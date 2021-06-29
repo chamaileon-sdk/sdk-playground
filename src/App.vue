@@ -1,32 +1,59 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-card height="100%" width="256" app class="drawer elevation-0">
+      <v-navigation-drawer permanent :style="style">
+        <v-list-item>
+          <v-list-item-content>
+            <Logo></Logo>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list dense nav>
+          <v-list-item v-for="item in items" :key="item.title" link>
+            <v-list-item-icon>
+              <v-icon class="white--text">{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title class="white--text">{{
+                item.title
+              }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+    </v-card>
+
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import Logo from './components/Logo.vue';
 
-#nav {
-  padding: 30px;
-}
+export default {
+  components: {
+    Logo,
+  },
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  computed: {
+    style() {
+      return `background-color: ${this.primaryColor} !important; fill: white;`;
+    },
+  },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  data() {
+    return {
+      primaryColor: '#00C0E7',
+      items: [
+        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
+        { title: 'Photos', icon: 'mdi-image' },
+        { title: 'About', icon: 'mdi-help-box' },
+      ],
+      right: null,
+    };
+  },
+};
+</script>
