@@ -20,6 +20,9 @@
                 elevation="0"
                 height="100%"
                 width="100%"
+                @click="
+                  toggleElement({ type: 'content', element: element.type })
+                "
               >
                 <v-card
                   width="80"
@@ -63,6 +66,9 @@
                 elevation="0"
                 height="100%"
                 width="100%"
+                @click="
+                  toggleElement({ type: 'structure', element: element.type })
+                "
               >
                 <v-card
                   width="80"
@@ -106,6 +112,9 @@
                 elevation="0"
                 height="100%"
                 width="100%"
+                @click="
+                  toggleElement({ type: 'advanced', element: element.type })
+                "
               >
                 <v-card
                   width="80"
@@ -132,13 +141,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters({
       elementsArr: 'getElements',
     }),
+  },
+  methods: {
+    ...mapMutations(['toggleElement']),
   },
   data() {
     return {
@@ -170,7 +182,7 @@ export default {
       ],
       structureElements: [
         {
-          type: 'block',
+          type: 'fullWidth',
           icon: 'mdi-window-maximize',
         },
         /*{
@@ -182,7 +194,7 @@ export default {
           icon: 'mdi-checkbox-blank-outline',
         },
         {
-          type: 'columns',
+          type: 'multiColumn',
           icon: 'mdi-view-column',
         },
       ],
@@ -196,7 +208,7 @@ export default {
           icon: 'mdi-call-split',
         },
         {
-          type: 'dynamic-image',
+          type: 'dynamicImage',
           icon: 'mdi-folder-multiple-image',
         },
       ],

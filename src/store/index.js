@@ -176,6 +176,12 @@ export default new Vuex.Store({
         }
       );
     },
+    toggleElement(state, payload) {
+      console.log(payload);
+      state.editorConfig.settings.elements[payload.type][
+        payload.element
+      ] = !state.editorConfig.settings.elements[payload.type][payload.element];
+    },
   },
   actions: {},
   modules: {},
