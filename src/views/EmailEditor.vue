@@ -21,7 +21,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link @click="sdk.editEmail({})">
+        <v-list-item link @click="sdk.editEmail(configObj)">
           <v-list-item-icon class="white--text">
             <v-icon>mdi-at</v-icon>
           </v-list-item-icon>
@@ -70,6 +70,9 @@ export default {
   computed: {
     style() {
       return `background-color: ${this.primaryColor} !important; fill: white;`;
+    },
+    configObj() {
+      return this.$store.getters.getConfigObject;
     },
   },
 

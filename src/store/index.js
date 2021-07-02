@@ -192,5 +192,8 @@ export default new Vuex.Store({
     getElements: state => {
       return state.editorConfig.settings.elements;
     },
+    getConfigObject: state => {
+      return state.editorConfig;
+    },
   },
 });
