@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     idArr: [],
+    blIDArr: [],
     key: 0,
+    blKey: 0,
     editorConfig: {
       document: {},
       settings: {
@@ -182,6 +184,50 @@ export default new Vuex.Store({
         payload.element
       ] = !state.editorConfig.settings.elements[payload.type][payload.element];
     },
+
+    //BlockLibs
+    addBlockLibs(state) {
+      state.editorConfig.blockLibraries.push({
+        id: `${state.blKey}`,
+        label: `Block Library ${state.blKey}`,
+        accessLevel: 'readOnly',
+      });
+
+      state.blIDArr.push(`${state.blKey}`);
+      state.blKey++;
+    },
+
+    removeBlockLibs(state, payload) {
+      state.editorConfig.blockLibraries = state.editorConfig.blockLibraries.filter(
+        c => c.id !== payload
+      );
+
+      state.blIDArr = state.blIDArr.filter(c => c !== payload);
+    },
+
+    updateBlockLibsOrder(state, payload) {
+      state.editorConfig.blockLibraries = payload;
+    },
+    updateBlockLibs(state, payload) {
+      state.editorConfig.blockLibraries = state.editorConfig.blockLibraries.map(
+        c => {
+          if (c.id === payload.id) {
+            if ('newID' in payload) {
+              state.blIDArr = state.blIDArr.map(c => {
+                if (c === payload.id) return payload.newID;
+
+                return c;
+              });
+              return { ...c, id: payload.newID };
+            }
+
+            return { ...c, ...payload };
+          }
+
+          return c;
+        }
+      );
+    },
   },
   actions: {},
   modules: {},
@@ -191,6 +237,9 @@ export default new Vuex.Store({
     },
     getElements: state => {
       return state.editorConfig.settings.elements;
+    },
+    getBlockLibs: state => {
+      return state.editorConfig.blockLibraries;
     },
     getConfigObject: state => {
       //Deep copy

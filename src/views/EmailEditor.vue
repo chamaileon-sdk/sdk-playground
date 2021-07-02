@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-navigation-drawer permanent app :style="style">
       <div class="pa-4">
         <Logo />
