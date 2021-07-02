@@ -1,34 +1,130 @@
 <template>
   <div>
-    <h1>Elements</h1>
-    <v-card class="mx-auto" max-width="300" tile>
-      <v-row no-gutters class="elem-icon categoryWrapper justify-space-around">
+    <h1 class="mb-6">Content</h1>
+    <v-card class="mb-6" flat>
+      <v-row>
         <v-col
-          cols="6"
+          cols="1"
+          class="py-0"
           v-for="(element, index) in contentElements"
           :key="index"
-          class="pa-3 highlight-elem"
         >
-          <div
-            :class="`text-center shadowed element-icon-${element.type}`"
-            :drag-object="element.type"
-            draggable="true"
-            @dragstart.stop="dragStartBasicElem"
-            @dragend.stop="dragEnd"
-          >
-            <v-container fill-height fluid>
-              <v-row align="center" justify="center" no-gutters>
-                <v-col>
+          <v-card class="text-center">
+            <v-responsive :aspect-ratio="1">
+              <v-btn
+                :color="
+                  elementsArr.content[element.type]
+                    ? `#00C0E7`
+                    : `grey lighten-4`
+                "
+                elevation="0"
+                height="100%"
+                width="100%"
+              >
+                <v-card
+                  width="80"
+                  flat
+                  color="transparent"
+                  :class="
+                    elementsArr.content[element.type] ? `white--text` : ``
+                  "
+                >
                   <v-icon x-large>
                     {{ element.icon }}
                   </v-icon>
                   <div class="element-break-word">
                     {{ element.type }}
                   </div>
-                </v-col>
-              </v-row>
-            </v-container>
-          </div>
+                </v-card>
+              </v-btn>
+            </v-responsive>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <h1 class="mb-6">Structure</h1>
+    <v-card class="mb-6" flat>
+      <v-row>
+        <v-col
+          cols="1"
+          class="py-0"
+          v-for="(element, index) in structureElements"
+          :key="index"
+        >
+          <v-card class="text-center">
+            <v-responsive :aspect-ratio="1">
+              <v-btn
+                :color="
+                  elementsArr.structure[element.type]
+                    ? `#00C0E7`
+                    : `grey lighten-4`
+                "
+                elevation="0"
+                height="100%"
+                width="100%"
+              >
+                <v-card
+                  width="80"
+                  flat
+                  color="transparent"
+                  :class="
+                    elementsArr.structure[element.type] ? `white--text` : ``
+                  "
+                >
+                  <v-icon x-large>
+                    {{ element.icon }}
+                  </v-icon>
+                  <div class="element-break-word">
+                    {{ element.type }}
+                  </div>
+                </v-card>
+              </v-btn>
+            </v-responsive>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <h1 class="mb-6">Advanced</h1>
+    <v-card class="mb-6" flat>
+      <v-row>
+        <v-col
+          cols="1"
+          class="py-0"
+          v-for="(element, index) in advancedElements"
+          :key="index"
+        >
+          <v-card class="text-center">
+            <v-responsive :aspect-ratio="1">
+              <v-btn
+                :color="
+                  elementsArr.advanced[element.type]
+                    ? `#00C0E7`
+                    : `grey lighten-4`
+                "
+                elevation="0"
+                height="100%"
+                width="100%"
+              >
+                <v-card
+                  width="80"
+                  flat
+                  color="transparent"
+                  :class="
+                    elementsArr.advanced[element.type] ? `white--text` : ``
+                  "
+                >
+                  <v-icon x-large>
+                    {{ element.icon }}
+                  </v-icon>
+                  <div class="element-break-word">
+                    {{ element.type }}
+                  </div>
+                </v-card>
+              </v-btn>
+            </v-responsive>
+          </v-card>
         </v-col>
       </v-row>
     </v-card>
@@ -39,9 +135,6 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  mounted() {
-    console.log(this.elementsArr);
-  },
   computed: {
     ...mapGetters({
       elementsArr: 'getElements',
@@ -68,11 +161,43 @@ export default {
         },
         {
           type: 'social',
-          icon: 'mdi-people',
+          icon: 'mdi-account-multiple',
         },
         {
           type: 'code',
-          icon: 'mdi-code',
+          icon: 'mdi-code-tags',
+        },
+      ],
+      structureElements: [
+        {
+          type: 'block',
+          icon: 'mdi-window-maximize',
+        },
+        /*{
+          type: 'column',
+          icon: 'view_column',
+        },*/
+        {
+          type: 'box',
+          icon: 'mdi-checkbox-blank-outline',
+        },
+        {
+          type: 'columns',
+          icon: 'mdi-view-column',
+        },
+      ],
+      advancedElements: [
+        {
+          type: 'loop',
+          icon: 'mdi-refresh',
+        },
+        {
+          type: 'conditional',
+          icon: 'mdi-call-split',
+        },
+        {
+          type: 'dynamic-image',
+          icon: 'mdi-folder-multiple-image',
         },
       ],
     };
@@ -80,4 +205,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.element-break-word {
+  word-wrap: break-word;
+}
+</style>
