@@ -20,6 +20,16 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item link @click="sdk.editEmail({})">
+          <v-list-item-icon class="white--text">
+            <v-icon>mdi-at</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content class="white--text">
+            <v-list-item-title>Open Editor</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -63,8 +73,49 @@ export default {
     },
   },
 
+  async mounted() {
+    const accessTokenRequest = await fetch(
+      'https://sdk-api.chamaileon.io/api/v1/tokens/generate',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer Y8mbu7S5Qh4cyCqJCVBn`,
+        },
+      }
+    );
+
+    const accessTokenResponse = await accessTokenRequest.json();
+    const accessToken = accessTokenResponse.result;
+
+    this.sdk = await window.chamaileonSdk.init({
+      mode: 'serverless',
+      accessToken: accessToken,
+      whitelabel: {
+        locale: 'en', // or 'hu'. If you need other languages, please contact us.
+        urls: {
+          splashScreen:
+            'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/splashScreen.html',
+          createLogoJS:
+            'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/createLogo.js',
+        },
+        colors: {
+          primary: '#2D3291',
+          secondary: '#009f4a',
+          red: '#ff5546',
+          darkBlue: '#2d3291',
+          darkGreen: '#00af6e',
+          lightGreen: '#50d791',
+          weirdGreen: '#50d791',
+          pink: '#ff91a0',
+          yellow: '#ffd23c',
+        },
+      },
+    });
+  },
+
   data() {
     return {
+      sdk: null,
       primaryColor: '#00C0E7',
       activeTab: -1,
       items: [
