@@ -105,7 +105,7 @@ export default new Vuex.Store({
     addHeaderDropdown(state) {
       state.editorConfig.settings.buttons.header.push({
         id: `yourBtn-${state.key}`,
-        type: 'button',
+        type: 'dropdown',
         icon: 'at',
         label: '',
         color: '#000000',
@@ -162,7 +162,7 @@ export default new Vuex.Store({
                     return c;
                   });
 
-                  return { ...c, id: payload.obj.newID };
+                  return { ...i, id: payload.obj.newID };
                 }
 
                 return { ...i, ...payload.obj };
