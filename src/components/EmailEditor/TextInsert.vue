@@ -1,9 +1,9 @@
 <template>
-  <v-main>
-    <router-view />
-  </v-main>
+  <h1>Text Insert</h1>
 </template>
 
 <script>
 export default {};
 </script>
+
+<style></style>

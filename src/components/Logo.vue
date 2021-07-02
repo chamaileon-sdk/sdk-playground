@@ -5,7 +5,6 @@
 <script>
 export default {
   mounted() {
-    console.log('mounted');
     document
       .getElementById('logo')
       .appendChild(this.createChamaileonLogo({ withText: true }));

@@ -1,14 +1,62 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+//Email editor
+import EmailEditor from '../views/EmailEditor.vue';
+import Header from '../components/EmailEditor/Header';
+import Elements from '../components/EmailEditor/Elements';
+import BlockLibraries from '../components/EmailEditor/BlockLibraries';
+import TextInsert from '../components/EmailEditor/TextInsert';
+import Addons from '../components/EmailEditor/Addons';
+import Settings from '../components/EmailEditor/Settings';
+
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: 'emaileditor',
+  },
+  {
+    path: '/emaileditor',
+    component: EmailEditor,
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        redirect: 'header',
+      },
+      {
+        path: 'header',
+        name: 'Header',
+        component: Header,
+      },
+      {
+        path: 'elements',
+        name: 'Elements',
+        component: Elements,
+      },
+      {
+        path: 'blocklibraries',
+        name: 'BlockLibraries',
+        component: BlockLibraries,
+      },
+      {
+        path: 'textinsert',
+        name: 'TextInsert',
+        component: TextInsert,
+      },
+      {
+        path: 'addons',
+        name: 'Addons',
+        component: Addons,
+      },
+      {
+        path: 'settings',
+        name: 'Settings',
+        component: Settings,
+      },
+    ],
   },
   {
     path: '/about',
@@ -16,12 +64,13 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
