@@ -183,5 +183,8 @@ export default new Vuex.Store({
     getHeaderBtns: state => {
       return state.editorConfig.settings.buttons.header;
     },
+    getElements: state => {
+      return state.editorConfig.settings.elements;
+    },
   },
 });
