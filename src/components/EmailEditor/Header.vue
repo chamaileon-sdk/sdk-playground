@@ -34,7 +34,7 @@
                     hide-details="true"
                     label="ID"
                     :value="b.id"
-                    @change="updateID($event, b.id)"
+                    @blur="updateID($event.target.value, b.id)"
                     outlined
                   ></v-text-field>
                 </v-col>
@@ -134,7 +134,7 @@
                     :value="i.id"
                     outlined
                     :rules="[rules.required, rules.unique]"
-                    @change="updateDDID($event, b.id, i.id)"
+                    @blur="updateDDID($event.target.value, b.id, i.id)"
                   ></v-text-field>
                 </v-col>
 
