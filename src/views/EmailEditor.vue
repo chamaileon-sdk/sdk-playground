@@ -134,3 +134,12 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  overflow: hidden !important;
+}
+iframe {
+  position: fixed;
+}
+</style>
