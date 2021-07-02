@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    idArr: [],
     key: 0,
     editorConfig: {
       document: {},
@@ -57,12 +58,24 @@ export default new Vuex.Store({
         style: 'text',
       });
 
+      state.idArr.push(`yourBtn-${state.key}`);
       state.key++;
     },
     removeHeaderBtn(state, payload) {
       state.editorConfig.settings.buttons.header = state.editorConfig.settings.buttons.header.filter(
-        c => c.id !== payload
+        c => {
+          if (c.id !== payload) return true;
+
+          if (c.items)
+            c.items.forEach(it => {
+              state.idArr = state.idArr.filter(id => id !== it.id);
+            });
+
+          return false;
+        }
       );
+
+      state.idArr = state.idArr.filter(c => c !== payload);
     },
     updateHeaderBtnOrder(state, payload) {
       state.editorConfig.settings.buttons.header = payload;
@@ -71,7 +84,14 @@ export default new Vuex.Store({
       state.editorConfig.settings.buttons.header = state.editorConfig.settings.buttons.header.map(
         c => {
           if (c.id === payload.id) {
-            if ('newID' in payload) return { ...c, id: payload.newID };
+            if ('newID' in payload) {
+              state.idArr = state.idArr.map(c => {
+                if (c === payload.id) return payload.newID;
+
+                return c;
+              });
+              return { ...c, id: payload.newID };
+            }
 
             return { ...c, ...payload };
           }
@@ -92,15 +112,17 @@ export default new Vuex.Store({
         style: 'text',
         items: [],
       });
+
+      state.idArr.push(`yourBtn-${state.key}`);
       state.key++;
     },
 
     removeHeaderDropdownBtn(state, payload) {
-      console.log(payload);
       state.editorConfig.settings.buttons.header = state.editorConfig.settings.buttons.header.map(
         c => {
           if (c.id === payload.id) {
             c.items = c.items.filter(c => c.id !== payload.obj.id);
+            state.idArr = state.idArr.filter(c => c !== payload.obj.id);
           }
 
           return c;
@@ -123,6 +145,7 @@ export default new Vuex.Store({
         }
       );
 
+      state.idArr.push(`yourBtn-${state.key}`);
       state.key++;
     },
 
@@ -132,8 +155,15 @@ export default new Vuex.Store({
           if (c.id === payload.id) {
             c.items = c.items.map(i => {
               if (i.id === payload.obj.id) {
-                if ('newID' in payload.obj)
+                if ('newID' in payload.obj) {
+                  state.idArr = state.idArr.map(c => {
+                    if (c === payload.obj.id) return payload.obj.newID;
+
+                    return c;
+                  });
+
                   return { ...c, id: payload.obj.newID };
+                }
 
                 return { ...i, ...payload.obj };
               }
