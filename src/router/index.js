@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 //Dashboard
 import Dashboard from '../views/Dashboard';
 import Plugins from '../components/Dashboard/Plugins';
-import Sdk from '../components/Dashboard/Plugins';
+import Sdk from '../components/Dashboard/Sdk';
 
 //Email editor
 import EmailEditor from '../views/EmailEditor.vue';
