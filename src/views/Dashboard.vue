@@ -27,7 +27,6 @@ export default {
         {
           title: 'Plugins',
           icon: 'power-plug-outline',
-          to: 'plugins',
         },
         {
           title: 'SDK',
