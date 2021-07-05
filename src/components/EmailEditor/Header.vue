@@ -30,10 +30,11 @@
                 <v-col cols="2" align-self="center" v-if="!b.items">
                   <v-text-field
                     dense
+                    :rules="[rules.required, rules.unique]"
                     hide-details="true"
                     label="ID"
                     :value="b.id"
-                    @change="updateID($event, b.id)"
+                    @blur="updateID($event.target.value, b.id)"
                     outlined
                   ></v-text-field>
                 </v-col>
@@ -132,12 +133,8 @@
                     label="ID"
                     :value="i.id"
                     outlined
-                    @change="
-                      updateDDBtn({
-                        id: b.id,
-                        obj: { id: i.id, newID: $event },
-                      })
-                    "
+                    :rules="[rules.required, rules.unique]"
+                    @blur="updateDDID($event.target.value, b.id, i.id)"
                   ></v-text-field>
                 </v-col>
 
@@ -222,6 +219,9 @@ import HeaderPreview from './HeaderPreview.vue';
 import { mapMutations } from 'vuex';
 
 export default {
+  updated() {
+    console.log(this.$store.state.idArr);
+  },
   components: {
     draggable,
     ColorPicker,
@@ -248,7 +248,15 @@ export default {
       this.updateBtn({ id: id, icon: val });
     },
     updateID(val, id) {
-      this.updateBtn({ id: id, newID: val });
+      if (!this.$store.state.idArr.includes(val) && val)
+        this.updateBtn({ id: id, newID: val });
+    },
+    updateDDID(val, pid, id) {
+      if (!this.$store.state.idArr.includes(val) && val)
+        this.updateDDBtn({
+          id: pid,
+          obj: { id: id, newID: val },
+        });
     },
   },
   computed: {
@@ -265,6 +273,10 @@ export default {
     return {
       icon: '',
       id: 3,
+      rules: {
+        required: value => !!value || 'Required.',
+        unique: value => !this.$store.state.idArr.includes(value),
+      },
     };
   },
 };
