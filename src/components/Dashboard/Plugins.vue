@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-container style="max-height: 80vh; overflow-y: auto">
+    <v-container style="max-height: 80vh; ">
       <v-row>
         <v-col
           class="ma-0"
-          cols="4"
+          cols="3"
           v-for="(item, ind) in items"
           :key="ind"
           link
@@ -12,40 +12,49 @@
         >
           <div>
             <v-card
-              class="pa-10 ma-0"
+              class="pa-10 ma-0 rounded-lg"
               min-height="233px"
               @mouseenter="item.reveal = true"
               @mouseleave="item.reveal = false"
             >
-              <v-row class="ma-0">
-                <v-col cols="3" class=" d-flex align-start pa-0 ">
-                  <v-icon color="primary" size="80">mdi-{{ item.icon }}</v-icon>
+              <v-row class="pa-0 ma-0">
+                <v-col cols="3" class=" d-flex align-start">
+                  <v-icon color="primary" x-large>mdi-{{ item.icon }}</v-icon>
                 </v-col>
 
-                <v-col class="pa-0 ml-6">
-                  <v-card-title class="pa-0 mb-3">{{
-                    item.title
-                  }}</v-card-title>
-
-                  <v-card-text class="pa-0">{{ item.description }}</v-card-text>
+                <v-col class="pa-0 ma-0">
+                  <v-card-title>{{ item.title }}</v-card-title>
                 </v-col>
               </v-row>
 
-              <v-expand-transition>
-                <v-card
-                  elevation="0"
-                  v-if="item.reveal"
-                  class="transition-fast-in-fast-out v-card--reveal"
-                  style="height: 50%;"
-                >
-                  <v-btn depressed color="primary">
-                    Primary
-                  </v-btn>
-                  <v-btn depressed color="error">
-                    Error
-                  </v-btn>
-                </v-card>
-              </v-expand-transition>
+              <v-row class="pa-0 ma-0">
+                <v-slide-y-reverse-transition>
+                  <v-card-text class="pa-0" v-if="!item.reveal">{{
+                    item.description
+                  }}</v-card-text>
+                </v-slide-y-reverse-transition>
+
+                <v-expand-transition>
+                  <v-card
+                    elevation="0"
+                    v-if="item.reveal"
+                    class="grey lighten-4 rounded-lg transition-fast-in-fast-out v-card--reveal d-flex align-center"
+                  >
+                    <v-row class="pa-0 ma-0">
+                      <v-col class="d-flex justify-space-around">
+                        <v-btn depressed color="white">
+                          <v-icon>mdi-book-outline</v-icon>
+                          Docs
+                        </v-btn>
+                        <v-btn depressed color="primary" :to="item.to">
+                          <v-icon>mdi-palette-outline</v-icon>
+                          Customize
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-expand-transition>
+              </v-row>
             </v-card>
           </div>
         </v-col>
@@ -80,9 +89,10 @@ export default {
           description:
             'You can simply customize the editor by passing a config object to the initializer function.',
           reveal: false,
+          to: 'emaileditor',
         },
         {
-          title: 'Email Variable Editor',
+          title: 'Variable Editor',
           icon: 'iframe-variable-outline',
           description:
             'If you already have a document with defined variables exported from the editor, you can open an editor to edit the variables.',
