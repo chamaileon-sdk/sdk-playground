@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+//Dashboard
+import Dashboard from '../views/Dashboard';
+
 //Email editor
 import EmailEditor from '../views/EmailEditor.vue';
 import Header from '../components/EmailEditor/Header';
@@ -15,7 +18,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    redirect: 'emaileditor',
+    name: 'Dashboard',
+    component: Dashboard,
   },
   {
     path: '/emaileditor',

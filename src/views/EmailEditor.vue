@@ -1,6 +1,8 @@
 <template>
   <v-app>
     <v-navigation-drawer permanent app :style="style">
+      <v-btn icon to="/"><v-icon>mdi-arrow-left</v-icon></v-btn>
+
       <div class="pa-4">
         <Logo />
       </div>
