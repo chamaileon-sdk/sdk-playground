@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    sdk: null,
     idArr: [],
     blIDArr: [],
     key: 0,
@@ -228,8 +229,57 @@ export default new Vuex.Store({
         }
       );
     },
+
+    addSDK(state, sdk) {
+      state.sdk = sdk;
+    },
   },
-  actions: {},
+  actions: {
+    async initSDK({ commit }, { apiKey, splashScrn, logoCtor }) {
+      const accessTokenRequest = await fetch(
+        'https://sdk-api.chamaileon.io/api/v1/tokens/generate',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        }
+      );
+
+      const accessTokenResponse = await accessTokenRequest.json();
+      const accessToken = accessTokenResponse.result;
+
+      const chamaileonPlugins = await window.chamaileonSdk.init({
+        mode: 'serverless',
+        accessToken: accessToken,
+        whitelabel: {
+          locale: 'en', // or 'hu'. If you need other languages, please contact us.
+          urls: {
+            splashScreen:
+              splashScrn ||
+              'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/splashScreen.html',
+            createLogoJS:
+              logoCtor ||
+              'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/createLogo.js',
+          },
+          colors: {
+            primary: '#2D3291',
+            secondary: '#009f4a',
+            red: '#ff5546',
+            darkBlue: '#2d3291',
+            darkGreen: '#00af6e',
+            lightGreen: '#50d791',
+            weirdGreen: '#50d791',
+            pink: '#ff91a0',
+            yellow: '#ffd23c',
+          },
+        },
+      });
+
+      console.log(chamaileonPlugins);
+      commit('addSDK', chamaileonPlugins);
+    },
+  },
   modules: {},
   getters: {
     getHeaderBtns: state => {

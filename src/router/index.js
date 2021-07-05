@@ -18,8 +18,22 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
     component: Dashboard,
+    children: [
+      {
+        path: '/',
+        name: 'Dashboard',
+        redirect: 'plugins',
+      },
+      {
+        path: 'plugins',
+        name: 'Plugin Config',
+      },
+      {
+        path: 'sdk',
+        name: 'SDK Config',
+      },
+    ],
   },
   {
     path: '/emaileditor',

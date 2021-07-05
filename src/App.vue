@@ -5,7 +5,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    this.$store.dispatch('initSDK', {
+      apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
+      logoCtor:
+        'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js',
+      splashScrn:
+        'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html',
+    });
+  },
+
+  unmounted() {
+    window.chamaileonSdk.destroy();
+  },
+};
 </script>
 
 <style>
