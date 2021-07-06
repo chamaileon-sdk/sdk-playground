@@ -25,7 +25,7 @@ const routes = [
       {
         path: '/',
         name: 'Dashboard',
-        redirect: 'plugins',
+        redirect: 'sdk',
       },
       {
         path: 'plugins',

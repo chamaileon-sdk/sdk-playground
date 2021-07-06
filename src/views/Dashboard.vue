@@ -25,12 +25,12 @@ export default {
     return {
       editors: [
         {
-          title: 'Plugins',
-          icon: 'power-plug-outline',
-        },
-        {
           title: 'SDK',
           icon: 'at',
+        },
+        {
+          title: 'Plugins',
+          icon: 'power-plug-outline',
         },
       ],
     };

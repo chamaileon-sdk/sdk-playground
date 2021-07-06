@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-container style="max-height: 80vh; ">
+    <v-container style="max-height: 80vh; overflow-y: auto">
       <v-row>
         <v-col
           class="ma-0"
-          cols="3"
+          cols="4"
           v-for="(item, ind) in items"
           :key="ind"
           link
@@ -13,42 +13,53 @@
           <div>
             <v-card
               class="pa-10 ma-0 rounded-lg"
-              min-height="233px"
               @mouseenter="item.reveal = true"
               @mouseleave="item.reveal = false"
+              min-height="233px"
             >
               <v-row class="pa-0 ma-0">
-                <v-col cols="3" class=" d-flex align-start">
-                  <v-icon color="primary" x-large>mdi-{{ item.icon }}</v-icon>
+                <v-col cols="4" class=" d-flex align-start">
+                  <v-icon color="primary" size="80">mdi-{{ item.icon }}</v-icon>
                 </v-col>
 
                 <v-col class="pa-0 ma-0">
-                  <v-card-title>{{ item.title }}</v-card-title>
+                  <v-card-title class="pl-0">{{ item.title }} </v-card-title>
+
+                  <v-card-text class="pa-0">{{ item.description }}</v-card-text>
                 </v-col>
               </v-row>
 
               <v-row class="pa-0 ma-0">
-                <v-slide-y-reverse-transition>
-                  <v-card-text class="pa-0" v-if="!item.reveal">{{
-                    item.description
-                  }}</v-card-text>
-                </v-slide-y-reverse-transition>
-
                 <v-expand-transition>
                   <v-card
                     elevation="0"
+                    height="100%"
                     v-if="item.reveal"
-                    class="grey lighten-4 rounded-lg transition-fast-in-fast-out v-card--reveal d-flex align-center"
+                    class="white rounded-lg transition-fast-in-fast-out v-card--reveal d-flex align-center"
                   >
                     <v-row class="pa-0 ma-0">
-                      <v-col class="d-flex justify-space-around">
-                        <v-btn depressed color="white">
-                          <v-icon>mdi-book-outline</v-icon>
-                          Docs
+                      <v-col
+                        class="pa-12 d-flex flex-column justify-space-around"
+                      >
+                        <v-btn
+                          class="my-2 mx-8 rounded-pill py-6"
+                          depressed
+                          color="primary"
+                          :to="item.to"
+                        >
+                          <v-icon class="mr-2">mdi-palette-outline</v-icon>
+                          Customizer
                         </v-btn>
-                        <v-btn depressed color="primary" :to="item.to">
-                          <v-icon>mdi-palette-outline</v-icon>
-                          Customize
+
+                        <v-btn
+                          class="my-2 mx-8 rounded-pill py-6"
+                          depressed
+                          color="grey lighten-3"
+                          :href="item.docs"
+                          target="_blank"
+                        >
+                          <v-icon class="mr-2">mdi-book-outline</v-icon>
+                          Docs
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -75,6 +86,7 @@ export default {
           description:
             'Generates a thumbnail from an existing document. Allows you to set the size and scale, and attach the thumbnail to an HTML element',
           reveal: false,
+          docs: 'https://chamaileon.io/sdk/docs/email-thumbnail/',
         },
         {
           title: 'Email Preview',
@@ -82,6 +94,7 @@ export default {
           description:
             'If you already have a document exported from the editor, this plugin allows you to create a preview for it.',
           reveal: false,
+          docs: 'https://chamaileon.io/sdk/docs/email-preview/',
         },
         {
           title: 'Email Editor',
@@ -90,6 +103,7 @@ export default {
             'You can simply customize the editor by passing a config object to the initializer function.',
           reveal: false,
           to: 'emaileditor',
+          docs: 'https://chamaileon.io/sdk/docs/email-editor/',
         },
         {
           title: 'Variable Editor',
@@ -97,6 +111,7 @@ export default {
           description:
             'If you already have a document with defined variables exported from the editor, you can open an editor to edit the variables.',
           reveal: false,
+          docs: 'https://chamaileon.io/sdk/docs/email-variable-editor/',
         },
       ],
     };
