@@ -19,8 +19,8 @@ export default new Vuex.Store({
           'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js',
       },
       colors: {
-        primary: '',
-        secondary: '',
+        primary: '#000000',
+        secondary: '#000000',
       },
     },
     editorConfig: {
@@ -248,11 +248,21 @@ export default new Vuex.Store({
     },
 
     updateSDKConfig(state, payload) {
+      let elems = document.head.getElementsByTagName('script');
+
+      let i = elems.length;
+
+      while (i--) {
+        elems[i].remove();
+      }
+
+      console.log(elems);
       state.sdkConfig = { ...state.sdkConfig, ...payload };
+      this.dispatch('initSDK', { apiKey: 'Y8mbu7S5Qh4cyCqJCVBn' });
     },
   },
   actions: {
-    async initSDK({ commit }, { apiKey, splashScrn, logoCtor }) {
+    async initSDK({ commit }, { apiKey }) {
       const accessTokenRequest = await fetch(
         'https://sdk-api.chamaileon.io/api/v1/tokens/generate',
         {
@@ -270,26 +280,7 @@ export default new Vuex.Store({
         mode: 'serverless',
         accessToken: accessToken,
         whitelabel: {
-          locale: 'en', // or 'hu'. If you need other languages, please contact us.
-          urls: {
-            splashScreen:
-              splashScrn ||
-              'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/splashScreen.html',
-            createLogoJS:
-              logoCtor ||
-              'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/createLogo.js',
-          },
-          colors: {
-            primary: '#2D3291',
-            secondary: '#009f4a',
-            red: '#ff5546',
-            darkBlue: '#2d3291',
-            darkGreen: '#00af6e',
-            lightGreen: '#50d791',
-            weirdGreen: '#50d791',
-            pink: '#ff91a0',
-            yellow: '#ffd23c',
-          },
+          ...this.state.sdkConfig,
         },
       });
 

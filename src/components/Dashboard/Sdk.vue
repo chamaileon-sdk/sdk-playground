@@ -33,6 +33,11 @@
               `fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`
             "
             v-chamaileonLogo
+            @click="
+              changeLogo(
+                'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
+              )
+            "
           ></v-card>
         </v-tab>
         <v-tab v-for="(l, i) in logos" :key="i" class="pa-0 mx-3">
@@ -42,6 +47,7 @@
             width="220px"
             elevation="0"
             outlined
+            @click="changeLogo(l.url)"
           >
             <div style="position: relative; height: 100%">
               <div
@@ -81,6 +87,11 @@
             elevation="0"
             outlined
             v-chamaileonLogoNoText
+            @click="
+              changeSplash(
+                'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html'
+              )
+            "
           >
           </v-card>
         </v-tab>
@@ -91,6 +102,7 @@
             width="320px"
             elevation="0"
             outlined
+            @click="changeSplash(l.url)"
             @mouseenter="hoverOnSplashContainer($event, l.url)"
           >
             <div style="position: relative; height: 100%">
@@ -125,14 +137,16 @@
       <v-col>
         <ColorPicker
           :index="0"
-          :value="this.$vuetify.presets.framework.theme.themes.light.primary"
+          :value="primaryColor"
+          @colorChange="changePrimary"
           :label="'Primary Color'"
         />
       </v-col>
       <v-col>
         <ColorPicker
           :index="1"
-          :value="this.$vuetify.presets.framework.theme.themes.light.secondary"
+          :value="secondaryColor"
+          @colorChange="changeSecondary"
           :label="'Secondary Color'"
         />
       </v-col>
@@ -148,13 +162,19 @@
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </p>
-    <v-select :items="['en', 'hu']" outlined label="Language"></v-select>
+    <v-select
+      v-model="locale"
+      :items="['en', 'hu']"
+      outlined
+      label="Language"
+    ></v-select>
   </v-app>
 </template>
 
 <script>
 const chamaileonLogo = require('chamaileon-logo');
 import ColorPicker from '../EmailEditor/ColorPicker.vue';
+import { mapState } from 'vuex';
 
 export default {
   directives: {
@@ -195,8 +215,42 @@ export default {
       </div></body></html>`;
       return html;
     },
+    changeLogo(value) {
+      this.$store.commit('updateSDKConfig', {
+        urls: { ...this.$store.state.sdkConfig.urls, createLogoJS: value },
+      });
+    },
+    changeSplash(value) {
+      this.$store.commit('updateSDKConfig', {
+        urls: { ...this.$store.state.sdkConfig.urls, splashScreen: value },
+      });
+    },
+    changePrimary(value) {
+      this.$store.commit('updateSDKConfig', {
+        colors: { ...this.$store.state.sdkConfig.colors, primary: value },
+      });
+    },
+    changeSecondary(value) {
+      this.$store.commit('updateSDKConfig', {
+        colors: { ...this.$store.state.sdkConfig.colors, secondary: value },
+      });
+    },
   },
   computed: {
+    locale: {
+      get() {
+        return this.$store.state.sdkConfig.locale;
+      },
+      set(value) {
+        this.$store.commit('updateSDKConfig', { locale: value });
+      },
+    },
+
+    ...mapState({
+      primaryColor: state => state.sdkConfig.colors.primary,
+      secondaryColor: state => state.sdkConfig.colors.secondary,
+    }),
+
     border() {
       return `box-sizing: border-box; border: 4px solid ${this.$vuetify.presets.framework.theme.themes.light.primary}; border-radius: 12px;`;
     },
