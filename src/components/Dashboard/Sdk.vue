@@ -1,5 +1,19 @@
 <template>
   <v-app>
+    <template>
+      <v-snackbar
+        color="green"
+        v-model="snackbar"
+        timeout="2000"
+        app
+        content-class="d-flex justify-center justify-self-center "
+        top
+        class="mt-5 text-button"
+      >
+        Your changes have successfully been saved
+      </v-snackbar>
+    </template>
+
     <h1>SDK</h1>
     <p class="my-3">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -257,6 +271,7 @@ export default {
   },
   data() {
     return {
+      snackbar: false,
       logos: [
         {
           url:
@@ -275,4 +290,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.v-snack__action {
+  margin: 0 !important;
+}
+</style>

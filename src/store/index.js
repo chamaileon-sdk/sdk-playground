@@ -10,8 +10,8 @@ export default new Vuex.Store({
     editorConfig,
   },
   state: {
+    apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
     sdk: null,
-
     sdkConfig: {
       locale: 'en',
       urls: {
@@ -32,27 +32,17 @@ export default new Vuex.Store({
     },
 
     updateSDKConfig(state, payload) {
-      let elems = document.head.getElementsByTagName('script');
-
-      let i = elems.length;
-
-      while (i--) {
-        elems[i].remove();
-      }
-
-      console.log(elems);
       state.sdkConfig = { ...state.sdkConfig, ...payload };
-      this.dispatch('initSDK', { apiKey: 'Y8mbu7S5Qh4cyCqJCVBn' });
     },
   },
   actions: {
-    async initSDK({ commit }, { apiKey }) {
+    async initSDK({ commit, state }) {
       const accessTokenRequest = await fetch(
         'https://sdk-api.chamaileon.io/api/v1/tokens/generate',
         {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${apiKey}`,
+            Authorization: `Bearer ${state.apiKey}`,
           },
         }
       );
@@ -70,6 +60,31 @@ export default new Vuex.Store({
 
       console.log(chamaileonPlugins);
       commit('addSDK', chamaileonPlugins);
+    },
+    async updateSDK({ dispatch }) {
+      window.chamaileonSdk.destroy();
+
+      let elems = document.head.getElementsByTagName('script');
+      let links = document.head.getElementsByTagName('link');
+      links[links.length - 1].remove();
+
+      let styles = document.head.getElementsByTagName('style');
+      let i = styles.length - 1;
+      while (
+        i >= 0 &&
+        styles[i].innerHTML.includes('chamaileon-plugin-wrapper iframe')
+      )
+        i--;
+
+      console.log(styles[i]);
+
+      i = elems.length;
+
+      while (i--) {
+        elems[i].remove();
+      }
+
+      dispatch('initSDK');
     },
   },
   getters: {
