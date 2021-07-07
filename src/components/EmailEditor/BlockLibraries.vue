@@ -104,7 +104,7 @@ export default {
       'removeBlockLibs',
     ]),
     updateID(val, id) {
-      if (!this.$store.state.blIDArr.includes(val) && val)
+      if (!this.$store.state.editorConfig.blIDArr.includes(val) && val)
         this.updateBlockLibs({ id: id, newID: val });
     },
   },
@@ -122,7 +122,8 @@ export default {
     return {
       rules: {
         required: value => !!value || 'Required.',
-        unique: value => !this.$store.state.blIDArr.includes(value),
+        unique: value =>
+          !this.$store.state.editorConfig.blIDArr.includes(value),
       },
     };
   },
