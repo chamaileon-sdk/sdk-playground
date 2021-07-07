@@ -18,6 +18,9 @@
 import Menu from '../components/Menu.vue';
 
 export default {
+  async mounted() {
+    await this.$store.dispatch('updateSDK');
+  },
   components: {
     Menu,
   },
