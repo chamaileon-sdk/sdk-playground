@@ -246,6 +246,10 @@ export default new Vuex.Store({
     addSDK(state, sdk) {
       state.sdk = sdk;
     },
+
+    updateSDKConfig(state, payload) {
+      state.sdkConfig = { ...state.sdkConfig, ...payload };
+    },
   },
   actions: {
     async initSDK({ commit }, { apiKey, splashScrn, logoCtor }) {
