@@ -80,12 +80,6 @@
             width="320px"
             elevation="0"
             outlined
-            @mouseenter="
-              hoverOnSplashContainer(
-                $event,
-                'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html'
-              )
-            "
             v-chamaileonLogoNoText
           >
           </v-card>
@@ -130,12 +124,14 @@
     <v-row>
       <v-col>
         <ColorPicker
+          :index="0"
           :value="this.$vuetify.presets.framework.theme.themes.light.primary"
           :label="'Primary Color'"
         />
       </v-col>
       <v-col>
         <ColorPicker
+          :index="1"
           :value="this.$vuetify.presets.framework.theme.themes.light.secondary"
           :label="'Secondary Color'"
         />
@@ -152,7 +148,7 @@
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </p>
-    <v-select :items="['hu', 'en']" outlined label="Language"></v-select>
+    <v-select :items="['en', 'hu']" outlined label="Language"></v-select>
   </v-app>
 </template>
 

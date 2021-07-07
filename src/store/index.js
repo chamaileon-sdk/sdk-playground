@@ -10,6 +10,19 @@ export default new Vuex.Store({
     blIDArr: [],
     key: 0,
     blKey: 0,
+    sdkConfig: {
+      locale: 'en',
+      urls: {
+        splashScreen:
+          'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html',
+        createLogoJS:
+          'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js',
+      },
+      colors: {
+        primary: '',
+        secondary: '',
+      },
+    },
     editorConfig: {
       document: {},
       settings: {
