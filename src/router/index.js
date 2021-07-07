@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 //Dashboard
 import Dashboard from '../views/Dashboard';
+import Plugins from '../components/Dashboard/Plugins';
+import Sdk from '../components/Dashboard/Sdk';
 
 //Email editor
 import EmailEditor from '../views/EmailEditor.vue';
@@ -18,8 +20,24 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Dashboard',
     component: Dashboard,
+    children: [
+      {
+        path: '/',
+        name: 'Dashboard',
+        redirect: 'sdk',
+      },
+      {
+        path: 'plugins',
+        name: 'Plugin Config',
+        component: Plugins,
+      },
+      {
+        path: 'sdk',
+        name: 'SDK Config',
+        component: Sdk,
+      },
+    ],
   },
   {
     path: '/emaileditor',
