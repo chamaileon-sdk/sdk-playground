@@ -116,11 +116,37 @@
         </v-tab>
       </v-tabs>
     </v-card>
+
+    <h1>Colors</h1>
+    <p class="my-3">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </p>
+    <v-row>
+      <v-col>
+        <ColorPicker
+          :value="this.$vuetify.presets.framework.theme.themes.light.primary"
+          :label="'Primary Color'"
+        />
+      </v-col>
+      <v-col>
+        <ColorPicker
+          :value="this.$vuetify.presets.framework.theme.themes.light.secondary"
+          :label="'Secondary Color'"
+        />
+      </v-col>
+    </v-row>
   </v-app>
 </template>
 
 <script>
 const chamaileonLogo = require('chamaileon-logo');
+import ColorPicker from '../EmailEditor/ColorPicker.vue';
 
 export default {
   directives: {
@@ -136,6 +162,9 @@ export default {
         el.appendChild(logo);
       },
     },
+  },
+  components: {
+    ColorPicker,
   },
   methods: {
     hoverOnSplashContainer(e, url) {
@@ -166,8 +195,6 @@ export default {
   },
   data() {
     return {
-      html: '',
-      tab: null,
       logos: [
         {
           url:
