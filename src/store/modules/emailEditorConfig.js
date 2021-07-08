@@ -4,6 +4,8 @@ export default {
     key: 0,
     blIDArr: [],
     blKey: 0,
+    tiIDArr: [],
+    tiID: 0,
     document: {},
     settings: {
       buttons: {
@@ -162,10 +164,13 @@ export default {
         return c;
       });
     },
+
+    //Elements
     toggleElement(state, payload) {
       state.settings.elements[payload.type][payload.element] = !state.settings
         .elements[payload.type][payload.element];
     },
+
     //BlockLibs
     addBlockLibs(state) {
       state.blockLibraries.push({
@@ -204,6 +209,47 @@ export default {
 
         return c;
       });
+    },
+
+    //Text insert
+    updateTextInsertOrder(state, payload) {
+      state.settings.buttons.textInsert = payload;
+    },
+
+    deleteTextInsertButton(state, payload) {
+      state.settings.buttons.textInsert = state.settings.buttons.textInsert.filter(
+        c => c.id !== payload
+      );
+
+      state.tiIDArr = state.tiIDArr.filter(c => c != payload);
+    },
+
+    addTextInsertButton(state) {
+      state.settings.buttons.textInsert.push({
+        id: `ti-btn-${state.tiID}`,
+        label: `Text Insert ${state.tiID}`,
+        icon: '',
+      });
+      state.tiIDArr.push(`ti-btn-${state.tiID}`);
+      state.tiID++;
+    },
+
+    updateTextInsertButton(state, payload) {
+      state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
+        c => {
+          if (c.id === payload.id) {
+            if (payload.newID) {
+              state.tiIDArr = state.tiIDArr.filter(c => c !== payload.id);
+              state.tiIDArr.push(payload.newID);
+              return { ...c, id: payload.newID };
+            }
+
+            return { ...c, ...payload };
+          }
+
+          return c;
+        }
+      );
     },
   },
 
