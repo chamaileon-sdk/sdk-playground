@@ -1,6 +1,13 @@
 <template>
   <v-main>
-    <router-view />
+    <v-row>
+      <v-col>
+        <router-view />
+      </v-col>
+      <v-col cols="4">
+        <v-card width="100%" height="100%" dark flat> </v-card>
+      </v-col>
+    </v-row>
   </v-main>
 </template>
 

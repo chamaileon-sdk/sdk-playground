@@ -1,7 +1,13 @@
 <template>
   <div>
     <h1 class="mb-6 grey--text text--darken-4">Preview</h1>
-    <v-card outlined elevation="0" class="pa-8 grey lighten-3">
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+      laboriosam neque laborum beatae quas, explicabo quaerat aperiam nesciunt
+      provident aliquam praesentium nisi magnam nihil debitis, pariatur numquam
+      veniam molestiae similique.
+    </p>
+    <v-card outlined elevation="0" class="pa-8 grey lighten-3 rounded-lg">
       <HeaderPreview />
     </v-card>
 
