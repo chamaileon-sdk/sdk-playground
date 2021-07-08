@@ -28,7 +28,7 @@
           <v-card-text>{{ item.description }}</v-card-text>
         </div>
         <v-select
-          style="width: 50%;"
+          style="width: 22em;"
           :items="['enabled', 'disabled', 'hidden']"
           class="align-self-center rounded mr-4"
           hide-details="true"
