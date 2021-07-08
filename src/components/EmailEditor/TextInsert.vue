@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <h1>Preview</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
@@ -7,7 +7,7 @@
       illo deleniti sint laborum incidunt distinctio? Quaerat, ratione hic.
     </p>
     <OptionWrapper>
-      <HeaderPreview />
+      <TextInsertPreview />
     </OptionWrapper>
     <h1>Buttons</h1>
     <p>
@@ -16,7 +16,7 @@
       reiciendis? Officia fuga saepe nam? Iure corporis molestias commodi saepe
       ipsum.
     </p>
-    <div>
+    <div style="max-height: 400px; overflow-y: auto;">
       <draggable v-model="btnArr">
         <v-card
           class="ma-0 pa-0 d-flex align-center"
@@ -94,24 +94,23 @@
           </v-list-item-content>
         </v-card>
       </draggable>
-
-      <template>
-        <v-row align="center" justify="end" class="ma-0 mt-7">
-          <v-btn depressed color="success" @click="addTextInsertButton">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
-        </v-row>
-      </template>
     </div>
-  </v-app>
+    <template>
+      <v-row align="center" justify="end" class="ma-0 mt-7">
+        <v-btn depressed color="success" @click="addTextInsertButton">
+          <v-icon left>
+            mdi-plus
+          </v-icon>
+          New Button
+        </v-btn>
+      </v-row>
+    </template>
+  </div>
 </template>
 
 <script>
 import OptionWrapper from '../optionWrapper.vue';
-import HeaderPreview from './HeaderPreview.vue';
+import TextInsertPreview from './TextInsertPreview.vue';
 import draggable from 'vuedraggable';
 import { mapMutations } from 'vuex';
 
@@ -136,8 +135,8 @@ export default {
   },
   components: {
     OptionWrapper,
-    HeaderPreview,
     draggable,
+    TextInsertPreview,
   },
 };
 </script>
