@@ -36,10 +36,16 @@ export default {
     blockLibraries: [],
     addons: {
       blockLock: {
-        enabled: false,
+        id: 'Block Lock',
+        description:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.',
+        state: 'disabled',
       },
       variableSystem: {
-        enabled: false,
+        id: 'Variable System',
+        description:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.',
+        state: 'disabled',
       },
     },
   }),
@@ -251,6 +257,15 @@ export default {
         }
       );
     },
+
+    //Addons
+    updateAddonState(state, payload) {
+      const obj = state.addons;
+      for (const addon in obj) {
+        if (obj[addon].id === payload.id)
+          return (obj[addon].state = payload.state);
+      }
+    },
   },
 
   actions: {},
@@ -263,6 +278,12 @@ export default {
     },
     getBlockLibs: state => {
       return state.blockLibraries;
+    },
+    getAddonStateById: state => id => {
+      const obj = state.addons;
+      for (const addon in obj) {
+        if (obj[addon].id === id) return obj[addon].state;
+      }
     },
   },
 };
