@@ -108,6 +108,25 @@ export default new Vuex.Store({
 
       x.settings.elements = keepElementsTab ? currentElems : false;
 
+      //Addons processing
+      let addons = x.addons;
+      for (const key in addons) {
+        switch (addons[key].state) {
+          case 'enabled':
+            addons[key] = { enabled: true };
+            break;
+          case 'disabled':
+            addons[key] = { enabled: false };
+            break;
+          case 'hidden':
+            addons[key] = false;
+            break;
+          default:
+            break;
+        }
+      }
+      x.settings.addons = addons;
+
       return x;
     },
   },
