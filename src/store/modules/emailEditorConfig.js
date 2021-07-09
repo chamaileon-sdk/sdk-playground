@@ -7,6 +7,12 @@ export default {
     tiIDArr: [],
     tiID: 0,
     document: {},
+    user: {
+      enabled: true,
+      name: 'Your Username',
+      avatar:
+        'https://www.indiewire.com/wp-content/uploads/2019/03/shutterstock_5885988bd.jpg',
+    },
     settings: {
       buttons: {
         header: [],
@@ -50,6 +56,7 @@ export default {
         state: 'disabled',
       },
     },
+    autoSaveInterval: 15000,
   }),
   mutations: {
     addHeaderBtn(state) {
@@ -267,6 +274,16 @@ export default {
         if (obj[addon].id === payload.id)
           return (obj[addon].state = payload.state);
       }
+    },
+
+    //User
+    updateUser(state, payload) {
+      state.user = { ...state.user, ...payload };
+    },
+
+    //Autosave
+    updateAutosave(state, payload) {
+      state.autoSaveInterval = payload;
     },
   },
 
