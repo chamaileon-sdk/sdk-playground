@@ -19,6 +19,7 @@
               class="right-input rounded align-self-center pa-4"
               outlined
               hide-details="true"
+              v-model="autosave"
             ></v-text-field>
           </v-card>
         </div>
@@ -41,6 +42,7 @@
           class="rounded align-self-center pa-4"
           outlined
           hide-details="true"
+          v-model="avatarUserName"
         ></v-text-field
         ><v-text-field
           label="Avatar URL"
@@ -48,12 +50,14 @@
           class="rounded align-self-center pa-4"
           outlined
           hide-details="true"
+          v-model="avatarImg"
         ></v-text-field>
         <v-switch
           class="align-self-center my-0 py-0 mr-2"
           hide-details="true"
           inset
           color="success"
+          v-model="avatarEnabled"
         ></v-switch>
       </v-card>
     </OptionWrapper>
@@ -62,6 +66,7 @@
 
 <script>
 import OptionWrapper from '../optionWrapper.vue';
+import { mapMutations } from 'vuex';
 
 export default {
   methods: {
@@ -70,7 +75,45 @@ export default {
 
       return name;
     },
+    ...mapMutations(['updateUser', 'updateAutosave']),
   },
+
+  computed: {
+    avatarEnabled: {
+      get() {
+        return this.$store.state.editorConfig.user.enabled;
+      },
+      set(val) {
+        this.updateUser({ enabled: val });
+      },
+    },
+    avatarUserName: {
+      get() {
+        return this.$store.state.editorConfig.user.name;
+      },
+      set(val) {
+        this.updateUser({ name: val });
+      },
+    },
+    avatarImg: {
+      get() {
+        return this.$store.state.editorConfig.user.avatar;
+      },
+      set(val) {
+        this.updateUser({ avatar: val });
+      },
+    },
+
+    autosave: {
+      get() {
+        return this.$store.state.editorConfig.autoSaveInterval;
+      },
+      set(val) {
+        this.updateAutosave(val);
+      },
+    },
+  },
+
   components: {
     OptionWrapper,
   },
