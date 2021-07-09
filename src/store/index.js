@@ -127,6 +127,9 @@ export default new Vuex.Store({
       }
       x.settings.addons = addons;
 
+      //User processing
+      if (!x.user.enable) x.user = false;
+
       return x;
     },
   },
