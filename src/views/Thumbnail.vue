@@ -21,6 +21,9 @@ export default {
   async mounted() {
     await this.$store.dispatch('updateSDK');
   },
+  destroyed() {
+    window.chamaileonSdk.destroy;
+  },
 
   components: {
     Menu,

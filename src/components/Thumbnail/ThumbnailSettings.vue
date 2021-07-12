@@ -75,9 +75,9 @@ export default {
   },
   data() {
     return {
-      height: 240,
-      width: 320,
-      scale: 1,
+      height: 640,
+      width: 480,
+      scale: 0.5,
       scroll: false,
     };
   },
