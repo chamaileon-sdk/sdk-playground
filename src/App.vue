@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-row>
-      <v-col>
+      <v-col cols="8">
         <router-view />
       </v-col>
       <v-col cols="4">
