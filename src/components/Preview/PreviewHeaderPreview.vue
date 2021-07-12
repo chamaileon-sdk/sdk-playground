@@ -21,9 +21,9 @@
       ></div>
 
       <div class="share-button-container">
-        <div v-if="headerButtons" class="d-flex align-center">
+        <div v-if="headerButtons" class="d-flex align-center justify-end">
           <div v-for="button in headerButtons" :key="button.id" class="mx-2">
-            <v-badge
+            <!--<v-badge
               class="badge"
               :color="button.badge.color"
               :value="button.badge"
@@ -33,49 +33,47 @@
             >
               <template v-if="button.badge" v-slot:badge>
                 <v-icon> mdi-{{ button.badge.icon }} </v-icon>
+              </template>-->
+            <v-menu transition="slide-y-transition" bottom left offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  :id="button.id"
+                  :color="button.color"
+                  :label="button.label"
+                  :icon="!button.label"
+                  :depressed="button.style === 'depressed'"
+                  :text="button.style === 'text'"
+                  :outlined="button.style === 'outlined'"
+                  :rounded="button.style === 'rounded'"
+                >
+                  <div
+                    class="d-flex align-center"
+                    :class="{ 'white--text': button.style === 'depressed' }"
+                  >
+                    <v-icon v-if="button.icon"> mdi-{{ button.icon }} </v-icon>
+                    <span v-if="button.label" class="ml-2">
+                      {{ button.label }}
+                    </span>
+                  </div>
+                </v-btn>
               </template>
-              <v-menu transition="slide-y-transition" bottom left offset-y>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    :id="button.id"
-                    :color="button.color"
-                    :label="button.label"
-                    :icon="!button.label"
-                    :depressed="button.style === 'depressed'"
-                    :text="button.style === 'text'"
-                    :outlined="button.style === 'outlined'"
-                    :rounded="button.style === 'rounded'"
-                  >
-                    <div
-                      class="d-flex align-center"
-                      :class="{ 'white--text': button.style === 'depressed' }"
-                    >
-                      <v-icon v-if="button.icon">
-                        mdi-{{ button.icon }}
-                      </v-icon>
-                      <span v-if="button.label" class="ml-2">
-                        {{ button.label }}
-                      </span>
-                    </div>
-                  </v-btn>
-                </template>
-                <v-list v-if="button.items">
-                  <v-list-item
-                    v-for="listItem in button.items"
-                    :key="listItem.id"
-                  >
-                    <v-list-item-action class="mx-2">
-                      <v-icon> mdi-{{ listItem.icon }} </v-icon>
-                    </v-list-item-action>
-                    <v-list-item-title class="mx-2 px-0 text-left">
-                      {{ listItem.label }}
-                    </v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-badge>
+              <v-list v-if="button.items">
+                <v-list-item
+                  v-for="listItem in button.items"
+                  :key="listItem.id"
+                >
+                  <v-list-item-action class="mx-2">
+                    <v-icon> mdi-{{ listItem.icon }} </v-icon>
+                  </v-list-item-action>
+                  <v-list-item-title class="mx-2 px-0 text-left">
+                    {{ listItem.label }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <!--</v-badge>-->
           </div>
         </div>
       </div>
@@ -84,10 +82,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
-      headerButtons: [],
       primary: this.$store.state.sdkConfig.colors.primary,
     };
   },
@@ -110,6 +109,8 @@ export default {
     },
   },
   computed: {
+    ...mapGetters({ headerButtons: 'getPreviewBtns' }),
+
     logo() {
       return this.$store.state.logoCreatorFunction;
     },
@@ -129,7 +130,7 @@ export default {
   position: relative;
   align-items: center;
   overflow: hidden;
-  width: 250px;
+  width: 200px;
   z-index: 3;
   margin: auto;
   text-align: center;

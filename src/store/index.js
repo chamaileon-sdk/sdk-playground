@@ -2,12 +2,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import editorConfig from './modules/emailEditorConfig';
+import previewConfig from './modules/preview';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     editorConfig,
+    previewConfig,
   },
   state: {
     apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
