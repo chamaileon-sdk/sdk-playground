@@ -1,149 +1,135 @@
 <template>
   <div>
-    <h1 class="mb-6">Content</h1>
-    <v-card class="mb-6" flat>
-      <v-row>
+    <h1>Content</h1>
+    <OptionWrapper>
+      <v-row class="ma-0 pa-0 mx-n3">
         <v-col
-          cols="1"
-          class="py-0"
+          class="my-0 py-0"
+          cols="2"
           v-for="(element, index) in contentElements"
           :key="index"
+          @click="toggleElement({ type: 'content', element: element.type })"
         >
-          <v-card class="text-center">
+          <v-btn
+            depressed
+            class="pa-0 d-flex"
+            height="100%"
+            width="100%"
+            :color="elementsArr.content[element.type] ? 'primary' : 'white'"
+          >
             <v-responsive :aspect-ratio="1">
-              <v-btn
-                :color="
-                  elementsArr.content[element.type]
-                    ? `#00C0E7`
-                    : `grey lighten-4`
-                "
-                elevation="0"
-                height="100%"
-                width="100%"
-                @click="
-                  toggleElement({ type: 'content', element: element.type })
-                "
+              <div
+                class="d-flex flex-column justify-space-around"
+                style="height: 100%;"
               >
-                <v-card
-                  width="80"
-                  flat
-                  color="transparent"
-                  :class="
-                    elementsArr.content[element.type] ? `white--text` : ``
-                  "
-                >
+                <div>
                   <v-icon x-large>
                     {{ element.icon }}
                   </v-icon>
-                  <div class="element-break-word">
+                  <div v-if="element.alt">
+                    {{ element.alt }}
+                  </div>
+                  <div v-else class="element-break-word">
                     {{ element.type }}
                   </div>
-                </v-card>
-              </v-btn>
+                </div>
+              </div>
             </v-responsive>
-          </v-card>
+          </v-btn>
         </v-col>
       </v-row>
-    </v-card>
+    </OptionWrapper>
 
-    <h1 class="mb-6">Structure</h1>
-    <v-card class="mb-6" flat>
-      <v-row>
+    <h1>Structure</h1>
+    <OptionWrapper>
+      <v-row class="ma-0 pa-0 mx-n3">
         <v-col
-          cols="1"
-          class="py-0"
+          class="my-0 py-0"
+          cols="2"
           v-for="(element, index) in structureElements"
           :key="index"
+          @click="toggleElement({ type: 'structure', element: element.type })"
         >
-          <v-card class="text-center">
+          <v-btn
+            depressed
+            class="pa-0 d-flex"
+            height="100%"
+            width="100%"
+            :color="elementsArr.structure[element.type] ? 'primary' : 'white'"
+          >
             <v-responsive :aspect-ratio="1">
-              <v-btn
-                :color="
-                  elementsArr.structure[element.type]
-                    ? `#00C0E7`
-                    : `grey lighten-4`
-                "
-                elevation="0"
-                height="100%"
-                width="100%"
-                @click="
-                  toggleElement({ type: 'structure', element: element.type })
-                "
+              <div
+                class="d-flex flex-column justify-space-around"
+                style="height: 100%;"
               >
-                <v-card
-                  width="80"
-                  flat
-                  color="transparent"
-                  :class="
-                    elementsArr.structure[element.type] ? `white--text` : ``
-                  "
-                >
+                <div>
                   <v-icon x-large>
                     {{ element.icon }}
                   </v-icon>
-                  <div class="element-break-word">
+                  <div v-if="element.alt">
+                    {{ element.alt }}
+                  </div>
+                  <div v-else class="element-break-word">
                     {{ element.type }}
                   </div>
-                </v-card>
-              </v-btn>
+                </div>
+              </div>
             </v-responsive>
-          </v-card>
+          </v-btn>
         </v-col>
       </v-row>
-    </v-card>
+    </OptionWrapper>
 
-    <h1 class="mb-6">Advanced</h1>
-    <v-card class="mb-6" flat>
-      <v-row>
+    <h1>Advanced</h1>
+    <OptionWrapper>
+      <v-row class="ma-0 pa-0 mx-n3">
         <v-col
-          cols="1"
-          class="py-0"
+          class="my-0 py-0"
+          cols="2"
           v-for="(element, index) in advancedElements"
           :key="index"
+          @click="toggleElement({ type: 'advanced', element: element.type })"
         >
-          <v-card class="text-center">
+          <v-btn
+            depressed
+            class="pa-0 d-flex"
+            height="100%"
+            width="100%"
+            :color="elementsArr.advanced[element.type] ? 'primary' : 'white'"
+          >
             <v-responsive :aspect-ratio="1">
-              <v-btn
-                :color="
-                  elementsArr.advanced[element.type]
-                    ? `#00C0E7`
-                    : `grey lighten-4`
-                "
-                elevation="0"
-                height="100%"
-                width="100%"
-                @click="
-                  toggleElement({ type: 'advanced', element: element.type })
-                "
+              <div
+                class="d-flex flex-column justify-space-around"
+                style="height: 100%;"
               >
-                <v-card
-                  width="80"
-                  flat
-                  color="transparent"
-                  :class="
-                    elementsArr.advanced[element.type] ? `white--text` : ``
-                  "
-                >
+                <div>
                   <v-icon x-large>
                     {{ element.icon }}
                   </v-icon>
-                  <div class="element-break-word">
+                  <div v-if="element.alt">
+                    {{ element.alt }}
+                  </div>
+                  <div v-else class="element-break-word">
                     {{ element.type }}
                   </div>
-                </v-card>
-              </v-btn>
+                </div>
+              </div>
             </v-responsive>
-          </v-card>
+          </v-btn>
         </v-col>
       </v-row>
-    </v-card>
+    </OptionWrapper>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import OptionWrapper from '../optionWrapper.vue';
 
 export default {
+  components: {
+    OptionWrapper,
+  },
   computed: {
     ...mapGetters({
       elementsArr: 'getElements',
@@ -194,6 +180,7 @@ export default {
           icon: 'mdi-checkbox-blank-outline',
         },
         {
+          alt: 'columns',
           type: 'multiColumn',
           icon: 'mdi-view-column',
         },
@@ -204,10 +191,12 @@ export default {
           icon: 'mdi-refresh',
         },
         {
+          alt: 'cond',
           type: 'conditional',
           icon: 'mdi-call-split',
         },
         {
+          alt: 'dyn img',
           type: 'dynamicImage',
           icon: 'mdi-folder-multiple-image',
         },
@@ -219,6 +208,6 @@ export default {
 
 <style>
 .element-break-word {
-  word-wrap: break-word;
+  word-break: break-word;
 }
 </style>

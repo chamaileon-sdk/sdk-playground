@@ -9,6 +9,7 @@
     <OptionWrapper>
       <TextInsertPreview />
     </OptionWrapper>
+
     <h1>Buttons</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
@@ -16,95 +17,101 @@
       reiciendis? Officia fuga saepe nam? Iure corporis molestias commodi saepe
       ipsum.
     </p>
-    <div style="max-height: 400px; overflow-y: auto;">
-      <draggable v-model="btnArr">
-        <v-card
-          class="ma-0 pa-0 d-flex align-center"
-          outlined
-          elevation="0"
-          tile
-          v-for="item in btnArr"
-          :key="item.id"
-        >
-          <v-list-item-icon class="align-self-center ma-0 ml-6">
-            <v-icon>mdi-menu</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-row class="px-6">
-              <v-col cols="2" align-self="center">
-                <v-text-field
-                  dense
-                  :value="item.id"
-                  hide-details="true"
-                  label="ID"
-                  outlined
-                  @change="
-                    updateTextInsertButton({
-                      id: item.id,
-                      newID: $event,
-                    })
-                  "
-                ></v-text-field>
-              </v-col>
-              <v-col cols="2" align-self="center">
-                <v-text-field
-                  dense
-                  :value="item.label"
-                  hide-details="true"
-                  label="Label"
-                  outlined
-                  @change="
-                    updateTextInsertButton({
-                      id: item.id,
-                      label: $event,
-                    })
-                  "
-                ></v-text-field>
-              </v-col>
-              <v-col cols="2" align-self="center">
-                <v-text-field
-                  dense
-                  :value="item.icon"
-                  @change="
-                    updateTextInsertButton({
-                      id: item.id,
-                      icon: $event,
-                    })
-                  "
-                  hide-details="true"
-                  label="Icon"
-                  outlined
-                ></v-text-field>
-              </v-col>
+    <OptionWrapper>
+      <template>
+        <v-row align="center" justify="end" class="ma-0">
+          <v-btn depressed color="success" @click="addTextInsertButton">
+            <v-icon left>
+              mdi-plus
+            </v-icon>
+            New Button
+          </v-btn>
+        </v-row>
+      </template>
+      <div
+        v-if="btnArr.length > 0"
+        class="mt-8"
+        style="max-height: 400px; overflow-y: auto;"
+      >
+        <draggable v-model="btnArr">
+          <v-card
+            class="ma-0 pa-0 d-flex align-center"
+            outlined
+            elevation="0"
+            tile
+            v-for="item in btnArr"
+            :key="item.id"
+          >
+            <v-list-item-icon class="align-self-center ma-0 ml-6">
+              <v-icon>mdi-menu</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-row class="px-6">
+                <v-col cols="3" align-self="center">
+                  <v-text-field
+                    dense
+                    :value="item.id"
+                    hide-details="true"
+                    label="ID"
+                    outlined
+                    @change="
+                      updateTextInsertButton({
+                        id: item.id,
+                        newID: $event,
+                      })
+                    "
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" align-self="center">
+                  <v-text-field
+                    dense
+                    :value="item.label"
+                    hide-details="true"
+                    label="Label"
+                    outlined
+                    @change="
+                      updateTextInsertButton({
+                        id: item.id,
+                        label: $event,
+                      })
+                    "
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" align-self="center">
+                  <v-text-field
+                    dense
+                    :value="item.icon"
+                    @change="
+                      updateTextInsertButton({
+                        id: item.id,
+                        icon: $event,
+                      })
+                    "
+                    hide-details="true"
+                    label="Icon"
+                    outlined
+                  ></v-text-field>
+                </v-col>
 
-              <v-col cols="2" align-self="center">
-                <v-btn
-                  depressed
-                  color="red white--text"
-                  width="100%"
-                  @click="deleteTextInsertButton(item.id)"
-                >
-                  <v-icon left>
-                    mdi-close
-                  </v-icon>
-                  delete
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-list-item-content>
-        </v-card>
-      </draggable>
-    </div>
-    <template>
-      <v-row align="center" justify="end" class="ma-0 mt-7">
-        <v-btn depressed color="success" @click="addTextInsertButton">
-          <v-icon left>
-            mdi-plus
-          </v-icon>
-          New Button
-        </v-btn>
-      </v-row>
-    </template>
+                <v-col cols="3" align-self="center">
+                  <v-btn
+                    depressed
+                    color="red white--text"
+                    width="100%"
+                    @click="deleteTextInsertButton(item.id)"
+                  >
+                    <v-icon left>
+                      mdi-close
+                    </v-icon>
+                    delete
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-list-item-content>
+          </v-card>
+        </draggable>
+      </div>
+    </OptionWrapper>
   </div>
 </template>
 
