@@ -86,6 +86,7 @@ export default {
           description:
             'Generates a thumbnail from an existing document. Allows you to set the size and scale, and attach the thumbnail to an HTML element',
           reveal: false,
+          to: 'emailthumbnail',
           docs: 'https://chamaileon.io/sdk/docs/email-thumbnail/',
         },
         {

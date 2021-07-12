@@ -1,11 +1,12 @@
 <template>
   <v-main>
     <v-row>
-      <v-col>
+      <v-col cols="8">
         <router-view />
       </v-col>
       <v-col cols="4">
-        <v-card width="100%" height="100%" dark flat> </v-card>
+        <v-card style="position: fixed" width="100%" height="100%" dark flat>
+        </v-card>
       </v-col>
     </v-row>
   </v-main>

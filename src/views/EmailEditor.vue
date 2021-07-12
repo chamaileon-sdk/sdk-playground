@@ -10,6 +10,19 @@
           </v-col>
         </v-row>
       </v-container>
+
+      <v-fab-transition>
+        <v-btn
+          color="primary rounded-pill"
+          large
+          fab
+          bottom
+          right
+          class="v-btn--example"
+        >
+          <v-icon>mdi-eye</v-icon>
+        </v-btn>
+      </v-fab-transition>
     </v-main>
   </v-app>
 </template>
@@ -41,6 +54,13 @@ export default {
 </script>
 
 <style>
+.v-btn--example {
+  position: fixed;
+  bottom: 0;
+  right: 31%;
+  margin-bottom: 64px;
+}
+
 body {
   overflow: hidden !important;
 }

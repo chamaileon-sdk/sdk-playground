@@ -15,6 +15,10 @@ import TextInsert from '../components/EmailEditor/TextInsert';
 import Addons from '../components/EmailEditor/Addons';
 import Settings from '../components/EmailEditor/Settings';
 
+//Thumbnail
+import Thumbnail from '../views/Thumbnail.vue';
+import ThumbnailSettings from '../components/Thumbnail/ThumbnailSettings';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -77,6 +81,22 @@ const routes = [
         path: 'settings',
         name: 'Settings',
         component: Settings,
+      },
+    ],
+  },
+  {
+    path: '/emailthumbnail',
+    component: Thumbnail,
+    children: [
+      {
+        path: '/',
+        name: 'EmailThumbnail',
+        redirect: 'settings',
+      },
+      {
+        path: 'settings',
+        name: 'ThumbnailSettings',
+        component: ThumbnailSettings,
       },
     ],
   },
