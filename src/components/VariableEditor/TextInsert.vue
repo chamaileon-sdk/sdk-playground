@@ -1,0 +1,152 @@
+<template>
+  <div>
+    <h1>Preview</h1>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
+      expedita ipsa ipsam ea nobis facere tenetur debitis magni, adipisci error,
+      illo deleniti sint laborum incidunt distinctio? Quaerat, ratione hic.
+    </p>
+    <OptionWrapper>
+      <TextInsertPreview />
+    </OptionWrapper>
+
+    <h1>Buttons</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
+      tempora hic delectus culpa natus dicta adipisci eius aliquam officiis
+      reiciendis? Officia fuga saepe nam? Iure corporis molestias commodi saepe
+      ipsum.
+    </p>
+    <OptionWrapper>
+      <template>
+        <v-row align="center" justify="end" class="ma-0">
+          <v-btn depressed color="success" @click="addVETextInsertButton">
+            <v-icon left>
+              mdi-plus
+            </v-icon>
+            New Button
+          </v-btn>
+        </v-row>
+      </template>
+      <div
+        v-if="btnArr.length > 0"
+        class="mt-8"
+        style="max-height: 400px; overflow-y: auto;"
+      >
+        <draggable v-model="btnArr">
+          <v-card
+            class="ma-0 pa-0 d-flex align-center"
+            outlined
+            elevation="0"
+            tile
+            v-for="item in btnArr"
+            :key="item.id"
+          >
+            <v-list-item-icon class="align-self-center ma-0 ml-6">
+              <v-icon>mdi-menu</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-row class="px-6">
+                <v-col cols="3" align-self="center">
+                  <v-text-field
+                    dense
+                    :value="item.id"
+                    hide-details="true"
+                    label="ID"
+                    outlined
+                    @change="
+                      updateVETextInsertButton({
+                        id: item.id,
+                        newID: $event,
+                      })
+                    "
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" align-self="center">
+                  <v-text-field
+                    dense
+                    :value="item.label"
+                    hide-details="true"
+                    label="Label"
+                    outlined
+                    @change="
+                      updateVETextInsertButton({
+                        id: item.id,
+                        label: $event,
+                      })
+                    "
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3" align-self="center">
+                  <v-text-field
+                    dense
+                    :value="item.icon"
+                    @change="
+                      updateVETextInsertButton({
+                        id: item.id,
+                        icon: $event,
+                      })
+                    "
+                    hide-details="true"
+                    label="Icon"
+                    outlined
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="3" align-self="center">
+                  <v-btn
+                    depressed
+                    color="red white--text"
+                    width="100%"
+                    @click="deleteVETextInsertButton(item.id)"
+                  >
+                    <v-icon left>
+                      mdi-close
+                    </v-icon>
+                    delete
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-list-item-content>
+          </v-card>
+        </draggable>
+      </div>
+    </OptionWrapper>
+  </div>
+</template>
+
+<script>
+import OptionWrapper from '../optionWrapper.vue';
+import TextInsertPreview from './TextInsertPreview.vue';
+import draggable from 'vuedraggable';
+import { mapMutations } from 'vuex';
+
+export default {
+  methods: {
+    ...mapMutations([
+      'addVETextInsertButton',
+      'deleteVETextInsertButton',
+      'updateVETextInsertOrder',
+      'updateVETextInsertButton',
+    ]),
+  },
+  computed: {
+    btnArr: {
+      get() {
+        return this.$store.state.variableEditorConfig.settings.buttons
+          .textInsertPlugin;
+      },
+      set(val) {
+        this.updateVETextInsertOrder(val);
+      },
+    },
+  },
+  components: {
+    OptionWrapper,
+    draggable,
+    TextInsertPreview,
+  },
+};
+</script>
+
+<style></style>

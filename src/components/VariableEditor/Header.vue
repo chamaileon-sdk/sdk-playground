@@ -22,7 +22,7 @@
       <v-row>
         <v-col cols="6">
           <template>
-            <v-row align="center" justify="begin" class="ma-0">
+            <v-row align="center" class="ma-0 justify-begin">
               <v-btn
                 depressed
                 color="success"
@@ -122,7 +122,7 @@
         </v-col>
         <v-col cols="6">
           <template>
-            <v-row align="center" justify="end" class="ma-0">
+            <v-row align="center" class="ma-0 justify-end">
               <v-btn
                 depressed
                 color="success"
