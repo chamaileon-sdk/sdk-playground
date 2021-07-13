@@ -1,19 +1,40 @@
 <template>
-  <v-main>
-    <v-row>
-      <v-col cols="8">
-        <router-view />
-      </v-col>
-      <v-col cols="4">
-        <v-card style="position: fixed" width="100%" height="100%" dark flat>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-main>
+  <v-app>
+    <MenuReworked />
+
+    <!--<v-main class="pa-16">
+      <v-container class="py-8 px-16" fluid>
+        <v-row>
+          <v-col>
+            <router-view />
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  -->
+    <v-main>
+      <v-row>
+        <v-col class="pa-16" cols="8">
+          <div class="py-8 px-16">
+            <router-view />
+          </div>
+        </v-col>
+        <v-col cols="4">
+          <v-card style="position: fixed" width="100%" height="100%" dark flat>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
+import MenuReworked from './components/MenuReworked.vue';
+
 export default {
+  components: {
+    MenuReworked,
+  },
   created() {
     this.$store.commit('updateSDKConfig', {
       colors: {
