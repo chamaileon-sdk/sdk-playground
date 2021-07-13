@@ -283,7 +283,7 @@ export default {
 
     //Autosave
     updateAutosave(state, payload) {
-      state.autoSaveInterval = payload;
+      state.autoSaveInterval = parseInt(payload);
     },
   },
 

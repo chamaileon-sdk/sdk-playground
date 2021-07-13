@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import editorConfig from './modules/emailEditorConfig';
 import previewConfig from './modules/preview';
+import variableEditorConfig from './modules/variableEditor';
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
   modules: {
     editorConfig,
     previewConfig,
+    variableEditorConfig,
   },
   state: {
     apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
@@ -58,6 +60,7 @@ export default new Vuex.Store({
 
       const chamaileonPlugins = await window.chamaileonSdk.init({
         mode: 'serverless',
+        environmentName: 'serverless-DEV-488',
         accessToken: accessToken,
         whitelabel: {
           ...this.state.sdkConfig,
@@ -136,6 +139,8 @@ export default new Vuex.Store({
 
       //User processing
       if (!x.user.enabled) x.user = false;
+
+      console.log(x);
 
       return x;
     },

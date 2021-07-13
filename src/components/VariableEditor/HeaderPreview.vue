@@ -15,7 +15,7 @@
           </v-btn>
 
           <v-btn v-if="button.icon" icon small class="mr-2">
-            <v-icon>{{ button.icon }}</v-icon>
+            <v-icon>mdi-{{ button.icon }}</v-icon>
           </v-btn>
         </span>
       </div>
@@ -33,7 +33,7 @@
           </v-btn>
 
           <v-btn v-if="button.icon" icon small class="ml-2">
-            <v-icon>{{ button.icon }}</v-icon>
+            <v-icon>mdi-{{ button.icon }}</v-icon>
           </v-btn>
         </span>
       </div>
@@ -42,7 +42,13 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['headerButtons']),
+  },
+};
 </script>
 
 <style scoped>
