@@ -1,57 +1,90 @@
 <template>
-  <v-app>
-    <Menu :items="items" />
+  <div>
+    <div class="observerRoot"></div>
+    <v-app>
+      <div class="section" id="header">
+        <Header />
+      </div>
 
-    <v-main class="pa-16">
-      <v-container class="py-8 px-16" fluid>
-        <v-row>
-          <v-col>
-            <router-view />
-          </v-col>
-        </v-row>
-      </v-container>
+      <div class="section" id="elements">
+        <Elements />
+      </div>
 
-      <v-fab-transition>
-        <v-btn
-          color="primary rounded-pill"
-          large
-          fab
-          bottom
-          right
-          class="v-btn--example"
-        >
-          <v-icon>mdi-eye</v-icon>
-        </v-btn>
-      </v-fab-transition>
-    </v-main>
-  </v-app>
+      <div class="section" id="block-libraries">
+        <BlockLibraries />
+      </div>
+
+      <div class="section" id="text-insert">
+        <TextInsert />
+      </div>
+
+      <div class="section" id="addons">
+        <Addons />
+      </div>
+      <div class="section" id="settings">
+        <Settings />
+      </div>
+    </v-app>
+  </div>
 </template>
 
 <script>
-import Menu from '../components/Menu.vue';
+import Header from '../components/EmailEditor/Header';
+import Elements from '../components/EmailEditor/Elements';
+import BlockLibraries from '../components/EmailEditor/BlockLibraries';
+import TextInsert from '../components/EmailEditor/TextInsert';
+import Addons from '../components/EmailEditor/Addons';
+import Settings from '../components/EmailEditor/Settings';
 
 export default {
-  async mounted() {
-    await this.$store.dispatch('updateSDK');
+  mounted() {
+    this.$store.dispatch('updateSDK');
+    this.observer = new IntersectionObserver(this.handleIntersect, {
+      threshold: 0.75,
+      //rootMargin: '-20% 0% -80% 0%',
+    });
+
+    const sections = document.querySelectorAll('.section');
+
+    sections.forEach(c => this.observer.observe(c));
   },
   destroyed() {
     window.chamaileonSdk.destroy;
+    this.observer.disconnect();
   },
   components: {
-    Menu,
+    Header,
+    Elements,
+    BlockLibraries,
+    TextInsert,
+    Addons,
+    Settings,
   },
 
   data() {
     return {
-      items: [
-        { title: 'Header', icon: 'border-top-variant' },
-        { title: 'Elements', icon: 'card-plus-outline' },
-        { title: 'Block Libraries', icon: 'database-edit-outline' },
-        { title: 'Text Insert', icon: 'format-text' },
-        { title: 'Addons', icon: 'puzzle-outline' },
-        { title: 'Settings', icon: 'cog-outline' },
-      ],
+      observer: null,
     };
+  },
+  methods: {
+    handleIntersect(e) {
+      e.forEach(c => {
+        if (c.isIntersecting) {
+          window.history.pushState(
+            null,
+            null,
+            this.$route.path + '#' + c.target.id
+          );
+
+          this.$router
+            .replace({
+              ...this.$route,
+              hash: '#' + c.target.id,
+            })
+            .catch(() => {});
+        }
+      });
+    },
   },
 };
 </script>
@@ -70,4 +103,13 @@ body {
 iframe {
   position: fixed;
 }
+/*.observerRoot {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
+  background-color: red;
+}*/
 </style>
