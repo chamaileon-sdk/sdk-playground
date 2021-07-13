@@ -23,6 +23,12 @@ import ThumbnailSettings from '../components/Thumbnail/ThumbnailSettings';
 import Preview from '../views/Preview.vue';
 import PreviewButtons from '../components/Preview/PreviewButtons.vue';
 
+//Variable Editor
+import VariableEditor from '../views/VariableEditor';
+import VEHeader from '../components/VariableEditor/Header';
+import VEFooter from '../components/VariableEditor/Footer';
+import VETextI from '../components/VariableEditor/TextInsert';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -121,13 +127,30 @@ const routes = [
     ],
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/varibleeditor',
+    component: VariableEditor,
+    children: [
+      {
+        path: '/',
+        name: 'VariableEditor',
+        redirect: 'header',
+      },
+      {
+        path: 'header',
+        name: 'VaraibleEditorHeader',
+        component: VEHeader,
+      },
+      {
+        path: 'footer',
+        name: 'VaraibleEditorFooter',
+        component: VEFooter,
+      },
+      {
+        path: 'textinsert',
+        name: 'VaraibleEditorTextInsert',
+        component: VETextI,
+      },
+    ],
   },
 ];
 

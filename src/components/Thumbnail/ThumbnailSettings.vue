@@ -75,8 +75,8 @@ export default {
   },
   data() {
     return {
-      height: 480,
       width: 640,
+      height: 480,
       scale: 1,
       scroll: false,
     };
