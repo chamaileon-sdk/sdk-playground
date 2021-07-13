@@ -19,6 +19,10 @@ import Settings from '../components/EmailEditor/Settings';
 import Thumbnail from '../views/Thumbnail.vue';
 import ThumbnailSettings from '../components/Thumbnail/ThumbnailSettings';
 
+//Preview
+import Preview from '../views/Preview.vue';
+import PreviewButtons from '../components/Preview/PreviewButtons.vue';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -97,6 +101,22 @@ const routes = [
         path: 'settings',
         name: 'ThumbnailSettings',
         component: ThumbnailSettings,
+      },
+    ],
+  },
+  {
+    path: '/emailpreview',
+    component: Preview,
+    children: [
+      {
+        path: '/',
+        name: 'EmailPreview',
+        redirect: 'header',
+      },
+      {
+        path: 'header',
+        name: 'PreviewHeader',
+        component: PreviewButtons,
       },
     ],
   },

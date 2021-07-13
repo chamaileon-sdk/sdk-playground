@@ -2,15 +2,18 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import editorConfig from './modules/emailEditorConfig';
+import previewConfig from './modules/preview';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     editorConfig,
+    previewConfig,
   },
   state: {
     apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
+    logoCreatorFunction: undefined,
     sdk: null,
     sdkConfig: {
       locale: 'en',
@@ -27,6 +30,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    changeLogoFunction(state, fn) {
+      state.logoCreatorFunction = fn;
+    },
     addSDK(state, sdk) {
       state.sdk = sdk;
     },
@@ -60,6 +66,7 @@ export default new Vuex.Store({
 
       console.log(chamaileonPlugins);
       commit('addSDK', chamaileonPlugins);
+      commit('changeLogoFunction', window.createLogo);
     },
     async updateSDK({ dispatch }) {
       window.chamaileonSdk.destroy();
@@ -128,7 +135,7 @@ export default new Vuex.Store({
       x.settings.addons = addons;
 
       //User processing
-      if (!x.user.enable) x.user = false;
+      if (!x.user.enabled) x.user = false;
 
       return x;
     },

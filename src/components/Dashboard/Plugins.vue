@@ -95,6 +95,7 @@ export default {
           description:
             'If you already have a document exported from the editor, this plugin allows you to create a preview for it.',
           reveal: false,
+          to: 'emailpreview',
           docs: 'https://chamaileon.io/sdk/docs/email-preview/',
         },
         {

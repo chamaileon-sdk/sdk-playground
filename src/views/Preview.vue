@@ -6,7 +6,7 @@
       <v-container class="py-8 px-16" fluid>
         <v-row>
           <v-col>
-            <router-view />
+            <router-view :actLogoCreator="this.creatorFunction" />
           </v-col>
         </v-row>
       </v-container>
@@ -18,9 +18,10 @@
 import Menu from '../components/Menu.vue';
 
 export default {
-  async mounted() {
-    await this.$store.dispatch('updateSDK');
+  mounted() {
+    this.$store.dispatch('updateSDK');
   },
+
   destroyed() {
     window.chamaileonSdk.destroy;
   },
@@ -30,9 +31,10 @@ export default {
   },
   data() {
     return {
+      creatorFunction: window.createLogo,
       editors: [
         {
-          title: 'Settings',
+          title: 'Header',
           icon: 'cog-outline',
         },
       ],
