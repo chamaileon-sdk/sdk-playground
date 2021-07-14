@@ -1,31 +1,28 @@
 <template>
-  <div>
-    <div class="observerRoot"></div>
-    <v-app>
-      <div class="section" id="header">
-        <Header />
-      </div>
+  <v-app>
+    <div class="section" id="header">
+      <Header />
+    </div>
 
-      <div class="section" id="elements">
-        <Elements />
-      </div>
+    <div class="section" id="elements">
+      <Elements />
+    </div>
 
-      <div class="section" id="block-libraries">
-        <BlockLibraries />
-      </div>
+    <div class="section" id="block-libraries">
+      <BlockLibraries />
+    </div>
 
-      <div class="section" id="text-insert">
-        <TextInsert />
-      </div>
+    <div class="section" id="text-insert">
+      <TextInsert />
+    </div>
 
-      <div class="section" id="addons">
-        <Addons />
-      </div>
-      <div class="section" id="settings">
-        <Settings />
-      </div>
-    </v-app>
-  </div>
+    <div class="section" id="addons">
+      <Addons />
+    </div>
+    <div class="section" id="settings">
+      <Settings />
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -68,8 +65,9 @@ export default {
   },
   methods: {
     handleIntersect(e) {
+      let inserted = false;
       e.forEach(c => {
-        if (c.isIntersecting) {
+        if (c.isIntersecting && !inserted) {
           window.history.pushState(
             null,
             null,
@@ -82,6 +80,8 @@ export default {
               hash: '#' + c.target.id,
             })
             .catch(() => {});
+
+          inserted = true;
         }
       });
     },

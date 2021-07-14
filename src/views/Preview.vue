@@ -1,44 +1,64 @@
 <template>
   <v-app>
-    <Menu :items="editors" />
-
-    <v-main class="pa-16">
-      <v-container class="py-8 px-16" fluid>
-        <v-row>
-          <v-col>
-            <router-view :actLogoCreator="this.creatorFunction" />
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
+    <div class="section" id="header">
+      <Header :actLogoCreator="this.creatorFunction" />
+    </div>
   </v-app>
 </template>
 
 <script>
-import Menu from '../components/Menu.vue';
+import Header from '../components/Preview/PreviewButtons.vue';
 
 export default {
+  components: {
+    Header,
+  },
   mounted() {
     this.$store.dispatch('updateSDK');
+
+    this.observer = new IntersectionObserver(this.handleIntersect, {
+      threshold: 0.75,
+      // rootMargin: '-20% 0% -20% 0%',
+    });
+
+    const sections = document.querySelectorAll('.section');
+
+    sections.forEach(c => this.observer.observe(c));
   },
 
   destroyed() {
     window.chamaileonSdk.destroy;
+    this.observer.disconnect();
   },
 
-  components: {
-    Menu,
-  },
   data() {
     return {
       creatorFunction: window.createLogo,
-      editors: [
-        {
-          title: 'Header',
-          icon: 'cog-outline',
-        },
-      ],
+      observer: null,
     };
+  },
+  methods: {
+    handleIntersect(e) {
+      let inserted = false;
+      e.forEach(c => {
+        if (c.isIntersecting && !inserted) {
+          window.history.pushState(
+            null,
+            null,
+            this.$route.path + '#' + c.target.id
+          );
+
+          this.$router
+            .replace({
+              ...this.$route,
+              hash: '#' + c.target.id,
+            })
+            .catch(() => {});
+
+          inserted = true;
+        }
+      });
+    },
   },
 };
 </script>
