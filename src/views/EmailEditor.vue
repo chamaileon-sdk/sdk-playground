@@ -34,7 +34,7 @@ import Addons from '../components/EmailEditor/Addons';
 import Settings from '../components/EmailEditor/Settings';
 
 export default {
-  mounted() {
+  async mounted() {
     this.$store.dispatch('updateSDK');
     this.observer = new IntersectionObserver(this.handleIntersect, {
       threshold: 0.75,
@@ -102,10 +102,5 @@ body {
 }
 iframe {
   position: fixed;
-}
-
-.section {
-  padding: 128px 0;
-  height: 100vh;
 }
 </style>

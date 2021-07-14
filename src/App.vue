@@ -58,4 +58,18 @@ html::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
+.section {
+  padding: 96px 0;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+h3 {
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
 </style>

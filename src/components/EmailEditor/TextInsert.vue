@@ -10,7 +10,7 @@
       <TextInsertPreview />
     </OptionWrapper>
 
-    <h2>Buttons</h2>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
       tempora hic delectus culpa natus dicta adipisci eius aliquam officiis

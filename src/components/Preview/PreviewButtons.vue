@@ -11,7 +11,7 @@
       <Header />
     </OptionWrapper>
 
-    <h1>Preview Buttons</h1>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis hic
       earum, molestiae voluptatum ullam ut quae ratione ducimus, illum aperiam

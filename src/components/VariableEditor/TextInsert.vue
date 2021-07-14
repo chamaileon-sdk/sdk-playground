@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Preview</h1>
+    <h1>Text Insert</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
       expedita ipsa ipsam ea nobis facere tenetur debitis magni, adipisci error,
@@ -10,7 +10,7 @@
       <TextInsertPreview />
     </OptionWrapper>
 
-    <h1>Buttons</h1>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
       tempora hic delectus culpa natus dicta adipisci eius aliquam officiis

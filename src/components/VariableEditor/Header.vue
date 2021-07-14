@@ -11,7 +11,7 @@
       <HeaderPreview />
     </OptionWrapper>
 
-    <h1>Buttons</h1>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium optio
       quae esse repudiandae minus eligendi perferendis nesciunt eos vitae quis.

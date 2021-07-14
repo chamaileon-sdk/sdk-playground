@@ -10,7 +10,7 @@
       <FooterPreview />
     </OptionWrapper>
 
-    <h1>Buttons</h1>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis vero
       odit eos reprehenderit itaque aspernatur debitis, nesciunt exercitationem

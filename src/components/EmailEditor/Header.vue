@@ -11,7 +11,7 @@
       <HeaderPreview />
     </OptionsWrapper>
 
-    <h2 class="mt-3">Your Buttons</h2>
+    <h3>Your Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis hic
       earum, molestiae voluptatum ullam ut quae ratione ducimus, illum aperiam

@@ -6,7 +6,7 @@
       assumenda a, alias nobis beatae! Aut, eaque velit, adipisci reprehenderit
       rerum blanditiis dolorem quos placeat ullam nam sapiente quam deserunt.
     </p>
-    <h2>Your Libraries</h2>
+    <h3>Your Libraries</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem quas modi
       esse obcaecati eligendi veniam. Cumque molestiae quasi incidunt tempore,

@@ -8,7 +8,7 @@
       Laborum explicabo repudiandae facere!
     </p>
 
-    <h2>Utilities</h2>
+    <h3>Utilities</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, molestiae
       illo cumque exercitationem aliquid sunt praesentium cupiditate qui ipsa
@@ -34,7 +34,7 @@
       </v-card>
     </OptionWrapper>
 
-    <h2>User Settings</h2>
+    <h3>User Settings</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius voluptate,
       voluptas, quidem est laboriosam illo perspiciatis ut ea repudiandae

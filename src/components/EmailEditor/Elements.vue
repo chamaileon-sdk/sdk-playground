@@ -8,7 +8,7 @@
       iste est maxime cum!
     </p>
 
-    <h2>Content</h2>
+    <h3>Content</h3>
     <OptionWrapper>
       <v-row class="ma-0 pa-0 mx-n3">
         <v-col
@@ -48,7 +48,7 @@
       </v-row>
     </OptionWrapper>
 
-    <h2>Structure</h2>
+    <h3>Structure</h3>
     <OptionWrapper>
       <v-row class="ma-0 pa-0 mx-n3">
         <v-col
@@ -88,7 +88,7 @@
       </v-row>
     </OptionWrapper>
 
-    <h2>Advanced</h2>
+    <h3>Advanced</h3>
     <OptionWrapper>
       <v-row class="ma-0 pa-0 mx-n3">
         <v-col
