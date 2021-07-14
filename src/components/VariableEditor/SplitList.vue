@@ -17,82 +17,33 @@
         style="max-height: 400px; overflow-y: auto;"
       >
         <draggable v-model="buttonsLeft">
-          <v-card
-            class="ma-0 pa-0 d-flex align-center"
-            outlined
-            elevation="0"
-            tile
+          <ListItem3
             v-for="item in buttonsLeft"
             :key="item.id"
-          >
-            <v-list-item-icon class="align-self-center ma-0 ml-6">
-              <v-icon>mdi-menu</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-row class="px-6">
-                <v-col cols="6" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.id"
-                    hide-details="true"
-                    label="ID"
-                    outlined
-                    @change="
-                      updateLeftButton({
-                        id: item.id,
-                        newID: $event,
-                      })
-                    "
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="6" align-self="center">
-                  <v-btn
-                    depressed
-                    color="red white--text"
-                    width="100%"
-                    @click="deleteLeftButton(item.id)"
-                  >
-                    <v-icon left>
-                      mdi-close
-                    </v-icon>
-                    delete
-                  </v-btn>
-                </v-col>
-
-                <v-col cols="6" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.label"
-                    hide-details="true"
-                    label="Label"
-                    outlined
-                    @change="
-                      updateLeftButton({
-                        id: item.id,
-                        label: $event,
-                      })
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="6" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.icon"
-                    @change="
-                      updateLeftButton({
-                        id: item.id,
-                        icon: $event,
-                      })
-                    "
-                    hide-details="true"
-                    label="Icon"
-                    outlined
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-            </v-list-item-content>
-          </v-card>
+            :id="item.id"
+            :icon="item.icon"
+            :label="item.label"
+            @idChange="
+              updateLeftButton({
+                id: item.id,
+                newID: $event,
+              })
+            "
+            @labelChange="
+              updateLeftButton({
+                id: item.id,
+                label: $event,
+              })
+            "
+            @iconChange="
+              updateLeftButton({
+                id: item.id,
+                icon: $event,
+              })
+            "
+            @deleteClicked="deleteLeftButton(item.id)"
+            :split="true"
+          />
         </draggable>
       </div>
     </v-col>
@@ -113,82 +64,33 @@
         style="max-height: 400px; overflow-y: auto;"
       >
         <draggable v-model="buttonsRight">
-          <v-card
-            class="ma-0 pa-0 d-flex align-center"
-            outlined
-            elevation="0"
-            tile
+          <ListItem3
             v-for="item in buttonsRight"
             :key="item.id"
-          >
-            <v-list-item-icon class="align-self-center ma-0 ml-6">
-              <v-icon>mdi-menu</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-row class="px-6">
-                <v-col cols="6" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.id"
-                    hide-details="true"
-                    label="ID"
-                    outlined
-                    @change="
-                      updateRightButton({
-                        id: item.id,
-                        newID: $event,
-                      })
-                    "
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="6" align-self="center">
-                  <v-btn
-                    depressed
-                    color="red white--text"
-                    width="100%"
-                    @click="deleteRightButton(item.id)"
-                  >
-                    <v-icon left>
-                      mdi-close
-                    </v-icon>
-                    delete
-                  </v-btn>
-                </v-col>
-
-                <v-col cols="6" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.label"
-                    hide-details="true"
-                    label="Label"
-                    outlined
-                    @change="
-                      updateRightButton({
-                        id: item.id,
-                        label: $event,
-                      })
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="6" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.icon"
-                    @change="
-                      updateRightButton({
-                        id: item.id,
-                        icon: $event,
-                      })
-                    "
-                    hide-details="true"
-                    label="Icon"
-                    outlined
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-            </v-list-item-content>
-          </v-card>
+            :id="item.id"
+            :icon="item.icon"
+            :label="item.label"
+            @idChange="
+              updateRightButton({
+                id: item.id,
+                newID: $event,
+              })
+            "
+            @labelChange="
+              updateRightButton({
+                id: item.id,
+                label: $event,
+              })
+            "
+            @iconChange="
+              updateRightButton({
+                id: item.id,
+                icon: $event,
+              })
+            "
+            @deleteClicked="deleteRightButton(item.id)"
+            :split="true"
+          />
         </draggable>
       </div>
     </v-col>
@@ -197,8 +99,14 @@
 
 <script>
 import draggable from 'vuedraggable';
+import ListItem3 from '../ListItem3.vue';
 
 export default {
+  components: {
+    draggable,
+    ListItem3,
+  },
+
   props: {
     section: {
       type: String,
@@ -275,10 +183,6 @@ export default {
         );
       },
     },
-  },
-
-  components: {
-    draggable,
   },
 };
 </script>
