@@ -142,6 +142,8 @@ export default new Vuex.Store({
 
       console.log(x);
 
+      //Variable Editor icon has to be mdi-*iconTitle*
+
       return x;
     },
   },
