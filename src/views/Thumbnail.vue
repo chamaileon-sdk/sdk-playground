@@ -1,5 +1,13 @@
 <template>
   <v-app>
+    <h1>Email Thumbnail</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima,
+      necessitatibus ad in saepe ducimus blanditiis voluptate nisi. Magni amet
+      tempore aut. Mollitia, nobis adipisci! Impedit ducimus a itaque labore
+      fugit!
+    </p>
+
     <div class="section" id="settings">
       <Settings />
     </div>

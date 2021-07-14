@@ -103,13 +103,9 @@ body {
 iframe {
   position: fixed;
 }
-/*.observerRoot {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 80%;
-  background-color: red;
-}*/
+
+.section {
+  padding: 128px 0;
+  height: 100vh;
+}
 </style>
