@@ -1,34 +1,37 @@
 <template>
   <v-app>
     <div class="section" id="header">
-      <Header />
+      <v-lazy transition="">
+        <Header />
+      </v-lazy>
     </div>
 
     <div class="section" id="elements">
-      <v-lazy>
+      <v-lazy transition="">
         <Elements />
       </v-lazy>
     </div>
 
     <div class="section" id="block-libraries">
-      <v-lazy>
+      <v-lazy transition="">
         <BlockLibraries />
       </v-lazy>
     </div>
 
     <div class="section" id="text-insert">
-      <v-lazy>
+      <v-lazy transition="">
         <TextInsert />
       </v-lazy>
     </div>
 
     <div class="section" id="addons">
-      <v-lazy>
+      <v-lazy transition="">
         <Addons />
       </v-lazy>
     </div>
+
     <div class="section" id="settings">
-      <v-lazy>
+      <v-lazy transition="">
         <Settings />
       </v-lazy>
     </div>
