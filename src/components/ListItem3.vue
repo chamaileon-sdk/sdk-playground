@@ -23,17 +23,9 @@
           :cols="split ? 6 : 3"
           align-self="center"
         >
-          <v-btn
-            depressed
-            color="red white--text"
-            width="100%"
+          <DeleteButton
             @click="() => this.$emit('deleteClicked')"
-          >
-            <v-icon left>
-              mdi-close
-            </v-icon>
-            delete
-          </v-btn>
+          ></DeleteButton>
         </v-col>
 
         <v-col class="pa-2" :cols="split ? 6 : 3" align-self="center">
@@ -69,17 +61,9 @@
           :cols="split ? 6 : 3"
           align-self="center"
         >
-          <v-btn
-            depressed
-            color="red white--text"
-            width="100%"
+          <DeleteButton
             @click="() => this.$emit('deleteClicked')"
-          >
-            <v-icon left>
-              mdi-close
-            </v-icon>
-            delete
-          </v-btn>
+          ></DeleteButton>
         </v-col>
       </v-row>
     </v-list-item-content>
@@ -87,7 +71,12 @@
 </template>
 
 <script>
+import DeleteButton from './DeleteButton.vue';
+
 export default {
+  components: {
+    DeleteButton,
+  },
   props: {
     split: {
       type: Boolean,

@@ -76,17 +76,7 @@
                   </v-col>
 
                   <v-col cols="3" align-self="center" class="ml-auto">
-                    <v-btn
-                      depressed
-                      color="red white--text"
-                      width="100%"
-                      @click="removeBlockLibs(b.id)"
-                    >
-                      <v-icon left>
-                        mdi-close
-                      </v-icon>
-                      delete
-                    </v-btn>
+                    <DeleteButton @click="removeBlockLibs(b.id)"></DeleteButton>
                   </v-col>
                 </v-row>
               </v-list-item-content>
@@ -99,6 +89,7 @@
 </template>
 
 <script>
+import DeleteButton from '../DeleteButton.vue';
 import AddButton from '../AddButton.vue';
 import draggable from 'vuedraggable';
 import OptionWrapper from '../optionWrapper.vue';
@@ -106,6 +97,7 @@ import { mapMutations } from 'vuex';
 
 export default {
   components: {
+    DeleteButton,
     AddButton,
     draggable,
     OptionWrapper,
