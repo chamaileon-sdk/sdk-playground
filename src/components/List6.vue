@@ -54,17 +54,7 @@
               </v-col>
 
               <v-col class="py-0" cols="4" align-self="center">
-                <v-btn
-                  depressed
-                  color="red white--text"
-                  width="100%"
-                  @click="deleteBtn(b.id)"
-                >
-                  <v-icon left>
-                    mdi-close
-                  </v-icon>
-                  delete
-                </v-btn>
+                <DeleteButton @click="deleteBtn(b.id)"></DeleteButton>
               </v-col>
             </v-row>
             <v-row class="px-6 pb-3">
@@ -162,22 +152,14 @@
               </v-col>
 
               <v-col cols="3" align-self="center" class="ml-auto">
-                <v-btn
-                  depressed
-                  color="red white--text"
+                <DeleteButton
                   @click="
                     deleteDDBtn({
                       id: b.id,
                       obj: { id: i.id },
                     })
                   "
-                  width="100%"
-                >
-                  <v-icon left>
-                    mdi-close
-                  </v-icon>
-                  delete
-                </v-btn>
+                ></DeleteButton>
               </v-col>
             </v-row>
           </v-card>
@@ -188,6 +170,7 @@
 </template>
 
 <script>
+import DeleteButton from './DeleteButton.vue';
 import draggable from 'vuedraggable';
 import ColorPicker from './EmailEditor/ColorPicker.vue';
 
@@ -203,6 +186,7 @@ export default {
     },
   },
   components: {
+    DeleteButton,
     draggable,
     ColorPicker,
   },
