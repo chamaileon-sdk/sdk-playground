@@ -1,7 +1,7 @@
 <template>
   <v-btn
     depressed
-    color="orange white--text"
+    color="red white--text"
     width="100%"
     min-width="0"
     @click="() => this.$emit('click')"
