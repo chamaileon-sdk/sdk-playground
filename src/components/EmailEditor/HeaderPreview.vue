@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <!--<v-card class="d-flex flex-wrap align-center py-2 " flat>
+    <v-card class="d-flex flex-wrap align-center py-2 " flat>
       <v-btn icon id="leaveEditorBtn" class="mx-2">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
@@ -97,7 +97,7 @@
           </v-list>
         </v-menu>
       </div>
-    </v-card>-->
+    </v-card>
   </div>
 </template>
 
