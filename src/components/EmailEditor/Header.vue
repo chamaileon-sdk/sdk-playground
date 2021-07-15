@@ -37,7 +37,8 @@
         </v-row>
       </template>
 
-      <v-card
+      <List6 :section="'Editor'" />
+      <!--<v-card
         color="transparent"
         v-if="buttonsArr.length > 0"
         class="mx-auto mt-7"
@@ -237,74 +238,31 @@
             </draggable>
           </div>
         </draggable>
-      </v-card>
+      </v-card>-->
     </OptionsWrapper>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import ColorPicker from './ColorPicker.vue';
 import HeaderPreview from './HeaderPreview.vue';
 import OptionsWrapper from '../optionWrapper.vue';
+import List6 from '../List6.vue';
 import { mapMutations } from 'vuex';
 
 export default {
-  updated() {
-    console.log(this.$store.state.editorConfig.idArr);
-  },
   components: {
-    draggable,
-    ColorPicker,
     HeaderPreview,
     OptionsWrapper,
+    List6,
   },
   methods: {
     ...mapMutations({
-      addBtn: 'addHeaderBtn',
-      deleteBtn: 'removeHeaderBtn',
-      updateHeaderBtnOrder: 'updateHeaderBtnOrder',
-      updateBtn: 'updateHeaderBtn',
-      addDD: 'addHeaderDropdown',
-      addDDBtn: 'addHeaderDropdownBtn',
-      updateDDBtn: 'updateDropdownBtn',
-      deleteDDBtn: 'removeHeaderDropdownBtn',
+      addBtn: 'addEditorBtn',
+      addDD: 'addEditorDropdown',
     }),
-    updateLabel(val, id) {
-      this.updateBtn({ id: id, label: val });
-    },
-    updateColor(val, id) {
-      this.updateBtn({ id: id, color: val });
-    },
-    updateIcon(val, id) {
-      this.updateBtn({ id: id, icon: val });
-    },
-    updateID(val, id) {
-      if (!this.$store.state.idArr.includes(val) && val)
-        this.updateBtn({ id: id, newID: val });
-    },
-    updateDDID(val, pid, id) {
-      if (!this.$store.state.idArr.includes(val) && val)
-        this.updateDDBtn({
-          id: pid,
-          obj: { id: id, newID: val },
-        });
-    },
-  },
-  computed: {
-    buttonsArr: {
-      get() {
-        return this.$store.getters.getHeaderBtns;
-      },
-      set(value) {
-        this.updateHeaderBtnOrder(value);
-      },
-    },
   },
   data() {
     return {
-      icon: '',
-      id: 3,
       rules: {
         required: value => !!value || 'Required.',
         unique: value => !this.$store.state.editorConfig.idArr.includes(value),

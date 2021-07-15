@@ -59,7 +59,7 @@ export default {
     autoSaveInterval: 15000,
   }),
   mutations: {
-    addHeaderBtn(state) {
+    addEditorBtn(state) {
       state.settings.buttons.header.push({
         id: `yourBtn-${state.key}`,
         type: 'button',
@@ -72,7 +72,7 @@ export default {
       state.idArr.push(`yourBtn-${state.key}`);
       state.key++;
     },
-    removeHeaderBtn(state, payload) {
+    removeEditorBtn(state, payload) {
       state.settings.buttons.header = state.settings.buttons.header.filter(
         c => {
           if (c.id !== payload) return true;
@@ -88,10 +88,10 @@ export default {
 
       state.idArr = state.idArr.filter(c => c !== payload);
     },
-    updateHeaderBtnOrder(state, payload) {
+    updateEditorBtnOrder(state, payload) {
       state.settings.buttons.header = payload;
     },
-    updateHeaderBtn(state, payload) {
+    updateEditorBtn(state, payload) {
       state.settings.buttons.header = state.settings.buttons.header.map(c => {
         if (c.id === payload.id) {
           if ('newID' in payload) {
@@ -111,7 +111,7 @@ export default {
     },
 
     //Dropdown
-    addHeaderDropdown(state) {
+    addEditorDropdown(state) {
       state.settings.buttons.header.push({
         id: `yourBtn-${state.key}`,
         type: 'dropdown',
@@ -126,7 +126,7 @@ export default {
       state.key++;
     },
 
-    removeHeaderDropdownBtn(state, payload) {
+    removeEditorDropdownBtn(state, payload) {
       state.settings.buttons.header = state.settings.buttons.header.map(c => {
         if (c.id === payload.id) {
           c.items = c.items.filter(c => c.id !== payload.obj.id);
@@ -137,7 +137,7 @@ export default {
       });
     },
 
-    addHeaderDropdownBtn(state, id) {
+    addEditorDropdownBtn(state, id) {
       state.settings.buttons.header = state.settings.buttons.header.map(c => {
         if (c.id === id) {
           c.items.push({
@@ -154,7 +154,7 @@ export default {
       state.key++;
     },
 
-    updateDropdownBtn(state, payload) {
+    updateEditorDropdownBtn(state, payload) {
       state.settings.buttons.header = state.settings.buttons.header.map(c => {
         if (c.id === payload.id) {
           c.items = c.items.map(i => {
