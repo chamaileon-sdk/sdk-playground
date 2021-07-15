@@ -23,11 +23,11 @@ export default {
   }),
   mutations: {
     //Left
-    updateVariableEditorLeftOrder(state, payload) {
+    updateVariableEditorHeaderLeftOrder(state, payload) {
       state.settings.buttons.header.left = payload;
     },
 
-    deleteVariableEditorLeftButton(state, payload) {
+    deleteVariableEditorHeaderLeftButton(state, payload) {
       state.settings.buttons.header.left = state.settings.buttons.header.left.filter(
         c => c.id !== payload
       );
@@ -35,7 +35,7 @@ export default {
       state.idArr = state.idArr.filter(c => c != payload);
     },
 
-    addVariableEditorLeftButton(state) {
+    addVariableEditorHeaderLeftButton(state) {
       state.settings.buttons.header.left.push({
         id: `ve-btn-${state.id}`,
         label: `Left ${state.id}`,
@@ -45,7 +45,7 @@ export default {
       state.id++;
     },
 
-    updateVariableEditorLeftButton(state, payload) {
+    updateVariableEditorHeaderLeftButton(state, payload) {
       state.settings.buttons.header.left = state.settings.buttons.header.left.map(
         c => {
           if (c.id === payload.id) {
@@ -64,11 +64,11 @@ export default {
     },
 
     //Right
-    updateVariableEditorRightOrder(state, payload) {
+    updateVariableEditorHeaderRightOrder(state, payload) {
       state.settings.buttons.header.right = payload;
     },
 
-    deleteVariableEditorRightButton(state, payload) {
+    deleteVariableEditorHeaderRightButton(state, payload) {
       state.settings.buttons.header.right = state.settings.buttons.header.right.filter(
         c => c.id !== payload
       );
@@ -76,7 +76,7 @@ export default {
       state.idArr = state.idArr.filter(c => c != payload);
     },
 
-    addVariableEditorRightButton(state) {
+    addVariableEditorHeaderRightButton(state) {
       state.settings.buttons.header.right.push({
         id: `ve-btn-${state.id}`,
         label: `Right ${state.id}`,
@@ -86,7 +86,7 @@ export default {
       state.id++;
     },
 
-    updateVariableEditorRightButton(state, payload) {
+    updateVariableEditorHeaderRightButton(state, payload) {
       state.settings.buttons.header.right = state.settings.buttons.header.right.map(
         c => {
           if (c.id === payload.id) {
@@ -105,11 +105,11 @@ export default {
     },
 
     //Footer left
-    updateVEFooterLeftOrder(state, payload) {
+    updateVariableEditorFooterLeftOrder(state, payload) {
       state.settings.buttons.footer.left = payload;
     },
 
-    deleteVEFooterLeftButton(state, payload) {
+    deleteVariableEditorFooterLeftButton(state, payload) {
       state.settings.buttons.footer.left = state.settings.buttons.footer.left.filter(
         c => c.id !== payload
       );
@@ -117,7 +117,7 @@ export default {
       state.fidArr = state.fidArr.filter(c => c != payload);
     },
 
-    addVEFooterLeftButton(state) {
+    addVariableEditorFooterLeftButton(state) {
       state.settings.buttons.footer.left.push({
         id: `vf-btn-${state.fid}`,
         label: `Left ${state.fid}`,
@@ -127,7 +127,7 @@ export default {
       state.fid++;
     },
 
-    updateVEFooterLeftButton(state, payload) {
+    updateVariableEditorFooterLeftButton(state, payload) {
       state.settings.buttons.footer.left = state.settings.buttons.footer.left.map(
         c => {
           if (c.id === payload.id) {
@@ -145,11 +145,11 @@ export default {
       );
     },
 
-    updateVEFooterRightOrder(state, payload) {
+    updateVariableEditorFooterRightOrder(state, payload) {
       state.settings.buttons.footer.right = payload;
     },
 
-    deleteVEFooterRightButton(state, payload) {
+    deleteVariableEditorFooterRightButton(state, payload) {
       state.settings.buttons.footer.right = state.settings.buttons.footer.right.filter(
         c => c.id !== payload
       );
@@ -157,7 +157,7 @@ export default {
       state.fidArr = state.fidArr.filter(c => c != payload);
     },
 
-    addVEFooterRightButton(state) {
+    addVariableEditorFooterRightButton(state) {
       state.settings.buttons.footer.right.push({
         id: `vf-btn-${state.fid}`,
         label: `Right ${state.fid}`,
@@ -167,7 +167,7 @@ export default {
       state.fid++;
     },
 
-    updateVEFooterRightButton(state, payload) {
+    updateVariableEditorFooterRightButton(state, payload) {
       state.settings.buttons.footer.right = state.settings.buttons.footer.right.map(
         c => {
           if (c.id === payload.id) {

@@ -60,7 +60,7 @@ export default new Vuex.Store({
 
       const chamaileonPlugins = await window.chamaileonSdk.init({
         mode: 'serverless',
-        environmentName: 'serverless-DEV-488',
+        // environmentName: 'serverless-DEV-488',
         accessToken: accessToken,
         whitelabel: {
           ...this.state.sdkConfig,
@@ -141,6 +141,8 @@ export default new Vuex.Store({
       if (!x.user.enabled) x.user = false;
 
       console.log(x);
+
+      //Variable Editor icon has to be mdi-*iconTitle*
 
       return x;
     },

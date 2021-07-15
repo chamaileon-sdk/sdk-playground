@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Preview</h1>
+    <h1>Text Insert</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
       expedita ipsa ipsam ea nobis facere tenetur debitis magni, adipisci error,
@@ -10,7 +10,7 @@
       <TextInsertPreview />
     </OptionWrapper>
 
-    <h1>Buttons</h1>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
       tempora hic delectus culpa natus dicta adipisci eius aliquam officiis
@@ -20,12 +20,7 @@
     <OptionWrapper>
       <template>
         <v-row align="center" justify="end" class="ma-0">
-          <v-btn depressed color="success" @click="addTextInsertButton">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
+          <AddButton @click="addTextInsertButton"> New Button </AddButton>
         </v-row>
       </template>
       <div
@@ -34,81 +29,32 @@
         style="max-height: 400px; overflow-y: auto;"
       >
         <draggable v-model="btnArr">
-          <v-card
-            class="ma-0 pa-0 d-flex align-center"
-            outlined
-            elevation="0"
-            tile
+          <ListItem3
             v-for="item in btnArr"
             :key="item.id"
-          >
-            <v-list-item-icon class="align-self-center ma-0 ml-6">
-              <v-icon>mdi-menu</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-row class="px-6">
-                <v-col cols="3" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.id"
-                    hide-details="true"
-                    label="ID"
-                    outlined
-                    @change="
-                      updateTextInsertButton({
-                        id: item.id,
-                        newID: $event,
-                      })
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.label"
-                    hide-details="true"
-                    label="Label"
-                    outlined
-                    @change="
-                      updateTextInsertButton({
-                        id: item.id,
-                        label: $event,
-                      })
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3" align-self="center">
-                  <v-text-field
-                    dense
-                    :value="item.icon"
-                    @change="
-                      updateTextInsertButton({
-                        id: item.id,
-                        icon: $event,
-                      })
-                    "
-                    hide-details="true"
-                    label="Icon"
-                    outlined
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="3" align-self="center">
-                  <v-btn
-                    depressed
-                    color="red white--text"
-                    width="100%"
-                    @click="deleteTextInsertButton(item.id)"
-                  >
-                    <v-icon left>
-                      mdi-close
-                    </v-icon>
-                    delete
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-list-item-content>
-          </v-card>
+            :id="item.id"
+            :icon="item.icon"
+            :label="item.label"
+            @idChange="
+              updateTextInsertButton({
+                id: item.id,
+                newID: $event,
+              })
+            "
+            @labelChange="
+              updateTextInsertButton({
+                id: item.id,
+                label: $event,
+              })
+            "
+            @iconChange="
+              updateTextInsertButton({
+                id: item.id,
+                icon: $event,
+              })
+            "
+            @deleteClicked="deleteTextInsertButton(item.id)"
+          />
         </draggable>
       </div>
     </OptionWrapper>
@@ -116,6 +62,8 @@
 </template>
 
 <script>
+import AddButton from '../AddButton.vue';
+import ListItem3 from '../ListItem3.vue';
 import OptionWrapper from '../optionWrapper.vue';
 import TextInsertPreview from './TextInsertPreview.vue';
 import draggable from 'vuedraggable';
@@ -141,9 +89,11 @@ export default {
     },
   },
   components: {
+    AddButton,
     OptionWrapper,
     draggable,
     TextInsertPreview,
+    ListItem3,
   },
 };
 </script>

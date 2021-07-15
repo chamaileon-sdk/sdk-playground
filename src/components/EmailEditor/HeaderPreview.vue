@@ -119,11 +119,7 @@ export default {
 .btn-central {
   max-width: 1rem;
 }
-#header {
-  background-color: white;
-  padding: 5px 0 5px 0;
-  border-bottom: thin solid rgba(0, 0, 0, 0.12);
-}
+
 .successSave {
   background: rgb(16, 137, 16) !important;
 }

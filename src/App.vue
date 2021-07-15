@@ -2,25 +2,22 @@
   <v-app>
     <MenuReworked />
 
-    <!--<v-main class="pa-16">
-      <v-container class="py-8 px-16" fluid>
-        <v-row>
-          <v-col>
-            <router-view />
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  -->
     <v-main>
-      <v-row>
-        <v-col class="pa-16" cols="8">
-          <div class="py-8 px-16">
+      <v-row class="pa-0 ma-0">
+        <v-col class="px-16 py-0" cols="8">
+          <div class="px-16">
             <router-view />
           </div>
         </v-col>
-        <v-col cols="4">
-          <v-card style="position: fixed" width="100%" height="100%" dark flat>
+        <v-col class="pa-0" cols="4">
+          <v-card
+            style="position: fixed"
+            class="rounded-0"
+            width="100%"
+            height="100%"
+            dark
+            flat
+          >
           </v-card>
         </v-col>
       </v-row>
@@ -60,5 +57,19 @@ html {
 html::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+.section {
+  padding: 96px 0;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+h3 {
+  margin-top: 32px;
+  margin-bottom: 8px;
 }
 </style>

@@ -1,6 +1,14 @@
 <template>
   <div>
-    <h1>Content</h1>
+    <h1>Elements</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+      praesentium, ad architecto beatae provident, pariatur doloremque
+      exercitationem quidem soluta, est magnam nemo similique. Fugit sunt atque
+      iste est maxime cum!
+    </p>
+
+    <h3>Content</h3>
     <OptionWrapper>
       <v-row class="ma-0 pa-0 mx-n3">
         <v-col
@@ -40,7 +48,7 @@
       </v-row>
     </OptionWrapper>
 
-    <h1>Structure</h1>
+    <h3>Structure</h3>
     <OptionWrapper>
       <v-row class="ma-0 pa-0 mx-n3">
         <v-col
@@ -80,7 +88,7 @@
       </v-row>
     </OptionWrapper>
 
-    <h1>Advanced</h1>
+    <h3>Advanced</h3>
     <OptionWrapper>
       <v-row class="ma-0 pa-0 mx-n3">
         <v-col

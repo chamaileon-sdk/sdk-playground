@@ -1,11 +1,19 @@
 <template>
   <div>
-    <h1>Utilities</h1>
+    <h1>Settings</h1>
     <p>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error ut
       voluptate unde facilis molestias, beatae necessitatibus, numquam sunt
       voluptatum soluta vitae, similique incidunt amet corporis molestiae!
       Laborum explicabo repudiandae facere!
+    </p>
+
+    <h3>Utilities</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, molestiae
+      illo cumque exercitationem aliquid sunt praesentium cupiditate qui ipsa
+      quidem, animi optio. Alias excepturi fuga in! Blanditiis corporis pariatur
+      saepe.
     </p>
     <OptionWrapper>
       <v-card elevation="0" class="d-flex">
@@ -26,7 +34,7 @@
       </v-card>
     </OptionWrapper>
 
-    <h1>User Settings</h1>
+    <h3>User Settings</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius voluptate,
       voluptas, quidem est laboriosam illo perspiciatis ut ea repudiandae

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <h1>Preview</h1>
+    <h1>Thumbnail</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore sunt
       excepturi ipsa recusandae illo fugiat natus, sequi architecto repudiandae
@@ -17,7 +17,7 @@
       </v-card>
     </OptionWrapper>
 
-    <h1>Thumbnail Settings</h1>
+    <h3>Thumbnail Settings</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatibus,
       saepe maxime autem asperiores consequatur quod, eligendi consectetur

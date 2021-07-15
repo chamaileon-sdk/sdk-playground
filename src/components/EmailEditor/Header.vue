@@ -11,9 +11,7 @@
       <HeaderPreview />
     </OptionsWrapper>
 
-    <v-spacer></v-spacer>
-
-    <h1>Your Buttons</h1>
+    <h3>Your Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis hic
       earum, molestiae voluptatum ullam ut quae ratione ducimus, illum aperiam
@@ -23,23 +21,13 @@
     <OptionsWrapper>
       <template>
         <v-row align="center" justify="end" class="ma-0">
-          <v-btn depressed color="success" @click="addBtn" class="mr-6">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
-
-          <v-btn depressed color="success" @click="addDD">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New DropDown
-          </v-btn>
+          <AddButton class="mr-6" @click="addBtn"> New Button </AddButton>
+          <AddButton @click="addDD"> New DropDown </AddButton>
         </v-row>
       </template>
 
-      <v-card
+      <List6 :section="'Editor'" />
+      <!--<v-card
         color="transparent"
         v-if="buttonsArr.length > 0"
         class="mx-auto mt-7"
@@ -239,74 +227,33 @@
             </draggable>
           </div>
         </draggable>
-      </v-card>
+      </v-card>-->
     </OptionsWrapper>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import ColorPicker from './ColorPicker.vue';
+import AddButton from '../AddButton.vue';
 import HeaderPreview from './HeaderPreview.vue';
 import OptionsWrapper from '../optionWrapper.vue';
+import List6 from '../List6.vue';
 import { mapMutations } from 'vuex';
 
 export default {
-  updated() {
-    console.log(this.$store.state.editorConfig.idArr);
-  },
   components: {
-    draggable,
-    ColorPicker,
+    AddButton,
     HeaderPreview,
     OptionsWrapper,
+    List6,
   },
   methods: {
     ...mapMutations({
-      addBtn: 'addHeaderBtn',
-      deleteBtn: 'removeHeaderBtn',
-      updateHeaderBtnOrder: 'updateHeaderBtnOrder',
-      updateBtn: 'updateHeaderBtn',
-      addDD: 'addHeaderDropdown',
-      addDDBtn: 'addHeaderDropdownBtn',
-      updateDDBtn: 'updateDropdownBtn',
-      deleteDDBtn: 'removeHeaderDropdownBtn',
+      addBtn: 'addEditorBtn',
+      addDD: 'addEditorDropdown',
     }),
-    updateLabel(val, id) {
-      this.updateBtn({ id: id, label: val });
-    },
-    updateColor(val, id) {
-      this.updateBtn({ id: id, color: val });
-    },
-    updateIcon(val, id) {
-      this.updateBtn({ id: id, icon: val });
-    },
-    updateID(val, id) {
-      if (!this.$store.state.idArr.includes(val) && val)
-        this.updateBtn({ id: id, newID: val });
-    },
-    updateDDID(val, pid, id) {
-      if (!this.$store.state.idArr.includes(val) && val)
-        this.updateDDBtn({
-          id: pid,
-          obj: { id: id, newID: val },
-        });
-    },
-  },
-  computed: {
-    buttonsArr: {
-      get() {
-        return this.$store.getters.getHeaderBtns;
-      },
-      set(value) {
-        this.updateHeaderBtnOrder(value);
-      },
-    },
   },
   data() {
     return {
-      icon: '',
-      id: 3,
       rules: {
         required: value => !!value || 'Required.',
         unique: value => !this.$store.state.editorConfig.idArr.includes(value),

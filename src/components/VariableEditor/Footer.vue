@@ -10,7 +10,7 @@
       <FooterPreview />
     </OptionWrapper>
 
-    <h1>Buttons</h1>
+    <h3>Buttons</h3>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis vero
       odit eos reprehenderit itaque aspernatur debitis, nesciunt exercitationem
@@ -18,200 +18,7 @@
       ipsa eveniet!
     </p>
     <OptionWrapper>
-      <v-row>
-        <v-col cols="6">
-          <template>
-            <v-row align="center" class="ma-0 justify-begin">
-              <v-btn depressed color="success" @click="addVEFooterLeftButton">
-                <v-icon left>
-                  mdi-plus
-                </v-icon>
-                New Button
-              </v-btn>
-            </v-row>
-          </template>
-          <div
-            v-if="footerButtons.left.length > 0"
-            class="mt-8"
-            style="max-height: 400px; overflow-y: auto;"
-          >
-            <draggable v-model="footerButtons.left">
-              <v-card
-                class="ma-0 pa-0 d-flex align-center"
-                outlined
-                elevation="0"
-                tile
-                v-for="item in footerButtons.left"
-                :key="item.id"
-              >
-                <v-list-item-icon class="align-self-center ma-0 ml-6">
-                  <v-icon>mdi-menu</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-row class="px-6">
-                    <v-col cols="6" align-self="center">
-                      <v-text-field
-                        dense
-                        :value="item.id"
-                        hide-details="true"
-                        label="ID"
-                        outlined
-                        @change="
-                          updateVEFooterLeftButton({
-                            id: item.id,
-                            newID: $event,
-                          })
-                        "
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="6" align-self="center">
-                      <v-btn
-                        depressed
-                        color="red white--text"
-                        width="100%"
-                        @click="deleteVEFooterLeftButton(item.id)"
-                      >
-                        <v-icon left>
-                          mdi-close
-                        </v-icon>
-                        delete
-                      </v-btn>
-                    </v-col>
-
-                    <v-col cols="6" align-self="center">
-                      <v-text-field
-                        dense
-                        :value="item.label"
-                        hide-details="true"
-                        label="Label"
-                        outlined
-                        @change="
-                          updateVEFooterLeftButton({
-                            id: item.id,
-                            label: $event,
-                          })
-                        "
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6" align-self="center">
-                      <v-text-field
-                        dense
-                        :value="item.icon"
-                        @change="
-                          updateVEFooterLeftButton({
-                            id: item.id,
-                            icon: $event,
-                          })
-                        "
-                        hide-details="true"
-                        label="Icon"
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-list-item-content>
-              </v-card>
-            </draggable>
-          </div>
-        </v-col>
-        <v-col cols="6">
-          <template>
-            <v-row align="center" class="ma-0 justify-end">
-              <v-btn depressed color="success" @click="addVEFooterRightButton">
-                <v-icon left>
-                  mdi-plus
-                </v-icon>
-                New Button
-              </v-btn>
-            </v-row>
-          </template>
-          <div
-            v-if="footerButtons.right.length > 0"
-            class="mt-8"
-            style="max-height: 400px; overflow-y: auto;"
-          >
-            <draggable v-model="footerButtons.right">
-              <v-card
-                class="ma-0 pa-0 d-flex align-center"
-                outlined
-                elevation="0"
-                tile
-                v-for="item in footerButtons.right"
-                :key="item.id"
-              >
-                <v-list-item-icon class="align-self-center ma-0 ml-6">
-                  <v-icon>mdi-menu</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-row class="px-6">
-                    <v-col cols="6" align-self="center">
-                      <v-text-field
-                        dense
-                        :value="item.id"
-                        hide-details="true"
-                        label="ID"
-                        outlined
-                        @change="
-                          updateVEFooterRightButton({
-                            id: item.id,
-                            newID: $event,
-                          })
-                        "
-                      ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="6" align-self="center">
-                      <v-btn
-                        depressed
-                        color="red white--text"
-                        width="100%"
-                        @click="deleteVEFooterRightButton(item.id)"
-                      >
-                        <v-icon left>
-                          mdi-close
-                        </v-icon>
-                        delete
-                      </v-btn>
-                    </v-col>
-
-                    <v-col cols="6" align-self="center">
-                      <v-text-field
-                        dense
-                        :value="item.label"
-                        hide-details="true"
-                        label="Label"
-                        outlined
-                        @change="
-                          updateVEFooterRightButton({
-                            id: item.id,
-                            label: $event,
-                          })
-                        "
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="6" align-self="center">
-                      <v-text-field
-                        dense
-                        :value="item.icon"
-                        @change="
-                          updateVEFooterRightButton({
-                            id: item.id,
-                            icon: $event,
-                          })
-                        "
-                        hide-details="true"
-                        label="Icon"
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-list-item-content>
-              </v-card>
-            </draggable>
-          </div>
-        </v-col>
-      </v-row>
+      <SplitList :section="'Footer'" />
     </OptionWrapper>
 
     <v-btn @click="OpenEditor">teszt</v-btn>
@@ -219,24 +26,13 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
-import draggable from 'vuedraggable';
+import SplitList from './SplitList.vue';
 import OptionWrapper from '../optionWrapper.vue';
 import FooterPreview from './FooterPreview.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   methods: {
-    ...mapMutations([
-      'addVEFooterLeftButton',
-      'deleteVEFooterLeftButton',
-      'updateVEFooterLeftOrder',
-      'updateVEFooterLeftButton',
-
-      'addVEFooterRightButton',
-      'deleteVEFooterRightButton',
-      'updateVEFooterRightOrder',
-      'updateVEFooterRightButton',
-    ]),
     OpenEditor() {
       this.$store.state.sdk.editVariables({
         document: {
@@ -449,12 +245,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['footerButtons', 'getVEConfigObj']),
+    ...mapGetters(['getVEConfigObj']),
   },
   components: {
+    SplitList,
     OptionWrapper,
     FooterPreview,
-    draggable,
   },
 };
 </script>
