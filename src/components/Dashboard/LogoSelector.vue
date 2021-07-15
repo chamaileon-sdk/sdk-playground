@@ -1,0 +1,100 @@
+<template>
+  <v-card color="transparent" elevation="0">
+    <v-tabs
+      height="auto"
+      color="primary"
+      background-color="transparent"
+      show-arrows
+    >
+      <v-tab class="pa-0 mr-3">
+        <v-card
+          outlined
+          elevation="0"
+          class="pa-5 d-flex"
+          height="100px"
+          width="220px"
+          :style="
+            `fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`
+          "
+          v-chamaileonLogo
+          @click="
+            changeLogo(
+              'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
+            )
+          "
+        ></v-card>
+      </v-tab>
+      <v-tab v-for="(l, i) in logos" :key="i" class="pa-0 mx-3">
+        <v-card
+          class="pa-5"
+          height="100px"
+          width="220px"
+          elevation="0"
+          outlined
+          @click="changeLogo(l.url)"
+        >
+          <div style="position: relative; height: 100%">
+            <div
+              style="position: absolute; top: 0; left: 0; width:100%; height:100%;z-index:2"
+            ></div>
+            <iframe
+              width="100%"
+              height="100%"
+              style="z-index:1; top: 0; left: 0; position: relative;"
+              :srcdoc="processScript(l.url)"
+              frameborder="0"
+            ></iframe>
+          </div>
+        </v-card>
+      </v-tab>
+    </v-tabs>
+  </v-card>
+</template>
+
+<script>
+const chamaileonLogo = require('chamaileon-logo');
+
+export default {
+  data() {
+    return {
+      logos: [
+        {
+          url:
+            'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/createLogo.js',
+        },
+      ],
+    };
+  },
+  directives: {
+    chamaileonLogo: {
+      inserted: function(el) {
+        el.appendChild(chamaileonLogo({ withText: true }));
+      },
+    },
+  },
+  methods: {
+    changeLogo(value) {
+      this.$store.commit('updateSDKConfig', {
+        urls: { ...this.$store.state.sdkConfig.urls, createLogoJS: value },
+      });
+    },
+    processScript: function(url) {
+      const importScript = document.createElement('script');
+      importScript.src = url;
+      importScript.type = 'text/javascript';
+      importScript.async = false;
+
+      const runScript = document.createElement('script');
+      runScript.innerText =
+        'document.getElementById("container").appendChild(createLogo());';
+
+      const html = `<html><head></head><body style="margin: 0"><div id="container" style="display: flex; height: 100vh; align-items: center; margin: 0; padding: 0; justify-content: center;">
+      ${importScript.outerHTML}${runScript.outerHTML}
+      </div></body></html>`;
+      return html;
+    },
+  },
+};
+</script>
+
+<style></style>
