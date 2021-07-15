@@ -6,7 +6,9 @@
       <v-row class="pa-0 ma-0">
         <v-col class="px-16 py-0" cols="8">
           <div class="px-16">
-            <router-view />
+            <keep-alive>
+              <router-view :key="$route.path" />
+            </keep-alive>
           </div>
         </v-col>
         <v-col class="pa-0" cols="4">

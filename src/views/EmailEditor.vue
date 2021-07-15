@@ -19,6 +19,7 @@
     <div class="section" id="addons">
       <Addons />
     </div>
+
     <div class="section" id="settings">
       <Settings />
     </div>
@@ -34,7 +35,7 @@ import Addons from '../components/EmailEditor/Addons';
 import Settings from '../components/EmailEditor/Settings';
 
 export default {
-  async mounted() {
+  mounted() {
     this.$store.dispatch('updateSDK');
     this.observer = new IntersectionObserver(this.handleIntersect, {
       threshold: 0.75,
