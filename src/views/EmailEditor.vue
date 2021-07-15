@@ -5,22 +5,32 @@
     </div>
 
     <div class="section" id="elements">
-      <Elements />
+      <v-lazy>
+        <Elements />
+      </v-lazy>
     </div>
 
     <div class="section" id="block-libraries">
-      <BlockLibraries />
+      <v-lazy>
+        <BlockLibraries />
+      </v-lazy>
     </div>
 
     <div class="section" id="text-insert">
-      <TextInsert />
+      <v-lazy>
+        <TextInsert />
+      </v-lazy>
     </div>
 
     <div class="section" id="addons">
-      <Addons />
+      <v-lazy>
+        <Addons />
+      </v-lazy>
     </div>
     <div class="section" id="settings">
-      <Settings />
+      <v-lazy>
+        <Settings />
+      </v-lazy>
     </div>
   </v-app>
 </template>
@@ -34,7 +44,7 @@ import Addons from '../components/EmailEditor/Addons';
 import Settings from '../components/EmailEditor/Settings';
 
 export default {
-  async mounted() {
+  mounted() {
     this.$store.dispatch('updateSDK');
     this.observer = new IntersectionObserver(this.handleIntersect, {
       threshold: 0.75,

@@ -1,7 +1,7 @@
 <template>
   <v-card
     color="transparent"
-    v-if="buttonsArr.length > 0"
+    v-show="buttonsArr.length > 0"
     class="mx-auto mt-7"
     elevation="0"
     max-height="360"
@@ -20,7 +20,12 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-row class="px-6 pt-3">
-              <v-col class="py-0" cols="4" align-self="center" v-if="!b.items">
+              <v-col
+                class="py-0"
+                cols="4"
+                align-self="center"
+                v-show="!b.items"
+              >
                 <v-text-field
                   dense
                   :rules="[rules.required, rules.unique]"
@@ -44,7 +49,7 @@
                 ></v-select>
               </v-col>
 
-              <v-col class="py-0" cols="4" align-self="center" v-if="b.items">
+              <v-col class="py-0" cols="4" align-self="center" v-show="b.items">
                 <v-btn depressed outlined width="100%" @click="addDDBtn(b.id)">
                   <v-icon left>
                     mdi-plus
@@ -92,7 +97,7 @@
           </v-list-item-content>
         </v-card>
 
-        <draggable v-if="b.items" v-model="b.items">
+        <draggable v-show="b.items" v-model="b.items">
           <v-card
             v-for="i in b.items"
             :key="i.id"
@@ -159,6 +164,7 @@
                       obj: { id: i.id },
                     })
                   "
+                  class=""
                 ></DeleteButton>
               </v-col>
             </v-row>
