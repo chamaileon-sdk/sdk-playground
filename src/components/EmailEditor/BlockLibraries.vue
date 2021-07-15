@@ -15,12 +15,7 @@
     <OptionWrapper>
       <template>
         <v-row align="center" justify="end" class="ma-0">
-          <v-btn depressed color="success" @click="addBlockLibs">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Library
-          </v-btn>
+          <AddButton @click="addBlockLibs"> New Library </AddButton>
         </v-row>
       </template>
       <v-card
@@ -104,12 +99,14 @@
 </template>
 
 <script>
+import AddButton from '../AddButton.vue';
 import draggable from 'vuedraggable';
 import OptionWrapper from '../optionWrapper.vue';
 import { mapMutations } from 'vuex';
 
 export default {
   components: {
+    AddButton,
     draggable,
     OptionWrapper,
   },

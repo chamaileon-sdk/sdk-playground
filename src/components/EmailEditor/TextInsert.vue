@@ -20,12 +20,7 @@
     <OptionWrapper>
       <template>
         <v-row align="center" justify="end" class="ma-0">
-          <v-btn depressed color="success" @click="addTextInsertButton">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
+          <AddButton @click="addTextInsertButton"> New Button </AddButton>
         </v-row>
       </template>
       <div
@@ -67,6 +62,7 @@
 </template>
 
 <script>
+import AddButton from '../AddButton.vue';
 import ListItem3 from '../ListItem3.vue';
 import OptionWrapper from '../optionWrapper.vue';
 import TextInsertPreview from './TextInsertPreview.vue';
@@ -93,6 +89,7 @@ export default {
     },
   },
   components: {
+    AddButton,
     OptionWrapper,
     draggable,
     TextInsertPreview,

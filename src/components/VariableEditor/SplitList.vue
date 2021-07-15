@@ -3,12 +3,7 @@
     <v-col cols="6">
       <template>
         <v-row align="center" class="ma-0 justify-begin">
-          <v-btn depressed color="success" @click="addLeftButton">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
+          <AddButton @click="addLeftButton"> New Button </AddButton>
         </v-row>
       </template>
       <div
@@ -50,12 +45,7 @@
     <v-col cols="6">
       <template>
         <v-row align="center" class="ma-0 justify-end">
-          <v-btn depressed color="success" @click="addRightButton">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
+          <AddButton @click="addRightButton"> New Button</AddButton>
         </v-row>
       </template>
       <div
@@ -98,11 +88,13 @@
 </template>
 
 <script>
+import AddButton from '../AddButton.vue';
 import draggable from 'vuedraggable';
 import ListItem3 from '../ListItem3.vue';
 
 export default {
   components: {
+    AddButton,
     draggable,
     ListItem3,
   },

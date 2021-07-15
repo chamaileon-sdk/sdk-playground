@@ -21,19 +21,8 @@
     <OptionWrapper>
       <template>
         <v-row align="center" justify="end" class="ma-0">
-          <v-btn depressed color="success" @click="addBtn" class="mr-6">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New Button
-          </v-btn>
-
-          <v-btn depressed color="success" @click="addDD">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            New DropDown
-          </v-btn>
+          <AddButton class="mr-6" @click="addBtn"> New Button </AddButton>
+          <AddButton @click="addDD"> New DropDown </AddButton>
         </v-row>
       </template>
       <List6 :section="'Preview'" />
@@ -43,6 +32,7 @@
 </template>
 
 <script>
+import AddButton from '../AddButton.vue';
 import List6 from '../List6.vue';
 import OptionWrapper from '../optionWrapper.vue';
 import Header from './PreviewHeaderPreview.vue';
@@ -51,6 +41,7 @@ import { mapMutations } from 'vuex';
 
 export default {
   components: {
+    AddButton,
     List6,
     OptionWrapper,
     Header,
