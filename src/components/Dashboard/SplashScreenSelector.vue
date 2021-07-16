@@ -60,6 +60,24 @@
           </div>
         </v-card>
       </v-tab>
+
+      <v-tab
+        class="pa-0 mx-3"
+        href="https://help.chamaileon.io/en/"
+        target="_blank"
+      >
+        <v-card
+          class="pa-5 d-flex align-center justify-center flex-column createNew"
+          width="300px"
+          height="200px"
+          elevation="0"
+          outlined
+          color="grey--text"
+        >
+          <v-icon class="pa-0 ma-0" x-large>mdi-plus</v-icon>
+          <v-card-text class="pa-0 ma-0">Create your own</v-card-text>
+        </v-card>
+      </v-tab>
     </v-tabs>
   </v-card>
 </template>
@@ -118,5 +136,11 @@ export default {
 .v-card:hover {
   opacity: 1 !important;
   transition: 200ms;
+}
+
+.createNew {
+  outline: 2px dashed;
+  outline-offset: -2px;
+  opacity: 0.3;
 }
 </style>
