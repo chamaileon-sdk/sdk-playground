@@ -17,7 +17,7 @@
       <v-col cols="4" class="d-flex justify-center">
         <v-btn
           tile
-          depressed
+          text
           color="primary"
           class="rounded-pill"
           href="https://help.chamaileon.io/en/"

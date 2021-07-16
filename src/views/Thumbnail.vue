@@ -1,17 +1,19 @@
 <template>
-  <v-app>
-    <SectionObserver>
-      <div class="section" id="settings">
-        <Settings />
-      </div>
-    </SectionObserver>
-    <Footer
-      :previous="'SDK'"
-      :prevTo="'/sdk'"
-      :next="'Email Preview'"
-      :nextTo="'/emailpreview'"
-    />
-  </v-app>
+  <v-lazy>
+    <v-app>
+      <SectionObserver>
+        <div class="section" id="settings">
+          <Settings />
+        </div>
+      </SectionObserver>
+      <Footer
+        :previous="'SDK'"
+        :prevTo="'/sdk'"
+        :next="'Email Preview'"
+        :nextTo="'/emailpreview'"
+      />
+    </v-app>
+  </v-lazy>
 </template>
 
 <script>

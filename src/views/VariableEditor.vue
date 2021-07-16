@@ -1,20 +1,22 @@
 <template>
-  <v-app>
-    <SectionObserver>
-      <div class="section" id="header">
-        <Header />
-      </div>
+  <v-lazy>
+    <v-app>
+      <SectionObserver>
+        <div class="section" id="header">
+          <Header />
+        </div>
 
-      <div class="section" id="footer">
-        <Footer />
-      </div>
+        <div class="section" id="footer">
+          <Footer />
+        </div>
 
-      <div class="section" id="text-insert">
-        <TextInsert />
-      </div>
-    </SectionObserver>
-    <NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
-  </v-app>
+        <div class="section" id="text-insert">
+          <TextInsert />
+        </div>
+      </SectionObserver>
+      <NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
+    </v-app>
+  </v-lazy>
 </template>
 
 <script>

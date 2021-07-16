@@ -1,37 +1,39 @@
 <template>
-  <v-app>
-    <SectionObserver>
-      <div class="section" id="header">
-        <Header />
-      </div>
+  <v-lazy>
+    <v-app>
+      <SectionObserver>
+        <div class="section" id="header">
+          <Header />
+        </div>
 
-      <div class="section" id="elements">
-        <Elements />
-      </div>
+        <div class="section" id="elements">
+          <Elements />
+        </div>
 
-      <div class="section" id="block-libraries">
-        <BlockLibraries />
-      </div>
+        <div class="section" id="block-libraries">
+          <BlockLibraries />
+        </div>
 
-      <div class="section" id="text-insert">
-        <TextInsert />
-      </div>
+        <div class="section" id="text-insert">
+          <TextInsert />
+        </div>
 
-      <div class="section" id="addons">
-        <Addons />
-      </div>
+        <div class="section" id="addons">
+          <Addons />
+        </div>
 
-      <div class="section" id="settings">
-        <Settings />
-      </div>
-    </SectionObserver>
-    <Footer
-      :previous="'Email Preview'"
-      :prevTo="'/emailpreview'"
-      :next="'Variable Editor'"
-      :nextTo="'/variableeditor'"
-    />
-  </v-app>
+        <div class="section" id="settings">
+          <Settings />
+        </div>
+      </SectionObserver>
+      <Footer
+        :previous="'Email Preview'"
+        :prevTo="'/emailpreview'"
+        :next="'Variable Editor'"
+        :nextTo="'/variableeditor'"
+      />
+    </v-app>
+  </v-lazy>
 </template>
 
 <script>
