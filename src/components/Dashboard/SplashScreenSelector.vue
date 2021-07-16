@@ -5,33 +5,44 @@
       color="primary"
       background-color="transparent"
       show-arrows
+      hide-slider
       slider-size="3"
     >
-      <v-tab class="pa-0 mr-3">
+      <v-tab
+        @click="
+          changeSplash(
+            'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html'
+          )
+        "
+        class="pa-0 mr-3 rounded-lg"
+      >
         <v-card
           class="rounded-lg  primary pa-5"
-          style="fill: white;"
-          height="240px"
-          width="320px"
+          style="fill: white; opacity: 0.3;"
+          width="300px"
+          height="200px"
           elevation="0"
-          outlined
-          v-chamaileonLogoNoText
-          @click="
-            changeSplash(
+          :style="
+            calculateOpacity(
               'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html'
             )
           "
+          v-chamaileonLogoNoText
         >
         </v-card>
       </v-tab>
-      <v-tab v-for="(l, i) in splashs" :key="i" class="pa-0 mx-3">
+      <v-tab
+        v-for="(l, i) in splashs"
+        :key="i"
+        class="pa-0 mx-3 rounded-lg"
+        @click="changeSplash(l.url)"
+      >
         <v-card
           class="rounded-lg"
-          height="240px"
-          width="320px"
+          width="300px"
+          height="200px"
           elevation="0"
-          outlined
-          @click="changeSplash(l.url)"
+          :style="calculateOpacity(l.url)"
           @mouseenter="hoverOnSplashContainer($event, l.url)"
         >
           <div style="position: relative; height: 100%">
@@ -67,6 +78,11 @@ export default {
       ],
     };
   },
+  computed: {
+    storedUrl() {
+      return this.$store.state.sdkConfig.urls.splashScreen;
+    },
+  },
   directives: {
     chamaileonLogoNoText: {
       inserted: function(el) {
@@ -88,8 +104,19 @@ export default {
         urls: { ...this.$store.state.sdkConfig.urls, splashScreen: value },
       });
     },
+
+    calculateOpacity(url) {
+      if (url === this.storedUrl) return 'opacity: 1; transition: 200ms;';
+
+      return 'opacity: 0.5; transition: 200ms;';
+    },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.v-card:hover {
+  opacity: 1 !important;
+  transition: 200ms;
+}
+</style>
