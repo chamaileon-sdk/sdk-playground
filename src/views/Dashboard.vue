@@ -1,8 +1,17 @@
 <template>
   <v-app>
     <SectionObserver>
-      <div class="section" id="sdk">
-        <Sdk />
+      <div class="section" id="sdklogo">
+        <Logo />
+      </div>
+      <div class="section" id="splashscreen">
+        <SplashScreen />
+      </div>
+      <div class="section" id="colors">
+        <Colors />
+      </div>
+      <div class="section" id="language">
+        <Language />
       </div>
     </SectionObserver>
   </v-app>
@@ -10,12 +19,18 @@
 
 <script>
 import SectionObserver from '../components/SectionObserver.vue';
-import Sdk from '../components/Dashboard/Sdk';
+import Logo from '../components/Dashboard/Logo.vue';
+import Language from '../components/Dashboard/Language.vue';
+import Colors from '../components/Dashboard/Colors.vue';
+import SplashScreen from '../components/Dashboard/SplashScreen.vue';
 
 export default {
   components: {
     SectionObserver,
-    Sdk,
+    Logo,
+    Colors,
+    SplashScreen,
+    Language,
   },
 };
 </script>
