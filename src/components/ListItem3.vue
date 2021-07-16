@@ -65,6 +65,7 @@
 <script>
 import Vue from 'vue';
 import {
+  VRow,
   VCol,
   VCard,
   VListItemIcon,
@@ -75,6 +76,7 @@ import {
 import DeleteButton from './DeleteButton.vue';
 
 Vue.component('v-col', VCol);
+Vue.component('v-row', VRow);
 Vue.component('v-card', VCard);
 Vue.component('v-list-item-icon', VListItemIcon);
 Vue.component('v-list-item-content', VListItemContent);

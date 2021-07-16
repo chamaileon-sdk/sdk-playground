@@ -18,17 +18,15 @@
       ipsum.
     </p>
     <OptionWrapper>
-      <template>
-        <v-row align="center" justify="end" class="ma-0">
-          <AddButton @click="addVETextInsertButton"> New Button</AddButton>
-        </v-row>
-      </template>
+      <v-row align="center" justify="end" class="ma-0">
+        <AddButton @click="addVETextInsertButton"> New Button</AddButton>
+      </v-row>
       <div
-        v-if="btnArr.length > 0"
+        v-show="btnArr.length > 0"
         class="mt-8"
         style="max-height: 222px; overflow-y: auto;"
       >
-        <draggable v-model="btnArr">
+        <draggable v-model.lazy="btnArr">
           <ListItem3
             v-for="item in btnArr"
             :key="item.id"
