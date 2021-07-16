@@ -99,10 +99,14 @@ export default {
         icon: 'at',
         to: 'sdk',
         children: [
-          { title: 'Logo', icon: 'cog-outline', to: '#sdklogo' },
-          { title: 'Splash Screen', icon: 'cog-outline', to: '#splashscreen' },
-          { title: 'Colors', icon: 'cog-outline', to: '#colors' },
-          { title: 'Language', icon: 'cog-outline', to: '#language' },
+          { title: 'Logo', icon: 'at', to: '#sdklogo' },
+          {
+            title: 'Splash Screen',
+            icon: 'image-size-select-actual',
+            to: '#splashscreen',
+          },
+          { title: 'Colors', icon: 'eyedropper-variant', to: '#colors' },
+          { title: 'Language', icon: 'web', to: '#language' },
         ],
       },
       {
