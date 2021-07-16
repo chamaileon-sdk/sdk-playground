@@ -1,21 +1,23 @@
 <template>
-  <v-app>
-    <SectionObserver>
-      <div class="section" id="sdklogo">
-        <Logo />
-      </div>
-      <div class="section" id="splashscreen">
-        <SplashScreen />
-      </div>
-      <div class="section" id="colors">
-        <Colors />
-      </div>
-      <div class="section" id="language">
-        <Language />
-      </div>
-    </SectionObserver>
-    <Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
-  </v-app>
+  <v-lazy>
+    <v-app>
+      <SectionObserver>
+        <div class="section" id="sdklogo">
+          <Logo />
+        </div>
+        <div class="section" id="splashscreen">
+          <SplashScreen />
+        </div>
+        <div class="section" id="colors">
+          <Colors />
+        </div>
+        <div class="section" id="language">
+          <Language />
+        </div>
+      </SectionObserver>
+      <Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
+    </v-app>
+  </v-lazy>
 </template>
 
 <script>
