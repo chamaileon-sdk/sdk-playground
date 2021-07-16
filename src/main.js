@@ -4,10 +4,7 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import VueScrollactive from 'vue-scrollactive';
-import VueVirtualScroller from 'vue-virtual-scroller';
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
-Vue.use(VueVirtualScroller);
 Vue.use(VueScrollactive);
 
 Vue.config.productionTip = false;

@@ -25,10 +25,17 @@
         <Settings />
       </div>
     </SectionObserver>
+    <Footer
+      :previous="'Email Preview'"
+      :prevTo="'/emailpreview'"
+      :next="'Variable Editor'"
+      :nextTo="'/variableeditor'"
+    />
   </v-app>
 </template>
 
 <script>
+import Footer from '../components/Footer.vue';
 import SectionObserver from '../components/SectionObserver.vue';
 import Header from '../components/EmailEditor/Header';
 import Elements from '../components/EmailEditor/Elements';
@@ -47,6 +54,7 @@ export default {
   components: {
     SectionObserver,
     Header,
+    Footer,
     Elements,
     BlockLibraries,
     TextInsert,
