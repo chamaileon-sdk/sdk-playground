@@ -98,7 +98,12 @@ export default {
         title: 'SDK',
         icon: 'at',
         to: 'sdk',
-        children: [],
+        children: [
+          { title: 'Logo', icon: 'cog-outline', to: '#sdklogo' },
+          { title: 'Splash Screen', icon: 'cog-outline', to: '#splashscreen' },
+          { title: 'Colors', icon: 'cog-outline', to: '#colors' },
+          { title: 'Language', icon: 'cog-outline', to: '#language' },
+        ],
       },
       {
         title: 'Email Thumbnail',
