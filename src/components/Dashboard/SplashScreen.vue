@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <h1>SDK</h1>
+  <div>
+    <h1>Splash Screen</h1>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -10,12 +10,21 @@
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </p>
-  </v-app>
+    <OptionsWrapper>
+      <SplashScreenSelector />
+    </OptionsWrapper>
+  </div>
 </template>
 
 <script>
+import OptionsWrapper from '../optionWrapper.vue';
+import SplashScreenSelector from './SplashScreenSelector.vue';
+
 export default {
-  components: {},
+  components: {
+    SplashScreenSelector,
+    OptionsWrapper,
+  },
 };
 </script>
 
