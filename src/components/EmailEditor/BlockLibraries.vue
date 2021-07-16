@@ -22,7 +22,7 @@
         v-if="blockLibsArr.length > 0"
         class="mx-auto mt-7"
         elevation="0"
-        max-height="400"
+        max-height="396"
         style="overflow-y: auto;"
       >
         <draggable v-model="blockLibsArr">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Preview</h1>
+    <h1>Header</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos
       pariatur saepe voluptas mollitia delectus nobis quia officia, cum est

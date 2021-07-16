@@ -3,13 +3,15 @@
     <scrollactive>
       <v-card flat height="100%" width="300">
         <v-card
+          :ripple="false"
+          to="/"
           :style="
             `fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`
           "
           color="transparent"
           flat
           width="100%"
-          class=" pa-4 pr-5"
+          class=" pa-4 pr-5 "
           id="logo"
           v-chamaileonLogo
         ></v-card>
@@ -108,7 +110,9 @@ export default {
         title: 'Email Preview',
         icon: 'email-search-outline',
         to: 'emailpreview',
-        children: [{ title: 'Header', icon: 'cog-outline', to: '#header' }],
+        children: [
+          { title: 'Header', icon: 'border-top-variant', to: '#header' },
+        ],
       },
       {
         title: 'Email Editor',
@@ -158,4 +162,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

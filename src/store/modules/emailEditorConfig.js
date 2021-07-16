@@ -242,7 +242,7 @@ export default {
     addTextInsertButton(state) {
       state.settings.buttons.textInsert.push({
         id: `ti-btn-${state.tiID}`,
-        label: `Text Insert ${state.tiID}`,
+        label: `Button`,
         icon: '',
       });
       state.tiIDArr.push(`ti-btn-${state.tiID}`);

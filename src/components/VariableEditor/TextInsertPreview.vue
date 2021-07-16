@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="white rounded-lg pa-3 mb-3" flat>
-      <div d-flex>
+      <div class="d-flex flex-nowrap">
         <v-btn
           v-if="btnArr.length === 0"
           disabled

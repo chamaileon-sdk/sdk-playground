@@ -121,7 +121,6 @@ export default {
 <style>
 #preview-header {
   background-color: #ffffff;
-  border-bottom: thin solid rgba(0, 0, 0, 0.12);
   height: 61px;
 }
 

@@ -60,7 +60,8 @@ html::-webkit-scrollbar {
 }
 
 .section {
-  padding: 96px 0;
+  /*padding: 96px 0;*/
+  padding: 70px 0;
   min-height: 100vh;
 }
 

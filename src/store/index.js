@@ -98,6 +98,7 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    //TODO: move to editor
     getConfigObject: state => {
       //Deep copy
       let x = JSON.parse(JSON.stringify(state.editorConfig));

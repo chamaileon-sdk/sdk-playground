@@ -26,7 +26,7 @@
       <div
         v-if="btnArr.length > 0"
         class="mt-8"
-        style="max-height: 400px; overflow-y: auto;"
+        style="max-height: 222px; overflow-y: auto;"
       >
         <draggable v-model="btnArr">
           <ListItem3

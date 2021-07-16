@@ -201,7 +201,7 @@ export default {
     addVETextInsertButton(state) {
       state.settings.buttons.textInsertPlugin.push({
         id: `ti-btn-${state.tid}`,
-        label: `Text Insert ${state.tid}`,
+        label: `Button`,
         icon: '',
       });
       state.tidArr.push(`ti-btn-${state.tid}`);

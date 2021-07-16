@@ -1,28 +1,11 @@
 <template>
   <v-app>
-    <h1>Thumbnail</h1>
+    <h1>Settings</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore sunt
       excepturi ipsa recusandae illo fugiat natus, sequi architecto repudiandae
       sed atque veniam unde possimus perspiciatis, corporis minima alias non
       quis?
-    </p>
-    <OptionWrapper>
-      <v-card
-        elevation="0"
-        id="email-thumbnail"
-        class="d-flex justify-center align-center"
-        color="transparent"
-      >
-      </v-card>
-    </OptionWrapper>
-
-    <h3>Thumbnail Settings</h3>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatibus,
-      saepe maxime autem asperiores consequatur quod, eligendi consectetur
-      repellendus dolore recusandae nobis fugit optio tempore deleniti.
-      Consectetur similique adipisci porro!
     </p>
     <OptionWrapper>
       <v-card elevation="0" class="d-flex justify-center align-center pa-4">
@@ -63,6 +46,23 @@
         ></v-switch>
       </v-card>
     </OptionWrapper>
+
+    <h3>Preview</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatibus,
+      saepe maxime autem asperiores consequatur quod, eligendi consectetur
+      repellendus dolore recusandae nobis fugit optio tempore deleniti.
+      Consectetur similique adipisci porro!
+    </p>
+    <OptionWrapper>
+      <v-card
+        elevation="0"
+        id="email-thumbnail"
+        class="d-flex justify-center align-center"
+        color="transparent"
+      >
+      </v-card>
+    </OptionWrapper>
   </v-app>
 </template>
 
@@ -75,8 +75,8 @@ export default {
   },
   data() {
     return {
-      width: 640,
-      height: 480,
+      width: 320,
+      height: 240,
       scale: 1,
       scroll: false,
     };
