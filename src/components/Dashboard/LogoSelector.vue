@@ -4,34 +4,45 @@
       height="auto"
       color="primary"
       background-color="transparent"
+      hide-slider
       show-arrows
     >
-      <v-tab class="pa-0 mr-3">
+      <v-tab
+        class="pa-0 mr-3"
+        @click="
+          changeLogo(
+            'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
+          )
+        "
+      >
         <v-card
-          outlined
           elevation="0"
           class="pa-5 d-flex"
           height="100px"
           width="220px"
           :style="
-            `fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`
+            `fill: ${
+              this.$vuetify.presets.framework.theme.themes.light.primary
+            }; ${calculateOpacity(
+              'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
+            )}`
           "
           v-chamaileonLogo
-          @click="
-            changeLogo(
-              'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
-            )
-          "
         ></v-card>
       </v-tab>
-      <v-tab v-for="(l, i) in logos" :key="i" class="pa-0 mx-3">
+      <v-tab
+        v-for="(l, i) in logos"
+        :key="i"
+        class="pa-0 mx-3"
+        @click="changeLogo(l.url)"
+      >
         <v-card
           class="pa-5"
           height="100px"
           width="220px"
           elevation="0"
           outlined
-          @click="changeLogo(l.url)"
+          :style="calculateOpacity(l.url)"
         >
           <div style="position: relative; height: 100%">
             <div
@@ -72,6 +83,14 @@ export default {
       },
     },
   },
+  computed: {
+    border() {
+      return `box-sizing: border-box; border: 4px solid ${this.$vuetify.presets.framework.theme.themes.light.primary}; border-radius: 12px;`;
+    },
+    storedUrl() {
+      return this.$store.state.sdkConfig.urls.createLogoJS;
+    },
+  },
   methods: {
     changeLogo(value) {
       this.$store.commit('updateSDKConfig', {
@@ -93,8 +112,18 @@ export default {
       </div></body></html>`;
       return html;
     },
+    calculateOpacity(url) {
+      if (url === this.storedUrl) return 'opacity: 1; transition: 200ms;';
+
+      return 'opacity: 0.5; transition: 200ms;';
+    },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.v-card:hover {
+  opacity: 1 !important;
+  transition: 200ms;
+}
+</style>

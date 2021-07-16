@@ -83,11 +83,6 @@ export default {
     LocaleSelector,
     SplashScreenSelector,
   },
-  computed: {
-    border() {
-      return `box-sizing: border-box; border: 4px solid ${this.$vuetify.presets.framework.theme.themes.light.primary}; border-radius: 12px;`;
-    },
-  },
 };
 </script>
 
