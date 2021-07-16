@@ -147,7 +147,7 @@ export default {
       {
         title: 'Variable Editor',
         icon: 'iframe-variable-outline',
-        to: 'varibleeditor',
+        to: 'variableeditor',
         children: [
           {
             title: 'Header',

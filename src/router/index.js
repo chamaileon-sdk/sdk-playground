@@ -40,7 +40,7 @@ const routes = [
     component: Preview,
   },
   {
-    path: '/varibleeditor',
+    path: '/variableeditor',
     component: VariableEditor,
   },
 ];

@@ -5,16 +5,24 @@
         <Header :actLogoCreator="this.creatorFunction" />
       </div>
     </SectionObserver>
+    <Footer
+      :previous="'Email Thumbnail'"
+      :prevTo="'/emailthumbnail'"
+      :next="'Email Editor'"
+      :nextTo="'/emaileditor'"
+    />
   </v-app>
 </template>
 
 <script>
+import Footer from '../components/Footer.vue';
 import SectionObserver from '../components/SectionObserver.vue';
 import Header from '../components/Preview/PreviewButtons.vue';
 
 export default {
   components: {
     Header,
+    Footer,
     SectionObserver,
   },
   mounted() {

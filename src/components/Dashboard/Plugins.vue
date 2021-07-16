@@ -113,7 +113,7 @@ export default {
           description:
             'If you already have a document with defined variables exported from the editor, you can open an editor to edit the variables.',
           reveal: false,
-          to: 'varibleeditor',
+          to: 'variableeditor',
           docs: 'https://chamaileon.io/sdk/docs/email-variable-editor/',
         },
       ],

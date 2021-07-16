@@ -13,6 +13,7 @@
         <TextInsert />
       </div>
     </SectionObserver>
+    <NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
   </v-app>
 </template>
 
@@ -21,6 +22,7 @@ import SectionObserver from '../components/SectionObserver.vue';
 import Header from '../components/VariableEditor/Header.vue';
 import Footer from '../components/VariableEditor/Footer.vue';
 import TextInsert from '../components/VariableEditor/TextInsert.vue';
+import NavFooter from '../components/Footer.vue';
 
 export default {
   mounted() {
@@ -32,6 +34,7 @@ export default {
   components: {
     Header,
     Footer,
+    NavFooter,
     TextInsert,
     SectionObserver,
   },
