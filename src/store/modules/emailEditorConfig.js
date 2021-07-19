@@ -6,7 +6,6 @@ export default {
     blKey: 0,
     tiIDArr: [],
     tiID: 0,
-    document: {},
     user: {
       enabled: true,
       name: 'Your Username',

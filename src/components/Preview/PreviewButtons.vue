@@ -51,7 +51,7 @@ export default {
       console.log(this.$store.state.previewConfig);
       this.$store.state.sdk.previewEmail({
         ...this.$store.state.previewConfig,
-        document: { title: 'Default title', body: {}, variables: [] }, // email JSON - required
+        document: this.$store.state.document, // email JSON - required
       });
     },
 

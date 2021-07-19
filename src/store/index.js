@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import editorConfig from './modules/emailEditorConfig';
 import previewConfig from './modules/preview';
 import variableEditorConfig from './modules/variableEditor';
+import document from './modules/emailDocument';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     editorConfig,
     previewConfig,
     variableEditorConfig,
+    document,
   },
   state: {
     apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
@@ -60,7 +62,6 @@ export default new Vuex.Store({
 
       const chamaileonPlugins = await window.chamaileonSdk.init({
         mode: 'serverless',
-        // environmentName: 'serverless-DEV-488',
         accessToken: accessToken,
         whitelabel: {
           ...this.state.sdkConfig,
@@ -74,18 +75,17 @@ export default new Vuex.Store({
     async updateSDK({ dispatch }) {
       window.chamaileonSdk.destroy();
 
-      let elems = document.head.getElementsByTagName('script');
-      let links = document.head.getElementsByTagName('link');
+      let elems = window.document.head.getElementsByTagName('script');
+      let links = window.document.head.getElementsByTagName('link');
       links[links.length - 1].remove();
 
-      let styles = document.head.getElementsByTagName('style');
+      let styles = window.document.head.getElementsByTagName('style');
       let i = styles.length - 1;
       while (
         i >= 0 &&
         styles[i].innerHTML.includes('chamaileon-plugin-wrapper iframe')
       )
         i--;
-
       console.log(styles[i]);
 
       i = elems.length;
@@ -98,6 +98,10 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    getEmail: state => {
+      return state.document;
+    },
+
     //TODO: move to editor
     getConfigObject: state => {
       //Deep copy
@@ -141,8 +145,8 @@ export default new Vuex.Store({
       //User processing
       if (!x.user.enabled) x.user = false;
 
+      x.document = state.document;
       console.log(x);
-
       //Variable Editor icon has to be mdi-*iconTitle*
 
       return x;
