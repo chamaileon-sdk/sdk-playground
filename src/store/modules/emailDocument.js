@@ -6218,7 +6218,13 @@ export default {
     previewText: '',
     subjectLine: '',
   }),
-  mutations: {},
+  mutations: {
+    updateDocument(state, payload) {
+      state.title = payload.title;
+      state.body = payload.body;
+      state.variables = payload.variables;
+    },
+  },
   actions: {},
   getters: {},
 };

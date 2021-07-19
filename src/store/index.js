@@ -68,13 +68,15 @@ export default new Vuex.Store({
         },
       });
 
-      console.log(chamaileonPlugins);
       commit('addSDK', chamaileonPlugins);
       commit('changeLogoFunction', window.createLogo);
     },
     async updateSDK({ dispatch }) {
       window.chamaileonSdk.destroy();
 
+      window.document
+        .querySelectorAll('.in-chamaileon-iframe')
+        .forEach(c => c.remove());
       let elems = window.document.head.getElementsByTagName('script');
       let links = window.document.head.getElementsByTagName('link');
       links[links.length - 1].remove();
@@ -146,7 +148,6 @@ export default new Vuex.Store({
       if (!x.user.enabled) x.user = false;
 
       x.document = state.document;
-      console.log(x);
       //Variable Editor icon has to be mdi-*iconTitle*
 
       return x;
@@ -163,6 +164,18 @@ export default new Vuex.Store({
       out.settings.variablesToEdit = varsToEdit;
 
       console.log(out);
+      return out;
+    },
+
+    getPreviewConfigObject: state => {
+      let out = {};
+
+      let doc = JSON.parse(JSON.stringify(state.document));
+
+      out.document = doc;
+      out.settings = state.previewConfig.settings;
+      out.hooks = {};
+
       return out;
     },
   },

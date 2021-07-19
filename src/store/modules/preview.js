@@ -2,7 +2,6 @@ export default {
   state: () => ({
     idArr: [],
     key: 0,
-    document: {},
     settings: {
       buttons: {
         header: [],

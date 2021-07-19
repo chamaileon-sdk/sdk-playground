@@ -48,10 +48,8 @@ export default {
   },
   methods: {
     openPreview() {
-      console.log(this.$store.state.previewConfig);
       this.$store.state.sdk.previewEmail({
-        ...this.$store.state.previewConfig,
-        document: this.$store.state.document, // email JSON - required
+        ...this.$store.getters.getPreviewConfigObject,
       });
     },
 

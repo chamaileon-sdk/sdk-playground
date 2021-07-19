@@ -70,7 +70,19 @@ export default {
   },
   methods: {
     openEditor() {
-      this.sdk.editEmail(this.getConfigObject);
+      this.sdk.editEmail({
+        ...this.$store.getters.getConfigObject,
+        hooks: {
+          onSave: async obj => {
+            return new Promise(
+              function(resolve) {
+                this.$store.commit('updateDocument', obj.document);
+                return resolve();
+              }.bind(this)
+            );
+          },
+        },
+      });
     },
     isActive(path) {
       return '/' + path === this.$route.path;

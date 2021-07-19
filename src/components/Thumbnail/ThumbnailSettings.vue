@@ -88,7 +88,7 @@ export default {
     openThumbnail() {
       document.getElementById('email-thumbnail').innerHTML = '';
       this.$store.state.sdk.createThumbnail({
-        document: this.$store.getters.getEmail(), // email document JSON
+        document: this.$store.getters.getEmail, // email document JSON
         container: '#email-thumbnail',
         height: this.height,
         width: this.width,
