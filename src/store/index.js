@@ -151,5 +151,19 @@ export default new Vuex.Store({
 
       return x;
     },
+
+    getVariableEditorConfigObject: state => {
+      let out = {};
+
+      out.document = state.document;
+      out.settings = state.variableEditorConfig.settings;
+
+      let varsToEdit = state.document.variables.map(c => c.name);
+
+      out.settings.variablesToEdit = varsToEdit;
+
+      console.log(out);
+      return out;
+    },
   },
 });

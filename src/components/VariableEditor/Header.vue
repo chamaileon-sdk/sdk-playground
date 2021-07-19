@@ -41,14 +41,13 @@ export default {
   methods: {
     OpenEditor() {
       this.$store.state.sdk.editVariables({
-        document: this.$store.state.document,
-        ...this.getVEConfigObj,
+        ...this.getVariableEditorConfigObject,
         hooks: {},
       });
     },
   },
   computed: {
-    ...mapGetters(['getVEConfigObj']),
+    ...mapGetters(['getVariableEditorConfigObject']),
   },
 };
 </script>

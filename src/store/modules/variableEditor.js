@@ -7,7 +7,7 @@ export default {
     tid: 0,
     tidArr: [],
     settings: {
-      variablesToEdit: ['varName1', 'varName2'],
+      variablesToEdit: [],
       buttons: {
         header: {
           left: [],
@@ -230,6 +230,5 @@ export default {
   getters: {
     headerButtons: state => state.settings.buttons.header,
     footerButtons: state => state.settings.buttons.footer,
-    getVEConfigObj: state => state,
   },
 };

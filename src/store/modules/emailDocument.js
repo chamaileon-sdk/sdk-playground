@@ -6202,6 +6202,18 @@ export default {
       },
       version: '2.0.0',
     },
+    variables: [
+      {
+        name: 'PrimaryColor',
+        value: '#1762C5',
+        type: 'color',
+      },
+      {
+        name: 'SecondaryColor',
+        value: '#5C9AEB',
+        type: 'color',
+      },
+    ],
     title: 'Business Promo',
     previewText: '',
     subjectLine: '',
