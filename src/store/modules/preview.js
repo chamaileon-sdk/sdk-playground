@@ -10,8 +10,10 @@ export default {
   }),
   mutations: {
     addPreviewBtn(state) {
+      state.idArr.push(`yourBtn-${state.key}`);
+
       state.settings.buttons.header.push({
-        id: `yourBtn-${state.key}`,
+        id: state.idArr[state.idArr.length - 1],
         type: 'button',
         icon: 'at',
         label: '',
@@ -19,22 +21,29 @@ export default {
         style: 'text',
       });
 
-      state.idArr.push(`yourBtn-${state.key}`);
       state.key++;
     },
+
+    /*
+      Payload is expected to be the ID of the object to remove
+    */
     removePreviewBtn(state, payload) {
-      state.settings.buttons.header = state.settings.buttons.header.filter(
-        c => {
-          if (c.id !== payload) return true;
+      let array = state.settings.buttons.header;
 
-          if (c.items)
-            c.items.forEach(it => {
-              state.idArr = state.idArr.filter(id => id !== it.id);
-            });
+      let index = array.findIndex(element => element.id === payload);
 
-          return false;
-        }
-      );
+      if (index === -1) {
+        //Handle not existing element... shouldn't happen in this method
+      }
+
+      let removedItem = array.splice(index, 1);
+
+      //If the removed item was a dropdown, we have to remove all the
+      //IDs of it's children from our array
+      if (removedItem.items)
+        removedItem.items.forEach(item => {
+          state.idArr = state.idArr.filter(id => id !== item.id);
+        });
 
       state.idArr = state.idArr.filter(c => c !== payload);
     },
