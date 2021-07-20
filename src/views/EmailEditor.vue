@@ -1,42 +1,48 @@
 <template>
-  <v-lazy>
-    <v-app>
-      <SectionObserver>
-        <div class="section" id="header">
-          <Header />
-        </div>
+	<div class="d-flex">
+		<v-card class="ma-0 pa-0" width="40%" flat></v-card>
+		<v-lazy>
+			<div>
+				<SectionObserver>
+					<div class="section" id="header">
+						<Header />
+					</div>
 
-        <div class="section" id="elements">
-          <Elements />
-        </div>
+					<div class="section" id="elements">
+						<Elements />
+					</div>
 
-        <div class="section" id="block-libraries">
-          <BlockLibraries />
-        </div>
+					<div class="section" id="block-libraries">
+						<BlockLibraries />
+					</div>
 
-        <div class="section" id="text-insert">
-          <TextInsert />
-        </div>
+					<div class="section" id="text-insert">
+						<TextInsert />
+					</div>
 
-        <div class="section" id="addons">
-          <Addons />
-        </div>
+					<div class="section" id="addons">
+						<Addons />
+					</div>
 
-        <div class="section" id="settings">
-          <Settings />
-        </div>
-      </SectionObserver>
-      <Footer
-        :previous="'Email Preview'"
-        :prevTo="'/emailpreview'"
-        :next="'Variable Editor'"
-        :nextTo="'/variableeditor'"
-      />
-    </v-app>
-  </v-lazy>
+					<div class="section" id="settings">
+						<Settings />
+					</div>
+				</SectionObserver>
+				<Footer
+					:previous="'Email Preview'"
+					:prevTo="'/emailpreview'"
+					:next="'Variable Editor'"
+					:nextTo="'/variableeditor'"
+				/>
+				<!--<OpenButton @openEditorClicked="openEditor" />-->
+			</div>
+		</v-lazy>
+		<v-card class="ma-0 pa-0" width="40%" flat></v-card>
+	</div>
 </template>
 
 <script>
+//import OpenButton from "../components/BaseOpenButton.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Header from "../components/EmailEditor/Header";
@@ -62,22 +68,29 @@ export default {
 		TextInsert,
 		Addons,
 		Settings,
+		//OpenButton,
+	},
+
+	methods: {
+		openEditor() {
+			console.log("open editor");
+		},
 	},
 };
 </script>
 
 <style>
 .v-btn--example {
-  position: fixed;
-  bottom: 0;
-  right: 31%;
-  margin-bottom: 64px;
+	position: fixed;
+	bottom: 0;
+	right: 31%;
+	margin-bottom: 64px;
 }
 
 body {
-  overflow: hidden !important;
+	overflow: hidden !important;
 }
 iframe {
-  position: fixed;
+	position: fixed;
 }
 </style>

@@ -30,7 +30,7 @@ export default {
 		removePreviewBtn(state, payload) {
 			let array = state.settings.buttons.header;
 
-			let index = array.findIndex(element => element.id === payload);
+			let index = array.findIndex((element) => element.id === payload);
 
 			if (index === -1) {
 				//Handle not existing element... shouldn't happen in this method
@@ -41,20 +41,20 @@ export default {
 			//If the removed item was a dropdown, we have to remove all the
 			//IDs of it's children from our array
 			if (removedItem.items)
-				removedItem.items.forEach(item => {
-					state.idArr = state.idArr.filter(id => id !== item.id);
+				removedItem.items.forEach((item) => {
+					state.idArr = state.idArr.filter((id) => id !== item.id);
 				});
 
-			state.idArr = state.idArr.filter(c => c !== payload);
+			state.idArr = state.idArr.filter((c) => c !== payload);
 		},
 		updatePreviewBtnOrder(state, payload) {
 			state.settings.buttons.header = payload;
 		},
 		updatePreviewBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === payload.id) {
 					if ("newID" in payload) {
-						state.idArr = state.idArr.map(c => {
+						state.idArr = state.idArr.map((c) => {
 							if (c === payload.id) return payload.newID;
 
 							return c;
@@ -86,10 +86,10 @@ export default {
 		},
 
 		removePreviewDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === payload.id) {
-					c.items = c.items.filter(c => c.id !== payload.obj.id);
-					state.idArr = state.idArr.filter(c => c !== payload.obj.id);
+					c.items = c.items.filter((c) => c.id !== payload.obj.id);
+					state.idArr = state.idArr.filter((c) => c !== payload.obj.id);
 				}
 
 				return c;
@@ -97,7 +97,7 @@ export default {
 		},
 
 		addPreviewDropdownBtn(state, id) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === id) {
 					c.items.push({
 						id: `yourBtn-${state.key}`,
@@ -114,12 +114,12 @@ export default {
 		},
 
 		updatePreviewDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === payload.id) {
-					c.items = c.items.map(i => {
+					c.items = c.items.map((i) => {
 						if (i.id === payload.obj.id) {
 							if ("newID" in payload.obj) {
-								state.idArr = state.idArr.map(c => {
+								state.idArr = state.idArr.map((c) => {
 									if (c === payload.obj.id) return payload.obj.newID;
 
 									return c;
@@ -141,7 +141,7 @@ export default {
 	},
 	actions: {},
 	getters: {
-		getPreviewBtns: state => {
+		getPreviewBtns: (state) => {
 			return state.settings.buttons.header;
 		},
 	},

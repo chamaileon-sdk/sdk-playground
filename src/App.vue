@@ -1,28 +1,28 @@
 <template>
-  <v-app>
-    <MenuReworked />
+	<v-app>
+		<MenuReworked />
 
-    <v-main>
-      <v-row class="pa-0 ma-0">
-        <v-col class="px-16 py-0" cols="8">
-          <div class="px-16">
-            <router-view />
-          </div>
-        </v-col>
-        <v-col class="pa-0" cols="4">
-          <v-card
-            style="position: fixed"
-            class="rounded-0"
-            width="100%"
-            height="100%"
-            dark
-            flat
-          >
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-main>
-  </v-app>
+		<v-main>
+			<v-row class="pa-0 ma-0">
+				<v-col class="pa-0" cols="8">
+					<div>
+						<router-view />
+					</div>
+				</v-col>
+				<v-col class="pa-0" cols="4">
+					<v-card
+						style="position: fixed"
+						class="rounded-0"
+						width="100%"
+						height="100%"
+						dark
+						flat
+					>
+					</v-card>
+				</v-col>
+			</v-row>
+		</v-main>
+	</v-app>
 </template>
 
 <script>
@@ -51,26 +51,26 @@ export default {
 
 <style>
 html {
-  font-family: Roboto, sans-serif;
+	font-family: Roboto, sans-serif;
 }
 
 html::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+	width: 0;
+	height: 0;
 }
 
 .section {
-  /*padding: 96px 0;*/
-  padding: 70px 0;
-  min-height: 100vh;
+	/*padding: 96px 0;*/
+	padding: 70px 0;
+	min-height: 100vh;
 }
 
 h1 {
-  margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 h3 {
-  margin-top: 32px;
-  margin-bottom: 8px;
+	margin-top: 32px;
+	margin-bottom: 8px;
 }
 </style>

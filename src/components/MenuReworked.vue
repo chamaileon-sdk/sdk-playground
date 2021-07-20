@@ -83,8 +83,7 @@ export default {
 			});
 		},
 		isActive(path) {
-			//return '/' + path === this.$route.path;
-			return true;
+			return "/" + path === this.$route.path;
 		},
 		addActiveClass(hash) {
 			if (window.location.hash === hash) return "v-list-item--active";
