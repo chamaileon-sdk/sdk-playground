@@ -1,3 +1,7 @@
+export default function () {
+	return new idContainer();
+}
+
 class idContainer {
 	constructor() {
 		this.ids = new Set();
