@@ -29,9 +29,9 @@ export default {
 
 		deleteVariableEditorHeaderLeftButton(state, payload) {
 			state.settings.buttons.header.left =
-        state.settings.buttons.header.left.filter(c => c.id !== payload);
+				state.settings.buttons.header.left.filter((c) => c.id !== payload);
 
-			state.idArr = state.idArr.filter(c => c != payload);
+			state.idArr = state.idArr.filter((c) => c != payload);
 		},
 
 		addVariableEditorHeaderLeftButton(state) {
@@ -46,19 +46,19 @@ export default {
 
 		updateVariableEditorHeaderLeftButton(state, payload) {
 			state.settings.buttons.header.left =
-        state.settings.buttons.header.left.map(c => {
-        	if (c.id === payload.id) {
-        		if (payload.newID) {
-        			state.idArr = state.idArr.filter(c => c !== payload.id);
-        			state.idArr.push(payload.newID);
-        			return { ...c, id: payload.newID };
-        		}
+				state.settings.buttons.header.left.map((c) => {
+					if (c.id === payload.id) {
+						if (payload.newID) {
+							state.idArr = state.idArr.filter((c) => c !== payload.id);
+							state.idArr.push(payload.newID);
+							return { ...c, id: payload.newID };
+						}
 
-        		return { ...c, ...payload };
-        	}
+						return { ...c, ...payload };
+					}
 
-        	return c;
-        });
+					return c;
+				});
 		},
 
 		//Right
@@ -68,9 +68,9 @@ export default {
 
 		deleteVariableEditorHeaderRightButton(state, payload) {
 			state.settings.buttons.header.right =
-        state.settings.buttons.header.right.filter(c => c.id !== payload);
+				state.settings.buttons.header.right.filter((c) => c.id !== payload);
 
-			state.idArr = state.idArr.filter(c => c != payload);
+			state.idArr = state.idArr.filter((c) => c != payload);
 		},
 
 		addVariableEditorHeaderRightButton(state) {
@@ -85,19 +85,19 @@ export default {
 
 		updateVariableEditorHeaderRightButton(state, payload) {
 			state.settings.buttons.header.right =
-        state.settings.buttons.header.right.map(c => {
-        	if (c.id === payload.id) {
-        		if (payload.newID) {
-        			state.idArr = state.idArr.filter(c => c !== payload.id);
-        			state.idArr.push(payload.newID);
-        			return { ...c, id: payload.newID };
-        		}
+				state.settings.buttons.header.right.map((c) => {
+					if (c.id === payload.id) {
+						if (payload.newID) {
+							state.idArr = state.idArr.filter((c) => c !== payload.id);
+							state.idArr.push(payload.newID);
+							return { ...c, id: payload.newID };
+						}
 
-        		return { ...c, ...payload };
-        	}
+						return { ...c, ...payload };
+					}
 
-        	return c;
-        });
+					return c;
+				});
 		},
 
 		//Footer left
@@ -107,9 +107,9 @@ export default {
 
 		deleteVariableEditorFooterLeftButton(state, payload) {
 			state.settings.buttons.footer.left =
-        state.settings.buttons.footer.left.filter(c => c.id !== payload);
+				state.settings.buttons.footer.left.filter((c) => c.id !== payload);
 
-			state.fidArr = state.fidArr.filter(c => c != payload);
+			state.fidArr = state.fidArr.filter((c) => c != payload);
 		},
 
 		addVariableEditorFooterLeftButton(state) {
@@ -124,19 +124,19 @@ export default {
 
 		updateVariableEditorFooterLeftButton(state, payload) {
 			state.settings.buttons.footer.left =
-        state.settings.buttons.footer.left.map(c => {
-        	if (c.id === payload.id) {
-        		if (payload.newID) {
-        			state.fidArr = state.fidArr.filter(c => c !== payload.id);
-        			state.fidArr.push(payload.newID);
-        			return { ...c, id: payload.newID };
-        		}
+				state.settings.buttons.footer.left.map((c) => {
+					if (c.id === payload.id) {
+						if (payload.newID) {
+							state.fidArr = state.fidArr.filter((c) => c !== payload.id);
+							state.fidArr.push(payload.newID);
+							return { ...c, id: payload.newID };
+						}
 
-        		return { ...c, ...payload };
-        	}
+						return { ...c, ...payload };
+					}
 
-        	return c;
-        });
+					return c;
+				});
 		},
 
 		updateVariableEditorFooterRightOrder(state, payload) {
@@ -145,9 +145,9 @@ export default {
 
 		deleteVariableEditorFooterRightButton(state, payload) {
 			state.settings.buttons.footer.right =
-        state.settings.buttons.footer.right.filter(c => c.id !== payload);
+				state.settings.buttons.footer.right.filter((c) => c.id !== payload);
 
-			state.fidArr = state.fidArr.filter(c => c != payload);
+			state.fidArr = state.fidArr.filter((c) => c != payload);
 		},
 
 		addVariableEditorFooterRightButton(state) {
@@ -162,19 +162,19 @@ export default {
 
 		updateVariableEditorFooterRightButton(state, payload) {
 			state.settings.buttons.footer.right =
-        state.settings.buttons.footer.right.map(c => {
-        	if (c.id === payload.id) {
-        		if (payload.newID) {
-        			state.fidArr = state.fidArr.filter(c => c !== payload.id);
-        			state.fidArr.push(payload.newID);
-        			return { ...c, id: payload.newID };
-        		}
+				state.settings.buttons.footer.right.map((c) => {
+					if (c.id === payload.id) {
+						if (payload.newID) {
+							state.fidArr = state.fidArr.filter((c) => c !== payload.id);
+							state.fidArr.push(payload.newID);
+							return { ...c, id: payload.newID };
+						}
 
-        		return { ...c, ...payload };
-        	}
+						return { ...c, ...payload };
+					}
 
-        	return c;
-        });
+					return c;
+				});
 		},
 
 		//Text Insert
@@ -184,9 +184,9 @@ export default {
 
 		deleteVETextInsertButton(state, payload) {
 			state.settings.buttons.textInsertPlugin =
-        state.settings.buttons.textInsertPlugin.filter(c => c.id !== payload);
+				state.settings.buttons.textInsertPlugin.filter((c) => c.id !== payload);
 
-			state.tidArr = state.tidArr.filter(c => c != payload);
+			state.tidArr = state.tidArr.filter((c) => c != payload);
 		},
 
 		addVETextInsertButton(state) {
@@ -201,24 +201,24 @@ export default {
 
 		updateVETextInsertButton(state, payload) {
 			state.settings.buttons.textInsertPlugin =
-        state.settings.buttons.textInsertPlugin.map(c => {
-        	if (c.id === payload.id) {
-        		if (payload.newID) {
-        			state.tidArr = state.tidArr.filter(c => c !== payload.id);
-        			state.tidArr.push(payload.newID);
-        			return { ...c, id: payload.newID };
-        		}
+				state.settings.buttons.textInsertPlugin.map((c) => {
+					if (c.id === payload.id) {
+						if (payload.newID) {
+							state.tidArr = state.tidArr.filter((c) => c !== payload.id);
+							state.tidArr.push(payload.newID);
+							return { ...c, id: payload.newID };
+						}
 
-        		return { ...c, ...payload };
-        	}
+						return { ...c, ...payload };
+					}
 
-        	return c;
-        });
+					return c;
+				});
 		},
 	},
 	actions: {},
 	getters: {
-		headerButtons: state => state.settings.buttons.header,
-		footerButtons: state => state.settings.buttons.footer,
+		headerButtons: (state) => state.settings.buttons.header,
+		footerButtons: (state) => state.settings.buttons.footer,
 	},
 };

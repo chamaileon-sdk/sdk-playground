@@ -4,8 +4,8 @@
 
 		<v-main>
 			<v-row class="pa-0 ma-0">
-				<v-col class="pa-0" cols="8">
-					<div>
+				<v-col class="px-16 pa-0" cols="8">
+					<div class="px-16">
 						<router-view />
 					</div>
 				</v-col>
