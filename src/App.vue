@@ -26,26 +26,26 @@
 </template>
 
 <script>
-import MenuReworked from './components/MenuReworked.vue';
+import MenuReworked from "./components/MenuReworked.vue";
 
 export default {
-  components: {
-    MenuReworked,
-  },
-  created() {
-    this.$store.commit('updateSDKConfig', {
-      colors: {
-        ...this.$store.state.sdkConfig.colors,
-        primary: this.$vuetify.presets.framework.theme.themes.light.primary,
-        secondary: this.$vuetify.presets.framework.theme.themes.light.secondary,
-      },
-    });
-  },
-  mounted() {
-    this.$store.dispatch('initSDK', {
-      apiKey: 'Y8mbu7S5Qh4cyCqJCVBn',
-    });
-  },
+	components: {
+		MenuReworked,
+	},
+	created() {
+		this.$store.commit("updateSDKConfig", {
+			colors: {
+				...this.$store.state.sdkConfig.colors,
+				primary: this.$vuetify.presets.framework.theme.themes.light.primary,
+				secondary: this.$vuetify.presets.framework.theme.themes.light.secondary,
+			},
+		});
+	},
+	mounted() {
+		this.$store.dispatch("initSDK", {
+			apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
+		});
+	},
 };
 </script>
 

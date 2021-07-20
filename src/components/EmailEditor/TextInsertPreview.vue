@@ -41,11 +41,11 @@
 
 <script>
 export default {
-  computed: {
-    btnArr() {
-      return this.$store.state.editorConfig.settings.buttons.textInsert;
-    },
-  },
+	computed: {
+		btnArr() {
+			return this.$store.state.editorConfig.settings.buttons.textInsert;
+		},
+	},
 };
 </script>
 

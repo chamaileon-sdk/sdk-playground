@@ -131,86 +131,86 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
-import OptionWrapper from '../optionWrapper.vue';
+import { mapGetters, mapMutations } from "vuex";
+import OptionWrapper from "../optionWrapper.vue";
 
 export default {
-  components: {
-    OptionWrapper,
-  },
-  computed: {
-    ...mapGetters({
-      elementsArr: 'getElements',
-    }),
-  },
-  methods: {
-    ...mapMutations(['toggleElement']),
-  },
-  data() {
-    return {
-      contentElements: [
-        {
-          type: 'text',
-          icon: 'mdi-format-text',
-        },
-        {
-          type: 'image',
-          icon: 'mdi-image',
-        },
-        {
-          type: 'button',
-          icon: 'mdi-card',
-        },
-        {
-          type: 'divider',
-          icon: 'mdi-arrow-split-horizontal',
-        },
-        {
-          type: 'social',
-          icon: 'mdi-account-multiple',
-        },
-        {
-          type: 'code',
-          icon: 'mdi-code-tags',
-        },
-      ],
-      structureElements: [
-        {
-          type: 'fullWidth',
-          icon: 'mdi-window-maximize',
-        },
-        /*{
+	components: {
+		OptionWrapper,
+	},
+	computed: {
+		...mapGetters({
+			elementsArr: "getElements",
+		}),
+	},
+	methods: {
+		...mapMutations(["toggleElement"]),
+	},
+	data() {
+		return {
+			contentElements: [
+				{
+					type: "text",
+					icon: "mdi-format-text",
+				},
+				{
+					type: "image",
+					icon: "mdi-image",
+				},
+				{
+					type: "button",
+					icon: "mdi-card",
+				},
+				{
+					type: "divider",
+					icon: "mdi-arrow-split-horizontal",
+				},
+				{
+					type: "social",
+					icon: "mdi-account-multiple",
+				},
+				{
+					type: "code",
+					icon: "mdi-code-tags",
+				},
+			],
+			structureElements: [
+				{
+					type: "fullWidth",
+					icon: "mdi-window-maximize",
+				},
+				/*{
           type: 'column',
           icon: 'view_column',
         },*/
-        {
-          type: 'box',
-          icon: 'mdi-checkbox-blank-outline',
-        },
-        {
-          alt: 'columns',
-          type: 'multiColumn',
-          icon: 'mdi-view-column',
-        },
-      ],
-      advancedElements: [
-        {
-          type: 'loop',
-          icon: 'mdi-refresh',
-        },
-        {
-          alt: 'cond',
-          type: 'conditional',
-          icon: 'mdi-call-split',
-        },
-        {
-          alt: 'dyn img',
-          type: 'dynamicImage',
-          icon: 'mdi-folder-multiple-image',
-        },
-      ],
-    };
-  },
+				{
+					type: "box",
+					icon: "mdi-checkbox-blank-outline",
+				},
+				{
+					alt: "columns",
+					type: "multiColumn",
+					icon: "mdi-view-column",
+				},
+			],
+			advancedElements: [
+				{
+					type: "loop",
+					icon: "mdi-refresh",
+				},
+				{
+					alt: "cond",
+					type: "conditional",
+					icon: "mdi-call-split",
+				},
+				{
+					alt: "dyn img",
+					type: "dynamicImage",
+					icon: "mdi-folder-multiple-image",
+				},
+			],
+		};
+	},
 };
 </script>
 

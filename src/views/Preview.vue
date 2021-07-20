@@ -17,23 +17,23 @@
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
-import SectionObserver from '../components/SectionObserver.vue';
-import Header from '../components/Preview/PreviewButtons.vue';
+import Footer from "../components/Footer.vue";
+import SectionObserver from "../components/SectionObserver.vue";
+import Header from "../components/Preview/PreviewButtons.vue";
 
 export default {
-  components: {
-    Header,
-    Footer,
-    SectionObserver,
-  },
-  mounted() {
-    this.$store.dispatch('updateSDK');
-  },
+	components: {
+		Header,
+		Footer,
+		SectionObserver,
+	},
+	mounted() {
+		this.$store.dispatch("updateSDK");
+	},
 
-  destroyed() {
-    window.chamaileonSdk.destroy;
-  },
+	destroyed() {
+		window.chamaileonSdk.destroy;
+	},
 };
 </script>
 

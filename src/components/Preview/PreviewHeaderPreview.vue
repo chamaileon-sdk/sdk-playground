@@ -82,39 +82,39 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      primary: this.$store.state.sdkConfig.colors.primary,
-    };
-  },
-  directives: {
-    dlogo: {
-      inserted: function(el, binding) {
-        if (typeof binding.value === 'function') {
-          let x = el.children[0];
-          if (x) x.remove();
-          el.appendChild(binding.value());
-        }
-      },
-      update: function(el, binding) {
-        if (typeof binding.value === 'function') {
-          let x = el.children[0];
-          if (x) x.remove();
-          el.appendChild(binding.value());
-        }
-      },
-    },
-  },
-  computed: {
-    ...mapGetters({ headerButtons: 'getPreviewBtns' }),
+	data() {
+		return {
+			primary: this.$store.state.sdkConfig.colors.primary,
+		};
+	},
+	directives: {
+		dlogo: {
+			inserted: function(el, binding) {
+				if (typeof binding.value === "function") {
+					let x = el.children[0];
+					if (x) x.remove();
+					el.appendChild(binding.value());
+				}
+			},
+			update: function(el, binding) {
+				if (typeof binding.value === "function") {
+					let x = el.children[0];
+					if (x) x.remove();
+					el.appendChild(binding.value());
+				}
+			},
+		},
+	},
+	computed: {
+		...mapGetters({ headerButtons: "getPreviewBtns" }),
 
-    logo() {
-      return this.$store.state.logoCreatorFunction;
-    },
-  },
+		logo() {
+			return this.$store.state.logoCreatorFunction;
+		},
+	},
 };
 </script>
 

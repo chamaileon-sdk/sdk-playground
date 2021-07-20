@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import OptionsWrapper from '../optionWrapper.vue';
-import ColorSelector from './ColorSelector.vue';
+import OptionsWrapper from "../optionWrapper.vue";
+import ColorSelector from "./ColorSelector.vue";
 
 export default {
-  components: {
-    ColorSelector,
-    OptionsWrapper,
-  },
+	components: {
+		ColorSelector,
+		OptionsWrapper,
+	},
 };
 </script>
 

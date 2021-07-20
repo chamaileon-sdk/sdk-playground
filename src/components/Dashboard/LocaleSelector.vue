@@ -12,16 +12,16 @@
 
 <script>
 export default {
-  computed: {
-    locale: {
-      get() {
-        return this.$store.state.sdkConfig.locale;
-      },
-      set(value) {
-        this.$store.commit('updateSDKConfig', { locale: value });
-      },
-    },
-  },
+	computed: {
+		locale: {
+			get() {
+				return this.$store.state.sdkConfig.locale;
+			},
+			set(value) {
+				this.$store.commit("updateSDKConfig", { locale: value });
+			},
+		},
+	},
 };
 </script>
 

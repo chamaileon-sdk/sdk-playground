@@ -80,61 +80,61 @@
 </template>
 
 <script>
-const chamaileonLogo = require('chamaileon-logo');
+const chamaileonLogo = require("chamaileon-logo");
 
 export default {
-  data() {
-    return {
-      logos: [
-        {
-          url:
-            'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/createLogo.js',
-        },
-      ],
-    };
-  },
-  directives: {
-    chamaileonLogo: {
-      inserted: function(el) {
-        el.appendChild(chamaileonLogo({ withText: true }));
-      },
-    },
-  },
-  computed: {
-    border() {
-      return `box-sizing: border-box; border: 4px solid ${this.$vuetify.presets.framework.theme.themes.light.primary}; border-radius: 12px;`;
-    },
-    storedUrl() {
-      return this.$store.state.sdkConfig.urls.createLogoJS;
-    },
-  },
-  methods: {
-    changeLogo(value) {
-      this.$store.commit('updateSDKConfig', {
-        urls: { ...this.$store.state.sdkConfig.urls, createLogoJS: value },
-      });
-    },
-    processScript: function(url) {
-      const importScript = document.createElement('script');
-      importScript.src = url;
-      importScript.type = 'text/javascript';
-      importScript.async = false;
+	data() {
+		return {
+			logos: [
+				{
+					url:
+            "https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/createLogo.js",
+				},
+			],
+		};
+	},
+	directives: {
+		chamaileonLogo: {
+			inserted: function(el) {
+				el.appendChild(chamaileonLogo({ withText: true }));
+			},
+		},
+	},
+	computed: {
+		border() {
+			return `box-sizing: border-box; border: 4px solid ${this.$vuetify.presets.framework.theme.themes.light.primary}; border-radius: 12px;`;
+		},
+		storedUrl() {
+			return this.$store.state.sdkConfig.urls.createLogoJS;
+		},
+	},
+	methods: {
+		changeLogo(value) {
+			this.$store.commit("updateSDKConfig", {
+				urls: { ...this.$store.state.sdkConfig.urls, createLogoJS: value },
+			});
+		},
+		processScript: function(url) {
+			const importScript = document.createElement("script");
+			importScript.src = url;
+			importScript.type = "text/javascript";
+			importScript.async = false;
 
-      const runScript = document.createElement('script');
-      runScript.innerText =
-        'document.getElementById("container").appendChild(createLogo());';
+			const runScript = document.createElement("script");
+			runScript.innerText =
+        "document.getElementById(\"container\").appendChild(createLogo());";
 
-      const html = `<html><head></head><body style="margin: 0"><div id="container" style="display: flex; height: 100vh; align-items: center; margin: 0; padding: 0; justify-content: center;">
+			const html = `<html><head></head><body style="margin: 0"><div id="container" style="display: flex; height: 100vh; align-items: center; margin: 0; padding: 0; justify-content: center;">
       ${importScript.outerHTML}${runScript.outerHTML}
       </div></body></html>`;
-      return html;
-    },
-    calculateOpacity(url) {
-      if (url === this.storedUrl) return 'opacity: 1; transition: 200ms;';
+			return html;
+		},
+		calculateOpacity(url) {
+			if (url === this.storedUrl) return "opacity: 1; transition: 200ms;";
 
-      return 'opacity: 0.5; transition: 200ms;';
-    },
-  },
+			return "opacity: 0.5; transition: 200ms;";
+		},
+	},
 };
 </script>
 

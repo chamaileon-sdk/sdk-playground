@@ -63,46 +63,46 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import Vue from "vue";
 import {
-  VRow,
-  VCol,
-  VCard,
-  VListItemIcon,
-  VListItemContent,
-  VTextField,
-  VIcon,
-} from 'vuetify/lib';
-import DeleteButton from './DeleteButton.vue';
+	VRow,
+	VCol,
+	VCard,
+	VListItemIcon,
+	VListItemContent,
+	VTextField,
+	VIcon,
+} from "vuetify/lib";
+import DeleteButton from "./DeleteButton.vue";
 
-Vue.component('v-col', VCol);
-Vue.component('v-row', VRow);
-Vue.component('v-card', VCard);
-Vue.component('v-list-item-icon', VListItemIcon);
-Vue.component('v-list-item-content', VListItemContent);
-Vue.component('v-text-field', VTextField);
-Vue.component('v-icon', VIcon);
-Vue.component('DeleteButton', DeleteButton);
+Vue.component("v-col", VCol);
+Vue.component("v-row", VRow);
+Vue.component("v-card", VCard);
+Vue.component("v-list-item-icon", VListItemIcon);
+Vue.component("v-list-item-content", VListItemContent);
+Vue.component("v-text-field", VTextField);
+Vue.component("v-icon", VIcon);
+Vue.component("DeleteButton", DeleteButton);
 
 export default {
-  props: {
-    split: {
-      type: Boolean,
-      default: false,
-    },
-    id: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    icon: {
-      type: String,
-      required: true,
-    },
-  },
+	props: {
+		split: {
+			type: Boolean,
+			default: false,
+		},
+		id: {
+			type: String,
+			required: true,
+		},
+		label: {
+			type: String,
+			required: true,
+		},
+		icon: {
+			type: String,
+			required: true,
+		},
+	},
 };
 </script>
 

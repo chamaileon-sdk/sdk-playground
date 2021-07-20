@@ -88,94 +88,94 @@
 </template>
 
 <script>
-import AddButton from '../AddButton.vue';
-import draggable from 'vuedraggable';
-import ListItem3 from '../ListItem3.vue';
+import AddButton from "../AddButton.vue";
+import draggable from "vuedraggable";
+import ListItem3 from "../ListItem3.vue";
 
 export default {
-  components: {
-    AddButton,
-    draggable,
-    ListItem3,
-  },
+	components: {
+		AddButton,
+		draggable,
+		ListItem3,
+	},
 
-  props: {
-    section: {
-      type: String,
-      required: true,
-      validator: function(value) {
-        // The value must match one of these strings
-        return ['Header', 'Footer'].indexOf(value) !== -1;
-      },
-    },
-  },
-  methods: {
-    addLeftButton() {
-      this.$store.commit(`addVariableEditor${this.section}LeftButton`);
-    },
+	props: {
+		section: {
+			type: String,
+			required: true,
+			validator: function(value) {
+				// The value must match one of these strings
+				return ["Header", "Footer"].indexOf(value) !== -1;
+			},
+		},
+	},
+	methods: {
+		addLeftButton() {
+			this.$store.commit(`addVariableEditor${this.section}LeftButton`);
+		},
 
-    updateLeftButton(payload) {
-      this.$store.commit(
-        `updateVariableEditor${this.section}LeftButton`,
-        payload
-      );
-    },
+		updateLeftButton(payload) {
+			this.$store.commit(
+				`updateVariableEditor${this.section}LeftButton`,
+				payload
+			);
+		},
 
-    deleteLeftButton(payload) {
-      this.$store.commit(
-        `deleteVariableEditor${this.section}LeftButton`,
-        payload
-      );
-    },
+		deleteLeftButton(payload) {
+			this.$store.commit(
+				`deleteVariableEditor${this.section}LeftButton`,
+				payload
+			);
+		},
 
-    addRightButton() {
-      this.$store.commit(`addVariableEditor${this.section}RightButton`);
-    },
+		addRightButton() {
+			this.$store.commit(`addVariableEditor${this.section}RightButton`);
+		},
 
-    updateRightButton(payload) {
-      this.$store.commit(
-        `updateVariableEditor${this.section}RightButton`,
-        payload
-      );
-    },
+		updateRightButton(payload) {
+			this.$store.commit(
+				`updateVariableEditor${this.section}RightButton`,
+				payload
+			);
+		},
 
-    deleteRightButton(payload) {
-      this.$store.commit(
-        `deleteVariableEditor${this.section}RightButton`,
-        payload
-      );
-    },
-  },
+		deleteRightButton(payload) {
+			this.$store.commit(
+				`deleteVariableEditor${this.section}RightButton`,
+				payload
+			);
+		},
+	},
 
-  computed: {
-    buttonsLeft: {
-      get() {
-        return this.$store.state.variableEditorConfig.settings.buttons[
-          this.section.toLowerCase()
-        ].left;
-      },
-      set(value) {
-        this.$store.commit(
-          `updateVariableEditor${this.section}LeftOrder`,
-          value
-        );
-      },
-    },
+	computed: {
+		buttonsLeft: {
+			get() {
+				return this.$store.state.variableEditorConfig.settings.buttons[
+					this.section.toLowerCase()
+				].left;
+			},
+			set(value) {
+				this.$store.commit(
+					`updateVariableEditor${this.section}LeftOrder`,
+					value
+				);
+			},
+		},
 
-    buttonsRight: {
-      get() {
-        return this.$store.state.variableEditorConfig.settings.buttons[
-          this.section.toLowerCase()
-        ].right;
-      },
-      set(value) {
-        this.$store.commit(
-          `updateVariableEditor${this.section}RightOrder`,
-          value
-        );
-      },
-    },
-  },
+		buttonsRight: {
+			get() {
+				return this.$store.state.variableEditorConfig.settings.buttons[
+					this.section.toLowerCase()
+				].right;
+			},
+			set(value) {
+				this.$store.commit(
+					`updateVariableEditor${this.section}RightOrder`,
+					value
+				);
+			},
+		},
+	},
 };
 </script>
 

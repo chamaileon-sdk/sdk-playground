@@ -73,58 +73,58 @@
 </template>
 
 <script>
-import OptionWrapper from '../optionWrapper.vue';
-import { mapMutations } from 'vuex';
+import OptionWrapper from "../optionWrapper.vue";
+import { mapMutations } from "vuex";
 
 export default {
-  methods: {
-    processName(name) {
-      if (name.length > 6) return name.substr(0, name.indexOf(' ') + 1) + '...';
+	methods: {
+		processName(name) {
+			if (name.length > 6) return name.substr(0, name.indexOf(" ") + 1) + "...";
 
-      return name;
-    },
-    ...mapMutations(['updateUser', 'updateAutosave']),
-  },
+			return name;
+		},
+		...mapMutations(["updateUser", "updateAutosave"]),
+	},
 
-  computed: {
-    avatarEnabled: {
-      get() {
-        return this.$store.state.editorConfig.user.enabled;
-      },
-      set(val) {
-        this.updateUser({ enabled: val });
-      },
-    },
-    avatarUserName: {
-      get() {
-        return this.$store.state.editorConfig.user.name;
-      },
-      set(val) {
-        this.updateUser({ name: val });
-      },
-    },
-    avatarImg: {
-      get() {
-        return this.$store.state.editorConfig.user.avatar;
-      },
-      set(val) {
-        this.updateUser({ avatar: val });
-      },
-    },
+	computed: {
+		avatarEnabled: {
+			get() {
+				return this.$store.state.editorConfig.user.enabled;
+			},
+			set(val) {
+				this.updateUser({ enabled: val });
+			},
+		},
+		avatarUserName: {
+			get() {
+				return this.$store.state.editorConfig.user.name;
+			},
+			set(val) {
+				this.updateUser({ name: val });
+			},
+		},
+		avatarImg: {
+			get() {
+				return this.$store.state.editorConfig.user.avatar;
+			},
+			set(val) {
+				this.updateUser({ avatar: val });
+			},
+		},
 
-    autosave: {
-      get() {
-        return this.$store.state.editorConfig.autoSaveInterval;
-      },
-      set(val) {
-        this.updateAutosave(val);
-      },
-    },
-  },
+		autosave: {
+			get() {
+				return this.$store.state.editorConfig.autoSaveInterval;
+			},
+			set(val) {
+				this.updateAutosave(val);
+			},
+		},
+	},
 
-  components: {
-    OptionWrapper,
-  },
+	components: {
+		OptionWrapper,
+	},
 };
 </script>
 

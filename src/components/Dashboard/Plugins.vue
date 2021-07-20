@@ -76,49 +76,49 @@
 
 <script>
 export default {
-  data() {
-    return {
-      reveal: false,
-      items: [
-        {
-          title: 'Email Thumbnail',
-          icon: 'image-outline',
-          description:
-            'Generates a thumbnail from an existing document. Allows you to set the size and scale, and attach the thumbnail to an HTML element',
-          reveal: false,
-          to: 'emailthumbnail',
-          docs: 'https://chamaileon.io/sdk/docs/email-thumbnail/',
-        },
-        {
-          title: 'Email Preview',
-          icon: 'email-search-outline',
-          description:
-            'If you already have a document exported from the editor, this plugin allows you to create a preview for it.',
-          reveal: false,
-          to: 'emailpreview',
-          docs: 'https://chamaileon.io/sdk/docs/email-preview/',
-        },
-        {
-          title: 'Email Editor',
-          icon: 'email-edit-outline',
-          description:
-            'You can simply customize the editor by passing a config object to the initializer function.',
-          reveal: false,
-          to: 'emaileditor',
-          docs: 'https://chamaileon.io/sdk/docs/email-editor/',
-        },
-        {
-          title: 'Variable Editor',
-          icon: 'iframe-variable-outline',
-          description:
-            'If you already have a document with defined variables exported from the editor, you can open an editor to edit the variables.',
-          reveal: false,
-          to: 'variableeditor',
-          docs: 'https://chamaileon.io/sdk/docs/email-variable-editor/',
-        },
-      ],
-    };
-  },
+	data() {
+		return {
+			reveal: false,
+			items: [
+				{
+					title: "Email Thumbnail",
+					icon: "image-outline",
+					description:
+            "Generates a thumbnail from an existing document. Allows you to set the size and scale, and attach the thumbnail to an HTML element",
+					reveal: false,
+					to: "emailthumbnail",
+					docs: "https://chamaileon.io/sdk/docs/email-thumbnail/",
+				},
+				{
+					title: "Email Preview",
+					icon: "email-search-outline",
+					description:
+            "If you already have a document exported from the editor, this plugin allows you to create a preview for it.",
+					reveal: false,
+					to: "emailpreview",
+					docs: "https://chamaileon.io/sdk/docs/email-preview/",
+				},
+				{
+					title: "Email Editor",
+					icon: "email-edit-outline",
+					description:
+            "You can simply customize the editor by passing a config object to the initializer function.",
+					reveal: false,
+					to: "emaileditor",
+					docs: "https://chamaileon.io/sdk/docs/email-editor/",
+				},
+				{
+					title: "Variable Editor",
+					icon: "iframe-variable-outline",
+					description:
+            "If you already have a document with defined variables exported from the editor, you can open an editor to edit the variables.",
+					reveal: false,
+					to: "variableeditor",
+					docs: "https://chamaileon.io/sdk/docs/email-variable-editor/",
+				},
+			],
+		};
+	},
 };
 </script>
 

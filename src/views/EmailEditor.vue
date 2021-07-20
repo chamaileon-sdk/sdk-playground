@@ -37,32 +37,32 @@
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
-import SectionObserver from '../components/SectionObserver.vue';
-import Header from '../components/EmailEditor/Header';
-import Elements from '../components/EmailEditor/Elements';
-import BlockLibraries from '../components/EmailEditor/BlockLibraries';
-import TextInsert from '../components/EmailEditor/TextInsert';
-import Addons from '../components/EmailEditor/Addons';
-import Settings from '../components/EmailEditor/Settings';
+import Footer from "../components/Footer.vue";
+import SectionObserver from "../components/SectionObserver.vue";
+import Header from "../components/EmailEditor/Header";
+import Elements from "../components/EmailEditor/Elements";
+import BlockLibraries from "../components/EmailEditor/BlockLibraries";
+import TextInsert from "../components/EmailEditor/TextInsert";
+import Addons from "../components/EmailEditor/Addons";
+import Settings from "../components/EmailEditor/Settings";
 
 export default {
-  mounted() {
-    this.$store.dispatch('updateSDK');
-  },
-  destroyed() {
-    window.chamaileonSdk.destroy;
-  },
-  components: {
-    SectionObserver,
-    Header,
-    Footer,
-    Elements,
-    BlockLibraries,
-    TextInsert,
-    Addons,
-    Settings,
-  },
+	mounted() {
+		this.$store.dispatch("updateSDK");
+	},
+	destroyed() {
+		window.chamaileonSdk.destroy;
+	},
+	components: {
+		SectionObserver,
+		Header,
+		Footer,
+		Elements,
+		BlockLibraries,
+		TextInsert,
+		Addons,
+		Settings,
+	},
 };
 </script>
 

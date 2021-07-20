@@ -32,41 +32,41 @@
 </template>
 
 <script>
-import AddButton from '../AddButton.vue';
-import List6 from '../List6.vue';
-import OptionWrapper from '../optionWrapper.vue';
-import Header from './PreviewHeaderPreview.vue';
+import AddButton from "../AddButton.vue";
+import List6 from "../List6.vue";
+import OptionWrapper from "../optionWrapper.vue";
+import Header from "./PreviewHeaderPreview.vue";
 
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 
 export default {
-  components: {
-    AddButton,
-    List6,
-    OptionWrapper,
-    Header,
-  },
-  methods: {
-    openPreview() {
-      this.$store.state.sdk.previewEmail({
-        ...this.$store.getters.getPreviewConfigObject,
-      });
-    },
+	components: {
+		AddButton,
+		List6,
+		OptionWrapper,
+		Header,
+	},
+	methods: {
+		openPreview() {
+			this.$store.state.sdk.previewEmail({
+				...this.$store.getters.getPreviewConfigObject,
+			});
+		},
 
-    ...mapMutations({
-      addBtn: 'addPreviewBtn',
-      addDD: 'addPreviewDropdown',
-    }),
-  },
+		...mapMutations({
+			addBtn: "addPreviewBtn",
+			addDD: "addPreviewDropdown",
+		}),
+	},
 
-  data() {
-    return {
-      rules: {
-        required: value => !!value || 'Required.',
-        unique: value => !this.$store.state.editorConfig.idArr.includes(value),
-      },
-    };
-  },
+	data() {
+		return {
+			rules: {
+				required: value => !!value || "Required.",
+				unique: value => !this.$store.state.editorConfig.idArr.includes(value),
+			},
+		};
+	},
 };
 </script>
 

@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import OptionsWrapper from '../optionWrapper.vue';
-import SplashScreenSelector from './SplashScreenSelector.vue';
+import OptionsWrapper from "../optionWrapper.vue";
+import SplashScreenSelector from "./SplashScreenSelector.vue";
 
 export default {
-  components: {
-    SplashScreenSelector,
-    OptionsWrapper,
-  },
+	components: {
+		SplashScreenSelector,
+		OptionsWrapper,
+	},
 };
 </script>
 

@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import OptionsWrapper from '../optionWrapper.vue';
-import LogoSelector from './LogoSelector.vue';
+import OptionsWrapper from "../optionWrapper.vue";
+import LogoSelector from "./LogoSelector.vue";
 
 export default {
-  components: {
-    LogoSelector,
-    OptionsWrapper,
-  },
+	components: {
+		LogoSelector,
+		OptionsWrapper,
+	},
 };
 </script>
 

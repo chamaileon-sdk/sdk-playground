@@ -43,22 +43,22 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
-import OptionWrapper from '../optionWrapper.vue';
+import { mapGetters, mapMutations } from "vuex";
+import OptionWrapper from "../optionWrapper.vue";
 
 export default {
-  components: {
-    OptionWrapper,
-  },
-  methods: {
-    ...mapMutations(['updateAddonState']),
-  },
-  computed: {
-    ...mapGetters(['getAddonStateById']),
-    addonArr() {
-      return this.$store.state.editorConfig.addons;
-    },
-  },
+	components: {
+		OptionWrapper,
+	},
+	methods: {
+		...mapMutations(["updateAddonState"]),
+	},
+	computed: {
+		...mapGetters(["getAddonStateById"]),
+		addonArr() {
+			return this.$store.state.editorConfig.addons;
+		},
+	},
 };
 </script>
 

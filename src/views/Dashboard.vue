@@ -21,22 +21,22 @@
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
-import SectionObserver from '../components/SectionObserver.vue';
-import Logo from '../components/Dashboard/Logo.vue';
-import Language from '../components/Dashboard/Language.vue';
-import Colors from '../components/Dashboard/Colors.vue';
-import SplashScreen from '../components/Dashboard/SplashScreen.vue';
+import Footer from "../components/Footer.vue";
+import SectionObserver from "../components/SectionObserver.vue";
+import Logo from "../components/Dashboard/Logo.vue";
+import Language from "../components/Dashboard/Language.vue";
+import Colors from "../components/Dashboard/Colors.vue";
+import SplashScreen from "../components/Dashboard/SplashScreen.vue";
 
 export default {
-  components: {
-    SectionObserver,
-    Footer,
-    Logo,
-    Colors,
-    SplashScreen,
-    Language,
-  },
+	components: {
+		SectionObserver,
+		Footer,
+		Logo,
+		Colors,
+		SplashScreen,
+		Language,
+	},
 };
 </script>
 

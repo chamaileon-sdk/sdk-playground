@@ -146,17 +146,17 @@
 </template>
 
 <script>
-import ColorPicker from './EmailEditor/ColorPicker.vue';
-import DeleteButton from './DeleteButton.vue';
+import ColorPicker from "./EmailEditor/ColorPicker.vue";
+import DeleteButton from "./DeleteButton.vue";
 
 export default {
-  props: {
-    b: Object,
-  },
-  components: {
-    DeleteButton,
-    ColorPicker,
-  },
+	props: {
+		b: Object,
+	},
+	components: {
+		DeleteButton,
+		ColorPicker,
+	},
 };
 </script>
 

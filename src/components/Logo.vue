@@ -3,16 +3,16 @@
 </template>
 
 <script>
-const chamaileonLogo = require('chamaileon-logo');
+const chamaileonLogo = require("chamaileon-logo");
 
 export default {
-  directives: {
-    chamaileonLogo: {
-      inserted: function(el) {
-        el.appendChild(chamaileonLogo({ withText: true }));
-      },
-    },
-  },
+	directives: {
+		chamaileonLogo: {
+			inserted: function(el) {
+				el.appendChild(chamaileonLogo({ withText: true }));
+			},
+		},
+	},
 };
 </script>
 

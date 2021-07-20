@@ -26,30 +26,30 @@
 </template>
 
 <script>
-import SplitList from './SplitList.vue';
-import OptionWrapper from '../optionWrapper.vue';
-import FooterPreview from './FooterPreview.vue';
-import { mapGetters } from 'vuex';
+import SplitList from "./SplitList.vue";
+import OptionWrapper from "../optionWrapper.vue";
+import FooterPreview from "./FooterPreview.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  methods: {
-    OpenEditor() {
-      this.$store.state.sdk.editVariables({
-        document: this.$store.state.document,
+	methods: {
+		OpenEditor() {
+			this.$store.state.sdk.editVariables({
+				document: this.$store.state.document,
 
-        ...this.getVEConfigObj,
-        hooks: {},
-      });
-    },
-  },
-  computed: {
-    ...mapGetters(['getVEConfigObj']),
-  },
-  components: {
-    SplitList,
-    OptionWrapper,
-    FooterPreview,
-  },
+				...this.getVEConfigObj,
+				hooks: {},
+			});
+		},
+	},
+	computed: {
+		...mapGetters(["getVEConfigObj"]),
+	},
+	components: {
+		SplitList,
+		OptionWrapper,
+		FooterPreview,
+	},
 };
 </script>
 

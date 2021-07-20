@@ -17,22 +17,22 @@
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
-import SectionObserver from '../components/SectionObserver.vue';
-import Settings from '../components/Thumbnail/ThumbnailSettings.vue';
+import Footer from "../components/Footer.vue";
+import SectionObserver from "../components/SectionObserver.vue";
+import Settings from "../components/Thumbnail/ThumbnailSettings.vue";
 
 export default {
-  mounted() {
-    this.$store.dispatch('updateSDK');
-  },
-  destroyed() {
-    window.chamaileonSdk.destroy;
-  },
-  components: {
-    Settings,
-    SectionObserver,
-    Footer,
-  },
+	mounted() {
+		this.$store.dispatch("updateSDK");
+	},
+	destroyed() {
+		window.chamaileonSdk.destroy;
+	},
+	components: {
+		Settings,
+		SectionObserver,
+		Footer,
+	},
 };
 </script>
 

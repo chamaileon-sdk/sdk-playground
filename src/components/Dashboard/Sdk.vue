@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  components: {},
+	components: {},
 };
 </script>
 

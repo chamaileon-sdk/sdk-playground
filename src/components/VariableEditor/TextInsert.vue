@@ -60,41 +60,41 @@
 </template>
 
 <script>
-import AddButton from '../AddButton.vue';
-import OptionWrapper from '../optionWrapper.vue';
-import ListItem3 from '../ListItem3.vue';
+import AddButton from "../AddButton.vue";
+import OptionWrapper from "../optionWrapper.vue";
+import ListItem3 from "../ListItem3.vue";
 
-import TextInsertPreview from './TextInsertPreview.vue';
-import draggable from 'vuedraggable';
-import { mapMutations } from 'vuex';
+import TextInsertPreview from "./TextInsertPreview.vue";
+import draggable from "vuedraggable";
+import { mapMutations } from "vuex";
 
 export default {
-  methods: {
-    ...mapMutations([
-      'addVETextInsertButton',
-      'deleteVETextInsertButton',
-      'updateVETextInsertOrder',
-      'updateVETextInsertButton',
-    ]),
-  },
-  computed: {
-    btnArr: {
-      get() {
-        return this.$store.state.variableEditorConfig.settings.buttons
-          .textInsertPlugin;
-      },
-      set(val) {
-        this.updateVETextInsertOrder(val);
-      },
-    },
-  },
-  components: {
-    AddButton,
-    OptionWrapper,
-    draggable,
-    TextInsertPreview,
-    ListItem3,
-  },
+	methods: {
+		...mapMutations([
+			"addVETextInsertButton",
+			"deleteVETextInsertButton",
+			"updateVETextInsertOrder",
+			"updateVETextInsertButton",
+		]),
+	},
+	computed: {
+		btnArr: {
+			get() {
+				return this.$store.state.variableEditorConfig.settings.buttons
+					.textInsertPlugin;
+			},
+			set(val) {
+				this.updateVETextInsertOrder(val);
+			},
+		},
+	},
+	components: {
+		AddButton,
+		OptionWrapper,
+		draggable,
+		TextInsertPreview,
+		ListItem3,
+	},
 };
 </script>
 
