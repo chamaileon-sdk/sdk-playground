@@ -6,7 +6,7 @@
 			</div>
 		</v-col>
 		<v-col class="ma-0 pa-0" cols="4">
-			<CodeEditor />
+			<CodeEditor :code="code" />
 		</v-col>
 	</v-row>
 </template>

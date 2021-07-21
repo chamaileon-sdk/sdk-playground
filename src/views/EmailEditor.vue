@@ -1,5 +1,5 @@
 <template>
-	<Wrapper>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header />
@@ -90,6 +90,12 @@ export default {
 	computed: {
 		...mapState(["sdk"]),
 		...mapGetters(["getConfigObject"]),
+	},
+
+	data() {
+		return {
+			code: "console.log(\"EmailEditor\")",
+		};
 	},
 };
 </script>

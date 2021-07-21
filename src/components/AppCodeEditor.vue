@@ -7,21 +7,14 @@
 		dark
 		flat
 	>
-		<highlight-code lang="javascript" :code="testcode" />
+		<highlight-code lang="javascript" :code="code" />
 	</v-card>
 </template>
 
 <script>
 export default {
-	mounted() {
-		let el = document.getElementById("codeContainer");
-		console.log(el);
-	},
-	data() {
-		return {
-			testcode: "console.log(\"hello world\");\n\tasd",
-			CodeMirror: null,
-		};
+	props: {
+		code: String,
 	},
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<Wrapper>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header />
@@ -59,6 +59,11 @@ export default {
 				},
 			});
 		},
+	},
+	data() {
+		return {
+			code: "console.log(\"VariableEditor\")",
+		};
 	},
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<Wrapper>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header :actLogoCreator="this.creatorFunction" />
@@ -45,6 +45,12 @@ export default {
 
 	destroyed() {
 		window.chamaileonSdk.destroy;
+	},
+
+	data() {
+		return {
+			code: "console.log(\"Preview\")",
+		};
 	},
 };
 </script>

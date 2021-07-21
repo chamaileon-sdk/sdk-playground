@@ -1,5 +1,5 @@
 <template>
-	<Wrapper>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="settings">
 				<Settings />
@@ -32,6 +32,12 @@ export default {
 		SectionObserver,
 		Footer,
 		Wrapper,
+	},
+
+	data() {
+		return {
+			code: "console.log(\"Thumbnail\")",
+		};
 	},
 };
 </script>

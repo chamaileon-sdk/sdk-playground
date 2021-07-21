@@ -1,5 +1,5 @@
 <template>
-	<Wrapper>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="sdklogo">
 				<Logo />
@@ -36,6 +36,11 @@ export default {
 		SplashScreen,
 		Language,
 		Wrapper,
+	},
+	data() {
+		return {
+			code: "console.log(\"Dashboard\")",
+		};
 	},
 };
 </script>
