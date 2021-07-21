@@ -34,10 +34,13 @@ export default {
 		Wrapper,
 	},
 
-	data() {
-		return {
-			code: "console.log(\"Thumbnail\")",
-		};
+	computed: {
+		//config() {
+		//return this.$store.state.sdkConfig;
+		//},
+		code() {
+			return "console.log('Thumbnail')";
+		},
 	},
 };
 </script>
