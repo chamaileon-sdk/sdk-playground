@@ -44,35 +44,35 @@
 </template>
 
 <script>
-const chamaileonLogo = require('chamaileon-logo');
-import { mapGetters, mapState } from 'vuex';
+const chamaileonLogo = require("chamaileon-logo");
+import { mapGetters, mapState } from "vuex";
 
 export default {
-  props: {
-    items: {
-      type: Array,
-      required: true,
-    },
-  },
-  methods: {
-    openEditor() {
-      this.sdk.editEmail(this.getConfigObject);
-    },
-  },
-  computed: {
-    isEditor() {
-      return this.$route.path.includes('emaileditor');
-    },
-    ...mapState(['sdk']),
-    ...mapGetters(['getConfigObject']),
-  },
-  directives: {
-    chamaileonLogo: {
-      inserted: function(el) {
-        el.appendChild(chamaileonLogo({ withText: true }));
-      },
-    },
-  },
+	props: {
+		items: {
+			type: Array,
+			required: true,
+		},
+	},
+	methods: {
+		openEditor() {
+			this.sdk.editEmail(this.getConfigObject);
+		},
+	},
+	computed: {
+		isEditor() {
+			return this.$route.path.includes("emaileditor");
+		},
+		...mapState(["sdk"]),
+		...mapGetters(["getConfigObject"]),
+	},
+	directives: {
+		chamaileonLogo: {
+			inserted: function(el) {
+				el.appendChild(chamaileonLogo({ withText: true }));
+			},
+		},
+	},
 };
 </script>
 

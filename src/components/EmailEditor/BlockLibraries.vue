@@ -89,50 +89,50 @@
 </template>
 
 <script>
-import DeleteButton from '../DeleteButton.vue';
-import AddButton from '../AddButton.vue';
-import draggable from 'vuedraggable';
-import OptionWrapper from '../optionWrapper.vue';
-import { mapMutations } from 'vuex';
+import DeleteButton from "../DeleteButton.vue";
+import AddButton from "../AddButton.vue";
+import draggable from "vuedraggable";
+import OptionWrapper from "../optionWrapper.vue";
+import { mapMutations } from "vuex";
 
 export default {
-  components: {
-    DeleteButton,
-    AddButton,
-    draggable,
-    OptionWrapper,
-  },
-  methods: {
-    ...mapMutations([
-      'updateBlockLibsOrder',
-      'updateBlockLibs',
-      'addBlockLibs',
-      'removeBlockLibs',
-    ]),
-    updateID(val, id) {
-      if (!this.$store.state.editorConfig.blIDArr.includes(val) && val)
-        this.updateBlockLibs({ id: id, newID: val });
-    },
-  },
-  computed: {
-    blockLibsArr: {
-      get() {
-        return this.$store.getters.getBlockLibs;
-      },
-      set(value) {
-        this.updateBlockLibsOrder(value);
-      },
-    },
-  },
-  data() {
-    return {
-      rules: {
-        required: value => !!value || 'Required.',
-        unique: value =>
-          !this.$store.state.editorConfig.blIDArr.includes(value),
-      },
-    };
-  },
+	components: {
+		DeleteButton,
+		AddButton,
+		draggable,
+		OptionWrapper,
+	},
+	methods: {
+		...mapMutations([
+			"updateBlockLibsOrder",
+			"updateBlockLibs",
+			"addBlockLibs",
+			"removeBlockLibs",
+		]),
+		updateID(val, id) {
+			if (!this.$store.state.editorConfig.blIDArr.includes(val) && val)
+				this.updateBlockLibs({ id: id, newID: val });
+		},
+	},
+	computed: {
+		blockLibsArr: {
+			get() {
+				return this.$store.getters.getBlockLibs;
+			},
+			set(value) {
+				this.updateBlockLibsOrder(value);
+			},
+		},
+	},
+	data() {
+		return {
+			rules: {
+				required: value => !!value || "Required.",
+				unique: value =>
+					!this.$store.state.editorConfig.blIDArr.includes(value),
+			},
+		};
+	},
 };
 </script>
 

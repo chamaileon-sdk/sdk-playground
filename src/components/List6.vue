@@ -173,69 +173,69 @@
 </template>
 
 <script>
-import DeleteButton from './DeleteButton.vue';
-import draggable from 'vuedraggable';
-import ColorPicker from './EmailEditor/ColorPicker.vue';
+import DeleteButton from "./DeleteButton.vue";
+import draggable from "vuedraggable";
+import ColorPicker from "./EmailEditor/ColorPicker.vue";
 
 export default {
-  props: {
-    section: {
-      type: String,
-      required: true,
-      validator: function(value) {
-        // The value must match one of these strings
-        return ['Editor', 'Preview'].indexOf(value) !== -1;
-      },
-    },
-  },
-  components: {
-    DeleteButton,
-    draggable,
-    ColorPicker,
-  },
-  methods: {
-    updateLabel(val, id) {
-      this.$store.commit(`update${this.section}Btn`, { id: id, label: val });
-    },
-    updateColor(val, id) {
-      this.$store.commit(`update${this.section}Btn`, { id: id, color: val });
-    },
-    updateIcon(val, id) {
-      this.$store.commit(`update${this.section}Btn`, { id: id, icon: val });
-    },
-    updateID(val, id) {
-      this.$store.commit(`update${this.section}Btn`, { id: id, newID: val });
-    },
-    updateDDID(val, pid, id) {
-      this.$store.commit(`update${this.section}DropdownBtn`, {
-        id: pid,
-        obj: { id: id, newID: val },
-      });
-    },
-    updateDDBtn(payload) {
-      this.$store.commit(`update${this.section}DropdownBtn`, payload);
-    },
-    addDDBtn(payload) {
-      this.$store.commit(`add${this.section}DropdownBtn`, payload);
-    },
-    deleteDDBtn(payload) {
-      this.$store.commit(`remove${this.section}DropdownBtn`, payload);
-    },
-    deleteBtn(payload) {
-      this.$store.commit(`remove${this.section}Btn`, payload);
-    },
-  },
-  computed: {
-    buttonsArr: {
-      get() {
-        return this.$store.state[this.section.toLowerCase() + 'Config'].settings
-          .buttons.header;
-      },
-      set(value) {
-        this.$store.commit(`update${this.section}BtnOrder`, value);
-      },
-    },
-  },
+	props: {
+		section: {
+			type: String,
+			required: true,
+			validator: function(value) {
+				// The value must match one of these strings
+				return ["Editor", "Preview"].indexOf(value) !== -1;
+			},
+		},
+	},
+	components: {
+		DeleteButton,
+		draggable,
+		ColorPicker,
+	},
+	methods: {
+		updateLabel(val, id) {
+			this.$store.commit(`update${this.section}Btn`, { id: id, label: val });
+		},
+		updateColor(val, id) {
+			this.$store.commit(`update${this.section}Btn`, { id: id, color: val });
+		},
+		updateIcon(val, id) {
+			this.$store.commit(`update${this.section}Btn`, { id: id, icon: val });
+		},
+		updateID(val, id) {
+			this.$store.commit(`update${this.section}Btn`, { id: id, newID: val });
+		},
+		updateDDID(val, pid, id) {
+			this.$store.commit(`update${this.section}DropdownBtn`, {
+				id: pid,
+				obj: { id: id, newID: val },
+			});
+		},
+		updateDDBtn(payload) {
+			this.$store.commit(`update${this.section}DropdownBtn`, payload);
+		},
+		addDDBtn(payload) {
+			this.$store.commit(`add${this.section}DropdownBtn`, payload);
+		},
+		deleteDDBtn(payload) {
+			this.$store.commit(`remove${this.section}DropdownBtn`, payload);
+		},
+		deleteBtn(payload) {
+			this.$store.commit(`remove${this.section}Btn`, payload);
+		},
+	},
+	computed: {
+		buttonsArr: {
+			get() {
+				return this.$store.state[this.section.toLowerCase() + "Config"].settings
+					.buttons.header;
+			},
+			set(value) {
+				this.$store.commit(`update${this.section}BtnOrder`, value);
+			},
+		},
+	},
 };
 </script>
 

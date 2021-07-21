@@ -22,31 +22,31 @@
 </template>
 
 <script>
-import ColorPicker from '../EmailEditor/ColorPicker.vue';
-import { mapState } from 'vuex';
+import ColorPicker from "../EmailEditor/ColorPicker.vue";
+import { mapState } from "vuex";
 
 export default {
-  components: {
-    ColorPicker,
-  },
-  methods: {
-    changePrimary(value) {
-      this.$store.commit('updateSDKConfig', {
-        colors: { ...this.$store.state.sdkConfig.colors, primary: value },
-      });
-    },
-    changeSecondary(value) {
-      this.$store.commit('updateSDKConfig', {
-        colors: { ...this.$store.state.sdkConfig.colors, secondary: value },
-      });
-    },
-  },
-  computed: {
-    ...mapState({
-      primaryColor: state => state.sdkConfig.colors.primary,
-      secondaryColor: state => state.sdkConfig.colors.secondary,
-    }),
-  },
+	components: {
+		ColorPicker,
+	},
+	methods: {
+		changePrimary(value) {
+			this.$store.commit("updateSDKConfig", {
+				colors: { ...this.$store.state.sdkConfig.colors, primary: value },
+			});
+		},
+		changeSecondary(value) {
+			this.$store.commit("updateSDKConfig", {
+				colors: { ...this.$store.state.sdkConfig.colors, secondary: value },
+			});
+		},
+	},
+	computed: {
+		...mapState({
+			primaryColor: state => state.sdkConfig.colors.primary,
+			secondaryColor: state => state.sdkConfig.colors.secondary,
+		}),
+	},
 };
 </script>
 

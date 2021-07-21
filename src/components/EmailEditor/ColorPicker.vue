@@ -35,46 +35,46 @@
 </template>
 
 <script>
-import { Sketch } from 'vue-color';
+import { Sketch } from "vue-color";
 
 export default {
-  name: 'ColorPickerInput',
-  components: {
-    'sketch-picker': Sketch,
-  },
-  props: {
-    value: {
-      required: true,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    disableVariables: {
-      type: Boolean,
-      default: false,
-    },
-    index: {
-      required: true,
-      type: Number,
-    },
-  },
-  methods: {
-    input() {
-      this.$emit('colorChange', this.color.hex);
-    },
-  },
-  mounted() {
-    this.color.hex = this.value;
-  },
-  data() {
-    return {
-      color: {
-        hex: '#194d33e',
-      },
-      colorPresets: [],
-      colorPickerModal: false,
-    };
-  },
+	name: "ColorPickerInput",
+	components: {
+		"sketch-picker": Sketch,
+	},
+	props: {
+		value: {
+			required: true,
+		},
+		label: {
+			type: String,
+			required: true,
+		},
+		disableVariables: {
+			type: Boolean,
+			default: false,
+		},
+		index: {
+			required: true,
+			type: Number,
+		},
+	},
+	methods: {
+		input() {
+			this.$emit("colorChange", this.color.hex);
+		},
+	},
+	mounted() {
+		this.color.hex = this.value;
+	},
+	data() {
+		return {
+			color: {
+				hex: "#194d33e",
+			},
+			colorPresets: [],
+			colorPickerModal: false,
+		};
+	},
 };
 </script>

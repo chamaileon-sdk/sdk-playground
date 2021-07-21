@@ -32,33 +32,33 @@
 </template>
 
 <script>
-import AddButton from '../AddButton.vue';
-import HeaderPreview from './HeaderPreview.vue';
-import OptionsWrapper from '../optionWrapper.vue';
-import List6 from '../List6.vue';
-import { mapMutations } from 'vuex';
+import AddButton from "../AddButton.vue";
+import HeaderPreview from "./HeaderPreview.vue";
+import OptionsWrapper from "../optionWrapper.vue";
+import List6 from "../List6.vue";
+import { mapMutations } from "vuex";
 
 export default {
-  components: {
-    AddButton,
-    HeaderPreview,
-    OptionsWrapper,
-    List6,
-  },
-  methods: {
-    ...mapMutations({
-      addBtn: 'addEditorBtn',
-      addDD: 'addEditorDropdown',
-    }),
-  },
-  data() {
-    return {
-      rules: {
-        required: value => !!value || 'Required.',
-        unique: value => !this.$store.state.editorConfig.idArr.includes(value),
-      },
-    };
-  },
+	components: {
+		AddButton,
+		HeaderPreview,
+		OptionsWrapper,
+		List6,
+	},
+	methods: {
+		...mapMutations({
+			addBtn: "addEditorBtn",
+			addDD: "addEditorDropdown",
+		}),
+	},
+	data() {
+		return {
+			rules: {
+				required: value => !!value || "Required.",
+				unique: value => !this.$store.state.editorConfig.idArr.includes(value),
+			},
+		};
+	},
 };
 </script>
 

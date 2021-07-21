@@ -102,16 +102,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'EditorHeader',
+	name: "EditorHeader",
 
-  computed: {
-    ...mapGetters({
-      buttons: 'getHeaderBtns',
-    }),
-  },
+	computed: {
+		...mapGetters({
+			buttons: "getHeaderBtns",
+		}),
+	},
 };
 </script>
 

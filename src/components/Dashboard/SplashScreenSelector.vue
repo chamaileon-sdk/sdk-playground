@@ -83,52 +83,52 @@
 </template>
 
 <script>
-const chamaileonLogo = require('chamaileon-logo');
+const chamaileonLogo = require("chamaileon-logo");
 
 export default {
-  data() {
-    return {
-      splashs: [
-        {
-          url:
-            'https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/splashScreen.html',
-        },
-      ],
-    };
-  },
-  computed: {
-    storedUrl() {
-      return this.$store.state.sdkConfig.urls.splashScreen;
-    },
-  },
-  directives: {
-    chamaileonLogoNoText: {
-      inserted: function(el) {
-        let logo = chamaileonLogo();
-        logo.style.height = '100%';
-        el.appendChild(logo);
-      },
-    },
-  },
-  methods: {
-    hoverOnSplashContainer(e, url) {
-      let x = e.target;
-      let y = x.querySelector('iframe');
-      y.src = url;
-    },
+	data() {
+		return {
+			splashs: [
+				{
+					url:
+            "https://chamaileon-sdk.github.io/splashscreen-and-logo-examples/splashScreen.html",
+				},
+			],
+		};
+	},
+	computed: {
+		storedUrl() {
+			return this.$store.state.sdkConfig.urls.splashScreen;
+		},
+	},
+	directives: {
+		chamaileonLogoNoText: {
+			inserted: function(el) {
+				let logo = chamaileonLogo();
+				logo.style.height = "100%";
+				el.appendChild(logo);
+			},
+		},
+	},
+	methods: {
+		hoverOnSplashContainer(e, url) {
+			let x = e.target;
+			let y = x.querySelector("iframe");
+			y.src = url;
+		},
 
-    changeSplash(value) {
-      this.$store.commit('updateSDKConfig', {
-        urls: { ...this.$store.state.sdkConfig.urls, splashScreen: value },
-      });
-    },
+		changeSplash(value) {
+			this.$store.commit("updateSDKConfig", {
+				urls: { ...this.$store.state.sdkConfig.urls, splashScreen: value },
+			});
+		},
 
-    calculateOpacity(url) {
-      if (url === this.storedUrl) return 'opacity: 1; transition: 200ms;';
+		calculateOpacity(url) {
+			if (url === this.storedUrl) return "opacity: 1; transition: 200ms;";
 
-      return 'opacity: 0.5; transition: 200ms;';
-    },
-  },
+			return "opacity: 0.5; transition: 200ms;";
+		},
+	},
 };
 </script>
 

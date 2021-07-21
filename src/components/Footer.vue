@@ -47,12 +47,12 @@
 
 <script>
 export default {
-  props: {
-    previous: { type: String, default: '' },
-    next: { type: String, default: '' },
-    prevTo: String,
-    nextTo: String,
-  },
+	props: {
+		previous: { type: String, default: "" },
+		next: { type: String, default: "" },
+		prevTo: String,
+		nextTo: String,
+	},
 };
 </script>
 

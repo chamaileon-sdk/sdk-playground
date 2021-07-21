@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import OptionsWrapper from '../optionWrapper.vue';
-import LocaleSelector from './LocaleSelector.vue';
+import OptionsWrapper from "../optionWrapper.vue";
+import LocaleSelector from "./LocaleSelector.vue";
 
 export default {
-  components: {
-    LocaleSelector,
-    OptionsWrapper,
-  },
+	components: {
+		LocaleSelector,
+		OptionsWrapper,
+	},
 };
 </script>
 

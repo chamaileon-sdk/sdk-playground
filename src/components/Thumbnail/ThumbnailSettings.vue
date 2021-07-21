@@ -67,36 +67,36 @@
 </template>
 
 <script>
-import OptionWrapper from '../optionWrapper.vue';
+import OptionWrapper from "../optionWrapper.vue";
 
 export default {
-  mounted() {
-    this.openThumbnail();
-  },
-  data() {
-    return {
-      width: 320,
-      height: 240,
-      scale: 1,
-      scroll: false,
-    };
-  },
-  components: {
-    OptionWrapper,
-  },
-  methods: {
-    openThumbnail() {
-      document.getElementById('email-thumbnail').innerHTML = '';
-      this.$store.state.sdk.createThumbnail({
-        document: this.$store.getters.getEmail, // email document JSON
-        container: '#email-thumbnail',
-        height: this.height,
-        width: this.width,
-        scale: this.scale, // the real size will be 320x240 in this case
-        scroll: this.scroll,
-      });
-    },
-  },
+	mounted() {
+		this.openThumbnail();
+	},
+	data() {
+		return {
+			width: 320,
+			height: 240,
+			scale: 1,
+			scroll: false,
+		};
+	},
+	components: {
+		OptionWrapper,
+	},
+	methods: {
+		openThumbnail() {
+			document.getElementById("email-thumbnail").innerHTML = "";
+			this.$store.state.sdk.createThumbnail({
+				document: this.$store.getters.getEmail, // email document JSON
+				container: "#email-thumbnail",
+				height: this.height,
+				width: this.width,
+				scale: this.scale, // the real size will be 320x240 in this case
+				scroll: this.scroll,
+			});
+		},
+	},
 };
 </script>
 
