@@ -1,6 +1,6 @@
 <template>
 	<v-card
-		class="rounded-0 text-wrap pa-10 ma-0"
+		class="rounded-0 text-wrap pa-0 ma-0"
 		width="100%"
 		height="100%"
 		dark
@@ -25,9 +25,11 @@ export default {
 
 <style>
 .hljs {
+	padding: 40px !important;
 	display: block;
-	width: 100%;
+	height: 100vh;
 	background: transparent;
+	overflow-y: auto;
 }
 
 code {
