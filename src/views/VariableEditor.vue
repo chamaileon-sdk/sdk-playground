@@ -1,23 +1,21 @@
 <template>
-	<v-lazy>
-		<v-app>
-			<SectionObserver>
-				<div class="section" id="header">
-					<Header />
-				</div>
+	<v-app>
+		<SectionObserver>
+			<div class="section" id="header">
+				<Header />
+			</div>
 
-				<div class="section" id="footer">
-					<Footer />
-				</div>
+			<div class="section" id="footer">
+				<Footer />
+			</div>
 
-				<div class="section" id="text-insert">
-					<TextInsert />
-				</div>
-			</SectionObserver>
-			<NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
-			<OpenButton @openEditorClicked="openEditor" />
-		</v-app>
-	</v-lazy>
+			<div class="section" id="text-insert">
+				<TextInsert />
+			</div>
+		</SectionObserver>
+		<NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
+		<OpenButton @openEditorClicked="openEditor" />
+	</v-app>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <slot />
-  </div>
+	<div>
+		<slot />
+	</div>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
 
 		const sections = document.querySelectorAll(".section");
 
-		sections.forEach(c => this.observer.observe(c));
+		sections.forEach((c) => this.observer.observe(c));
 	},
 	destroyed() {
 		this.observer.disconnect();
@@ -27,7 +27,7 @@ export default {
 	methods: {
 		handleIntersect(e) {
 			let inserted = false;
-			e.forEach(c => {
+			e.forEach((c) => {
 				if (c.isIntersecting && !inserted) {
 					window.history.pushState(
 						null,

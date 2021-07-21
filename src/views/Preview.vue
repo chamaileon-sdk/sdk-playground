@@ -1,20 +1,18 @@
 <template>
-	<v-lazy>
-		<v-app>
-			<SectionObserver>
-				<div class="section" id="header">
-					<Header :actLogoCreator="this.creatorFunction" />
-				</div>
-			</SectionObserver>
-			<Footer
-				:previous="'Email Thumbnail'"
-				:prevTo="'/emailthumbnail'"
-				:next="'Email Editor'"
-				:nextTo="'/emaileditor'"
-			/>
-			<OpenButton @openEditorClicked="openEditor" />
-		</v-app>
-	</v-lazy>
+	<v-app>
+		<SectionObserver>
+			<div class="section" id="header">
+				<Header :actLogoCreator="this.creatorFunction" />
+			</div>
+		</SectionObserver>
+		<Footer
+			:previous="'Email Thumbnail'"
+			:prevTo="'/emailthumbnail'"
+			:next="'Email Editor'"
+			:nextTo="'/emaileditor'"
+		/>
+		<OpenButton @openEditorClicked="openEditor" />
+	</v-app>
 </template>
 
 <script>
