@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header :actLogoCreator="this.creatorFunction" />
@@ -12,10 +12,11 @@
 			:nextTo="'/emaileditor'"
 		/>
 		<OpenButton @openEditorClicked="openEditor" />
-	</v-app>
+	</Wrapper>
 </template>
 
 <script>
+import Wrapper from "../components/AppRouterViewContainer.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Header from "../components/Preview/PreviewButtons.vue";
@@ -27,6 +28,7 @@ export default {
 		Footer,
 		SectionObserver,
 		OpenButton,
+		Wrapper,
 	},
 
 	methods: {
@@ -43,6 +45,12 @@ export default {
 
 	destroyed() {
 		window.chamaileonSdk.destroy;
+	},
+
+	data() {
+		return {
+			code: "console.log(\"Preview\")",
+		};
 	},
 };
 </script>

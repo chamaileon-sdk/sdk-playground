@@ -3,24 +3,7 @@
 		<MenuReworked />
 
 		<v-main>
-			<v-row class="pa-0 ma-0">
-				<v-col class="px-16 pa-0" cols="8">
-					<div class="px-16">
-						<router-view />
-					</div>
-				</v-col>
-				<v-col class="pa-0" cols="4">
-					<v-card
-						style="position: fixed"
-						class="rounded-0"
-						width="100%"
-						height="100%"
-						dark
-						flat
-					>
-					</v-card>
-				</v-col>
-			</v-row>
+			<router-view />
 		</v-main>
 	</v-app>
 </template>

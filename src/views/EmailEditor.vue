@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<Wrapper :code="code">
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header />
@@ -32,10 +32,11 @@
 			:nextTo="'/variableeditor'"
 		/>
 		<OpenButton @openEditorClicked="openEditor" />
-	</v-app>
+	</Wrapper>
 </template>
 
 <script>
+import Wrapper from "../components/AppRouterViewContainer.vue";
 import OpenButton from "../components/BaseOpenButton.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
@@ -65,6 +66,7 @@ export default {
 		Addons,
 		Settings,
 		OpenButton,
+		Wrapper,
 	},
 
 	methods: {
@@ -88,6 +90,12 @@ export default {
 	computed: {
 		...mapState(["sdk"]),
 		...mapGetters(["getConfigObject"]),
+	},
+
+	data() {
+		return {
+			code: "console.log(\"EmailEditor\")",
+		};
 	},
 };
 </script>
