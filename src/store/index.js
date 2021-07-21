@@ -23,9 +23,9 @@ export default new Vuex.Store({
 			locale: "en",
 			urls: {
 				splashScreen:
-          "https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html",
+					"https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html",
 				createLogoJS:
-          "https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js",
+					"https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js",
 			},
 			colors: {
 				primary: "#000000",
@@ -85,7 +85,7 @@ export default new Vuex.Store({
 			let i = styles.length - 1;
 			while (
 				i >= 0 &&
-        styles[i].innerHTML.includes("chamaileon-plugin-wrapper iframe")
+				styles[i].innerHTML.includes("chamaileon-plugin-wrapper iframe")
 			)
 				i--;
 			console.log(styles[i]);
@@ -157,13 +157,19 @@ export default new Vuex.Store({
 			let out = {};
 
 			out.document = state.document;
-			out.settings = state.variableEditorConfig.settings;
+			out.settings = JSON.parse(
+				JSON.stringify(state.variableEditorConfig.settings)
+			);
+
+			out.settings.buttons.header.left = [
+				{ id: "close", label: "close", icon: "mdi-arrow-left" },
+				...out.settings.buttons.header.left,
+			];
 
 			let varsToEdit = state.document.variables.map((c) => c.name);
 
 			out.settings.variablesToEdit = varsToEdit;
 
-			console.log(out);
 			return out;
 		},
 

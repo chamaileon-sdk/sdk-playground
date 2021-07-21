@@ -44,10 +44,19 @@ export default {
 		OpenButton,
 	},
 	methods: {
-		openEditor() {
-			this.$store.state.sdk.editVariables({
+		async openEditor() {
+			const variableEditor = await this.$store.state.sdk.editVariables({
 				...this.$store.getters.getVariableEditorConfigObject,
-				hooks: {},
+				hooks: {
+					onButtonClicked: async ({ buttonId }) => {
+						if (buttonId === "close") {
+							const newJson = await variableEditor.getDocument();
+							this.$store.commit("updateDocument", newJson);
+							//exampleJsonTextArea.value = JSON.stringify(newJson);
+							variableEditor.close();
+						}
+					},
+				},
 			});
 		},
 	},
