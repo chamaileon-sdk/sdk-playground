@@ -37,10 +37,27 @@ export default {
 		Language,
 		Wrapper,
 	},
-	data() {
-		return {
-			code: "console.log(\"Dashboard\")",
-		};
+	computed: {
+		config() {
+			return this.$store.state.sdkConfig;
+		},
+		code() {
+			return `const chamaileonPlugins = await window.chamaileonSdk.init({
+    mode: "serverless",
+    accessToken: accessToken,
+    whitelabel: {
+        locale: '${this.config.locale}',
+        urls: {
+            splashScreen: "${this.config.urls.splashScreen}",
+            createLogoJS: "${this.config.urls.createLogoJS}"
+        },
+        colors: {
+            primary: "${this.config.colors.primary}",
+            secondary: "${this.config.colors.secondary}",
+        }
+    }
+});`;
+		},
 	},
 };
 </script>

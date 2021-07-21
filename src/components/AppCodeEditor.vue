@@ -1,13 +1,17 @@
 <template>
 	<v-card
-		style="position: fixed"
-		class="rounded-0"
+		class="rounded-0 text-wrap pa-10 ma-0"
 		width="100%"
 		height="100%"
 		dark
 		flat
 	>
-		<highlight-code lang="javascript" :code="code" />
+		<highlight-code
+			style="position: fixed"
+			class="pa-0"
+			lang="javascript"
+			:code="code"
+		/>
 	</v-card>
 </template>
 
@@ -19,4 +23,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.hljs {
+	display: block;
+	width: 100%;
+	background: transparent;
+}
+
+code {
+	background-color: transparent !important;
+	white-space: pre-wrap;
+	overflow: auto;
+}
+</style>
