@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<Wrapper>
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header />
@@ -15,10 +15,11 @@
 		</SectionObserver>
 		<NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
 		<OpenButton @openEditorClicked="openEditor" />
-	</v-app>
+	</Wrapper>
 </template>
 
 <script>
+import Wrapper from "../components/AppRouterViewContainer.vue";
 import OpenButton from "../components/BaseOpenButton.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Header from "../components/VariableEditor/Header.vue";
@@ -40,6 +41,7 @@ export default {
 		TextInsert,
 		SectionObserver,
 		OpenButton,
+		Wrapper,
 	},
 	methods: {
 		async openEditor() {

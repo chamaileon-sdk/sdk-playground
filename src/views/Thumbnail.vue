@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<Wrapper>
 		<SectionObserver>
 			<div class="section" id="settings">
 				<Settings />
@@ -11,10 +11,11 @@
 			:next="'Email Preview'"
 			:nextTo="'/emailpreview'"
 		/>
-	</v-app>
+	</Wrapper>
 </template>
 
 <script>
+import Wrapper from "../components/AppRouterViewContainer.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Settings from "../components/Thumbnail/ThumbnailSettings.vue";
@@ -30,6 +31,7 @@ export default {
 		Settings,
 		SectionObserver,
 		Footer,
+		Wrapper,
 	},
 };
 </script>
