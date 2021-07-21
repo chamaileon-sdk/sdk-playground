@@ -189,10 +189,48 @@ export default {
 					label: '${c.label}',
 					color: '${c.color}',
 					style: '${c.style}'${
-	c.items
-		? `,\n\t\t\t\t\titems: '${this.calculateDDItems(c.items)}'`
-		: ""
+	c.items ? `,\n\t\t\t\t\titems: ${this.calculateDDItems(c.items)}` : ""
 }
+				},`;
+			});
+			literal += `
+			]`;
+			return literal;
+		},
+
+		calculateBlockLibs() {
+			let literal = "";
+			let arr = this.config.blockLibraries;
+
+			if (arr.length === 0) return "[]";
+
+			literal += "[";
+			arr.forEach((c) => {
+				literal += `
+				{
+					id: '${c.id}',
+					label: '${c.label}',
+					accessLevel: '${c.accessLevel}'
+				},`;
+			});
+			literal += `
+			]`;
+			return literal;
+		},
+
+		calculateTextInsert() {
+			let literal = "";
+			let arr = this.config.settings.buttons.textInsert;
+
+			if (arr.length === 0) return "[]";
+
+			literal += "[";
+			arr.forEach((c) => {
+				literal += `
+				{
+					id: '${c.id}',
+					label: '${c.label}',
+					icon: '${c.icon}'
 				},`;
 			});
 			literal += `
@@ -211,15 +249,15 @@ export default {
         avatar: "${this.config.user.avatar}"
     }`
 		: "false"
-} ,
+},
     settings: {
         staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
         buttons: {
             header: ${this.calculateHeader},
-            textInsert: []
+            textInsert: ${this.calculateTextInsert}
         },
         elements: ${this.calculateElements},
-        blockLibraries: [],
+        blockLibraries: ${this.calculateBlockLibs},
         addons: {
             blockLock: ${this.calculateBL},
             variableSystem: ${this.calculateVE}
