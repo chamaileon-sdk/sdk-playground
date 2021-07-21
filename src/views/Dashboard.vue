@@ -46,15 +46,15 @@ export default {
     mode: "serverless",
     accessToken: accessToken,
     whitelabel: {
-        locale: '${this.config.locale}',
-        urls: {
-            splashScreen: "${this.config.urls.splashScreen}",
+		urls: {
             createLogoJS: "${this.config.urls.createLogoJS}"
+			splashScreen: "${this.config.urls.splashScreen}",
         },
         colors: {
-            primary: "${this.config.colors.primary}",
+			primary: "${this.config.colors.primary}",
             secondary: "${this.config.colors.secondary}",
         }
+		locale: '${this.config.locale}',
     }
 });`;
 		},

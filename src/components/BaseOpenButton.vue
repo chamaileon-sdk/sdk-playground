@@ -62,7 +62,7 @@ export default {
 		setTimeout(() => {
 			document.querySelector(".openbtn").style.opacity = "";
 			document.querySelector(".openbtnl").style.opacity = "";
-		}, 1000);
+		}, 2000);
 	},
 
 	methods: {
