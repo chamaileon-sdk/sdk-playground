@@ -60,10 +60,130 @@ export default {
 			});
 		},
 	},
-	data() {
-		return {
-			code: "console.log(\"VariableEditor\")",
-		};
+	computed: {
+		config() {
+			return this.$store.getters.getVariableEditorConfigObject;
+		},
+
+		calculateHeaderLeft() {
+			let literal = "";
+			let arr = this.config.settings.buttons.header.left;
+
+			if (arr.length === 0) return "[]";
+
+			literal += `[
+				/*It's not necessary to have a close button, 
+				but otherwise there is no way to exit the app*/`;
+			arr.forEach((c) => {
+				literal += `
+					{
+						id: '${c.id}',
+						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
+					},`;
+			});
+			literal += `
+				]`;
+			return literal;
+		},
+
+		calculateHeaderRight() {
+			let literal = "";
+			let arr = this.config.settings.buttons.header.right;
+
+			if (arr.length === 0) return "[]";
+
+			literal += "[";
+			arr.forEach((c) => {
+				literal += `
+					{
+						id: '${c.id}',
+						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
+					},`;
+			});
+			literal += `
+				]`;
+			return literal;
+		},
+
+		calculateFooterRight() {
+			let literal = "";
+			let arr = this.config.settings.buttons.footer.right;
+
+			if (arr.length === 0) return "[]";
+
+			literal += "[";
+			arr.forEach((c) => {
+				literal += `
+					{
+						id: '${c.id}',
+						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
+					},`;
+			});
+			literal += `
+				]`;
+			return literal;
+		},
+
+		calculateFooterLeft() {
+			let literal = "";
+			let arr = this.config.settings.buttons.footer.left;
+
+			if (arr.length === 0) return "[]";
+
+			literal += "[";
+			arr.forEach((c) => {
+				literal += `
+					{
+						id: '${c.id}',
+						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
+					},`;
+			});
+			literal += `
+				]`;
+			return literal;
+		},
+
+		calculateTextInsert() {
+			let literal = "";
+			let arr = this.config.settings.buttons.textInsertPlugin;
+
+			if (arr.length === 0) return "[]";
+
+			literal += "[";
+			arr.forEach((c) => {
+				literal += `
+				{
+					id: '${c.id}',
+					label: '${c.label}',
+					icon: '${c.icon}'
+				},`;
+			});
+			literal += `
+			]`;
+			return literal;
+		},
+
+		code() {
+			return `const variableEditorConfig = {
+    document: {},
+    settings: {
+        variablesToEdit: ['varName1', 'varName2'],
+        buttons: {
+            header: {
+                left: ${this.calculateHeaderLeft},
+                right: ${this.calculateHeaderRight},
+            },
+            footer: {
+                left: ${this.calculateFooterLeft},
+                right: ${this.calculateFooterRight},
+            },
+            textInsertPlugin: ${this.calculateTextInsert}
+    },
+    hooks: {}
+};
+
+const variableEditorInstance = await chamaileonPlugins.editVariables(variableEditorConfig)`;
+		},
 	},
 };
 </script>

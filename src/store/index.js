@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import editorConfig from "./modules/emailEditorConfig";
 import previewConfig from "./modules/preview";
 import variableEditorConfig from "./modules/variableEditor";
+import thumbnailConfig from "./modules/thumbnail";
 import document from "./modules/emailDocument";
 
 Vue.use(Vuex);
@@ -14,6 +15,7 @@ export default new Vuex.Store({
 		previewConfig,
 		variableEditorConfig,
 		document,
+		thumbnailConfig,
 	},
 	state: {
 		apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
