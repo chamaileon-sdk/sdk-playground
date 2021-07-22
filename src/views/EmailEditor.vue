@@ -263,6 +263,7 @@ export default {
             variableSystem: ${this.calculateVE}
         }
     },
+	autoSaveInterval: ${this.config.autoSaveInterval},
     hooks: {}
 });`;
 		},
