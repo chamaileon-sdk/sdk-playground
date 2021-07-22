@@ -180,7 +180,9 @@ export default {
             textInsertPlugin: ${this.calculateTextInsert}
     },
     hooks: {}
-};`;
+};
+
+const variableEditorInstance = await chamaileonPlugins.editVariables(variableEditorConfig)`;
 		},
 	},
 };
