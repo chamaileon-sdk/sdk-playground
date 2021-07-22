@@ -78,7 +78,6 @@ export default {
 
 	methods: {
 		copyToClipboard(str) {
-			console.log("copy");
 			const el = document.createElement("textarea");
 			el.value = str;
 			el.setAttribute("readonly", "");

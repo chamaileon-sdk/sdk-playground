@@ -31,12 +31,12 @@
 			:next="'Variable Editor'"
 			:nextTo="'/variableeditor'"
 		/>
-		<!--<OpenButton @openEditorClicked="openEditor" />-->
+		<OpenButton @openEditorClicked="openEditor" />
 	</div>
 </template>
 
 <script>
-//import OpenButton from "../components/BaseOpenButton.vue";
+import OpenButton from "../components/BaseOpenButton.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Header from "../components/EmailEditor/Header";
@@ -64,7 +64,7 @@ export default {
 		TextInsert,
 		Addons,
 		Settings,
-		//OpenButton,
+		OpenButton,
 	},
 
 	methods: {
