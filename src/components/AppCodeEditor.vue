@@ -1,12 +1,5 @@
 <template>
-	<v-card
-		class="rounded-0 pa-0 ma-0"
-		width="100%"
-		height="100vh"
-		dark
-		fixed
-		flat
-	>
+	<v-card class="rounded-0 pa-0 ma-0" width="100%" dark fixed flat>
 		<v-tabs v-model="tab" :show-arrows="true" dark>
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> JavaScript </v-tab>
@@ -18,7 +11,6 @@
 			v-if="tab === 0"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
-			height="100vh"
 			dark
 			fixed
 			flat
@@ -31,7 +23,6 @@
 				v-if="tab === 1"
 				class="rounded-0 pa-0 ma-0"
 				width="100%"
-				height="100vh"
 				dark
 				fixed
 				flat
@@ -44,7 +35,6 @@
 			v-if="tab === 2"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
-			height="100vh"
 			dark
 			fixed
 			flat

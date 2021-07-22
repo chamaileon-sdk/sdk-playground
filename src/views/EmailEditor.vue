@@ -1,5 +1,5 @@
 <template>
-	<Wrapper :code="code">
+	<div>
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header />
@@ -31,13 +31,12 @@
 			:next="'Variable Editor'"
 			:nextTo="'/variableeditor'"
 		/>
-		<OpenButton @openEditorClicked="openEditor" />
-	</Wrapper>
+		<!--<OpenButton @openEditorClicked="openEditor" />-->
+	</div>
 </template>
 
 <script>
-import Wrapper from "../components/AppRouterViewContainer.vue";
-import OpenButton from "../components/BaseOpenButton.vue";
+//import OpenButton from "../components/BaseOpenButton.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Header from "../components/EmailEditor/Header";
@@ -65,8 +64,7 @@ export default {
 		TextInsert,
 		Addons,
 		Settings,
-		OpenButton,
-		Wrapper,
+		//OpenButton,
 	},
 
 	methods: {
