@@ -1,5 +1,5 @@
 <template>
-	<Wrapper :code="code">
+	<div>
 		<SectionObserver>
 			<div class="section" id="sdklogo">
 				<Logo />
@@ -15,11 +15,10 @@
 			</div>
 		</SectionObserver>
 		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
-	</Wrapper>
+	</div>
 </template>
 
 <script>
-import Wrapper from "../components/AppRouterViewContainer.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Logo from "../components/Dashboard/Logo.vue";
@@ -35,7 +34,6 @@ export default {
 		Colors,
 		SplashScreen,
 		Language,
-		Wrapper,
 	},
 	computed: {
 		config() {

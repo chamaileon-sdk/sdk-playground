@@ -20,7 +20,7 @@
 						style="width: 100px"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						open preview
+						preview changes
 					</div>
 				</v-btn>
 			</div>
@@ -45,7 +45,7 @@
 						style="width: 100px"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						open preview
+						preview changes
 					</div>
 				</v-btn>
 			</div>
