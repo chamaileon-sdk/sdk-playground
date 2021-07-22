@@ -1,6 +1,10 @@
 <template>
 	<Wrapper :code="code">
 		<SectionObserver>
+			<div class="section" id="variablestoedit">
+				<VariablesToEdit />
+			</div>
+
 			<div class="section" id="header">
 				<Header />
 			</div>
@@ -25,6 +29,7 @@ import SectionObserver from "../components/SectionObserver.vue";
 import Header from "../components/VariableEditor/Header.vue";
 import Footer from "../components/VariableEditor/Footer.vue";
 import TextInsert from "../components/VariableEditor/TextInsert.vue";
+import VariablesToEdit from "../components/VariableEditor/VariablesToEdit.vue";
 import NavFooter from "../components/Footer.vue";
 
 export default {
@@ -42,6 +47,7 @@ export default {
 		SectionObserver,
 		OpenButton,
 		Wrapper,
+		VariablesToEdit,
 	},
 	methods: {
 		async openEditor() {
@@ -63,6 +69,17 @@ export default {
 	computed: {
 		config() {
 			return this.$store.getters.getVariableEditorConfigObject;
+		},
+
+		calculateVariables() {
+			let out = "";
+
+			this.config.settings.variablesToEdit.forEach((c) => {
+				out += `"${c}",`;
+			});
+
+			out = out.slice(0, -1);
+			return out;
 		},
 
 		calculateHeaderLeft() {
@@ -167,7 +184,7 @@ export default {
 			return `const variableEditorConfig = {
     document: {},
     settings: {
-        variablesToEdit: ['varName1', 'varName2'],
+        variablesToEdit: [${this.calculateVariables}],
         buttons: {
             header: {
                 left: ${this.calculateHeaderLeft},

@@ -141,6 +141,11 @@ export default {
 				to: "variableeditor",
 				children: [
 					{
+						title: "Variables To Edit",
+						icon: "variable",
+						to: "#variablestoedit",
+					},
+					{
 						title: "Header",
 						icon: "border-top-variant",
 						to: "#header",

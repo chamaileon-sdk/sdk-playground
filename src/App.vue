@@ -2,6 +2,10 @@
 	<v-app>
 		<MenuReworked />
 
+		<v-navigation-drawer permanent app right width="30%">
+			<CodeEditor :code="'console.log(app)'" />
+		</v-navigation-drawer>
+
 		<v-main>
 			<router-view />
 		</v-main>
@@ -9,11 +13,13 @@
 </template>
 
 <script>
+import CodeEditor from "./components/AppCodeEditor.vue";
 import MenuReworked from "./components/MenuReworked.vue";
 
 export default {
 	components: {
 		MenuReworked,
+		CodeEditor,
 	},
 	created() {
 		this.$store.commit("updateSDKConfig", {
