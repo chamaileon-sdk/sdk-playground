@@ -168,9 +168,13 @@ export default new Vuex.Store({
 				...out.settings.buttons.header.left,
 			];
 
-			let varsToEdit = state.document.variables.map((c) => c.name);
+			let tmpArr = [];
 
-			out.settings.variablesToEdit = varsToEdit;
+			out.settings.variablesToEdit.forEach((c) => {
+				if (c.edit) tmpArr.push(c.name);
+			});
+
+			out.settings.variablesToEdit = tmpArr;
 
 			return out;
 		},

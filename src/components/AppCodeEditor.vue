@@ -2,8 +2,9 @@
 	<v-card
 		class="rounded-0 text-wrap pa-0 ma-0"
 		width="100%"
-		height="100%"
+		height="100vh"
 		dark
+		fixed
 		flat
 	>
 		<v-card class="copyCard rounded-pill" elevation="0" v-show="snackbar"
@@ -14,12 +15,7 @@
 		<v-btn icon large class="copyToClipboard" @click="copyToClipboard(code)"
 			><v-icon>mdi-clipboard-file-outline</v-icon></v-btn
 		>
-		<highlight-code
-			style="position: fixed"
-			class="pa-0"
-			lang="javascript"
-			:code="code"
-		/>
+		<highlight-code class="pa-0" lang="javascript" :code="code" />
 	</v-card>
 </template>
 

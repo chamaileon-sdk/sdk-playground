@@ -22,6 +22,28 @@ export default {
 		},
 	}),
 	mutations: {
+		resetVariablesToEditArray(state, array) {
+			state.settings.variablesToEdit = [];
+			array.forEach((c) => {
+				state.settings.variablesToEdit.push({
+					name: c.name,
+					edit: true,
+				});
+			});
+		},
+
+		addVariableToEdit(state, variable) {
+			state.settings.variablesToEdit.push({
+				name: variable,
+				edit: true,
+			});
+		},
+
+		toggleVariableToEdit(state, index) {
+			state.settings.variablesToEdit[index].edit =
+				!state.settings.variablesToEdit[index].edit;
+		},
+
 		//Left
 		updateVariableEditorHeaderLeftOrder(state, payload) {
 			state.settings.buttons.header.left = payload;

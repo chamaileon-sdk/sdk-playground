@@ -6,7 +6,7 @@
 			</div>
 		</v-col>
 		<v-col class="ma-0 pa-0" cols="4">
-			<CodeEditor :code="code" />
+			<CodeEditor class="editorContainer" :code="code" />
 		</v-col>
 	</v-row>
 </template>
@@ -24,4 +24,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.editorContainer {
+	position: fixed;
+	right: 0;
+	width: calc((100% - 256px) * 0.3333) !important;
+}
+</style>
