@@ -35,28 +35,6 @@ export default {
 		SplashScreen,
 		Language,
 	},
-	computed: {
-		config() {
-			return this.$store.state.sdkConfig;
-		},
-		code() {
-			return `const chamaileonPlugins = await window.chamaileonSdk.init({
-    mode: "serverless",
-    accessToken: accessToken,
-    whitelabel: {
-		urls: {
-            createLogoJS: "${this.config.urls.createLogoJS}"
-			splashScreen: "${this.config.urls.splashScreen}",
-        },
-        colors: {
-			primary: "${this.config.colors.primary}",
-            secondary: "${this.config.colors.secondary}",
-        }
-		locale: '${this.config.locale}',
-    }
-});`;
-		},
-	},
 };
 </script>
 

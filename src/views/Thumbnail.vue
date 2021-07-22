@@ -31,22 +31,6 @@ export default {
 		SectionObserver,
 		Footer,
 	},
-
-	computed: {
-		config() {
-			return this.$store.getters.getThumbnailSettings;
-		},
-		code() {
-			return `const thumbnailInstance = await chamaileonPlugins.createThumbnail({
-    document: {}, 
-    container: "${this.config.container}", //Can change it in your code
-    width: ${this.config.width},
-    height: ${this.config.height},
-    scale: ${this.config.scale}
-    scroll: ${this.config.scroll},
-});`;
-		},
-	},
 };
 </script>
 

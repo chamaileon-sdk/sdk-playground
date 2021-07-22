@@ -36,6 +36,10 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
+		updateCode(state, newCode) {
+			state.code = newCode;
+		},
+
 		changeLogoFunction(state, fn) {
 			state.logoCreatorFunction = fn;
 		},

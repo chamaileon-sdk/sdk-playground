@@ -12,7 +12,13 @@
 			</div>
 		</v-main>
 
-		<v-navigation-drawer width="30.873%" app right permanent>
+		<v-navigation-drawer
+			class="hideScrollY"
+			width="30.873%"
+			app
+			right
+			permanent
+		>
 			<CodeEditor />
 		</v-navigation-drawer>
 	</v-app>
@@ -74,6 +80,10 @@ html::-webkit-scrollbar {
 	/*padding: 96px 0;*/
 	padding: 70px 0;
 	min-height: 100vh;
+}
+
+.hideScrollY .v-navigation-drawer__content {
+	overflow-y: hidden !important;
 }
 
 h1 {
