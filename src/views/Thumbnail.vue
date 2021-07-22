@@ -1,5 +1,5 @@
 <template>
-	<Wrapper :code="code">
+	<div>
 		<SectionObserver>
 			<div class="section" id="settings">
 				<Settings />
@@ -11,11 +11,10 @@
 			:next="'Email Preview'"
 			:nextTo="'/emailpreview'"
 		/>
-	</Wrapper>
+	</div>
 </template>
 
 <script>
-import Wrapper from "../components/AppRouterViewContainer.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
 import Settings from "../components/Thumbnail/ThumbnailSettings.vue";
@@ -31,23 +30,6 @@ export default {
 		Settings,
 		SectionObserver,
 		Footer,
-		Wrapper,
-	},
-
-	computed: {
-		config() {
-			return this.$store.getters.getThumbnailSettings;
-		},
-		code() {
-			return `const thumbnailInstance = await chamaileonPlugins.createThumbnail({
-    document: {}, 
-    container: "${this.config.container}", //Can change it in your code
-    width: ${this.config.width},
-    height: ${this.config.height},
-    scale: ${this.config.scale}
-    scroll: ${this.config.scroll},
-});`;
-		},
 	},
 };
 </script>

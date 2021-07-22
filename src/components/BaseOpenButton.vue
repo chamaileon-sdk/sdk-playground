@@ -20,7 +20,7 @@
 						style="width: 100px"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						open preview
+						preview changes
 					</div>
 				</v-btn>
 			</div>
@@ -45,7 +45,7 @@
 						style="width: 100px"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						open preview
+						preview changes
 					</div>
 				</v-btn>
 			</div>
@@ -83,8 +83,9 @@ export default {
 	width: 128px;
 	position: fixed;
 	bottom: 0;
-	right: 33.33%;
-	margin-right: -85px;
+	right: 30.873%;
+	transform: translateX(-0%);
+	z-index: 5;
 
 	transition: opacity 0.2s ease-in-out;
 }
@@ -102,7 +103,7 @@ export default {
 	width: 128px;
 	position: fixed;
 	bottom: 0;
-	left: 256px;
+	left: 19.127%;
 
 	transition: opacity 0.2s ease-in-out;
 }

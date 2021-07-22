@@ -1,19 +1,37 @@
 <template>
 	<v-app>
-		<MenuReworked />
+		<v-navigation-drawer width="19.127%" app permanent>
+			<MenuReworked />
+		</v-navigation-drawer>
 
 		<v-main>
-			<router-view />
+			<div class="px-16 pa-0">
+				<div class="px-16">
+					<router-view />
+				</div>
+			</div>
 		</v-main>
+
+		<v-navigation-drawer
+			class="hideScrollY"
+			width="30.873%"
+			app
+			right
+			permanent
+		>
+			<CodeEditor />
+		</v-navigation-drawer>
 	</v-app>
 </template>
 
 <script>
+import CodeEditor from "./components/AppCodeEditor.vue";
 import MenuReworked from "./components/MenuReworked.vue";
 
 export default {
 	components: {
 		MenuReworked,
+		CodeEditor,
 	},
 	created() {
 		this.$store.commit("updateSDKConfig", {
@@ -42,10 +60,30 @@ html::-webkit-scrollbar {
 	height: 0;
 }
 
+.rightSection {
+	width: 30.873%;
+	height: 100vh;
+	right: 0;
+}
+
+.midSection {
+	width: 50%;
+}
+
+.leftSection {
+	width: 19.127%;
+	height: 100vh;
+	left: 0;
+}
+
 .section {
 	/*padding: 96px 0;*/
 	padding: 70px 0;
 	min-height: 100vh;
+}
+
+.hideScrollY .v-navigation-drawer__content {
+	overflow-y: hidden !important;
 }
 
 h1 {
@@ -56,4 +94,10 @@ h3 {
 	margin-top: 32px;
 	margin-bottom: 8px;
 }
+
+/*.editorContainer {
+	position: fixed;
+	right: 0;
+	width: calc((100% - 256px) * 0.3333) !important;
+}*/
 </style>
