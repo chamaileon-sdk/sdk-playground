@@ -35,11 +35,18 @@ export default {
 	},
 
 	computed: {
-		//config() {
-		//return this.$store.state.sdkConfig;
-		//},
+		config() {
+			return this.$store.getters.getThumbnailSettings;
+		},
 		code() {
-			return "console.log('Thumbnail')";
+			return `const thumbnailInstance = await chamaileonPlugins.createThumbnail({
+    document: {}, 
+    container: "${this.config.container}", //Can change it in your code
+    width: ${this.config.width},
+    height: ${this.config.height},
+    scale: ${this.config.scale}
+    scroll: ${this.config.scroll},
+});`;
 		},
 	},
 };
