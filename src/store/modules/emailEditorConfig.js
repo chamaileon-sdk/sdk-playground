@@ -10,7 +10,7 @@ export default {
 			enabled: true,
 			name: "Your Username",
 			avatar:
-        "https://www.indiewire.com/wp-content/uploads/2019/03/shutterstock_5885988bd.jpg",
+				"https://www.indiewire.com/wp-content/uploads/2019/03/shutterstock_5885988bd.jpg",
 		},
 		settings: {
 			buttons: {
@@ -44,18 +44,19 @@ export default {
 				icon: "table-lock",
 				id: "Block Lock",
 				description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.",
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.",
 				state: "disabled",
 			},
 			variableSystem: {
 				icon: "iframe-variable-outline",
 				id: "Variable System",
 				description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.",
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.",
 				state: "disabled",
 			},
 		},
 		autoSaveInterval: 15000,
+		hooks: {},
 	}),
 	mutations: {
 		addEditorBtn(state) {
@@ -73,28 +74,28 @@ export default {
 		},
 		removeEditorBtn(state, payload) {
 			state.settings.buttons.header = state.settings.buttons.header.filter(
-				c => {
+				(c) => {
 					if (c.id !== payload) return true;
 
 					if (c.items)
-						c.items.forEach(it => {
-							state.idArr = state.idArr.filter(id => id !== it.id);
+						c.items.forEach((it) => {
+							state.idArr = state.idArr.filter((id) => id !== it.id);
 						});
 
 					return false;
 				}
 			);
 
-			state.idArr = state.idArr.filter(c => c !== payload);
+			state.idArr = state.idArr.filter((c) => c !== payload);
 		},
 		updateEditorBtnOrder(state, payload) {
 			state.settings.buttons.header = payload;
 		},
 		updateEditorBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === payload.id) {
 					if ("newID" in payload) {
-						state.idArr = state.idArr.map(c => {
+						state.idArr = state.idArr.map((c) => {
 							if (c === payload.id) return payload.newID;
 
 							return c;
@@ -126,10 +127,10 @@ export default {
 		},
 
 		removeEditorDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === payload.id) {
-					c.items = c.items.filter(c => c.id !== payload.obj.id);
-					state.idArr = state.idArr.filter(c => c !== payload.obj.id);
+					c.items = c.items.filter((c) => c.id !== payload.obj.id);
+					state.idArr = state.idArr.filter((c) => c !== payload.obj.id);
 				}
 
 				return c;
@@ -137,7 +138,7 @@ export default {
 		},
 
 		addEditorDropdownBtn(state, id) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === id) {
 					c.items.push({
 						id: `yourBtn-${state.key}`,
@@ -154,12 +155,12 @@ export default {
 		},
 
 		updateEditorDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map(c => {
+			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
 				if (c.id === payload.id) {
-					c.items = c.items.map(i => {
+					c.items = c.items.map((i) => {
 						if (i.id === payload.obj.id) {
 							if ("newID" in payload.obj) {
-								state.idArr = state.idArr.map(c => {
+								state.idArr = state.idArr.map((c) => {
 									if (c === payload.obj.id) return payload.obj.newID;
 
 									return c;
@@ -181,8 +182,8 @@ export default {
 
 		//Elements
 		toggleElement(state, payload) {
-			state.settings.elements[payload.type][payload.element] = !state.settings
-				.elements[payload.type][payload.element];
+			state.settings.elements[payload.type][payload.element] =
+				!state.settings.elements[payload.type][payload.element];
 		},
 
 		//BlockLibs
@@ -198,19 +199,21 @@ export default {
 		},
 
 		removeBlockLibs(state, payload) {
-			state.blockLibraries = state.blockLibraries.filter(c => c.id !== payload);
+			state.blockLibraries = state.blockLibraries.filter(
+				(c) => c.id !== payload
+			);
 
-			state.blIDArr = state.blIDArr.filter(c => c !== payload);
+			state.blIDArr = state.blIDArr.filter((c) => c !== payload);
 		},
 
 		updateBlockLibsOrder(state, payload) {
 			state.blockLibraries = payload;
 		},
 		updateBlockLibs(state, payload) {
-			state.blockLibraries = state.blockLibraries.map(c => {
+			state.blockLibraries = state.blockLibraries.map((c) => {
 				if (c.id === payload.id) {
 					if ("newID" in payload) {
-						state.blIDArr = state.blIDArr.map(c => {
+						state.blIDArr = state.blIDArr.map((c) => {
 							if (c === payload.id) return payload.newID;
 
 							return c;
@@ -231,11 +234,10 @@ export default {
 		},
 
 		deleteTextInsertButton(state, payload) {
-			state.settings.buttons.textInsert = state.settings.buttons.textInsert.filter(
-				c => c.id !== payload
-			);
+			state.settings.buttons.textInsert =
+				state.settings.buttons.textInsert.filter((c) => c.id !== payload);
 
-			state.tiIDArr = state.tiIDArr.filter(c => c != payload);
+			state.tiIDArr = state.tiIDArr.filter((c) => c != payload);
 		},
 
 		addTextInsertButton(state) {
@@ -250,10 +252,10 @@ export default {
 
 		updateTextInsertButton(state, payload) {
 			state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
-				c => {
+				(c) => {
 					if (c.id === payload.id) {
 						if (payload.newID) {
-							state.tiIDArr = state.tiIDArr.filter(c => c !== payload.id);
+							state.tiIDArr = state.tiIDArr.filter((c) => c !== payload.id);
 							state.tiIDArr.push(payload.newID);
 							return { ...c, id: payload.newID };
 						}
@@ -290,14 +292,14 @@ export default {
 
 	actions: {},
 	getters: {
-		getHeaderBtns: state => {
+		getHeaderBtns: (state) => {
 			return state.settings.buttons.header;
 		},
-		getElements: state => {
+		getElements: (state) => {
 			return state.settings.elements;
 		},
-		getBlockLibs: state => state.blockLibraries,
-		getAddonStateById: state => id => {
+		getBlockLibs: (state) => state.blockLibraries,
+		getAddonStateById: (state) => (id) => {
 			const obj = state.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === id) return obj[addon].state;

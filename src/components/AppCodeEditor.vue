@@ -1,21 +1,70 @@
 <template>
 	<v-card
-		class="rounded-0 text-wrap pa-0 ma-0"
+		class="rounded-0 pa-0 ma-0"
 		width="100%"
 		height="100vh"
 		dark
 		fixed
 		flat
 	>
-		<v-card class="copyCard rounded-pill" elevation="0" v-show="snackbar"
+		<v-tabs v-model="tab" :show-arrows="true" dark>
+			<v-tabs-slider color="yellow"></v-tabs-slider>
+			<v-tab> JavaScript </v-tab>
+			<v-tab> Document </v-tab>
+			<v-tab>Hooks</v-tab>
+		</v-tabs>
+
+		<v-card
+			v-if="tab === 0"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			height="100vh"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code class="pa-0" lang="javascript" :code="code" />
+		</v-card>
+
+		<v-lazy>
+			<v-card
+				v-if="tab === 1"
+				class="rounded-0 pa-0 ma-0"
+				width="100%"
+				height="100vh"
+				dark
+				fixed
+				flat
+			>
+				<highlight-code class="pa-0" lang="javascript" :code="doc" />
+			</v-card>
+		</v-lazy>
+
+		<v-card
+			v-if="tab === 2"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			height="100vh"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code class="pa-0" lang="javascript" :code="hooks" />
+		</v-card>
+
+		<v-card dark class="copyCard rounded-pill" elevation="0" v-show="snackbar"
 			><v-card-text class="pa-2 px-4 success--text"
 				>Code Copied to Clipboard</v-card-text
 			></v-card
 		>
-		<v-btn icon large class="copyToClipboard" @click="copyToClipboard(code)"
+		<v-btn
+			dark
+			icon
+			large
+			class="copyToClipboard"
+			@click="copyToClipboard(code)"
 			><v-icon>mdi-clipboard-file-outline</v-icon></v-btn
 		>
-		<highlight-code class="pa-0" lang="javascript" :code="code" />
 	</v-card>
 </template>
 
@@ -23,10 +72,18 @@
 export default {
 	data: () => ({
 		snackbar: false,
+		tab: 0,
 	}),
+
+	computed: {
+		doc() {
+			return JSON.stringify(this.$store.state.document, null, "  ");
+		},
+	},
 
 	props: {
 		code: String,
+		hooks: String,
 	},
 
 	methods: {
@@ -58,7 +115,7 @@ export default {
 	margin: 40px;
 	right: 0;
 	top: 0;
-	z-index: 1;
+	z-index: 2;
 	opacity: 0.15;
 }
 
@@ -74,7 +131,7 @@ export default {
 .hljs {
 	padding: 40px !important;
 	display: block;
-	height: 100vh;
+	height: calc(100vh - 48px);
 	background: transparent;
 	overflow-y: auto;
 }

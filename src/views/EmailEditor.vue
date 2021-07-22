@@ -264,7 +264,7 @@ export default {
         }
     },
 	autoSaveInterval: ${this.config.autoSaveInterval},
-    hooks: {}
+    hooks: hooks
 });`;
 		},
 	},

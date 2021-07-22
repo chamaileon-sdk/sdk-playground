@@ -6,7 +6,7 @@
 			</div>
 		</v-col>
 		<v-col class="ma-0 pa-0" cols="4">
-			<CodeEditor class="editorContainer" :code="code" />
+			<CodeEditor class="editorContainer" :code="code" :hooks="hooks" />
 		</v-col>
 	</v-row>
 </template>
@@ -20,6 +20,7 @@ export default {
 	},
 	props: {
 		code: String,
+		hooks: String,
 	},
 };
 </script>
