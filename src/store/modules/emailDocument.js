@@ -39,7 +39,7 @@ export default {
 												color: "#FFFFFF",
 												"font-size": "14px",
 												"font-family":
-                          "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+													"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 												h6: {},
 												h5: {},
 												h4: {},
@@ -108,7 +108,7 @@ export default {
 												color: "#FFFFFF",
 												"font-size": "14px",
 												"font-family":
-                          "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+													"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 												h6: {},
 												h5: {},
 												h4: {},
@@ -177,7 +177,7 @@ export default {
 												color: "#FFFFFF",
 												"font-size": "14px",
 												"font-family":
-                          "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+													"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 												h6: {},
 												h5: {},
 												h4: {},
@@ -246,7 +246,7 @@ export default {
 												color: "#FFFFFF",
 												"font-size": "14px",
 												"font-family":
-                          "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+													"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 												h6: {},
 												h5: {},
 												h4: {},
@@ -386,8 +386,7 @@ export default {
 											style: {
 												"max-height": "36px",
 												"max-width": "167px",
-												src:
-                          "https://via.placeholder.com/167x36/ffffff/5C9AEB%3Ftext=Logo",
+												src: "https://via.placeholder.com/167x36/ffffff/5C9AEB%3Ftext=Logo",
 												width: "167px",
 												"background-color": "",
 												"border-radius": "0px",
@@ -422,8 +421,7 @@ export default {
 											eid: "KdRj3P5VJzc",
 											type: "text",
 											attrs: {
-												text:
-                          "<p style=\"text-align: center;\"><strong>Our Portfolio</strong></p>\n",
+												text: "<p style=\"text-align: center;\"><strong>Our Portfolio</strong></p>\n",
 											},
 											style: {
 												"padding-left": "10px",
@@ -438,7 +436,7 @@ export default {
 												color: "#ffffff",
 												"font-size": "45px",
 												"font-family":
-                          "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+													"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 												h6: {
 													"line-height": "16px",
 													color: "#000000",
@@ -486,8 +484,7 @@ export default {
 											eid: "60-OPIRcR49",
 											type: "text",
 											attrs: {
-												text:
-                          "<p style=\"text-align: center;\">PERFECTLY SIMPLE DESIGN</p>",
+												text: "<p style=\"text-align: center;\">PERFECTLY SIMPLE DESIGN</p>",
 											},
 											style: {
 												"padding-left": "10px",
@@ -502,7 +499,7 @@ export default {
 												color: "#ffffff",
 												"font-size": "15px",
 												"font-family":
-                          "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+													"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 												h6: {
 													"line-height": "16px",
 													color: "#000000",
@@ -562,8 +559,7 @@ export default {
 																	eid: "2AHhADq2t",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p><strong>Professional</strong></p>\n",
+																		text: "<p><strong>Professional</strong></p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -582,7 +578,7 @@ export default {
 																		color: "#FFFFFF",
 																		"font-size": "25px",
 																		"font-family":
-                                      "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+																			"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 																		h6: {},
 																		h5: {},
 																		h4: {},
@@ -634,7 +630,7 @@ export default {
 																		color: "#D8EEF5",
 																		"font-size": "15px",
 																		"font-family":
-                                      "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
+																			"Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
 																		h6: {},
 																		h5: {},
 																		h4: {},
@@ -667,8 +663,7 @@ export default {
 																	eid: "G6hw1u_xa",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p>Fusce maximus nunc ut quam aliquet, cursus tempus justo tincidunt. Vivamus quis magna molestie, pellentesque tellus ac, efficitur nibh,&nbsp;cursus tempus justo tincidunt.</p>\n",
+																		text: "<p>Fusce maximus nunc ut quam aliquet, cursus tempus justo tincidunt. Vivamus quis magna molestie, pellentesque tellus ac, efficitur nibh,&nbsp;cursus tempus justo tincidunt.</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -730,7 +725,7 @@ export default {
 																		color: "#ffffff",
 																		"font-size": "17px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		"background-color": {
 																			reference: "SecondaryColor",
 																			default: "#5C9AEB",
@@ -843,8 +838,7 @@ export default {
 																	style: {
 																		"max-height": "453px",
 																		"max-width": "300px",
-																		src:
-                                      "https://via.placeholder.com/300x453/ededed/5C9AEB",
+																		src: "https://via.placeholder.com/300x453/ededed/5C9AEB",
 																		width: "300px",
 																		"background-color": "",
 																		"border-radius": "0px",
@@ -953,7 +947,7 @@ export default {
 										"background-position": "center top",
 										"background-repeat": "repeat",
 										"background-image":
-                      "url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
+											"url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
 										"border-radius": "0px",
 										"border-left": "0px solid #000000",
 										"border-bottom": "0px solid #000000",
@@ -1190,8 +1184,7 @@ export default {
 													eid: "BO2hU5VzcI",
 													type: "text",
 													attrs: {
-														text:
-                              "<p><strong>Welcome to my Customers!</strong></p>\n",
+														text: "<p><strong>Welcome to my Customers!</strong></p>\n",
 													},
 													style: {
 														"padding-left": "20px",
@@ -1210,7 +1203,7 @@ export default {
 														color: "#FFFFFF",
 														"font-size": "35px",
 														"font-family":
-                              "Arial, Helvetica Neue, Helvetica, sans-serif",
+															"Arial, Helvetica Neue, Helvetica, sans-serif",
 														h6: {},
 														h5: {},
 														h4: {},
@@ -1335,8 +1328,7 @@ export default {
 											eid: "TuAiS7jSBI",
 											type: "text",
 											attrs: {
-												text:
-                          "<p>Sed et lacus volutpat, consectetur erat vel, aliquet mauris. Praesent nisi elit, molestie sit amet ante ut, consectetur condimentum elit. Aliquam erat volutpat. Aenean nec congue est. Aliquam erat volutpat. Ut in feugiat est. Quisque libero tellus, volutpat non dapibus vitae, feugiat quis nisl.</p>\n",
+												text: "<p>Sed et lacus volutpat, consectetur erat vel, aliquet mauris. Praesent nisi elit, molestie sit amet ante ut, consectetur condimentum elit. Aliquam erat volutpat. Aenean nec congue est. Aliquam erat volutpat. Ut in feugiat est. Quisque libero tellus, volutpat non dapibus vitae, feugiat quis nisl.</p>\n",
 											},
 											style: {
 												"padding-left": "20px",
@@ -1398,7 +1390,7 @@ export default {
 												color: "#ffffff",
 												"font-size": "17px",
 												"font-family":
-                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+													"Arial, Helvetica Neue, Helvetica, sans-serif",
 												"background-color": {
 													reference: "SecondaryColor",
 													default: "#5C9AEB",
@@ -1445,7 +1437,7 @@ export default {
 										"background-position": "center top",
 										"background-repeat": "repeat",
 										"background-image":
-                      "url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
+											"url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
 										"border-radius": "0px",
 										"border-left": "0px solid #000000",
 										"border-bottom": "0px solid #000000",
@@ -1578,8 +1570,7 @@ export default {
 											eid: "UhlM1UHNLW",
 											type: "text",
 											attrs: {
-												text:
-                          "<p style=\"text-align: center;\"><strong>Professional</strong></p>\n",
+												text: "<p style=\"text-align: center;\"><strong>Professional</strong></p>\n",
 											},
 											style: {
 												"padding-left": "10px",
@@ -1601,7 +1592,7 @@ export default {
 												},
 												"font-size": "35px",
 												"font-family":
-                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+													"Arial, Helvetica Neue, Helvetica, sans-serif",
 												h6: {},
 												h5: {},
 												h4: {},
@@ -1634,8 +1625,7 @@ export default {
 											eid: "d-CZCx-OWv",
 											type: "text",
 											attrs: {
-												text:
-                          "<p style=\"text-align: center;\">STRATEGY TEAM</p>\n",
+												text: "<p style=\"text-align: center;\">STRATEGY TEAM</p>\n",
 											},
 											style: {
 												"padding-left": "10px",
@@ -1660,7 +1650,7 @@ export default {
 												},
 												"font-size": "15px",
 												"font-family":
-                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+													"Arial, Helvetica Neue, Helvetica, sans-serif",
 												h6: {},
 												h5: {},
 												h4: {},
@@ -1693,8 +1683,7 @@ export default {
 											eid: "-5EX_YNIcx",
 											type: "text",
 											attrs: {
-												text:
-                          "<p>Fusce maximus nunc ut quam aliquet, cursus tempus justo tincidunt. Vivamus quis magna molestie, pellentesque tellus ac, efficitur nibh,&nbsp;cursus tempus justo tincidunt.</p>\n",
+												text: "<p>Fusce maximus nunc ut quam aliquet, cursus tempus justo tincidunt. Vivamus quis magna molestie, pellentesque tellus ac, efficitur nibh,&nbsp;cursus tempus justo tincidunt.</p>\n",
 											},
 											style: {
 												"padding-left": "10px",
@@ -1759,7 +1748,7 @@ export default {
 												color: "#ffffff",
 												"font-size": "17px",
 												"font-family":
-                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+													"Arial, Helvetica Neue, Helvetica, sans-serif",
 												"background-color": {
 													reference: "PrimaryColor",
 													default: "#165BB4",
@@ -1806,7 +1795,7 @@ export default {
 										"background-position": "center top",
 										"background-repeat": "repeat",
 										"background-image":
-                      "url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
+											"url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
 										"border-radius": "0px",
 										"border-left": "0px solid #000000",
 										"border-bottom": "0px solid #000000",
@@ -2059,7 +2048,7 @@ export default {
 														color: "#FFFFFF",
 														"font-size": "35px",
 														"font-family":
-                              "Arial, Helvetica Neue, Helvetica, sans-serif",
+															"Arial, Helvetica Neue, Helvetica, sans-serif",
 														h6: {},
 														h5: {},
 														h4: {},
@@ -2114,7 +2103,7 @@ export default {
 														},
 														"font-size": "15px",
 														"font-family":
-                              "Arial, Helvetica Neue, Helvetica, sans-serif",
+															"Arial, Helvetica Neue, Helvetica, sans-serif",
 														h6: {},
 														h5: {},
 														h4: {},
@@ -2147,8 +2136,7 @@ export default {
 													eid: "9c0_LzTtC",
 													type: "text",
 													attrs: {
-														text:
-                              "<p><strong>Vivamus accumsan erat id tortor ornare euismod.</strong></p>\n\n<p>Nullam enim libero. Cras non magna sit amet massa aliquam suscipit.</p>\n",
+														text: "<p><strong>Vivamus accumsan erat id tortor ornare euismod.</strong></p>\n\n<p>Nullam enim libero. Cras non magna sit amet massa aliquam suscipit.</p>\n",
 													},
 													style: {
 														"padding-left": "10px",
@@ -2199,8 +2187,7 @@ export default {
 													eid: "Cy0EjuLkf",
 													type: "text",
 													attrs: {
-														text:
-                              "<p>Aenean ac finibus dui, non eleifend ligula. Nulla facilisi. Aligue condim. <strong>Sed suscipit metus ligula!</strong></p>\n",
+														text: "<p>Aenean ac finibus dui, non eleifend ligula. Nulla facilisi. Aligue condim. <strong>Sed suscipit metus ligula!</strong></p>\n",
 													},
 													style: {
 														"padding-left": "10px",
@@ -2262,7 +2249,7 @@ export default {
 														color: "#ffffff",
 														"font-size": "17px",
 														"font-family":
-                              "Arial, Helvetica Neue, Helvetica, sans-serif",
+															"Arial, Helvetica Neue, Helvetica, sans-serif",
 														"background-color": {
 															reference: "PrimaryColor",
 															default: "#165BB4",
@@ -2372,8 +2359,7 @@ export default {
 											style: {
 												"max-height": "453px",
 												"max-width": "300px",
-												src:
-                          "https://via.placeholder.com/300x453/ededed/5C9AEB",
+												src: "https://via.placeholder.com/300x453/ededed/5C9AEB",
 												width: "300px",
 												"background-color": "",
 												"border-radius": "0px",
@@ -2523,8 +2509,7 @@ export default {
 															style: {
 																"max-height": "150px",
 																"max-width": "150px",
-																src:
-                                  "https://via.placeholder.com/150/ededed/1762C5",
+																src: "https://via.placeholder.com/150/ededed/1762C5",
 																width: "150px",
 																"background-color": "",
 																"border-radius": "0px",
@@ -2580,8 +2565,7 @@ export default {
 																	eid: "5DucigUVy",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
+																		text: "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -2716,8 +2700,7 @@ export default {
 																	eid: "8I9Hc45I5n",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
+																		text: "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -2840,8 +2823,7 @@ export default {
 															style: {
 																"max-height": "150px",
 																"max-width": "150px",
-																src:
-                                  "https://via.placeholder.com/150/a1a1a1/5C9AEB",
+																src: "https://via.placeholder.com/150/a1a1a1/5C9AEB",
 																width: "150px",
 																"background-color": "",
 																"border-radius": "0px",
@@ -2946,8 +2928,7 @@ export default {
 															style: {
 																"max-height": "150px",
 																"max-width": "150px",
-																src:
-                                  "https://via.placeholder.com/150/ededed/1762C5",
+																src: "https://via.placeholder.com/150/ededed/1762C5",
 																width: "150px",
 																"background-color": "",
 																"border-radius": "0px",
@@ -3003,8 +2984,7 @@ export default {
 																	eid: "bIBBZQ9Ksf",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
+																		text: "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -3139,8 +3119,7 @@ export default {
 																	eid: "wR6qFZ1Jld",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
+																		text: "<p style=\"text-align: center;\">Style, Fast, Mission</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -3263,8 +3242,7 @@ export default {
 															style: {
 																"max-height": "150px",
 																"max-width": "150px",
-																src:
-                                  "https://via.placeholder.com/150/a1a1a1/5C9AEB",
+																src: "https://via.placeholder.com/150/a1a1a1/5C9AEB",
 																width: "150px",
 																"background-color": "",
 																"border-radius": "0px",
@@ -3416,8 +3394,7 @@ export default {
 									eid: "KdrQAZQGFk",
 									type: "text",
 									attrs: {
-										text:
-                      "<p style=\"text-align: center;\"><strong>Services we provide</strong></p>\n",
+										text: "<p style=\"text-align: center;\"><strong>Services we provide</strong></p>\n",
 									},
 									style: {
 										"padding-left": "10px",
@@ -3435,7 +3412,7 @@ export default {
 										},
 										"font-size": "35px",
 										"font-family":
-                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+											"Arial, Helvetica Neue, Helvetica, sans-serif",
 										h6: {
 											"line-height": "16px",
 											color: "#000000",
@@ -3483,8 +3460,7 @@ export default {
 									eid: "tFyeP6HSI",
 									type: "text",
 									attrs: {
-										text:
-                      "<p style=\"text-align: center;\">LET&#39;S START WITH US!</p>\n",
+										text: "<p style=\"text-align: center;\">LET&#39;S START WITH US!</p>\n",
 									},
 									style: {
 										"padding-left": "10px",
@@ -3506,7 +3482,7 @@ export default {
 										},
 										"font-size": "15px",
 										"font-family":
-                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+											"Arial, Helvetica Neue, Helvetica, sans-serif",
 										h6: {},
 										h5: {},
 										h4: {},
@@ -3573,8 +3549,7 @@ export default {
 																			style: {
 																				"max-height": "270px",
 																				"max-width": "270px",
-																				src:
-                                          "https://via.placeholder.com/270/a1a1a1/5C9AEB",
+																				src: "https://via.placeholder.com/270/a1a1a1/5C9AEB",
 																				width: "270px",
 																				"background-color": "",
 																				"border-radius": "0px",
@@ -3650,8 +3625,7 @@ export default {
 																			eid: "S59DpNVhHs",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\"><strong>Jim Carry, Phd. -&nbsp;FOUNDER</strong></p>\n",
+																				text: "<p style=\"text-align: center;\"><strong>Jim Carry, Phd. -&nbsp;FOUNDER</strong></p>\n",
 																			},
 																			style: {
 																				"padding-left": "10px",
@@ -3740,8 +3714,7 @@ export default {
 																	eid: "pw4nn1lZ4q",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\">FOUNDER</p>\n",
+																		text: "<p style=\"text-align: center;\">FOUNDER</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -3872,8 +3845,7 @@ export default {
 																			style: {
 																				"max-height": "270px",
 																				"max-width": "270px",
-																				src:
-                                          "https://via.placeholder.com/270/a1a1a1/5C9AEB",
+																				src: "https://via.placeholder.com/270/a1a1a1/5C9AEB",
 																				width: "270px",
 																				"background-color": "",
 																				"border-radius": "0px",
@@ -3949,8 +3921,7 @@ export default {
 																			eid: "ztrWNjrt1p",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\"><strong>Jim Carry, Phd. -&nbsp;FOUNDER</strong></p>\n",
+																				text: "<p style=\"text-align: center;\"><strong>Jim Carry, Phd. -&nbsp;FOUNDER</strong></p>\n",
 																			},
 																			style: {
 																				"padding-left": "10px",
@@ -4039,8 +4010,7 @@ export default {
 																	eid: "hyc0OQk3TG",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\">FOUNDER</p>\n",
+																		text: "<p style=\"text-align: center;\">FOUNDER</p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -4207,7 +4177,7 @@ export default {
 								"background-position": "center center",
 								"background-repeat": "no-repeat",
 								"background-image":
-                  "url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
+									"url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
 								"border-radius": "0px",
 								"border-left": "0px solid #000000",
 								"border-bottom": "0px solid #000000",
@@ -4311,8 +4281,7 @@ export default {
 																	eid: "LNqn53Y40O",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\"><b>Light</b></p>\n",
+																		text: "<p style=\"text-align: center;\"><b>Light</b></p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -4330,7 +4299,7 @@ export default {
 																		},
 																		"font-size": "20px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		h6: {
 																			"line-height": "16px",
 																			color: "#000000",
@@ -4354,7 +4323,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "22px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		h2: {
@@ -4362,7 +4331,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "26px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		h1: {
@@ -4370,7 +4339,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "32px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		"letter-spacing": "normal",
@@ -4385,8 +4354,7 @@ export default {
 																			eid: "1sWBuKdw_V",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\">Their Pronunciation and their most common words.</p>\n",
+																				text: "<p style=\"text-align: center;\">Their Pronunciation and their most common words.</p>\n",
 																			},
 																			style: {
 																				"padding-left": "10px",
@@ -4404,7 +4372,7 @@ export default {
 																				},
 																				"font-size": "13px",
 																				"font-family":
-                                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+																					"Arial, Helvetica Neue, Helvetica, sans-serif",
 																				h6: {
 																					"line-height": "16px",
 																					color: "#000000",
@@ -4428,7 +4396,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "22px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h2: {
@@ -4436,7 +4404,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "26px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h1: {
@@ -4444,7 +4412,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "32px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				"letter-spacing": "normal",
@@ -4455,8 +4423,7 @@ export default {
 																			eid: "DspJSEDO94",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\"><strong>$16.00</strong></p>",
+																				text: "<p style=\"text-align: center;\"><strong>$16.00</strong></p>",
 																			},
 																			style: {
 																				"padding-left": "5px",
@@ -4474,7 +4441,7 @@ export default {
 																				},
 																				"font-size": "32px",
 																				"font-family":
-                                          "Helvetica, Helvetica Neue, Arial",
+																					"Helvetica, Helvetica Neue, Arial",
 																				h6: {
 																					"line-height": "16px",
 																					color: "#000000",
@@ -4498,7 +4465,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "22px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h2: {
@@ -4506,7 +4473,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "26px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h1: {
@@ -4514,7 +4481,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "32px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				"letter-spacing": "normal",
@@ -4574,7 +4541,7 @@ export default {
 																		color: "#ffffff",
 																		"font-size": "17px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		"background-color": {
 																			reference: "PrimaryColor",
 																			default: "#165BB4",
@@ -4674,8 +4641,7 @@ export default {
 																	eid: "rMAQtiQATg",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\"><b>Medium</b></p>\n",
+																		text: "<p style=\"text-align: center;\"><b>Medium</b></p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -4693,7 +4659,7 @@ export default {
 																		},
 																		"font-size": "20px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		h6: {
 																			"line-height": "16px",
 																			color: "#000000",
@@ -4717,7 +4683,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "22px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		h2: {
@@ -4725,7 +4691,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "26px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		h1: {
@@ -4733,7 +4699,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "32px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		"letter-spacing": "normal",
@@ -4748,8 +4714,7 @@ export default {
 																			eid: "U2bTZqZGBc",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\">Their Pronunciation and their most common words.</p>\n",
+																				text: "<p style=\"text-align: center;\">Their Pronunciation and their most common words.</p>\n",
 																			},
 																			style: {
 																				"padding-left": "10px",
@@ -4767,7 +4732,7 @@ export default {
 																				},
 																				"font-size": "13px",
 																				"font-family":
-                                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+																					"Arial, Helvetica Neue, Helvetica, sans-serif",
 																				h6: {
 																					"line-height": "16px",
 																					color: "#000000",
@@ -4791,7 +4756,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "22px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h2: {
@@ -4799,7 +4764,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "26px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h1: {
@@ -4807,7 +4772,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "32px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				"letter-spacing": "normal",
@@ -4818,8 +4783,7 @@ export default {
 																			eid: "87uACi154kk",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\"><strong>$16.00</strong></p>",
+																				text: "<p style=\"text-align: center;\"><strong>$16.00</strong></p>",
 																			},
 																			style: {
 																				"padding-left": "5px",
@@ -4837,7 +4801,7 @@ export default {
 																				},
 																				"font-size": "32px",
 																				"font-family":
-                                          "Helvetica, Helvetica Neue, Arial",
+																					"Helvetica, Helvetica Neue, Arial",
 																				h6: {
 																					"line-height": "16px",
 																					color: "#000000",
@@ -4861,7 +4825,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "22px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h2: {
@@ -4869,7 +4833,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "26px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h1: {
@@ -4877,7 +4841,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "32px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				"letter-spacing": "normal",
@@ -4937,7 +4901,7 @@ export default {
 																		color: "#ffffff",
 																		"font-size": "17px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		"background-color": {
 																			reference: "PrimaryColor",
 																			default: "#165BB4",
@@ -5037,8 +5001,7 @@ export default {
 																	eid: "4hFdp3DDrxG",
 																	type: "text",
 																	attrs: {
-																		text:
-                                      "<p style=\"text-align: center;\"><b>Strong</b></p>\n",
+																		text: "<p style=\"text-align: center;\"><b>Strong</b></p>\n",
 																	},
 																	style: {
 																		"padding-left": "10px",
@@ -5056,7 +5019,7 @@ export default {
 																		},
 																		"font-size": "20px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		h6: {
 																			"line-height": "16px",
 																			color: "#000000",
@@ -5080,7 +5043,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "22px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		h2: {
@@ -5088,7 +5051,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "26px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		h1: {
@@ -5096,7 +5059,7 @@ export default {
 																			color: "#58585a",
 																			"font-size": "32px",
 																			"font-family":
-                                        "Helvetica, Helvetica Neue, Arial",
+																				"Helvetica, Helvetica Neue, Arial",
 																			"letter-spacing": "normal",
 																		},
 																		"letter-spacing": "normal",
@@ -5111,8 +5074,7 @@ export default {
 																			eid: "CrSorptBYOs",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\">Their Pronunciation and their most common words.</p>\n",
+																				text: "<p style=\"text-align: center;\">Their Pronunciation and their most common words.</p>\n",
 																			},
 																			style: {
 																				"padding-left": "10px",
@@ -5130,7 +5092,7 @@ export default {
 																				},
 																				"font-size": "13px",
 																				"font-family":
-                                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+																					"Arial, Helvetica Neue, Helvetica, sans-serif",
 																				h6: {
 																					"line-height": "16px",
 																					color: "#000000",
@@ -5154,7 +5116,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "22px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h2: {
@@ -5162,7 +5124,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "26px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h1: {
@@ -5170,7 +5132,7 @@ export default {
 																					color: "#a7a7a7",
 																					"font-size": "32px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				"letter-spacing": "normal",
@@ -5181,8 +5143,7 @@ export default {
 																			eid: "SEsswitxOXt",
 																			type: "text",
 																			attrs: {
-																				text:
-                                          "<p style=\"text-align: center;\"><strong>$16.00</strong></p>",
+																				text: "<p style=\"text-align: center;\"><strong>$16.00</strong></p>",
 																			},
 																			style: {
 																				"padding-left": "5px",
@@ -5200,7 +5161,7 @@ export default {
 																				},
 																				"font-size": "32px",
 																				"font-family":
-                                          "Helvetica, Helvetica Neue, Arial",
+																					"Helvetica, Helvetica Neue, Arial",
 																				h6: {
 																					"line-height": "16px",
 																					color: "#000000",
@@ -5224,7 +5185,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "22px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h2: {
@@ -5232,7 +5193,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "26px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				h1: {
@@ -5240,7 +5201,7 @@ export default {
 																					color: "#ffffff",
 																					"font-size": "32px",
 																					"font-family":
-                                            "Helvetica, Helvetica Neue, Arial",
+																						"Helvetica, Helvetica Neue, Arial",
 																					"letter-spacing": "normal",
 																				},
 																				"letter-spacing": "normal",
@@ -5300,7 +5261,7 @@ export default {
 																		color: "#ffffff",
 																		"font-size": "17px",
 																		"font-family":
-                                      "Arial, Helvetica Neue, Helvetica, sans-serif",
+																			"Arial, Helvetica Neue, Helvetica, sans-serif",
 																		"background-color": {
 																			reference: "PrimaryColor",
 																			default: "#165BB4",
@@ -5416,7 +5377,7 @@ export default {
 										"background-position": "center top",
 										"background-repeat": "no-repeat",
 										"background-image":
-                      "url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
+											"url(https://chamaileon-sdk.github.io/example-jsons/assets/backgrounds/1602506297978_bg_business_abstract.png)",
 										"border-radius": "0px",
 										"border-left": "0px solid #000000",
 										"border-bottom": "0px solid #000000",
@@ -5546,8 +5507,7 @@ export default {
 											eid: "6nfRRJyOW",
 											type: "text",
 											attrs: {
-												text:
-                          "<p style=\"text-align: center;\">THEIR PRONUNCIATION AND THEIR MOST COMMON WORDS.</p>\n",
+												text: "<p style=\"text-align: center;\">THEIR PRONUNCIATION AND THEIR MOST COMMON WORDS.</p>\n",
 											},
 											style: {
 												"padding-left": "10px",
@@ -5562,7 +5522,7 @@ export default {
 												color: "#FFFFFF",
 												"font-size": "13px",
 												"font-family":
-                          "Arial, Helvetica Neue, Helvetica, sans-serif",
+													"Arial, Helvetica Neue, Helvetica, sans-serif",
 												h6: {
 													"line-height": "16px",
 													color: "#000000",
@@ -5653,8 +5613,7 @@ export default {
 																	style: {
 																		"max-height": "240px",
 																		"max-width": "240px",
-																		src:
-                                      "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/ig-3-grey.png",
+																		src: "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/ig-3-grey.png",
 																		width: "32px",
 																		"background-color": "",
 																		"border-radius": "0px",
@@ -5720,8 +5679,7 @@ export default {
 																	style: {
 																		"max-height": "240px",
 																		"max-width": "240px",
-																		src:
-                                      "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/fb-3-grey.png",
+																		src: "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/fb-3-grey.png",
 																		width: "32px",
 																		"background-color": "",
 																		"border-radius": "0px",
@@ -5787,8 +5745,7 @@ export default {
 																	style: {
 																		"max-height": "240px",
 																		"max-width": "240px",
-																		src:
-                                      "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/ig-3-grey.png",
+																		src: "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/ig-3-grey.png",
 																		width: "32px",
 																		"background-color": "",
 																		"background-repeat": "no-repeat",
@@ -5856,8 +5813,7 @@ export default {
 																	style: {
 																		"max-height": "240px",
 																		"max-width": "240px",
-																		src:
-                                      "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/PT-3-grey.png",
+																		src: "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/PT-3-grey.png",
 																		width: "32px",
 																		"background-color": "",
 																		"background-repeat": "no-repeat",
@@ -5925,8 +5881,7 @@ export default {
 																	style: {
 																		"max-height": "240px",
 																		"max-width": "240px",
-																		src:
-                                      "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/WC-3-grey.png",
+																		src: "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/WC-3-grey.png",
 																		width: "32px",
 																		"background-color": "",
 																		"background-repeat": "no-repeat",
@@ -5994,8 +5949,7 @@ export default {
 																	style: {
 																		"max-height": "240px",
 																		"max-width": "240px",
-																		src:
-                                      "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/tw-3-grey.png",
+																		src: "https://chamaileon-sdk.github.io/example-jsons/assets/social-icons/tw-3-grey.png",
 																		width: "32px",
 																		"background-color": "",
 																		"background-repeat": "no-repeat",
@@ -6226,7 +6180,9 @@ export default {
 		},
 	},
 	actions: {},
-	getters: {},
+	getters: {
+		documentTitle: (state) => state.title,
+	},
 };
 
 //#1762C5
