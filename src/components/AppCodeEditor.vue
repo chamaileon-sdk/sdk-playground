@@ -104,8 +104,8 @@ export default {
     container: "${this.thumbnailConfig.container}", //Can change it in your code
     width: ${this.thumbnailConfig.width},
     height: ${this.thumbnailConfig.height},
-    scale: ${this.thumbnailConfig.scale}
-    scroll: ${this.thumbnailConfig.scroll},
+    scale: ${this.thumbnailConfig.scale},
+    scroll: ${this.thumbnailConfig.scroll}
 });`;
 		},
 
@@ -155,7 +155,13 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 		},
 
 		previewHooks() {
-			let str = "const emailPreviewHooks = {}";
+			let str = `const emailPreviewHooks = {
+	onHeaderButtonClicked: ({ buttonId }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	}
+}`;
 
 			return str;
 		},
