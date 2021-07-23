@@ -1,90 +1,90 @@
 <template>
-  <v-row>
-    <v-col cols="6">
-      <template>
-        <v-row align="center" class="ma-0 justify-begin">
-          <AddButton @click="addLeftButton"> New Button </AddButton>
-        </v-row>
-      </template>
-      <div
-        v-if="buttonsLeft.length > 0"
-        class="mt-8"
-        style="max-height: 260px; overflow-y: auto;"
-      >
-        <draggable v-model="buttonsLeft">
-          <ListItem3
-            v-for="item in buttonsLeft"
-            :key="item.id"
-            :id="item.id"
-            :icon="item.icon"
-            :label="item.label"
-            @idChange="
-              updateLeftButton({
-                id: item.id,
-                newID: $event,
-              })
-            "
-            @labelChange="
-              updateLeftButton({
-                id: item.id,
-                label: $event,
-              })
-            "
-            @iconChange="
-              updateLeftButton({
-                id: item.id,
-                icon: $event,
-              })
-            "
-            @deleteClicked="deleteLeftButton(item.id)"
-            :split="true"
-          />
-        </draggable>
-      </div>
-    </v-col>
-    <v-col cols="6">
-      <template>
-        <v-row align="center" class="ma-0 justify-end">
-          <AddButton @click="addRightButton"> New Button</AddButton>
-        </v-row>
-      </template>
-      <div
-        v-if="buttonsRight.length > 0"
-        class="mt-8"
-        style="max-height: 260px; overflow-y: auto;"
-      >
-        <draggable v-model="buttonsRight">
-          <ListItem3
-            v-for="item in buttonsRight"
-            :key="item.id"
-            :id="item.id"
-            :icon="item.icon"
-            :label="item.label"
-            @idChange="
-              updateRightButton({
-                id: item.id,
-                newID: $event,
-              })
-            "
-            @labelChange="
-              updateRightButton({
-                id: item.id,
-                label: $event,
-              })
-            "
-            @iconChange="
-              updateRightButton({
-                id: item.id,
-                icon: $event,
-              })
-            "
-            @deleteClicked="deleteRightButton(item.id)"
-            :split="true"
-          />
-        </draggable>
-      </div>
-    </v-col>
-  </v-row>
+	<v-row>
+		<v-col cols="6">
+			<template>
+				<v-row align="center" class="ma-0 justify-begin">
+					<AddButton @click="addLeftButton"> New Button </AddButton>
+				</v-row>
+			</template>
+			<div
+				v-if="buttonsLeft.length > 0"
+				class="mt-8 list3"
+				style="max-height: 260px; overflow-y: auto"
+			>
+				<draggable v-model="buttonsLeft">
+					<ListItem3
+						v-for="item in buttonsLeft"
+						:key="item.id"
+						:id="item.id"
+						:icon="item.icon"
+						:label="item.label"
+						@idChange="
+							updateLeftButton({
+								id: item.id,
+								newID: $event,
+							})
+						"
+						@labelChange="
+							updateLeftButton({
+								id: item.id,
+								label: $event,
+							})
+						"
+						@iconChange="
+							updateLeftButton({
+								id: item.id,
+								icon: $event,
+							})
+						"
+						@deleteClicked="deleteLeftButton(item.id)"
+						:split="true"
+					/>
+				</draggable>
+			</div>
+		</v-col>
+		<v-col cols="6">
+			<template>
+				<v-row align="center" class="ma-0 justify-end">
+					<AddButton @click="addRightButton"> New Button</AddButton>
+				</v-row>
+			</template>
+			<div
+				v-if="buttonsRight.length > 0"
+				class="mt-8 list3"
+				style="max-height: 260px; overflow-y: auto"
+			>
+				<draggable v-model="buttonsRight">
+					<ListItem3
+						v-for="item in buttonsRight"
+						:key="item.id"
+						:id="item.id"
+						:icon="item.icon"
+						:label="item.label"
+						@idChange="
+							updateRightButton({
+								id: item.id,
+								newID: $event,
+							})
+						"
+						@labelChange="
+							updateRightButton({
+								id: item.id,
+								label: $event,
+							})
+						"
+						@iconChange="
+							updateRightButton({
+								id: item.id,
+								icon: $event,
+							})
+						"
+						@deleteClicked="deleteRightButton(item.id)"
+						:split="true"
+					/>
+				</draggable>
+			</div>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
@@ -103,7 +103,7 @@ export default {
 		section: {
 			type: String,
 			required: true,
-			validator: function(value) {
+			validator: function (value) {
 				// The value must match one of these strings
 				return ["Header", "Footer"].indexOf(value) !== -1;
 			},

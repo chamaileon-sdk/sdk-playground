@@ -1,62 +1,62 @@
 <template>
-  <div>
-    <h1>Text Insert</h1>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
-      expedita ipsa ipsam ea nobis facere tenetur debitis magni, adipisci error,
-      illo deleniti sint laborum incidunt distinctio? Quaerat, ratione hic.
-    </p>
-    <OptionWrapper>
-      <TextInsertPreview />
-    </OptionWrapper>
+	<div>
+		<h1>Text Insert</h1>
+		<p>
+			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
+			expedita ipsa ipsam ea nobis facere tenetur debitis magni, adipisci error,
+			illo deleniti sint laborum incidunt distinctio? Quaerat, ratione hic.
+		</p>
+		<OptionWrapper>
+			<TextInsertPreview />
+		</OptionWrapper>
 
-    <h3>Buttons</h3>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
-      tempora hic delectus culpa natus dicta adipisci eius aliquam officiis
-      reiciendis? Officia fuga saepe nam? Iure corporis molestias commodi saepe
-      ipsum.
-    </p>
-    <OptionWrapper>
-      <v-row align="center" justify="end" class="ma-0">
-        <AddButton @click="addVETextInsertButton"> New Button</AddButton>
-      </v-row>
-      <div
-        v-show="btnArr.length > 0"
-        class="mt-8"
-        style="max-height: 222px; overflow-y: auto;"
-      >
-        <draggable v-model.lazy="btnArr">
-          <ListItem3
-            v-for="item in btnArr"
-            :key="item.id"
-            :id="item.id"
-            :icon="item.icon"
-            :label="item.label"
-            @idChange="
-              updateVETextInsertButton({
-                id: item.id,
-                newID: $event,
-              })
-            "
-            @labelChange="
-              updateVETextInsertButton({
-                id: item.id,
-                label: $event,
-              })
-            "
-            @iconChange="
-              updateVETextInsertButton({
-                id: item.id,
-                icon: $event,
-              })
-            "
-            @deleteClicked="deleteVETextInsertButton(item.id)"
-          />
-        </draggable>
-      </div>
-    </OptionWrapper>
-  </div>
+		<h3>Buttons</h3>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
+			tempora hic delectus culpa natus dicta adipisci eius aliquam officiis
+			reiciendis? Officia fuga saepe nam? Iure corporis molestias commodi saepe
+			ipsum.
+		</p>
+		<OptionWrapper>
+			<v-row align="center" justify="end" class="ma-0">
+				<AddButton @click="addVETextInsertButton"> New Button</AddButton>
+			</v-row>
+			<div
+				v-show="btnArr.length > 0"
+				class="mt-8 list3"
+				style="max-height: 222px; overflow-y: auto"
+			>
+				<draggable v-model.lazy="btnArr">
+					<ListItem3
+						v-for="item in btnArr"
+						:key="item.id"
+						:id="item.id"
+						:icon="item.icon"
+						:label="item.label"
+						@idChange="
+							updateVETextInsertButton({
+								id: item.id,
+								newID: $event,
+							})
+						"
+						@labelChange="
+							updateVETextInsertButton({
+								id: item.id,
+								label: $event,
+							})
+						"
+						@iconChange="
+							updateVETextInsertButton({
+								id: item.id,
+								icon: $event,
+							})
+						"
+						@deleteClicked="deleteVETextInsertButton(item.id)"
+					/>
+				</draggable>
+			</div>
+		</OptionWrapper>
+	</div>
 </template>
 
 <script>

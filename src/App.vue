@@ -56,8 +56,28 @@ html {
 }
 
 html::-webkit-scrollbar {
-	width: 0;
-	height: 0;
+	width: 0 !important;
+	height: 0 !important;
+}
+
+.list3 {
+	overflow: overlay;
+}
+
+.list3::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.list3::-webkit-scrollbar-thumb {
+	background: #e0e0e0;
+	border-radius: 99999px;
+}
+.list3::-webkit-scrollbar-thumb:hover {
+	background: #bdbdbd;
+}
+.list3::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 99999px;
 }
 
 .rightSection {
