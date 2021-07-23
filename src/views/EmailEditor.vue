@@ -72,13 +72,26 @@ export default {
 			this.sdk.editEmail({
 				...this.$store.getters.getConfigObject,
 				hooks: {
-					onSave: async (obj) => {
+					onSave: (obj) => {
 						return new Promise(
 							function (resolve) {
 								this.$store.commit("updateDocument", obj.document);
 								return resolve();
 							}.bind(this)
 						);
+					},
+					onAutoSave: (obj) => {
+						return new Promise(
+							function (resolve) {
+								this.$store.commit("updateDocument", obj.document);
+								return resolve();
+							}.bind(this)
+						);
+					},
+					onChange: () => {
+						return new Promise((resolve) => {
+							resolve();
+						});
 					},
 				},
 			});

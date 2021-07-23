@@ -8,31 +8,29 @@
 		</v-tabs>
 
 		<v-card
-			v-if="tab === 0"
+			v-show="tab === 0"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
 			fixed
 			flat
 		>
-			<highlight-code class="pa-0" lang="javascript" :code="code" />
+			<highlight-code :code="code" class="pa-0" lang="javascript" />
 		</v-card>
 
-		<v-lazy>
-			<v-card
-				v-show="tab === 1"
-				class="rounded-0 pa-0 ma-0"
-				width="100%"
-				dark
-				fixed
-				flat
-			>
-				<highlight-code class="pa-0" lang="javascript" :code="doc" />
-			</v-card>
-		</v-lazy>
+		<v-card
+			v-show="tab === 1"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code :code="doc" class="pa-0" lang="javascript" />
+		</v-card>
 
 		<v-card
-			v-if="tab === 2"
+			v-show="tab === 2"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -43,18 +41,19 @@
 		</v-card>
 
 		<v-card dark class="copyCard rounded-pill" elevation="0" v-show="snackbar"
-			><v-card-text class="pa-2 px-4 success--text"
-				>Code Copied to Clipboard</v-card-text
+			><v-card-text class="pa-1 px-4 success--text text-button"
+				>Copied to Clipboard</v-card-text
 			></v-card
 		>
-		<v-btn
-			dark
-			icon
-			large
-			class="copyToClipboard"
-			@click="copyToClipboard(code)"
-			><v-icon>mdi-clipboard-file-outline</v-icon></v-btn
-		>
+		<v-tab>
+			<v-btn
+				dark
+				icon
+				class="copyToClipboard grey--text text--darken-1"
+				@click="copyToClipboard"
+				><v-icon>mdi-clipboard-file-outline</v-icon></v-btn
+			>
+		</v-tab>
 	</v-card>
 </template>
 
@@ -67,7 +66,10 @@ export default {
 
 	computed: {
 		doc() {
-			return JSON.stringify(this.$store.state.document, null, "  ");
+			return (
+				"let emailDocument = " +
+				JSON.stringify(this.$store.state.document, null, " ")
+			);
 		},
 
 		//Sdk
@@ -80,13 +82,13 @@ export default {
     accessToken: accessToken,
     whitelabel: {
 		urls: {
-            createLogoJS: "${this.sdkConfig.urls.createLogoJS}"
+            createLogoJS: "${this.sdkConfig.urls.createLogoJS}",
 			splashScreen: "${this.sdkConfig.urls.splashScreen}",
         },
         colors: {
 			primary: "${this.sdkConfig.colors.primary}",
             secondary: "${this.sdkConfig.colors.secondary}",
-        }
+        },
 		locale: '${this.sdkConfig.locale}',
     }
 });`;
@@ -98,7 +100,7 @@ export default {
 		},
 		thumbnailCode() {
 			return `const thumbnailInstance = await chamaileonPlugins.createThumbnail({
-    document: {}, 
+    document: emailDocument, // see 'document' tab
     container: "${this.thumbnailConfig.container}", //Can change it in your code
     width: ${this.thumbnailConfig.width},
     height: ${this.thumbnailConfig.height},
@@ -140,16 +142,22 @@ export default {
 
 		previewCode() {
 			return `const previewConfig = {
-    document: {}, 
+    document: emailDocument, // see 'document' tab
     settings: {
       buttons: {
         header: ${this.calculatePreviewHeader}
       }
     },
-    hooks: {} 
+    hooks: emailPreviewHooks //see 'hooks' tab
 };
 
 const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
+		},
+
+		previewHooks() {
+			let str = "const emailPreviewHooks = {}";
+
+			return str;
 		},
 
 		//Email Editor
@@ -282,8 +290,7 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 
 		emailCode() {
 			return `const editorInstance = await chamaileonPlugins.editEmail({
-	// a JSON object that represents the email document
-    document: {},
+    document: emailDocument, // see 'document' tab
     user: ${
 	this.config.user
 		? `{
@@ -306,8 +313,96 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
         }
     },
 	autoSaveInterval: ${this.config.autoSaveInterval},
-    hooks: hooks
+    hooks: emailEditorHooks //see 'hooks' tab
 });`;
+		},
+
+		editorHooks() {
+			let str = `const emailEditorHooks = {
+    onSave: ({ emailJson }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+    onAutoSave: ({ emailJson }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+    onChange: () => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+    onBeforeClose: () => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+    onAfterClose: () => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+
+    onEditTitle: ({ title }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+
+    onEditImage: ({ originalImage, lockDimensions: { width, height } }) => {
+		return new Promise(resolve => {
+			resolve({ src });
+		});
+	},
+    onEditBackgroundImage: () => {
+		return new Promise(resolve => {
+			resolve({ src });
+		});
+	},
+
+    onBlockSave: ({ libId }) => {
+		return new Promise(resolve => {
+			const blocks = [];
+			resolve({ blocks });
+		});
+	},
+    onLoadBlocks: ({ libId, block }) => {
+		return new Promise(resolve => {
+			block._id = "customStringId"; 
+			resolve({ block });
+		});
+	},
+    onBlockRename: ({ libId, block: { _id, title } }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+    onBlockDelete: ({ libId, block: { _id } }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+
+    onHeaderButtonClicked: ({ buttonId }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+    onTextInsertPluginButtonClicked: ({ buttonId }) => {
+		return new Promise(resolve => {
+			resolve({ value: "Your inserted text." });
+		});
+	},
+    onExpressionEditClicked: ({ expression }) => {
+		return new Promise(resolve => {
+			resolve({ expression: "<Your inserted expression>" });
+		});
+	}
+};`;
+
+			return str;
 		},
 
 		//Variable Editor
@@ -333,7 +428,7 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 			if (arr.length === 0) return "[]";
 
 			literal += `[
-				/*It's not necessary to have a close button, 
+				/*It's not necessary to have a close button,
 				but otherwise there is no way to exit the app*/`;
 			arr.forEach((c) => {
 				literal += `
@@ -426,7 +521,7 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 
 		variableEditorCode() {
 			return `const variableEditorConfig = {
-    document: {},
+    document: emailDocument, // see 'document' tab
     settings: {
         variablesToEdit: [${this.calculateVariables}],
         buttons: {
@@ -439,11 +534,39 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
                 right: ${this.calculateFooterRight},
             },
             textInsertPlugin: ${this.calculateVariableEditorTextInsert}
-    },
-    hooks: {}
+		},
+	},
+    hooks: variableEditorHooks //see 'hooks' tab
 };
 
 const variableEditorInstance = await chamaileonPlugins.editVariables(variableEditorConfig)`;
+		},
+
+		variableEditorHooks() {
+			let str = `const variableEditorHooks = {
+	onEditImage: ({ originalImg }) => {
+		return new Promise(resolve => {
+			resolve({ src });
+		});
+	},
+
+	onTextInsertPluginButtonClicked: ({ buttonId }) => {
+		return new Promise(resolve => {
+			resolve({ value: "Your inserted text." });
+		});
+	},
+
+	onButtonClicked: ({ buttonId }) => {
+
+		if (buttonId === "close") variableEditorInstance.close();
+		
+		return new Promise(resolve => {
+			resolve();
+		});
+	}
+}`;
+
+			return str;
 		},
 
 		//Final
@@ -457,14 +580,35 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 				return this.variableEditorCode;
 			else return `console.log("${this.$route.path}");`;
 		},
-	},
 
-	props: {
-		hooks: String,
+		hooks() {
+			if (this.$route.path === "/emaileditor") return this.editorHooks;
+			else if (this.$route.path === "/emailpreview") return this.previewHooks;
+			else if (this.$route.path === "/variableeditor")
+				return this.variableEditorHooks;
+			else return "//There are no hooks available";
+		},
 	},
 
 	methods: {
-		copyToClipboard(str) {
+		copyToClipboard() {
+			let str;
+
+			switch (this.tab) {
+			case 0:
+				str = this.code;
+				break;
+			case 1:
+				str = this.doc;
+				break;
+			case 2:
+				str = this.hooks;
+				break;
+			default:
+				str = "";
+				break;
+			}
+
 			const el = document.createElement("textarea");
 			el.value = str;
 			el.setAttribute("readonly", "");
@@ -523,6 +667,28 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 
 			return literal;
 		},
+
+		//Document
+		//JSON.stringify = ~595ms
+		//traverse = ~497ms with array keys shown
+		//traverse = ~514ms
+		//Debug first: doesn't produce proper JSON
+		traverse(obj, depth = 0) {
+			//Array is considered as object by js
+			if (typeof obj !== "object") return `"${obj}"`;
+
+			let isArray = Array.isArray(obj);
+
+			let str = isArray ? "[\n" : "{\n";
+			for (const property in obj) {
+				for (let i = 0; i < depth; i++) str += " ";
+
+				if (!isArray) str += `"${property}": `;
+				str += `${this.traverse(obj[property], depth + 1)}\n`;
+			}
+			str += isArray ? "]" : "}";
+			return str;
+		},
 	},
 };
 </script>
@@ -530,20 +696,21 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 <style>
 .copyToClipboard {
 	position: fixed !important;
-	margin: 40px;
+	margin: 8px;
 	right: 0;
 	top: 0;
 	z-index: 2;
-	opacity: 0.15;
 }
 
 .copyCard {
 	position: fixed !important;
 	top: 0;
 	right: 0;
+	width: 100%;
+	text-align: right;
 	z-index: 2;
-	margin-right: 90px;
-	margin-top: 40px;
+	margin-right: 58px;
+	margin-top: 4px;
 }
 
 .hljs {
