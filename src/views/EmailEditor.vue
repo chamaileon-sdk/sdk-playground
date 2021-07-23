@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<div class="section">
+			<EmailEditorDescription />
+		</div>
 		<SectionObserver>
 			<div class="section" id="header">
 				<Header />
@@ -45,6 +48,7 @@ import BlockLibraries from "../components/EmailEditor/BlockLibraries";
 import TextInsert from "../components/EmailEditor/TextInsert";
 import Addons from "../components/EmailEditor/Addons";
 import Settings from "../components/EmailEditor/Settings";
+import EmailEditorDescription from "../components/EmailEditorDescription.vue";
 
 import { mapGetters, mapState } from "vuex";
 
@@ -65,6 +69,7 @@ export default {
 		Addons,
 		Settings,
 		OpenButton,
+		EmailEditorDescription,
 	},
 
 	methods: {
