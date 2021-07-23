@@ -25,7 +25,7 @@
 		</div>
 
 		<div class="text-center">
-			<v-toolbar-title class="center">Your Title</v-toolbar-title>
+			<v-toolbar-title class="center">{{ documentTitle }}</v-toolbar-title>
 		</div>
 
 		<div class="right-button-holder mr-3">
@@ -49,7 +49,7 @@ import { mapGetters } from "vuex";
 
 export default {
 	computed: {
-		...mapGetters(["headerButtons"]),
+		...mapGetters(["headerButtons", "documentTitle"]),
 	},
 };
 </script>

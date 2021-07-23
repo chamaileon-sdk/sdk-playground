@@ -727,6 +727,22 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 	overflow-y: auto;
 }
 
+.hljs::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.hljs::-webkit-scrollbar-thumb {
+	background: #757575;
+	border-radius: 99999px;
+}
+.hljs::-webkit-scrollbar-thumb:hover {
+	background: white;
+}
+.hljs::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 99999px;
+}
+
 code {
 	background-color: transparent !important;
 	white-space: pre-wrap;
