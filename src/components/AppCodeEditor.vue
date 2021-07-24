@@ -67,9 +67,11 @@ export default {
 	computed: {
 		doc() {
 			return (
-				"let emailDocument = " +
-				//JSON.stringify(this.$store.state.document, null, " ")
-				this.traverse(this.$store.state.document)
+				"let emailDocument = JSON.parse(\"" +
+				JSON.stringify(this.$store.state.document)
+					.replaceAll("\\", "\\\\")
+					.replaceAll(/"/g, "\\\"") +
+				"\")"
 			);
 		},
 
