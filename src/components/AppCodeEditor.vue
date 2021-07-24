@@ -67,8 +67,11 @@ export default {
 	computed: {
 		doc() {
 			return (
-				"let emailDocument = " +
-				JSON.stringify(this.$store.state.document, null, " ")
+				"let emailDocument = JSON.parse(\"" +
+				JSON.stringify(this.$store.state.document)
+					.replaceAll("\\", "\\\\")
+					.replaceAll(/"/g, "\\\"") +
+				"\")"
 			);
 		},
 
@@ -376,7 +379,7 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 	},
     onLoadBlocks: ({ libId, block }) => {
 		return new Promise(resolve => {
-			block._id = "customStringId"; 
+			block._id = "customStringId";
 			resolve({ block });
 		});
 	},
@@ -565,7 +568,7 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 	onButtonClicked: ({ buttonId }) => {
 
 		if (buttonId === "close") variableEditorInstance.close();
-		
+
 		return new Promise(resolve => {
 			resolve();
 		});
@@ -677,11 +680,12 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 		//Document
 		//JSON.stringify = ~595ms
 		//traverse = ~497ms with array keys shown
-		//traverse = ~514ms
-		//Debug first: doesn't produce proper JSON
+		//traverse = ~514ms without replaces
+		//traverse = ~630ms now
 		traverse(obj, depth = 0) {
 			//Array is considered as object by js
-			if (typeof obj !== "object") return `"${obj}"`;
+			if (typeof obj !== "object")
+				return `"${obj.toString().replace(/\n/g, "\\n").replace(/"/g, "\\\"")}"`;
 
 			let isArray = Array.isArray(obj);
 
@@ -690,11 +694,36 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 				for (let i = 0; i < depth; i++) str += " ";
 
 				if (!isArray) str += `"${property}": `;
-				str += `${this.traverse(obj[property], depth + 1)}\n`;
+				str += `${this.traverse(obj[property], depth + 1)}`;
+
+				let keys = Object.keys(obj);
+				if (property !== keys[keys.length - 1]) str += ",";
+
+				str += "\n";
 			}
 			str += isArray ? "]" : "}";
 			return str;
 		},
+
+		//~595ms without formatting
+		/*traverse(obj, depth = 0) {
+			//Array is considered as object by js
+			if (typeof obj !== "object")
+				return `"${obj.toString().replace(/\n/g, "\\n").replace(/"/g, "\\\"")}"`;
+
+			let isArray = Array.isArray(obj);
+
+			let str = isArray ? "[" : "{";
+			for (const property in obj) {
+				if (!isArray) str += `"${property}": `;
+				str += `${this.traverse(obj[property], depth + 1)}`;
+
+				let keys = Object.keys(obj);
+				if (property !== keys[keys.length - 1]) str += ",";
+			}
+			str += isArray ? "]" : "}";
+			return str;
+		},*/
 	},
 };
 </script>
