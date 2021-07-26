@@ -94,7 +94,12 @@
 						</v-row>
 					</v-list-item-content>
 				</v-card>
-				<draggable handle=".dtrigger" v-show="b.items" v-model="b.items">
+				<draggable
+					handle=".dtrigger"
+					v-show="b.items"
+					:value="b.items"
+					@input="updateDDBtnOrder({ parentIndex: i, newArr: $event })"
+				>
 					<v-card
 						v-for="(item, bi) in b.items"
 						:key="bi"
@@ -235,6 +240,9 @@ export default {
 		deleteDDBtn(payload) {
 			this.$store.commit(`remove${this.section}DropdownBtn`, payload);
 		},
+		updateDDBtnOrder(payload) {
+			this.$store.commit(`update${this.section}DropdownBtnOrder`, payload);
+		},
 		deleteBtn(payload) {
 			this.$store.commit(`remove${this.section}Btn`, payload);
 		},
@@ -247,6 +255,18 @@ export default {
 			},
 			set(value) {
 				this.$store.commit(`update${this.section}BtnOrder`, value);
+			},
+		},
+		ddArrById: {
+			get(parentId) {
+				return this.$store.state[this.section.toLowerCase() + "Config"].settings
+					.buttons.header[parentId].items;
+			},
+			set(parentId, newArr) {
+				this.$store.commit(`update${this.section}DropdownBtnOrder`, {
+					parentId: parentId,
+					newArr: newArr,
+				});
 			},
 		},
 	},

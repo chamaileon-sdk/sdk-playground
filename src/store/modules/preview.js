@@ -83,6 +83,10 @@ export default {
 				}
 			);
 		},
+
+		updatePreviewDropdownBtnOrder(state, payload) {
+			state.settings.buttons.header[payload.parentIndex].items = payload.newArr;
+		},
 	},
 	actions: {},
 	getters: {

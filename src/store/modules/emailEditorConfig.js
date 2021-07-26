@@ -84,6 +84,7 @@ export default {
 			});
 		},
 
+		//TODO: add dropdown button order updater as it is currently being mutated
 		//Dropdown
 		addEditorDropdown(state) {
 			state.settings.buttons.header.push({
@@ -129,6 +130,10 @@ export default {
 					...newObj,
 				}
 			);
+		},
+
+		updateEditorDropdownBtnOrder(state, payload) {
+			state.settings.buttons.header[payload.parentIndex].items = payload.newArr;
 		},
 
 		//Elements

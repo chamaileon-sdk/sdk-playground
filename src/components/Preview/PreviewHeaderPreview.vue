@@ -136,7 +136,6 @@ export default {
 	text-align: center;
 }
 
-/* TODO: make it general for all kind of logos */
 #logo svg {
 	display: inline-block;
 	vertical-align: middle;

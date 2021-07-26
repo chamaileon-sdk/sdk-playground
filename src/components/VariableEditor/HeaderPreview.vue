@@ -74,7 +74,6 @@ export default {
 	height: 58px;
 	z-index: 3;
 }
-/* TODO: make it general for all kind of logos */
 #logo svg {
 	fill: var(--v-primary-base);
 	display: inline-block;
