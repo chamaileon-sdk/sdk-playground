@@ -4,7 +4,6 @@ export default {
 		key: 0,
 		blIDArr: [],
 		blKey: 0,
-		tiIDArr: [],
 		tiID: 0,
 		user: {
 			enabled: true,
@@ -233,11 +232,8 @@ export default {
 			state.settings.buttons.textInsert = payload;
 		},
 
-		deleteTextInsertButton(state, payload) {
-			state.settings.buttons.textInsert =
-				state.settings.buttons.textInsert.filter((c) => c.id !== payload);
-
-			state.tiIDArr = state.tiIDArr.filter((c) => c != payload);
+		deleteTextInsertButton(state, index) {
+			state.settings.buttons.textInsert.splice(index, 1);
 		},
 
 		addTextInsertButton(state) {
@@ -246,21 +242,16 @@ export default {
 				label: "Button",
 				icon: "",
 			});
-			state.tiIDArr.push(`ti-btn-${state.tiID}`);
 			state.tiID++;
 		},
 
 		updateTextInsertButton(state, payload) {
-			state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
-				(c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.tiIDArr = state.tiIDArr.filter((c) => c !== payload.id);
-							state.tiIDArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload); //Separate other properties from index
 
-						return { ...c, ...payload };
+			state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
+				(c, i) => {
+					if (i === payload.index) {
+						return { ...c, ...newObj };
 					}
 
 					return c;

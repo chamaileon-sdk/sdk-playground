@@ -10,6 +10,7 @@ import document from "./modules/emailDocument";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+	strict: true,
 	modules: {
 		editorConfig,
 		previewConfig,
