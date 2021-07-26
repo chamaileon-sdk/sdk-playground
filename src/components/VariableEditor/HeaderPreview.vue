@@ -12,7 +12,7 @@
 				<v-btn icon small class="mr-2">
 					<v-icon>mdi-arrow-left</v-icon>
 				</v-btn>
-				<span v-for="button in headerButtons.left" :key="button.id">
+				<span v-for="(button, ind) in headerButtons.left" :key="ind">
 					<v-btn v-if="!button.icon" outlined class="mr-2">
 						{{ button.label }}
 					</v-btn>
@@ -30,7 +30,7 @@
 
 		<div class="right-button-holder mr-3">
 			<div class="right-button-wrapper d-flex align-center">
-				<span v-for="button in headerButtons.right" :key="button.id">
+				<span v-for="(button, ind) in headerButtons.right" :key="ind">
 					<v-btn v-if="!button.icon" outlined class="ml-2">
 						{{ button.label }}
 					</v-btn>

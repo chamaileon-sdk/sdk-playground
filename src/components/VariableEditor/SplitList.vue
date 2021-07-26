@@ -13,30 +13,30 @@
 			>
 				<draggable handle=".dtrigger" v-model="buttonsLeft">
 					<ListItem3
-						v-for="item in buttonsLeft"
-						:key="item.id"
+						v-for="(item, ind) in buttonsLeft"
+						:key="ind"
 						:id="item.id"
 						:icon="item.icon"
 						:label="item.label"
 						@idChange="
 							updateLeftButton({
-								id: item.id,
-								newID: $event,
+								index: ind,
+								id: $event,
 							})
 						"
 						@labelChange="
 							updateLeftButton({
-								id: item.id,
+								index: ind,
 								label: $event,
 							})
 						"
 						@iconChange="
 							updateLeftButton({
-								id: item.id,
+								index: ind,
 								icon: $event,
 							})
 						"
-						@deleteClicked="deleteLeftButton(item.id)"
+						@deleteClicked="deleteLeftButton(ind)"
 						:split="true"
 					/>
 				</draggable>
@@ -55,30 +55,30 @@
 			>
 				<draggable handle=".dtrigger" v-model="buttonsRight">
 					<ListItem3
-						v-for="item in buttonsRight"
-						:key="item.id"
+						v-for="(item, ind) in buttonsRight"
+						:key="ind"
 						:id="item.id"
 						:icon="item.icon"
 						:label="item.label"
 						@idChange="
 							updateRightButton({
-								id: item.id,
-								newID: $event,
+								index: ind,
+								id: $event,
 							})
 						"
 						@labelChange="
 							updateRightButton({
-								id: item.id,
+								index: ind,
 								label: $event,
 							})
 						"
 						@iconChange="
 							updateRightButton({
-								id: item.id,
+								index: ind,
 								icon: $event,
 							})
 						"
-						@deleteClicked="deleteRightButton(item.id)"
+						@deleteClicked="deleteRightButton(ind)"
 						:split="true"
 					/>
 				</draggable>
