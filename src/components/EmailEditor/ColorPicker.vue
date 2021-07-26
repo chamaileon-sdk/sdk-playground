@@ -1,37 +1,37 @@
 <template>
-  <v-menu
-    v-model="colorPickerModal"
-    offset-y
-    top
-    min-width="200"
-    :close-on-content-click="false"
-  >
-    <template v-slot:activator="{ on: onVMenu }">
-      <div class="d-flex align-center" outlined>
-        <v-text-field
-          v-on="onVMenu"
-          dense
-          outlined
-          :value="color.hex"
-          :label="label"
-          :placeholder="color.hex"
-          hide-details="true"
-          @blur="color = $event.target.value"
-          @keyup.enter="color = $event.target.value"
-        >
-          <template v-slot:prepend-inner>
-            <div
-              v-on="onVMenu"
-              class="pa-3 mr-1 rounded-circle d-inline-block"
-              :style="`background-color: ${color.hex}`"
-            />
-          </template>
-        </v-text-field>
-      </div>
-    </template>
+	<v-menu
+		v-model="colorPickerModal"
+		offset-y
+		top
+		min-width="200"
+		:close-on-content-click="false"
+	>
+		<template v-slot:activator="{ on: onVMenu }">
+			<div class="d-flex align-center" outlined>
+				<v-text-field
+					v-on="onVMenu"
+					dense
+					outlined
+					:value="value"
+					:label="label"
+					:placeholder="value"
+					hide-details="true"
+					@blur="emitTarVal"
+					@keyup.enter="emitTarVal"
+				>
+					<template v-slot:prepend-inner>
+						<div
+							v-on="onVMenu"
+							class="pa-3 mr-1 rounded-circle d-inline-block"
+							:style="`background-color: ${value}`"
+						/>
+					</template>
+				</v-text-field>
+			</div>
+		</template>
 
-    <sketch-picker v-model="color" @input="this.input" />
-  </v-menu>
+		<sketch-picker :value="value" @input="emitHex" />
+	</v-menu>
 </template>
 
 <script>
@@ -54,27 +54,27 @@ export default {
 			type: Boolean,
 			default: false,
 		},
-		index: {
-			required: true,
-			type: Number,
-		},
 	},
+
 	methods: {
-		input() {
-			this.$emit("colorChange", this.color.hex);
+		emitTarVal(e) {
+			this.$emit("colorChange", e.target.value);
 		},
-	},
-	mounted() {
-		this.color.hex = this.value;
+
+		emitHex(e) {
+			this.$emit("colorChange", e.hex);
+		},
 	},
 	data() {
 		return {
-			color: {
-				hex: "#194d33e",
-			},
 			colorPresets: [],
 			colorPickerModal: false,
 		};
 	},
 };
+
+/*
+@blur="this.value = $event.target.value"
+					@keyup.enter="this.value = $event.target.value"
+*/
 </script>

@@ -1,10 +1,7 @@
 export default {
 	state: () => ({
-		idArr: [],
 		key: 0,
-		blIDArr: [],
 		blKey: 0,
-		tiIDArr: [],
 		tiID: 0,
 		user: {
 			enabled: true,
@@ -69,44 +66,21 @@ export default {
 				style: "text",
 			});
 
-			state.idArr.push(`yourBtn-${state.key}`);
 			state.key++;
 		},
-		removeEditorBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.filter(
-				(c) => {
-					if (c.id !== payload) return true;
-
-					if (c.items)
-						c.items.forEach((it) => {
-							state.idArr = state.idArr.filter((id) => id !== it.id);
-						});
-
-					return false;
-				}
-			);
-
-			state.idArr = state.idArr.filter((c) => c !== payload);
+		removeEditorBtn(state, index) {
+			state.settings.buttons.header.splice(index, 1);
 		},
 		updateEditorBtnOrder(state, payload) {
 			state.settings.buttons.header = payload;
 		},
 		updateEditorBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === payload.id) {
-					if ("newID" in payload) {
-						state.idArr = state.idArr.map((c) => {
-							if (c === payload.id) return payload.newID;
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.header[payload.index];
 
-							return c;
-						});
-						return { ...c, id: payload.newID };
-					}
-
-					return { ...c, ...payload };
-				}
-
-				return c;
+			state.settings.buttons.header.splice(payload.index, 1, {
+				...c,
+				...newObj,
 			});
 		},
 
@@ -122,62 +96,43 @@ export default {
 				items: [],
 			});
 
-			state.idArr.push(`yourBtn-${state.key}`);
 			state.key++;
 		},
 
 		removeEditorDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === payload.id) {
-					c.items = c.items.filter((c) => c.id !== payload.obj.id);
-					state.idArr = state.idArr.filter((c) => c !== payload.obj.id);
-				}
-
-				return c;
-			});
+			state.settings.buttons.header[payload.parentIndex].items.splice(
+				payload.obj.index,
+				1
+			);
 		},
 
-		addEditorDropdownBtn(state, id) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === id) {
-					c.items.push({
-						id: `yourBtn-${state.key}`,
-						icon: "at",
-						label: "",
-					});
-				}
-
-				return c;
+		addEditorDropdownBtn(state, index) {
+			state.settings.buttons.header[index].items.push({
+				id: `yourBtn-${state.key}`,
+				icon: "at",
+				label: "",
 			});
 
-			state.idArr.push(`yourBtn-${state.key}`);
 			state.key++;
 		},
 
 		updateEditorDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === payload.id) {
-					c.items = c.items.map((i) => {
-						if (i.id === payload.obj.id) {
-							if ("newID" in payload.obj) {
-								state.idArr = state.idArr.map((c) => {
-									if (c === payload.obj.id) return payload.obj.newID;
+			let newObj = (({ index, ...payload }) => payload)(payload.obj);
 
-									return c;
-								});
-
-								return { ...i, id: payload.obj.newID };
-							}
-
-							return { ...i, ...payload.obj };
-						}
-
-						return i;
-					});
+			state.settings.buttons.header[payload.parentIndex].items.splice(
+				payload.obj.index,
+				1,
+				{
+					...state.settings.buttons.header[payload.parentIndex].items[
+						payload.obj.index
+					],
+					...newObj,
 				}
+			);
+		},
 
-				return c;
-			});
+		updateEditorDropdownBtnOrder(state, payload) {
+			state.settings.buttons.header[payload.parentIndex].items = payload.newArr;
 		},
 
 		//Elements
@@ -194,37 +149,23 @@ export default {
 				accessLevel: "readOnly",
 			});
 
-			state.blIDArr.push(`${state.blKey}`);
 			state.blKey++;
 		},
 
-		removeBlockLibs(state, payload) {
-			state.blockLibraries = state.blockLibraries.filter(
-				(c) => c.id !== payload
-			);
-
-			state.blIDArr = state.blIDArr.filter((c) => c !== payload);
+		removeBlockLibs(state, index) {
+			state.blockLibraries.splice(index, 1);
 		},
 
 		updateBlockLibsOrder(state, payload) {
 			state.blockLibraries = payload;
 		},
 		updateBlockLibs(state, payload) {
-			state.blockLibraries = state.blockLibraries.map((c) => {
-				if (c.id === payload.id) {
-					if ("newID" in payload) {
-						state.blIDArr = state.blIDArr.map((c) => {
-							if (c === payload.id) return payload.newID;
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.blockLibraries[payload.index];
 
-							return c;
-						});
-						return { ...c, id: payload.newID };
-					}
-
-					return { ...c, ...payload };
-				}
-
-				return c;
+			state.blockLibraries.splice(payload.index, 1, {
+				...c,
+				...newObj,
 			});
 		},
 
@@ -233,11 +174,8 @@ export default {
 			state.settings.buttons.textInsert = payload;
 		},
 
-		deleteTextInsertButton(state, payload) {
-			state.settings.buttons.textInsert =
-				state.settings.buttons.textInsert.filter((c) => c.id !== payload);
-
-			state.tiIDArr = state.tiIDArr.filter((c) => c != payload);
+		deleteTextInsertButton(state, index) {
+			state.settings.buttons.textInsert.splice(index, 1);
 		},
 
 		addTextInsertButton(state) {
@@ -246,21 +184,16 @@ export default {
 				label: "Button",
 				icon: "",
 			});
-			state.tiIDArr.push(`ti-btn-${state.tiID}`);
 			state.tiID++;
 		},
 
 		updateTextInsertButton(state, payload) {
-			state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
-				(c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.tiIDArr = state.tiIDArr.filter((c) => c !== payload.id);
-							state.tiIDArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload); //Separate other properties from index
 
-						return { ...c, ...payload };
+			state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
+				(c, i) => {
+					if (i === payload.index) {
+						return { ...c, ...newObj };
 					}
 
 					return c;

@@ -30,30 +30,30 @@
 			>
 				<draggable handle=".dtrigger" v-model="btnArr">
 					<ListItem3
-						v-for="item in btnArr"
-						:key="item.id"
+						v-for="(item, ind) in btnArr"
+						:key="ind"
 						:id="item.id"
 						:icon="item.icon"
 						:label="item.label"
 						@idChange="
 							updateTextInsertButton({
-								id: item.id,
-								newID: $event,
+								index: ind,
+								id: $event,
 							})
 						"
 						@labelChange="
 							updateTextInsertButton({
-								id: item.id,
+								index: ind,
 								label: $event,
 							})
 						"
 						@iconChange="
 							updateTextInsertButton({
-								id: item.id,
+								index: ind,
 								icon: $event,
 							})
 						"
-						@deleteClicked="deleteTextInsertButton(item.id)"
+						@deleteClicked="deleteTextInsertButton(ind)"
 					/>
 				</draggable>
 			</div>

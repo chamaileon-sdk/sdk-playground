@@ -22,7 +22,7 @@
 					<v-icon class="grey--text text--darken-2"> mdi-content-save </v-icon>
 				</v-btn>
 
-				<div v-for="button in buttons" :key="button.id" class="mx-2">
+				<div v-for="(button, index) in buttons" :key="index" class="mx-2">
 					<v-btn
 						v-if="!button.items"
 						:id="button.id"
@@ -83,7 +83,10 @@
 							</v-btn>
 						</template>
 						<v-list v-if="button.items">
-							<v-list-item v-for="listItem in button.items" :key="listItem.id">
+							<v-list-item
+								v-for="(listItem, liIndex) in button.items"
+								:key="liIndex"
+							>
 								<v-list-item-action class="mx-2">
 									<v-icon> mdi-{{ listItem.icon }} </v-icon>
 								</v-list-item-action>

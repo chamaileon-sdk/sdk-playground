@@ -10,6 +10,7 @@ import document from "./modules/emailDocument";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+	strict: true,
 	modules: {
 		editorConfig,
 		previewConfig,
@@ -110,7 +111,6 @@ export default new Vuex.Store({
 			return state.document;
 		},
 
-		//TODO: move to editor
 		getConfigObject: (state) => {
 			//Deep copy
 			let x = JSON.parse(JSON.stringify(state.editorConfig));

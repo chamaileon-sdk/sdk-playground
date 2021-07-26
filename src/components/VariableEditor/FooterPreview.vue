@@ -1,27 +1,31 @@
 <template>
-  <v-card app height="64" flat class="d-flex align-center px-3 flex-wrap">
-    <span v-for="button in footerButtons.left" :key="button.label">
-      <v-btn v-if="!button.icon" outlined class="mr-2">
-        {{ button.label }}
-      </v-btn>
+	<v-card app height="64" flat class="d-flex align-center px-3 flex-wrap">
+		<div>
+			<span v-for="(button, ind) in footerButtons.left" :key="ind">
+				<v-btn v-if="!button.icon" outlined class="mr-2">
+					{{ button.label }}
+				</v-btn>
 
-      <v-btn v-if="button.icon" icon small class="mr-2">
-        <v-icon>{{ button.icon }}</v-icon>
-      </v-btn>
-    </span>
+				<v-btn v-if="button.icon" icon small class="mr-2">
+					<v-icon>mdi-{{ button.icon }}</v-icon>
+				</v-btn>
+			</span>
+		</div>
 
-    <v-spacer></v-spacer>
+		<v-spacer></v-spacer>
 
-    <span v-for="button in footerButtons.right" :key="button.label">
-      <v-btn v-if="!button.icon" outlined class="ml-2">
-        {{ button.label }}
-      </v-btn>
+		<div>
+			<span v-for="(button, ind) in footerButtons.right" :key="ind">
+				<v-btn v-if="!button.icon" outlined class="ml-2">
+					{{ button.label }}
+				</v-btn>
 
-      <v-btn v-if="button.icon" icon small class="ml-2">
-        <v-icon>{{ button.icon }}</v-icon>
-      </v-btn>
-    </span>
-  </v-card>
+				<v-btn v-if="button.icon" icon small class="ml-2">
+					<v-icon>mdi-{{ button.icon }}</v-icon>
+				</v-btn>
+			</span>
+		</div>
+	</v-card>
 </template>
 
 <script>

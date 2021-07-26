@@ -8,7 +8,7 @@
 		style="overflow-y: overlay"
 	>
 		<draggable v-model="buttonsArr" handle=".dtrigger">
-			<div v-for="(b, i) in buttonsArr" :key="b.id">
+			<div v-for="(b, i) in buttonsArr" :key="i">
 				<v-card
 					class="ma-0 pa-0 d-flex align-center"
 					outlined
@@ -31,7 +31,7 @@
 									hide-details="true"
 									label="ID"
 									:value="b.id"
-									@blur="updateID($event.target.value, b.id)"
+									@blur="updateID($event.target.value, i)"
 									outlined
 								></v-text-field>
 							</v-col>
@@ -43,20 +43,21 @@
 									class="ma-0 pa-0"
 									label="Style"
 									:items="['text', 'filled', 'depressed', 'outlined']"
-									v-model="b.style"
+									:value="b.style"
+									@change="updateStyle($event, i)"
 									outlined
 								></v-select>
 							</v-col>
 
 							<v-col class="py-0" cols="4" align-self="center" v-show="b.items">
-								<v-btn depressed outlined width="100%" @click="addDDBtn(b.id)">
+								<v-btn depressed outlined width="100%" @click="addDDBtn(i)">
 									<v-icon left> mdi-plus </v-icon>
 									Add Button
 								</v-btn>
 							</v-col>
 
 							<v-col class="py-0" cols="4" align-self="center">
-								<DeleteButton @click="deleteBtn(b.id)"></DeleteButton>
+								<DeleteButton @click="deleteBtn(i)"></DeleteButton>
 							</v-col>
 						</v-row>
 						<v-row class="px-6 pb-3">
@@ -66,17 +67,17 @@
 									hide-details="true"
 									label="Icon"
 									:value="b.icon"
-									@input="updateIcon($event, b.id)"
+									@input="updateIcon($event, i)"
 									outlined
 								></v-text-field>
 							</v-col>
 							<v-col class="py-0" cols="4">
 								<ColorPicker
+									:key="i"
 									class="pa-0"
 									:value="b.color"
 									:label="'Color'"
-									:index="i"
-									@colorChange="updateColor($event, b.id)"
+									@colorChange="updateColor($event, i)"
 								/>
 							</v-col>
 
@@ -86,17 +87,22 @@
 									hide-details="true"
 									label="Label"
 									:value="b.label"
-									@input="updateLabel($event, b.id)"
+									@input="updateLabel($event, i)"
 									outlined
 								></v-text-field>
 							</v-col>
 						</v-row>
 					</v-list-item-content>
 				</v-card>
-				<draggable handle=".dtrigger" v-show="b.items" v-model="b.items">
+				<draggable
+					handle=".dtrigger"
+					v-show="b.items"
+					:value="b.items"
+					@input="updateDDBtnOrder({ parentIndex: i, newArr: $event })"
+				>
 					<v-card
-						v-for="i in b.items"
-						:key="i.id"
+						v-for="(item, bi) in b.items"
+						:key="bi"
 						class="ma-0 pa-0 d-flex align-center mx-auto"
 						outlined
 						elevation="0"
@@ -113,9 +119,9 @@
 									dense
 									hide-details="true"
 									label="ID"
-									:value="i.id"
+									:value="item.id"
 									outlined
-									@blur="updateDDID($event.target.value, b.id, i.id)"
+									@blur="updateDDID($event.target.value, i, bi)"
 								></v-text-field>
 							</v-col>
 
@@ -124,12 +130,12 @@
 									dense
 									hide-details="true"
 									label="Icon"
-									:value="i.icon"
+									:value="item.icon"
 									outlined
 									@input="
 										updateDDBtn({
-											id: b.id,
-											obj: { id: i.id, icon: $event },
+											parentIndex: i,
+											obj: { index: bi, icon: $event },
 										})
 									"
 								></v-text-field>
@@ -140,12 +146,12 @@
 									dense
 									hide-details="true"
 									label="Label"
-									:value="i.label"
+									:value="item.label"
 									outlined
 									@input="
 										updateDDBtn({
-											id: b.id,
-											obj: { id: i.id, label: $event },
+											parentIndex: i,
+											obj: { index: bi, label: $event },
 										})
 									"
 								></v-text-field>
@@ -155,8 +161,8 @@
 								<DeleteButton
 									@click="
 										deleteDDBtn({
-											id: b.id,
-											obj: { id: i.id },
+											parentIndex: i,
+											obj: { index: bi },
 										})
 									"
 									class=""
@@ -192,22 +198,37 @@ export default {
 		ColorPicker,
 	},
 	methods: {
-		updateLabel(val, id) {
-			this.$store.commit(`update${this.section}Btn`, { id: id, label: val });
+		updateLabel(val, index) {
+			this.$store.commit(`update${this.section}Btn`, {
+				index: index,
+				label: val,
+			});
 		},
-		updateColor(val, id) {
-			this.$store.commit(`update${this.section}Btn`, { id: id, color: val });
+		updateColor(val, index) {
+			this.$store.commit(`update${this.section}Btn`, {
+				index: index,
+				color: val,
+			});
 		},
-		updateIcon(val, id) {
-			this.$store.commit(`update${this.section}Btn`, { id: id, icon: val });
+		updateIcon(val, index) {
+			this.$store.commit(`update${this.section}Btn`, {
+				index: index,
+				icon: val,
+			});
 		},
-		updateID(val, id) {
-			this.$store.commit(`update${this.section}Btn`, { id: id, newID: val });
+		updateStyle(val, index) {
+			this.$store.commit(`update${this.section}Btn`, {
+				index: index,
+				style: val,
+			});
 		},
-		updateDDID(val, pid, id) {
+		updateID(val, index) {
+			this.$store.commit(`update${this.section}Btn`, { index: index, id: val });
+		},
+		updateDDID(val, parentIndex, index) {
 			this.$store.commit(`update${this.section}DropdownBtn`, {
-				id: pid,
-				obj: { id: id, newID: val },
+				parentIndex: parentIndex,
+				obj: { index: index, id: val },
 			});
 		},
 		updateDDBtn(payload) {
@@ -218,6 +239,9 @@ export default {
 		},
 		deleteDDBtn(payload) {
 			this.$store.commit(`remove${this.section}DropdownBtn`, payload);
+		},
+		updateDDBtnOrder(payload) {
+			this.$store.commit(`update${this.section}DropdownBtnOrder`, payload);
 		},
 		deleteBtn(payload) {
 			this.$store.commit(`remove${this.section}Btn`, payload);
@@ -231,6 +255,18 @@ export default {
 			},
 			set(value) {
 				this.$store.commit(`update${this.section}BtnOrder`, value);
+			},
+		},
+		ddArrById: {
+			get(parentId) {
+				return this.$store.state[this.section.toLowerCase() + "Config"].settings
+					.buttons.header[parentId].items;
+			},
+			set(parentId, newArr) {
+				this.$store.commit(`update${this.section}DropdownBtnOrder`, {
+					parentId: parentId,
+					newArr: newArr,
+				});
 			},
 		},
 	},

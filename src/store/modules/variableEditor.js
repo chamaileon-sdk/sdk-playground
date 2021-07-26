@@ -5,7 +5,6 @@ export default {
 		fid: 0,
 		fidArr: [],
 		tid: 0,
-		tidArr: [],
 		settings: {
 			variablesToEdit: [],
 			buttons: {
@@ -49,11 +48,8 @@ export default {
 			state.settings.buttons.header.left = payload;
 		},
 
-		deleteVariableEditorHeaderLeftButton(state, payload) {
-			state.settings.buttons.header.left =
-				state.settings.buttons.header.left.filter((c) => c.id !== payload);
-
-			state.idArr = state.idArr.filter((c) => c != payload);
+		deleteVariableEditorHeaderLeftButton(state, index) {
+			state.settings.buttons.header.left.splice(index, 1);
 		},
 
 		addVariableEditorHeaderLeftButton(state) {
@@ -62,25 +58,17 @@ export default {
 				label: `Left ${state.id}`,
 				icon: "",
 			});
-			state.idArr.push(`ve-btn-${state.id}`);
 			state.id++;
 		},
 
 		updateVariableEditorHeaderLeftButton(state, payload) {
-			state.settings.buttons.header.left =
-				state.settings.buttons.header.left.map((c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.idArr = state.idArr.filter((c) => c !== payload.id);
-							state.idArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.header.left[payload.index];
 
-						return { ...c, ...payload };
-					}
-
-					return c;
-				});
+			state.settings.buttons.header.left.splice(payload.index, 1, {
+				...c,
+				...newObj,
+			});
 		},
 
 		//Right
@@ -88,11 +76,8 @@ export default {
 			state.settings.buttons.header.right = payload;
 		},
 
-		deleteVariableEditorHeaderRightButton(state, payload) {
-			state.settings.buttons.header.right =
-				state.settings.buttons.header.right.filter((c) => c.id !== payload);
-
-			state.idArr = state.idArr.filter((c) => c != payload);
+		deleteVariableEditorHeaderRightButton(state, index) {
+			state.settings.buttons.header.right.splice(index, 1);
 		},
 
 		addVariableEditorHeaderRightButton(state) {
@@ -101,25 +86,17 @@ export default {
 				label: `Right ${state.id}`,
 				icon: "",
 			});
-			state.idArr.push(`ve-btn-${state.id}`);
 			state.id++;
 		},
 
 		updateVariableEditorHeaderRightButton(state, payload) {
-			state.settings.buttons.header.right =
-				state.settings.buttons.header.right.map((c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.idArr = state.idArr.filter((c) => c !== payload.id);
-							state.idArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.header.right[payload.index];
 
-						return { ...c, ...payload };
-					}
-
-					return c;
-				});
+			state.settings.buttons.header.right.splice(payload.index, 1, {
+				...c,
+				...newObj,
+			});
 		},
 
 		//Footer left
@@ -127,11 +104,8 @@ export default {
 			state.settings.buttons.footer.left = payload;
 		},
 
-		deleteVariableEditorFooterLeftButton(state, payload) {
-			state.settings.buttons.footer.left =
-				state.settings.buttons.footer.left.filter((c) => c.id !== payload);
-
-			state.fidArr = state.fidArr.filter((c) => c != payload);
+		deleteVariableEditorFooterLeftButton(state, index) {
+			state.settings.buttons.footer.left.splice(index, 1);
 		},
 
 		addVariableEditorFooterLeftButton(state) {
@@ -140,36 +114,25 @@ export default {
 				label: `Left ${state.fid}`,
 				icon: "",
 			});
-			state.fidArr.push(`vf-btn-${state.fid}`);
 			state.fid++;
 		},
 
 		updateVariableEditorFooterLeftButton(state, payload) {
-			state.settings.buttons.footer.left =
-				state.settings.buttons.footer.left.map((c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.fidArr = state.fidArr.filter((c) => c !== payload.id);
-							state.fidArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.footer.left[payload.index];
 
-						return { ...c, ...payload };
-					}
-
-					return c;
-				});
+			state.settings.buttons.footer.left.splice(payload.index, 1, {
+				...c,
+				...newObj,
+			});
 		},
 
 		updateVariableEditorFooterRightOrder(state, payload) {
 			state.settings.buttons.footer.right = payload;
 		},
 
-		deleteVariableEditorFooterRightButton(state, payload) {
-			state.settings.buttons.footer.right =
-				state.settings.buttons.footer.right.filter((c) => c.id !== payload);
-
-			state.fidArr = state.fidArr.filter((c) => c != payload);
+		deleteVariableEditorFooterRightButton(state, index) {
+			state.settings.buttons.footer.right.splice(index, 1);
 		},
 
 		addVariableEditorFooterRightButton(state) {
@@ -178,25 +141,17 @@ export default {
 				label: `Right ${state.fid}`,
 				icon: "",
 			});
-			state.fidArr.push(`vf-btn-${state.fid}`);
 			state.fid++;
 		},
 
 		updateVariableEditorFooterRightButton(state, payload) {
-			state.settings.buttons.footer.right =
-				state.settings.buttons.footer.right.map((c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.fidArr = state.fidArr.filter((c) => c !== payload.id);
-							state.fidArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.footer.right[payload.index];
 
-						return { ...c, ...payload };
-					}
-
-					return c;
-				});
+			state.settings.buttons.footer.right.splice(payload.index, 1, {
+				...c,
+				...newObj,
+			});
 		},
 
 		//Text Insert
@@ -204,11 +159,8 @@ export default {
 			state.settings.buttons.textInsertPlugin = payload;
 		},
 
-		deleteVETextInsertButton(state, payload) {
-			state.settings.buttons.textInsertPlugin =
-				state.settings.buttons.textInsertPlugin.filter((c) => c.id !== payload);
-
-			state.tidArr = state.tidArr.filter((c) => c != payload);
+		deleteVETextInsertButton(state, index) {
+			state.settings.buttons.textInsertPlugin.splice(index, 1);
 		},
 
 		addVETextInsertButton(state) {
@@ -217,25 +169,17 @@ export default {
 				label: "Button",
 				icon: "",
 			});
-			state.tidArr.push(`ti-btn-${state.tid}`);
 			state.tid++;
 		},
 
 		updateVETextInsertButton(state, payload) {
-			state.settings.buttons.textInsertPlugin =
-				state.settings.buttons.textInsertPlugin.map((c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.tidArr = state.tidArr.filter((c) => c !== payload.id);
-							state.tidArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.textInsertPlugin[payload.index];
 
-						return { ...c, ...payload };
-					}
-
-					return c;
-				});
+			state.settings.buttons.textInsertPlugin.splice(payload.index, 1, {
+				...c,
+				...newObj,
+			});
 		},
 	},
 	actions: {},
