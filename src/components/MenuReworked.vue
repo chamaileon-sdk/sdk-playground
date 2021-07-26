@@ -38,7 +38,7 @@
 							v-for="c in m.children"
 							:key="c.to"
 							link
-							:href="c.to"
+							:to="{ path: m.to, hash: c.to }"
 						>
 							<v-list-item-icon class="ml-9">
 								<v-icon>mdi-{{ c.icon }}</v-icon>

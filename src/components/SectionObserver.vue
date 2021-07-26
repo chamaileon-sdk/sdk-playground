@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	mounted() {
+	/*mounted() {
 		this.observer = new IntersectionObserver(this.handleIntersect, {
 			threshold: 0.75,
 			//rootMargin: '-20% 0% -80% 0%',
@@ -46,7 +46,7 @@ export default {
 				}
 			});
 		},
-	},
+	},*/
 };
 </script>
 
