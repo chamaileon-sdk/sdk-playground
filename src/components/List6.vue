@@ -73,10 +73,10 @@
 							</v-col>
 							<v-col class="py-0" cols="4">
 								<ColorPicker
+									:key="i"
 									class="pa-0"
 									:value="b.color"
 									:label="'Color'"
-									:index="i"
 									@colorChange="updateColor($event, i)"
 								/>
 							</v-col>
