@@ -26,7 +26,7 @@
 				class="mt-8 list3"
 				style="max-height: 222px; overflow-y: auto"
 			>
-				<draggable v-model.lazy="btnArr">
+				<draggable handle=".dtrigger" v-model.lazy="btnArr">
 					<ListItem3
 						v-for="item in btnArr"
 						:key="item.id"
