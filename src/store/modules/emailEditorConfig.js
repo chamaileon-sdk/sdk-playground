@@ -68,44 +68,20 @@ export default {
 				style: "text",
 			});
 
-			state.idArr.push(`yourBtn-${state.key}`);
 			state.key++;
 		},
-		removeEditorBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.filter(
-				(c) => {
-					if (c.id !== payload) return true;
-
-					if (c.items)
-						c.items.forEach((it) => {
-							state.idArr = state.idArr.filter((id) => id !== it.id);
-						});
-
-					return false;
-				}
-			);
-
-			state.idArr = state.idArr.filter((c) => c !== payload);
+		removeEditorBtn(state, index) {
+			state.settings.buttons.header.splice(index, 1);
 		},
 		updateEditorBtnOrder(state, payload) {
 			state.settings.buttons.header = payload;
 		},
 		updateEditorBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === payload.id) {
-					if ("newID" in payload) {
-						state.idArr = state.idArr.map((c) => {
-							if (c === payload.id) return payload.newID;
+			let newObj = (({ index, ...payload }) => payload)(payload);
 
-							return c;
-						});
-						return { ...c, id: payload.newID };
-					}
-
-					return { ...c, ...payload };
-				}
-
-				return c;
+			state.settings.buttons.header.splice(payload.index, 1, {
+				...c,
+				...newObj,
 			});
 		},
 
@@ -121,62 +97,39 @@ export default {
 				items: [],
 			});
 
-			state.idArr.push(`yourBtn-${state.key}`);
 			state.key++;
 		},
 
 		removeEditorDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === payload.id) {
-					c.items = c.items.filter((c) => c.id !== payload.obj.id);
-					state.idArr = state.idArr.filter((c) => c !== payload.obj.id);
-				}
-
-				return c;
-			});
+			state.settings.buttons.header[payload.parentIndex].items.splice(
+				payload.obj.index,
+				1
+			);
 		},
 
-		addEditorDropdownBtn(state, id) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === id) {
-					c.items.push({
-						id: `yourBtn-${state.key}`,
-						icon: "at",
-						label: "",
-					});
-				}
-
-				return c;
+		addEditorDropdownBtn(state, index) {
+			state.settings.buttons.header[index].items.push({
+				id: `yourBtn-${state.key}`,
+				icon: "at",
+				label: "",
 			});
 
-			state.idArr.push(`yourBtn-${state.key}`);
 			state.key++;
 		},
 
 		updateEditorDropdownBtn(state, payload) {
-			state.settings.buttons.header = state.settings.buttons.header.map((c) => {
-				if (c.id === payload.id) {
-					c.items = c.items.map((i) => {
-						if (i.id === payload.obj.id) {
-							if ("newID" in payload.obj) {
-								state.idArr = state.idArr.map((c) => {
-									if (c === payload.obj.id) return payload.obj.newID;
+			let newObj = (({ index, ...payload }) => payload)(payload.obj);
 
-									return c;
-								});
-
-								return { ...i, id: payload.obj.newID };
-							}
-
-							return { ...i, ...payload.obj };
-						}
-
-						return i;
-					});
+			state.settings.buttons.header[payload.parentIndex].items.splice(
+				payload.obj.index,
+				1,
+				{
+					...state.settings.buttons.header[payload.parentIndex].items[
+						payload.obj.index
+					],
+					...newObj,
 				}
-
-				return c;
-			});
+			);
 		},
 
 		//Elements
