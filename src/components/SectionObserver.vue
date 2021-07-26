@@ -6,7 +6,7 @@
 
 <script>
 export default {
-	/*mounted() {
+	mounted() {
 		this.observer = new IntersectionObserver(this.handleIntersect, {
 			threshold: 0.75,
 			//rootMargin: '-20% 0% -80% 0%',
@@ -32,13 +32,13 @@ export default {
 					window.history.pushState(
 						null,
 						null,
-						this.$route.path + "#" + c.target.id
+						this.$route.path + `#${c.target.id}`
 					);
 
 					this.$router
 						.replace({
 							...this.$route,
-							hash: "#" + c.target.id,
+							hash: `#${c.target.id}`,
 						})
 						.catch(() => {});
 
@@ -46,7 +46,7 @@ export default {
 				}
 			});
 		},
-	},*/
+	},
 };
 </script>
 

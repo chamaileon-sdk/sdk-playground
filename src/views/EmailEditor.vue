@@ -1,9 +1,10 @@
 <template>
 	<div>
-		<div class="section">
-			<EmailEditorDescription />
-		</div>
 		<SectionObserver>
+			<div class="section" id="home">
+				<EmailEditorDescription />
+			</div>
+
 			<div class="section" id="header">
 				<Header />
 			</div>
