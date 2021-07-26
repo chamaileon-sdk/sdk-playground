@@ -18,7 +18,11 @@
 
 			<div class="share-button-container">
 				<div v-if="headerButtons" class="d-flex align-center justify-end">
-					<div v-for="button in headerButtons" :key="button.id" class="mx-2">
+					<div
+						v-for="(button, index) in headerButtons"
+						:key="index"
+						class="mx-2"
+					>
 						<!--<v-badge
               class="badge"
               :color="button.badge.color"
@@ -57,8 +61,8 @@
 							</template>
 							<v-list v-if="button.items">
 								<v-list-item
-									v-for="listItem in button.items"
-									:key="listItem.id"
+									v-for="(listItem, liIndex) in button.items"
+									:key="liIndex"
 								>
 									<v-list-item-action class="mx-2">
 										<v-icon> mdi-{{ listItem.icon }} </v-icon>

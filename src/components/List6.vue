@@ -43,7 +43,8 @@
 									class="ma-0 pa-0"
 									label="Style"
 									:items="['text', 'filled', 'depressed', 'outlined']"
-									v-model="b.style"
+									:value="b.style"
+									@change="updateStyle($event, i)"
 									outlined
 								></v-select>
 							</v-col>
@@ -208,6 +209,12 @@ export default {
 			this.$store.commit(`update${this.section}Btn`, {
 				index: index,
 				icon: val,
+			});
+		},
+		updateStyle(val, index) {
+			this.$store.commit(`update${this.section}Btn`, {
+				index: index,
+				style: val,
 			});
 		},
 		updateID(val, index) {

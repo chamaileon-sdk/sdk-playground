@@ -1,6 +1,5 @@
 export default {
 	state: () => ({
-		idArr: [],
 		key: 0,
 		blIDArr: [],
 		blKey: 0,
@@ -78,6 +77,7 @@ export default {
 		},
 		updateEditorBtn(state, payload) {
 			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.header[payload.index];
 
 			state.settings.buttons.header.splice(payload.index, 1, {
 				...c,
