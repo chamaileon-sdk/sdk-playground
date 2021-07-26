@@ -84,7 +84,6 @@ export default {
 			});
 		},
 
-		//TODO: add dropdown button order updater as it is currently being mutated
 		//Dropdown
 		addEditorDropdown(state) {
 			state.settings.buttons.header.push({
