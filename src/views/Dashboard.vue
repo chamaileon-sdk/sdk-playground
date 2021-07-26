@@ -1,6 +1,14 @@
 <template>
 	<div>
 		<SectionObserver>
+			<div class="section" id="home">
+				<Description
+					:title="'Chamaileon SDK'"
+					:docUrl="'https://chamaileon.io/sdk/docs/'"
+					:paragraph1="paragraph1"
+					:paragraph2="paragraph2"
+				/>
+			</div>
 			<div class="section" id="sdklogo">
 				<Logo />
 			</div>
@@ -25,8 +33,18 @@ import Logo from "../components/Dashboard/Logo.vue";
 import Language from "../components/Dashboard/Language.vue";
 import Colors from "../components/Dashboard/Colors.vue";
 import SplashScreen from "../components/Dashboard/SplashScreen.vue";
+import Description from "../components/ViewDescription.vue";
 
 export default {
+	data() {
+		return {
+			paragraph1:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+			paragraph2:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+		};
+	},
+
 	components: {
 		SectionObserver,
 		Footer,
@@ -34,6 +52,7 @@ export default {
 		Colors,
 		SplashScreen,
 		Language,
+		Description,
 	},
 };
 </script>

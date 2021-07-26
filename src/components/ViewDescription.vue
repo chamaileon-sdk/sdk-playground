@@ -1,19 +1,14 @@
 <template>
 	<div>
-		<h1>Email Editor</h1>
+		<h1>{{ title }}</h1>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum autem,
-			saepe optio officia laudantium sunt architecto quis praesentium explicabo
-			quo veniam ducimus atque deleniti asperiores cupiditate molestiae et.
-			Recusandae, cum!
+			{{ paragraph1 }}
 		</p>
 
 		<p>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem
-			incidunt, voluptate laborum temporibus iste sequi soluta atque molestias
-			dolorum error cumque! Iste beatae ad sint alias repellat illo libero
-			similique.
+			{{ paragraph2 }}
 		</p>
+
 		<OptionWrapper
 			style="
 				background-color: rgba(0, 0, 0, 0) !important;
@@ -23,7 +18,7 @@
 		>
 			<div class="d-flex">
 				<v-btn
-					href="https://chamaileon.io/sdk/docs/email-editor/"
+					:href="docUrl"
 					target="_blank"
 					class="ml-auto ma-0"
 					text
@@ -41,6 +36,13 @@
 import OptionWrapper from "./optionWrapper.vue";
 
 export default {
+	props: {
+		title: String,
+		paragraph1: String,
+		paragraph2: String,
+		docUrl: String,
+	},
+
 	components: {
 		OptionWrapper,
 	},
