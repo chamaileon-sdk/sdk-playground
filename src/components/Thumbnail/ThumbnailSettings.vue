@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 import OptionWrapper from "../optionWrapper.vue";
 
 export default {
