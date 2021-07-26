@@ -28,30 +28,30 @@
 			>
 				<draggable handle=".dtrigger" v-model.lazy="btnArr">
 					<ListItem3
-						v-for="item in btnArr"
-						:key="item.id"
+						v-for="(item, ind) in btnArr"
+						:key="ind"
 						:id="item.id"
 						:icon="item.icon"
 						:label="item.label"
 						@idChange="
 							updateVETextInsertButton({
-								id: item.id,
-								newID: $event,
+								index: ind,
+								id: $event,
 							})
 						"
 						@labelChange="
 							updateVETextInsertButton({
-								id: item.id,
+								index: ind,
 								label: $event,
 							})
 						"
 						@iconChange="
 							updateVETextInsertButton({
-								id: item.id,
+								index: ind,
 								icon: $event,
 							})
 						"
-						@deleteClicked="deleteVETextInsertButton(item.id)"
+						@deleteClicked="deleteVETextInsertButton(ind)"
 					/>
 				</draggable>
 			</div>

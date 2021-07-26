@@ -204,11 +204,8 @@ export default {
 			state.settings.buttons.textInsertPlugin = payload;
 		},
 
-		deleteVETextInsertButton(state, payload) {
-			state.settings.buttons.textInsertPlugin =
-				state.settings.buttons.textInsertPlugin.filter((c) => c.id !== payload);
-
-			state.tidArr = state.tidArr.filter((c) => c != payload);
+		deleteVETextInsertButton(state, index) {
+			state.settings.buttons.textInsertPlugin.splice(index, 1);
 		},
 
 		addVETextInsertButton(state) {
@@ -217,25 +214,17 @@ export default {
 				label: "Button",
 				icon: "",
 			});
-			state.tidArr.push(`ti-btn-${state.tid}`);
 			state.tid++;
 		},
 
 		updateVETextInsertButton(state, payload) {
-			state.settings.buttons.textInsertPlugin =
-				state.settings.buttons.textInsertPlugin.map((c) => {
-					if (c.id === payload.id) {
-						if (payload.newID) {
-							state.tidArr = state.tidArr.filter((c) => c !== payload.id);
-							state.tidArr.push(payload.newID);
-							return { ...c, id: payload.newID };
-						}
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.settings.buttons.textInsertPlugin[payload.index];
 
-						return { ...c, ...payload };
-					}
-
-					return c;
-				});
+			state.settings.buttons.textInsertPlugin.splice(payload.index, 1, {
+				...c,
+				...newObj,
+			});
 		},
 	},
 	actions: {},
