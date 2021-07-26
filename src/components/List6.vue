@@ -7,7 +7,7 @@
 		max-height="360"
 		style="overflow-y: overlay"
 	>
-		<draggable v-model="buttonsArr">
+		<draggable v-model="buttonsArr" handle=".dtrigger">
 			<div v-for="(b, i) in buttonsArr" :key="b.id">
 				<v-card
 					class="ma-0 pa-0 d-flex align-center"
@@ -16,7 +16,7 @@
 					tile
 				>
 					<v-list-item-icon class="align-self-center ma-0 ml-6">
-						<v-icon>mdi-menu</v-icon>
+						<v-icon class="dtrigger">mdi-menu</v-icon>
 					</v-list-item-icon>
 					<v-list-item-content>
 						<v-row class="px-6 pt-3">
@@ -93,7 +93,7 @@
 						</v-row>
 					</v-list-item-content>
 				</v-card>
-				<draggable v-show="b.items" v-model="b.items">
+				<draggable handle=".dtrigger" v-show="b.items" v-model="b.items">
 					<v-card
 						v-for="i in b.items"
 						:key="i.id"
@@ -105,7 +105,7 @@
 						style="overflow-y: hidden"
 					>
 						<v-list-item-icon class="align-self-center ma-0 ml-6">
-							<v-icon>mdi-menu</v-icon>
+							<v-icon class="dtrigger">mdi-menu</v-icon>
 						</v-list-item-icon>
 						<v-row class="px-6 ma-0">
 							<v-col cols="3" align-self="center">

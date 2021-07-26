@@ -11,7 +11,7 @@
 				class="mt-8 list3"
 				style="max-height: 260px; overflow-y: auto"
 			>
-				<draggable v-model="buttonsLeft">
+				<draggable handle=".dtrigger" v-model="buttonsLeft">
 					<ListItem3
 						v-for="item in buttonsLeft"
 						:key="item.id"
@@ -53,7 +53,7 @@
 				class="mt-8 list3"
 				style="max-height: 260px; overflow-y: auto"
 			>
-				<draggable v-model="buttonsRight">
+				<draggable handle=".dtrigger" v-model="buttonsRight">
 					<ListItem3
 						v-for="item in buttonsRight"
 						:key="item.id"

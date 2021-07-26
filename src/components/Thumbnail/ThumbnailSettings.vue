@@ -72,7 +72,12 @@ import OptionWrapper from "../optionWrapper.vue";
 
 export default {
 	mounted() {
-		this.openThumbnail();
+		let interval = setInterval(() => {
+			if (this.$store.state.sdk) {
+				clearInterval(interval);
+				this.openThumbnail();
+			}
+		}, 500);
 	},
 	components: {
 		OptionWrapper,

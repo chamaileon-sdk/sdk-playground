@@ -25,7 +25,7 @@
 				max-height="396"
 				style="overflow-y: auto"
 			>
-				<draggable v-model="blockLibsArr">
+				<draggable handle=".dtrigger" v-model="blockLibsArr">
 					<div v-for="b in blockLibsArr" :key="b.id">
 						<v-card
 							class="ma-0 pa-0 d-flex align-center"
@@ -34,7 +34,7 @@
 							tile
 						>
 							<v-list-item-icon class="align-self-center ma-0 ml-6">
-								<v-icon>mdi-menu</v-icon>
+								<v-icon class="dtrigger">mdi-menu</v-icon>
 							</v-list-item-icon>
 							<v-list-item-content>
 								<v-row class="px-6">
