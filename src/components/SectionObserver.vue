@@ -32,13 +32,13 @@ export default {
 					window.history.pushState(
 						null,
 						null,
-						this.$route.path + "#" + c.target.id
+						this.$route.path + `#${c.target.id}`
 					);
 
 					this.$router
 						.replace({
 							...this.$route,
-							hash: "#" + c.target.id,
+							hash: `#${c.target.id}`,
 						})
 						.catch(() => {});
 

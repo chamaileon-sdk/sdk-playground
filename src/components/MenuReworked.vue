@@ -15,12 +15,12 @@
 			<v-list>
 				<template v-for="(m, ind) in Menu">
 					<v-list-item
-						class="pl-10"
+						:key="ind"
+						class="pl-10 scrollactive-item"
 						color="primary"
 						v-ripple="{ class: `primary--text` }"
-						:key="ind"
 						exact
-						:to="{ path: m.to }"
+						:to="{ path: m.to, hash: 'home' }"
 					>
 						<v-list-item-icon>
 							<v-icon>mdi-{{ m.icon }}</v-icon>
@@ -38,7 +38,7 @@
 							v-for="c in m.children"
 							:key="c.to"
 							link
-							:href="c.to"
+							:to="{ path: m.to, hash: c.to }"
 						>
 							<v-list-item-icon class="ml-9">
 								<v-icon>mdi-{{ c.icon }}</v-icon>

@@ -1,6 +1,15 @@
 <template>
 	<div>
 		<SectionObserver>
+			<div class="section" id="home">
+				<Description
+					:title="'Email Variable Editor'"
+					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
+					:paragraph1="paragraph1"
+					:paragraph2="paragraph2"
+				/>
+			</div>
+
 			<div class="section" id="variablestoedit">
 				<VariablesToEdit />
 			</div>
@@ -30,8 +39,18 @@ import Footer from "../components/VariableEditor/Footer.vue";
 import TextInsert from "../components/VariableEditor/TextInsert.vue";
 import VariablesToEdit from "../components/VariableEditor/VariablesToEdit.vue";
 import NavFooter from "../components/Footer.vue";
+import Description from "../components/ViewDescription.vue";
 
 export default {
+	data() {
+		return {
+			paragraph1:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+			paragraph2:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+		};
+	},
+
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},
@@ -46,6 +65,7 @@ export default {
 		SectionObserver,
 		OpenButton,
 		VariablesToEdit,
+		Description,
 	},
 	methods: {
 		async openEditor() {

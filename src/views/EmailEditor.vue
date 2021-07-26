@@ -1,9 +1,15 @@
 <template>
 	<div>
-		<div class="section">
-			<EmailEditorDescription />
-		</div>
 		<SectionObserver>
+			<div class="section" id="home">
+				<Description
+					:title="'Email Editor'"
+					:docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
+					:paragraph1="paragraph1"
+					:paragraph2="paragraph2"
+				/>
+			</div>
+
 			<div class="section" id="header">
 				<Header />
 			</div>
@@ -48,11 +54,20 @@ import BlockLibraries from "../components/EmailEditor/BlockLibraries";
 import TextInsert from "../components/EmailEditor/TextInsert";
 import Addons from "../components/EmailEditor/Addons";
 import Settings from "../components/EmailEditor/Settings";
-import EmailEditorDescription from "../components/EmailEditorDescription.vue";
+import Description from "../components/ViewDescription.vue";
 
 import { mapGetters, mapState } from "vuex";
 
 export default {
+	data() {
+		return {
+			paragraph1:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+			paragraph2:
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+		};
+	},
+
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},
@@ -69,7 +84,7 @@ export default {
 		Addons,
 		Settings,
 		OpenButton,
-		EmailEditorDescription,
+		Description,
 	},
 
 	methods: {
