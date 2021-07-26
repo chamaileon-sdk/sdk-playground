@@ -26,7 +26,7 @@
 				style="overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="blockLibsArr">
-					<div v-for="b in blockLibsArr" :key="b.id">
+					<div v-for="(b, ind) in blockLibsArr" :key="ind">
 						<v-card
 							class="ma-0 pa-0 d-flex align-center"
 							outlined
@@ -44,7 +44,7 @@
 											hide-details="true"
 											label="ID"
 											:value="b.id"
-											@blur="updateID($event.target.value, b.id)"
+											@input="updateBlockLibs({ index: ind, id: $event })"
 											outlined
 										></v-text-field>
 									</v-col>
@@ -55,7 +55,7 @@
 											hide-details="true"
 											label="Label"
 											:value="b.label"
-											@input="updateBlockLibs({ id: b.id, label: $event })"
+											@input="updateBlockLibs({ index: ind, label: $event })"
 											outlined
 										></v-text-field>
 									</v-col>
@@ -68,14 +68,14 @@
 											:value="b.accessLevel"
 											:items="['readOnly', 'readWrite']"
 											@change="
-												updateBlockLibs({ id: b.id, accessLevel: $event })
+												updateBlockLibs({ index: ind, accessLevel: $event })
 											"
 											outlined
 										></v-select>
 									</v-col>
 
 									<v-col cols="3" align-self="center" class="ml-auto">
-										<DeleteButton @click="removeBlockLibs(b.id)"></DeleteButton>
+										<DeleteButton @click="removeBlockLibs(ind)"></DeleteButton>
 									</v-col>
 								</v-row>
 							</v-list-item-content>

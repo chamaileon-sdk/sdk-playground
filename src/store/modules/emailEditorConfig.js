@@ -1,7 +1,6 @@
 export default {
 	state: () => ({
 		key: 0,
-		blIDArr: [],
 		blKey: 0,
 		tiID: 0,
 		user: {
@@ -146,37 +145,23 @@ export default {
 				accessLevel: "readOnly",
 			});
 
-			state.blIDArr.push(`${state.blKey}`);
 			state.blKey++;
 		},
 
-		removeBlockLibs(state, payload) {
-			state.blockLibraries = state.blockLibraries.filter(
-				(c) => c.id !== payload
-			);
-
-			state.blIDArr = state.blIDArr.filter((c) => c !== payload);
+		removeBlockLibs(state, index) {
+			state.blockLibraries.splice(index, 1);
 		},
 
 		updateBlockLibsOrder(state, payload) {
 			state.blockLibraries = payload;
 		},
 		updateBlockLibs(state, payload) {
-			state.blockLibraries = state.blockLibraries.map((c) => {
-				if (c.id === payload.id) {
-					if ("newID" in payload) {
-						state.blIDArr = state.blIDArr.map((c) => {
-							if (c === payload.id) return payload.newID;
+			let newObj = (({ index, ...payload }) => payload)(payload);
+			let c = state.blockLibraries[payload.index];
 
-							return c;
-						});
-						return { ...c, id: payload.newID };
-					}
-
-					return { ...c, ...payload };
-				}
-
-				return c;
+			state.blockLibraries.splice(payload.index, 1, {
+				...c,
+				...newObj,
 			});
 		},
 
