@@ -10,7 +10,7 @@
 				/>
 			</div>
 			<div class="section" id="header">
-				<Header :actLogoCreator="this.creatorFunction" />
+				<Header />
 			</div>
 		</SectionObserver>
 		<Footer
