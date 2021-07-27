@@ -20,7 +20,7 @@
 			</template>
 			<v-card
 				v-if="blockLibsArr.length > 0"
-				class="mx-auto mt-7 list3"
+				class="mx-auto mt-7 list3 rounded-0"
 				elevation="0"
 				max-height="396"
 				style="overflow-y: auto"
