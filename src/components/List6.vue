@@ -9,12 +9,7 @@
 	>
 		<draggable v-model="buttonsArr" handle=".dtrigger">
 			<div v-for="(b, i) in buttonsArr" :key="i">
-				<v-card
-					class="ma-0 pa-2 d-flex align-center"
-					outlined
-					elevation="0"
-					tile
-				>
+				<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
 					<v-list-item-icon class="align-self-center ma-0 ml-3 mr-3">
 						<v-icon class="dtrigger">mdi-menu</v-icon>
 					</v-list-item-icon>
@@ -171,6 +166,7 @@
 						</v-row>
 					</v-card>
 				</draggable>
+				<v-divider></v-divider>
 			</div>
 		</draggable>
 	</v-card>

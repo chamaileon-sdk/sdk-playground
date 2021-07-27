@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Addons</h1>
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum autem,
@@ -77,7 +77,7 @@
 				</v-row>
 			</v-card>
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

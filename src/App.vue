@@ -143,12 +143,17 @@ html::-webkit-scrollbar {
 }
 
 h1 {
-	margin-bottom: 16px;
+	margin-bottom: 3px;
 }
 
 h3 {
-	margin-top: 32px;
+	margin-top: 64px;
 	margin-bottom: 8px;
+}
+
+p {
+	margin-top: 9px !important;
+	margin-bottom: 9px !important;
 }
 
 /*.editorContainer {

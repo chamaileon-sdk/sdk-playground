@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Settings</h1>
 		<p>
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error ut
@@ -69,7 +69,7 @@
 				></v-switch>
 			</v-card>
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

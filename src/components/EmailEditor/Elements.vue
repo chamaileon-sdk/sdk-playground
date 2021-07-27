@@ -1,133 +1,133 @@
 <template>
-  <div>
-    <h1>Elements</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-      praesentium, ad architecto beatae provident, pariatur doloremque
-      exercitationem quidem soluta, est magnam nemo similique. Fugit sunt atque
-      iste est maxime cum!
-    </p>
+	<v-app>
+		<h1>Elements</h1>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
+			praesentium, ad architecto beatae provident, pariatur doloremque
+			exercitationem quidem soluta, est magnam nemo similique. Fugit sunt atque
+			iste est maxime cum!
+		</p>
 
-    <h3>Content</h3>
-    <OptionWrapper>
-      <v-row class="ma-0 pa-0 mx-n3">
-        <v-col
-          class="my-0 py-0"
-          cols="2"
-          v-for="(element, index) in contentElements"
-          :key="index"
-          @click="toggleElement({ type: 'content', element: element.type })"
-        >
-          <v-btn
-            depressed
-            class="pa-0 d-flex"
-            height="100%"
-            width="100%"
-            :color="elementsArr.content[element.type] ? 'primary' : 'white'"
-          >
-            <v-responsive :aspect-ratio="1">
-              <div
-                class="d-flex flex-column justify-space-around"
-                style="height: 100%;"
-              >
-                <div>
-                  <v-icon x-large>
-                    {{ element.icon }}
-                  </v-icon>
-                  <div v-if="element.alt">
-                    {{ element.alt }}
-                  </div>
-                  <div v-else class="element-break-word">
-                    {{ element.type }}
-                  </div>
-                </div>
-              </div>
-            </v-responsive>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </OptionWrapper>
+		<h3>Content</h3>
+		<OptionWrapper>
+			<v-row class="ma-0 pa-0 mx-n3">
+				<v-col
+					class="my-0 py-0"
+					cols="2"
+					v-for="(element, index) in contentElements"
+					:key="index"
+					@click="toggleElement({ type: 'content', element: element.type })"
+				>
+					<v-btn
+						depressed
+						class="pa-0 d-flex"
+						height="100%"
+						width="100%"
+						:color="elementsArr.content[element.type] ? 'primary' : 'white'"
+					>
+						<v-responsive :aspect-ratio="1">
+							<div
+								class="d-flex flex-column justify-space-around"
+								style="height: 100%"
+							>
+								<div>
+									<v-icon x-large>
+										{{ element.icon }}
+									</v-icon>
+									<div v-if="element.alt">
+										{{ element.alt }}
+									</div>
+									<div v-else class="element-break-word">
+										{{ element.type }}
+									</div>
+								</div>
+							</div>
+						</v-responsive>
+					</v-btn>
+				</v-col>
+			</v-row>
+		</OptionWrapper>
 
-    <h3>Structure</h3>
-    <OptionWrapper>
-      <v-row class="ma-0 pa-0 mx-n3">
-        <v-col
-          class="my-0 py-0"
-          cols="2"
-          v-for="(element, index) in structureElements"
-          :key="index"
-          @click="toggleElement({ type: 'structure', element: element.type })"
-        >
-          <v-btn
-            depressed
-            class="pa-0 d-flex"
-            height="100%"
-            width="100%"
-            :color="elementsArr.structure[element.type] ? 'primary' : 'white'"
-          >
-            <v-responsive :aspect-ratio="1">
-              <div
-                class="d-flex flex-column justify-space-around"
-                style="height: 100%;"
-              >
-                <div>
-                  <v-icon x-large>
-                    {{ element.icon }}
-                  </v-icon>
-                  <div v-if="element.alt">
-                    {{ element.alt }}
-                  </div>
-                  <div v-else class="element-break-word">
-                    {{ element.type }}
-                  </div>
-                </div>
-              </div>
-            </v-responsive>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </OptionWrapper>
+		<h3>Structure</h3>
+		<OptionWrapper>
+			<v-row class="ma-0 pa-0 mx-n3">
+				<v-col
+					class="my-0 py-0"
+					cols="2"
+					v-for="(element, index) in structureElements"
+					:key="index"
+					@click="toggleElement({ type: 'structure', element: element.type })"
+				>
+					<v-btn
+						depressed
+						class="pa-0 d-flex"
+						height="100%"
+						width="100%"
+						:color="elementsArr.structure[element.type] ? 'primary' : 'white'"
+					>
+						<v-responsive :aspect-ratio="1">
+							<div
+								class="d-flex flex-column justify-space-around"
+								style="height: 100%"
+							>
+								<div>
+									<v-icon x-large>
+										{{ element.icon }}
+									</v-icon>
+									<div v-if="element.alt">
+										{{ element.alt }}
+									</div>
+									<div v-else class="element-break-word">
+										{{ element.type }}
+									</div>
+								</div>
+							</div>
+						</v-responsive>
+					</v-btn>
+				</v-col>
+			</v-row>
+		</OptionWrapper>
 
-    <h3>Advanced</h3>
-    <OptionWrapper>
-      <v-row class="ma-0 pa-0 mx-n3">
-        <v-col
-          class="my-0 py-0"
-          cols="2"
-          v-for="(element, index) in advancedElements"
-          :key="index"
-          @click="toggleElement({ type: 'advanced', element: element.type })"
-        >
-          <v-btn
-            depressed
-            class="pa-0 d-flex"
-            height="100%"
-            width="100%"
-            :color="elementsArr.advanced[element.type] ? 'primary' : 'white'"
-          >
-            <v-responsive :aspect-ratio="1">
-              <div
-                class="d-flex flex-column justify-space-around"
-                style="height: 100%;"
-              >
-                <div>
-                  <v-icon x-large>
-                    {{ element.icon }}
-                  </v-icon>
-                  <div v-if="element.alt">
-                    {{ element.alt }}
-                  </div>
-                  <div v-else class="element-break-word">
-                    {{ element.type }}
-                  </div>
-                </div>
-              </div>
-            </v-responsive>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </OptionWrapper>
-  </div>
+		<h3>Advanced</h3>
+		<OptionWrapper>
+			<v-row class="ma-0 pa-0 mx-n3">
+				<v-col
+					class="my-0 py-0"
+					cols="2"
+					v-for="(element, index) in advancedElements"
+					:key="index"
+					@click="toggleElement({ type: 'advanced', element: element.type })"
+				>
+					<v-btn
+						depressed
+						class="pa-0 d-flex"
+						height="100%"
+						width="100%"
+						:color="elementsArr.advanced[element.type] ? 'primary' : 'white'"
+					>
+						<v-responsive :aspect-ratio="1">
+							<div
+								class="d-flex flex-column justify-space-around"
+								style="height: 100%"
+							>
+								<div>
+									<v-icon x-large>
+										{{ element.icon }}
+									</v-icon>
+									<div v-if="element.alt">
+										{{ element.alt }}
+									</div>
+									<div v-else class="element-break-word">
+										{{ element.type }}
+									</div>
+								</div>
+							</div>
+						</v-responsive>
+					</v-btn>
+				</v-col>
+			</v-row>
+		</OptionWrapper>
+	</v-app>
 </template>
 
 <script>
@@ -176,6 +176,7 @@ export default {
 			],
 			structureElements: [
 				{
+					alt: "Block",
 					type: "fullWidth",
 					icon: "mdi-window-maximize",
 				},
@@ -216,6 +217,6 @@ export default {
 
 <style>
 .element-break-word {
-  word-break: break-word;
+	word-break: break-word;
 }
 </style>

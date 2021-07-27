@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Block Libraries</h1>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore atque
@@ -132,7 +132,7 @@
 				</draggable>
 			</v-card>
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>
