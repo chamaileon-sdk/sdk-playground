@@ -43,8 +43,9 @@
 											dense
 											hide-details="true"
 											label="ID"
+											:rules="[noEmpty, noMatching(ind)]"
 											:value="b.id"
-											@input="updateBlockLibs({ index: ind, id: $event })"
+											@input="updateID(ind, $event)"
 											outlined
 										></v-text-field>
 									</v-col>
@@ -60,7 +61,66 @@
 										></v-text-field>
 									</v-col>
 									<v-col cols="3" align-self="center">
-										<v-select
+										<v-card flat class="d-flex justify-space-between">
+											<v-btn
+												icon
+												small
+												:color="b.canDeleteBlock ? 'primary' : ''"
+												:value="b.canDeleteBlock"
+												:ripple="false"
+												@click="
+													updateBlockLibs({
+														index: ind,
+														canDeleteBlock: !b.canDeleteBlock,
+													})
+												"
+											>
+												<v-icon size="25"
+													>mdi-delete{{
+														!b.canDeleteBlock ? "-outline" : ""
+													}}</v-icon
+												>
+											</v-btn>
+											<v-btn
+												icon
+												small
+												:color="b.canRenameBlock ? 'primary' : ''"
+												:value="b.canRenameBlock"
+												:ripple="false"
+												@click="
+													updateBlockLibs({
+														index: ind,
+														canRenameBlock: !b.canRenameBlock,
+													})
+												"
+											>
+												<v-icon size="25"
+													>mdi-pencil{{
+														!b.canRenameBlock ? "-outline" : ""
+													}}</v-icon
+												>
+											</v-btn>
+											<v-btn
+												icon
+												small
+												:color="b.canSaveBlock ? 'primary' : ''"
+												:value="b.canSaveBlock"
+												:ripple="false"
+												@click="
+													updateBlockLibs({
+														index: ind,
+														canSaveBlock: !b.canSaveBlock,
+													})
+												"
+											>
+												<v-icon size="25"
+													>mdi-content-save{{
+														!b.canSaveBlock ? "-outline" : ""
+													}}</v-icon
+												>
+											</v-btn>
+										</v-card>
+										<!--<v-select
 											dense
 											hide-details="true"
 											class="ma-0 pa-0"
@@ -71,7 +131,7 @@
 												updateBlockLibs({ index: ind, accessLevel: $event })
 											"
 											outlined
-										></v-select>
+										></v-select>-->
 									</v-col>
 
 									<v-col cols="3" align-self="center" class="ml-auto">
@@ -108,9 +168,25 @@ export default {
 			"addBlockLibs",
 			"removeBlockLibs",
 		]),
-		updateID(val, id) {
-			if (!this.$store.state.editorConfig.blIDArr.includes(val) && val)
-				this.updateBlockLibs({ id: id, newID: val });
+		updateID(index, id) {
+			if (!this.noEmpty(id) || !this.noMatching(index)(id)) return;
+
+			this.updateBlockLibs({ index: index, id: id });
+		},
+		noEmpty(e) {
+			return e.length !== 0;
+		},
+		noMatching(ind) {
+			return function (e) {
+				let i = 0;
+				let arr = this.$store.state.editorConfig.blockLibraries;
+
+				while (i < arr.length && !(arr[i].id === e && i !== ind)) {
+					i++;
+				}
+
+				return i === arr.length;
+			}.bind(this);
 		},
 	},
 	computed: {

@@ -2,7 +2,7 @@
 	<v-card class="rounded-0 pa-0 ma-0" width="100%" dark fixed flat>
 		<v-tabs v-model="tab" :show-arrows="true" dark>
 			<v-tabs-slider color="yellow"></v-tabs-slider>
-			<v-tab> JavaScript </v-tab>
+			<v-tab> Settings </v-tab>
 			<v-tab> Document </v-tab>
 			<v-tab>Hooks</v-tab>
 		</v-tabs>
@@ -269,7 +269,9 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 				{
 					id: '${c.id}',
 					label: '${c.label}',
-					accessLevel: '${c.accessLevel}'
+					canDeleteBlock: ${c.canDeleteBlock},
+					canRenameBlock: ${c.canRenameBlock},
+					canSaveBlock: ${c.canSaveBlock}
 				},`;
 			});
 			literal += `
@@ -333,21 +335,25 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 			resolve();
 		});
 	},
+
     onAutoSave: ({ emailJson }) => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
+
     onChange: () => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
+
     onBeforeClose: () => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
+
     onAfterClose: () => {
 		return new Promise(resolve => {
 			resolve();
@@ -365,29 +371,33 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 			resolve({ src });
 		});
 	},
+
     onEditBackgroundImage: () => {
 		return new Promise(resolve => {
 			resolve({ src });
 		});
 	},
 
-    onBlockSave: ({ libId }) => {
+    onLoadBlocks: ({ libId }) => {
 		return new Promise(resolve => {
 			const blocks = [];
 			resolve({ blocks });
 		});
 	},
-    onLoadBlocks: ({ libId, block }) => {
+
+    onBlockSave: ({ libId, block }) => {
 		return new Promise(resolve => {
 			block._id = "customStringId";
 			resolve({ block });
 		});
 	},
+
     onBlockRename: ({ libId, block: { _id, title } }) => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
+
     onBlockDelete: ({ libId, block: { _id } }) => {
 		return new Promise(resolve => {
 			resolve();
@@ -399,11 +409,13 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 			resolve();
 		});
 	},
+
     onTextInsertPluginButtonClicked: ({ buttonId }) => {
 		return new Promise(resolve => {
 			resolve({ value: "Your inserted text." });
 		});
 	},
+
     onExpressionEditClicked: ({ expression }) => {
 		return new Promise(resolve => {
 			resolve({ expression: "<Your inserted expression>" });

@@ -7,18 +7,17 @@
 			fugit aliquid consequuntur voluptatem obcaecati fugiat dolorum dolores.
 		</p>
 		<OptionWrapper>
-			<v-card class="pa-2" width="100%" min-height="64px" flat>
-				<v-chip
-					color="primary"
-					class="ma-2"
-					v-for="(v, i) in varsArray"
-					:key="i"
-					:outlined="!v.edit"
-					@click="toggleVariableToEdit(i)"
-				>
-					{{ v.name }}
-				</v-chip>
-			</v-card>
+			<v-chip
+				color="primary"
+				:style="!v.edit ? 'background-color: white !important' : ''"
+				class="mx-2 rounded"
+				:class="!v.edit ? 'primary--text' : ''"
+				v-for="(v, i) in varsArray"
+				:key="i"
+				@click="toggleVariableToEdit(i)"
+			>
+				{{ v.name }}
+			</v-chip>
 		</OptionWrapper>
 	</div>
 </template>

@@ -108,9 +108,87 @@ export default {
 							}.bind(this)
 						);
 					},
+
 					onChange: () => {
 						return new Promise((resolve) => {
 							resolve();
+						});
+					},
+
+					onBeforeClose: () => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+
+					onAfterClose: () => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+
+					onEditTitle: ({ title }) => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+
+					onEditImage: ({
+						originalImage,
+						lockDimensions: { width, height },
+					}) => {
+						return new Promise((resolve) => {
+							resolve({ src });
+						});
+					},
+
+					onEditBackgroundImage: () => {
+						return new Promise((resolve) => {
+							resolve({ src });
+						});
+					},
+
+					onLoadBlocks: ({ libId }) => {
+						return new Promise((resolve) => {
+							const blocks = [];
+							resolve({ blocks });
+						});
+					},
+
+					onBlockSave: ({ libId, block }) => {
+						return new Promise((resolve) => {
+							block._id = "customStringId";
+							resolve({ block });
+						});
+					},
+
+					onBlockRename: ({ libId, block: { _id, title } }) => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+
+					onBlockDelete: ({ libId, block: { _id } }) => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+
+					onHeaderButtonClicked: ({ buttonId }) => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+
+					onTextInsertPluginButtonClicked: ({ buttonId }) => {
+						return new Promise((resolve) => {
+							resolve({ value: "Your inserted text." });
+						});
+					},
+
+					onExpressionEditClicked: ({ expression }) => {
+						return new Promise((resolve) => {
+							resolve({ expression: "<Your inserted expression>" });
 						});
 					},
 				},

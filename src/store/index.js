@@ -37,6 +37,28 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
+		//Load from local storage
+		sdkConfigLoad(state, sdkConfig) {
+			state.sdkConfig = sdkConfig;
+		},
+
+		editorConfigLoad(state, editorConfig) {
+			state.editorConfig = editorConfig;
+		},
+
+		previewConfigLoad(state, previewConfig) {
+			state.previewConfig = previewConfig;
+		},
+
+		variableEditorConfigLoad(state, variableEditorConfig) {
+			state.variableEditorConfig = variableEditorConfig;
+		},
+
+		thumbnailConfigLoad(state, thumbnailConfig) {
+			state.thumbnailConfig = thumbnailConfig;
+		},
+
+		//SDK Settings
 		updateCode(state, newCode) {
 			state.code = newCode;
 		},

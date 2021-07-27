@@ -146,7 +146,9 @@ export default {
 			state.blockLibraries.push({
 				id: `${state.blKey}`,
 				label: `Block Library ${state.blKey}`,
-				accessLevel: "readOnly",
+				canDeleteBlock: false,
+				canRenameBlock: false,
+				canSaveBlock: true,
 			});
 
 			state.blKey++;
@@ -219,7 +221,9 @@ export default {
 
 		//Autosave
 		updateAutosave(state, payload) {
-			state.autoSaveInterval = parseInt(payload);
+			let x = parseInt(payload);
+
+			state.autoSaveInterval = x >= 0 ? x : 0;
 		},
 	},
 
