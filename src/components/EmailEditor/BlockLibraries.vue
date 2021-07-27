@@ -43,8 +43,9 @@
 											dense
 											hide-details="true"
 											label="ID"
+											:rules="[noEmpty, noMatching(ind)]"
 											:value="b.id"
-											@input="updateBlockLibs({ index: ind, id: $event })"
+											@input="updateID(ind, $event)"
 											outlined
 										></v-text-field>
 									</v-col>
@@ -108,9 +109,25 @@ export default {
 			"addBlockLibs",
 			"removeBlockLibs",
 		]),
-		updateID(val, id) {
-			if (!this.$store.state.editorConfig.blIDArr.includes(val) && val)
-				this.updateBlockLibs({ id: id, newID: val });
+		updateID(index, id) {
+			if (!this.noEmpty(id) || !this.noMatching(index)(id)) return;
+
+			this.updateBlockLibs({ index: index, id: id });
+		},
+		noEmpty(e) {
+			return e.length !== 0;
+		},
+		noMatching(ind) {
+			return function (e) {
+				let i = 0;
+				let arr = this.$store.state.editorConfig.blockLibraries;
+
+				while (i < arr.length && !(arr[i].id === e && i !== ind)) {
+					i++;
+				}
+
+				return i === arr.length;
+			}.bind(this);
 		},
 	},
 	computed: {
