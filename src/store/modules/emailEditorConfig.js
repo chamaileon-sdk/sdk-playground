@@ -219,7 +219,9 @@ export default {
 
 		//Autosave
 		updateAutosave(state, payload) {
-			state.autoSaveInterval = parseInt(payload);
+			let x = parseInt(payload);
+
+			state.autoSaveInterval = x >= 0 ? x : 0;
 		},
 	},
 
