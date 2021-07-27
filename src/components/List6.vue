@@ -4,24 +4,24 @@
 		v-show="buttonsArr.length > 0"
 		class="mx-auto mt-7 flex flex-column list6"
 		elevation="0"
-		max-height="360"
+		max-height="260"
 		style="overflow-y: overlay"
 	>
 		<draggable v-model="buttonsArr" handle=".dtrigger">
 			<div v-for="(b, i) in buttonsArr" :key="i">
 				<v-card
-					class="ma-0 pa-0 d-flex align-center"
+					class="ma-0 pa-2 d-flex align-center"
 					outlined
 					elevation="0"
 					tile
 				>
-					<v-list-item-icon class="align-self-center ma-0 ml-6">
+					<v-list-item-icon class="align-self-center ma-0 ml-3 mr-3">
 						<v-icon class="dtrigger">mdi-menu</v-icon>
 					</v-list-item-icon>
-					<v-list-item-content>
-						<v-row class="px-6 pt-3">
+					<v-list-item-content class="ma-0 pa-0">
+						<v-row class="ma-0 pa-0">
 							<v-col
-								class="py-0"
+								class="pa-2"
 								cols="4"
 								align-self="center"
 								v-show="!b.items"
@@ -36,7 +36,7 @@
 								></v-text-field>
 							</v-col>
 
-							<v-col class="py-0" cols="4" align-self="center">
+							<v-col class="pa-2" cols="4" align-self="center">
 								<v-select
 									dense
 									hide-details="true"
@@ -49,19 +49,19 @@
 								></v-select>
 							</v-col>
 
-							<v-col class="py-0" cols="4" align-self="center" v-show="b.items">
+							<v-col class="pa-2" cols="4" align-self="center" v-show="b.items">
 								<v-btn depressed outlined width="100%" @click="addDDBtn(i)">
 									<v-icon left> mdi-plus </v-icon>
 									Add Button
 								</v-btn>
 							</v-col>
 
-							<v-col class="py-0" cols="4" align-self="center">
+							<v-col class="pa-2" cols="4" align-self="center">
 								<DeleteButton @click="deleteBtn(i)"></DeleteButton>
 							</v-col>
 						</v-row>
-						<v-row class="px-6 pb-3">
-							<v-col class="py-0" cols="4" align-self="center">
+						<v-row class="ma-0 pa-0">
+							<v-col class="pa-2" cols="4" align-self="center">
 								<v-text-field
 									dense
 									hide-details="true"
@@ -71,7 +71,7 @@
 									outlined
 								></v-text-field>
 							</v-col>
-							<v-col class="py-0" cols="4">
+							<v-col class="pa-2" cols="4">
 								<ColorPicker
 									:key="i"
 									class="pa-0"
@@ -81,7 +81,7 @@
 								/>
 							</v-col>
 
-							<v-col class="py-0" cols="4" align-self="center">
+							<v-col class="pa-2" cols="4" align-self="center">
 								<v-text-field
 									dense
 									hide-details="true"
