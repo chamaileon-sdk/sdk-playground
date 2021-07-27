@@ -146,7 +146,9 @@ export default {
 			state.blockLibraries.push({
 				id: `${state.blKey}`,
 				label: `Block Library ${state.blKey}`,
-				accessLevel: "readOnly",
+				canDeleteBlock: false,
+				canRenameBlock: false,
+				canSaveBlock: true,
 			});
 
 			state.blKey++;

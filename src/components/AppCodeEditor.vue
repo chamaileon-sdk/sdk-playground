@@ -269,7 +269,9 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 				{
 					id: '${c.id}',
 					label: '${c.label}',
-					accessLevel: '${c.accessLevel}'
+					canDeleteBlock: ${c.canDeleteBlock},
+					canRenameBlock: ${c.canRenameBlock},
+					canSaveBlock: ${c.canSaveBlock}
 				},`;
 			});
 			literal += `

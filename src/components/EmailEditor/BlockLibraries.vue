@@ -61,7 +61,66 @@
 										></v-text-field>
 									</v-col>
 									<v-col cols="3" align-self="center">
-										<v-select
+										<v-card flat class="d-flex justify-space-between">
+											<v-btn
+												icon
+												small
+												:color="b.canDeleteBlock ? 'primary' : ''"
+												:value="b.canDeleteBlock"
+												:ripple="false"
+												@click="
+													updateBlockLibs({
+														index: ind,
+														canDeleteBlock: !b.canDeleteBlock,
+													})
+												"
+											>
+												<v-icon size="25"
+													>mdi-delete{{
+														!b.canDeleteBlock ? "-outline" : ""
+													}}</v-icon
+												>
+											</v-btn>
+											<v-btn
+												icon
+												small
+												:color="b.canRenameBlock ? 'primary' : ''"
+												:value="b.canRenameBlock"
+												:ripple="false"
+												@click="
+													updateBlockLibs({
+														index: ind,
+														canRenameBlock: !b.canRenameBlock,
+													})
+												"
+											>
+												<v-icon size="25"
+													>mdi-pencil{{
+														!b.canRenameBlock ? "-outline" : ""
+													}}</v-icon
+												>
+											</v-btn>
+											<v-btn
+												icon
+												small
+												:color="b.canSaveBlock ? 'primary' : ''"
+												:value="b.canSaveBlock"
+												:ripple="false"
+												@click="
+													updateBlockLibs({
+														index: ind,
+														canSaveBlock: !b.canSaveBlock,
+													})
+												"
+											>
+												<v-icon size="25"
+													>mdi-content-save{{
+														!b.canSaveBlock ? "-outline" : ""
+													}}</v-icon
+												>
+											</v-btn>
+										</v-card>
+										<!--<v-select
 											dense
 											hide-details="true"
 											class="ma-0 pa-0"
@@ -72,7 +131,7 @@
 												updateBlockLibs({ index: ind, accessLevel: $event })
 											"
 											outlined
-										></v-select>
+										></v-select>-->
 									</v-col>
 
 									<v-col cols="3" align-self="center" class="ml-auto">
