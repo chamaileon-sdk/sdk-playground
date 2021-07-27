@@ -46,6 +46,42 @@ export default {
 		this.$store.dispatch("initSDK", {
 			apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
 		});
+
+		window.onbeforeunload = function () {
+			localStorage.setItem(
+				"sdkConfig",
+				JSON.stringify(this.$store.state.sdkConfig)
+			);
+			localStorage.setItem(
+				"editorConfig",
+				JSON.stringify(this.$store.state.editorConfig)
+			);
+			localStorage.setItem(
+				"previewConfig",
+				JSON.stringify(this.$store.state.previewConfig)
+			);
+			localStorage.setItem(
+				"variableEditorConfig",
+				JSON.stringify(this.$store.state.variableEditorConfig)
+			);
+			localStorage.setItem(
+				"thumbnailConfig",
+				JSON.stringify(this.$store.state.thumbnailConfig)
+			);
+		}.bind(this);
+
+		for (let elem of [
+			"sdkConfig",
+			"editorConfig",
+			"previewConfig",
+			"variableEditorConfig",
+			"thumbnailConfig",
+		])
+			if (localStorage.getItem(elem))
+				this.$store.commit(
+					`${elem}Load`,
+					JSON.parse(localStorage.getItem(elem))
+				);
 	},
 };
 </script>
