@@ -41,14 +41,14 @@ export default {
 				icon: "table-lock",
 				id: "Block Lock",
 				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.",
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 				state: "disabled",
 			},
 			variableSystem: {
 				icon: "iframe-variable-outline",
 				id: "Variable System",
 				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi molestias nostrum corporis dolorem quis ea magni.",
+					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 				state: "disabled",
 			},
 		},

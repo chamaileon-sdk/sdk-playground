@@ -25,7 +25,7 @@
 			</template>
 			<div
 				v-if="btnArr.length > 0"
-				class="mt-8 list3"
+				class="mt-8 list3 rounded-0"
 				style="max-height: 222px; overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="btnArr">

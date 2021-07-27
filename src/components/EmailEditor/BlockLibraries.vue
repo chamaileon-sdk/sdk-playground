@@ -20,7 +20,7 @@
 			</template>
 			<v-card
 				v-if="blockLibsArr.length > 0"
-				class="mx-auto mt-7 list3"
+				class="mx-auto mt-7 list3 rounded-0"
 				elevation="0"
 				max-height="396"
 				style="overflow-y: auto"
@@ -28,17 +28,17 @@
 				<draggable handle=".dtrigger" v-model="blockLibsArr">
 					<div v-for="(b, ind) in blockLibsArr" :key="ind">
 						<v-card
-							class="ma-0 pa-0 d-flex align-center"
+							class="ma-0 pa-2 d-flex align-center"
 							outlined
 							elevation="0"
 							tile
 						>
-							<v-list-item-icon class="align-self-center ma-0 ml-6">
+							<v-list-item-icon class="align-self-center ma-0 mx-3">
 								<v-icon class="dtrigger">mdi-menu</v-icon>
 							</v-list-item-icon>
-							<v-list-item-content>
-								<v-row class="px-6">
-									<v-col cols="3" align-self="center">
+							<v-list-item-content class="ma-0 pa-0">
+								<v-row class="ma-0 pa-0">
+									<v-col cols="3" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
@@ -50,7 +50,7 @@
 										></v-text-field>
 									</v-col>
 
-									<v-col cols="3" align-self="center">
+									<v-col cols="3" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
@@ -60,7 +60,7 @@
 											outlined
 										></v-text-field>
 									</v-col>
-									<v-col cols="3" align-self="center">
+									<v-col cols="3" class="pa-2" align-self="center">
 										<v-card flat class="d-flex justify-space-between">
 											<v-btn
 												icon
@@ -120,21 +120,9 @@
 												>
 											</v-btn>
 										</v-card>
-										<!--<v-select
-											dense
-											hide-details="true"
-											class="ma-0 pa-0"
-											label="Access"
-											:value="b.accessLevel"
-											:items="['readOnly', 'readWrite']"
-											@change="
-												updateBlockLibs({ index: ind, accessLevel: $event })
-											"
-											outlined
-										></v-select>-->
 									</v-col>
 
-									<v-col cols="3" align-self="center" class="ml-auto">
+									<v-col cols="3" align-self="center" class="ml-auto pa-2">
 										<DeleteButton @click="removeBlockLibs(ind)"></DeleteButton>
 									</v-col>
 								</v-row>
