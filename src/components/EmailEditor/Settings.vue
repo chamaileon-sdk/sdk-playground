@@ -42,12 +42,12 @@
 			porro dignissimos.
 		</p>
 		<OptionWrapper>
-			<v-card elevation="0" class="d-flex">
-				<v-card-title>Avatar</v-card-title>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card-title class="py-4 px-2">Avatar</v-card-title>
 				<v-text-field
 					dense
 					label="Displayed Name"
-					class="rounded align-self-center pa-4"
+					class="rounded align-self-center py-4 px-2"
 					outlined
 					hide-details="true"
 					v-model="avatarUserName"
@@ -55,16 +55,16 @@
 				><v-text-field
 					label="Avatar URL"
 					dense
-					class="rounded align-self-center pa-4"
+					class="rounded align-self-center py-4 px-2"
 					outlined
 					hide-details="true"
 					v-model="avatarImg"
 				></v-text-field>
 				<v-switch
-					class="align-self-center my-0 py-0 mr-2"
+					class="align-self-center my-0 py-0 pl-4 pr-0"
 					hide-details="true"
 					inset
-					color="success"
+					color="primary"
 					v-model="avatarEnabled"
 				></v-switch>
 			</v-card>
