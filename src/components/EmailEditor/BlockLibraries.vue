@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Block Libraries</h1>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore atque
@@ -20,19 +20,14 @@
 			</template>
 			<v-card
 				v-if="blockLibsArr.length > 0"
-				class="mx-auto mt-7 list3 rounded-0"
+				class="mx-auto mt-8 list3 rounded"
 				elevation="0"
 				max-height="396"
 				style="overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="blockLibsArr">
 					<div v-for="(b, ind) in blockLibsArr" :key="ind">
-						<v-card
-							class="ma-0 pa-2 d-flex align-center"
-							outlined
-							elevation="0"
-							tile
-						>
+						<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
 							<v-list-item-icon class="align-self-center ma-0 mx-3">
 								<v-icon class="dtrigger">mdi-menu</v-icon>
 							</v-list-item-icon>
@@ -128,11 +123,13 @@
 								</v-row>
 							</v-list-item-content>
 						</v-card>
+
+						<v-divider v-show="ind !== blockLibsArr.length - 1"></v-divider>
 					</div>
 				</draggable>
 			</v-card>
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

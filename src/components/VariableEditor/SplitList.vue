@@ -8,37 +8,38 @@
 			</template>
 			<div
 				v-if="buttonsLeft.length > 0"
-				class="mt-8 list3"
-				style="max-height: 260px; overflow-y: auto"
+				class="mt-8 list3 rounded"
+				style="max-height: 257px; overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="buttonsLeft">
-					<ListItem3
-						v-for="(item, ind) in buttonsLeft"
-						:key="ind"
-						:id="item.id"
-						:icon="item.icon"
-						:label="item.label"
-						@idChange="
-							updateLeftButton({
-								index: ind,
-								id: $event,
-							})
-						"
-						@labelChange="
-							updateLeftButton({
-								index: ind,
-								label: $event,
-							})
-						"
-						@iconChange="
-							updateLeftButton({
-								index: ind,
-								icon: $event,
-							})
-						"
-						@deleteClicked="deleteLeftButton(ind)"
-						:split="true"
-					/>
+					<div v-for="(item, ind) in buttonsLeft" :key="ind">
+						<ListItem3
+							:id="item.id"
+							:icon="item.icon"
+							:label="item.label"
+							@idChange="
+								updateLeftButton({
+									index: ind,
+									id: $event,
+								})
+							"
+							@labelChange="
+								updateLeftButton({
+									index: ind,
+									label: $event,
+								})
+							"
+							@iconChange="
+								updateLeftButton({
+									index: ind,
+									icon: $event,
+								})
+							"
+							@deleteClicked="deleteLeftButton(ind)"
+							:split="true"
+						/>
+						<v-divider v-show="ind !== buttonsLeft.length - 1"></v-divider>
+					</div>
 				</draggable>
 			</div>
 		</v-col>
@@ -50,37 +51,38 @@
 			</template>
 			<div
 				v-if="buttonsRight.length > 0"
-				class="mt-8 list3"
-				style="max-height: 260px; overflow-y: auto"
+				class="mt-8 list3 rounded"
+				style="max-height: 257px; overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="buttonsRight">
-					<ListItem3
-						v-for="(item, ind) in buttonsRight"
-						:key="ind"
-						:id="item.id"
-						:icon="item.icon"
-						:label="item.label"
-						@idChange="
-							updateRightButton({
-								index: ind,
-								id: $event,
-							})
-						"
-						@labelChange="
-							updateRightButton({
-								index: ind,
-								label: $event,
-							})
-						"
-						@iconChange="
-							updateRightButton({
-								index: ind,
-								icon: $event,
-							})
-						"
-						@deleteClicked="deleteRightButton(ind)"
-						:split="true"
-					/>
+					<div v-for="(item, ind) in buttonsRight" :key="ind">
+						<ListItem3
+							:id="item.id"
+							:icon="item.icon"
+							:label="item.label"
+							@idChange="
+								updateRightButton({
+									index: ind,
+									id: $event,
+								})
+							"
+							@labelChange="
+								updateRightButton({
+									index: ind,
+									label: $event,
+								})
+							"
+							@iconChange="
+								updateRightButton({
+									index: ind,
+									icon: $event,
+								})
+							"
+							@deleteClicked="deleteRightButton(ind)"
+							:split="true"
+						/>
+						<v-divider v-show="ind !== buttonsRight.length - 1"></v-divider>
+					</div>
 				</draggable>
 			</div>
 		</v-col>

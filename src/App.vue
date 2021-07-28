@@ -135,7 +135,12 @@ html::-webkit-scrollbar {
 .section {
 	/*padding: 96px 0;*/
 	padding: 70px 0;
-	min-height: 100vh;
+	min-height: calc(100vh - 170px);
+	margin-bottom: 100px;
+}
+
+.section:last-child {
+	margin-bottom: 0px;
 }
 
 .hideScrollY .v-navigation-drawer__content {
@@ -143,12 +148,17 @@ html::-webkit-scrollbar {
 }
 
 h1 {
-	margin-bottom: 16px;
+	margin-bottom: 3px;
 }
 
 h3 {
-	margin-top: 32px;
+	margin-top: 10px;
 	margin-bottom: 8px;
+}
+
+p {
+	margin-top: 9px !important;
+	margin-bottom: 9px !important;
 }
 
 /*.editorContainer {

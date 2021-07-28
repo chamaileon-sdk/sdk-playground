@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Variables To Edit</h1>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic id possimus a
@@ -19,7 +19,7 @@
 				{{ v.name }}
 			</v-chip>
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

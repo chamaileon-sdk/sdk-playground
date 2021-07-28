@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Footer</h1>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic id possimus a
@@ -20,7 +20,7 @@
 		<OptionWrapper>
 			<SplitList :section="'Footer'" />
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>
