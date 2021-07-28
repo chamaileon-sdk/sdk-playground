@@ -3,12 +3,12 @@
 		<v-card flat height="100%">
 			<v-card
 				:ripple="false"
-				to="/"
+				to="/sdk#home"
 				:style="`fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`"
 				color="transparent"
 				flat
 				width="100%"
-				class="pa-4 pr-5"
+				class="px-6 pt-6 pb-4"
 				id="logo"
 				v-chamaileonLogo
 			></v-card>
@@ -16,13 +16,13 @@
 				<template v-for="(m, ind) in Menu">
 					<v-list-item
 						:key="ind"
-						class="pl-10 scrollactive-item"
+						class="pl-6 scrollactive-item"
 						color="primary"
 						v-ripple="{ class: `primary--text` }"
 						exact
 						:to="{ path: m.to, hash: 'home' }"
 					>
-						<v-list-item-icon>
+						<v-list-item-icon class="mr-6">
 							<v-icon>mdi-{{ m.icon }}</v-icon>
 						</v-list-item-icon>
 
@@ -32,7 +32,7 @@
 					<template v-if="isActive(m.to)">
 						<v-list-item
 							color="primary"
-							class="pl-14 navLink scrollactive-item"
+							class="pl-12 navLink scrollactive-item"
 							v-ripple="{ class: `primary--text` }"
 							:class="addActiveClass(c.to)"
 							v-for="c in m.children"
@@ -40,7 +40,7 @@
 							link
 							:to="{ path: m.to, hash: c.to }"
 						>
-							<v-list-item-icon class="ml-9">
+							<v-list-item-icon class="ml-6 mr-6">
 								<v-icon>mdi-{{ c.icon }}</v-icon>
 							</v-list-item-icon>
 
@@ -166,4 +166,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-card--link:before {
+	background: transparent;
+}
+</style>
