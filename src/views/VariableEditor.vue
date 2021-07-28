@@ -7,6 +7,7 @@
 					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
 					:paragraph1="paragraph1"
 					:paragraph2="paragraph2"
+					:image="'VariableEditorIllustration.svg'"
 				/>
 			</div>
 

@@ -7,6 +7,7 @@
 					:docUrl="'https://chamaileon.io/sdk/docs/'"
 					:paragraph1="paragraph1"
 					:paragraph2="paragraph2"
+					:image="'SdkIllustration.svg'"
 				/>
 			</div>
 			<div class="section" id="sdklogo">

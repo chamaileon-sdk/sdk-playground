@@ -7,6 +7,7 @@
 					:docUrl="'https://chamaileon.io/sdk/docs/email-thumbnail/'"
 					:paragraph1="paragraph1"
 					:paragraph2="paragraph2"
+					:image="'EmailThumbnailIllustration.svg'"
 				/>
 			</div>
 

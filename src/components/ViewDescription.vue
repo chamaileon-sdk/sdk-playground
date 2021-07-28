@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<h1>{{ title }}</h1>
+	<v-app>
+		<h1 class="mb-8">{{ title }}</h1>
 		<p>
 			{{ paragraph1 }}
 		</p>
@@ -9,42 +9,37 @@
 			{{ paragraph2 }}
 		</p>
 
-		<OptionWrapper
-			style="
-				background-color: rgba(0, 0, 0, 0) !important;
-				border: none;
-				/*padding-right: 0 !important;*/
-			"
-		>
-			<div class="d-flex">
-				<v-btn
-					:href="docUrl"
-					target="_blank"
-					class="ml-auto ma-0"
-					text
-					color="primary"
-				>
-					<v-icon left>mdi-book</v-icon>
-					Read the docs
-				</v-btn>
-			</div>
-		</OptionWrapper>
-	</div>
+		<div class="d-flex mt-11">
+			<v-btn
+				:href="docUrl"
+				target="_blank"
+				class="ma-0"
+				depressed
+				color="primary"
+			>
+				<v-icon left>mdi-book</v-icon>
+				Read the docs
+			</v-btn>
+		</div>
+
+		<v-card v-if="image" class="mt-16" flat>
+			<v-img
+				:transition="false"
+				:eager="true"
+				:src="require(`@/assets/${image}`)"
+			></v-img>
+		</v-card>
+	</v-app>
 </template>
 
 <script>
-import OptionWrapper from "./optionWrapper.vue";
-
 export default {
 	props: {
 		title: String,
 		paragraph1: String,
 		paragraph2: String,
 		docUrl: String,
-	},
-
-	components: {
-		OptionWrapper,
+		image: String,
 	},
 };
 </script>
