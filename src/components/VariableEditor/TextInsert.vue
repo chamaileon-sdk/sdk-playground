@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Text Insert</h1>
 		<p>
 			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
@@ -57,7 +57,7 @@
 				</draggable>
 			</div>
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

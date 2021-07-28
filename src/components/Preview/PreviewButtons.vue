@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Header</h1>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti quos
@@ -27,7 +27,7 @@
 			</template>
 			<List6 :section="'Preview'" />
 		</OptionWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>
