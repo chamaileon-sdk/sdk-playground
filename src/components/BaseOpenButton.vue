@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-hover v-slot="{ hover }">
-			<div class="openbtn pa-3" :class="hover ? 'on-hover' : ''">
+			<div class="openbtn ma-3" :class="hover ? 'on-hover' : ''">
 				<v-btn
 					depressed
 					class="grey lighten-3 pa-3 custom-btn primary--text"
@@ -26,7 +26,7 @@
 			</div>
 		</v-hover>
 		<v-hover v-slot="{ hover }">
-			<div class="openbtnl pa-3" :class="hover ? 'on-hover' : ''">
+			<div class="openbtnl ma-3" :class="hover ? 'on-hover' : ''">
 				<v-btn
 					depressed
 					class="grey lighten-3 pa-3 custom-btn primary--text"
@@ -79,8 +79,8 @@ export default {
 }
 
 .openbtn {
-	height: 100vh !important;
-	width: 128px;
+	height: calc(100vh - 24px) !important;
+	width: 104px;
 	position: fixed;
 	bottom: 0;
 	right: 30.873%;
@@ -99,8 +99,8 @@ export default {
 }
 
 .openbtnl {
-	height: 100vh !important;
-	width: 128px;
+	height: calc(100vh - 24px) !important;
+	width: 104px;
 	position: fixed;
 	bottom: 0;
 	left: 19.127%;

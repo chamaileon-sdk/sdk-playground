@@ -17,7 +17,7 @@
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex">
-				<v-card-title>Autosave</v-card-title>
+				<v-card-title class="text-subtitle-1">Autosave</v-card-title>
 				<div class="ml-auto d-flex align-center">
 					<v-card width="8em" elevation="0" color="transparent" class="d-flex">
 						<v-text-field
@@ -34,7 +34,7 @@
 			</v-card>
 		</OptionWrapper>
 
-		<h3>User Settings</h3>
+		<h3>Avatar</h3>
 		<p>
 			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius voluptate,
 			voluptas, quidem est laboriosam illo perspiciatis ut ea repudiandae
@@ -43,7 +43,7 @@
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">
-				<v-card-title class="py-4 px-2">Avatar</v-card-title>
+				<!--<v-card-title class="py-4 px-2 text-subtitle-1">Avatar</v-card-title>-->
 				<v-text-field
 					dense
 					label="Displayed Name"
@@ -60,13 +60,22 @@
 					hide-details="true"
 					v-model="avatarImg"
 				></v-text-field>
-				<v-switch
+				<v-btn
+					icon
+					class="align-self-center px-2"
+					@click="avatarEnabled = !avatarEnabled"
+				>
+					<v-icon :color="avatarEnabled ? 'primary' : ''"
+						>mdi-{{ avatarEnabled ? "eye" : "eye-off" }}</v-icon
+					>
+				</v-btn>
+				<!--<v-switch
 					class="align-self-center my-0 py-0 pl-4 pr-0"
 					hide-details="true"
 					inset
 					color="primary"
 					v-model="avatarEnabled"
-				></v-switch>
+				></v-switch>-->
 			</v-card>
 		</OptionWrapper>
 	</v-app>

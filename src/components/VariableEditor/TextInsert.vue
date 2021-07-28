@@ -23,36 +23,37 @@
 			</v-row>
 			<div
 				v-show="btnArr.length > 0"
-				class="mt-8 list3"
-				style="max-height: 222px; overflow-y: auto"
+				class="mt-8 list3 rounded"
+				style="max-height: 218px; overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model.lazy="btnArr">
-					<ListItem3
-						v-for="(item, ind) in btnArr"
-						:key="ind"
-						:id="item.id"
-						:icon="item.icon"
-						:label="item.label"
-						@idChange="
-							updateVETextInsertButton({
-								index: ind,
-								id: $event,
-							})
-						"
-						@labelChange="
-							updateVETextInsertButton({
-								index: ind,
-								label: $event,
-							})
-						"
-						@iconChange="
-							updateVETextInsertButton({
-								index: ind,
-								icon: $event,
-							})
-						"
-						@deleteClicked="deleteVETextInsertButton(ind)"
-					/>
+					<div v-for="(item, ind) in btnArr" :key="ind">
+						<ListItem3
+							:id="item.id"
+							:icon="item.icon"
+							:label="item.label"
+							@idChange="
+								updateVETextInsertButton({
+									index: ind,
+									id: $event,
+								})
+							"
+							@labelChange="
+								updateVETextInsertButton({
+									index: ind,
+									label: $event,
+								})
+							"
+							@iconChange="
+								updateVETextInsertButton({
+									index: ind,
+									icon: $event,
+								})
+							"
+							@deleteClicked="deleteVETextInsertButton(ind)"
+						/>
+						<v-divider v-show="ind !== btnArr.length - 1"></v-divider>
+					</div>
 				</draggable>
 			</div>
 		</OptionWrapper>

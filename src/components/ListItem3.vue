@@ -1,10 +1,10 @@
 <template functional>
-	<v-card class="ma-0 pa-0 d-flex align-center" outlined elevation="0" tile>
-		<v-list-item-icon class="align-self-center ma-0 ml-6">
+	<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
+		<v-list-item-icon class="align-self-center ma-0 mx-3">
 			<v-icon class="dtrigger">mdi-menu</v-icon>
 		</v-list-item-icon>
-		<v-list-item-content>
-			<v-row class="px-6 py-2">
+		<v-list-item-content class="ma-0 pa-0">
+			<v-row class="ma-0 pa-0">
 				<v-col class="pa-2" :cols="props.split ? 6 : 3" align-self="center">
 					<v-text-field
 						dense

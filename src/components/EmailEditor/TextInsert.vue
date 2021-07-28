@@ -10,7 +10,7 @@
 			<TextInsertPreview />
 		</OptionWrapper>
 
-		<h3>Buttons</h3>
+		<h3>Your Buttons</h3>
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
 			tempora hic delectus culpa natus dicta adipisci eius aliquam officiis
@@ -25,36 +25,37 @@
 			</template>
 			<div
 				v-if="btnArr.length > 0"
-				class="mt-8 list3 rounded-0"
-				style="max-height: 222px; overflow-y: auto"
+				class="mt-8 list3 rounded"
+				style="max-height: 218px; overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="btnArr">
-					<ListItem3
-						v-for="(item, ind) in btnArr"
-						:key="ind"
-						:id="item.id"
-						:icon="item.icon"
-						:label="item.label"
-						@idChange="
-							updateTextInsertButton({
-								index: ind,
-								id: $event,
-							})
-						"
-						@labelChange="
-							updateTextInsertButton({
-								index: ind,
-								label: $event,
-							})
-						"
-						@iconChange="
-							updateTextInsertButton({
-								index: ind,
-								icon: $event,
-							})
-						"
-						@deleteClicked="deleteTextInsertButton(ind)"
-					/>
+					<div v-for="(item, ind) in btnArr" :key="ind">
+						<ListItem3
+							:id="item.id"
+							:icon="item.icon"
+							:label="item.label"
+							@idChange="
+								updateTextInsertButton({
+									index: ind,
+									id: $event,
+								})
+							"
+							@labelChange="
+								updateTextInsertButton({
+									index: ind,
+									label: $event,
+								})
+							"
+							@iconChange="
+								updateTextInsertButton({
+									index: ind,
+									icon: $event,
+								})
+							"
+							@deleteClicked="deleteTextInsertButton(ind)"
+						/>
+						<v-divider v-show="ind !== btnArr.length - 1"></v-divider>
+					</div>
 				</draggable>
 			</div>
 		</OptionWrapper>

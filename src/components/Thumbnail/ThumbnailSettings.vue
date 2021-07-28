@@ -10,6 +10,7 @@
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex justify-center align-center pa-4">
 				<v-text-field
+					dense
 					v-model="width"
 					class="rounded mr-2"
 					hide-details="true"
@@ -19,6 +20,7 @@
 					@change="openThumbnail"
 				></v-text-field>
 				<v-text-field
+					dense
 					v-model="height"
 					class="rounded mx-2"
 					hide-details="true"
@@ -28,6 +30,7 @@
 					@change="openThumbnail"
 				></v-text-field>
 				<v-text-field
+					dense
 					v-model="scale"
 					class="rounded mx-2"
 					hide-details="true"
