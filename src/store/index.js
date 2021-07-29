@@ -77,13 +77,7 @@ export default new Vuex.Store({
 	actions: {
 		async initSDK({ commit, state }) {
 			const accessTokenRequest = await fetch(
-				"https://sdk-api.chamaileon.io/api/v1/tokens/generate",
-				{
-					method: "GET",
-					headers: {
-						Authorization: `Bearer ${state.apiKey}`,
-					},
-				}
+				"http://127.0.0.1:8100/getAuthToken"
 			);
 
 			const accessTokenResponse = await accessTokenRequest.json();
@@ -176,8 +170,10 @@ export default new Vuex.Store({
 			if (!x.user.enabled) x.user = false;
 
 			x.document = state.document;
-			//Variable Editor icon has to be mdi-*iconTitle*
+			//TODO: Variable Editor icon has to be mdi-*iconTitle*
 
+			x.hooks = state.editorConfig.hooks;
+			console.log(x);
 			return x;
 		},
 

@@ -15,7 +15,7 @@
 		<OptionWrapper>
 			<template>
 				<v-row align="center" justify="end" class="ma-0">
-					<AddButton @click="addBlockLibs"> New Library </AddButton>
+					<AddButton @click="addBlockLibararies"> New Library </AddButton>
 				</v-row>
 			</template>
 			<v-card
@@ -118,7 +118,9 @@
 									</v-col>
 
 									<v-col cols="3" align-self="center" class="ml-auto pa-2">
-										<DeleteButton @click="removeBlockLibs(ind)"></DeleteButton>
+										<DeleteButton
+											@click="removeBlockLibararies(ind, b.id)"
+										></DeleteButton>
 									</v-col>
 								</v-row>
 							</v-list-item-content>
@@ -153,9 +155,27 @@ export default {
 			"addBlockLibs",
 			"removeBlockLibs",
 		]),
+
+		addBlockLibararies() {
+			this.addBlockLibs();
+			this.$store.commit(
+				"createBlockLibData",
+				this.blockLibsArr[this.blockLibsArr.length - 1].id
+			);
+		},
+
+		removeBlockLibararies(ind, id) {
+			this.removeBlockLibs(ind);
+			this.$store.commit("deleteBlockLibData", id);
+		},
+
 		updateID(index, id) {
 			if (!this.noEmpty(id) || !this.noMatching(index)(id)) return;
 
+			this.$store.commit("moveBlockLibData", {
+				oldLibId: this.blockLibsArr[index].id,
+				newLibId: id,
+			});
 			this.updateBlockLibs({ index: index, id: id });
 		},
 		noEmpty(e) {

@@ -6184,6 +6184,3 @@ export default {
 		documentTitle: (state) => state.title,
 	},
 };
-
-//#1762C5
-//#5C9AEB
