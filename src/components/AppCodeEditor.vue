@@ -4,7 +4,10 @@
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> Settings </v-tab>
 			<v-tab> Document </v-tab>
-			<v-tab>Hooks</v-tab>
+			<v-tab v-if="route !== '/sdk' && route !== '/emailthumbnail'">
+				Hooks
+			</v-tab>
+			<v-tab v-if="route === '/emaileditor'">Block Libraries</v-tab>
 		</v-tabs>
 
 		<v-card
@@ -30,7 +33,7 @@
 		</v-card>
 
 		<v-card
-			v-show="tab === 2"
+			v-if="route !== '/sdk' && route !== '/emailthumbnail' && tab === 2"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -38,6 +41,17 @@
 			flat
 		>
 			<highlight-code class="pa-0" lang="javascript" :code="hooks" />
+		</v-card>
+
+		<v-card
+			v-if="route === '/emaileditor' && tab === 3"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code class="pa-0" lang="javascript" :code="blockLibs" />
 		</v-card>
 
 		<v-card dark class="copyCard rounded-pill" elevation="0" v-show="snackbar"
@@ -65,6 +79,10 @@ export default {
 	}),
 
 	computed: {
+		route() {
+			return this.$route.path;
+		},
+
 		doc() {
 			return (
 				"let emailDocument = JSON.parse(\"" +
@@ -170,6 +188,26 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 		},
 
 		//Email Editor
+		blockLibs() {
+			let str = "";
+			let map = this.$store.state.editorConfig.BlockLibData.blockLibsData;
+			console.log(map);
+			let bls = this.$store.getters.getBlockLibs;
+			console.log(bls);
+
+			for (let bl of bls) {
+				str += `blockLibraryData.set("${bl.id}", JSON.parse("${JSON.stringify(
+					map[bl.id]
+				)
+					.replaceAll("\\", "\\\\")
+					.replaceAll(/"/g, "\\\"")}"));\n`;
+			}
+
+			console.log(map);
+
+			return str;
+		},
+
 		config() {
 			return this.$store.getters.getConfigObject;
 		},
@@ -331,9 +369,9 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 		editorHooks() {
 			let str = `//Key: libraryID, Value: Array of stored blocks
 const blockLibraryData = new Map();
-			
+
 const emailEditorHooks = {
-	
+
     onSave: ({ document }) => {
 		emailDocument = document;
 
@@ -391,7 +429,7 @@ const emailEditorHooks = {
 
       	if (!blockLibraryData.has(libId)) {
 			blocks = [];
-		} else { 
+		} else {
 			blocks = blockLibraryData.get(libId);
 		}
 
@@ -404,7 +442,7 @@ const emailEditorHooks = {
 		if (!blockLibraryData.has(libId)) {
 			blockLibraryData.set(libId, []);
 		}
-		
+
     	blockLibraryData.get(libId).push(block);
 
 		return new Promise(resolve => {
@@ -418,7 +456,7 @@ const emailEditorHooks = {
 		array.forEach(c => {
 			if (c._id == _id) {
 				c.title = title;
-			} 
+			}
 		});
 
 		blockLibraryData.set(libId, array);
@@ -660,6 +698,9 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 				break;
 			case 2:
 				str = this.hooks;
+				break;
+			case 3:
+				str = this.blockLibs;
 				break;
 			default:
 				str = "";
