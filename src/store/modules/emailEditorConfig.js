@@ -1,4 +1,9 @@
+import BlockLibData from "./EditorBlockLibraryContainer";
+
 export default {
+	modules: {
+		BlockLibData,
+	},
 	state: () => ({
 		key: 0,
 		blKey: 0,
@@ -53,7 +58,6 @@ export default {
 			},
 		},
 		autoSaveInterval: 15000,
-		hooks: {},
 	}),
 	mutations: {
 		addEditorBtn(state) {
@@ -226,7 +230,6 @@ export default {
 			state.autoSaveInterval = x >= 0 ? x : 0;
 		},
 	},
-
 	actions: {},
 	getters: {
 		getHeaderBtns: (state) => {

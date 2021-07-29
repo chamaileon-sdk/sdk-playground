@@ -150,26 +150,38 @@ export default {
 					},
 
 					onLoadBlocks: ({ libId }) => {
+						const blocks = this.$store.getters.getBlocksById(libId);
+
 						return new Promise((resolve) => {
-							const blocks = [];
 							resolve({ blocks });
 						});
 					},
 
 					onBlockSave: ({ libId, block }) => {
+						this.$store.commit("addBlockToLib", { libId: libId, block: block });
+
 						return new Promise((resolve) => {
-							block._id = "customStringId";
 							resolve({ block });
 						});
 					},
 
 					onBlockRename: ({ libId, block: { _id, title } }) => {
+						this.$store.commit("renameBlock", {
+							libId: libId,
+							block: { _id, title },
+						});
+
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
 
 					onBlockDelete: ({ libId, block: { _id } }) => {
+						this.$store.commit("deleteBlock", {
+							libId: libId,
+							blockId: _id,
+						});
+
 						return new Promise((resolve) => {
 							resolve();
 						});

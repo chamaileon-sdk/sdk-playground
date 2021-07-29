@@ -176,8 +176,10 @@ export default new Vuex.Store({
 			if (!x.user.enabled) x.user = false;
 
 			x.document = state.document;
-			//Variable Editor icon has to be mdi-*iconTitle*
+			//TODO: Variable Editor icon has to be mdi-*iconTitle*
 
+			x.hooks = state.editorConfig.hooks;
+			console.log(x);
 			return x;
 		},
 
