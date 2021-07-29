@@ -80,8 +80,6 @@ export default new Vuex.Store({
 				"http://127.0.0.1:8100/getAuthToken"
 			);
 
-			console.log("accessTokenRequest");
-
 			const accessTokenResponse = await accessTokenRequest.json();
 			const accessToken = accessTokenResponse.result;
 
