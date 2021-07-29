@@ -1,6 +1,6 @@
 # sdk-ui
 
-## Node
+## Note
 To run this project you must run https://github.com/chamaileon-sdk/gui-auth-server
 
 ## Project setup
