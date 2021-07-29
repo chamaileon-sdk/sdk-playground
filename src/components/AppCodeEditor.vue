@@ -329,14 +329,22 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 		},
 
 		editorHooks() {
-			let str = `const emailEditorHooks = {
-    onSave: ({ emailJson }) => {
+			let str = `//Key: libraryID, Value: Array of stored blocks
+const blockLibraryData = new Map();
+			
+const emailEditorHooks = {
+	
+    onSave: ({ document }) => {
+		emailDocument = document;
+
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
-    onAutoSave: ({ emailJson }) => {
+    onAutoSave: ({ document }) => {
+		emailDocument = document;
+
 		return new Promise(resolve => {
 			resolve();
 		});
@@ -379,26 +387,54 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 	},
 
     onLoadBlocks: ({ libId }) => {
+		let blocks = [];
+
+      	if (!blockLibraryData.has(libId)) {
+			blocks = [];
+		} else { 
+			blocks = blockLibraryData.get(libId);
+		}
+
 		return new Promise(resolve => {
-			const blocks = [];
 			resolve({ blocks });
 		});
 	},
 
     onBlockSave: ({ libId, block }) => {
+		if (!blockLibraryData.has(libId)) {
+			blockLibraryData.set(libId, []);
+		}
+		
+    	blockLibraryData.get(libId).push(block);
+
 		return new Promise(resolve => {
-			block._id = "customStringId";
 			resolve({ block });
 		});
 	},
 
     onBlockRename: ({ libId, block: { _id, title } }) => {
+		let array = blockLibraryData.get(libId);
+
+		array.forEach(c => {
+			if (c._id == _id) {
+				c.title = title;
+			} 
+		});
+
+		blockLibraryData.set(libId, array);
+
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
     onBlockDelete: ({ libId, block: { _id } }) => {
+		let array = blockLibraryData.get(libId);
+
+		array = array.filter(c => c._id !== _id);
+
+		blockLibraryData.set(libId, array);
+
 		return new Promise(resolve => {
 			resolve();
 		});
