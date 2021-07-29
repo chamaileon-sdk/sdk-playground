@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Splash Screen</h1>
+		<h1>Colors</h1>
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -10,19 +10,19 @@
 			cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
 			est laborum.
 		</p>
-		<OptionsWrapper class="px-0">
-			<SplashScreenSelector />
+		<OptionsWrapper>
+			<ColorSelector />
 		</OptionsWrapper>
 	</div>
 </template>
 
 <script>
-import OptionsWrapper from "../optionWrapper.vue";
-import SplashScreenSelector from "./SplashScreenSelector.vue";
+import OptionsWrapper from "../../optionWrapper.vue";
+import ColorSelector from "./Colors/ColorSelector.vue";
 
 export default {
 	components: {
-		SplashScreenSelector,
+		ColorSelector,
 		OptionsWrapper,
 	},
 };
