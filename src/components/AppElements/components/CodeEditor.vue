@@ -374,54 +374,6 @@ const emailEditorHooks = {
 				this.snackbar = false;
 			}, 800);
 		},
-
-		//Document
-		//JSON.stringify = ~595ms
-		//traverse = ~497ms with array keys shown
-		//traverse = ~514ms without replaces
-		//traverse = ~630ms now
-		traverse(obj, depth = 0) {
-			//Array is considered as object by js
-			if (typeof obj !== "object")
-				return `"${obj.toString().replace(/\n/g, "\\n").replace(/"/g, "\\\"")}"`;
-
-			let isArray = Array.isArray(obj);
-
-			let str = isArray ? "[\n" : "{\n";
-			for (const property in obj) {
-				for (let i = 0; i < depth; i++) str += " ";
-
-				if (!isArray) str += `"${property}": `;
-				str += `${this.traverse(obj[property], depth + 1)}`;
-
-				let keys = Object.keys(obj);
-				if (property !== keys[keys.length - 1]) str += ",";
-
-				str += "\n";
-			}
-			str += isArray ? "]" : "}";
-			return str;
-		},
-
-		//~595ms without formatting
-		/*traverse(obj, depth = 0) {
-			//Array is considered as object by js
-			if (typeof obj !== "object")
-				return `"${obj.toString().replace(/\n/g, "\\n").replace(/"/g, "\\\"")}"`;
-
-			let isArray = Array.isArray(obj);
-
-			let str = isArray ? "[" : "{";
-			for (const property in obj) {
-				if (!isArray) str += `"${property}": `;
-				str += `${this.traverse(obj[property], depth + 1)}`;
-
-				let keys = Object.keys(obj);
-				if (property !== keys[keys.length - 1]) str += ",";
-			}
-			str += isArray ? "]" : "}";
-			return str;
-		},*/
 	},
 };
 </script>
