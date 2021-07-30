@@ -23,17 +23,23 @@
 		</div>
 
 		<v-card v-if="image" class="mt-16" flat>
-			<v-img
-				:transition="false"
-				:eager="true"
-				:src="require(`@/assets/${image}`)"
-			></v-img>
+			<v-img :eager="true" :src="img"></v-img>
 		</v-card>
 	</v-app>
 </template>
 
 <script>
 export default {
+	created() {
+		this.img = require(`@/assets/${this.image}`);
+	},
+
+	data() {
+		return {
+			img: undefined,
+		};
+	},
+
 	props: {
 		title: String,
 		paragraph1: String,

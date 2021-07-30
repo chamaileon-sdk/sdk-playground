@@ -33,7 +33,7 @@
 		</v-card>
 
 		<v-card
-			v-if="route !== '/sdk' && route !== '/emailthumbnail' && tab === 2"
+			v-show="route !== '/sdk' && route !== '/emailthumbnail' && tab === 2"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -44,7 +44,7 @@
 		</v-card>
 
 		<v-card
-			v-if="route === '/emaileditor' && tab === 3"
+			v-show="route === '/emaileditor' && tab === 3"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark

@@ -75,7 +75,7 @@ import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 export default {
 	mounted() {
 		let interval = setInterval(() => {
-			if (this.$store.state.sdk) {
+			if (this.$store.state.sdk && document.getElementById("email-thumbnail")) {
 				clearInterval(interval);
 				this.openThumbnail();
 			}
