@@ -43,9 +43,7 @@ export default {
 		});
 	},
 	mounted() {
-		this.$store.dispatch("initSDK", {
-			apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
-		});
+		this.$store.dispatch("initSDK");
 
 		window.onbeforeunload = function () {
 			localStorage.setItem(
