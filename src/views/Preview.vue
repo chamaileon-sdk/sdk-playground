@@ -26,9 +26,9 @@
 
 <script>
 import Footer from "../components/Footer.vue";
-import SectionObserver from "../components/SectionObserver.vue";
+import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
 import Header from "../components/Preview/components/Header.vue";
-import OpenButton from "../components/BaseOpenButton.vue";
+import OpenButton from "../components/AppElements/components/OpenButton.vue";
 import Description from "../components/ViewDescription.vue";
 
 export default {

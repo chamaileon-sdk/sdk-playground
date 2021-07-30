@@ -5,7 +5,7 @@ import editorConfig from "../components/EmailEditor/store/emailEditorConfig";
 import previewConfig from "../components/Preview/store/preview";
 import variableEditorConfig from "../components/VariableEditor/store/variableEditor";
 import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
-import document from "./modules/emailDocument";
+import document from "../components/AppElements/store/emailDocument";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
 
 Vue.use(Vuex);

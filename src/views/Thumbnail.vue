@@ -26,7 +26,7 @@
 
 <script>
 import Footer from "../components/Footer.vue";
-import SectionObserver from "../components/SectionObserver.vue";
+import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
 import Settings from "../components/Thumbnail/components/Settings.vue";
 import Description from "../components/ViewDescription.vue";
 

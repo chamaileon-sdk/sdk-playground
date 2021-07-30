@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import OpenButton from "../components/BaseOpenButton.vue";
+import OpenButton from "../components/AppElements/components/OpenButton.vue";
 import Footer from "../components/Footer.vue";
-import SectionObserver from "../components/SectionObserver.vue";
+import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
 import Header from "../components/EmailEditor/components/Header";
 import Elements from "../components/EmailEditor/components/Elements";
 import BlockLibraries from "../components/EmailEditor/components/BlockLibraries";

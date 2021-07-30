@@ -29,7 +29,7 @@
 
 <script>
 import Footer from "../components/Footer.vue";
-import SectionObserver from "../components/SectionObserver.vue";
+import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
 import Logo from "../components/Dashboard/components/Logo.vue";
 import Language from "../components/Dashboard/components/Language.vue";
 import Colors from "../components/Dashboard/components/Colors.vue";

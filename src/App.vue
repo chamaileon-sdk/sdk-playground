@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import CodeEditor from "./components/AppCodeEditor.vue";
-import MenuReworked from "./components/Menu.vue";
+import CodeEditor from "./components/AppElements/components/CodeEditor.vue";
+import MenuReworked from "./components/AppElements/components/Menu.vue";
 
 export default {
 	components: {
