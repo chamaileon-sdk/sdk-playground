@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import AddButton from "../AddButton.vue";
-import List6 from "../List6.vue";
-import OptionWrapper from "../optionWrapper.vue";
-import Header from "./PreviewHeaderPreview.vue";
+import AddButton from "../../AddButton.vue";
+import List6 from "../../List6.vue";
+import OptionWrapper from "../../optionWrapper.vue";
+import Header from "./Header/HeaderPreview.vue";
 
 import { mapMutations } from "vuex";
 
