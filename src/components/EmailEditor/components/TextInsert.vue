@@ -63,10 +63,10 @@
 </template>
 
 <script>
-import AddButton from "../AddButton.vue";
-import ListItem3 from "../ListItem3.vue";
-import OptionWrapper from "../optionWrapper.vue";
-import TextInsertPreview from "./TextInsertPreview.vue";
+import AddButton from "../../AddButton.vue";
+import ListItem3 from "../../ListItem3.vue";
+import OptionWrapper from "../../optionWrapper.vue";
+import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";
 import draggable from "vuedraggable";
 import { mapMutations } from "vuex";
 

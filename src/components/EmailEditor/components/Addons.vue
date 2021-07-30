@@ -87,7 +87,7 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import OptionWrapper from "../optionWrapper.vue";
+import OptionWrapper from "../../optionWrapper.vue";
 
 export default {
 	components: {

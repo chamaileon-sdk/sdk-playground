@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import OptionWrapper from "../optionWrapper.vue";
+import OptionWrapper from "../../optionWrapper.vue";
 import { mapMutations } from "vuex";
 
 export default {
