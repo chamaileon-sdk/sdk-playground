@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import OptionWrapper from "../../optionWrapper.vue";
+import OptionWrapper from "../../OptionWrapper.vue";
 import HeaderPreview from "./Header/HeaderPreview.vue";
 import SplitList from "../../Lists/components/SplitList.vue";
 

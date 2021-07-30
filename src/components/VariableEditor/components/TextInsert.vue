@@ -62,7 +62,7 @@
 
 <script>
 import AddButton from "../../AddButton.vue";
-import OptionWrapper from "../../optionWrapper.vue";
+import OptionWrapper from "../../OptionWrapper.vue";
 import ListItem3 from "../../Lists/components/ListItem3.vue";
 
 import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";

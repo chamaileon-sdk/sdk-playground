@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import OptionsWrapper from "../../optionWrapper.vue";
+import OptionsWrapper from "../../OptionWrapper.vue";
 import LocaleSelector from "./Language/LocaleSelector.vue";
 
 export default {
