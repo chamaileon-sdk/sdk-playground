@@ -181,9 +181,9 @@
 </template>
 
 <script>
-import DeleteButton from "./DeleteButton.vue";
+import DeleteButton from "../../DeleteButton.vue";
 import draggable from "vuedraggable";
-import ColorPicker from "./ColorPicker.vue";
+import ColorPicker from "../../ColorPicker.vue";
 
 export default {
 	props: {

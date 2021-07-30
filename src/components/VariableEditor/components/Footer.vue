@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import SplitList from "../../SplitList.vue";
+import SplitList from "../../Lists/components/SplitList.vue";
 import OptionWrapper from "../../optionWrapper.vue";
 import FooterPreview from "./Footer/FooterPreview.vue";
 
