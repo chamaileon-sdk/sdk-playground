@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import Footer from "../components/Footer.vue";
-import SectionObserver from "../components/SectionObserver.vue";
-import Settings from "../components/Thumbnail/ThumbnailSettings.vue";
-import Description from "../components/ViewDescription.vue";
+import Footer from "../components/ViewUtilities/components/Footer.vue";
+import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
+import Settings from "../components/Thumbnail/components/Settings.vue";
+import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	data() {

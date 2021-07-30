@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import editorConfig from "./modules/emailEditorConfig";
-import previewConfig from "./modules/preview";
-import variableEditorConfig from "./modules/variableEditor";
-import thumbnailConfig from "./modules/thumbnail";
-import document from "./modules/emailDocument";
+import editorConfig from "../components/EmailEditor/store/emailEditorConfig";
+import previewConfig from "../components/Preview/store/preview";
+import variableEditorConfig from "../components/VariableEditor/store/variableEditor";
+import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
+import document from "../components/AppElements/store/emailDocument";
+import sdkConfig from "../components/Dashboard/store/sdkConfig";
 
 Vue.use(Vuex);
 
@@ -17,24 +18,12 @@ export default new Vuex.Store({
 		variableEditorConfig,
 		document,
 		thumbnailConfig,
+		sdkConfig,
 	},
 	state: {
 		apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
 		logoCreatorFunction: undefined,
 		sdk: null,
-		sdkConfig: {
-			locale: "en",
-			urls: {
-				splashScreen:
-					"https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html",
-				createLogoJS:
-					"https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js",
-			},
-			colors: {
-				primary: "#000000",
-				secondary: "#000000",
-			},
-		},
 	},
 	mutations: {
 		//Load from local storage
@@ -59,9 +48,6 @@ export default new Vuex.Store({
 		},
 
 		//SDK Settings
-		updateCode(state, newCode) {
-			state.code = newCode;
-		},
 
 		changeLogoFunction(state, fn) {
 			state.logoCreatorFunction = fn;
@@ -70,6 +56,7 @@ export default new Vuex.Store({
 			state.sdk = sdk;
 		},
 
+		//TODO: move to own module and wire up
 		updateSDKConfig(state, payload) {
 			state.sdkConfig = { ...state.sdkConfig, ...payload };
 		},
@@ -111,7 +98,6 @@ export default new Vuex.Store({
 				styles[i].innerHTML.includes("chamaileon-plugin-wrapper iframe")
 			)
 				i--;
-			console.log(styles[i]);
 
 			i = elems.length;
 
@@ -173,7 +159,6 @@ export default new Vuex.Store({
 			//TODO: Variable Editor icon has to be mdi-*iconTitle*
 
 			x.hooks = state.editorConfig.hooks;
-			console.log(x);
 			return x;
 		},
 

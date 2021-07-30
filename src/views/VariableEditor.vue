@@ -33,14 +33,14 @@
 </template>
 
 <script>
-import OpenButton from "../components/BaseOpenButton.vue";
-import SectionObserver from "../components/SectionObserver.vue";
-import Header from "../components/VariableEditor/Header.vue";
-import Footer from "../components/VariableEditor/Footer.vue";
-import TextInsert from "../components/VariableEditor/TextInsert.vue";
-import VariablesToEdit from "../components/VariableEditor/VariablesToEdit.vue";
-import NavFooter from "../components/Footer.vue";
-import Description from "../components/ViewDescription.vue";
+import OpenButton from "../components/AppElements/components/OpenButton.vue";
+import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
+import Header from "../components/VariableEditor/components/Header.vue";
+import Footer from "../components/VariableEditor/components/Footer.vue";
+import TextInsert from "../components/VariableEditor/components/TextInsert.vue";
+import VariablesToEdit from "../components/VariableEditor/components/VariablesToEdit.vue";
+import NavFooter from "../components/ViewUtilities/components/Footer.vue";
+import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	data() {
