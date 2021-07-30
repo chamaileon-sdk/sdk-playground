@@ -98,7 +98,6 @@ export default new Vuex.Store({
 				styles[i].innerHTML.includes("chamaileon-plugin-wrapper iframe")
 			)
 				i--;
-			console.log(styles[i]);
 
 			i = elems.length;
 
@@ -160,7 +159,6 @@ export default new Vuex.Store({
 			//TODO: Variable Editor icon has to be mdi-*iconTitle*
 
 			x.hooks = state.editorConfig.hooks;
-			console.log(x);
 			return x;
 		},
 
