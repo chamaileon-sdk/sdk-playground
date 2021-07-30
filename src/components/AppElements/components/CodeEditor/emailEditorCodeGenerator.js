@@ -1,6 +1,6 @@
 export default function (config) {
 	return `const editorInstance = await chamaileonPlugins.editEmail({
-document: emailDocument, // see 'document' tab
+document: emailDocument, // see "document" tab
 user: ${
 	config.user
 		? `{
@@ -23,7 +23,7 @@ settings: {
     }
 },
 autoSaveInterval: ${config.autoSaveInterval},
-hooks: emailEditorHooks //see 'hooks' tab
+hooks: emailEditorHooks //see "hooks" tab
 });`;
 }
 
@@ -142,8 +142,8 @@ const calculateBlockLibs = (config) => {
 	arr.forEach((c) => {
 		literal += `
         {
-            id: '${c.id}',
-            label: '${c.label}',
+            id: "${c.id}",
+            label: "${c.label}",
             canDeleteBlock: ${c.canDeleteBlock},
             canRenameBlock: ${c.canRenameBlock},
             canSaveBlock: ${c.canSaveBlock},

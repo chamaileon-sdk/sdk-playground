@@ -76,6 +76,7 @@ import sdkCodeGenerator from "./CodeEditor/sdkCodeGenerator";
 import thumbnailCodeGenerator from "./CodeEditor/thumbnailCodeGenerator";
 import previewCodeGenerator from "./CodeEditor/previewCodeGenerator";
 import emailEditorCodeGenerator from "./CodeEditor/emailEditorCodeGenerator";
+import variableEditorCodeGenerator from "./CodeEditor/variableEditorCodeGenerator";
 
 export default {
 	data: () => ({
@@ -280,140 +281,11 @@ const emailEditorHooks = {
 		},
 
 		//Variable Editor
-		variableEditorConfig() {
-			return this.$store.getters.getVariableEditorConfigObject;
-		},
-
-		calculateVariables() {
-			let out = "";
-
-			this.variableEditorConfig.settings.variablesToEdit.forEach((c) => {
-				out += `"${c}",`;
-			});
-
-			out = out.slice(0, -1);
-			return out;
-		},
-
-		calculateHeaderLeft() {
-			let literal = "";
-			let arr = this.variableEditorConfig.settings.buttons.header.left;
-
-			if (arr.length === 0) return "[]";
-
-			literal += `[
-				/*It's not necessary to have a close button,
-				but otherwise there is no way to exit the app*/`;
-			arr.forEach((c) => {
-				literal += `
-					{
-						id: '${c.id}',
-						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
-					},`;
-			});
-			literal += `
-				]`;
-			return literal;
-		},
-
-		calculateHeaderRight() {
-			let literal = "";
-			let arr = this.variableEditorConfig.settings.buttons.header.right;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-					{
-						id: '${c.id}',
-						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
-					},`;
-			});
-			literal += `
-				]`;
-			return literal;
-		},
-
-		calculateFooterRight() {
-			let literal = "";
-			let arr = this.variableEditorConfig.settings.buttons.footer.right;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-					{
-						id: '${c.id}',
-						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
-					},`;
-			});
-			literal += `
-				]`;
-			return literal;
-		},
-
-		calculateFooterLeft() {
-			let literal = "";
-			let arr = this.variableEditorConfig.settings.buttons.footer.left;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-					{
-						id: '${c.id}',
-						${c.icon ? `icon: '${c.icon}'` : `label: '${c.label}'`}
-					},`;
-			});
-			literal += `
-				]`;
-			return literal;
-		},
-
-		calculateVariableEditorTextInsert() {
-			let literal = "";
-			let arr = this.variableEditorConfig.settings.buttons.textInsertPlugin;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-				{
-					id: '${c.id}',
-					label: '${c.label}',
-					icon: '${c.icon}'
-				},`;
-			});
-			literal += `
-			]`;
-			return literal;
-		},
 
 		variableEditorCode() {
-			return `const variableEditorConfig = {
-    document: emailDocument, // see 'document' tab
-    settings: {
-        variablesToEdit: [${this.calculateVariables}],
-        buttons: {
-            header: {
-                left: ${this.calculateHeaderLeft},
-                right: ${this.calculateHeaderRight},
-            },
-            footer: {
-                left: ${this.calculateFooterLeft},
-                right: ${this.calculateFooterRight},
-            },
-            textInsertPlugin: ${this.calculateVariableEditorTextInsert}
-		},
-	},
-    hooks: variableEditorHooks //see 'hooks' tab
-};
-
-const variableEditorInstance = await chamaileonPlugins.editVariables(variableEditorConfig)`;
+			return variableEditorCodeGenerator(
+				this.$store.getters.getVariableEditorConfigObject
+			);
 		},
 
 		variableEditorHooks() {
