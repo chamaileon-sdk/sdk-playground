@@ -72,11 +72,12 @@
 </template>
 
 <script>
-import sdkCodeGenerator from "./CodeEditor/sdkCodeGenerator";
-import thumbnailCodeGenerator from "./CodeEditor/thumbnailCodeGenerator";
-import previewCodeGenerator from "./CodeEditor/previewCodeGenerator";
-import emailEditorCodeGenerator from "./CodeEditor/emailEditorCodeGenerator";
-import variableEditorCodeGenerator from "./CodeEditor/variableEditorCodeGenerator";
+import sdkCodeGenerator from "./CodeEditor/codeGenerators/sdkCodeGenerator";
+import thumbnailCodeGenerator from "./CodeEditor/codeGenerators/thumbnailCodeGenerator";
+import previewCodeGenerator from "./CodeEditor/codeGenerators/previewCodeGenerator";
+import emailEditorCodeGenerator from "./CodeEditor/codeGenerators/emailEditorCodeGenerator";
+import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEditorCodeGenerator";
+import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
 
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
@@ -123,19 +124,10 @@ export default {
 
 		//Email Editor
 		blockLibs() {
-			let str = "";
-			let map = this.$store.state.editorConfig.BlockLibData.blockLibsData;
-			let bls = this.$store.getters.getBlockLibs;
-
-			for (let bl of bls) {
-				str += `blockLibraryData.set("${bl.id}", JSON.parse("${JSON.stringify(
-					map[bl.id]
-				)
-					.replaceAll("\\", "\\\\")
-					.replaceAll(/"/g, "\\\"")}"));\n`;
-			}
-
-			return str;
+			return blockLibrariesCodeGenerator(
+				this.$store.state.editorConfig.BlockLibData.blockLibsData,
+				this.$store.getters.getBlockLibs
+			);
 		},
 
 		emailCode() {
