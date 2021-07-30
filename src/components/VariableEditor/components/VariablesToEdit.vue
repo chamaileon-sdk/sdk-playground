@@ -24,7 +24,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import OptionWrapper from "../optionWrapper.vue";
+import OptionWrapper from "../../optionWrapper.vue";
 
 export default {
 	mounted() {

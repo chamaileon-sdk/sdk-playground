@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import SplitList from "./SplitList.vue";
-import OptionWrapper from "../optionWrapper.vue";
-import FooterPreview from "./FooterPreview.vue";
+import SplitList from "../../SplitList.vue";
+import OptionWrapper from "../../optionWrapper.vue";
+import FooterPreview from "./Footer/FooterPreview.vue";
 
 export default {
 	components: {

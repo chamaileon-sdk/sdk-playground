@@ -61,11 +61,11 @@
 </template>
 
 <script>
-import AddButton from "../AddButton.vue";
-import OptionWrapper from "../optionWrapper.vue";
-import ListItem3 from "../ListItem3.vue";
+import AddButton from "../../AddButton.vue";
+import OptionWrapper from "../../optionWrapper.vue";
+import ListItem3 from "../../ListItem3.vue";
 
-import TextInsertPreview from "./TextInsertPreview.vue";
+import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";
 import draggable from "vuedraggable";
 import { mapMutations } from "vuex";
 
