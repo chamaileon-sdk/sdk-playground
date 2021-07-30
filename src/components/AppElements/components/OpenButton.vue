@@ -56,18 +56,35 @@
 <script>
 export default {
 	mounted() {
-		document.querySelector(".openbtn").style.opacity = 1;
-		document.querySelector(".openbtnl").style.opacity = 1;
+		if (this.$route.hash !== "#home") this.showBtns();
+	},
 
-		setTimeout(() => {
-			document.querySelector(".openbtn").style.opacity = "";
-			document.querySelector(".openbtnl").style.opacity = "";
-		}, 2000);
+	data() {
+		return {
+			autoShown: false,
+		};
+	},
+
+	watch: {
+		$route(to, from) {
+			if (!this.autoShown && to.hash !== "#home") this.showBtns();
+		},
 	},
 
 	methods: {
 		emitClick() {
 			this.$emit("openEditorClicked");
+		},
+
+		showBtns() {
+			document.querySelector(".openbtn").style.opacity = 1;
+			document.querySelector(".openbtnl").style.opacity = 1;
+			this.autoShown = true;
+
+			setTimeout(() => {
+				document.querySelector(".openbtn").style.opacity = "";
+				document.querySelector(".openbtnl").style.opacity = "";
+			}, 2000);
 		},
 	},
 };
