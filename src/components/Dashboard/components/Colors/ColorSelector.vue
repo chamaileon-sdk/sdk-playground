@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import ColorPicker from "../../../ColorPicker.vue";
+import ColorPicker from "../../../ViewUtilities/components/ColorPicker.vue";
 import { mapState } from "vuex";
 
 export default {

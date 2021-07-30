@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import AddButton from "../../AddButton.vue";
+import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import draggable from "vuedraggable";
 import ListItem3 from "./ListItem3.vue";
 

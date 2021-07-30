@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import AddButton from "../../AddButton.vue";
+import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import HeaderPreview from "./Header/HeaderPreview.vue";
-import OptionsWrapper from "../../OptionWrapper.vue";
+import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import List6 from "../../Lists/components/List6.vue";
 import { mapMutations } from "vuex";
 

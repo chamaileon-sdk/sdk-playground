@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import AddButton from "../../AddButton.vue";
+import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import List6 from "../../Lists/components/List6.vue";
-import OptionWrapper from "../../OptionWrapper.vue";
+import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import Header from "./Header/HeaderPreview.vue";
 
 import { mapMutations } from "vuex";

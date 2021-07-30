@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import Footer from "../components/Footer.vue";
+import Footer from "../components/ViewUtilities/components/Footer.vue";
 import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
 import Header from "../components/Preview/components/Header.vue";
 import OpenButton from "../components/AppElements/components/OpenButton.vue";
-import Description from "../components/ViewDescription.vue";
+import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	data() {

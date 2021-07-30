@@ -25,7 +25,7 @@
 
 <script>
 import SplitList from "../../Lists/components/SplitList.vue";
-import OptionWrapper from "../../OptionWrapper.vue";
+import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import FooterPreview from "./Footer/FooterPreview.vue";
 
 export default {

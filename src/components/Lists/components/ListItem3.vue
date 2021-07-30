@@ -73,7 +73,7 @@ import {
 	VTextField,
 	VIcon,
 } from "vuetify/lib";
-import DeleteButton from "../../DeleteButton.vue";
+import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 
 Vue.component("v-col", VCol);
 Vue.component("v-row", VRow);

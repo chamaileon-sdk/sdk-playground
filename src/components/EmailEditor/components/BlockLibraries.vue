@@ -135,10 +135,10 @@
 </template>
 
 <script>
-import DeleteButton from "../../DeleteButton.vue";
-import AddButton from "../../AddButton.vue";
+import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
+import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import draggable from "vuedraggable";
-import OptionWrapper from "../../OptionWrapper.vue";
+import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import { mapMutations } from "vuex";
 
 export default {

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import OptionsWrapper from "../../OptionWrapper.vue";
+import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import LogoSelector from "./Logo/LogoSelector.vue";
 
 export default {

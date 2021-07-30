@@ -39,8 +39,8 @@ import Header from "../components/VariableEditor/components/Header.vue";
 import Footer from "../components/VariableEditor/components/Footer.vue";
 import TextInsert from "../components/VariableEditor/components/TextInsert.vue";
 import VariablesToEdit from "../components/VariableEditor/components/VariablesToEdit.vue";
-import NavFooter from "../components/Footer.vue";
-import Description from "../components/ViewDescription.vue";
+import NavFooter from "../components/ViewUtilities/components/Footer.vue";
+import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	data() {
