@@ -4,7 +4,7 @@ export default function (previewConfig) {
     settings: {
         buttons: {
             header: ${calculatePreviewHeader(previewConfig)}
-        }
+        },
     },
     hooks: emailPreviewHooks //see 'hooks' tab
 };
@@ -16,44 +16,43 @@ const calculatePreviewHeader = (previewConfig) => {
 	let literal = "";
 	let arr = previewConfig.settings.buttons.header;
 
-	if (arr.length === 0) return "[]";
+	if (arr.length === 0) return "[],";
 
-	literal += "[";
-	arr.forEach((c) => {
-		literal += `
-        {
-            ${c.type === "button" ? `id: '${c.id}',\n\t\t\t\t\t` : ""}type: '${
-	c.type
-}',
-            icon: '${c.icon}',
-            label: '${c.label}',
-            color: '${c.color}',
-            style: '${c.style}'${
-	c.items ? `,\n\t\t\t\t\titems: ${calculatePreviewDDItems(c.items)}` : ""
-}
-        },`;
+	literal += "[\n";
+	arr.forEach((c, i) => {
+		literal += "\t\t\t\t{\n";
+		literal += c.type === "button" ? `\t\t\t\t\tid: "${c.id}",\n` : "";
+		literal += `\t\t\t\t\ticon: "${c.icon}",\n`;
+		literal += `\t\t\t\t\tlabel: "${c.label}",\n`;
+		literal += `\t\t\t\t\tcolor: "${c.color}",\n`;
+		literal += `\t\t\t\t\tstyle: "${c.style}"`;
+		literal += c.items
+			? `,\n\t\t\t\t\titems: ${calculatePreviewDDItems(c.items)}\n`
+			: ",\n";
+		literal += "\t\t\t\t}";
+		literal += i === arr.length - 1 ? "," : ",\n";
 	});
-	literal += `
-    ]`;
+	literal += "\n\t\t\t],";
+
 	return literal;
 };
 
 const calculatePreviewDDItems = (arr) => {
-	if (arr.length === 0) return "[]";
+	if (arr.length === 0) return "[],";
 
 	let literal = "";
 
-	literal += "[";
+	literal += "[\n";
 
-	arr.forEach((c) => {
-		literal += `\n\t\t\t\t\t\t{
-                    id: "${c.id}",
-                    label: "${c.label}",
-                    icon: "${c.icon}",
-        \t\t},`;
+	arr.forEach((c, i) => {
+		literal += "\t\t\t\t\t\t{\n";
+		literal += `\t\t\t\t\t\t\tid: "${c.id}",\n`;
+		literal += `\t\t\t\t\t\t\tlabel: "${c.label}",\n`;
+		literal += `\t\t\t\t\t\t\ticon: "${c.icon}"\n`;
+		literal += "\t\t\t\t\t\t}";
+		literal += i === arr.length - 1 ? "," : ",\n";
 	});
 
-	literal += "\n\t\t\t\t\t]";
-
+	literal += "\n\t\t\t\t\t],";
 	return literal;
 };
