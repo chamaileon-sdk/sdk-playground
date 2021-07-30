@@ -5,12 +5,20 @@ export default function (variableEditorConfig) {
         variablesToEdit: [${calculateVariables(variableEditorConfig)}],
         buttons: {
             header: {
-                left: ${calculateHeaderLeft(variableEditorConfig)},
-                right: ${calculateHeaderRight(variableEditorConfig)},
+                left: ${calculateButtons(
+		variableEditorConfig.settings.buttons.header.left
+	)},
+                right: ${calculateButtons(
+		variableEditorConfig.settings.buttons.header.right
+	)},
             },
             footer: {
-                left: ${calculateFooterLeft(variableEditorConfig)},
-                right: ${calculateFooterRight(variableEditorConfig)},
+                left: ${calculateButtons(
+		variableEditorConfig.settings.buttons.footer.left
+	)},
+                right: ${calculateButtons(
+		variableEditorConfig.settings.buttons.footer.right
+	)},
             },
             textInsertPlugin: ${calculateVariableEditorTextInsert(
 		variableEditorConfig
@@ -34,9 +42,8 @@ const calculateVariables = (variableEditorConfig) => {
 	return out;
 };
 
-const calculateHeaderLeft = (variableEditorConfig) => {
+const calculateButtons = (arr) => {
 	let literal = "";
-	let arr = variableEditorConfig.settings.buttons.header.left;
 
 	if (arr.length === 0) return "[]";
 
@@ -52,70 +59,6 @@ const calculateHeaderLeft = (variableEditorConfig) => {
 	});
 
 	literal += "\t\t\t\t]";
-	return literal;
-};
-
-const calculateHeaderRight = (variableEditorConfig) => {
-	let literal = "";
-	let arr = variableEditorConfig.settings.buttons.header.right;
-
-	if (arr.length === 0) return "[]";
-
-	literal = "[\n";
-
-	arr.forEach((c) => {
-		literal += "\t\t\t\t\t{\n";
-		literal += `\t\t\t\t\t\tid: '${c.id}',\n`;
-		literal += c.icon
-			? `\t\t\t\t\t\ticon: '${c.icon}',\n`
-			: `\t\t\t\t\t\tlabel: '${c.label}',\n`;
-		literal += "\t\t\t\t\t},\n";
-	});
-
-	literal += "\t\t\t\t]";
-
-	return literal;
-};
-
-const calculateFooterRight = (variableEditorConfig) => {
-	let literal = "";
-	let arr = variableEditorConfig.settings.buttons.footer.right;
-
-	literal = "[\n";
-
-	arr.forEach((c) => {
-		literal += "\t\t\t\t\t{\n";
-		literal += `\t\t\t\t\t\tid: '${c.id}',\n`;
-		literal += c.icon
-			? `\t\t\t\t\t\ticon: '${c.icon}',\n`
-			: `\t\t\t\t\t\tlabel: '${c.label}',\n`;
-		literal += "\t\t\t\t\t},\n";
-	});
-
-	literal += "\t\t\t\t]";
-
-	return literal;
-};
-
-const calculateFooterLeft = (variableEditorConfig) => {
-	let literal = "";
-	let arr = variableEditorConfig.settings.buttons.footer.left;
-
-	if (arr.length === 0) return "[]";
-
-	literal = "[\n";
-
-	arr.forEach((c) => {
-		literal += "\t\t\t\t\t{\n";
-		literal += `\t\t\t\t\t\tid: '${c.id}',\n`;
-		literal += c.icon
-			? `\t\t\t\t\t\ticon: '${c.icon}',\n`
-			: `\t\t\t\t\t\tlabel: '${c.label}',\n`;
-		literal += "\t\t\t\t\t},\n";
-	});
-
-	literal += "\t\t\t\t]";
-
 	return literal;
 };
 
