@@ -75,6 +75,7 @@
 import sdkCodeGenerator from "./CodeEditor/sdkCodeGenerator";
 import thumbnailCodeGenerator from "./CodeEditor/thumbnailCodeGenerator";
 import previewCodeGenerator from "./CodeEditor/previewCodeGenerator";
+import emailEditorCodeGenerator from "./CodeEditor/emailEditorCodeGenerator";
 
 export default {
 	data: () => ({
@@ -140,162 +141,8 @@ export default {
 			return str;
 		},
 
-		config() {
-			return this.$store.getters.getConfigObject;
-		},
-
-		calcualteConfig() {
-			if (!this.config.settings.elements.content) return "false";
-
-			return `{
-				text: ${this.config.settings.elements.content.text},
-				image: ${this.config.settings.elements.content.image},
-				button: ${this.config.settings.elements.content.button},
-				divider: ${this.config.settings.elements.content.divider},
-				social: ${this.config.settings.elements.content.social},
-				code:  ${this.config.settings.elements.content.code}
-			}`;
-		},
-
-		calcualteStructure() {
-			if (!this.config.settings.elements.structure) return "false";
-
-			return `{
-				fullWidth: ${this.config.settings.elements.structure.fullWidth},
-				box: ${this.config.settings.elements.structure.box},
-				multiColumn: ${this.config.settings.elements.structure.multiColumn}
-			}`;
-		},
-
-		calcualteAdvanced() {
-			if (!this.config.settings.elements.advanced) return "false";
-
-			return `{
-				loop: ${this.config.settings.elements.advanced.loop},
-				conditional: ${this.config.settings.elements.advanced.conditional},
-				dynamicImage: ${this.config.settings.elements.advanced.dynamicImage}
-			}`;
-		},
-
-		calculateElements() {
-			if (!this.config.settings.elements) return "false";
-
-			return `{
-			content: ${this.calcualteConfig},
-			structure: ${this.calcualteStructure},
-			advanced: ${this.calcualteAdvanced}
-		}`;
-		},
-
-		calculateBL() {
-			if (!this.config.addons.blockLock) return "false";
-
-			return `{
-                enabled: ${this.config.addons.blockLock.enabled}
-            }`;
-		},
-
-		calculateVE() {
-			if (!this.config.addons.variableSystem) return "false";
-
-			return `{
-                enabled: ${this.config.addons.variableSystem.enabled}
-            }`;
-		},
-
-		calculateHeader() {
-			let literal = "";
-			let arr = this.config.settings.buttons.header;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-				{
-					${c.type === "button" ? `id: '${c.id}',\n\t\t\t\t\t` : ""}type: '${c.type}',
-					icon: '${c.icon}',
-					label: '${c.label}',
-					color: '${c.color}',
-					style: '${c.style}'${
-	c.items ? `,\n\t\t\t\t\titems: ${this.calculateDDItems(c.items)}` : ""
-}
-				},`;
-			});
-			literal += `
-			]`;
-			return literal;
-		},
-
-		calculateBlockLibs() {
-			let literal = "";
-			let arr = this.config.blockLibraries;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-				{
-					id: '${c.id}',
-					label: '${c.label}',
-					canDeleteBlock: ${c.canDeleteBlock},
-					canRenameBlock: ${c.canRenameBlock},
-					canSaveBlock: ${c.canSaveBlock}
-				},`;
-			});
-			literal += `
-			]`;
-			return literal;
-		},
-
-		calculateTextInsert() {
-			let literal = "";
-			let arr = this.config.settings.buttons.textInsert;
-
-			if (arr.length === 0) return "[]";
-
-			literal += "[";
-			arr.forEach((c) => {
-				literal += `
-				{
-					id: '${c.id}',
-					label: '${c.label}',
-					icon: '${c.icon}'
-				},`;
-			});
-			literal += `
-			]`;
-			return literal;
-		},
-
 		emailCode() {
-			return `const editorInstance = await chamaileonPlugins.editEmail({
-    document: emailDocument, // see 'document' tab
-    user: ${
-	this.config.user
-		? `{
-        name: "${this.config.user.name}",
-        avatar: "${this.config.user.avatar}"
-    }`
-		: "false"
-},
-    settings: {
-        staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
-        buttons: {
-            header: ${this.calculateHeader},
-            textInsert: ${this.calculateTextInsert}
-        },
-        elements: ${this.calculateElements},
-        blockLibraries: ${this.calculateBlockLibs},
-        addons: {
-            blockLock: ${this.calculateBL},
-            variableSystem: ${this.calculateVE}
-        }
-    },
-	autoSaveInterval: ${this.config.autoSaveInterval},
-    hooks: emailEditorHooks //see 'hooks' tab
-});`;
+			return emailEditorCodeGenerator(this.$store.getters.getConfigObject);
 		},
 
 		editorHooks() {
@@ -654,27 +501,6 @@ const variableEditorInstance = await chamaileonPlugins.editVariables(variableEdi
 			setTimeout(() => {
 				this.snackbar = false;
 			}, 800);
-		},
-
-		//Editor
-		calculateDDItems(arr) {
-			if (arr.length === 0) return "[]";
-
-			let literal = "";
-
-			literal += "[";
-
-			arr.forEach((c) => {
-				literal += `\n\t\t\t\t\t\t{
-							id: "${c.id}",
-                			label: "${c.label}",
-                			icon: "${c.icon}",
-				\t\t},`;
-			});
-
-			literal += "\n\t\t\t\t\t]";
-
-			return literal;
 		},
 
 		//Document

@@ -48,7 +48,7 @@ const calculatePreviewDDItems = (arr) => {
 		literal += "\t\t\t\t\t\t{\n";
 		literal += `\t\t\t\t\t\t\tid: "${c.id}",\n`;
 		literal += `\t\t\t\t\t\t\tlabel: "${c.label}",\n`;
-		literal += `\t\t\t\t\t\t\ticon: "${c.icon}"\n`;
+		literal += `\t\t\t\t\t\t\ticon: "${c.icon}",\n`;
 		literal += "\t\t\t\t\t\t}";
 		literal += i === arr.length - 1 ? "," : ",\n";
 	});
