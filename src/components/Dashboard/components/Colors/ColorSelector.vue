@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import ColorPicker from "../../../EmailEditor/ColorPicker.vue";
+import ColorPicker from "../../../ColorPicker.vue";
 import { mapState } from "vuex";
 
 export default {

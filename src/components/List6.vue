@@ -183,7 +183,7 @@
 <script>
 import DeleteButton from "./DeleteButton.vue";
 import draggable from "vuedraggable";
-import ColorPicker from "./EmailEditor/ColorPicker.vue";
+import ColorPicker from "./ColorPicker.vue";
 
 export default {
 	props: {
