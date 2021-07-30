@@ -1,46 +1,56 @@
 <template>
-  <v-navigation-drawer permanent app color="primary">
-    <v-card
-      color="transparent"
-      flat
-      to="/"
-      width="100%"
-      class=" pa-4 pr-5"
-      id="logo"
-      v-chamaileonLogo
-      :ripple="false"
-    ></v-card>
+	<scrollactive>
+		<v-card flat height="100%">
+			<v-card
+				:ripple="false"
+				to="/sdk#home"
+				:style="`fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`"
+				color="transparent"
+				flat
+				width="100%"
+				class="px-6 pt-6 pb-4"
+				id="logo"
+				v-chamaileonLogo
+			></v-card>
+			<v-list>
+				<template v-for="(m, ind) in Menu">
+					<v-list-item
+						:key="ind"
+						class="pl-6 scrollactive-item"
+						color="primary"
+						v-ripple="{ class: `primary--text` }"
+						exact
+						:to="{ path: m.to, hash: 'home' }"
+					>
+						<v-list-item-icon class="mr-6">
+							<v-icon>mdi-{{ m.icon }}</v-icon>
+						</v-list-item-icon>
 
-    <v-list dark shaped>
-      <v-list-item
-        v-for="(item, ind) in items"
-        :key="ind"
-        link
-        :to="item.title.toLowerCase().replaceAll(' ', '')"
-      >
-        <v-list-item-icon class="white--text mr-4">
-          <v-icon>mdi-{{ item.icon }}</v-icon>
-        </v-list-item-icon>
+						<v-list-item-title>{{ m.title }}</v-list-item-title>
+					</v-list-item>
 
-        <v-list-item-content class="white--text">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+					<template v-if="isActive(m.to)">
+						<v-list-item
+							color="primary"
+							class="pl-12 navLink scrollactive-item"
+							v-ripple="{ class: `primary--text` }"
+							:class="addActiveClass(c.to)"
+							v-for="c in m.children"
+							:key="c.to"
+							link
+							:to="{ path: m.to, hash: c.to }"
+						>
+							<v-list-item-icon class="ml-6 mr-6">
+								<v-icon>mdi-{{ c.icon }}</v-icon>
+							</v-list-item-icon>
 
-    <template v-slot:append v-if="isEditor">
-      <div class="pa-4">
-        <v-btn
-          width="100%"
-          depressed
-          color="rgba(255,255,255,0.25)"
-          class="rounded-pill white--text"
-          @click="openEditor"
-          >Open Editor</v-btn
-        >
-      </div>
-    </template>
-  </v-navigation-drawer>
+							<v-list-item-title>{{ c.title }}</v-list-item-title>
+						</v-list-item>
+					</template>
+				</template>
+			</v-list>
+		</v-card>
+	</scrollactive>
 </template>
 
 <script>
@@ -48,46 +58,116 @@ const chamaileonLogo = require("chamaileon-logo");
 import { mapGetters, mapState } from "vuex";
 
 export default {
-	props: {
-		items: {
-			type: Array,
-			required: true,
-		},
+	mounted() {
+		this.primary = this.$vuetify.presets.framework.theme.themes.light.primary;
 	},
 	methods: {
-		openEditor() {
-			this.sdk.editEmail(this.getConfigObject);
+		isActive(path) {
+			return "/" + path === this.$route.path;
 		},
-	},
-	computed: {
-		isEditor() {
-			return this.$route.path.includes("emaileditor");
+		addActiveClass(hash) {
+			if (window.location.hash === hash) return "v-list-item--active";
+			return "";
 		},
-		...mapState(["sdk"]),
-		...mapGetters(["getConfigObject"]),
 	},
 	directives: {
 		chamaileonLogo: {
-			inserted: function(el) {
+			inserted: function (el) {
 				el.appendChild(chamaileonLogo({ withText: true }));
 			},
 		},
 	},
+	computed: {
+		...mapState(["sdk"]),
+		...mapGetters(["getConfigObject"]),
+	},
+	data: () => ({
+		primary: "",
+		Menu: [
+			{
+				title: "SDK",
+				icon: "at",
+				to: "sdk",
+				children: [
+					{ title: "Logo", icon: "at", to: "#sdklogo" },
+					{
+						title: "Splash Screen",
+						icon: "image-size-select-actual",
+						to: "#splashscreen",
+					},
+					{ title: "Colors", icon: "eyedropper-variant", to: "#colors" },
+					{ title: "Language", icon: "web", to: "#language" },
+				],
+			},
+			{
+				title: "Email Thumbnail",
+				icon: "image-outline",
+				to: "emailthumbnail",
+				children: [{ title: "Settings", icon: "cog-outline", to: "#settings" }],
+			},
+			{
+				title: "Email Preview",
+				icon: "email-search-outline",
+				to: "emailpreview",
+				children: [
+					{ title: "Header", icon: "border-top-variant", to: "#header" },
+				],
+			},
+			{
+				title: "Email Editor",
+				icon: "email-edit-outline",
+				to: "emaileditor",
+				children: [
+					{ title: "Header", icon: "border-top-variant", to: "#header" },
+					{ title: "Elements", icon: "card-plus-outline", to: "#elements" },
+					{
+						title: "Block Libraries",
+						icon: "database-edit-outline",
+						to: "#block-libraries",
+					},
+					{ title: "Text Insert", icon: "format-text", to: "#text-insert" },
+					{
+						title: "Addons",
+						icon: "puzzle-outline",
+						to: "#addons",
+					},
+					{ title: "Settings", icon: "cog-outline", to: "#settings" },
+				],
+			},
+			{
+				title: "Variable Editor",
+				icon: "iframe-variable-outline",
+				to: "variableeditor",
+				children: [
+					{
+						title: "Variables To Edit",
+						icon: "variable",
+						to: "#variablestoedit",
+					},
+					{
+						title: "Header",
+						icon: "border-top-variant",
+						to: "#header",
+					},
+					{
+						title: "Footer",
+						icon: "border-bottom-variant",
+						to: "#footer",
+					},
+					{
+						title: "Text Insert",
+						icon: "format-text",
+						to: "#text-insert",
+					},
+				],
+			},
+		],
+	}),
 };
 </script>
 
-<style>
-#logo {
-  width: 200px;
-  fill: white;
-}
-
-.element-break-word {
-  word-wrap: break-word;
-}
-
-.biggerText {
-  font-size: 20px !important;
-  text-transform: uppercase;
+<style scoped>
+.v-card--link:before {
+	background: transparent;
 }
 </style>
