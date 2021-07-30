@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import editorConfig from "./modules/emailEditorConfig";
+import editorConfig from "../components/EmailEditor/store/emailEditorConfig";
 import previewConfig from "./modules/preview";
 import variableEditorConfig from "./modules/variableEditor";
 import thumbnailConfig from "./modules/thumbnail";

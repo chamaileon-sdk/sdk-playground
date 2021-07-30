@@ -1,4 +1,4 @@
-import BlockLibData from "./EditorBlockLibraryContainer";
+import BlockLibData from "./editorBlockLibraryContainer";
 
 export default {
 	modules: {
