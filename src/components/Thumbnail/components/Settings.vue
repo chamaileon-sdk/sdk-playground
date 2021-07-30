@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import OptionWrapper from "../optionWrapper.vue";
+import OptionWrapper from "../../optionWrapper.vue";
 
 export default {
 	mounted() {

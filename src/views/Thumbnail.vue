@@ -27,7 +27,7 @@
 <script>
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
-import Settings from "../components/Thumbnail/ThumbnailSettings.vue";
+import Settings from "../components/Thumbnail/components/Settings.vue";
 import Description from "../components/ViewDescription.vue";
 
 export default {
