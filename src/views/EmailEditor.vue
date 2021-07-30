@@ -49,12 +49,12 @@
 import OpenButton from "../components/BaseOpenButton.vue";
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
-import Header from "../components/EmailEditor/Header";
-import Elements from "../components/EmailEditor/Elements";
-import BlockLibraries from "../components/EmailEditor/BlockLibraries";
-import TextInsert from "../components/EmailEditor/TextInsert";
-import Addons from "../components/EmailEditor/Addons";
-import Settings from "../components/EmailEditor/Settings";
+import Header from "../components/EmailEditor/components/Header";
+import Elements from "../components/EmailEditor/components/Elements";
+import BlockLibraries from "../components/EmailEditor/components/BlockLibraries";
+import TextInsert from "../components/EmailEditor/components/TextInsert";
+import Addons from "../components/EmailEditor/components/Addons";
+import Settings from "../components/EmailEditor/components/Settings";
 import Description from "../components/ViewDescription.vue";
 
 import { mapGetters, mapState } from "vuex";

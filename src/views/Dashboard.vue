@@ -30,10 +30,10 @@
 <script>
 import Footer from "../components/Footer.vue";
 import SectionObserver from "../components/SectionObserver.vue";
-import Logo from "../components/Dashboard/componenets/Logo.vue";
-import Language from "../components/Dashboard/componenets/Language.vue";
-import Colors from "../components/Dashboard/componenets/Colors.vue";
-import SplashScreen from "../components/Dashboard/componenets/SplashScreen.vue";
+import Logo from "../components/Dashboard/components/Logo.vue";
+import Language from "../components/Dashboard/components/Language.vue";
+import Colors from "../components/Dashboard/components/Colors.vue";
+import SplashScreen from "../components/Dashboard/components/SplashScreen.vue";
 import Description from "../components/ViewDescription.vue";
 
 export default {
