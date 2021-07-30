@@ -78,6 +78,7 @@ import previewCodeGenerator from "./CodeEditor/codeGenerators/previewCodeGenerat
 import emailEditorCodeGenerator from "./CodeEditor/codeGenerators/emailEditorCodeGenerator";
 import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEditorCodeGenerator";
 import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
+import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
 
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
@@ -95,13 +96,7 @@ export default {
 		},
 
 		doc() {
-			return (
-				"let emailDocument = JSON.parse(\"" +
-				JSON.stringify(this.$store.state.document)
-					.replaceAll("\\", "\\\\")
-					.replaceAll(/"/g, "\\\"") +
-				"\")"
-			);
+			return documentCodeGenerator(this.$store.state.document);
 		},
 
 		sdkCode() {
