@@ -6,6 +6,7 @@ import previewConfig from "../components/Preview/store/preview";
 import variableEditorConfig from "../components/VariableEditor/store/variableEditor";
 import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
 import document from "../components/AppElements/store/emailDocument";
+import menu from "../components/AppElements/store/menuData";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
 
 Vue.use(Vuex);
@@ -19,6 +20,7 @@ export default new Vuex.Store({
 		document,
 		thumbnailConfig,
 		sdkConfig,
+		menu,
 	},
 	state: {
 		apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
