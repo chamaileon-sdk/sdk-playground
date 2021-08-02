@@ -23,7 +23,7 @@
 		</div>
 
 		<v-card v-if="image" class="mt-16" flat>
-			<v-img :eager="true" :src="img"></v-img>
+			<img :src="img" alt="" />
 		</v-card>
 	</v-app>
 </template>

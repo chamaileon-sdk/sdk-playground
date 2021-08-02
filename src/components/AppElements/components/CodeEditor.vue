@@ -233,6 +233,7 @@ export default {
 	height: calc(100vh - 48px);
 	background: transparent;
 	overflow-y: auto;
+	scrollbar-width: thin;
 }
 
 .hljs::-webkit-scrollbar {
