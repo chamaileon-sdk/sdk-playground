@@ -86,9 +86,71 @@ import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 
 export default {
 	data: () => ({
+		menus: [
+			"home",
+			"header",
+			"elements",
+			"block-libraries",
+			"text-insert",
+			"addons",
+			"settings",
+		],
+		destinations: [
+			"top",
+			"header",
+			"elements",
+			"blockLibraries",
+			"textInsert",
+			"addons",
+			"autoSaveInterval",
+		],
+		ignore: 0,
 		snackbar: false,
 		tab: 0,
 	}),
+
+	mounted() {
+		this.codeContainer = document.querySelector("code.hljs");
+	},
+
+	watch: {
+		$route(to, from) {
+			let toHash = to.hash.slice(1);
+			let fromHash = from.hash.slice(1);
+
+			let toInd = this.menus.findIndex((el) => el === toHash);
+			let fromInd = this.menus.findIndex((el) => el === fromHash);
+
+			if (toInd === -1 || fromInd === -1) throw "CodeEditor: Menu not found";
+
+			let dist = Math.abs(toInd - fromInd);
+
+			if (this.ignore > 0) {
+				this.ignore--;
+				return;
+			}
+
+			if (toInd === 0)
+				document.querySelector("code.hljs").scroll({
+					top: 0,
+					behavior: "smooth",
+				});
+
+			//Note: Can be stored in an array for better performance
+			document.querySelectorAll(".hljs-attr").forEach((c) => {
+				if (c.innerHTML == this.destinations[toInd]) {
+					this.toScrollTop = c.offsetTop;
+					let parent = c.parentElement;
+					parent.scroll({
+						top: c.offsetTop,
+						behavior: "smooth",
+					});
+				}
+			});
+
+			if (dist !== 1) this.ignore = dist;
+		},
+	},
 
 	computed: {
 		route() {
