@@ -64,7 +64,7 @@ export default new Vuex.Store({
 	actions: {
 		async initSDK({ commit, state }) {
 			const accessTokenRequest = await fetch(
-				"http://127.0.0.1:8100/getAuthToken"
+				"https://sdk-demo-api.chamaileon.io/getAuthToken"
 			);
 
 			const accessTokenResponse = await accessTokenRequest.json();
