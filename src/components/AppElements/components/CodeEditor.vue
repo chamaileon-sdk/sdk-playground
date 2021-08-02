@@ -234,6 +234,8 @@ export default {
 	background: transparent;
 	overflow-y: auto;
 	scrollbar-width: thin;
+
+	font-family: "Source Code Pro", monospace;
 }
 
 .hljs::-webkit-scrollbar {
