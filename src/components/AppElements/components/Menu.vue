@@ -119,13 +119,13 @@ export default {
 				to: "emaileditor",
 				children: [
 					{ title: "Header", icon: "border-top-variant", to: "#header" },
+					{ title: "Text Insert", icon: "format-text", to: "#text-insert" },
 					{ title: "Elements", icon: "card-plus-outline", to: "#elements" },
 					{
 						title: "Block Libraries",
 						icon: "database-edit-outline",
 						to: "#block-libraries",
 					},
-					{ title: "Text Insert", icon: "format-text", to: "#text-insert" },
 					{
 						title: "Addons",
 						icon: "puzzle-outline",
