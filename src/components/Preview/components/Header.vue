@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<h1>Header</h1>
+		<h2>Header</h2>
 		<p>
 			You can configure buttons & dropdowns to appear in the header on the right-hand-side. It is a great way to interact with you application from this plugin. For example, you can pop up dialogs when your users click on one of the buttons or dropdown items.
 		</p>
@@ -11,7 +11,7 @@
 			<Header />
 		</OptionWrapper>
 
-		<h2>Buttons & Dropdowns</h2>
+		<h3>Buttons & Dropdowns</h3>
 		<p>
 			You can add buttons and dropdowns below. Keep in mind, that you can add buttons to dropdowns as well.
 		</p>
