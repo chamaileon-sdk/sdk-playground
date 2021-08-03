@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h2>Logo</h2>
 		<p>
 			You can set up what logo you want to use within the plugins. This is a Javascript file that injects your logo into the DOM, which makes it possible to even create animated logos.
@@ -10,7 +10,7 @@
 		<OptionsWrapper class="px-0">
 			<LogoSelector />
 		</OptionsWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

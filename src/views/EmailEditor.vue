@@ -14,16 +14,16 @@
 				<Header />
 			</div>
 
+			<div class="section" id="text-insert">
+				<TextInsert />
+			</div>
+
 			<div class="section" id="elements">
 				<Elements />
 			</div>
 
 			<div class="section" id="block-libraries">
 				<BlockLibraries />
-			</div>
-
-			<div class="section" id="text-insert">
-				<TextInsert />
 			</div>
 
 			<div class="section" id="addons">

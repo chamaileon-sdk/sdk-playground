@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h2>Splash Screen</h2>
 		<p>
 			Splashscreens are shown while a plugin is loading. You can easily implement custom animations
@@ -7,7 +7,7 @@
 		<OptionsWrapper class="px-0">
 			<SplashScreenSelector />
 		</OptionsWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

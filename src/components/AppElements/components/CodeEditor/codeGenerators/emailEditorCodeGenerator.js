@@ -1,14 +1,6 @@
 export default function (config) {
 	return `const editorInstance = await chamaileonPlugins.editEmail({
 	document: emailDocument, // see "document" tab
-	user: ${
-	config.user
-		? `{
-		name: "${config.user.name}",
-		avatar: "${config.user.avatar}"
-	}`
-		: "false"
-},
 	settings: {
 		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
 		buttons: {
@@ -23,6 +15,14 @@ export default function (config) {
 		},
 	},
 	autoSaveInterval: ${config.autoSaveInterval},
+	user: ${
+	config.user
+		? `{
+		name: "${config.user.name}",
+		avatar: "${config.user.avatar}"
+	}`
+		: "false"
+},
 	hooks: emailEditorHooks, //see "hooks" tab
 });`;
 }

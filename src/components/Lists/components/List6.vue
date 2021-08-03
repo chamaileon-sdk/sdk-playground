@@ -5,7 +5,6 @@
 		elevation="0"
 		max-height="257"
 		color="transparent"
-		style="overflow-y: overlay"
 	>
 		<draggable v-model="buttonsArr" handle=".dtrigger">
 			<div v-for="(b, i) in buttonsArr" :key="i">
@@ -278,6 +277,11 @@ export default {
 </script>
 
 <style>
+.list6 {
+	scrollbar-width: thin;
+	overflow-y: scroll;
+}
+
 .list6::-webkit-scrollbar {
 	width: 6px;
 	height: 6px;

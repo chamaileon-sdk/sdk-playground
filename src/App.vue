@@ -87,6 +87,7 @@ export default {
 <style>
 html {
 	font-family: Roboto, sans-serif;
+	scrollbar-width: none;
 }
 
 html::-webkit-scrollbar {
@@ -95,7 +96,8 @@ html::-webkit-scrollbar {
 }
 
 .list3 {
-	overflow: overlay;
+	overflow-y: scroll;
+	scrollbar-width: thin;
 }
 
 .list3::-webkit-scrollbar {
