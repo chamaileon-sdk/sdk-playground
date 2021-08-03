@@ -33,7 +33,7 @@ export default {
 	data() {
 		return {
 			paragraphs: [
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse."
+				"You can easily create thumbnails of your emails based on the JSON representation of the document. You can use this plugin in listing pages or custom previews."
 			]
 		};
 	},

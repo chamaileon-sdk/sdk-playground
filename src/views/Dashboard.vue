@@ -39,10 +39,7 @@ export default {
 	data() {
 		return {
 			paragraphs: [
-				"Welcome to the Chamaileon SDK Playground!",
-				"The Chamaileon SDK consists of multiple plugins and API endpoints that can help you to extend your product with amazing email creation capabilities. You can try out all of the configuration options in this playground.",
-				"On the left-hand-side, you can navigate through our plugins and API endpoints, and you can try set up all of the available configuration options in the middle. Whenever you change the configuration options, a code snippet is generated on the right-hand-side that you can directly use in your own code.",
-				"Scroll down to play around with the SDK-level settings. These settings will be applied to all of the plugins."
+				"The Chamaileon SDK consists of multiple plugins and API endpoints that can help you to extend your product with amazing email creation capabilities. You can try out all of the configuration options in this playground."
 			]	
 		};
 	},
