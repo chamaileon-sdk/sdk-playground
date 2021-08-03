@@ -99,12 +99,23 @@ export default {
 		let routes = this.menus[pageIndex].children;
 		let toInd = routes.findIndex((el) => el.to === to.hash) + 1;
 
-		document.querySelectorAll(".hljs-attr").forEach((c) => {
-			if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
-				let parent = c.parentElement;
-				parent.scroll(0, c.offsetTop);
+		let interval = setInterval(() => {
+			if (this.$store.state.sdk) {
+				clearInterval(interval);
+				document.querySelectorAll(".hljs-attr").forEach((c) => {
+					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
+						console.log("scroll");
+						let parent = c.parentElement;
+						parent.scroll({
+							top: c.offsetTop,
+							behavior: "smooth",
+						});
+					}
+				});
+
+				this.ignore = 0;
 			}
-		});
+		}, 100);
 	},
 
 	watch: {
@@ -138,7 +149,7 @@ export default {
 				});
 			else {
 				document.querySelectorAll(".hljs-attr").forEach((c) => {
-					if (c.innerHTML === prop) {
+					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
 						let parent = c.parentElement;
 						parent.scroll({
 							top: c.offsetTop,
