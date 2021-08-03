@@ -29,6 +29,8 @@
 </template>
 
 <script>
+//TODO: use slot here
+
 export default {
 	created() {
 		this.img = require(`@/assets/${this.image}`);
