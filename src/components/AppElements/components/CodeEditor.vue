@@ -84,13 +84,67 @@ import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 
+import { mapGetters } from "vuex";
+
 export default {
 	data: () => ({
+		ignore: 0,
 		snackbar: false,
 		tab: 0,
 	}),
 
+	mounted() {
+		let to = this.$route;
+		let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+		let routes = this.menus[pageIndex].children;
+		let toInd = routes.findIndex((el) => el.to === to.hash) + 1;
+
+		setTimeout(() => {
+			this.scrollToProp(routes[toInd - 1].codePropToMatch);
+			this.ignore = 0;
+		}, 1000);
+	},
+
+	watch: {
+		$route(to, from) {
+			let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+
+			let routes = this.menus[pageIndex].children;
+
+			let toHash = to.hash;
+			let fromHash = from.hash;
+
+			let toInd = routes.findIndex((el) => el.to === toHash) + 1;
+			let fromInd = routes.findIndex((el) => el.to === fromHash) + 1;
+
+			if (to.hash === "#home") toInd = 0;
+			if (from.hash === "#home") fromInd = 0;
+
+			if (toInd === -1 || fromInd === -1) throw "CodeEditor: Menu not found";
+
+			let dist = Math.abs(toInd - fromInd);
+
+			if (this.ignore > 0) {
+				this.ignore--;
+				return;
+			}
+
+			if (toInd === 0)
+				document.querySelector("code.hljs").scroll({
+					top: 0,
+					behavior: "smooth",
+				});
+			else {
+				this.scrollToProp(routes[toInd - 1].codePropToMatch);
+			}
+
+			if (dist !== 1) this.ignore = dist;
+		},
+	},
+
 	computed: {
+		...mapGetters({ menus: "getMenu" }),
+
 		route() {
 			return this.$route.path;
 		},
@@ -166,6 +220,17 @@ export default {
 	},
 
 	methods: {
+		scrollToProp(prop) {
+			document.querySelectorAll(".hljs-attr").forEach((c) => {
+				if (c.innerHTML === prop) {
+					let parent = c.parentElement;
+					parent.scroll({
+						top: c.offsetTop,
+						behavior: "smooth",
+					});
+				}
+			});
+		},
 		copyToClipboard() {
 			let str;
 
@@ -233,6 +298,9 @@ export default {
 	height: calc(100vh - 48px);
 	background: transparent;
 	overflow-y: auto;
+	scrollbar-width: thin;
+
+	font-family: "Source Code Pro", monospace;
 }
 
 .hljs::-webkit-scrollbar {

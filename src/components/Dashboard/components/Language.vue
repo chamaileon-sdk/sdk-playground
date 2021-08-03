@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Language</h1>
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -13,7 +13,7 @@
 		<OptionsWrapper>
 			<LocaleSelector />
 		</OptionsWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>

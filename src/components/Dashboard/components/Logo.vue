@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<v-app>
 		<h1>Logo</h1>
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -13,7 +13,7 @@
 		<OptionsWrapper class="px-0">
 			<LogoSelector />
 		</OptionsWrapper>
-	</div>
+	</v-app>
 </template>
 
 <script>
