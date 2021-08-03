@@ -2,9 +2,7 @@
 	<v-app>
 		<h1>Footer</h1>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic id possimus a
-			maxime quo voluptas commodi natus libero soluta provident laudantium, amet
-			fugit aliquid consequuntur voluptatem obcaecati fugiat dolorum dolores.
+			Similarly to the header, you can configure buttons on the left- and right-hand-side in the footer of the variable editor.
 		</p>
 		<OptionWrapper>
 			<FooterPreview />
@@ -12,10 +10,7 @@
 
 		<h3>Buttons</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis vero
-			odit eos reprehenderit itaque aspernatur debitis, nesciunt exercitationem
-			libero placeat non ipsum impedit quisquam optio tenetur quas molestiae
-			ipsa eveniet!
+			You can configure the buttons and dropdowns on the left- and right-hand-side of the footer below.
 		</p>
 		<OptionWrapper>
 			<SplitList :section="'Footer'" />

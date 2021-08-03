@@ -2,9 +2,7 @@
 	<v-app>
 		<h1>Text Insert</h1>
 		<p>
-			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias natus
-			expedita ipsa ipsam ea nobis facere tenetur debitis magni, adipisci error,
-			illo deleniti sint laborum incidunt distinctio? Quaerat, ratione hic.
+			Similarly to the email editor, you can configure buttons that will insert predefined texts to a text element. This is a great way to provide merge tags to your users.
 		</p>
 		<OptionWrapper>
 			<TextInsertPreview />
@@ -12,10 +10,7 @@
 
 		<h3>Buttons</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
-			tempora hic delectus culpa natus dicta adipisci eius aliquam officiis
-			reiciendis? Officia fuga saepe nam? Iure corporis molestias commodi saepe
-			ipsum.
+			In case of these buttons, the icons are not from material design icons. They are simple images that you will have to host somewhere.
 		</p>
 		<OptionWrapper>
 			<v-row align="center" justify="end" class="ma-0">

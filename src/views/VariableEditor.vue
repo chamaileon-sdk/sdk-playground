@@ -45,7 +45,8 @@ export default {
 	data() {
 		return {
 			paragraphs: [
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse."
+				"This plugin is a restricted editor with which you can only modify the variables in an email that you previously defined within the email editor.",
+				"A really good use case is when you want to create multiple emails (for example in an email series, like marketing automation) and you only want your users to customize certain parts of the email (the variables). You can basically create wizards with the variable editor that can be used to create multiple brand consistent emails with ease."
 			]
 		};
 	},
