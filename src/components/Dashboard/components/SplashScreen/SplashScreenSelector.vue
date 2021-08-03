@@ -63,7 +63,7 @@
 
       <v-tab
         class="pa-0 mx-3"
-        href="https://help.chamaileon.io/en/"
+        href="https://github.com/chamaileon-sdk/splashscreen-and-logo-examples"
         target="_blank"
       >
         <v-card
