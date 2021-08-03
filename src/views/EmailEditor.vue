@@ -5,8 +5,7 @@
 				<Description
 					:title="'Email Editor'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
-					:paragraph1="paragraph1"
-					:paragraph2="paragraph2"
+					:paragraphs="paragraphs"
 					:image="'EmailEditorIllustration.svg'"
 				/>
 			</div>
@@ -62,10 +61,9 @@ import { mapGetters, mapState } from "vuex";
 export default {
 	data() {
 		return {
-			paragraph1:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
-			paragraph2:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+			paragraphs: [
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse."
+			]
 		};
 	},
 
