@@ -99,10 +99,12 @@ export default {
 		let routes = this.menus[pageIndex].children;
 		let toInd = routes.findIndex((el) => el.to === to.hash) + 1;
 
-		setTimeout(() => {
-			this.scrollToProp(routes[toInd - 1].codePropToMatch);
-			this.ignore = 0;
-		}, 1000);
+		document.querySelectorAll(".hljs-attr").forEach((c) => {
+			if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
+				let parent = c.parentElement;
+				parent.scroll(0, c.offsetTop);
+			}
+		});
 	},
 
 	watch: {
@@ -135,7 +137,15 @@ export default {
 					behavior: "smooth",
 				});
 			else {
-				this.scrollToProp(routes[toInd - 1].codePropToMatch);
+				document.querySelectorAll(".hljs-attr").forEach((c) => {
+					if (c.innerHTML === prop) {
+						let parent = c.parentElement;
+						parent.scroll({
+							top: c.offsetTop,
+							behavior: "smooth",
+						});
+					}
+				});
 			}
 
 			if (dist !== 1) this.ignore = dist;
@@ -220,17 +230,6 @@ export default {
 	},
 
 	methods: {
-		scrollToProp(prop) {
-			document.querySelectorAll(".hljs-attr").forEach((c) => {
-				if (c.innerHTML === prop) {
-					let parent = c.parentElement;
-					parent.scroll({
-						top: c.offsetTop,
-						behavior: "smooth",
-					});
-				}
-			});
-		},
 		copyToClipboard() {
 			let str;
 
