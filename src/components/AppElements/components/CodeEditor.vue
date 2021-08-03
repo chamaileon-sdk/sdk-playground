@@ -84,42 +84,41 @@ import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 
+import { mapGetters } from "vuex";
+
 export default {
 	data: () => ({
-		menus: [
-			"home",
-			"header",
-			"text-insert",
-			"elements",
-			"block-libraries",
-			"addons",
-			"settings",
-		],
-		destinations: [
-			"top",
-			"header",
-			"textInsert",
-			"elements",
-			"blockLibraries",
-			"addons",
-			"autoSaveInterval",
-		],
 		ignore: 0,
 		snackbar: false,
 		tab: 0,
 	}),
 
 	mounted() {
-		this.codeContainer = document.querySelector("code.hljs");
+		let to = this.$route;
+		let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+		let routes = this.menus[pageIndex].children;
+		let toInd = routes.findIndex((el) => el.to === to.hash) + 1;
+
+		setTimeout(() => {
+			this.scrollToProp(routes[toInd - 1].codePropToMatch);
+			this.ignore = 0;
+		}, 1000);
 	},
 
 	watch: {
 		$route(to, from) {
-			let toHash = to.hash.slice(1);
-			let fromHash = from.hash.slice(1);
+			let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
 
-			let toInd = this.menus.findIndex((el) => el === toHash);
-			let fromInd = this.menus.findIndex((el) => el === fromHash);
+			let routes = this.menus[pageIndex].children;
+
+			let toHash = to.hash;
+			let fromHash = from.hash;
+
+			let toInd = routes.findIndex((el) => el.to === toHash) + 1;
+			let fromInd = routes.findIndex((el) => el.to === fromHash) + 1;
+
+			if (to.hash === "#home") toInd = 0;
+			if (from.hash === "#home") fromInd = 0;
 
 			if (toInd === -1 || fromInd === -1) throw "CodeEditor: Menu not found";
 
@@ -135,24 +134,17 @@ export default {
 					top: 0,
 					behavior: "smooth",
 				});
-
-			//Note: Can be stored in an array for better performance
-			document.querySelectorAll(".hljs-attr").forEach((c) => {
-				if (c.innerHTML == this.destinations[toInd]) {
-					this.toScrollTop = c.offsetTop;
-					let parent = c.parentElement;
-					parent.scroll({
-						top: c.offsetTop,
-						behavior: "smooth",
-					});
-				}
-			});
+			else {
+				this.scrollToProp(routes[toInd - 1].codePropToMatch);
+			}
 
 			if (dist !== 1) this.ignore = dist;
 		},
 	},
 
 	computed: {
+		...mapGetters({ menus: "getMenu" }),
+
 		route() {
 			return this.$route.path;
 		},
@@ -228,6 +220,17 @@ export default {
 	},
 
 	methods: {
+		scrollToProp(prop) {
+			document.querySelectorAll(".hljs-attr").forEach((c) => {
+				if (c.innerHTML === prop) {
+					let parent = c.parentElement;
+					parent.scroll({
+						top: c.offsetTop,
+						behavior: "smooth",
+					});
+				}
+			});
+		},
 		copyToClipboard() {
 			let str;
 
