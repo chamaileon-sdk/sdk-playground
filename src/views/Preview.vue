@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			paragraphs: [
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse."
+				"This component helps you to show your customers the email's mobile and destop preview."
 			]
 		};
 	},

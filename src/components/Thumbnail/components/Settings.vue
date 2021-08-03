@@ -1,11 +1,11 @@
 <template>
 	<v-app>
-		<h1>Settings</h1>
+		<h2>Settings</h2>
 		<p>
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore sunt
-			excepturi ipsa recusandae illo fugiat natus, sequi architecto repudiandae
-			sed atque veniam unde possimus perspiciatis, corporis minima alias non
-			quis?
+			The <em>width</em> and <em>height</em> properties define the viewport in whitch the preview will be rendered whereas with the scale property, you can make the previews smaller. This way, you can create small thumbnails of even huge viewports (desktop views).
+		</p>
+		<p>
+			You can also configure the thumbnail component to be scrollable or not.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex justify-center align-center pa-4">
@@ -52,10 +52,7 @@
 
 		<h3>Preview</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, voluptatibus,
-			saepe maxime autem asperiores consequatur quod, eligendi consectetur
-			repellendus dolore recusandae nobis fugit optio tempore deleniti.
-			Consectetur similique adipisci porro!
+			If you change the settings above, the preview below will automatically be updated.
 		</p>
 		<OptionWrapper>
 			<v-card
