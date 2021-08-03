@@ -2,10 +2,7 @@
 	<v-app>
 		<h1>Elements</h1>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-			praesentium, ad architecto beatae provident, pariatur doloremque
-			exercitationem quidem soluta, est magnam nemo similique. Fugit sunt atque
-			iste est maxime cum!
+			In this section, you can turn on and off basic draggable elements. You can even disable all of the elements, which is useful if you want your users to be only be able to use blocks from predefined block libraries. Those blocks' design can be locked, so they won't be able to mess up the desired design.
 		</p>
 
 		<h3>Content</h3>

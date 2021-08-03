@@ -2,10 +2,7 @@
 	<v-app>
 		<h1>Addons</h1>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum autem,
-			saepe optio officia laudantium sunt architecto quis praesentium explicabo
-			quo veniam ducimus atque deleniti asperiores cupiditate molestiae et.
-			Recusandae, cum!
+			There are some addons that you can use within the editor, depending on the package you are in. If you have access to these addons, then you can decide if you want to enable them, disable them or even fully hide them. It let's you to differentiate between the functionality that you want to provide to different segments of your users.
 		</p>
 		<OptionWrapper>
 			<div v-for="(item, name, ind) in addonArr" :key="item.id">
