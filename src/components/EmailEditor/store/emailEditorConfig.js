@@ -11,8 +11,7 @@ export default {
 		user: {
 			enabled: true,
 			name: "Your Username",
-			avatar:
-				"https://www.indiewire.com/wp-content/uploads/2019/03/shutterstock_5885988bd.jpg",
+			avatar: "",
 		},
 		settings: {
 			buttons: {
