@@ -21,7 +21,6 @@ export default new Vuex.Store({
 		sdkConfig,
 	},
 	state: {
-		apiKey: "Y8mbu7S5Qh4cyCqJCVBn",
 		logoCreatorFunction: undefined,
 		sdk: null,
 	},
