@@ -3,10 +3,9 @@
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
-					:title="'Chamaileon SDK'"
+					:title="'Chamaileon SDK Playground'"
 					:docUrl="'https://chamaileon.io/sdk/docs/'"
-					:paragraph1="paragraph1"
-					:paragraph2="paragraph2"
+					:paragraphs="paragraphs"
 					:image="'SdkIllustration.svg'"
 				/>
 			</div>
@@ -39,10 +38,12 @@ import Description from "../components/ViewUtilities/components/ViewDescription.
 export default {
 	data() {
 		return {
-			paragraph1:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
-			paragraph2:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
+			paragraphs: [
+				"Welcome to the Chamaileon SDK Playground!",
+				"The Chamaileon SDK consists of multiple plugins and API endpoints that can help you to extend your product with amazing email creation capabilities. You can try out all of the configuration options in this playground.",
+				"On the left-hand-side, you can navigate through our plugins and API endpoints, and you can try set up all of the available configuration options in the middle. Whenever you change the configuration options, a code snippet is generated on the right-hand-side that you can directly use in your own code.",
+				"Scroll down to play around with the SDK-level settings. These settings will be applied to all of the plugins."
+			]	
 		};
 	},
 

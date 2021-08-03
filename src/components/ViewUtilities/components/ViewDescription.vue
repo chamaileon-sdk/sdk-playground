@@ -1,13 +1,10 @@
 <template>
 	<v-app>
 		<h1 class="mb-8">{{ title }}</h1>
-		<p>
-			{{ paragraph1 }}
-		</p>
 
-		<p>
-			{{ paragraph2 }}
-		</p>
+		<div v-for="(paragraph, idx) in paragraphs" :key="title + idx">
+			<p>{{ paragraph }}</p>
+		</div>
 
 		<div class="d-flex mt-11">
 			<v-btn
@@ -42,8 +39,7 @@ export default {
 
 	props: {
 		title: String,
-		paragraph1: String,
-		paragraph2: String,
+		paragraphs: Array,
 		docUrl: String,
 		image: String,
 	},
