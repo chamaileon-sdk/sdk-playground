@@ -2,6 +2,7 @@ export default {
 	state: () => ({
 		fetchingHTML: false,
 		html: "",
+		htmlSize: "0B",
 		settings: {
 			vmlBackground: {
 				displayText: "VML background for Outlook",
@@ -51,6 +52,15 @@ export default {
 		updateHtml(state, html) {
 			state.html = html;
 		},
+
+		updateSize(state, size) {
+			let s = size;
+
+			if (size > 1024) s = (size / 1024).toFixed(2) + "kB";
+			else s += "B";
+
+			state.htmlSize = s;
+		},
 	},
 	actions: {
 		async fetchHtml(context) {
@@ -76,6 +86,9 @@ export default {
 			}
 
 			const response = await genRequest.json();
+
+			const size = genRequest.headers.get("content-length");
+			context.commit("updateSize", size);
 
 			context.commit("updateHtml", response.result);
 			context.commit("toggleFetching");
@@ -105,5 +118,7 @@ export default {
 		getHTMLFetchStatus(state) {
 			return state.fetchingHTML;
 		},
+
+		getSize: (state) => state.htmlSize,
 	},
 };

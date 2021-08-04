@@ -9,7 +9,8 @@
 		</p>
 		<OptionWrapper>
 			<template>
-				<v-row align="center" justify="end" class="ma-0 mb-8">
+				<v-row align="center" justify="space-between" class="ma-0 mb-8">
+					<p>Size: {{ size }}</p>
 					<v-btn depressed @click="generateHtml" color="success">
 						<v-icon v-show="!fetching" left> mdi-plus </v-icon>
 						<v-progress-circular
@@ -54,7 +55,11 @@ export default {
 	},
 
 	computed: {
-		...mapGetters({ fetching: "getHTMLFetchStatus", html: "getHtmlDocument" }),
+		...mapGetters({
+			fetching: "getHTMLFetchStatus",
+			html: "getHtmlDocument",
+			size: "getSize",
+		}),
 	},
 
 	methods: {
