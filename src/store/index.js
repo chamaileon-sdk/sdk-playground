@@ -50,6 +50,9 @@ export default new Vuex.Store({
 			state.thumbnailConfig = thumbnailConfig;
 		},
 
+		generatorConfigLoad(state, generatorConfig) {
+			state.generatorConfig = generatorConfig;
+		},
 		//SDK Settings
 
 		changeLogoFunction(state, fn) {
