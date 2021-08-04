@@ -24,7 +24,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
-import ImportHtml from "../components/ImportHTML.vue";
+import ImportHtml from "../components/ImportHtml.vue";
 
 export default {
 	components: {

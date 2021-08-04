@@ -39,7 +39,6 @@ export default {
 				commit("updateDocument", json);
 			}
 
-			console.log(json);
 			commit("toggleFetching");
 		},
 	},

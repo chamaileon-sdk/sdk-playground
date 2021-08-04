@@ -1,5 +1,6 @@
 export default {
 	state: () => ({
+		fetchingHTML: false,
 		html: "",
 		settings: {
 			vmlBackground: {
@@ -33,6 +34,10 @@ export default {
 		},
 	}),
 	mutations: {
+		toggleFetching(state) {
+			state.fetchingHTML = !state.fetchingHTML;
+		},
+
 		updateHtmlGeneratorSettings(state, payload) {
 			state.settings[payload.key].value = payload.value;
 		},
@@ -49,6 +54,8 @@ export default {
 	},
 	actions: {
 		async fetchHtml(context) {
+			context.commit("toggleFetching");
+
 			const genRequest = await fetch(
 				"https://sdk-api.chamaileon.io/api/v1/emails/generate",
 				{
@@ -71,6 +78,7 @@ export default {
 			const response = await genRequest.json();
 
 			context.commit("updateHtml", response.result);
+			context.commit("toggleFetching");
 		},
 	},
 	getters: {
@@ -93,5 +101,9 @@ export default {
 		},
 
 		getHtmlDocument: (state) => state.html,
+
+		getHTMLFetchStatus(state) {
+			return state.fetchingHTML;
+		},
 	},
 };

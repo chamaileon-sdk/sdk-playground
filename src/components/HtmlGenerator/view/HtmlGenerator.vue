@@ -14,6 +14,10 @@
 			<div class="section" id="settings">
 				<Settings />
 			</div>
+
+			<div class="section" id="settings">
+				<GenerateHtml />
+			</div>
 		</SectionObserver>
 		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
 	</div>
@@ -25,6 +29,7 @@ import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 import Settings from "../components/Settings.vue";
+import GenerateHtml from "../components/GenerateHtml.vue";
 
 export default {
 	components: {
@@ -32,6 +37,7 @@ export default {
 		Settings,
 		Description,
 		Footer,
+		GenerateHtml,
 	},
 
 	data() {
