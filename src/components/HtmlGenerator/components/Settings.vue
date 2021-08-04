@@ -44,7 +44,7 @@
 									:ripple="false"
 									:value="true"
 									@change="
-										updateHtmlGeneratorSettings({
+										updateSettings({
 											key: key,
 											value: $event !== null,
 										})
@@ -60,7 +60,7 @@
 									label="Value"
 									:hide-details="true"
 									:value="item.value"
-									@input="updateInt({ key: key, value: $event })"
+									@change="updateIntSettings({ key: key, value: $event })"
 								></v-text-field>
 							</v-card>
 						</v-col>
@@ -77,9 +77,7 @@
 									label="Value"
 									:items="['handlebars', 'liquid', 'mustage']"
 									:hide-details="true"
-									@change="
-										updateHtmlGeneratorSettings({ key: key, value: $event })
-									"
+									@change="updateSettings({ key: key, value: $event })"
 									:value="item.value"
 								></v-select>
 							</v-card>
@@ -111,6 +109,16 @@ export default {
 
 	methods: {
 		...mapMutations(["updateHtmlGeneratorSettings", "updateInt"]),
+
+		updateSettings(obj) {
+			this.$store.dispatch("fetchHtml");
+			this.updateHtmlGeneratorSettings(obj);
+		},
+
+		updateIntSettings(obj) {
+			this.$store.dispatch("fetchHtml");
+			this.updateInt(obj);
+		},
 	},
 };
 </script>

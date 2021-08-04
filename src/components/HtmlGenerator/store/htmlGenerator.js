@@ -1,5 +1,6 @@
 export default {
 	state: () => ({
+		html: "",
 		settings: {
 			vmlBackground: {
 				displayText: "VML background for Outlook",
@@ -41,8 +42,37 @@ export default {
 
 			state.settings[payload.key].value = x >= 0 ? x : 0;
 		},
+
+		updateHtml(state, html) {
+			state.html = html;
+		},
 	},
-	actions: {},
+	actions: {
+		async fetchHtml(context) {
+			const genRequest = await fetch(
+				"https://sdk-api.chamaileon.io/api/v1/emails/generate",
+				{
+					method: "POST",
+					headers: {
+						Authorization: "Y8mbu7S5Qh4cyCqJCVBn",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						document: context.rootState.document,
+						settings: context.getters.getHtmlGeneratorConfigObject,
+					}),
+				}
+			);
+
+			if (!genRequest.ok) {
+				throw new Error("Auth error");
+			}
+
+			const response = await genRequest.json();
+
+			context.commit("updateHtml", response.result);
+		},
+	},
 	getters: {
 		getHtmlGeneratorSettings(state) {
 			return state.settings;
@@ -61,5 +91,7 @@ export default {
 
 			return cnfg;
 		},
+
+		getHtmlDocument: (state) => state.html,
 	},
 };
