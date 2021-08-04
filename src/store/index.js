@@ -8,6 +8,7 @@ import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
 import document from "../components/AppElements/store/emailDocument";
 import menu from "../components/AppElements/store/menuData";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
+import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
 		thumbnailConfig,
 		sdkConfig,
 		menu,
+		generatorConfig,
 	},
 	state: {
 		logoCreatorFunction: undefined,
