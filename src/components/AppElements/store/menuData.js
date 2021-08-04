@@ -151,9 +151,9 @@ export default {
 				to: "htmlimport",
 				children: [
 					{
-						title: "Settings",
-						icon: "cog-outline",
-						to: "#settings",
+						title: "Import HTML",
+						icon: "application-import",
+						to: "#importhtml",
 						codePropToMatch: "document",
 					},
 				],

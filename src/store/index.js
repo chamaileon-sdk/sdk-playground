@@ -9,6 +9,7 @@ import document from "../components/AppElements/store/emailDocument";
 import menu from "../components/AppElements/store/menuData";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
 import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
+import importConfig from "../components/HtmlImport/store/htmlImport";
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
 		sdkConfig,
 		menu,
 		generatorConfig,
+		importConfig,
 	},
 	state: {
 		logoCreatorFunction: undefined,

@@ -108,8 +108,6 @@ import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 
-import htmlGenerator from "./CodeEditor/html/htmlGenerator";
-
 import { mapGetters } from "vuex";
 
 export default {
