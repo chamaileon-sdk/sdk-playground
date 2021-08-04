@@ -15,7 +15,7 @@
 				<Settings />
 			</div>
 
-			<div class="section" id="settings">
+			<div class="section" id="generatehtml">
 				<GenerateHtml />
 			</div>
 		</SectionObserver>

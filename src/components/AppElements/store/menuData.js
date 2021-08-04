@@ -143,6 +143,12 @@ export default {
 						to: "#settings",
 						codePropToMatch: "document",
 					},
+					{
+						title: "Generate HTML",
+						icon: "application-export",
+						to: "#generatehtml",
+						codePropToMatch: "document",
+					},
 				],
 			},
 			{

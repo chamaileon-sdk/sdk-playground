@@ -27,6 +27,7 @@
 			</template>
 			<v-card flat class="pa-4">
 				<v-textarea
+					height="456px"
 					readonly
 					class="customScroll pa-0"
 					background-color="white"
