@@ -47,5 +47,19 @@ export default {
 		getHtmlGeneratorSettings(state) {
 			return state.settings;
 		},
+
+		getHtmlGeneratorConfigObject(state) {
+			let cnfg = {};
+
+			for (const key in state.settings) {
+				if (key === "buttonType") {
+					cnfg[key] = state.settings[key].value ? "minimal" : "classic";
+				} else {
+					cnfg[key] = state.settings[key].value;
+				}
+			}
+
+			return cnfg;
+		},
 	},
 };

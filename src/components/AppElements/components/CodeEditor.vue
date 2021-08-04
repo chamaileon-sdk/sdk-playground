@@ -79,6 +79,7 @@ import emailEditorCodeGenerator from "./CodeEditor/codeGenerators/emailEditorCod
 import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEditorCodeGenerator";
 import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
+import htmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/htmlGeneratorCodeGenerator";
 
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
@@ -165,6 +166,7 @@ export default {
 
 	computed: {
 		...mapGetters({ menus: "getMenu" }),
+		...mapGetters(["getHtmlGeneratorConfigObject"]),
 
 		route() {
 			return this.$route.path;
@@ -219,6 +221,11 @@ export default {
 			return variableEditorHooksGenerator();
 		},
 
+		//Html generator
+		htmlGeneratorCode() {
+			return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
+		},
+
 		//Final
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
@@ -228,6 +235,8 @@ export default {
 				return this.thumbnailCode;
 			else if (this.$route.path === "/variableeditor")
 				return this.variableEditorCode;
+			else if (this.$route.path === "/htmlgenerator")
+				return this.htmlGeneratorCode;
 			else return `console.log("${this.$route.path}");`;
 		},
 
