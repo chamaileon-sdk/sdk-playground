@@ -4,10 +4,17 @@
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> Settings </v-tab>
 			<v-tab> Document </v-tab>
-			<v-tab v-if="route !== '/sdk' && route !== '/emailthumbnail'">
+			<v-tab
+				v-if="
+					route !== '/sdk' &&
+					route !== '/emailthumbnail' &&
+					route !== '/htmlgenerator'
+				"
+			>
 				Hooks
 			</v-tab>
 			<v-tab v-if="route === '/emaileditor'">Block Libraries</v-tab>
+			<v-tab v-if="route === '/htmlgenerator'">HTML</v-tab>
 		</v-tabs>
 
 		<v-card
@@ -33,7 +40,12 @@
 		</v-card>
 
 		<v-card
-			v-show="route !== '/sdk' && route !== '/emailthumbnail' && tab === 2"
+			v-show="
+				route !== '/sdk' &&
+				route !== '/emailthumbnail' &&
+				route !== '/htmlgenerator' &&
+				tab === 2
+			"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -52,6 +64,17 @@
 			flat
 		>
 			<highlight-code class="pa-0" lang="javascript" :code="blockLibs" />
+		</v-card>
+
+		<v-card
+			v-show="route === '/htmlgenerator' && tab === 2"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code class="pa-0" lang="html" :code="htmlCode" />
 		</v-card>
 
 		<v-card dark class="copyCard rounded-pill" elevation="0" v-show="snackbar"
@@ -79,6 +102,9 @@ import emailEditorCodeGenerator from "./CodeEditor/codeGenerators/emailEditorCod
 import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEditorCodeGenerator";
 import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
+import htmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/htmlGeneratorCodeGenerator";
+import htmlImportCodeGenerator from "./CodeEditor/codeGenerators/htmlImportCodeGenerator";
+import dummyHtmlCodeGenerator from "./CodeEditor/codeGenerators/dummyHtmlCodeGenerator";
 
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
@@ -104,7 +130,6 @@ export default {
 				clearInterval(interval);
 				document.querySelectorAll(".hljs-attr").forEach((c) => {
 					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
-						console.log("scroll");
 						let parent = c.parentElement;
 						parent.scroll({
 							top: c.offsetTop,
@@ -165,6 +190,11 @@ export default {
 
 	computed: {
 		...mapGetters({ menus: "getMenu" }),
+		...mapGetters([
+			"getHtmlGeneratorConfigObject",
+			"getHtmlDocument",
+			"getDummyHtmlDocument",
+		]),
 
 		route() {
 			return this.$route.path;
@@ -219,6 +249,23 @@ export default {
 			return variableEditorHooksGenerator();
 		},
 
+		//Html generator
+		htmlGeneratorCode() {
+			return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
+		},
+
+		htmlCode() {
+			return dummyHtmlCodeGenerator(
+				this.getDummyHtmlDocument,
+				this.getHtmlGeneratorConfigObject.lineLength
+			);
+		},
+
+		//Html import
+		htmlImportCode() {
+			return htmlImportCodeGenerator();
+		},
+
 		//Final
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
@@ -228,6 +275,9 @@ export default {
 				return this.thumbnailCode;
 			else if (this.$route.path === "/variableeditor")
 				return this.variableEditorCode;
+			else if (this.$route.path === "/htmlgenerator")
+				return this.htmlGeneratorCode;
+			else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
 			else return `console.log("${this.$route.path}");`;
 		},
 

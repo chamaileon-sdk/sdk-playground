@@ -66,6 +66,14 @@ export default {
 				"thumbnailConfig",
 				JSON.stringify(this.$store.state.thumbnailConfig)
 			);
+			localStorage.setItem(
+				"generatorConfig",
+				JSON.stringify(this.$store.state.generatorConfig)
+			);
+			localStorage.setItem(
+				"emailDocument",
+				JSON.stringify(this.$store.state.document)
+			);
 		}.bind(this);
 
 		for (let elem of [
@@ -74,6 +82,8 @@ export default {
 			"previewConfig",
 			"variableEditorConfig",
 			"thumbnailConfig",
+			"generatorConfig",
+			"emailDocument",
 		])
 			if (localStorage.getItem(elem))
 				this.$store.commit(

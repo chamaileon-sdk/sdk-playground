@@ -16,6 +16,12 @@ import Preview from "../views/Preview.vue";
 //Variable Editor
 import VariableEditor from "../views/VariableEditor";
 
+//Html Generator
+import HtmlGenerator from "../components/HtmlGenerator/view/HtmlGenerator";
+
+//Html Import
+import HtmlImport from "../components/HtmlImport/view/HtmlImport";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -42,6 +48,14 @@ const routes = [
 	{
 		path: "/variableeditor",
 		component: VariableEditor,
+	},
+	{
+		path: "/htmlgenerator",
+		component: HtmlGenerator,
+	},
+	{
+		path: "/htmlimport",
+		component: HtmlImport,
 	},
 ];
 

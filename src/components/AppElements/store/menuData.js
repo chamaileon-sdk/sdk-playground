@@ -132,6 +132,38 @@ export default {
 					},
 				],
 			},
+			{
+				title: "Email HTML Generator",
+				icon: "code-json",
+				to: "htmlgenerator",
+				children: [
+					{
+						title: "Settings",
+						icon: "cog-outline",
+						to: "#settings",
+						codePropToMatch: "document",
+					},
+					{
+						title: "Generate HTML",
+						icon: "application-export",
+						to: "#generatehtml",
+						codePropToMatch: "document",
+					},
+				],
+			},
+			{
+				title: "Email HTML Import",
+				icon: "xml",
+				to: "htmlimport",
+				children: [
+					{
+						title: "Import HTML",
+						icon: "application-import",
+						to: "#importhtml",
+						codePropToMatch: "document",
+					},
+				],
+			},
 		],
 	}),
 	mutations: {},

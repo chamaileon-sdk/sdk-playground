@@ -8,6 +8,8 @@ import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
 import document from "../components/AppElements/store/emailDocument";
 import menu from "../components/AppElements/store/menuData";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
+import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
+import importConfig from "../components/HtmlImport/store/htmlImport";
 
 Vue.use(Vuex);
 
@@ -21,6 +23,8 @@ export default new Vuex.Store({
 		thumbnailConfig,
 		sdkConfig,
 		menu,
+		generatorConfig,
+		importConfig,
 	},
 	state: {
 		logoCreatorFunction: undefined,
@@ -48,6 +52,13 @@ export default new Vuex.Store({
 			state.thumbnailConfig = thumbnailConfig;
 		},
 
+		generatorConfigLoad(state, generatorConfig) {
+			state.generatorConfig.settings = generatorConfig.settings;
+		},
+
+		emailDocumentLoad(state, emailDocument) {
+			state.document = emailDocument;
+		},
 		//SDK Settings
 
 		changeLogoFunction(state, fn) {

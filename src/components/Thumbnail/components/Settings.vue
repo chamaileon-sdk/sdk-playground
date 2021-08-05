@@ -69,6 +69,7 @@
 <script>
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 
+//TODO: accept only numerical inputs where needed
 export default {
 	mounted() {
 		let interval = setInterval(() => {
