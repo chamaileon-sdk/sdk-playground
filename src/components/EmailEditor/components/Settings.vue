@@ -2,18 +2,12 @@
 	<v-app>
 		<h1>Settings</h1>
 		<p>
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error ut
-			voluptate unde facilis molestias, beatae necessitatibus, numquam sunt
-			voluptatum soluta vitae, similique incidunt amet corporis molestiae!
-			Laborum explicabo repudiandae facere!
+			In this section, you can change various misc settings.
 		</p>
 
 		<h3>Utilities</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, molestiae
-			illo cumque exercitationem aliquid sunt praesentium cupiditate qui ipsa
-			quidem, animi optio. Alias excepturi fuga in! Blanditiis corporis pariatur
-			saepe.
+			An autosave interval that is triggered periodically. When triggered, the <em>onAutoSave</em> hook is called.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex">
@@ -36,10 +30,7 @@
 
 		<h3>Avatar</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius voluptate,
-			voluptas, quidem est laboriosam illo perspiciatis ut ea repudiandae
-			reprehenderit facere eveniet quaerat aliquid facilis eos numquam dolores
-			porro dignissimos.
+			You can show your user's name and their avatar, but it's also possible to turn off this feature.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">

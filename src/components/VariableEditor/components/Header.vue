@@ -2,10 +2,7 @@
 	<v-app>
 		<h1>Header</h1>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis quasi
-			exercitationem porro quaerat iusto reiciendis vero accusamus nam libero
-			ipsum, vitae non a distinctio beatae! Libero pariatur voluptate commodi
-			sapiente?
+			In the variable editor, you can configure buttons in the header on the left-hand-side and on the right-hand-side as well. In our example, we programmatically configure a close button as well, but you don't have to do that in your application. (It is not necessarily needed, if you create a wizard with multiple steps.)
 		</p>
 		<OptionWrapper>
 			<HeaderPreview />
@@ -13,10 +10,7 @@
 
 		<h3>Buttons</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium optio
-			quae esse repudiandae minus eligendi perferendis nesciunt eos vitae quis.
-			At commodi quam provident, praesentium asperiores architecto est rerum
-			aliquam!
+			You can configure the buttons and dropdowns on the left- and right-hand-side of the header below.
 		</p>
 		<OptionWrapper>
 			<SplitList :section="'Header'" />

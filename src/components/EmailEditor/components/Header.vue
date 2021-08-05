@@ -2,10 +2,10 @@
 	<v-app>
 		<h1>Header</h1>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-			laboriosam neque laborum beatae quas, explicabo quaerat aperiam nesciunt
-			provident aliquam praesentium nisi magnam nihil debitis, pariatur numquam
-			veniam molestiae similique.
+			You can configure buttons & dropdowns to appear in the header on the right-hand-side. It is a great way to interact with you application from this plugin. For example, you can pop up dialogs when your users click on one of the buttons or dropdown items.
+		</p>
+		<p>
+			Whenever you click on a button or a dropdown item, a hook will be called, and the <em>buttonId</em> will be passed to the hook, which is the <em>id</em> property in the config. (Please, check out the hooks tab on the right-hand-side.)
 		</p>
 		<OptionsWrapper>
 			<HeaderPreview />
@@ -13,10 +13,10 @@
 
 		<h3>Your Buttons</h3>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis hic
-			earum, molestiae voluptatum ullam ut quae ratione ducimus, illum aperiam
-			eligendi voluptatibus? Quia doloremque, quisquam ipsa veritatis unde eos.
-			Facilis!
+			You can add buttons and dropdowns below. Keep in mind, that you can add buttons (menu items) to dropdowns as well.
+		</p>
+		<p>
+			The icons are from <a href="https://materialdesignicons.com/" target="_blank">material design icons</a>. In the configuration object, you will have to use the icon name without the <em>mdi-</em> prefix.
 		</p>
 		<OptionsWrapper>
 			<template>

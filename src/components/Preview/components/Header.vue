@@ -13,7 +13,10 @@
 
 		<h3>Buttons & Dropdowns</h3>
 		<p>
-			You can add buttons and dropdowns below. Keep in mind, that you can add buttons to dropdowns as well.
+			You can add buttons and dropdowns below. Keep in mind, that you can add buttons (menu items) to dropdowns as well.
+		</p>
+		<p>
+			The icons are from <a href="https://materialdesignicons.com/" target="_blank">material design icons</a>. In the configuration object, you will have to use the icon name without the <em>mdi-</em> prefix.
 		</p>
 		<OptionWrapper>
 			<template>

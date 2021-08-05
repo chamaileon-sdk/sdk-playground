@@ -2,9 +2,7 @@
 	<v-app>
 		<h1>Variables To Edit</h1>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic id possimus a
-			maxime quo voluptas commodi natus libero soluta provident laudantium, amet
-			fugit aliquid consequuntur voluptatem obcaecati fugiat dolorum dolores.
+			You can configure which variables will the user be able to edit. You can re-configure these settings on the fly (for example on a click of a button), and that way you can enable your users to change different sets of variables in each step.
 		</p>
 		<OptionWrapper>
 			<v-chip

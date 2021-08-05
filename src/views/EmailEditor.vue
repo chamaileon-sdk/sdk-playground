@@ -62,7 +62,8 @@ export default {
 	data() {
 		return {
 			paragraphs: [
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse."
+				"The email editor plugin has lot of configuration options. You can set it up that your users can design beautiful emails from scratch or you can even limit the functionalities so they can only edit the content.",
+				"You can even create a design system for your emails, or you can create hyper-personalized emails with it."
 			]
 		};
 	},

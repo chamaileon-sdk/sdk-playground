@@ -2,15 +2,11 @@
 	<v-app>
 		<h1>Block Libraries</h1>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore atque
-			assumenda a, alias nobis beatae! Aut, eaque velit, adipisci reprehenderit
-			rerum blanditiis dolorem quos placeat ullam nam sapiente quam deserunt.
+			It's possible to provide block libraries to your users, which is a great way to reuse sections of an email that are already designed.
 		</p>
 		<h3>Your Libraries</h3>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem quas modi
-			esse obcaecati eligendi veniam. Cumque molestiae quasi incidunt tempore,
-			sit inventore pariatur maxime. Modi doloribus fugiat ex veritatis cum!
+			In this example, you can set up different block libraries, set up the access level of the actual user to those block libraries (save, rename, delete). This way, you can provide a way to your users to be able to create their own block libraries.
 		</p>
 		<OptionWrapper>
 			<template>
