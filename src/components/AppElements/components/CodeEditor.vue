@@ -104,6 +104,7 @@ import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrar
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
 import htmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/htmlGeneratorCodeGenerator";
 import htmlImportCodeGenerator from "./CodeEditor/codeGenerators/htmlImportCodeGenerator";
+import dummyHtmlCodeGenerator from "./CodeEditor/codeGenerators/dummyHtmlCodeGenerator";
 
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
@@ -189,7 +190,11 @@ export default {
 
 	computed: {
 		...mapGetters({ menus: "getMenu" }),
-		...mapGetters(["getHtmlGeneratorConfigObject", "getHtmlDocument"]),
+		...mapGetters([
+			"getHtmlGeneratorConfigObject",
+			"getHtmlDocument",
+			"getDummyHtmlDocument",
+		]),
 
 		route() {
 			return this.$route.path;
@@ -250,7 +255,10 @@ export default {
 		},
 
 		htmlCode() {
-			return this.getHtmlDocument;
+			return dummyHtmlCodeGenerator(
+				this.getDummyHtmlDocument,
+				this.getHtmlGeneratorConfigObject.lineLength
+			);
 		},
 
 		//Html import

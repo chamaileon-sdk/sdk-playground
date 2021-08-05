@@ -112,10 +112,12 @@ export default {
 
 		updateSettings(obj) {
 			this.updateHtmlGeneratorSettings(obj);
+			this.$store.dispatch("fetchDummyHtml");
 		},
 
 		updateIntSettings(obj) {
 			this.updateInt(obj);
+			this.$store.dispatch("fetchDummyHtml");
 		},
 	},
 };

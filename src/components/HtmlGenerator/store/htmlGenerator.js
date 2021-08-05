@@ -1,7 +1,10 @@
+import dummyDoc from "./dummyDocument";
+
 export default {
 	state: () => ({
 		fetchingHTML: false,
 		html: "",
+		dummyHtml: "",
 		htmlSize: "0B",
 		settings: {
 			vmlBackground: {
@@ -53,6 +56,10 @@ export default {
 			state.html = html;
 		},
 
+		updateDummyHtml(state, dummyHtml) {
+			state.dummyHtml = dummyHtml;
+		},
+
 		updateSize(state, size) {
 			let s = size;
 
@@ -63,6 +70,31 @@ export default {
 		},
 	},
 	actions: {
+		async fetchDummyHtml(context) {
+			const genRequest = await fetch(
+				"https://sdk-api.chamaileon.io/api/v1/emails/generate",
+				{
+					method: "POST",
+					headers: {
+						Authorization: "Y8mbu7S5Qh4cyCqJCVBn",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						document: dummyDoc,
+						settings: context.getters.getHtmlGeneratorConfigObject,
+					}),
+				}
+			);
+
+			if (!genRequest.ok) {
+				throw new Error("Auth error");
+			}
+
+			const response = await genRequest.json();
+
+			context.commit("updateDummyHtml", response.result);
+		},
+
 		async fetchHtml(context) {
 			context.commit("toggleFetching");
 
@@ -114,6 +146,8 @@ export default {
 		},
 
 		getHtmlDocument: (state) => state.html,
+
+		getDummyHtmlDocument: (state) => state.dummyHtml,
 
 		getHTMLFetchStatus(state) {
 			return state.fetchingHTML;
