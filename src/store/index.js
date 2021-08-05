@@ -53,7 +53,7 @@ export default new Vuex.Store({
 		},
 
 		generatorConfigLoad(state, generatorConfig) {
-			state.generatorConfig = generatorConfig;
+			state.generatorConfig.settings = generatorConfig.settings;
 		},
 		//SDK Settings
 
