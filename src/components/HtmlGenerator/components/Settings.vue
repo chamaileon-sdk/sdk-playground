@@ -111,12 +111,10 @@ export default {
 		...mapMutations(["updateHtmlGeneratorSettings", "updateInt"]),
 
 		updateSettings(obj) {
-			this.$store.dispatch("fetchHtml");
 			this.updateHtmlGeneratorSettings(obj);
 		},
 
 		updateIntSettings(obj) {
-			this.$store.dispatch("fetchHtml");
 			this.updateInt(obj);
 		},
 	},
