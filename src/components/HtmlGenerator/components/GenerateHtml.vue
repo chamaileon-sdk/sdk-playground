@@ -11,19 +11,30 @@
 			<template>
 				<v-row align="center" justify="space-between" class="ma-0 mb-8">
 					<p>Size: {{ size }}</p>
-					<v-btn depressed @click="generateHtml" color="success">
-						<v-icon v-show="!fetching" left> mdi-plus </v-icon>
-						<v-progress-circular
-							v-show="fetching"
-							color="white"
-							:indeterminate="true"
-							:value="0"
-							size="20"
-							width="3"
-							class="mr-3"
-						></v-progress-circular>
-						Generate
-					</v-btn>
+					<div>
+						<v-btn
+							class="mr-7"
+							depressed
+							color="success"
+							@click="copyCodeToClipboard"
+						>
+							<v-icon left>mdi-clipboard-file-outline</v-icon>
+							Copy to Clipboard
+						</v-btn>
+						<v-btn depressed @click="generateHtml" color="success">
+							<v-icon v-show="!fetching" left> mdi-plus </v-icon>
+							<v-progress-circular
+								v-show="fetching"
+								color="white"
+								:indeterminate="true"
+								:value="0"
+								size="20"
+								width="3"
+								class="mr-3"
+							></v-progress-circular>
+							Generate
+						</v-btn>
+					</div>
 				</v-row>
 			</template>
 			<v-card flat class="pa-4">
@@ -65,6 +76,20 @@ export default {
 	methods: {
 		generateHtml() {
 			this.$store.dispatch("fetchHtml");
+		},
+
+		copyCodeToClipboard() {
+			let str = document.querySelector("textarea").value;
+
+			const el = document.createElement("textarea");
+			el.value = str;
+			el.setAttribute("readonly", "");
+			el.style.position = "absolute";
+			el.style.left = "-9999px";
+			document.body.appendChild(el);
+			el.select();
+			document.execCommand("copy");
+			document.body.removeChild(el);
 		},
 	},
 };
