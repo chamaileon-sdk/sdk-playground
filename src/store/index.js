@@ -55,6 +55,10 @@ export default new Vuex.Store({
 		generatorConfigLoad(state, generatorConfig) {
 			state.generatorConfig.settings = generatorConfig.settings;
 		},
+
+		emailDocumentLoad(state, emailDocument) {
+			state.document = emailDocument;
+		},
 		//SDK Settings
 
 		changeLogoFunction(state, fn) {

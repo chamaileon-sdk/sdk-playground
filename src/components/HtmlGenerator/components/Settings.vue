@@ -75,7 +75,7 @@
 									dense
 									outlined
 									label="Value"
-									:items="['handlebars', 'liquid', 'mustage']"
+									:items="['handlebars', 'liquid', 'mustache']"
 									:hide-details="true"
 									@change="updateSettings({ key: key, value: $event })"
 									:value="item.value"
