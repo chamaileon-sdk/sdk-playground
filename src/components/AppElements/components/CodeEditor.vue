@@ -103,6 +103,7 @@ import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEdi
 import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
 import htmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/htmlGeneratorCodeGenerator";
+import htmlImportCodeGenerator from "./CodeEditor/codeGenerators/htmlImportCodeGenerator";
 
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
@@ -252,6 +253,11 @@ export default {
 			return this.getHtmlDocument;
 		},
 
+		//Html import
+		htmlImportCode() {
+			return htmlImportCodeGenerator();
+		},
+
 		//Final
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
@@ -263,6 +269,7 @@ export default {
 				return this.variableEditorCode;
 			else if (this.$route.path === "/htmlgenerator")
 				return this.htmlGeneratorCode;
+			else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
 			else return `console.log("${this.$route.path}");`;
 		},
 
