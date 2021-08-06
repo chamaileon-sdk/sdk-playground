@@ -6,12 +6,17 @@
 
 		<div class="d-flex mt-11">
 			<v-btn
-				:href="docUrl"
+				@click="scrollToFirst"
 				target="_blank"
-				class="ma-0"
+				class="ma-0 mr-3"
 				depressed
 				color="primary"
 			>
+				<v-icon left>mdi-palette</v-icon>
+				Get Started
+			</v-btn>
+
+			<v-btn :href="docUrl" target="_blank" class="ma-0" text color="primary">
 				<v-icon left>mdi-book</v-icon>
 				Read the docs
 			</v-btn>
@@ -27,6 +32,13 @@
 export default {
 	created() {
 		this.img = require(`@/assets/${this.image}`);
+	},
+
+	methods: {
+		scrollToFirst() {
+			console.log("scroll");
+			window.scrollTo({ top: window.innerHeight + 80, behavior: "smooth" });
+		},
 	},
 
 	data() {
