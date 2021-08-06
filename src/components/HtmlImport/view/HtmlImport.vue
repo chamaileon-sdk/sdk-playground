@@ -7,7 +7,7 @@
 					:docUrl="'https://chamaileon.io/sdk/docs/email-html-importer/'"
 					:paragraph1="paragraph1"
 					:paragraph2="paragraph2"
-					:image="'SdkIllustration.svg'"
+					:image="'HtmlImportIllustration.svg'"
 				/>
 			</div>
 		</SectionObserver>

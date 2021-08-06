@@ -17,11 +17,11 @@
 			</v-tab>
 			<v-tab v-show="route === '/emaileditor'">Block Libraries</v-tab>
 			<v-tab v-show="route === '/htmlgenerator'">Examples</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">JSON Input</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">HTML Output</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">Input JSON</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">Output HTML</v-tab>
 
-			<v-tab v-show="route === '/htmlimport'">HTML Input</v-tab>
-			<v-tab v-show="route === '/htmlimport'">JSON Output</v-tab>
+			<v-tab v-show="route === '/htmlimport'">Input HTML</v-tab>
+			<v-tab v-show="route === '/htmlimport'">Output JSON</v-tab>
 		</v-tabs>
 
 		<v-card
