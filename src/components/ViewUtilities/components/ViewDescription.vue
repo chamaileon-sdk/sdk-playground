@@ -19,8 +19,8 @@
 			</v-btn>
 		</div>
 
-		<v-card v-if="image" class="mt-16" flat>
-			<v-img class="rounded-0" width="100%" :src="img"></v-img>
+		<v-card v-if="image" class="mt-16 rounded-0" flat>
+			<img class="rounded-0" width="100%" :src="img" alt="" />
 		</v-card>
 	</v-app>
 </template>
