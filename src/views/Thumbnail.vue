@@ -5,9 +5,15 @@
 				<Description
 					:title="'Email Thumbnail'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-thumbnail/'"
-					:paragraphs="paragraphs"
 					:image="'EmailThumbnailIllustration.svg'"
-				/>
+				>
+					<p>
+						You can easily create thumbnails of your emails based on the JSON
+						representation of the document. The plugin generates a thumbnail
+						with the specified properties from the given JSON and attaches it to
+						referenced DOM element.
+					</p>
+				</Description>
 			</div>
 
 			<div class="section" id="settings">
@@ -30,14 +36,6 @@ import Settings from "../components/Thumbnail/components/Settings.vue";
 import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
-	data() {
-		return {
-			paragraphs: [
-				"You can easily create thumbnails of your emails based on the JSON representation of the document. You can use this plugin in listing pages or custom previews."
-			]
-		};
-	},
-
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},
