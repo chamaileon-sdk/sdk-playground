@@ -134,7 +134,7 @@ export default {
 			},
 			{
 				title: "Email HTML Generator",
-				icon: "code-json",
+				icon: "xml",
 				to: "htmlgenerator",
 				children: [
 					{
@@ -147,7 +147,7 @@ export default {
 			},
 			{
 				title: "Email HTML Import",
-				icon: "xml",
+				icon: "code-json",
 				to: "htmlimport",
 			},
 		],
