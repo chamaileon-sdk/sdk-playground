@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex align-center" id="preview-header">
+	<div class="d-flex align-center rounded" id="preview-header">
 		<div class="d-flex pt-2 pb-2 px-2 header-container align-center">
 			<div class="title-container d-flex align-center">
 				<v-btn text icon id="btnLeavePreview">
