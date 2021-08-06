@@ -1,6 +1,6 @@
 let bulletproofLineLength = require("bulletproofLineLength");
 
-export default function (doc, lineLength = 799) {
+export default function (doc, size, lineLength = 799) {
 	let el = document.createElement("html");
 	el.innerHTML = doc;
 
@@ -15,6 +15,9 @@ export default function (doc, lineLength = 799) {
 
 	let out =
 		"<!--\nNote: this page only contains some snippets to showcase how each setting works. For the full output see \"HTML Output\" tab \n-->\n\n";
+
+	out += `<span> Size of whole document: ${size} </span>\n\n`;
+
 	el.getElementsByTagName("*").forEach((c) => {
 		if (c.style.backgroundImage) {
 			out += "<!-- VML background & Presentation role -->\n\n";

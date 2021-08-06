@@ -226,6 +226,7 @@ export default {
 			"getHtmlDocument",
 			"getDummyHtmlDocument",
 			"getDummyJSON",
+			"getSize",
 		]),
 
 		route() {
@@ -293,6 +294,7 @@ export default {
 		htmlCode() {
 			return dummyHtmlCodeGenerator(
 				this.getDummyHtmlDocument,
+				this.getSize,
 				this.getHtmlGeneratorConfigObject.lineLength
 			);
 		},
