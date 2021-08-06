@@ -3,6 +3,7 @@ import dummyDoc from "./dummyDocument";
 export default {
 	state: () => ({
 		fetchingHTML: false,
+		json: dummyDoc,
 		html: "",
 		dummyHtml: "",
 		htmlSize: "0B",
@@ -80,7 +81,7 @@ export default {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						document: dummyDoc,
+						document: context.state.json,
 						settings: context.getters.getHtmlGeneratorConfigObject,
 					}),
 				}
@@ -146,6 +147,8 @@ export default {
 		},
 
 		getHtmlDocument: (state) => state.html,
+
+		getDummyJSON: (state) => state.json,
 
 		getDummyHtmlDocument: (state) => state.dummyHtml,
 

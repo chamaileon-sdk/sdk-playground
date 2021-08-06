@@ -10,7 +10,7 @@ const genRequest = await fetch('https://sdk-api.chamaileon.io/api/v1/emails/gene
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-        document: emailDocument, // see "document" tab
+        document: jsonInput, //see "JSON Input" tab
         settings: requestSettings,
     })
 })
@@ -21,7 +21,7 @@ if (!genRequest.ok) {
 
 const response = await genRequest.json()
 
-const result = response.result
+const htmlOutput = response.result //see "HTML Output" tab
 `;
 }
 

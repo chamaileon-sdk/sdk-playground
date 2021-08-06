@@ -3,11 +3,11 @@
 		<v-tabs v-model="tab" :show-arrows="true" dark>
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> Settings </v-tab>
-			<v-tab v-if="route !== '/htmlgenerator' && route !== '/htmlimport'">
+			<v-tab v-show="route !== '/htmlgenerator' && route !== '/htmlimport'">
 				Document
 			</v-tab>
 			<v-tab
-				v-if="
+				v-show="
 					route === '/emailpreview' ||
 					route === '/emaileditor' ||
 					route === '/variableeditor'
@@ -15,10 +15,10 @@
 			>
 				Hooks
 			</v-tab>
-			<v-tab v-if="route === '/emaileditor'">Block Libraries</v-tab>
-			<v-tab v-if="route === '/htmlgenerator'">HTML Examples</v-tab>
-			<v-tab>JSON Input</v-tab>
-			<v-tab>HTML Output</v-tab>
+			<v-tab v-show="route === '/emaileditor'">Block Libraries</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">Examples</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">JSON Input</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">HTML Output</v-tab>
 		</v-tabs>
 
 		<v-card
@@ -33,9 +33,7 @@
 		</v-card>
 
 		<v-card
-			v-show="
-				route !== '/htmlgenerator' && route !== '/htmlimport' && tab === 1
-			"
+			v-show="tab === 1"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -46,12 +44,7 @@
 		</v-card>
 
 		<v-card
-			v-show="
-				route !== '/sdk' &&
-				route !== '/emailthumbnail' &&
-				route !== '/htmlgenerator' &&
-				tab === 2
-			"
+			v-show="tab === 2"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -62,7 +55,7 @@
 		</v-card>
 
 		<v-card
-			v-show="route === '/emaileditor' && tab === 3"
+			v-show="tab === 3"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -73,7 +66,7 @@
 		</v-card>
 
 		<v-card
-			v-show="route === '/htmlgenerator' && tab === 1"
+			v-show="tab === 4"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -81,6 +74,28 @@
 			flat
 		>
 			<highlight-code class="pa-0" lang="html" :code="htmlCode" />
+		</v-card>
+
+		<v-card
+			v-show="tab === 5"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code class="pa-0" lang="json" :code="htmlGeneratorDummyJSON" />
+		</v-card>
+
+		<v-card
+			v-show="tab === 6"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			dark
+			fixed
+			flat
+		>
+			<highlight-code class="pa-0" lang="html" :code="getDummyHtmlDocument" />
 		</v-card>
 
 		<v-card dark class="copyCard rounded-pill" elevation="0" v-show="snackbar"
@@ -119,6 +134,13 @@ import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 import { mapGetters } from "vuex";
 
 export default {
+	updated() {
+		let el = document.querySelector(".v-navigation-drawer .v-tab--active");
+		let style = window.getComputedStyle(el);
+
+		if (style.display === "none") this.tab = 0;
+	},
+
 	data: () => ({
 		ignore: 0,
 		snackbar: false,
@@ -200,6 +222,7 @@ export default {
 			"getHtmlGeneratorConfigObject",
 			"getHtmlDocument",
 			"getDummyHtmlDocument",
+			"getDummyJSON",
 		]),
 
 		route() {
@@ -260,6 +283,10 @@ export default {
 			return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
 		},
 
+		htmlGeneratorDummyJSON() {
+			return JSON.stringify(this.getDummyJSON, null, " ");
+		},
+
 		htmlCode() {
 			return dummyHtmlCodeGenerator(
 				this.getDummyHtmlDocument,
@@ -308,11 +335,19 @@ export default {
 				str = this.doc;
 				break;
 			case 2:
-				if (this.route === "/htmlgenerator") str = this.htmlCode;
-				else str = this.hooks;
+				str = this.hooks;
 				break;
 			case 3:
 				str = this.blockLibs;
+				break;
+			case 4:
+				str = this.htmlCode;
+				break;
+			case 5:
+				str = this.htmlGeneratorDummyJSON;
+				break;
+			case 6:
+				str = this.getDummyHtmlDocument;
 				break;
 			default:
 				str = "";
