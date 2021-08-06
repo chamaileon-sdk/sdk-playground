@@ -2,21 +2,25 @@
 	<v-app>
 		<h1>Header</h1>
 		<p>
-			You can configure buttons & dropdowns to appear in the header on the right-hand-side. It is a great way to interact with you application from this plugin. For example, you can pop up dialogs when your users click on one of the buttons or dropdown items.
-		</p>
-		<p>
-			Whenever you click on a button or a dropdown item, a hook will be called, and the <em>buttonId</em> will be passed to the hook, which is the <em>id</em> property in the config. (Please, check out the hooks tab on the right-hand-side.)
+			You can add buttons and dropdowns to the right of the header. It is a
+			great way to interact with you application from this plugin. Whenever you
+			click on a button or a dropdown item, a hook will be called with the ID of
+			that button. This allows you to attach any custom functionality to each
+			button.
 		</p>
 		<OptionsWrapper>
 			<HeaderPreview />
 		</OptionsWrapper>
 
-		<h3>Your Buttons</h3>
+		<h3>Your Buttons and Dropdowns</h3>
 		<p>
-			You can add buttons and dropdowns below. Keep in mind, that you can add buttons (menu items) to dropdowns as well.
-		</p>
-		<p>
-			The icons are from <a href="https://materialdesignicons.com/" target="_blank">material design icons</a>. In the configuration object, you will have to use the icon name without the <em>mdi-</em> prefix.
+			You can add and customize your buttons and dropdowns below. The icon is
+			required to be a <br />
+			<a href="https://materialdesignicons.com/" target="_blank"
+				>Material Design Icon</a
+			>
+			without <em>mdi-</em> prefix. Keep in mind that the header can only store
+			a limited amount of buttons.
 		</p>
 		<OptionsWrapper>
 			<template>
