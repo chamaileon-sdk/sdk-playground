@@ -20,7 +20,7 @@
 		</div>
 
 		<v-card v-if="image" class="mt-16" flat>
-			<img width="100%" :src="img" alt="" />
+			<v-img class="rounded-0" width="100%" :src="img"></v-img>
 		</v-card>
 	</v-app>
 </template>
