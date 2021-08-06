@@ -2,10 +2,11 @@
 	<v-app>
 		<h2>Logo</h2>
 		<p>
-			You can set up what logo you want to use within the plugins. This is a Javascript file that injects your logo into the DOM, which makes it possible to even create animated logos.
-		</p>
-		<p>
-			Select one of the example logos from below.
+			You can select what logo you want to display within the plugins. Any kind
+			of logos is supported, which means you are not limited to just static
+			images. You are free to use animated or even reactive logos. This
+			flexibility is achieved trough passing a JavaScript file to the SDK, which
+			returns a DOM element.
 		</p>
 		<OptionsWrapper class="px-0">
 			<LogoSelector />
