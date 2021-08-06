@@ -10,10 +10,6 @@
 					:image="'SdkIllustration.svg'"
 				/>
 			</div>
-
-			<div class="section" id="importhtml">
-				<ImportHtml />
-			</div>
 		</SectionObserver>
 		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
 	</div>
@@ -24,14 +20,15 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
-import ImportHtml from "../components/ImportHtml.vue";
-
 export default {
+	mounted() {
+		this.$store.dispatch("fetchDummyHtml");
+	},
+
 	components: {
 		SectionObserver,
 		Description,
 		Footer,
-		ImportHtml,
 	},
 
 	data() {

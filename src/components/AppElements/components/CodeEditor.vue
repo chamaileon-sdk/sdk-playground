@@ -19,6 +19,9 @@
 			<v-tab v-show="route === '/htmlgenerator'">Examples</v-tab>
 			<v-tab v-show="route === '/htmlgenerator'">JSON Input</v-tab>
 			<v-tab v-show="route === '/htmlgenerator'">HTML Output</v-tab>
+
+			<v-tab v-show="route === '/htmlimport'">HTML Input</v-tab>
+			<v-tab v-show="route === '/htmlimport'">JSON Output</v-tab>
 		</v-tabs>
 
 		<v-card
@@ -77,7 +80,7 @@
 		</v-card>
 
 		<v-card
-			v-show="tab === 5"
+			v-show="tab === 5 || tab === 8"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -88,7 +91,7 @@
 		</v-card>
 
 		<v-card
-			v-show="tab === 6"
+			v-show="tab === 6 || tab === 7"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -344,9 +347,11 @@ export default {
 				str = this.htmlCode;
 				break;
 			case 5:
+			case 8:
 				str = this.htmlGeneratorDummyJSON;
 				break;
 			case 6:
+			case 7:
 				str = this.getDummyHtmlDocument;
 				break;
 			default:
