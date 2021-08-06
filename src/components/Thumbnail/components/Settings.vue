@@ -2,10 +2,10 @@
 	<v-app>
 		<h2>Settings</h2>
 		<p>
-			The <em>width</em> and <em>height</em> properties define the viewport in whitch the preview will be rendered whereas with the scale property, you can make the previews smaller. This way, you can create small thumbnails of even huge viewports (desktop views).
-		</p>
-		<p>
-			You can also configure the thumbnail component to be scrollable or not.
+			The width and height properties define the viewport in which the thumbnail
+			will be rendered, whereas the scale property defines the scale of the
+			rendered thumbnail. This allows you to showcase the exact look of an email
+			on any device.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex justify-center align-center pa-4">
@@ -50,9 +50,10 @@
 			</v-card>
 		</OptionWrapper>
 
-		<h3>Preview</h3>
+		<h3>Thumbnail</h3>
 		<p>
-			If you change the settings above, the preview below will automatically be updated.
+			If you change the settings above, the thumbnail below will automatically
+			update.
 		</p>
 		<OptionWrapper>
 			<v-card

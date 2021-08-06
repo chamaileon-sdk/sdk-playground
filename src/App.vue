@@ -145,7 +145,7 @@ html::-webkit-scrollbar {
 .section {
 	/*padding: 96px 0;*/
 	padding: 70px 0;
-	min-height: calc(100vh - 170px);
+	min-height: 100vh;
 	margin-bottom: 100px;
 }
 

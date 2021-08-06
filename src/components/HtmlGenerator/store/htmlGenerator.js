@@ -3,6 +3,7 @@ import dummyDoc from "./dummyDocument";
 export default {
 	state: () => ({
 		fetchingHTML: false,
+		json: dummyDoc,
 		html: "",
 		dummyHtml: "",
 		htmlSize: "0B",
@@ -52,10 +53,6 @@ export default {
 			state.settings[payload.key].value = x >= 0 ? x : 0;
 		},
 
-		updateHtml(state, html) {
-			state.html = html;
-		},
-
 		updateDummyHtml(state, dummyHtml) {
 			state.dummyHtml = dummyHtml;
 		},
@@ -80,7 +77,7 @@ export default {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						document: dummyDoc,
+						document: context.state.json,
 						settings: context.getters.getHtmlGeneratorConfigObject,
 					}),
 				}
@@ -89,41 +86,13 @@ export default {
 			if (!genRequest.ok) {
 				throw new Error("Auth error");
 			}
-
-			const response = await genRequest.json();
-
-			context.commit("updateDummyHtml", response.result);
-		},
-
-		async fetchHtml(context) {
-			context.commit("toggleFetching");
-
-			const genRequest = await fetch(
-				"https://sdk-api.chamaileon.io/api/v1/emails/generate",
-				{
-					method: "POST",
-					headers: {
-						Authorization: "Y8mbu7S5Qh4cyCqJCVBn",
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						document: context.rootState.document,
-						settings: context.getters.getHtmlGeneratorConfigObject,
-					}),
-				}
-			);
-
-			if (!genRequest.ok) {
-				throw new Error("Auth error");
-			}
-
-			const response = await genRequest.json();
 
 			const size = genRequest.headers.get("content-length");
 			context.commit("updateSize", size);
 
-			context.commit("updateHtml", response.result);
-			context.commit("toggleFetching");
+			const response = await genRequest.json();
+
+			context.commit("updateDummyHtml", response.result);
 		},
 	},
 	getters: {
@@ -146,6 +115,8 @@ export default {
 		},
 
 		getHtmlDocument: (state) => state.html,
+
+		getDummyJSON: (state) => state.json,
 
 		getDummyHtmlDocument: (state) => state.dummyHtml,
 

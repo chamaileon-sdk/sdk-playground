@@ -3,11 +3,17 @@
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
-					:title="'Chamaileon SDK Playground'"
+					:title="'Chamaileon SDK'"
 					:docUrl="'https://chamaileon.io/sdk/docs/'"
-					:paragraphs="paragraphs"
 					:image="'SdkIllustration.svg'"
-				/>
+				>
+					<p>
+						The Chamaileon SDK consists of multiple plugins and API endpoints
+						that can help you to extend your product with amazing email creation
+						capabilities. You can fully customize the SDK to that it fits
+						seamlessly into your product.
+					</p>
+				</Description>
 			</div>
 			<div class="section" id="sdklogo">
 				<Logo />
@@ -36,14 +42,6 @@ import SplashScreen from "../components/Dashboard/components/SplashScreen.vue";
 import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
-	data() {
-		return {
-			paragraphs: [
-				"The Chamaileon SDK consists of multiple plugins and API endpoints that can help you to extend your product with amazing email creation capabilities. You can try out all of the configuration options in this playground."
-			]	
-		};
-	},
-
 	components: {
 		SectionObserver,
 		Footer,

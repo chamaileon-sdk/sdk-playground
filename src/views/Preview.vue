@@ -5,9 +5,16 @@
 				<Description
 					:title="'Email Preview'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-preview/'"
-					:paragraphs="paragraphs"
 					:image="'EmailPreviewIllustration.svg'"
-				/>
+				>
+					<p>
+						This plugin helps you to show your customers how an email looks like
+						on different devices.<br />
+						You can fully customize and extend the functionality of this plugin
+						by adding different buttons to the header and defining how each
+						button behaves, trough a hook.
+					</p>
+				</Description>
 			</div>
 			<div class="section" id="header">
 				<Header />
@@ -31,14 +38,6 @@ import OpenButton from "../components/AppElements/components/OpenButton.vue";
 import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
-	data() {
-		return {
-			paragraphs: [
-				"This component helps you to show your customers the email's mobile and destop preview."
-			]
-		};
-	},
-
 	components: {
 		Header,
 		Footer,

@@ -5,9 +5,17 @@
 				<Description
 					:title="'Email Editor'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
-					:paragraphs="paragraphs"
 					:image="'EmailEditorIllustration.svg'"
-				/>
+				>
+					<p>
+						With the help of the email editor plugin your users can create
+						beautiful emails from scratch. The editor offers many ways of
+						customization regarding functionality. You can create a personalized
+						layout, design systems for your emails and you can even change the
+						access of yout team members to those libraries in a team
+						environment.
+					</p>
+				</Description>
 			</div>
 
 			<div class="section" id="header">
@@ -59,15 +67,6 @@ import Description from "../components/ViewUtilities/components/ViewDescription.
 import { mapGetters, mapState } from "vuex";
 
 export default {
-	data() {
-		return {
-			paragraphs: [
-				"The email editor plugin has lot of configuration options. You can set it up that your users can design beautiful emails from scratch or you can even limit the functionalities so they can only edit the content.",
-				"You can even create a design system for your emails, or you can create hyper-personalized emails with it."
-			]
-		};
-	},
-
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},

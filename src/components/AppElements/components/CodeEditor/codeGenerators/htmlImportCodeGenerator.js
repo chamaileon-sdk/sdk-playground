@@ -8,7 +8,7 @@ export default function () {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-        html: htmlString
+        html: htmlInput //see "HTML Input" tab
     })
 })
       
@@ -18,5 +18,5 @@ if (!genRequest.ok) {
       
 const response = await genRequest.json()
       
-emailDocument = response.result.document`;
+jsonOutput = response.result.document //see "JSON Output" tab`;
 }

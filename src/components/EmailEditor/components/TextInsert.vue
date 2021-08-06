@@ -2,10 +2,11 @@
 	<v-app>
 		<h1>Text Insert</h1>
 		<p>
-			If you want to provide predefined merge tags to your customers, text insert buttons are a great solution. They work similarly to any other configurable buttons in the SDK, whenever a user clicks on them, the <em>onTextInsertPluginButtonClicked</em> hook is invoked with a <em>buttonId</em> as a parameter.
-		</p>
-		<p>
-			These buttons will appear when you edit a text or a button element within the editor.
+			If you want to provide predefined merge tags to your customers, text
+			insert buttons are a great solution. They work similarly to any other
+			configurable buttons in the SDK, whenever a user clicks on them, the
+			onTextInsertPluginButtonClicked hook is invoked with a buttonId as a
+			parameter.
 		</p>
 		<OptionWrapper>
 			<TextInsertPreview />
@@ -13,7 +14,9 @@
 
 		<h3>Your Buttons</h3>
 		<p>
-			In case of these buttons, the icons are not from material design icons. They are simple images that you will have to host somewhere.
+			In case of these buttons, the icon field expects a URL to an image. You
+			can either display the label of the button or the icon, but not both at
+			the same time.
 		</p>
 		<OptionWrapper>
 			<template>
