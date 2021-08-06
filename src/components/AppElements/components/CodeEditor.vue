@@ -3,18 +3,22 @@
 		<v-tabs v-model="tab" :show-arrows="true" dark>
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> Settings </v-tab>
-			<v-tab> Document </v-tab>
+			<v-tab v-if="route !== '/htmlgenerator' && route !== '/htmlimport'">
+				Document
+			</v-tab>
 			<v-tab
 				v-if="
-					route !== '/sdk' &&
-					route !== '/emailthumbnail' &&
-					route !== '/htmlgenerator'
+					route === '/emailpreview' ||
+					route === '/emaileditor' ||
+					route === '/variableeditor'
 				"
 			>
 				Hooks
 			</v-tab>
 			<v-tab v-if="route === '/emaileditor'">Block Libraries</v-tab>
-			<v-tab v-if="route === '/htmlgenerator'">HTML</v-tab>
+			<v-tab v-if="route === '/htmlgenerator'">HTML Examples</v-tab>
+			<v-tab>JSON Input</v-tab>
+			<v-tab>HTML Output</v-tab>
 		</v-tabs>
 
 		<v-card
@@ -29,7 +33,9 @@
 		</v-card>
 
 		<v-card
-			v-show="tab === 1"
+			v-show="
+				route !== '/htmlgenerator' && route !== '/htmlimport' && tab === 1
+			"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -67,7 +73,7 @@
 		</v-card>
 
 		<v-card
-			v-show="route === '/htmlgenerator' && tab === 2"
+			v-show="route === '/htmlgenerator' && tab === 1"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -302,7 +308,8 @@ export default {
 				str = this.doc;
 				break;
 			case 2:
-				str = this.hooks;
+				if (this.route === "/htmlgenerator") str = this.htmlCode;
+				else str = this.hooks;
 				break;
 			case 3:
 				str = this.blockLibs;
