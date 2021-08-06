@@ -1,8 +1,6 @@
 let bulletproofLineLength = require("bulletproofLineLength");
 
 export default function (doc, lineLength = 799) {
-	console.log(doc);
-
 	let el = document.createElement("html");
 	el.innerHTML = doc;
 
