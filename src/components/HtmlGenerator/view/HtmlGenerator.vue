@@ -5,8 +5,6 @@
 				<Description
 					:title="'Email HTML Generator'"
 					:docUrl="'https://chamaileon-sdk.github.io/examples/api/generate-email-html/'"
-					:paragraph1="paragraph1"
-					:paragraph2="paragraph2"
 					:image="'HtmlGeneratorIllustration.svg'"
 				/>
 			</div>

@@ -1,10 +1,8 @@
 <template>
-	<v-app>
+	<div class="d-flex flex-column" style="height: calc(100vh - 140px)">
 		<h1 class="mb-8">{{ title }}</h1>
 
-		<div v-for="(paragraph, idx) in paragraphs" :key="title + idx">
-			<p>{{ paragraph }}</p>
-		</div>
+		<slot />
 
 		<div class="d-flex mt-11">
 			<v-btn
@@ -19,15 +17,13 @@
 			</v-btn>
 		</div>
 
-		<v-card v-if="image" class="mt-16 rounded-0" flat>
+		<v-card v-if="image" class="mt-auto rounded-0" flat>
 			<img class="rounded-0" width="100%" :src="img" alt="" />
 		</v-card>
-	</v-app>
+	</div>
 </template>
 
 <script>
-//TODO: use slot here
-
 export default {
 	created() {
 		this.img = require(`@/assets/${this.image}`);
