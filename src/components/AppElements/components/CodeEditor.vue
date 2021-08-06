@@ -3,7 +3,13 @@
 		<v-tabs v-model="tab" :show-arrows="true" dark>
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> Settings </v-tab>
-			<v-tab v-show="route !== '/htmlgenerator' && route !== '/htmlimport'">
+			<v-tab
+				v-show="
+					route !== '/htmlgenerator' &&
+					route !== '/htmlimport' &&
+					route !== '/sdk'
+				"
+			>
 				Document
 			</v-tab>
 			<v-tab
