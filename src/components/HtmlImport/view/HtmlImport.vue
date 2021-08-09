@@ -5,10 +5,15 @@
 				<Description
 					:title="'Email HTML Import'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-html-importer/'"
-					:paragraph1="paragraph1"
-					:paragraph2="paragraph2"
 					:image="'HtmlImportIllustration.svg'"
-				/>
+				>
+					<p>
+						Our HTML import plugin allows you to import an existing HTML email
+						to editor and make changes to it. The output is a JSON object, which
+						the editor can process. Currently there are no available options for
+						this plugin.
+					</p>
+				</Description>
 			</div>
 		</SectionObserver>
 		<Footer :previous="'Email HTML Generator'" :prevTo="'/htmlgenerator'" />
@@ -29,15 +34,6 @@ export default {
 		SectionObserver,
 		Description,
 		Footer,
-	},
-
-	data() {
-		return {
-			paragraph1:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
-			paragraph2:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
-		};
 	},
 };
 </script>
