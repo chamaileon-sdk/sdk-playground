@@ -8,19 +8,21 @@
 				color="transparent"
 				flat
 				width="100%"
-				class="px-6 pt-6 pb-4 scrollactive-item"
+				class="px-6 pt-6 pb-4"
 				id="logo"
 				v-chamaileonLogo
+				@click="scrollToTop"
 			></v-card>
 			<v-list>
 				<template v-for="(m, ind) in Menu">
 					<v-list-item
 						:key="ind"
-						class="pl-6 scrollactive-item"
+						class="pl-6"
 						color="primary"
 						v-ripple="{ class: `primary--text` }"
 						exact
 						:to="{ path: m.to, hash: 'home' }"
+						@click="scrollToTop"
 					>
 						<v-list-item-icon class="mr-6">
 							<v-icon>mdi-{{ m.icon }}</v-icon>
@@ -69,6 +71,9 @@ export default {
 			if (window.location.hash === hash) return "v-list-item--active";
 			return "";
 		},
+		scrollToTop() {
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		},
 	},
 	directives: {
 		chamaileonLogo: {
@@ -78,7 +83,6 @@ export default {
 		},
 	},
 	computed: {
-		...mapState(["sdk"]),
 		...mapGetters(["getConfigObject"]),
 		...mapGetters({ Menu: "getMenu" }),
 	},
