@@ -5,7 +5,6 @@
 				<Description
 					:title="'Email Variable Editor'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
-					:paragraphs="paragraphs"
 					:image="'VariableEditorIllustration.svg'"
 				>
 					<p>

@@ -49,7 +49,6 @@ export default {
 
 	props: {
 		title: String,
-		paragraphs: Array,
 		docUrl: String,
 		image: String,
 	},
