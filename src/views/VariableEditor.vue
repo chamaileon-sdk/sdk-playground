@@ -7,7 +7,17 @@
 					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
 					:paragraphs="paragraphs"
 					:image="'VariableEditorIllustration.svg'"
-				/>
+				>
+					<p>
+						This plugin is a restricted editor with which you can only modify
+						the variables in an email that you previously defined within the
+						email editor. A really good use case is when you want to create
+						multiple emails and you only want your users to customize certain
+						parts of the email. You can basically create wizards with the
+						variable editor that can be used to create multiple brand consistent
+						emails with ease.
+					</p>
+				</Description>
 			</div>
 
 			<div class="section" id="variablestoedit">
@@ -42,15 +52,6 @@ import NavFooter from "../components/ViewUtilities/components/Footer.vue";
 import Description from "../components/ViewUtilities/components/ViewDescription.vue";
 
 export default {
-	data() {
-		return {
-			paragraphs: [
-				"This plugin is a restricted editor with which you can only modify the variables in an email that you previously defined within the email editor.",
-				"A really good use case is when you want to create multiple emails (for example in an email series, like marketing automation) and you only want your users to customize certain parts of the email (the variables). You can basically create wizards with the variable editor that can be used to create multiple brand consistent emails with ease."
-			]
-		};
-	},
-
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},

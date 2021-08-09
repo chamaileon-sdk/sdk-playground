@@ -2,7 +2,11 @@
 	<v-app>
 		<h1>Text Insert</h1>
 		<p>
-			Similarly to the email editor, you can configure buttons that will insert predefined texts to a text element. This is a great way to provide merge tags to your users.
+			Similarly to the email editor, you can configure buttons that will insert
+			predefined texts to a text element. This is a great way to provide merge
+			tags to your users. Whenever a user clicks on them, the
+			onTextInsertPluginButtonClicked hook is invoked with a buttonId as a
+			parameter.
 		</p>
 		<OptionWrapper>
 			<TextInsertPreview />
@@ -10,7 +14,9 @@
 
 		<h3>Buttons</h3>
 		<p>
-			In case of these buttons, the icons are not from material design icons. They are simple images that you will have to host somewhere.
+			In case of these buttons, the icon field expects a URL to an image. You
+			can either display the label of the button or the icon, but not both at
+			the same time.
 		</p>
 		<OptionWrapper>
 			<v-row align="center" justify="end" class="ma-0">
