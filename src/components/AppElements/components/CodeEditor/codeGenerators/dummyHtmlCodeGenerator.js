@@ -39,7 +39,7 @@ export default function (doc, size, lineLength = 799) {
 
 	let directiveNode = el.getElementsByTagName("td");
 	if (directiveNode.length > 1) {
-		directiveNode = directiveNode[0].cloneNode(true);
+		directiveNode = directiveNode[1].cloneNode(true);
 		directiveNode.removeChild(directiveNode.querySelector("table"));
 
 		out += "\n\n<!-- Templating language -->\n\n";

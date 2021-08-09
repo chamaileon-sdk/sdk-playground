@@ -36,10 +36,6 @@ import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import Settings from "../components/Settings.vue";
 
 export default {
-	mounted() {
-		this.$store.dispatch("fetchDummyHtml");
-	},
-
 	components: {
 		SectionObserver,
 		Settings,
