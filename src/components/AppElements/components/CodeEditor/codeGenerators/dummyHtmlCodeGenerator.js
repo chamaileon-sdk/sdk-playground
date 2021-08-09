@@ -13,8 +13,11 @@ export default function (doc, size, lineLength = 799) {
 	el.querySelector("head").remove();
 	el.querySelectorAll("style").forEach((c) => c.remove());
 
-	let out =
-		"<!--\nNote: this page only contains some snippets to showcase how each setting works. For the full output see \"HTML Output\" tab \n-->\n\n";
+	let out = "";
+	// out +=
+	// 	"<!--\nNote: this page only contains some snippets to showcase how each setting works. For the full output see \"HTML Output\" tab \n-->\n\n";
+	out +=
+		"<span>\nImportant: the changes are processed on our server, so it might take some time to update the result. Also this is only a demo page, for full result see the \"HTML Output\" tab\n</span>\n\n";
 
 	out += `<span> Size of whole document: ${size} </span>\n\n`;
 
