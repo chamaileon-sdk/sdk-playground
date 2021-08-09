@@ -11,7 +11,7 @@
 				/>
 			</div>
 		</SectionObserver>
-		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
+		<Footer :previous="'Email HTML Generator'" :prevTo="'/htmlgenerator'" />
 	</div>
 </template>
 

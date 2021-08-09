@@ -36,7 +36,12 @@
 				<TextInsert />
 			</div>
 		</SectionObserver>
-		<NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
+		<NavFooter
+			:previous="'Email Editor'"
+			:prevTo="'/emaileditor'"
+			:next="'Email HTML Generator'"
+			:nextTo="'/htmlgenerator'"
+		/>
 		<OpenButton @openEditorClicked="openEditor" />
 	</div>
 </template>

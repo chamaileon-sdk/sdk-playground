@@ -13,7 +13,12 @@
 				<Settings />
 			</div>
 		</SectionObserver>
-		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
+		<Footer
+			:previous="'Variable Editor'"
+			:prevTo="'/variableeditor'"
+			:next="'Email HTML Import'"
+			:nextTo="'/htmlimport'"
+		/>
 	</div>
 </template>
 
