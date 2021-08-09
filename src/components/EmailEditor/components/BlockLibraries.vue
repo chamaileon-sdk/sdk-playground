@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Block Libraries</h1>
+	<div>
+		<h2>Block Libraries</h2>
 		<p>
 			It's possible to provide block libraries to your users, which is a great
 			way to reuse sections of an email that are already designed.
@@ -130,7 +130,7 @@
 				</draggable>
 			</v-card>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Header</h1>
+	<div>
+		<h2>Header</h2>
 		<p>
 			In the variable editor, you can configure buttons in the header on both
 			side. In our example, we programmatically configured a close button as
@@ -24,7 +24,7 @@
 		<OptionWrapper>
 			<SplitList :section="'Header'" />
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

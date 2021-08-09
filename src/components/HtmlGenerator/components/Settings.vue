@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Settings</h1>
+	<div>
+		<h2>Settings</h2>
 		<p>
 			You can choose between the following options to make our plugin generate
 			the most optimized output for your desired email client.
@@ -85,7 +85,7 @@
 				<v-divider v-show="ind !== settingsLength - 1"></v-divider>
 			</div>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

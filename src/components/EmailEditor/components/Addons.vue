@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Addons</h1>
+	<div>
+		<h2>Addons</h2>
 		<p>
 			There are some addons that you can use within the editor, depending on
 			your subscription. If you have access to these addons, then you can decide
@@ -83,7 +83,7 @@
 				<v-divider v-show="ind !== addonArrLength - 1"></v-divider>
 			</div>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

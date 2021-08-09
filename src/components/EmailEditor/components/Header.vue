@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Header</h1>
+	<div>
+		<h2>Header</h2>
 		<p>
 			You can add buttons and dropdowns to the right of the header. It is a
 			great way to interact with you application from this plugin. Whenever you
@@ -32,7 +32,7 @@
 
 			<List6 :section="'Editor'" />
 		</OptionsWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

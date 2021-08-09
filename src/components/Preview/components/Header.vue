@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<div>
 		<h2>Header</h2>
 		<p>
 			You can add buttons and dropdowns to the right of the header. It is a
@@ -33,7 +33,7 @@
 			</template>
 			<List6 :section="'Preview'" />
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

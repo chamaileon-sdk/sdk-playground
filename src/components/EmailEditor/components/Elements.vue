@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Elements</h1>
+	<div>
+		<h2>Elements</h2>
 		<p>
 			You can turn on and off basic draggable elements. You can even disable all
 			of the elements, which is useful if you want your users to be only be able
@@ -126,7 +126,7 @@
 				</v-col>
 			</v-row>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

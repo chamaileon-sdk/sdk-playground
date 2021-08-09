@@ -1,8 +1,11 @@
 <template>
-	<v-app>
-		<h1>Variables To Edit</h1>
+	<div>
+		<h2>Variables To Edit</h2>
 		<p>
-			You can configure which variables will the user be able to edit. You can re-configure these settings on the fly (for example on a click of a button), and that way you can enable your users to change different sets of variables in each step.
+			You can configure which variables will the user be able to edit. You can
+			re-configure these settings on the fly (for example on a click of a
+			button), and that way you can enable your users to change different sets
+			of variables in each step.
 		</p>
 		<OptionWrapper>
 			<v-chip
@@ -17,7 +20,7 @@
 				{{ v.name }}
 			</v-chip>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

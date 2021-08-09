@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Settings</h1>
+	<div>
+		<h2>Settings</h2>
 		<p>Various general settings are also provided for better experience.</p>
 
 		<h3>Utilities</h3>
@@ -70,7 +70,7 @@
 				></v-switch>-->
 			</v-card>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

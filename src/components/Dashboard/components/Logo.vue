@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<div>
 		<h2>Logo</h2>
 		<p>
 			You can select what logo you want to display within the plugins. Any kind
@@ -11,7 +11,7 @@
 		<OptionsWrapper class="px-0">
 			<LogoSelector />
 		</OptionsWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

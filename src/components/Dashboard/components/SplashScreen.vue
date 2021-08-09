@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<div>
 		<h2>Splash Screen</h2>
 		<p>
 			Splashscreens are shown while a plugin is loading. Just in case of the
@@ -9,7 +9,7 @@
 		<OptionsWrapper class="px-0">
 			<SplashScreenSelector />
 		</OptionsWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

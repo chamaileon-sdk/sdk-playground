@@ -4,7 +4,7 @@
 
 		<slot />
 
-		<div class="d-flex mt-11">
+		<div class="d-flex mt-6">
 			<v-btn
 				@click="scrollToFirst"
 				target="_blank"

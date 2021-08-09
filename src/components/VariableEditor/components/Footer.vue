@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Footer</h1>
+	<div>
+		<h2>Footer</h2>
 		<p>
 			Similarly to the header, you can configure buttons on both side of the
 			footer. This provides even more options for full integration and building
@@ -23,7 +23,7 @@
 		<OptionWrapper>
 			<SplitList :section="'Footer'" />
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

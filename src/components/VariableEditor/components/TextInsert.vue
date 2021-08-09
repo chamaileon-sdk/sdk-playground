@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Text Insert</h1>
+	<div>
+		<h2>Text Insert</h2>
 		<p>
 			Similarly to the email editor, you can configure buttons that will insert
 			predefined texts to a text element. This is a great way to provide merge
@@ -58,7 +58,7 @@
 				</draggable>
 			</div>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>
