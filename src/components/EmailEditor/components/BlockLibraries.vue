@@ -2,11 +2,14 @@
 	<v-app>
 		<h1>Block Libraries</h1>
 		<p>
-			It's possible to provide block libraries to your users, which is a great way to reuse sections of an email that are already designed.
+			It's possible to provide block libraries to your users, which is a great
+			way to reuse sections of an email that are already designed.
 		</p>
 		<h3>Your Libraries</h3>
 		<p>
-			In this example, you can set up different block libraries, set up the access level of the actual user to those block libraries (save, rename, delete). This way, you can provide a way to your users to be able to create their own block libraries.
+			You can set up different block libraries, set up the access level of the
+			current user to them (save, rename, delete). This allows you to provide a
+			way to your users to be able to create their own block libraries.
 		</p>
 		<OptionWrapper>
 			<template>

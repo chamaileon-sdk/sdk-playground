@@ -2,7 +2,11 @@
 	<v-app>
 		<h1>Addons</h1>
 		<p>
-			There are some addons that you can use within the editor, depending on the package you are in. If you have access to these addons, then you can decide if you want to enable them, disable them or even fully hide them. It let's you to differentiate between the functionality that you want to provide to different segments of your users.
+			There are some addons that you can use within the editor, depending on
+			your subscription. If you have access to these addons, then you can decide
+			if you want to enable them, disable them or even fully hide them. It let's
+			you differentiate between the functionality that you want to provide to
+			different segments of your users.
 		</p>
 		<OptionWrapper>
 			<div v-for="(item, name, ind) in addonArr" :key="item.id">

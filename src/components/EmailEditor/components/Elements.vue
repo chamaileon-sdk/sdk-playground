@@ -2,7 +2,9 @@
 	<v-app>
 		<h1>Elements</h1>
 		<p>
-			In this section, you can turn on and off basic draggable elements. You can even disable all of the elements, which is useful if you want your users to be only be able to use blocks from predefined block libraries. Those blocks' design can be locked, so they won't be able to mess up the desired design.
+			You can turn on and off basic draggable elements. You can even disable all
+			of the elements, which is useful if you want your users to be only be able
+			to use blocks from predefined block libraries.
 		</p>
 
 		<h3>Content</h3>

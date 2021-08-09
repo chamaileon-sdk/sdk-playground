@@ -1,13 +1,13 @@
 <template>
 	<v-app>
 		<h1>Settings</h1>
-		<p>
-			In this section, you can change various misc settings.
-		</p>
+		<p>Various general settings are also provided for better experience.</p>
 
 		<h3>Utilities</h3>
 		<p>
-			An autosave interval that is triggered periodically. When triggered, the <em>onAutoSave</em> hook is called.
+			Autosave interval is triggered periodically. When triggered, the
+			onAutoSave hook is called. With Static Assets Url you can specify a path
+			to your own asset library.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex">
@@ -30,7 +30,8 @@
 
 		<h3>Avatar</h3>
 		<p>
-			You can show your user's name and their avatar, but it's also possible to turn off this feature.
+			You can customize the name and the avator of the current user, but it's
+			also possible to hide this feature.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">
