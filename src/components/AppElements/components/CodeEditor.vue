@@ -1,6 +1,6 @@
 <template>
 	<v-card class="rounded-0 pa-0 ma-0" width="100%" dark fixed flat>
-		<v-tabs v-model="tab" :show-arrows="true" dark>
+		<v-tabs style="width: 90%" v-model="tab" :show-arrows="true" dark>
 			<v-tabs-slider color="yellow"></v-tabs-slider>
 			<v-tab> Settings </v-tab>
 			<v-tab

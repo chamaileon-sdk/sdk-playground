@@ -84,12 +84,15 @@ export default {
 			"thumbnailConfig",
 			"generatorConfig",
 			"emailDocument",
-		])
+		]) {
 			if (localStorage.getItem(elem))
 				this.$store.commit(
 					`${elem}Load`,
 					JSON.parse(localStorage.getItem(elem))
 				);
+		}
+
+		this.$store.dispatch("fetchDummyHtml");
 	},
 };
 </script>
