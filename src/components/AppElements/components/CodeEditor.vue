@@ -159,6 +159,9 @@ export default {
 	mounted() {
 		let to = this.$route;
 		let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+
+		if (!this.menus[pageIndex].children) return;
+
 		let routes = this.menus[pageIndex].children;
 		let toInd = routes.findIndex((el) => el.to === to.hash) + 1;
 
@@ -183,6 +186,8 @@ export default {
 	watch: {
 		$route(to, from) {
 			let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+
+			if (!this.menus[pageIndex].children) return;
 
 			let routes = this.menus[pageIndex].children;
 
