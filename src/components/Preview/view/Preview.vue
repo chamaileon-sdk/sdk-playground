@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import Footer from "../components/ViewUtilities/components/Footer.vue";
-import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
-import Header from "../components/Preview/components/Header.vue";
-import OpenButton from "../components/AppElements/components/OpenButton.vue";
-import Description from "../components/ViewUtilities/components/ViewDescription.vue";
+import Footer from "../../ViewUtilities/components/Footer.vue";
+import SectionObserver from "../../AppElements/components/SectionObserver.vue";
+import Header from "../components/Header.vue";
+import OpenButton from "../../AppElements/components/OpenButton.vue";
+import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	components: {
