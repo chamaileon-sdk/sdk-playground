@@ -8,7 +8,7 @@
 				color="transparent"
 				flat
 				width="100%"
-				class="px-6 pt-6 pb-4"
+				class="px-6 pt-6 pb-4 scrollactive-item"
 				id="logo"
 				v-chamaileonLogo
 			></v-card>
