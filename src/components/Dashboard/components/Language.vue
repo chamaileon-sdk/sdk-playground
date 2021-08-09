@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<div>
 		<h2>Language</h2>
 		<p>
 			The Chamaileon SDK is localized. Currently it only supports english and
@@ -10,7 +10,7 @@
 		<OptionsWrapper>
 			<LocaleSelector />
 		</OptionsWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

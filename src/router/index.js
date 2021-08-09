@@ -2,19 +2,19 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 //Dashboard
-import Dashboard from "../views/Dashboard";
+import Dashboard from "../components/Dashboard/view/Dashboard";
 
 //Email editor
-import EmailEditor from "../views/EmailEditor.vue";
+import EmailEditor from "../components/EmailEditor/view/EmailEditor";
 
 //Thumbnail
-import Thumbnail from "../views/Thumbnail.vue";
+import Thumbnail from "../components/Thumbnail/view/Thumbnail";
 
 //Preview
-import Preview from "../views/Preview.vue";
+import Preview from "../components/Preview/view/Preview";
 
 //Variable Editor
-import VariableEditor from "../views/VariableEditor";
+import VariableEditor from "../components/VariableEditor/view/VariableEditor";
 
 //Html Generator
 import HtmlGenerator from "../components/HtmlGenerator/view/HtmlGenerator";

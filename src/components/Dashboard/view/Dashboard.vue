@@ -33,13 +33,13 @@
 </template>
 
 <script>
-import Footer from "../components/ViewUtilities/components/Footer.vue";
-import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
-import Logo from "../components/Dashboard/components/Logo.vue";
-import Language from "../components/Dashboard/components/Language.vue";
-import Colors from "../components/Dashboard/components/Colors.vue";
-import SplashScreen from "../components/Dashboard/components/SplashScreen.vue";
-import Description from "../components/ViewUtilities/components/ViewDescription.vue";
+import Footer from "../../ViewUtilities/components/Footer.vue";
+import SectionObserver from "../../AppElements/components/SectionObserver.vue";
+import Logo from "../components/Logo.vue";
+import Language from "../components/Language.vue";
+import Colors from "../components/Colors.vue";
+import SplashScreen from "../components/SplashScreen.vue";
+import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	components: {

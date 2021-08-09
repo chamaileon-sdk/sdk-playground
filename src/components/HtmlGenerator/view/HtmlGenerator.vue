@@ -6,14 +6,25 @@
 					:title="'Email HTML Generator'"
 					:docUrl="'https://chamaileon-sdk.github.io/examples/api/generate-email-html/'"
 					:image="'HtmlGeneratorIllustration.svg'"
-				/>
+				>
+					<p>
+						Our HTML generator plugins allows you to generate an email HTML from
+						your current document. We offer many different options to help you
+						generate the email based on the target mail client.
+					</p>
+				</Description>
 			</div>
 
 			<div class="section" id="settings">
 				<Settings />
 			</div>
 		</SectionObserver>
-		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
+		<Footer
+			:previous="'Variable Editor'"
+			:prevTo="'/variableeditor'"
+			:next="'Email HTML Import'"
+			:nextTo="'/htmlimport'"
+		/>
 	</div>
 </template>
 
@@ -34,15 +45,6 @@ export default {
 		Settings,
 		Description,
 		Footer,
-	},
-
-	data() {
-		return {
-			paragraph1:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
-			paragraph2:
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit nostrum ullam consectetur quidem repellendus facilis deserunt architecto, debitis nihil? Repellat nesciunt beatae eius nulla incidunt iure modi sint consequuntur esse.",
-		};
 	},
 };
 </script>

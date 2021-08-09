@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import Footer from "../components/ViewUtilities/components/Footer.vue";
-import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
-import Settings from "../components/Thumbnail/components/Settings.vue";
-import Description from "../components/ViewUtilities/components/ViewDescription.vue";
+import Footer from "../../ViewUtilities/components/Footer.vue";
+import SectionObserver from "../../AppElements/components/SectionObserver.vue";
+import Settings from "../components/Settings.vue";
+import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 export default {
 	mounted() {

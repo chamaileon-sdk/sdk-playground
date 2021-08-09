@@ -5,9 +5,18 @@
 				<Description
 					:title="'Email Variable Editor'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
-					:paragraphs="paragraphs"
 					:image="'VariableEditorIllustration.svg'"
-				/>
+				>
+					<p>
+						This plugin is a restricted editor with which you can only modify
+						the variables in an email that you previously defined within the
+						email editor. A really good use case is when you want to create
+						multiple emails and you only want your users to customize certain
+						parts of the email. You can basically create wizards with the
+						variable editor that can be used to create multiple brand consistent
+						emails with ease.
+					</p>
+				</Description>
 			</div>
 
 			<div class="section" id="variablestoedit">
@@ -26,31 +35,27 @@
 				<TextInsert />
 			</div>
 		</SectionObserver>
-		<NavFooter :previous="'Email Editor'" :prevTo="'/emaileditor'" />
+		<NavFooter
+			:previous="'Email Editor'"
+			:prevTo="'/emaileditor'"
+			:next="'Email HTML Generator'"
+			:nextTo="'/htmlgenerator'"
+		/>
 		<OpenButton @openEditorClicked="openEditor" />
 	</div>
 </template>
 
 <script>
-import OpenButton from "../components/AppElements/components/OpenButton.vue";
-import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
-import Header from "../components/VariableEditor/components/Header.vue";
-import Footer from "../components/VariableEditor/components/Footer.vue";
-import TextInsert from "../components/VariableEditor/components/TextInsert.vue";
-import VariablesToEdit from "../components/VariableEditor/components/VariablesToEdit.vue";
-import NavFooter from "../components/ViewUtilities/components/Footer.vue";
-import Description from "../components/ViewUtilities/components/ViewDescription.vue";
+import OpenButton from "../../AppElements/components/OpenButton.vue";
+import SectionObserver from "../../AppElements/components/SectionObserver.vue";
+import Header from "../components/Header.vue";
+import Footer from "../components/Footer.vue";
+import TextInsert from "../components/TextInsert.vue";
+import VariablesToEdit from "../components/VariablesToEdit.vue";
+import NavFooter from "../../ViewUtilities/components/Footer.vue";
+import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 export default {
-	data() {
-		return {
-			paragraphs: [
-				"This plugin is a restricted editor with which you can only modify the variables in an email that you previously defined within the email editor.",
-				"A really good use case is when you want to create multiple emails (for example in an email series, like marketing automation) and you only want your users to customize certain parts of the email (the variables). You can basically create wizards with the variable editor that can be used to create multiple brand consistent emails with ease."
-			]
-		};
-	},
-
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},

@@ -1,6 +1,6 @@
 <template>
-	<v-app>
-		<h1>Text Insert</h1>
+	<div>
+		<h2>Text Insert</h2>
 		<p>
 			If you want to provide predefined merge tags to your customers, text
 			insert buttons are a great solution. They work similarly to any other
@@ -60,7 +60,7 @@
 				</draggable>
 			</div>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

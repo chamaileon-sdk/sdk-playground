@@ -1,13 +1,14 @@
 <template>
-	<v-app>
+	<div>
 		<h2>Colors</h2>
 		<p>
-			You can set up your colors within the plugins to match your brand colors. In most of the cases it is enough to change the primary color.
+			You can set up your colors within the plugins to match your brand colors.
+			In most of the cases it is enough to change the primary color.
 		</p>
 		<OptionsWrapper>
 			<ColorSelector />
 		</OptionsWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

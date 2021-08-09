@@ -1,8 +1,11 @@
 <template>
-	<v-app>
-		<h1>Header</h1>
+	<div>
+		<h2>Header</h2>
 		<p>
-			In the variable editor, you can configure buttons in the header on the left-hand-side and on the right-hand-side as well. In our example, we programmatically configure a close button as well, but you don't have to do that in your application. (It is not necessarily needed, if you create a wizard with multiple steps.)
+			In the variable editor, you can configure buttons in the header on both
+			side. In our example, we programmatically configured a close button as
+			well, which is not necessary but is a must have in order to close the
+			editor when used as a pop-up.
 		</p>
 		<OptionWrapper>
 			<HeaderPreview />
@@ -10,12 +13,18 @@
 
 		<h3>Buttons</h3>
 		<p>
-			You can configure the buttons and dropdowns on the left- and right-hand-side of the header below.
+			You can add and customize your buttons and dropdowns below. The icon is
+			required to be a <br />
+			<a href="https://materialdesignicons.com/" target="_blank"
+				>Material Design Icon</a
+			>
+			without <em>mdi-</em> prefix. Keep in mind that the header can only store
+			a limited amount of buttons.
 		</p>
 		<OptionWrapper>
 			<SplitList :section="'Header'" />
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

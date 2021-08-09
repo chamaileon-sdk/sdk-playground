@@ -1,4 +1,4 @@
-let bulletproofLineLength = require("bulletproofLineLength");
+let bulletproofLineLength = require("bulletprooflinelength");
 
 export default function (doc, size, lineLength = 799) {
 	let el = document.createElement("html");

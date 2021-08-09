@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<div>
 		<h2>Settings</h2>
 		<p>
 			The width and height properties define the viewport in which the thumbnail
@@ -64,7 +64,7 @@
 			>
 			</v-card>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

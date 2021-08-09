@@ -4,7 +4,7 @@
 
 		<slot />
 
-		<div class="d-flex mt-11">
+		<div class="d-flex mt-6">
 			<v-btn
 				@click="scrollToFirst"
 				target="_blank"
@@ -49,7 +49,6 @@ export default {
 
 	props: {
 		title: String,
-		paragraphs: Array,
 		docUrl: String,
 		image: String,
 	},

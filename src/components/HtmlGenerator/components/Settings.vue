@@ -1,11 +1,9 @@
 <template>
-	<v-app>
-		<h1>Settings</h1>
+	<div>
+		<h2>Settings</h2>
 		<p>
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo vitae
-			deserunt ea atque recusandae! Ipsam incidunt suscipit error voluptas
-			blanditiis laboriosam, consequuntur accusamus ratione facere ex tempore
-			fugit optio non.
+			You can choose between the following options to make our plugin generate
+			the most optimized output for your desired email client.
 		</p>
 		<OptionWrapper>
 			<div v-for="(item, key, ind) in settings" :key="key">
@@ -87,7 +85,7 @@
 				<v-divider v-show="ind !== settingsLength - 1"></v-divider>
 			</div>
 		</OptionWrapper>
-	</v-app>
+	</div>
 </template>
 
 <script>

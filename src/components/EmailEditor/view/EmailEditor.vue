@@ -53,16 +53,16 @@
 </template>
 
 <script>
-import OpenButton from "../components/AppElements/components/OpenButton.vue";
-import Footer from "../components/ViewUtilities/components/Footer.vue";
-import SectionObserver from "../components/AppElements/components/SectionObserver.vue";
-import Header from "../components/EmailEditor/components/Header";
-import Elements from "../components/EmailEditor/components/Elements";
-import BlockLibraries from "../components/EmailEditor/components/BlockLibraries";
-import TextInsert from "../components/EmailEditor/components/TextInsert";
-import Addons from "../components/EmailEditor/components/Addons";
-import Settings from "../components/EmailEditor/components/Settings";
-import Description from "../components/ViewUtilities/components/ViewDescription.vue";
+import OpenButton from "../../AppElements/components/OpenButton.vue";
+import Footer from "../../ViewUtilities/components/Footer.vue";
+import SectionObserver from "../../AppElements/components/SectionObserver.vue";
+import Header from "../components/Header";
+import Elements from "../components/Elements";
+import BlockLibraries from "../components/BlockLibraries";
+import TextInsert from "../components/TextInsert";
+import Addons from "../components/Addons";
+import Settings from "../components/Settings";
+import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 import { mapGetters, mapState } from "vuex";
 
