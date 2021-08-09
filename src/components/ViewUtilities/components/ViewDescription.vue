@@ -36,7 +36,6 @@ export default {
 
 	methods: {
 		scrollToFirst() {
-			console.log("scroll");
 			window.scrollTo({ top: window.innerHeight + 80, behavior: "smooth" });
 		},
 	},
