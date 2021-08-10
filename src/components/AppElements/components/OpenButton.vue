@@ -1,7 +1,12 @@
 <template>
 	<div>
 		<v-hover v-slot="{ hover }">
-			<div class="openbtn ma-3" :class="hover ? 'on-hover' : ''">
+			<div
+				class="openbtn ma-3"
+				:class="
+					(hover ? 'on-hover' : '') + ' ' + (!breakpoint.xl ? 'openbtnSM' : '')
+				"
+			>
 				<v-btn
 					depressed
 					class="grey lighten-3 pa-3 custom-btn primary--text"
@@ -26,7 +31,12 @@
 			</div>
 		</v-hover>
 		<v-hover v-slot="{ hover }">
-			<div class="openbtnl ma-3" :class="hover ? 'on-hover' : ''">
+			<div
+				class="openbtnl ma-3"
+				:class="
+					(hover ? 'on-hover' : '') + ' ' + (!breakpoint.xl ? 'openbtnlSM' : '')
+				"
+			>
 				<v-btn
 					depressed
 					class="grey lighten-3 pa-3 custom-btn primary--text"
@@ -63,6 +73,12 @@ export default {
 		return {
 			autoShown: false,
 		};
+	},
+
+	computed: {
+		breakpoint() {
+			return this.$vuetify.breakpoint;
+		},
 	},
 
 	watch: {
@@ -107,6 +123,13 @@ export default {
 	transition: opacity 0.2s ease-in-out;
 }
 
+.openbtnSM {
+	margin: 0 !important;
+	top: 0;
+	height: 100% !important;
+	width: 64px;
+}
+
 .openbtn:not(.on-hover) {
 	opacity: 0;
 }
@@ -123,6 +146,13 @@ export default {
 	left: 19.127%;
 
 	transition: opacity 0.2s ease-in-out;
+}
+
+.openbtnlSM {
+	margin: 0 !important;
+	top: 0;
+	height: 100% !important;
+	width: 64px;
 }
 
 .openbtnl:not(.on-hover) {

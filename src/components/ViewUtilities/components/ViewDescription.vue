@@ -4,7 +4,7 @@
 
 		<slot />
 
-		<div class="d-flex mt-6" style="margin-bottom: 100px !important">
+		<div style="margin-top: 23px; margin-bottom: 100px !important">
 			<v-btn
 				@click="scrollToFirst"
 				target="_blank"
@@ -18,7 +18,7 @@
 
 			<v-btn :href="docUrl" target="_blank" class="ma-0" text color="primary">
 				<v-icon left>mdi-book</v-icon>
-				Read the docs
+				docs
 			</v-btn>
 		</div>
 

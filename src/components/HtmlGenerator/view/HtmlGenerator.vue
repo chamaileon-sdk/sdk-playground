@@ -4,7 +4,7 @@
 			<div class="section" id="home">
 				<Description
 					:title="'Email HTML Generator'"
-					:docUrl="'https://chamaileon-sdk.github.io/examples/api/generate-email-html/'"
+					:docUrl="'https://chamaileon.io/sdk/docs/email-html-generator/'"
 					:image="'HtmlGeneratorIllustration.svg'"
 				>
 					<p>
