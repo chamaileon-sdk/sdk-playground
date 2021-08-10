@@ -6,7 +6,7 @@
 
 		<v-main>
 			<div class="px-16 pa-0">
-				<div class="px-lg-16">
+				<div class="px-xl-16">
 					<router-view />
 				</div>
 			</div>

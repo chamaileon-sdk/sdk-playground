@@ -34,7 +34,7 @@
 					<template v-if="isActive(m.to)">
 						<v-list-item
 							color="primary"
-							class="pl-lg-12 navLink scrollactive-item"
+							class="pl-xl-12 navLink scrollactive-item"
 							v-ripple="{ class: `primary--text` }"
 							:class="addActiveClass(c.to)"
 							v-for="c in m.children"

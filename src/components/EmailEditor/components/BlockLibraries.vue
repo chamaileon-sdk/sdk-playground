@@ -32,7 +32,7 @@
 							</v-list-item-icon>
 							<v-list-item-content class="ma-0 pa-0">
 								<v-row class="ma-0 pa-0">
-									<v-col cols="6" lg="3" class="pa-2" align-self="center">
+									<v-col cols="6" xl="3" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
@@ -45,9 +45,9 @@
 									</v-col>
 
 									<v-col
-										v-if="breakpoint.mdAndDown"
+										v-if="breakpoint.lgAndDown"
 										cols="6"
-										lg="3"
+										xl="3"
 										align-self="center"
 										class="ml-auto pa-2"
 									>
@@ -56,7 +56,7 @@
 										></DeleteButton>
 									</v-col>
 
-									<v-col cols="6" lg="3" class="pa-2" align-self="center">
+									<v-col cols="6" xl="3" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
@@ -66,7 +66,7 @@
 											outlined
 										></v-text-field>
 									</v-col>
-									<v-col cols="6" lg="3" class="pa-2" align-self="center">
+									<v-col cols="6" xl="3" class="pa-2" align-self="center">
 										<v-card flat class="d-flex justify-space-between">
 											<v-btn
 												icon
@@ -129,9 +129,9 @@
 									</v-col>
 
 									<v-col
-										v-if="!breakpoint.mdAndDown"
+										v-if="!breakpoint.lgAndDown"
 										cols="6"
-										lg="3"
+										xl="3"
 										align-self="center"
 										class="ml-auto pa-2"
 									>

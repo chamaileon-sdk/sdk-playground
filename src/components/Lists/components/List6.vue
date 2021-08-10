@@ -16,7 +16,7 @@
 						<v-row class="ma-0 pa-0">
 							<v-col
 								class="pa-2"
-								lg="4"
+								xl="4"
 								cols="6"
 								align-self="center"
 								v-show="!b.items"
@@ -33,9 +33,9 @@
 
 							<!-- Dropdown add button on small screens -->
 							<v-col
-								v-if="breakpoint != 'lg' && breakpoint != 'xl'"
+								v-if="breakpoint != 'xl' && breakpoint != 'xl'"
 								class="pa-2"
-								lg="4"
+								xl="4"
 								cols="6"
 								align-self="center"
 								v-show="b.items"
@@ -48,16 +48,16 @@
 
 							<!-- Delete button on small screens -->
 							<v-col
-								v-if="breakpoint != 'lg' && breakpoint != 'xl'"
+								v-if="breakpoint != 'xl' && breakpoint != 'xl'"
 								class="pa-2"
-								lg="4"
+								xl="4"
 								cols="6"
 								align-self="center"
 							>
 								<DeleteButton @click="deleteBtn(i)"></DeleteButton>
 							</v-col>
 
-							<v-col class="pa-2" lg="4" cols="6" align-self="center">
+							<v-col class="pa-2" xl="4" cols="6" align-self="center">
 								<v-select
 									dense
 									hide-details="true"
@@ -72,9 +72,9 @@
 
 							<!-- Dropdown add button on large screens -->
 							<v-col
-								v-if="breakpoint == 'lg' || breakpoint == 'xl'"
+								v-if="breakpoint == 'xl' || breakpoint == 'xl'"
 								class="pa-2"
-								lg="4"
+								xl="4"
 								cols="6"
 								align-self="center"
 								v-show="b.items"
@@ -87,16 +87,16 @@
 
 							<!-- Delete add button on large screens -->
 							<v-col
-								v-if="breakpoint == 'lg' || breakpoint == 'xl'"
+								v-if="breakpoint == 'xl' || breakpoint == 'xl'"
 								class="pa-2"
-								lg="4"
+								xl="4"
 								cols="6"
 								align-self="center"
 							>
 								<DeleteButton @click="deleteBtn(i)"></DeleteButton>
 							</v-col>
 
-							<v-col class="pa-2" lg="4" cols="6" align-self="center">
+							<v-col class="pa-2" xl="4" cols="6" align-self="center">
 								<v-text-field
 									dense
 									hide-details="true"
@@ -106,7 +106,7 @@
 									outlined
 								></v-text-field>
 							</v-col>
-							<v-col class="pa-2" lg="4" cols="6">
+							<v-col class="pa-2" xl="4" cols="6">
 								<ColorPicker
 									:key="i"
 									class="pa-0"
@@ -116,7 +116,7 @@
 								/>
 							</v-col>
 
-							<v-col class="pa-2" lg="4" cols="6" align-self="center">
+							<v-col class="pa-2" xl="4" cols="6" align-self="center">
 								<v-text-field
 									dense
 									hide-details="true"
@@ -153,7 +153,7 @@
 								<v-icon class="dtrigger">mdi-menu</v-icon>
 							</v-list-item-icon>
 							<v-row class="pa-0 ma-0">
-								<v-col class="pa-2" lg="3" cols="6" align-self="center">
+								<v-col class="pa-2" xl="3" cols="6" align-self="center">
 									<v-text-field
 										dense
 										hide-details="true"
@@ -165,8 +165,8 @@
 								</v-col>
 
 								<v-col
-									lg="3"
-									v-if="breakpoint != 'lg' && breakpoint != 'xl'"
+									xl="3"
+									v-if="breakpoint != 'xl' && breakpoint != 'xl'"
 									cols="6"
 									align-self="center"
 									class="ml-auto pa-2"
@@ -182,7 +182,7 @@
 									></DeleteButton>
 								</v-col>
 
-								<v-col class="pa-2" lg="3" cols="6" align-self="center">
+								<v-col class="pa-2" xl="3" cols="6" align-self="center">
 									<v-text-field
 										dense
 										hide-details="true"
@@ -198,7 +198,7 @@
 									></v-text-field>
 								</v-col>
 
-								<v-col class="pa-2" lg="3" cols="6" align-self="center">
+								<v-col class="pa-2" xl="3" cols="6" align-self="center">
 									<v-text-field
 										dense
 										hide-details="true"
@@ -215,8 +215,8 @@
 								</v-col>
 
 								<v-col
-									lg="3"
-									v-if="breakpoint == 'lg' || breakpoint == 'xl'"
+									xl="3"
+									v-if="breakpoint == 'xl' || breakpoint == 'xl'"
 									cols="6"
 									align-self="center"
 									class="ml-auto pa-2"

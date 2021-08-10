@@ -7,7 +7,7 @@
 			<v-row class="ma-0 pa-0">
 				<v-col
 					class="pa-2"
-					:cols="split || breakpoint.mdAndDown ? 6 : 3"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
 				>
 					<v-text-field
@@ -26,9 +26,9 @@
 
 				<!-- If split: delete button will be rendered as 2nd element -->
 				<v-col
-					v-show="split || breakpoint.mdAndDown"
+					v-show="split || breakpoint.lgAndDown"
 					class="pa-2 ma-0"
-					:cols="split || breakpoint.mdAndDown ? 6 : 3"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
 				>
 					<DeleteButton
@@ -42,7 +42,7 @@
 
 				<v-col
 					class="pa-2"
-					:cols="split || breakpoint.mdAndDown ? 6 : 3"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
 				>
 					<v-text-field
@@ -61,7 +61,7 @@
 
 				<v-col
 					class="pa-2"
-					:cols="split || breakpoint.mdAndDown ? 6 : 3"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
 				>
 					<v-text-field
@@ -81,8 +81,8 @@
 				<!-- If not split: delete button will be rendered as 4th element -->
 				<v-col
 					class="pa-2"
-					v-show="!split && !breakpoint.mdAndDown"
-					:cols="split || breakpoint.mdAndDown ? 6 : 3"
+					v-show="!split && !breakpoint.lgAndDown"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
 				>
 					<DeleteButton
