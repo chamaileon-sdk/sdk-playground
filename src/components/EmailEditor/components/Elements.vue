@@ -9,10 +9,11 @@
 
 		<h3>Content</h3>
 		<OptionWrapper>
-			<v-row class="ma-0 pa-0 mx-n3">
+			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-lg-0">
 				<v-col
-					class="my-0 py-0"
-					cols="2"
+					class="my-0 py-0 mb-6 mb-lg-0"
+					cols="4"
+					lg="2"
 					v-for="(element, index) in contentElements"
 					:key="index"
 					@click="toggleElement({ type: 'content', element: element.type })"
@@ -49,10 +50,11 @@
 
 		<h3>Structure</h3>
 		<OptionWrapper>
-			<v-row class="ma-0 pa-0 mx-n3">
+			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-lg-0">
 				<v-col
-					class="my-0 py-0"
-					cols="2"
+					class="my-0 py-0 mb-6 mb-lg-0"
+					cols="4"
+					lg="2"
 					v-for="(element, index) in structureElements"
 					:key="index"
 					@click="toggleElement({ type: 'structure', element: element.type })"
@@ -89,10 +91,11 @@
 
 		<h3>Advanced</h3>
 		<OptionWrapper>
-			<v-row class="ma-0 pa-0 mx-n3">
+			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-lg-0">
 				<v-col
-					class="my-0 py-0"
-					cols="2"
+					class="my-0 py-0 mb-6 mb-lg-0"
+					cols="4"
+					lg="2"
 					v-for="(element, index) in advancedElements"
 					:key="index"
 					@click="toggleElement({ type: 'advanced', element: element.type })"

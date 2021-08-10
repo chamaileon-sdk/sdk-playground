@@ -13,7 +13,7 @@ export default {
 				value: true,
 			},
 			rolePresentation: {
-				displayText: "Layout table presentation role",
+				displayText: "Table presentation role",
 				value: false,
 			},
 			encodeUrls: {

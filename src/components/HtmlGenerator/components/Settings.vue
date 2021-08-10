@@ -30,7 +30,12 @@
 							<!--<p class="ma-0">{{ item.description }}</p>-->
 						</v-col>
 
-						<v-col class="align-self-center" cols="2">
+						<v-col
+							v-show="typeof item.value !== typeof '000'"
+							class="align-self-center"
+							cols="3"
+							lg="2"
+						>
 							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 								<v-switch
 									v-show="typeof item.value === typeof true"
@@ -65,7 +70,8 @@
 						<v-col
 							v-show="typeof item.value === typeof '000'"
 							class="align-self-center"
-							cols="4"
+							lg="4"
+							cols="5"
 						>
 							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 								<v-select

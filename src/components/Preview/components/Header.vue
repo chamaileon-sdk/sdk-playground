@@ -27,8 +27,10 @@
 		<OptionWrapper>
 			<template>
 				<v-row align="center" justify="end" class="ma-0">
-					<AddButton class="mr-6" @click="addBtn"> New Button </AddButton>
-					<AddButton @click="addDD"> New DropDown </AddButton>
+					<AddButton class="mr-lg-6" @click="addBtn"> New Button </AddButton>
+					<AddButton class="mt-6 mt-lg-0" @click="addDD">
+						New DropDown
+					</AddButton>
 				</v-row>
 			</template>
 			<List6 :section="'Preview'" />

@@ -1,5 +1,5 @@
 <template>
-	<scrollactive>
+	<scrollactive class="menuScroll">
 		<v-card flat height="100%">
 			<v-card
 				:ripple="false"
@@ -34,7 +34,7 @@
 					<template v-if="isActive(m.to)">
 						<v-list-item
 							color="primary"
-							class="pl-12 navLink scrollactive-item"
+							class="pl-lg-12 navLink scrollactive-item"
 							v-ripple="{ class: `primary--text` }"
 							:class="addActiveClass(c.to)"
 							v-for="c in m.children"
@@ -95,5 +95,25 @@ export default {
 <style scoped>
 .v-card--link:before {
 	background: transparent;
+}
+
+.menuScroll {
+	scrollbar-width: thin;
+}
+
+.menuScroll::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.menuScroll::-webkit-scrollbar-thumb {
+	background: #757575;
+	border-radius: 99999px;
+}
+.menuScroll::-webkit-scrollbar-thumb:hover {
+	background: white;
+}
+.menuScroll::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 99999px;
 }
 </style>

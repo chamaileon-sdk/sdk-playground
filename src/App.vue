@@ -1,12 +1,12 @@
 <template>
 	<v-app>
-		<v-navigation-drawer width="19.127%" app permanent>
+		<v-navigation-drawer class="leftSection" width="19.127%" app permanent>
 			<MenuReworked />
 		</v-navigation-drawer>
 
 		<v-main>
 			<div class="px-16 pa-0">
-				<div class="px-16">
+				<div class="px-lg-16">
 					<router-view />
 				</div>
 			</div>
@@ -139,10 +139,24 @@ html::-webkit-scrollbar {
 	width: 50%;
 }
 
-.leftSection {
-	width: 19.127%;
-	height: 100vh;
-	left: 0;
+.leftSection :first-child {
+	scrollbar-width: thin;
+}
+
+.leftSection :first-child::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.leftSection :first-child::-webkit-scrollbar-thumb {
+	background: #e0e0e0;
+	border-radius: 99999px;
+}
+.leftSection :first-child::-webkit-scrollbar-thumb:hover {
+	background: #bdbdbd;
+}
+.leftSection :first-child::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 99999px;
 }
 
 .section {
