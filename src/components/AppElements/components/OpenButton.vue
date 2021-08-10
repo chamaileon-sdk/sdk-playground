@@ -124,10 +124,7 @@ export default {
 }
 
 .openbtnSM {
-	margin: 0 !important;
-	top: 0;
-	height: 100% !important;
-	width: 64px;
+	width: 71px;
 }
 
 .openbtn:not(.on-hover) {
@@ -149,10 +146,7 @@ export default {
 }
 
 .openbtnlSM {
-	margin: 0 !important;
-	top: 0;
-	height: 100% !important;
-	width: 64px;
+	width: 71px;
 }
 
 .openbtnl:not(.on-hover) {
