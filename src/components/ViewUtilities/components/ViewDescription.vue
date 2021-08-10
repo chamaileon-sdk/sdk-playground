@@ -1,10 +1,10 @@
 <template>
-	<div style="position: relative; height: calc(100vh - 140px)">
+	<div class="d-flex flex-column" style="height: calc(100vh - 140px)">
 		<h1 class="mb-8">{{ title }}</h1>
 
 		<slot />
 
-		<div class="d-flex" style="margin-top: 56px">
+		<div class="d-flex mt-6" style="margin-bottom: 100px !important">
 			<v-btn
 				@click="scrollToFirst"
 				target="_blank"
@@ -25,7 +25,7 @@
 		<img
 			v-if="image"
 			width="100%"
-			style="position: absolute; bottom: 0; z-index: 0"
+			style="margin-top: auto"
 			class="rounded-0"
 			:src="img"
 			alt=""
@@ -59,4 +59,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.imgWrapper {
+	position: relative;
+}
+</style>
