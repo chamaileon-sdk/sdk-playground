@@ -1,5 +1,5 @@
 <template>
-	<div class="d-flex flex-column" style="height: calc(100vh - 140px)">
+	<div style="position: relative; height: calc(100vh - 140px)">
 		<h1 class="mb-8">{{ title }}</h1>
 
 		<slot />
@@ -22,9 +22,14 @@
 			</v-btn>
 		</div>
 
-		<v-card v-if="image" class="mt-auto rounded-0" flat>
-			<img class="rounded-0" width="100%" :src="img" alt="" />
-		</v-card>
+		<img
+			v-if="image"
+			width="100%"
+			style="position: absolute; bottom: 0; z-index: 0"
+			class="rounded-0"
+			:src="img"
+			alt=""
+		/>
 	</div>
 </template>
 
