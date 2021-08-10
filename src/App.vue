@@ -1,5 +1,5 @@
 <template>
-	<v-app>
+	<v-app v-if="isAvailable">
 		<v-navigation-drawer class="leftSection" width="19.127%" app permanent>
 			<MenuReworked />
 		</v-navigation-drawer>
@@ -22,16 +22,27 @@
 			<CodeEditor />
 		</v-navigation-drawer>
 	</v-app>
+
+	<v-app v-else>
+		<NotAvailable />
+	</v-app>
 </template>
 
 <script>
 import CodeEditor from "./components/AppElements/components/CodeEditor.vue";
 import MenuReworked from "./components/AppElements/components/Menu.vue";
+import NotAvailable from "./components/AppElements/components/NotAvailable.vue";
 
 export default {
+	computed: {
+		isAvailable() {
+			return this.$vuetify.breakpoint.width > 960;
+		},
+	},
 	components: {
 		MenuReworked,
 		CodeEditor,
+		NotAvailable,
 	},
 	created() {
 		this.$store.commit("updateSDKConfig", {
@@ -43,6 +54,7 @@ export default {
 		});
 	},
 	mounted() {
+		console.log(this.$vuetify.breakpoint);
 		this.$store.dispatch("initSDK");
 
 		window.onbeforeunload = function () {
