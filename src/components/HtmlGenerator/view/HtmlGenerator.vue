@@ -8,9 +8,9 @@
 					:image="'HtmlGeneratorIllustration.svg'"
 				>
 					<p>
-						Our HTML generator plugins allows you to generate an email HTML from
-						your current document. We offer many different options to help you
-						generate the email based on the target mail client.
+						Our HTML generator plugin allows you to generate an email HTML from
+						your current document. We offer many options to help you generate
+						the email based on the target mail client.
 					</p>
 				</Description>
 			</div>

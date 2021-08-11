@@ -6,7 +6,7 @@
 		<h3>Utilities</h3>
 		<p>
 			Autosave interval is triggered periodically. When triggered, the
-			onAutoSave hook is called. With Static Assets Url you can specify a path
+			onAutoSave hook is called. With Static Assets URL you can specify a path
 			to your own asset library.
 		</p>
 		<OptionWrapper>
@@ -68,7 +68,7 @@
 
 		<h3>Avatar</h3>
 		<p>
-			You can customize the name and the avator of the current user, but it's
+			You can customize the name and the avatar of the current user, but it's
 			also possible to hide this feature.
 		</p>
 		<OptionWrapper>

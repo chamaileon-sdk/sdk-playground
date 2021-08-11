@@ -17,7 +17,7 @@ export default function (doc, size, lineLength = 799) {
 	// out +=
 	// 	"<!--\nNote: this page only contains some snippets to showcase how each setting works. For the full output see \"HTML Output\" tab \n-->\n\n";
 	out +=
-		"<span>\nImportant: the changes are processed on our server, so it might take some time to update the result. Also this is only a demo page, for full result see the \"HTML Output\" tab\n</span>\n\n";
+		"<span>\nImportant: the changes are processed on our server, so it might take some time to update the result. Also, this is only a demo page, for full result see the \"Output HTML\" tab\n</span>\n\n";
 
 	out += `<span> Size of whole document: ${size} </span>\n\n`;
 

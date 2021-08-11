@@ -3,8 +3,8 @@
 		<h2>Elements</h2>
 		<p>
 			You can turn on and off basic draggable elements. You can even disable all
-			of the elements, which is useful if you want your users to be only be able
-			to use blocks from predefined block libraries.
+			the elements, which is useful if you want your users to be only be able to
+			use blocks from predefined block libraries.
 		</p>
 
 		<h3>Content</h3>

@@ -4,7 +4,7 @@
 		<p>
 			In the variable editor, you can configure buttons in the header on both
 			side. In our example, we programmatically configured a close button as
-			well, which is not necessary but is a must have in order to close the
+			well, which is not necessary but is a must-have in order to close the
 			editor when used as a pop-up.
 		</p>
 		<OptionWrapper>

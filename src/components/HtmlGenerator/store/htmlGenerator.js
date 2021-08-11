@@ -60,8 +60,8 @@ export default {
 		updateSize(state, size) {
 			let s = size;
 
-			if (size > 1024) s = (size / 1024).toFixed(2) + "kB";
-			else s += "B";
+			if (size > 1024) s = (size / 1024).toFixed(2) + " kB";
+			else s += " B";
 
 			state.htmlSize = s;
 		},

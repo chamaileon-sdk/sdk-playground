@@ -8,13 +8,13 @@
 					:image="'VariableEditorIllustration.svg'"
 				>
 					<p>
-						This plugin is a restricted editor with which you can only modify
+						This plugin is a restricted editor, with which you can only modify
 						the variables in an email that you previously defined within the
-						email editor. A really good use case is when you want to create
-						multiple emails and you only want your users to customize certain
-						parts of the email. You can basically create wizards with the
-						variable editor that can be used to create multiple brand consistent
-						emails with ease.
+						email editor. A good use case is when you want to create multiple
+						emails, and you only want your users to customize certain parts of
+						the email. You can basically create wizards with the variable editor
+						that can be used to create multiple brand consistent emails with
+						ease.
 					</p>
 				</Description>
 			</div>
