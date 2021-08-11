@@ -4,7 +4,11 @@
 			<div
 				class="openbtn ma-3"
 				:class="
-					(hover ? 'on-hover' : '') + ' ' + (!breakpoint.xl ? 'openbtnSM' : '')
+					(hover ? 'on-hover' : '') +
+					' ' +
+					(breakpoint.lg ? 'openbtnLG' : '') +
+					' ' +
+					(breakpoint.md ? 'openbtnSM' : '')
 				"
 			>
 				<v-btn
@@ -13,6 +17,7 @@
 					width="100%"
 					height="100%"
 					@click="emitClick"
+					min-width="0"
 				>
 					<div
 						class="
@@ -22,10 +27,12 @@
 							grey--text
 							text--darken-2
 						"
-						style="width: 100px"
+						:style="!breakpoint.md ? 'width: 100px' : ''"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						preview changes
+						<span :class="breakpoint.md ? 'verticalText' : ''"
+							>preview changes</span
+						>
 					</div>
 				</v-btn>
 			</div>
@@ -34,7 +41,11 @@
 			<div
 				class="openbtnl ma-3"
 				:class="
-					(hover ? 'on-hover' : '') + ' ' + (!breakpoint.xl ? 'openbtnlSM' : '')
+					(hover ? 'on-hover' : '') +
+					' ' +
+					(breakpoint.lg ? 'openbtnlLG' : '') +
+					' ' +
+					(breakpoint.md ? 'openbtnlSM' : '')
 				"
 			>
 				<v-btn
@@ -43,6 +54,7 @@
 					width="100%"
 					height="100%"
 					@click="emitClick"
+					min-width="0"
 				>
 					<div
 						class="
@@ -52,10 +64,12 @@
 							grey--text
 							text--darken-2
 						"
-						style="width: 100px"
+						:style="!breakpoint.md ? 'width: 100px' : ''"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						preview changes
+						<div :class="breakpoint.md ? 'verticalText' : ''">
+							preview changes
+						</div>
 					</div>
 				</v-btn>
 			</div>
@@ -123,8 +137,20 @@ export default {
 	transition: opacity 0.2s ease-in-out;
 }
 
-.openbtnSM {
+.verticalText {
+	writing-mode: vertical-rl;
+	text-orientation: upright;
+	display: flex;
+	align-items: center;
+}
+
+.openbtnLG {
 	width: 71px;
+}
+
+.openbtnSM {
+	width: 40px !important;
+	min-width: 0px !important;
 }
 
 .openbtn:not(.on-hover) {
@@ -145,8 +171,13 @@ export default {
 	transition: opacity 0.2s ease-in-out;
 }
 
-.openbtnlSM {
+.openbtnlLG {
 	width: 71px;
+}
+
+.openbtnlSM {
+	width: 40px !important;
+	min-width: 0px !important;
 }
 
 .openbtnl:not(.on-hover) {
