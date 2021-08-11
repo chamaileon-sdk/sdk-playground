@@ -6,6 +6,7 @@
 
 		<div style="margin-top: 23px; margin-bottom: 100px !important">
 			<v-btn
+				v-if="!hideGetStarted"
 				@click="scrollToFirst"
 				target="_blank"
 				class="ma-0 mr-3"
@@ -16,7 +17,14 @@
 				Get Started
 			</v-btn>
 
-			<v-btn :href="docUrl" target="_blank" class="ma-0" text color="primary">
+			<v-btn
+				:href="docUrl"
+				target="_blank"
+				class="ma-0"
+				:text="!hideGetStarted"
+				:depressed="hideGetStarted"
+				color="primary"
+			>
 				<v-icon left>mdi-book</v-icon>
 				docs
 			</v-btn>
@@ -55,6 +63,10 @@ export default {
 		title: String,
 		docUrl: String,
 		image: String,
+		hideGetStarted: {
+			type: Boolean,
+			default: false,
+		},
 	},
 };
 </script>

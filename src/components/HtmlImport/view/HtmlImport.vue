@@ -6,6 +6,7 @@
 					:title="'Email HTML Import'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-html-importer/'"
 					:image="'HtmlImportIllustration.svg'"
+					:hideGetStarted="true"
 				>
 					<p>
 						Our HTML import plugin allows you to import an existing HTML email
