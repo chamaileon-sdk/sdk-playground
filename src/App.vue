@@ -54,7 +54,6 @@ export default {
 		});
 	},
 	mounted() {
-		console.log(this.$vuetify.breakpoint);
 		this.$store.dispatch("initSDK");
 
 		window.onbeforeunload = function () {

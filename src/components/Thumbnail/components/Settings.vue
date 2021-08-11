@@ -83,8 +83,6 @@ import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 
 export default {
 	mounted() {
-		console.log(this.$vuetify.breakpoint.name);
-
 		let interval = setInterval(() => {
 			if (this.$store.state.sdk && document.getElementById("email-thumbnail")) {
 				clearInterval(interval);
