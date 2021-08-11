@@ -10,21 +10,59 @@
 			to your own asset library.
 		</p>
 		<OptionWrapper>
-			<v-card elevation="0" class="d-flex">
-				<v-card-title class="text-subtitle-1">Autosave</v-card-title>
-				<div class="ml-auto d-flex align-center">
-					<v-card width="8em" elevation="0" color="transparent" class="d-flex">
-						<v-text-field
-							suffix="ms"
-							dense
-							class="right-input rounded align-self-center pa-4"
-							outlined
-							label="Interval"
-							hide-details="true"
-							v-model="autosave"
-						></v-text-field>
-					</v-card>
-				</div>
+			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
+				<v-row>
+					<v-col class="align-self-center">
+						<v-card-title
+							class="ma-0 pa-0 text-subtitle-1"
+							style="margin-bottom: -3px !important"
+						>
+							Static Assets
+						</v-card-title>
+						<!--<p class="ma-0">{{ item.description }}</p>-->
+					</v-col>
+
+					<v-col class="align-self-center" cols="6" lg="6">
+						<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
+							<v-text-field
+								dense
+								outlined
+								label="URL"
+								:hide-details="true"
+								v-model="staticAssets"
+							></v-text-field>
+						</v-card>
+					</v-col>
+				</v-row>
+			</v-card>
+
+			<v-divider></v-divider>
+
+			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
+				<v-row>
+					<v-col class="align-self-center">
+						<v-card-title
+							class="ma-0 pa-0 text-subtitle-1"
+							style="margin-bottom: -3px !important"
+						>
+							Autosave
+						</v-card-title>
+						<!--<p class="ma-0">{{ item.description }}</p>-->
+					</v-col>
+
+					<v-col class="align-self-center" cols="5" lg="3">
+						<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
+							<v-text-field
+								suffix="ms"
+								dense
+								outlined
+								label="Interval"
+								:hide-details="true"
+								v-model="autosave"
+							></v-text-field>
+						</v-card>
+					</v-col>
+				</v-row>
 			</v-card>
 		</OptionWrapper>
 
@@ -84,7 +122,7 @@ export default {
 
 			return name;
 		},
-		...mapMutations(["updateUser", "updateAutosave"]),
+		...mapMutations(["updateUser", "updateAutosave", "updateSaticAssets"]),
 	},
 
 	computed: {
@@ -121,6 +159,15 @@ export default {
 				this.updateAutosave(val);
 			},
 		},
+
+		staticAssets: {
+			get() {
+				return this.$store.state.editorConfig.staticAssetsBaseUrl;
+			},
+			set(val) {
+				this.updateSaticAssets(val);
+			},
+		},
 	},
 
 	components: {
@@ -130,7 +177,7 @@ export default {
 </script>
 
 <style scoped>
-.right-input >>> input {
+/*.right-input >>> input {
 	text-align: right;
-}
+}*/
 </style>

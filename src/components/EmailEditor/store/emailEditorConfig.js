@@ -56,6 +56,7 @@ export default {
 				state: "disabled",
 			},
 		},
+		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
 		autoSaveInterval: 15000,
 	}),
 	mutations: {
@@ -227,6 +228,11 @@ export default {
 			let x = parseInt(payload);
 
 			state.autoSaveInterval = x >= 0 ? x : 0;
+		},
+
+		//Static Assets
+		updateSaticAssets(state, url) {
+			state.staticAssetsBaseUrl = url;
 		},
 	},
 	actions: {},
