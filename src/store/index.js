@@ -67,11 +67,6 @@ export default new Vuex.Store({
 		addSDK(state, sdk) {
 			state.sdk = sdk;
 		},
-
-		//TODO: move to own module and wire up
-		updateSDKConfig(state, payload) {
-			state.sdkConfig = { ...state.sdkConfig, ...payload };
-		},
 	},
 	actions: {
 		async initSDK({ commit, state }) {

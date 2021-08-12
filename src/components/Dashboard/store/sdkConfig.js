@@ -12,7 +12,11 @@ export default {
 			secondary: "#000000",
 		},
 	}),
-	mutations: {},
+	mutations: {
+		updateSDKConfig(state, payload) {
+			for (const key in payload) state[key] = payload[key];
+		},
+	},
 	actions: {},
 	getters: {},
 };
