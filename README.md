@@ -1,7 +1,5 @@
 # Chamaileon SDK Playground
-
-# Chamaileon SDK Playground
-An application that to showcase the flexibility of Chamaileon Plugins.
+An application to showcase the flexibility of Chamaileon Plugins.
 
 ## Updating environment
 SDK initialization happens in `src/store/index.js`. You can change the environment in the `initSDK` function.
