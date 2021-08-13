@@ -68,16 +68,19 @@ export default {
 	},
 	actions: {
 		async fetchDummyHtml(context) {
-			const genRequest = await fetch("http://127.0.0.1:8100/fetchDocument", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					document: context.state.json,
-					settings: context.getters.getHtmlGeneratorConfigObject,
-				}),
-			});
+			const genRequest = await fetch(
+				"https://sdk-demo-api.chamaileon.io/fetchDocument",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						document: context.state.json,
+						settings: context.getters.getHtmlGeneratorConfigObject,
+					}),
+				}
+			);
 
 			if (!genRequest.ok) {
 				throw new Error("Auth error");
