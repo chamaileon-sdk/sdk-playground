@@ -2,10 +2,10 @@
 	<div>
 		<h2>Logo</h2>
 		<p>
-			You can select what logo you want to display within the plugins. Any kind
-			of logos is supported, which means you are not limited to just static
+			You can select what logo you want to display within the plugins. The SDK
+			supports any kind of logos, which means you are not limited to just static
 			images. You are free to use animated or even reactive logos. This
-			flexibility is achieved trough passing a JavaScript file to the SDK, which
+			flexibility is achieved by passing a JavaScript file to the SDK, which
 			returns a DOM element.
 		</p>
 		<OptionsWrapper class="px-0">

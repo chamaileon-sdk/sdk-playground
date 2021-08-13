@@ -1,9 +1,11 @@
 <template>
 	<v-row>
-		<v-col cols="6">
+		<v-col cols="12" xl="6">
 			<template>
 				<v-row align="center" class="ma-0 justify-begin">
-					<AddButton @click="addLeftButton"> New Button </AddButton>
+					<AddButton class="ml-auto ml-xl-0" @click="addLeftButton">
+						New Button
+					</AddButton>
 				</v-row>
 			</template>
 			<div
@@ -43,7 +45,7 @@
 				</draggable>
 			</div>
 		</v-col>
-		<v-col cols="6">
+		<v-col cols="12" xl="6" class="mt-2 mt-xl-0">
 			<template>
 				<v-row align="center" class="ma-0 justify-end">
 					<AddButton @click="addRightButton"> New Button</AddButton>

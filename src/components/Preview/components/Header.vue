@@ -3,7 +3,7 @@
 		<h2>Header</h2>
 		<p>
 			You can add buttons and dropdowns to the right of the header. It is a
-			great way to interact with you application from this plugin. Whenever you
+			great way to interact with your application from this plugin. Whenever you
 			click on a button or a dropdown item, a hook will be called with the ID of
 			that button. This allows you to attach any custom functionality to each
 			button.
@@ -27,8 +27,10 @@
 		<OptionWrapper>
 			<template>
 				<v-row align="center" justify="end" class="ma-0">
-					<AddButton class="mr-6" @click="addBtn"> New Button </AddButton>
-					<AddButton @click="addDD"> New DropDown </AddButton>
+					<AddButton class="mr-lg-6" @click="addBtn"> New Button </AddButton>
+					<AddButton class="mt-6 mt-lg-0" @click="addDD">
+						New DropDown
+					</AddButton>
 				</v-row>
 			</template>
 			<List6 :section="'Preview'" />

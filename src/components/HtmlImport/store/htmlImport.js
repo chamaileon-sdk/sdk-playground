@@ -16,7 +16,7 @@ export default {
 				{
 					method: "POST",
 					headers: {
-						Authorization: "Bearer Y8mbu7S5Qh4cyCqJCVBn",
+						Authorization: `Bearer ${apikey}`,
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({

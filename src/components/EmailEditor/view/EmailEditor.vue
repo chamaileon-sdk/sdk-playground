@@ -11,8 +11,8 @@
 						With the help of the email editor plugin your users can create
 						beautiful emails from scratch. The editor offers many ways of
 						customization regarding functionality. You can create a personalized
-						layout, design systems for your emails and you can even change the
-						access of yout team members to those libraries in a team
+						layout, design systems for your emails, and you can even change the
+						access of your team members to those libraries in a team
 						environment.
 					</p>
 				</Description>

@@ -1,13 +1,23 @@
 <template>
 	<div>
 		<v-hover v-slot="{ hover }">
-			<div class="openbtn ma-3" :class="hover ? 'on-hover' : ''">
+			<div
+				class="openbtn ma-3"
+				:class="
+					(hover ? 'on-hover' : '') +
+					' ' +
+					(breakpoint.lg ? 'openbtnLG' : '') +
+					' ' +
+					(breakpoint.md ? 'openbtnSM' : '')
+				"
+			>
 				<v-btn
 					depressed
 					class="grey lighten-3 pa-3 custom-btn primary--text"
 					width="100%"
 					height="100%"
 					@click="emitClick"
+					min-width="0"
 				>
 					<div
 						class="
@@ -17,22 +27,34 @@
 							grey--text
 							text--darken-2
 						"
-						style="width: 100px"
+						:style="!breakpoint.md ? 'width: 100px' : ''"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						preview changes
+						<span :class="breakpoint.md ? 'verticalText' : ''"
+							>preview changes</span
+						>
 					</div>
 				</v-btn>
 			</div>
 		</v-hover>
 		<v-hover v-slot="{ hover }">
-			<div class="openbtnl ma-3" :class="hover ? 'on-hover' : ''">
+			<div
+				class="openbtnl ma-3"
+				:class="
+					(hover ? 'on-hover' : '') +
+					' ' +
+					(breakpoint.lg ? 'openbtnlLG' : '') +
+					' ' +
+					(breakpoint.md ? 'openbtnlSM' : '')
+				"
+			>
 				<v-btn
 					depressed
 					class="grey lighten-3 pa-3 custom-btn primary--text"
 					width="100%"
 					height="100%"
 					@click="emitClick"
+					min-width="0"
 				>
 					<div
 						class="
@@ -42,10 +64,12 @@
 							grey--text
 							text--darken-2
 						"
-						style="width: 100px"
+						:style="!breakpoint.md ? 'width: 100px' : ''"
 					>
 						<v-icon class="ma-2">mdi-eye</v-icon>
-						preview changes
+						<div :class="breakpoint.md ? 'verticalText' : ''">
+							preview changes
+						</div>
 					</div>
 				</v-btn>
 			</div>
@@ -63,6 +87,12 @@ export default {
 		return {
 			autoShown: false,
 		};
+	},
+
+	computed: {
+		breakpoint() {
+			return this.$vuetify.breakpoint;
+		},
 	},
 
 	watch: {
@@ -107,6 +137,22 @@ export default {
 	transition: opacity 0.2s ease-in-out;
 }
 
+.verticalText {
+	writing-mode: vertical-rl;
+	text-orientation: upright;
+	display: flex;
+	align-items: center;
+}
+
+.openbtnLG {
+	width: 71px;
+}
+
+.openbtnSM {
+	width: 40px !important;
+	min-width: 0px !important;
+}
+
 .openbtn:not(.on-hover) {
 	opacity: 0;
 }
@@ -123,6 +169,15 @@ export default {
 	left: 19.127%;
 
 	transition: opacity 0.2s ease-in-out;
+}
+
+.openbtnlLG {
+	width: 71px;
+}
+
+.openbtnlSM {
+	width: 40px !important;
+	min-width: 0px !important;
 }
 
 .openbtnl:not(.on-hover) {

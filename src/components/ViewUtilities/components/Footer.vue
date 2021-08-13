@@ -2,7 +2,7 @@
 	<div>
 		<v-divider></v-divider>
 		<v-row class="my-3">
-			<v-col class="d-flex justify-start primary--text" cols="4">
+			<v-col class="d-flex justify-start align-center primary--text" cols="4">
 				<v-card
 					v-if="previous.length > 0"
 					flat
@@ -14,7 +14,7 @@
 				</v-card>
 			</v-col>
 
-			<v-col cols="4" class="d-flex justify-center">
+			<v-col cols="4" class="d-flex align-center justify-center">
 				<v-btn
 					tile
 					text
@@ -28,7 +28,7 @@
 				</v-btn>
 			</v-col>
 
-			<v-col class="d-flex justify-end" cols="4">
+			<v-col class="d-flex align-center justify-end" cols="4">
 				<v-card
 					v-if="next.length > 0"
 					flat

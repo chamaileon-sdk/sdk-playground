@@ -12,7 +12,7 @@
 						on different devices.<br />
 						You can fully customize and extend the functionality of this plugin
 						by adding different buttons to the header and defining how each
-						button behaves, trough a hook.
+						button behaves, through a hook.
 					</p>
 				</Description>
 			</div>

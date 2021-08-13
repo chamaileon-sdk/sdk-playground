@@ -13,7 +13,7 @@ export default {
 				value: true,
 			},
 			rolePresentation: {
-				displayText: "Layout table presentation role",
+				displayText: "Table presentation role",
 				value: false,
 			},
 			encodeUrls: {
@@ -60,8 +60,8 @@ export default {
 		updateSize(state, size) {
 			let s = size;
 
-			if (size > 1024) s = (size / 1024).toFixed(2) + "kB";
-			else s += "B";
+			if (size > 1024) s = (size / 1024).toFixed(2) + " kB";
+			else s += " B";
 
 			state.htmlSize = s;
 		},
@@ -69,13 +69,9 @@ export default {
 	actions: {
 		async fetchDummyHtml(context) {
 			const genRequest = await fetch(
-				"https://sdk-api.chamaileon.io/api/v1/emails/generate",
+				"https://sdk-demo-api.chamaileon.io/fetchDocument",
 				{
 					method: "POST",
-					headers: {
-						Authorization: "Y8mbu7S5Qh4cyCqJCVBn",
-						"Content-Type": "application/json",
-					},
 					body: JSON.stringify({
 						document: context.state.json,
 						settings: context.getters.getHtmlGeneratorConfigObject,

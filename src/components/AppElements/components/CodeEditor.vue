@@ -154,79 +154,23 @@ export default {
 		ignore: 0,
 		snackbar: false,
 		tab: 0,
+		watchRouteChange: false,
 	}),
 
 	mounted() {
-		let to = this.$route;
-		let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
-
-		if (!this.menus[pageIndex].children) return;
-
-		let routes = this.menus[pageIndex].children;
-		let toInd = routes.findIndex((el) => el.to === to.hash) + 1;
-
-		let interval = setInterval(() => {
+		let wait = setInterval(() => {
 			if (this.$store.state.sdk) {
-				clearInterval(interval);
-				document.querySelectorAll(".hljs-attr").forEach((c) => {
-					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
-						let parent = c.parentElement;
-						parent.scroll({
-							top: c.offsetTop,
-							behavior: "smooth",
-						});
-					}
-				});
-
+				clearInterval(wait);
+				this.scrollCode({ hash: "#home" }, this.$route);
 				this.ignore = 0;
+				this.watchRouteChange = true;
 			}
 		}, 100);
 	},
 
 	watch: {
 		$route(to, from) {
-			let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
-
-			if (!this.menus[pageIndex].children) return;
-
-			let routes = this.menus[pageIndex].children;
-
-			let toHash = to.hash;
-			let fromHash = from.hash;
-
-			let toInd = routes.findIndex((el) => el.to === toHash) + 1;
-			let fromInd = routes.findIndex((el) => el.to === fromHash) + 1;
-
-			if (to.hash === "#home") toInd = 0;
-			if (from.hash === "#home") fromInd = 0;
-
-			if (toInd === -1 || fromInd === -1) throw "CodeEditor: Menu not found";
-
-			let dist = Math.abs(toInd - fromInd);
-
-			if (this.ignore > 0) {
-				this.ignore--;
-				return;
-			}
-
-			if (toInd === 0)
-				document.querySelector("code.hljs").scroll({
-					top: 0,
-					behavior: "smooth",
-				});
-			else {
-				document.querySelectorAll(".hljs-attr").forEach((c) => {
-					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
-						let parent = c.parentElement;
-						parent.scroll({
-							top: c.offsetTop,
-							behavior: "smooth",
-						});
-					}
-				});
-			}
-
-			if (dist !== 1) this.ignore = dist;
+			if (this.watchRouteChange) this.scrollCode(from, to);
 		},
 	},
 
@@ -340,6 +284,51 @@ export default {
 	},
 
 	methods: {
+		scrollCode(from, to) {
+			if (this.ignore > 0) {
+				this.ignore--;
+				return;
+			}
+
+			let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+
+			if (!this.menus[pageIndex].children) return;
+
+			let routes = this.menus[pageIndex].children;
+
+			let toHash = to.hash;
+			let fromHash = from.hash;
+
+			let toInd = routes.findIndex((el) => el.to === toHash) + 1;
+			let fromInd = routes.findIndex((el) => el.to === fromHash) + 1;
+
+			if (to.hash === "#home") toInd = 0;
+			if (from.hash === "#home") fromInd = 0;
+
+			if (toInd === -1 || fromInd === -1) throw "CodeEditor: Menu not found";
+
+			let dist = Math.abs(toInd - fromInd);
+
+			if (toInd === 0)
+				document.querySelector("code.hljs").scroll({
+					top: 0,
+					behavior: "smooth",
+				});
+			else {
+				document.querySelectorAll(".hljs-attr").forEach((c) => {
+					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
+						let parent = c.parentElement;
+						parent.scroll({
+							top: c.offsetTop,
+							behavior: "smooth",
+						});
+					}
+				});
+			}
+
+			if (dist > 1) this.ignore = dist;
+		},
+
 		copyToClipboard() {
 			let str;
 

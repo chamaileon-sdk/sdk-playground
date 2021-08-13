@@ -16,7 +16,8 @@
 						<v-row class="ma-0 pa-0">
 							<v-col
 								class="pa-2"
-								cols="4"
+								xl="4"
+								cols="6"
 								align-self="center"
 								v-show="!b.items"
 							>
@@ -30,7 +31,33 @@
 								></v-text-field>
 							</v-col>
 
-							<v-col class="pa-2" cols="4" align-self="center">
+							<!-- Dropdown add button on small screens -->
+							<v-col
+								v-if="breakpoint != 'xl' && breakpoint != 'xl'"
+								class="pa-2"
+								xl="4"
+								cols="6"
+								align-self="center"
+								v-show="b.items"
+							>
+								<v-btn depressed outlined width="100%" @click="addDDBtn(i)">
+									<v-icon left> mdi-plus </v-icon>
+									Add Button
+								</v-btn>
+							</v-col>
+
+							<!-- Delete button on small screens -->
+							<v-col
+								v-if="breakpoint != 'xl' && breakpoint != 'xl'"
+								class="pa-2"
+								xl="4"
+								cols="6"
+								align-self="center"
+							>
+								<DeleteButton @click="deleteBtn(i)"></DeleteButton>
+							</v-col>
+
+							<v-col class="pa-2" xl="4" cols="6" align-self="center">
 								<v-select
 									dense
 									hide-details="true"
@@ -43,19 +70,33 @@
 								></v-select>
 							</v-col>
 
-							<v-col class="pa-2" cols="4" align-self="center" v-show="b.items">
+							<!-- Dropdown add button on large screens -->
+							<v-col
+								v-if="breakpoint == 'xl' || breakpoint == 'xl'"
+								class="pa-2"
+								xl="4"
+								cols="6"
+								align-self="center"
+								v-show="b.items"
+							>
 								<v-btn depressed outlined width="100%" @click="addDDBtn(i)">
 									<v-icon left> mdi-plus </v-icon>
 									Add Button
 								</v-btn>
 							</v-col>
 
-							<v-col class="pa-2" cols="4" align-self="center">
+							<!-- Delete add button on large screens -->
+							<v-col
+								v-if="breakpoint == 'xl' || breakpoint == 'xl'"
+								class="pa-2"
+								xl="4"
+								cols="6"
+								align-self="center"
+							>
 								<DeleteButton @click="deleteBtn(i)"></DeleteButton>
 							</v-col>
-						</v-row>
-						<v-row class="ma-0 pa-0">
-							<v-col class="pa-2" cols="4" align-self="center">
+
+							<v-col class="pa-2" xl="4" cols="6" align-self="center">
 								<v-text-field
 									dense
 									hide-details="true"
@@ -65,7 +106,7 @@
 									outlined
 								></v-text-field>
 							</v-col>
-							<v-col class="pa-2" cols="4">
+							<v-col class="pa-2" xl="4" cols="6">
 								<ColorPicker
 									:key="i"
 									class="pa-0"
@@ -75,7 +116,7 @@
 								/>
 							</v-col>
 
-							<v-col class="pa-2" cols="4" align-self="center">
+							<v-col class="pa-2" xl="4" cols="6" align-self="center">
 								<v-text-field
 									dense
 									hide-details="true"
@@ -102,17 +143,17 @@
 				>
 					<div v-for="(item, bi) in b.items" :key="bi">
 						<v-card
-							class="ma-0 pa-0 d-flex align-center mx-auto"
+							class="ma-0 pa-2 d-flex align-center mx-auto"
 							elevation="0"
 							width="90%"
 							tile
 							style="overflow-y: hidden"
 						>
-							<v-list-item-icon class="align-self-center ma-0 ml-6">
+							<v-list-item-icon class="align-self-center ma-0 ml-3 mr-3">
 								<v-icon class="dtrigger">mdi-menu</v-icon>
 							</v-list-item-icon>
-							<v-row class="px-6 ma-0">
-								<v-col cols="3" align-self="center">
+							<v-row class="pa-0 ma-0">
+								<v-col class="pa-2" xl="3" cols="6" align-self="center">
 									<v-text-field
 										dense
 										hide-details="true"
@@ -123,7 +164,25 @@
 									></v-text-field>
 								</v-col>
 
-								<v-col cols="3" align-self="center">
+								<v-col
+									xl="3"
+									v-if="breakpoint != 'xl' && breakpoint != 'xl'"
+									cols="6"
+									align-self="center"
+									class="ml-auto pa-2"
+								>
+									<DeleteButton
+										@click="
+											deleteDDBtn({
+												parentIndex: i,
+												obj: { index: bi },
+											})
+										"
+										class=""
+									></DeleteButton>
+								</v-col>
+
+								<v-col class="pa-2" xl="3" cols="6" align-self="center">
 									<v-text-field
 										dense
 										hide-details="true"
@@ -139,7 +198,7 @@
 									></v-text-field>
 								</v-col>
 
-								<v-col cols="3" align-self="center">
+								<v-col class="pa-2" xl="3" cols="6" align-self="center">
 									<v-text-field
 										dense
 										hide-details="true"
@@ -155,7 +214,13 @@
 									></v-text-field>
 								</v-col>
 
-								<v-col cols="3" align-self="center" class="ml-auto">
+								<v-col
+									xl="3"
+									v-if="breakpoint == 'xl' || breakpoint == 'xl'"
+									cols="6"
+									align-self="center"
+									class="ml-auto pa-2"
+								>
 									<DeleteButton
 										@click="
 											deleteDDBtn({
@@ -251,6 +316,10 @@ export default {
 		},
 	},
 	computed: {
+		breakpoint() {
+			return this.$vuetify.breakpoint.name;
+		},
+
 		buttonsArr: {
 			get() {
 				return this.$store.state[this.section.toLowerCase() + "Config"].settings

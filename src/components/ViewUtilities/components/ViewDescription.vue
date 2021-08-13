@@ -4,8 +4,9 @@
 
 		<slot />
 
-		<div class="d-flex mt-6">
+		<div style="margin-top: 23px; margin-bottom: 100px !important">
 			<v-btn
+				v-if="!hideGetStarted"
 				@click="scrollToFirst"
 				target="_blank"
 				class="ma-0 mr-3"
@@ -16,15 +17,27 @@
 				Get Started
 			</v-btn>
 
-			<v-btn :href="docUrl" target="_blank" class="ma-0" text color="primary">
+			<v-btn
+				:href="docUrl"
+				target="_blank"
+				class="ma-0"
+				:text="!hideGetStarted"
+				:depressed="hideGetStarted"
+				color="primary"
+			>
 				<v-icon left>mdi-book</v-icon>
-				Read the docs
+				docs
 			</v-btn>
 		</div>
 
-		<v-card v-if="image" class="mt-auto rounded-0" flat>
-			<img class="rounded-0" width="100%" :src="img" alt="" />
-		</v-card>
+		<img
+			v-if="image"
+			width="100%"
+			style="margin-top: auto"
+			class="rounded-0"
+			:src="img"
+			alt=""
+		/>
 	</div>
 </template>
 
@@ -50,8 +63,16 @@ export default {
 		title: String,
 		docUrl: String,
 		image: String,
+		hideGetStarted: {
+			type: Boolean,
+			default: false,
+		},
 	},
 };
 </script>
 
-<style></style>
+<style>
+.imgWrapper {
+	position: relative;
+}
+</style>

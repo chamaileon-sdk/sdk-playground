@@ -8,7 +8,7 @@
 export default {
 	mounted() {
 		this.observer = new IntersectionObserver(this.handleIntersect, {
-			threshold: 0.75,
+			threshold: 0.25,
 			//rootMargin: '-20% 0% -80% 0%',
 		});
 

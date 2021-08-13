@@ -3,16 +3,17 @@
 		<h2>Elements</h2>
 		<p>
 			You can turn on and off basic draggable elements. You can even disable all
-			of the elements, which is useful if you want your users to be only be able
-			to use blocks from predefined block libraries.
+			the elements, which is useful if you want your users to be only be able to
+			use blocks from predefined block libraries.
 		</p>
 
 		<h3>Content</h3>
 		<OptionWrapper>
-			<v-row class="ma-0 pa-0 mx-n3">
+			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
-					class="my-0 py-0"
-					cols="2"
+					class="my-0 py-0 mb-6 mb-xl-0"
+					cols="4"
+					xl="2"
 					v-for="(element, index) in contentElements"
 					:key="index"
 					@click="toggleElement({ type: 'content', element: element.type })"
@@ -49,10 +50,11 @@
 
 		<h3>Structure</h3>
 		<OptionWrapper>
-			<v-row class="ma-0 pa-0 mx-n3">
+			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
-					class="my-0 py-0"
-					cols="2"
+					class="my-0 py-0 mb-6 mb-xl-0"
+					cols="4"
+					xl="2"
 					v-for="(element, index) in structureElements"
 					:key="index"
 					@click="toggleElement({ type: 'structure', element: element.type })"
@@ -89,10 +91,11 @@
 
 		<h3>Advanced</h3>
 		<OptionWrapper>
-			<v-row class="ma-0 pa-0 mx-n3">
+			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
-					class="my-0 py-0"
-					cols="2"
+					class="my-0 py-0 mb-6 mb-xl-0"
+					cols="4"
+					xl="2"
 					v-for="(element, index) in advancedElements"
 					:key="index"
 					@click="toggleElement({ type: 'advanced', element: element.type })"

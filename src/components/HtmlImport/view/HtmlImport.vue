@@ -6,12 +6,13 @@
 					:title="'Email HTML Import'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-html-importer/'"
 					:image="'HtmlImportIllustration.svg'"
+					:hideGetStarted="true"
 				>
 					<p>
 						Our HTML import plugin allows you to import an existing HTML email
-						to editor and make changes to it. The output is a JSON object, which
-						the editor can process. Currently there are no available options for
-						this plugin.
+						to the editor and make changes to it. The output is a JSON object,
+						which the editor can process. Currently, there are no available
+						options for this plugin.
 					</p>
 				</Description>
 			</div>

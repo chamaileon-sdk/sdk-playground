@@ -8,46 +8,57 @@
 			on any device.
 		</p>
 		<OptionWrapper>
-			<v-card elevation="0" class="d-flex justify-center align-center pa-4">
-				<v-text-field
-					dense
-					v-model="width"
-					class="rounded mr-2"
-					hide-details="true"
-					label="Width"
-					outlined
-					suffix="px"
-					@change="openThumbnail"
-				></v-text-field>
-				<v-text-field
-					dense
-					v-model="height"
-					class="rounded mx-2"
-					hide-details="true"
-					label="Height"
-					outlined
-					suffix="px"
-					@change="openThumbnail"
-				></v-text-field>
-				<v-text-field
-					dense
-					v-model="scale"
-					class="rounded mx-2"
-					hide-details="true"
-					label="Scale"
-					outlined
-					@change="openThumbnail"
-				></v-text-field>
-				<v-switch
-					v-model="scroll"
-					class="ma-0 pa-0 ml-2"
-					label="Scroll"
-					hide-details="true"
-					color="primary"
-					inset
-					@change="openThumbnail"
-				></v-switch>
-			</v-card>
+			<v-row
+				elevation="0"
+				class="d-flex white rounded justify-center align-center pa-4"
+			>
+				<v-col :cols="columns" class="pa-0 ma-0">
+					<v-text-field
+						dense
+						v-model="width"
+						class="rounded mr-2"
+						hide-details="true"
+						label="Width"
+						outlined
+						suffix="px"
+						@change="openThumbnail"
+					></v-text-field>
+				</v-col>
+				<v-col :cols="columns" class="pa-0 ma-0">
+					<v-text-field
+						dense
+						v-model="height"
+						class="rounded ml-2 mr-xl-2"
+						hide-details="true"
+						label="Height"
+						outlined
+						suffix="px"
+						@change="openThumbnail"
+					></v-text-field>
+				</v-col>
+				<v-col :cols="columns" class="pa-0 ma-0 mt-4 mt-xl-0">
+					<v-text-field
+						dense
+						v-model="scale"
+						class="rounded mr-2 ml-xl-2"
+						hide-details="true"
+						label="Scale"
+						outlined
+						@change="openThumbnail"
+					></v-text-field>
+				</v-col>
+				<v-col :cols="Math.max(columns, 2)" class="pa-0 ma-0 mt-4 mt-xl-0">
+					<v-switch
+						v-model="scroll"
+						class="ma-0 pa-0 ml-2"
+						label="Scroll"
+						hide-details="true"
+						color="primary"
+						inset
+						@change="openThumbnail"
+					></v-switch>
+				</v-col>
+			</v-row>
 		</OptionWrapper>
 
 		<h3>Thumbnail</h3>
@@ -70,7 +81,6 @@
 <script>
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 
-//TODO: accept only numerical inputs where needed
 export default {
 	mounted() {
 		let interval = setInterval(() => {
@@ -85,6 +95,16 @@ export default {
 	},
 
 	computed: {
+		columns() {
+			switch (this.$vuetify.breakpoint.name) {
+			case "xl":
+				return 0;
+
+			default:
+				return 6;
+			}
+		},
+
 		configObj() {
 			return this.$store.getters.getThumbnailSettings;
 		},

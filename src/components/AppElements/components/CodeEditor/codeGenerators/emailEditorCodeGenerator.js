@@ -2,7 +2,6 @@ export default function (config) {
 	return `const editorInstance = await chamaileonPlugins.editEmail({
 	document: emailDocument, // see "document" tab
 	settings: {
-		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
 		buttons: {
 			header: ${calculateHeader(config)}
 			textInsert: ${calculateTextInsert(config)}
@@ -13,6 +12,7 @@ export default function (config) {
 			blockLock: ${calculateBL(config)},
 			variableSystem: ${calculateVE(config)}
 		},
+		staticAssetsBaseUrl: "${config.staticAssetsBaseUrl}",
 	},
 	autoSaveInterval: ${config.autoSaveInterval},
 	user: ${

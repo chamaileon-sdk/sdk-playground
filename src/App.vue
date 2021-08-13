@@ -1,12 +1,12 @@
 <template>
-	<v-app>
-		<v-navigation-drawer width="19.127%" app permanent>
+	<v-app v-if="isAvailable">
+		<v-navigation-drawer class="leftSection" width="19.127%" app permanent>
 			<MenuReworked />
 		</v-navigation-drawer>
 
 		<v-main>
 			<div class="px-16 pa-0">
-				<div class="px-16">
+				<div class="px-lg-8 px-xl-16">
 					<router-view />
 				</div>
 			</div>
@@ -22,16 +22,27 @@
 			<CodeEditor />
 		</v-navigation-drawer>
 	</v-app>
+
+	<v-app v-else>
+		<NotAvailable />
+	</v-app>
 </template>
 
 <script>
 import CodeEditor from "./components/AppElements/components/CodeEditor.vue";
 import MenuReworked from "./components/AppElements/components/Menu.vue";
+import NotAvailable from "./components/AppElements/components/NotAvailable.vue";
 
 export default {
+	computed: {
+		isAvailable() {
+			return this.$vuetify.breakpoint.width > 960;
+		},
+	},
 	components: {
 		MenuReworked,
 		CodeEditor,
+		NotAvailable,
 	},
 	created() {
 		this.$store.commit("updateSDKConfig", {
@@ -139,10 +150,24 @@ html::-webkit-scrollbar {
 	width: 50%;
 }
 
-.leftSection {
-	width: 19.127%;
-	height: 100vh;
-	left: 0;
+.leftSection :first-child {
+	scrollbar-width: thin;
+}
+
+.leftSection :first-child::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+.leftSection :first-child::-webkit-scrollbar-thumb {
+	background: #e0e0e0;
+	border-radius: 99999px;
+}
+.leftSection :first-child::-webkit-scrollbar-thumb:hover {
+	background: #bdbdbd;
+}
+.leftSection :first-child::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 99999px;
 }
 
 .section {
