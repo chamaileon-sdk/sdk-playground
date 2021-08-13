@@ -26,7 +26,7 @@ jobs:
     - name: sync s3
       uses: jakejarvis/s3-sync-action@master
       with:
-        args: --exclude '.git*/*' --delete --follow-symlinks
+        args: --acl public-read --delete
       env:
         SOURCE_DIR: './dist'
         AWS_REGION: 'us-east-1'
