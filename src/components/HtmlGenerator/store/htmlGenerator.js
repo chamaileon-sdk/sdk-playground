@@ -72,9 +72,6 @@ export default {
 				"https://sdk-demo-api.chamaileon.io/fetchDocument",
 				{
 					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
 					body: JSON.stringify({
 						document: context.state.json,
 						settings: context.getters.getHtmlGeneratorConfigObject,
