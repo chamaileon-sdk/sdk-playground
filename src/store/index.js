@@ -179,7 +179,7 @@ export default new Vuex.Store({
 			);
 
 			out.settings.buttons.header.left = [
-				{ id: "close", label: "close", icon: "mdi-arrow-left" },
+				{ id: "close", label: "close", icon: "arrow-left" },
 				...out.settings.buttons.header.left,
 			];
 
