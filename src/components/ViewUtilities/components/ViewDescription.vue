@@ -18,6 +18,7 @@
 			</v-btn>
 
 			<v-btn
+				v-if="docUrl"
 				:href="docUrl"
 				target="_blank"
 				class="ma-0"
@@ -27,6 +28,19 @@
 			>
 				<v-icon left>mdi-book</v-icon>
 				docs
+			</v-btn>
+
+			<v-btn
+				v-if="readMoreUrl"
+				:href="readMoreUrl"
+				target="_blank"
+				class="ma-0"
+				:text="!hideGetStarted"
+				:depressed="hideGetStarted"
+				color="primary"
+			>
+				<v-icon left>mdi-book-open</v-icon>
+				read more
 			</v-btn>
 		</div>
 
@@ -45,6 +59,7 @@
 export default {
 	created() {
 		this.img = require(`@/assets/${this.image}`);
+		console.log("wtf", this.readMoreUrl, typeof this.readMoreUrl)
 	},
 
 	methods: {
@@ -62,6 +77,7 @@ export default {
 	props: {
 		title: String,
 		docUrl: String,
+		readMoreUrl: String,
 		image: String,
 		hideGetStarted: {
 			type: Boolean,

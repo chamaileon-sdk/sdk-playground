@@ -57,7 +57,7 @@
 
 <script>
 const chamaileonLogo = require("chamaileon-logo");
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
 	mounted() {

@@ -20,7 +20,7 @@
 					text
 					color="primary"
 					class="rounded"
-					href="https://help.chamaileon.io/en/"
+					href="https://calendly.com/gyula/chamaileon-sdk"
 					target="_blank"
 				>
 					<v-icon left> mdi-message-reply </v-icon>

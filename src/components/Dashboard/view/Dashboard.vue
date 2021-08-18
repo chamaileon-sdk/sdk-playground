@@ -5,6 +5,7 @@
 				<Description
 					:title="'Chamaileon SDK'"
 					:docUrl="'https://chamaileon.io/sdk/docs/'"
+					:readMoreUrl="'https://chamaileon.io/sdk/'"
 					:image="'SdkIllustration.svg'"
 				>
 					<p>
