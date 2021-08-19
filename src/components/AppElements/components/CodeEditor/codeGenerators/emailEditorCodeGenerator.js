@@ -2,6 +2,13 @@ export default function (config) {
 	return `const editorInstance = await chamaileonPlugins.editEmail({
 	document: emailDocument, // see "document" tab
 	settings: {
+		fontFiles: {
+			"Zen Tokyo Zoo": "https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap"
+		},
+		fontStacks: [
+			["Zen Tokyo Zoo", "cursive"]
+		],
+		hideDefaultFonts: true,
 		buttons: {
 			header: ${calculateHeader(config)}
 			textInsert: ${calculateTextInsert(config)}

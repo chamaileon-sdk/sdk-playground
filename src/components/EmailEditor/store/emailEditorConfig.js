@@ -14,6 +14,13 @@ export default {
 			avatar: "",
 		},
 		settings: {
+			fontFiles: {
+				"Zen Tokyo Zoo": "https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap"
+			},
+			fontStacks: [
+				["Zen Tokyo Zoo", "cursive"]
+			],
+			hideDefaultFonts: true,
 			buttons: {
 				header: [],
 				textInsert: [],
