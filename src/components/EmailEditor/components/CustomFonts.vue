@@ -33,36 +33,25 @@
 
 		<OptionWrapper>
 			<template>
+				{{customFontsArr}}
 				<v-row align="center" justify="end" class="ma-0">
-					<AddButton @click="addBlockLibararies"> New Library </AddButton>
+					<AddButton @click="addFontFileMethod"> New Library </AddButton>
 				</v-row>
 			</template>
 			<v-card
-				v-if="customFontsArr.length > 0"
 				class="mx-auto mt-8 list3 rounded"
 				elevation="0"
 				max-height="396"
 				style="overflow-y: auto"
 			>
 				<draggable handle=".dtrigger" v-model="customFontsArr">
-					<div v-for="(b, ind) in customFontsArr" :key="ind">
+					<div v-for="(value, name) in customFontsArr" :key="name">
 						<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
 							<v-list-item-icon class="align-self-center ma-0 mx-3">
 								<v-icon class="dtrigger">mdi-menu</v-icon>
 							</v-list-item-icon>
 							<v-list-item-content class="ma-0 pa-0">
 								<v-row class="ma-0 pa-0">
-									<v-col cols="6" xl="1" class="pa-2" align-self="center">
-										<v-text-field
-											dense
-											hide-details="true"
-											label="ID"
-											:rules="[noEmpty, noMatching(ind)]"
-											:value="b.id"
-											@input="updateID(ind, $event)"
-											outlined
-										></v-text-field>
-									</v-col>
 
 									<v-col
 										v-if="breakpoint.lgAndDown"
@@ -81,19 +70,19 @@
 											dense
 											hide-details="true"
 											label="Font name"
-											:value="b.label"
+											:value="name"
 											@input="updateBlockLibs({ index: ind, label: $event })"
 											outlined
 										></v-text-field>
 									</v-col>
 
 
-									<v-col cols="6" xl="5" class="pa-2" align-self="center">
+									<v-col cols="6" xl="6" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
 											label="Font file"
-											:value="b.label"
+											:value="value"
 											@input="updateBlockLibs({ index: ind, label: $event })"
 											outlined
 										></v-text-field>
@@ -108,7 +97,7 @@
 										class="ml-auto pa-2"
 									>
 										<DeleteButton
-											@click="removeBlockLibararies(ind, b.id)"
+											@click="removeFontFile(name)"
 										></DeleteButton>
 									</v-col>
 								</v-row>
@@ -141,16 +130,17 @@ export default {
 		...mapMutations([
 			"updateBlockLibsOrder",
 			"updateBlockLibs",
-			"addBlockLibs",
+			"addFontFile",
+			"removeFontFile",
 			"removeBlockLibs",
 		]),
 
-		addBlockLibararies() {
-			this.addBlockLibs();
-			this.$store.commit(
-				"createBlockLibData",
-				this.customFontsArr[this.customFontsArr.length - 1].id
-			);
+		addFontFileMethod() {
+			this.addFontFile();
+			// this.$store.commit(
+			// 	"createBlockLibData",
+			// 	this.customFontsArr[this.customFontsArr.length - 1].id
+			// );
 		},
 
 		removeBlockLibararies(ind, id) {
@@ -189,11 +179,11 @@ export default {
 		},
 		customFontsArr: {
 			get() {
-				return this.$store.getters.getBlockLibs;
+				return this.$store.getters.getFontFiles;
 			},
-			set(value) {
-				this.updateBlockLibsOrder(value);
-			},
+			// set(value) {
+			// 	this.updateBlockLibsOrder(value);
+			// },
 		},
 	},
 };

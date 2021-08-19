@@ -7,6 +7,7 @@ export default {
 	state: () => ({
 		key: 0,
 		blKey: 0,
+		ffKey: 0,
 		tiID: 0,
 		user: {
 			enabled: true,
@@ -182,6 +183,15 @@ export default {
 			});
 		},
 
+		//Fontfiles
+		addFontFile(state) {
+			state.settings.fontFiles[`Font Family ${state.ffKey}`] = ""; // eslint-disable-line
+			state.ffKey++;
+		},
+		removeFontFile(state, fontName) {
+			delete state.settings.fontFiles[fontName];
+		},
+
 		//Text insert
 		updateTextInsertOrder(state, payload) {
 			state.settings.buttons.textInsert = payload;
@@ -251,6 +261,7 @@ export default {
 			return state.settings.elements;
 		},
 		getBlockLibs: (state) => state.blockLibraries,
+		getFontFiles: (state) => state.settings.fontFiles,
 		getAddonStateById: (state) => (id) => {
 			const obj = state.addons;
 			for (const addon in obj) {
