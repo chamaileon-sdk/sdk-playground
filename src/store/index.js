@@ -79,7 +79,7 @@ export default new Vuex.Store({
 
 			const chamaileonPlugins = await window.chamaileonSdk.init({
 				mode: "serverless",
-				environmentName: "serverless-windowscope",
+				environmentName: location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
 				accessToken: accessToken,
 				whitelabel: {
 					...this.state.sdkConfig,
