@@ -5,7 +5,7 @@
 			color="primary"
 			background-color="transparent"
 			hide-slider
-			show-arrows
+			show-arrows="always"
 		>
 			<v-tab
 				class="pa-0 mr-3"
