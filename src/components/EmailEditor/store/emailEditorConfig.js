@@ -189,14 +189,10 @@ export default {
 		},
 
 		removeFontFile(state, fontName) {
-			// console.log("XXXXX FONTFILES XXXXXX");
-			// console.log(fontName);
-			// console.log(state.settings.fontFiles[fontName]);
 			Vue.delete(state.settings.fontFiles, fontName);
 		},
 
 		updateFontFile(state, newFontFiles) {
-			// console.log(newFontFiles);
 			Vue.set(state.settings, "fontFiles", newFontFiles)
 		},
 
@@ -220,7 +216,6 @@ export default {
 		},
 		// HideDefaultFonts
 		setHideDefaultFont(state, value) {
-			console.log(state, value);
 			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 

@@ -36,7 +36,6 @@
 		</div>
 		<OptionWrapper>
 			<template>
-				{{customFontsArr}}
 				<v-row align="center" justify="end" class="ma-0">
 					<AddButton @click="addFontFileMethod"> New Font File </AddButton>
 				</v-row>
@@ -95,7 +94,6 @@
 							</v-list-item-content>
 						</v-card>
 
-						<v-divider v-show="ind !== customFontsArr.length - 1"></v-divider>
 					</div>
 				<!-- </draggable> -->
 			</v-card>
@@ -107,7 +105,6 @@
 
 		<OptionWrapper>
 			<template>
-				{{fontStacks}}
 				<v-row align="center" justify="end" class="ma-0">
 					<AddButton @click="addFontStackMethod"> New Font Stack </AddButton>
 				</v-row>
@@ -155,7 +152,6 @@
 							</v-list-item-content>
 						</v-card>
 
-						<v-divider v-show="ind !== customFontsArr.length - 1"></v-divider>
 					</div>
 				</draggable>
 
@@ -210,10 +206,6 @@ export default {
 
 		addFontFileMethod() {
 			this.addFontFile();
-			// this.$store.commit(
-			// 	"createBlockLibData",
-			// 	this.customFontsArr[this.customFontsArr.length - 1].id
-			// );
 		},
 
 		updateFontFileDebounced: debounce(function(payload) {
@@ -239,35 +231,6 @@ export default {
 		}),
 
 
-		// removeBlockLibararies(ind, id) {
-		// 	this.removeBlockLibs(ind);
-		// 	this.$store.commit("deleteBlockLibData", id);
-		// },
-
-		// updateID(index, id) {
-		// 	if (!this.noEmpty(id) || !this.noMatching(index)(id)) return;
-
-		// 	this.$store.commit("moveBlockLibData", {
-		// 		oldLibId: this.customFontsArr[index].id,
-		// 		newLibId: id,
-		// 	});
-		// 	this.updateBlockLibs({ index: index, id: id });
-		// },
-		// noEmpty(e) {
-		// 	return e.length !== 0;
-		// },
-		// noMatching(ind) {
-		// 	return function (e) {
-		// 		let i = 0;
-		// 		let arr = this.$store.state.editorConfig.blockLibraries;
-
-		// 		while (i < arr.length && !(arr[i].id === e && i !== ind)) {
-		// 			i++;
-		// 		}
-
-		// 		return i === arr.length;
-		// 	}.bind(this);
-		// },
 	},
 	computed: {
 		...mapGetters({
@@ -295,14 +258,6 @@ export default {
 		},
 		breakpoint() {
 			return this.$vuetify.breakpoint;
-		},
-		customFontsArr: {
-			get() {
-				return this.$store.getters.getFontFiles;
-			},
-			// set(value) {
-			// 	this.updateBlockLibsOrder(value);
-			// },
 		},
 	},
 };
