@@ -31,11 +31,14 @@
 			</v-col> -->
 		</v-row>
 
+		<div class="title pb-6">
+			Set Font Files
+		</div>
 		<OptionWrapper>
 			<template>
 				{{customFontsArr}}
 				<v-row align="center" justify="end" class="ma-0">
-					<AddButton @click="addFontFileMethod"> New Library </AddButton>
+					<AddButton @click="addFontFileMethod"> New Font File </AddButton>
 				</v-row>
 			</template>
 			<v-card
@@ -44,34 +47,22 @@
 				max-height="396"
 				style="overflow-y: auto"
 			>
-				<draggable handle=".dtrigger" v-model="customFontsArr">
-					<div v-for="(value, name) in customFontsArr" :key="name">
+				<!-- <draggable handle=".dtrigger" v-model="getFontFiles"> -->
+					<div v-for="(font, fontIndex) in fontFilesArray" :key="fontIndex">
 						<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
-							<v-list-item-icon class="align-self-center ma-0 mx-3">
+							<!-- <v-list-item-icon class="align-self-center ma-0 mx-3">
 								<v-icon class="dtrigger">mdi-menu</v-icon>
-							</v-list-item-icon>
+							</v-list-item-icon> -->
 							<v-list-item-content class="ma-0 pa-0">
 								<v-row class="ma-0 pa-0">
-
-									<v-col
-										v-if="breakpoint.lgAndDown"
-										cols="6"
-										xl="3"
-										align-self="center"
-										class="ml-auto pa-2"
-									>
-										<DeleteButton
-											@click="removeBlockLibararies(ind, b.id)"
-										></DeleteButton>
-									</v-col>
 
 									<v-col cols="6" xl="3" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
 											label="Font name"
-											:value="name"
-											@input="updateBlockLibs({ index: ind, label: $event })"
+											:value="font.fontName"
+											@input="updateFontFileDebounced({ fontName: $event, fontFile: font.fontFile, fontIndex  })"
 											outlined
 										></v-text-field>
 									</v-col>
@@ -82,8 +73,8 @@
 											dense
 											hide-details="true"
 											label="Font file"
-											:value="value"
-											@input="updateBlockLibs({ index: ind, label: $event })"
+											:value="font.fontFile"
+											@input="updateFontFileDebounced({fontName: font.fontName, fontFile: $event, fontIndex  })"
 											outlined
 										></v-text-field>
 									</v-col>
@@ -106,8 +97,76 @@
 
 						<v-divider v-show="ind !== customFontsArr.length - 1"></v-divider>
 					</div>
-				</draggable>
+				<!-- </draggable> -->
 			</v-card>
+		</OptionWrapper>
+
+		<div class="title pb-6">
+			Set Font Stacks
+		</div>
+
+		<OptionWrapper>
+			<template>
+				{{fontStacks}}
+				<v-row align="center" justify="end" class="ma-0">
+					<AddButton @click="addFontStackMethod"> New Font Stack </AddButton>
+				</v-row>
+			</template>
+			<v-card
+				class="mx-auto mt-8 list3 rounded"
+				elevation="0"
+				max-height="396"
+				style="overflow-y: auto"
+			>
+
+				<draggable handle=".dtrigger" v-model="fontStacks">
+					<div v-for="(value, index) in fontStacks" :key="index">
+						<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
+							<v-list-item-icon class="align-self-center ma-0 mx-3">
+								<v-icon class="dtrigger">mdi-menu</v-icon>
+							</v-list-item-icon>
+							<v-list-item-content class="ma-0 pa-0">
+								<v-row class="ma-0 pa-0">
+
+									<v-col cols="6" xl="6" class="pa-2" align-self="center">
+										<v-text-field
+											dense
+											hide-details="true"
+											label="Font file"
+											:value="value"
+											@input="updateFontStackDebounced({ index, fontStackString: $event })"
+											outlined
+										></v-text-field>
+									</v-col>
+
+
+									<v-col
+										v-if="!breakpoint.lgAndDown"
+										cols="6"
+										xl="3"
+										align-self="center"
+										class="ml-auto pa-2"
+									>
+										<DeleteButton
+											@click="removeFontStack(index)"
+										></DeleteButton>
+									</v-col>
+								</v-row>
+							</v-list-item-content>
+						</v-card>
+
+						<v-divider v-show="ind !== customFontsArr.length - 1"></v-divider>
+					</div>
+				</draggable>
+
+			</v-card>
+		</OptionWrapper>
+		<OptionWrapper>
+			<v-switch		
+				v-model="hideDefaultFontsValue"
+				inset
+				:label="'Hide default fonts'"
+			></v-switch>
 		</OptionWrapper>
 	</div>
 </template>
@@ -117,7 +176,16 @@ import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import draggable from "vuedraggable";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
+
+function debounce(callback, wait = 500) {
+	let timoutId = "";
+
+	return function(...args) {
+		clearTimeout(timoutId);
+		timoutId = setTimeout(callback.bind(this, ...args), wait);
+	}
+}
 
 export default {
 	components: {
@@ -130,9 +198,14 @@ export default {
 		...mapMutations([
 			"updateBlockLibsOrder",
 			"updateBlockLibs",
+			"removeBlockLibs",
 			"addFontFile",
 			"removeFontFile",
-			"removeBlockLibs",
+			"updateFontFile",
+			"addFontStack",
+			"updateFontStack",
+			"removeFontStack",
+			"setHideDefaultFont",
 		]),
 
 		addFontFileMethod() {
@@ -143,37 +216,83 @@ export default {
 			// );
 		},
 
-		removeBlockLibararies(ind, id) {
-			this.removeBlockLibs(ind);
-			this.$store.commit("deleteBlockLibData", id);
+		updateFontFileDebounced: debounce(function(payload) {
+			const newFontFilesArray = JSON.parse(JSON.stringify(this.fontFilesArray));
+			newFontFilesArray[payload.fontIndex] = { fontName: payload.fontName, fontFile: payload.fontFile };
+			const newFontFiles = newFontFilesArray.reduce((map, font) => ({
+				...map,
+				[font.fontName]: font.fontFile,
+			}), {})
+			this.updateFontFile(newFontFiles);
+		}),
+
+		addFontStackMethod() {
+			this.addFontStack();
 		},
 
-		updateID(index, id) {
-			if (!this.noEmpty(id) || !this.noMatching(index)(id)) return;
-
-			this.$store.commit("moveBlockLibData", {
-				oldLibId: this.customFontsArr[index].id,
-				newLibId: id,
-			});
-			this.updateBlockLibs({ index: index, id: id });
+		removeFontStackMethod() {
+			this.removeFontStack();
 		},
-		noEmpty(e) {
-			return e.length !== 0;
-		},
-		noMatching(ind) {
-			return function (e) {
-				let i = 0;
-				let arr = this.$store.state.editorConfig.blockLibraries;
 
-				while (i < arr.length && !(arr[i].id === e && i !== ind)) {
-					i++;
-				}
+		updateFontStackDebounced: debounce(function({ index, fontStackString}) {
+			this.updateFontStack({ index, fontStackString});
+		}),
 
-				return i === arr.length;
-			}.bind(this);
-		},
+
+		// removeBlockLibararies(ind, id) {
+		// 	this.removeBlockLibs(ind);
+		// 	this.$store.commit("deleteBlockLibData", id);
+		// },
+
+		// updateID(index, id) {
+		// 	if (!this.noEmpty(id) || !this.noMatching(index)(id)) return;
+
+		// 	this.$store.commit("moveBlockLibData", {
+		// 		oldLibId: this.customFontsArr[index].id,
+		// 		newLibId: id,
+		// 	});
+		// 	this.updateBlockLibs({ index: index, id: id });
+		// },
+		// noEmpty(e) {
+		// 	return e.length !== 0;
+		// },
+		// noMatching(ind) {
+		// 	return function (e) {
+		// 		let i = 0;
+		// 		let arr = this.$store.state.editorConfig.blockLibraries;
+
+		// 		while (i < arr.length && !(arr[i].id === e && i !== ind)) {
+		// 			i++;
+		// 		}
+
+		// 		return i === arr.length;
+		// 	}.bind(this);
+		// },
 	},
 	computed: {
+		...mapGetters({
+			fontFiles: "getFontFiles",
+			fontStacks: "getFontStacks",
+			hideDefaultFonts: "getHideDefaultFonts"
+		}),
+		hideDefaultFontsValue: {
+			get() {
+				return this.hideDefaultFonts;
+			},
+			set(value) {
+				this.setHideDefaultFont(value);
+			},
+		},
+		fontFilesArray() {
+			if (!this.fontFiles) {
+				return;
+			}
+			const fontFilesArray = []
+			for (const [key, value] of Object.entries(this.fontFiles)) {
+				fontFilesArray.push({ fontName: key, fontFile: value});
+			}
+			return fontFilesArray;
+		},
 		breakpoint() {
 			return this.$vuetify.breakpoint;
 		},

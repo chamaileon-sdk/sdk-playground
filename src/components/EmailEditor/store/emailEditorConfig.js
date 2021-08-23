@@ -1,4 +1,5 @@
 import BlockLibData from "./editorBlockLibraryContainer";
+import Vue from "vue";
 
 export default {
 	modules: {
@@ -15,13 +16,9 @@ export default {
 			avatar: "",
 		},
 		settings: {
-			fontFiles: {
-				"Zen Tokyo Zoo": "https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap"
-			},
-			fontStacks: [
-				["Zen Tokyo Zoo", "cursive"]
-			],
-			hideDefaultFonts: true,
+			fontFiles: {},
+			fontStacks: [],
+			hideDefaultFonts: false,
 			buttons: {
 				header: [],
 				textInsert: [],
@@ -173,6 +170,7 @@ export default {
 		updateBlockLibsOrder(state, payload) {
 			state.blockLibraries = payload;
 		},
+
 		updateBlockLibs(state, payload) {
 			let newObj = (({ index, ...payload }) => payload)(payload);
 			let c = state.blockLibraries[payload.index];
@@ -185,11 +183,45 @@ export default {
 
 		//Fontfiles
 		addFontFile(state) {
-			state.settings.fontFiles[`Font Family ${state.ffKey}`] = ""; // eslint-disable-line
+			console.log(`Font Family ${state.ffKey}`);
+			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, ""); // eslint-disable-line
 			state.ffKey++;
 		},
+
 		removeFontFile(state, fontName) {
-			delete state.settings.fontFiles[fontName];
+			// console.log("XXXXX FONTFILES XXXXXX");
+			// console.log(fontName);
+			// console.log(state.settings.fontFiles[fontName]);
+			Vue.delete(state.settings.fontFiles, fontName);
+		},
+
+		updateFontFile(state, newFontFiles) {
+			// console.log(newFontFiles);
+			Vue.set(state.settings, "fontFiles", newFontFiles)
+		},
+
+		// FontStacks
+		addFontStack(state) {
+			state.settings.fontStacks.push([]);
+		},
+
+		removeFontStack(state, index){
+			console.log(state.settings.fontStacks, index);
+			state.settings.fontStacks.splice(index, 1);
+		},
+
+		async updateFontStack(state, {index, fontStackString}) {
+			console.log({index, fontStackString});
+			const fontStacks =  state.settings.fontStacks;
+			const newFontStack = fontStackString.split(",")
+				.map(str => JSON.parse(JSON.stringify(str.trim())))
+				.filter(x => !!x);
+			fontStacks.splice(index, 1, newFontStack);
+		},
+		// HideDefaultFonts
+		setHideDefaultFont(state, value) {
+			console.log(state, value);
+			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 
 		//Text insert
@@ -262,6 +294,8 @@ export default {
 		},
 		getBlockLibs: (state) => state.blockLibraries,
 		getFontFiles: (state) => state.settings.fontFiles,
+		getFontStacks: (state) => state.settings.fontStacks,
+		gethideDefaultFonts: (state) => state.settings.hideDefaultFonts,
 		getAddonStateById: (state) => (id) => {
 			const obj = state.addons;
 			for (const addon in obj) {
