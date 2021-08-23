@@ -1,20 +1,17 @@
 export default function (config) {
+	console.log(config)
 	return `const editorInstance = await chamaileonPlugins.editEmail({
 	document: emailDocument, // see "document" tab
 	settings: {
-		fontFiles: {
-			"Zen Tokyo Zoo": "https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap"
-		},
-		fontStacks: [
-			["Zen Tokyo Zoo", "cursive"]
-		],
-		hideDefaultFonts: true,
 		buttons: {
 			header: ${calculateHeader(config)}
 			textInsert: ${calculateTextInsert(config)}
 		},
 		elements: ${calculateElements(config)},
 		blockLibraries: ${calculateBlockLibs(config)},
+		fontFiles: ${JSON.stringify(config.settings.fontFiles, null, "\t\t\t")},
+		fontStacks: ${JSON.stringify(config.settings.fontStacks)},
+		hideDefaultFonts: ${JSON.stringify(config.settings.hideDefaultFonts)},
 		addons: {
 			blockLock: ${calculateBL(config)},
 			variableSystem: ${calculateVE(config)}

@@ -91,7 +91,7 @@ export default {
 						title: "Custom Fonts",
 						icon: "format-font",
 						to: "#custom-fonts",
-						codePropToMatch: "customFonts",
+						codePropToMatch: "fontFiles",
 					},
 					{
 						title: "Addons",
