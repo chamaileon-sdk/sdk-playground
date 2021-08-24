@@ -98,6 +98,8 @@
 			Font Stacks
 		</div>
 
+		<p>Font stacks are displayed in an alphabetical order in the editor.</p>
+
 		<OptionWrapper>
 			<template>
 				<v-row align="center" justify="end" class="ma-0">
