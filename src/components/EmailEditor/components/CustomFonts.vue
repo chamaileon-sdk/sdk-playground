@@ -32,7 +32,7 @@
 		</v-row>
 
 		<div class="title pb-6">
-			Set Font Files
+			Font Files
 		</div>
 		<OptionWrapper>
 			<template>
@@ -100,7 +100,7 @@
 		</OptionWrapper>
 
 		<div class="title pb-6">
-			Set Font Stacks
+			Font Stacks
 		</div>
 
 		<OptionWrapper>
@@ -125,11 +125,11 @@
 							<v-list-item-content class="ma-0 pa-0">
 								<v-row class="ma-0 pa-0">
 
-									<v-col cols="6" xl="6" class="pa-2" align-self="center">
+									<v-col cols="6" xl="9" class="pa-2" align-self="center">
 										<v-text-field
 											dense
 											hide-details="true"
-											label="Font file"
+											label="Font stack"
 											:value="value"
 											@input="updateFontStackDebounced({ index, fontStackString: $event })"
 											outlined
