@@ -1,4 +1,5 @@
 import BlockLibData from "./editorBlockLibraryContainer";
+import Vue from "vue";
 
 export default {
 	modules: {
@@ -7,6 +8,7 @@ export default {
 	state: () => ({
 		key: 0,
 		blKey: 0,
+		ffKey: 0,
 		tiID: 0,
 		user: {
 			enabled: true,
@@ -14,6 +16,9 @@ export default {
 			avatar: "",
 		},
 		settings: {
+			fontFiles: {},
+			fontStacks: [],
+			hideDefaultFonts: false,
 			buttons: {
 				header: [],
 				textInsert: [],
@@ -165,6 +170,7 @@ export default {
 		updateBlockLibsOrder(state, payload) {
 			state.blockLibraries = payload;
 		},
+
 		updateBlockLibs(state, payload) {
 			let newObj = (({ index, ...payload }) => payload)(payload);
 			let c = state.blockLibraries[payload.index];
@@ -173,6 +179,41 @@ export default {
 				...c,
 				...newObj,
 			});
+		},
+
+		//Fontfiles
+		addFontFile(state) {
+			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, ""); // eslint-disable-line
+			state.ffKey++;
+		},
+
+		removeFontFile(state, fontName) {
+			Vue.delete(state.settings.fontFiles, fontName);
+		},
+
+		updateFontFile(state, newFontFiles) {
+			Vue.set(state.settings, "fontFiles", newFontFiles)
+		},
+
+		// FontStacks
+		addFontStack(state) {
+			state.settings.fontStacks.push([]);
+		},
+
+		removeFontStack(state, index){
+			state.settings.fontStacks.splice(index, 1);
+		},
+
+		async updateFontStack(state, {index, fontStackString}) {
+			const fontStacks =  state.settings.fontStacks;
+			const newFontStack = fontStackString.split(",")
+				.map(str => JSON.parse(JSON.stringify(str.trim())))
+				.filter(x => !!x);
+			fontStacks.splice(index, 1, newFontStack);
+		},
+		// HideDefaultFonts
+		setHideDefaultFont(state, value) {
+			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 
 		//Text insert
@@ -244,6 +285,9 @@ export default {
 			return state.settings.elements;
 		},
 		getBlockLibs: (state) => state.blockLibraries,
+		getFontFiles: (state) => state.settings.fontFiles,
+		getFontStacks: (state) => state.settings.fontStacks,
+		gethideDefaultFonts: (state) => state.settings.hideDefaultFonts,
 		getAddonStateById: (state) => (id) => {
 			const obj = state.addons;
 			for (const addon in obj) {

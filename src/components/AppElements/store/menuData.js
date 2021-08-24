@@ -88,6 +88,12 @@ export default {
 						codePropToMatch: "blockLibraries",
 					},
 					{
+						title: "Custom Fonts",
+						icon: "format-font",
+						to: "#custom-fonts",
+						codePropToMatch: "fontFiles",
+					},
+					{
 						title: "Addons",
 						icon: "puzzle-outline",
 						to: "#addons",
