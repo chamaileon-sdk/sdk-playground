@@ -82,7 +82,7 @@
 										class="ml-auto pa-2"
 									>
 										<DeleteButton
-											@click="removeFontFile(name)"
+											@click="removeFontFile(font.fontName)"
 										></DeleteButton>
 									</v-col>
 								</v-row>
@@ -111,12 +111,12 @@
 				style="overflow-y: auto"
 			>
 
-				<draggable handle=".dtrigger" v-model="fontStacks">
+				<!-- <draggable handle=".dtrigger" v-model="fontStacks"> -->
 					<div v-for="(value, index) in fontStacks" :key="index">
 						<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
-							<v-list-item-icon class="align-self-center ma-0 mx-3">
+							<!-- <v-list-item-icon class="align-self-center ma-0 mx-3">
 								<v-icon class="dtrigger">mdi-menu</v-icon>
-							</v-list-item-icon>
+							</v-list-item-icon> -->
 							<v-list-item-content class="ma-0 pa-0">
 								<v-row class="ma-0 pa-0">
 
@@ -146,9 +146,8 @@
 								</v-row>
 							</v-list-item-content>
 						</v-card>
-
 					</div>
-				</draggable>
+				<!-- </draggable> -->
 
 			</v-card>
 		</OptionWrapper>
@@ -165,7 +164,7 @@
 <script>
 import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
-import draggable from "vuedraggable";
+// import draggable from "vuedraggable";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import { mapMutations, mapGetters } from "vuex";
 
@@ -182,7 +181,7 @@ export default {
 	components: {
 		DeleteButton,
 		AddButton,
-		draggable,
+		// draggable,
 		OptionWrapper,
 	},
 	methods: {
