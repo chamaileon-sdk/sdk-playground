@@ -61,6 +61,18 @@
 										></v-text-field>
 									</v-col>
 
+									<v-col
+										v-if="breakpoint.lgAndDown"
+										cols="6"
+										xl="3"
+										align-self="center"
+										class="ml-auto pa-2"
+									>
+										<DeleteButton
+											@click="removeFontFile(font.fontName)"
+										></DeleteButton>
+									</v-col>
+
 
 									<v-col cols="6" xl="6" class="pa-2" align-self="center">
 										<v-text-field
@@ -131,6 +143,18 @@
 											@input="updateFontStackDebounced({ index, fontStackString: $event })"
 											outlined
 										></v-text-field>
+									</v-col>
+
+									<v-col
+										v-if="breakpoint.lgAndDown"
+										cols="6"
+										xl="3"
+										align-self="center"
+										class="ml-auto pa-2"
+									>
+										<DeleteButton
+											@click="removeFontStack(index)"
+										></DeleteButton>
 									</v-col>
 
 
