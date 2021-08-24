@@ -9,8 +9,8 @@ export default function (config) {
 		},
 		elements: ${calculateElements(config)},
 		blockLibraries: ${calculateBlockLibs(config)},
-		fontFiles: ${JSON.stringify(config.settings.fontFiles, null, "\t\t\t")},
-		fontStacks: ${JSON.stringify(config.settings.fontStacks)},
+		fontFiles: ${calculateFontFiles(config)},
+		fontStacks: ${calculateFontStacks(config)},
 		hideDefaultFonts: ${JSON.stringify(config.settings.hideDefaultFonts)},
 		addons: {
 			blockLock: ${calculateBL(config)},
@@ -178,3 +178,18 @@ const calculateTextInsert = (config) => {
 
 	return literal;
 };
+
+const calculateFontFiles = (config) => {
+	const objKeysAndValues = Object.entries(config.settings.fontFiles).map(([key, value]) => {
+		return `\t\t\t"${key}": "${value}"`
+	}).join(",\n");
+	return `{\n${objKeysAndValues}\n\t\t}`
+}
+
+const calculateFontStacks = (config) => {
+	const innerArrays = config.settings.fontStacks.map(stack => {
+		return `\n\t\t\t[\n${stack.map(item => `\t\t\t\t"${item}"`).join(",\n")}\n\t\t\t]`;
+	});
+
+	return `[${innerArrays}\n\t\t]`;
+}
