@@ -1,5 +1,4 @@
 export default function (config) {
-	console.log(config)
 	return `const editorInstance = await chamaileonPlugins.editEmail({
 	document: emailDocument, // see "document" tab
 	settings: {

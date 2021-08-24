@@ -59,7 +59,6 @@
 export default {
 	created() {
 		this.img = require(`@/assets/${this.image}`);
-		console.log("wtf", this.readMoreUrl, typeof this.readMoreUrl)
 	},
 
 	methods: {
