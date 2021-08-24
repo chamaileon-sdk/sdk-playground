@@ -236,7 +236,7 @@ export default {
 		...mapGetters({
 			fontFiles: "getFontFiles",
 			fontStacks: "getFontStacks",
-			hideDefaultFonts: "getHideDefaultFonts"
+			hideDefaultFonts: "gethideDefaultFonts"
 		}),
 		hideDefaultFontsValue: {
 			get() {
