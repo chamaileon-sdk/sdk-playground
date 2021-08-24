@@ -183,7 +183,6 @@ export default {
 
 		//Fontfiles
 		addFontFile(state) {
-			console.log(`Font Family ${state.ffKey}`);
 			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, ""); // eslint-disable-line
 			state.ffKey++;
 		},
@@ -202,12 +201,10 @@ export default {
 		},
 
 		removeFontStack(state, index){
-			console.log(state.settings.fontStacks, index);
 			state.settings.fontStacks.splice(index, 1);
 		},
 
 		async updateFontStack(state, {index, fontStackString}) {
-			console.log({index, fontStackString});
 			const fontStacks =  state.settings.fontStacks;
 			const newFontStack = fontStackString.split(",")
 				.map(str => JSON.parse(JSON.stringify(str.trim())))

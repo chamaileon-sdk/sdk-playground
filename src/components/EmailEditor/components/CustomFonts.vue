@@ -21,11 +21,6 @@
 				<p>Once you added the required Font URL, you need to define the Font stack to ensure that email clients (like Gmail) that don't support custom fonts will display your text in a similar web-safe font. </p>
 				<p style="margin-bottom: 0;">As an example, the Font stack for Poppins would look like this:</p>
 				<p style="font-family: monospace;">Poppins, Helvetica Neue, Helvetica, Arial, sans-serif</p>
-					<p class="text-center">
-						<v-btn color="success" href="https://help.chamaileon.io/en/articles/5432638-how-to-add-other-google-fonts-or-custom-fonts-to-my-email-s" target="_blank">
-							Read more
-						</v-btn>
-					</p>
 			</v-col>
 			<!-- <v-col md="1" class="text-right">
 			</v-col> -->
