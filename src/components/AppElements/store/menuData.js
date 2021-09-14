@@ -30,6 +30,12 @@ export default {
 						to: "#language",
 						codePropToMatch: "locale",
 					},
+					{
+						title: "Developer",
+						icon: "alarm-light",
+						to: "#developer",
+						codePropToMatch: "developer",
+					},
 				],
 			},
 			{
