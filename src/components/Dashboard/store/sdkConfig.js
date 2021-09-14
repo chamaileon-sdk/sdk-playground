@@ -1,5 +1,8 @@
 export default {
 	state: () => ({
+		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
+		apiKey: "",
+		environmentName: "serverless-windowscope",
 		locale: "en",
 		urls: {
 			splashScreen:

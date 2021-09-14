@@ -70,17 +70,59 @@ export default new Vuex.Store({
 	},
 	actions: {
 		async initSDK({ commit, state }) {
-			const accessTokenRequest = await fetch(
-				"https://sdk-demo-api.chamaileon.io/getAuthToken"
-			);
+			const apiBackend = state.sdkConfig.apiBackend;
+			console.log(apiBackend);
 
-			const accessTokenResponse = await accessTokenRequest.json();
-			const accessToken = accessTokenResponse.result;
+			async function fetchAccessToken() {				
+				if(apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
+					console.log("DEMO IS INITED")
+					const accessTokenRequest = await fetch(
+						"https://sdk-demo-api.chamaileon.io/getAuthToken"
+					);
+					const accessTokenResponse = await accessTokenRequest.json()
+					return accessTokenResponse.result
+				} else {
+					const apiKey = state.sdkConfig.apiKey;
+					const accessTokenRequest = await fetch(apiBackend, {
+						method: "GET",
+						headers: {
+							"Authorization": `Bearer ${apiKey}`,
+						},
+					})
+					if (!accessTokenRequest.ok) {
+						throw new Error("Auth error")
+					}
+					const accessTokenResponse = await accessTokenRequest.json()
+					return accessTokenResponse.result
+				}
+			}
 
+			async function getAccessToken() {
+				let accessTokenCache = JSON.parse(localStorage.getItem("chamaileonSdkAccessTokenCache"))
+				const now = new Date();
+				
+				if (!accessTokenCache || !accessTokenCache.accessToken || now - new Date(accessTokenCache.createdAt) > 3600000) {
+					const apiKey = state.sdkConfig.apiKey;
+					const accessToken = await fetchAccessToken({ apiKey })
+
+					accessTokenCache = {
+						accessToken,
+						createdAt: now
+					}
+
+					localStorage.setItem("chamaileonSdkAccessTokenCache", JSON.stringify(accessTokenCache))
+				}
+
+				return accessTokenCache.accessToken
+			}
+
+
+			const accessToken = await getAccessToken();
+						
 			const chamaileonPlugins = await window.chamaileonSdk.init({
 				mode: "serverless",
-				environmentName: "serverless-windowscope",
-				accessToken: accessToken,
+				environmentName: state.sdkConfig.environmentName,
+				accessToken,
 				whitelabel: {
 					...this.state.sdkConfig,
 				},

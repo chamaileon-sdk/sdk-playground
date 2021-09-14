@@ -2,14 +2,23 @@
 	<div>
 		<h2>Developer settings</h2>
 		<p>
-			This example project is only for demo and testing purposes, and it stores your API key in the localStorage. 
-			You should NEVER store your API key on the client side in real life. 
-			You should store it on your backend and create a route on your side that generates the access token. 
-			Then your client side can use that route to fetch an access token. 
-			Make sure, that the domain you are trying this example on, is enabled in your environment associated to your API key.
+			This is a warning here!!
 		</p>
 		<OptionsWrapper>
-			<ApiBackendSelector />
+			<ApiBackendSelector class="rounded-t rounded-0 d-flex pa-4" />
+			<ApiKey class="rounded-0 d-flex pa-4"/>
+			<ChamaileonSdk class="rounded-0 d-flex pa-4"/>
+			<EnvironmentName class="rounded-b rounded-0 d-flex pa-4"/>
+			<v-btn
+				@click="initSdk"
+				target="_blank"
+				class="ma-0 mt-3 mr-3"
+				depressed
+				color="primary"
+			>
+				<v-icon left>mdi-reload-alert</v-icon>
+					UPDATE SDK
+			</v-btn>
 		</OptionsWrapper>
 	</div>
 </template>
@@ -17,12 +26,23 @@
 <script>
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import ApiBackendSelector from "./Developer/ApiBackendSelector.vue";
+import ApiKey from "./Developer/ApiKey.vue";
+import EnvironmentName from "./Developer/EnvironmentName.vue";
+import ChamaileonSdk from "./Developer/ChamaileonSdk.vue";
 
 export default {
 	components: {
 		ApiBackendSelector,
+		ApiKey,
 		OptionsWrapper,
+		EnvironmentName,
+		ChamaileonSdk
 	},
+	methods: {
+		initSdk() {
+			this.$store.dispatch("updateSDK");
+		}
+	}
 };
 </script>
 
