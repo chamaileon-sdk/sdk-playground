@@ -7,7 +7,8 @@
 				v-show="
 					route !== '/htmlgenerator' &&
 					route !== '/htmlimport' &&
-					route !== '/sdk'
+					route !== '/sdk' && 
+					route !== '/megagallery'
 				"
 			>
 				Document
@@ -16,7 +17,8 @@
 				v-show="
 					route === '/emailpreview' ||
 					route === '/emaileditor' ||
-					route === '/variableeditor'
+					route === '/variableeditor' ||
+					route === '/megagallery'
 				"
 			>
 				Hooks
@@ -224,6 +226,16 @@ export default {
 
 		editorHooks() {
 			return emailEditorHooksGenerator();
+		},
+
+		// Mega Gallery
+
+		galleryCode() { 
+			return emailEditorCodeGenerator(this.$store.getters.getGalleryConfigObject);
+		},
+
+		galleryHooks() { 
+			return emailEditorCodeGenerator(this.$store.getters.getGalleryConfigObject);
 		},
 
 		//Variable Editor

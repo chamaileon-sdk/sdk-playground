@@ -33,6 +33,7 @@ export default {
 					{
 						title: "Developer",
 						icon: "alarm-light",
+						disabled: process.env.NODE_ENV === "development" ? false : true,
 						to: "#developer",
 						codePropToMatch: "developer",
 					},
@@ -108,8 +109,27 @@ export default {
 				],
 			},
 			{
+				title: "Mega Gallery",
+				icon: "image",
+				to: "megagallery",
+				children: [
+					{
+						title: "Folder Tree",
+						icon: "folder",
+						to: "#folder",
+						codePropToMatch: "folder",
+					},
+					{
+						title: "Settings",
+						icon: "cog-outline",
+						to: "#settings",
+						codePropToMatch: "settings",
+					}
+				],
+			},
+			{
 				title: "Variable Editor",
-				icon: "iframe-variable-outline",
+				icon: "variable",
 				to: "variableeditor",
 				children: [
 					{

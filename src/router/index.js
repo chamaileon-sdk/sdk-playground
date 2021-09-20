@@ -7,6 +7,9 @@ import Dashboard from "../components/Dashboard/view/Dashboard";
 //Email editor
 import EmailEditor from "../components/EmailEditor/view/EmailEditor";
 
+//Mega Gallery
+import MegaGallery from "../components/MegaGallery/view/MegaGallery";
+
 //Thumbnail
 import Thumbnail from "../components/Thumbnail/view/Thumbnail";
 
@@ -38,6 +41,10 @@ const routes = [
 		component: EmailEditor,
 	},
 	{
+		path: "/megagallery",
+		component: MegaGallery,
+	},
+	{
 		path: "/emailthumbnail",
 		component: Thumbnail,
 	},
@@ -53,6 +60,7 @@ const routes = [
 		path: "/htmlgenerator",
 		component: HtmlGenerator,
 	},
+	
 	{
 		path: "/htmlimport",
 		component: HtmlImport,

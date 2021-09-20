@@ -14,7 +14,12 @@
 export default {
 	data () {
 		return {
-			chamaileonSdks: ["https://plugins.chamaileon.io/static/chamaileonSdk.js", "http://localhost:50004/static/chamaileonSdk.js", "https://plugins.chamaileon.io/static/chamaileonSdk-serverlessGallery.js"],
+			chamaileonSdks: [ 
+				"https://plugins.chamaileon.io/static/chamaileonSdk.js",
+				"http://localhost:50004/static/chamaileonSdk.js",
+				"https://plugins.chamaileon.io/static/chamaileonSdk-serverlessGallery.js",
+				"http://localhost:50004/static/chamaileonSdk-serverlessGallery.js"
+			],
 		}
 	},
 	computed: {

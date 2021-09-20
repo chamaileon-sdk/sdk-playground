@@ -45,8 +45,8 @@
 		<Footer
 			:previous="'Email Preview'"
 			:prevTo="'/emailpreview'"
-			:next="'Variable Editor'"
-			:nextTo="'/variableeditor'"
+			:next="'Mega Gallery'"
+			:nextTo="'/megagallery'"
 		/>
 		<OpenButton @openEditorClicked="openEditor" />
 	</div>
@@ -64,15 +64,9 @@ import Addons from "../components/Addons";
 import Settings from "../components/Settings";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 
 export default {
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	},
 	components: {
 		SectionObserver,
 		Header,
@@ -85,8 +79,14 @@ export default {
 		OpenButton,
 		Description,
 	},
-
+	computed: {
+		...mapState(["sdk"]),
+		...mapGetters(["getConfigObject"]),
+	},
 	methods: {
+		...mapActions({
+			openGallery: "openGallery",
+		}),
 		openEditor() {
 			this.sdk.editEmail({
 				...this.$store.getters.getConfigObject,
@@ -133,11 +133,11 @@ export default {
 					},
 
 					onEditImage: ({
-						originalImage,
-						lockDimensions: { width, height },
+						editImgSrc,
+						dimensions,
 					}) => {
-						return new Promise((resolve) => {
-							resolve({ src });
+						return new Promise((resolve) =>  {
+							this.openGallery( {  editImgSrc, dimensions , resolve });
 						});
 					},
 
@@ -206,10 +206,11 @@ export default {
 			});
 		},
 	},
-
-	computed: {
-		...mapState(["sdk"]),
-		...mapGetters(["getConfigObject"]),
+	mounted() {
+		// this.$store.dispatch("updateSDK");
+	},
+	destroyed() {
+		window.chamaileonSdk.destroy;
 	},
 };
 </script>

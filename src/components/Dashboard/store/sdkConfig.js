@@ -2,6 +2,7 @@ export default {
 	state: () => ({
 		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		apiKey: "",
+		chamaileonSdk: "https://plugins.chamaileon.io/static/chamaileonSdk.js",
 		environmentName: "serverless-windowscope",
 		locale: "en",
 		urls: {

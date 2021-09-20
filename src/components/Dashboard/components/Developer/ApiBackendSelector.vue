@@ -14,7 +14,11 @@
 export default {
 	data () {
 		return {
-			apiBackends: ["https://sdk-demo-api.chamaileon.io/getAuthToken", "https://sdk-api.chamaileon.io/api/v1/tokens/generate", "https://sdk-api-staging.chamaileon.io/api/v1/tokens/generate"],
+			apiBackends: [ 
+				{ text: "demo", value: "https://sdk-demo-api.chamaileon.io/getAuthToken" },
+				{ text: "production", value: "https://sdk-api.chamaileon.io/api/v1/tokens/generate" },
+				{ text: "staging", value: "https://sdk-api-staging.chamaileon.io/api/v1/tokens/generate" }
+			],
 		}
 	},
 	computed: {
@@ -23,6 +27,7 @@ export default {
 				return this.$store.state.sdkConfig.apiBackend;
 			},
 			set(value) {
+				localStorage.removeItem("chamaileonSdkAccessTokenCache");
 				this.$store.commit("updateSDKConfig", { apiBackend: value });
 			},
 		},

@@ -33,11 +33,41 @@ import CodeEditor from "./components/AppElements/components/CodeEditor.vue";
 import MenuReworked from "./components/AppElements/components/Menu.vue";
 import NotAvailable from "./components/AppElements/components/NotAvailable.vue";
 
+import { mapState } from "vuex"
+
 export default {
+	metaInfo() {
+		return {
+			script: [
+				{
+					src: this.chamaileonSdk,
+					async: true,
+					defer: true,
+					callback: () => {
+						this.isChamaileonSDKLoaded = true 
+					} 
+				}
+			],	
+		}
+	},
+	data() {
+		return {
+			isChamaileonSDKLoaded: false
+		}
+	},
+	watch: {
+		isChamaileonSDKLoaded() {
+			this.$store.dispatch("initSDK");
+		}
+	},
 	computed: {
+		...mapState({
+			chamaileonSdk: (state) => state.sdkConfig.chamaileonSdk,
+		}),
 		isAvailable() {
 			return this.$vuetify.breakpoint.width > 960;
 		},
+
 	},
 	components: {
 		MenuReworked,
@@ -54,8 +84,6 @@ export default {
 		});
 	},
 	mounted() {
-		this.$store.dispatch("initSDK");
-
 		window.onbeforeunload = function () {
 			localStorage.setItem(
 				"sdkConfig",

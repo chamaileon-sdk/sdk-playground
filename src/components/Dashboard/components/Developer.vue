@@ -10,7 +10,7 @@
 			<ChamaileonSdk class="rounded-0 d-flex pa-4"/>
 			<EnvironmentName class="rounded-b rounded-0 d-flex pa-4"/>
 			<v-btn
-				@click="initSdk"
+				@click="updateSDK"
 				target="_blank"
 				class="ma-0 mt-3 mr-3"
 				depressed
@@ -39,8 +39,8 @@ export default {
 		ChamaileonSdk
 	},
 	methods: {
-		initSdk() {
-			this.$store.dispatch("updateSDK");
+		updateSDK() {
+			this.$store.dispatch("updateSDK", { vm: this });
 		}
 	}
 };
