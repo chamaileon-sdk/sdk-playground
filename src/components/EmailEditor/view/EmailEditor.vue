@@ -207,7 +207,7 @@ export default {
 		},
 	},
 	mounted() {
-		// this.$store.dispatch("updateSDK");
+		this.$store.dispatch("updateSDK");
 	},
 	destroyed() {
 		window.chamaileonSdk.destroy;

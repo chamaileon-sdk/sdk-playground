@@ -3,7 +3,7 @@ export default {
 		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		apiKey: "",
 		chamaileonSdk: "https://plugins.chamaileon.io/static/chamaileonSdk.js",
-		environmentName: "serverless-windowscope",
+		environmentName: "sdk-playground-prod",
 		locale: "en",
 		urls: {
 			splashScreen:

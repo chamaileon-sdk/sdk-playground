@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import editorConfig from "../components/EmailEditor/store/emailEditorConfig";
+import megaGalleryConfig from "../components/MegaGallery/store/megaGalleryConfig";
 import previewConfig from "../components/Preview/store/preview";
 import variableEditorConfig from "../components/VariableEditor/store/variableEditor";
 import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
@@ -17,6 +18,7 @@ export default new Vuex.Store({
 	strict: true,
 	modules: {
 		editorConfig,
+		megaGalleryConfig,
 		previewConfig,
 		variableEditorConfig,
 		document,
@@ -36,8 +38,16 @@ export default new Vuex.Store({
 			state.sdkConfig = sdkConfig;
 		},
 
+		setIsGalleryVisible(state, payload) {
+			state.isGalleryVisible = payload;
+		},
+
 		editorConfigLoad(state, editorConfig) {
 			state.editorConfig = editorConfig;
+		},
+
+		megaGalleryConfigLoad(state, megaGalleryConfig) {
+			state.megaGalleryConfig = megaGalleryConfig;
 		},
 
 		previewConfigLoad(state, previewConfig) {
@@ -71,16 +81,14 @@ export default new Vuex.Store({
 	actions: {
 		async initSDK({ commit, state }) {
 			const apiBackend = state.sdkConfig.apiBackend;
-			console.log(apiBackend);
 
 			async function fetchAccessToken() {				
 				if(apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
-					console.log("DEMO IS INITED")
 					const accessTokenRequest = await fetch(
 						"https://sdk-demo-api.chamaileon.io/getAuthToken"
 					);
-					const accessTokenResponse = await accessTokenRequest.json()
-					return accessTokenResponse.result
+					const accessTokenResponse = await accessTokenRequest.json();
+					return accessTokenResponse.result;
 				} else {
 					const apiKey = state.sdkConfig.apiKey;
 					const accessTokenRequest = await fetch(apiBackend, {
@@ -101,9 +109,8 @@ export default new Vuex.Store({
 				let accessTokenCache = JSON.parse(localStorage.getItem("chamaileonSdkAccessTokenCache"))
 				const now = new Date();
 				
-				if (!accessTokenCache || !accessTokenCache.accessToken || now - new Date(accessTokenCache.createdAt) > 3600000) {
-					const apiKey = state.sdkConfig.apiKey;
-					const accessToken = await fetchAccessToken({ apiKey })
+				if (!accessTokenCache || !accessTokenCache.accessToken || now - new Date(accessTokenCache.createdAt) > 3600000) {			
+					const accessToken = await fetchAccessToken();
 
 					accessTokenCache = {
 						accessToken,
@@ -111,14 +118,16 @@ export default new Vuex.Store({
 					}
 
 					localStorage.setItem("chamaileonSdkAccessTokenCache", JSON.stringify(accessTokenCache))
-				}
 
+				} 
+				
 				return accessTokenCache.accessToken
 			}
 
 
 			const accessToken = await getAccessToken();
-						
+			console.log(accessToken);
+
 			const chamaileonPlugins = await window.chamaileonSdk.init({
 				mode: "serverless",
 				environmentName: state.sdkConfig.environmentName,
@@ -131,9 +140,12 @@ export default new Vuex.Store({
 			commit("addSDK", chamaileonPlugins);
 			commit("changeLogoFunction", window.createLogo);
 		},
-		async updateSDK({ dispatch }) {
+		async updateSDK({ dispatch }, { vm = null } = {} ) {
+			if(vm) {
+				vm.$router.go();
+			}
 			window.chamaileonSdk.destroy();
-
+			
 			window.document
 				.querySelectorAll(".in-chamaileon-iframe")
 				.forEach((c) => c.remove());
@@ -148,13 +160,13 @@ export default new Vuex.Store({
 				styles[i].innerHTML.includes("chamaileon-plugin-wrapper iframe")
 			)
 				i--;
-
+				
 			i = elems.length;
-
+				
 			while (i--) {
 				elems[i].remove();
 			}
-
+			
 			dispatch("initSDK");
 		},
 	},
@@ -162,6 +174,12 @@ export default new Vuex.Store({
 		getEmail: (state) => {
 			return state.document;
 		},
+
+		getGalleryConfigObject: (state) => {
+			let x = JSON.parse(JSON.stringify(state.megaGalleryConfig));
+			return x;
+
+		}, 
 
 		getConfigObject: (state) => {
 			//Deep copy
