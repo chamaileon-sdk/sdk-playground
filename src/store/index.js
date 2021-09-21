@@ -126,7 +126,6 @@ export default new Vuex.Store({
 
 
 			const accessToken = await getAccessToken();
-			console.log(accessToken);
 
 			const chamaileonPlugins = await window.chamaileonSdk.init({
 				mode: "serverless",

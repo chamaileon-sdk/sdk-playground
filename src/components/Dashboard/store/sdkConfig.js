@@ -3,7 +3,7 @@ export default {
 		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		apiKey: "",
 		chamaileonSdk: "https://plugins.chamaileon.io/static/chamaileonSdk.js",
-		environmentName: "sdk-playground-prod",
+		environmentName: location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
 		locale: "en",
 		urls: {
 			splashScreen:
