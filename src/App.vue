@@ -113,12 +113,17 @@ export default {
 				"emailDocument",
 				JSON.stringify(this.$store.state.document)
 			);
+			localStorage.setItem(
+				"megaGalleryConfig",
+				JSON.stringify(this.$store.state.megaGalleryConfig)
+			);
 		}.bind(this);
 
 		for (let elem of [
 			"sdkConfig",
 			"editorConfig",
 			"previewConfig",
+			"megaGalleryConfig",
 			"variableEditorConfig",
 			"thumbnailConfig",
 			"generatorConfig",
