@@ -17,8 +17,8 @@
 				v-show="
 					route === '/emailpreview' ||
 					route === '/emaileditor' ||
-					route === '/variableeditor' ||
-					route === '/megagallery'
+					route === '/megagallery' ||
+					route === '/variableeditor'
 				"
 			>
 				Hooks
@@ -131,6 +131,7 @@ import sdkCodeGenerator from "./CodeEditor/codeGenerators/sdkCodeGenerator";
 import thumbnailCodeGenerator from "./CodeEditor/codeGenerators/thumbnailCodeGenerator";
 import previewCodeGenerator from "./CodeEditor/codeGenerators/previewCodeGenerator";
 import emailEditorCodeGenerator from "./CodeEditor/codeGenerators/emailEditorCodeGenerator";
+import megaGalleryCodeGenerator from "./CodeEditor/codeGenerators/megaGalleryCodeGenerator";
 import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEditorCodeGenerator";
 import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
@@ -141,6 +142,7 @@ import dummyHtmlCodeGenerator from "./CodeEditor/codeGenerators/dummyHtmlCodeGen
 import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
+import megaGalleryHooksGenerator from "./CodeEditor/hooks/megaGalleryHooks";
 
 import { mapGetters } from "vuex";
 
@@ -230,12 +232,12 @@ export default {
 
 		// Mega Gallery
 
-		galleryCode() { 
-			return emailEditorCodeGenerator(this.$store.getters.getGalleryConfigObject);
+		galleryCode() {
+			return megaGalleryCodeGenerator(this.$store.getters.getGalleryConfigObject);
 		},
 
 		galleryHooks() { 
-			return emailEditorCodeGenerator(this.$store.getters.getGalleryConfigObject);
+			return megaGalleryHooksGenerator();
 		},
 
 		//Variable Editor
@@ -275,6 +277,7 @@ export default {
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
 			else if (this.$route.path === "/sdk") return this.sdkCode;
+			else if (this.$route.path === "/megagallery") return this.galleryCode;
 			else if (this.$route.path === "/emailpreview") return this.previewCode;
 			else if (this.$route.path === "/emailthumbnail")
 				return this.thumbnailCode;
@@ -289,6 +292,7 @@ export default {
 		hooks() {
 			if (this.$route.path === "/emaileditor") return this.editorHooks;
 			else if (this.$route.path === "/emailpreview") return this.previewHooks;
+			else if (this.$route.path === "/megagallery") return this.galleryHooks;
 			else if (this.$route.path === "/variableeditor")
 				return this.variableEditorHooks;
 			else return "//There are no hooks available";
