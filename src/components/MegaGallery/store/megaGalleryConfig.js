@@ -90,6 +90,15 @@ export default {
 				state[key] = value;
 			})
 		},
+		setSelectedFolderId(state, payload) {
+			state.settings.selectedFolderId = payload;
+		},
+		setMaxFileSize(state, payload) {
+			state.settings.maxFileSize = payload;
+		},
+		setMaxImagePerPage(state, payload) {
+			state.settings.maxImagePerPage = payload;
+		},
 		setFolderTree(state, payload) {
 			state.settings.folderTree = payload;
 		}

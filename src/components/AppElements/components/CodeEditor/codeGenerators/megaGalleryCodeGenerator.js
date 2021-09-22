@@ -3,7 +3,7 @@ export default function (megaGalleryConfig) {
 			editImgSrc: editImgSrc,
 			dimensions: dimensions,
 			settings: {
-				folderTree: ${ JSON.stringify(megaGalleryConfig.settings.folderTree, null, 4) },
+				folderTree: ${JSON.stringify(megaGalleryConfig.settings.folderTree, null, "\t" )},
 				selectedFolderId: ${ megaGalleryConfig.settings.selectedFolderId },
 				maxImagePerPage: ${ megaGalleryConfig.settings.maxImagePerPage },
 				maxFileSize: ${ megaGalleryConfig.settings.maxFileSize },

@@ -17,6 +17,9 @@
 			<div class="section" id="folder">
 				<FolderTree />
 			</div>
+			<div class="section" id="settings">
+				<Settings />
+			</div>
 			
 		</SectionObserver>
 		<Footer
@@ -35,6 +38,7 @@ import Footer from "../../ViewUtilities/components/Footer.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import FolderTree from "../components/FolderTree";
+import Settings from "../components/Settings.vue";
 
 import { mapActions } from "vuex";
 
@@ -51,6 +55,7 @@ export default {
 		Footer,
 		OpenButton,
 		Description,
+		Settings,
 	},
 	methods: {
 		...mapActions({

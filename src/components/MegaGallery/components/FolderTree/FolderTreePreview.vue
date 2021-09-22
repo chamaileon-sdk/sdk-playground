@@ -109,9 +109,18 @@ export default {
 			}
 		}
 	},
+	watch: {
+		activeFolders: {
+			handler: function (value) {
+				this.setSelectedFolderId(value[0]);
+			},
+			deep: true,
+		}
+	},
 	methods: {
 		...mapMutations({
 			setFolderTree: "setFolderTree",
+			setSelectedFolderId: "setSelectedFolderId"
 		}),
 		editName(item) {
 			const obj = JSON.parse(JSON.stringify(this.folderTree));			
