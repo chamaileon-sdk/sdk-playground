@@ -147,9 +147,6 @@ export default new Vuex.Store({
 			commit("changeLogoFunction", window.createLogo);
 		},
 		async updateSDK({ dispatch }) {
-			if(vm) {
-				vm.$router.go();
-			}
 			window.chamaileonSdk.destroy();
 			
 			window.document
