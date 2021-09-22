@@ -4,7 +4,7 @@
 			height="auto"
 			color="primary"
 			background-color="transparent"
-			show-arrows
+			show-arrows="always"
 			hide-slider
 			slider-size="3"
 		>

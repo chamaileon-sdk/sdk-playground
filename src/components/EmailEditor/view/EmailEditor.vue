@@ -34,6 +34,10 @@
 				<BlockLibraries />
 			</div>
 
+			<div class="section" id="custom-fonts">
+				<CustomFonts />
+			</div>
+
 			<div class="section" id="addons">
 				<Addons />
 			</div>
@@ -59,6 +63,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header";
 import Elements from "../components/Elements";
 import BlockLibraries from "../components/BlockLibraries";
+import CustomFonts from "../components/CustomFonts";
 import TextInsert from "../components/TextInsert";
 import Addons from "../components/Addons";
 import Settings from "../components/Settings";
@@ -73,6 +78,7 @@ export default {
 		Footer,
 		Elements,
 		BlockLibraries,
+		CustomFonts,
 		TextInsert,
 		Addons,
 		Settings,

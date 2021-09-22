@@ -43,7 +43,14 @@ export default new Vuex.Store({
 		},
 
 		editorConfigLoad(state, editorConfig) {
-			state.editorConfig = editorConfig;
+			state.editorConfig = {
+				...state.editorConfig,
+				...editorConfig,
+				settings: {
+					...state.editorConfig.settings,
+					...editorConfig.settings
+				}
+			};
 		},
 
 		megaGalleryConfigLoad(state, megaGalleryConfig) {
