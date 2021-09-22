@@ -40,7 +40,7 @@ export default {
 	},
 	methods: {
 		updateSDK() {
-			this.$store.dispatch("updateSDK", { vm: this });
+			this.$store.dispatch("updateSDK");
 		}
 	}
 };

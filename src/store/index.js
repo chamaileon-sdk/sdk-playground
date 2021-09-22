@@ -146,7 +146,7 @@ export default new Vuex.Store({
 			commit("addSDK", chamaileonPlugins);
 			commit("changeLogoFunction", window.createLogo);
 		},
-		async updateSDK({ dispatch }, { vm = null } = {} ) {
+		async updateSDK({ dispatch }) {
 			if(vm) {
 				vm.$router.go();
 			}
