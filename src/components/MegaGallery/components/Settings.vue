@@ -2,15 +2,15 @@
 	<div>
 		<h2>Other settings</h2>
 		<p>
-			You can also set the maximum size of images what your users still can upload to your server. 
-			The Gallery uses infinit scrolling to show the images. You can set the number of picture to load with one request.
+			You can also set the maximum size of images that your users still can upload to your server. 
+			The Gallery uses infinite scrolling to show the images. You can set the number of pictures to load with a request.
 		</p>
 		<OptionsWrapper>
 			<v-row
 				elevation="0"
 				class="d-flex white rounded justify-center align-center pa-4"
 			>
-				<v-col :cols="columns" class="pa-0 ma-0">
+				<v-col cols="12" md="6" class="pa-0 ma-0">
 					<v-text-field
 						dense
 						v-model.lazy="fileSize"
@@ -21,7 +21,7 @@
 						suffix="MBs"
 					></v-text-field>
 				</v-col>
-				<v-col :cols="columns" class="pa-0 ma-0">
+				<v-col cols="12" md="6" class="pa-0 ma-0">
 					<v-text-field
 						dense
 						v-model.lazy="imagePerPage"
@@ -73,9 +73,6 @@ export default {
 			setMaxImagePerPage: "setMaxImagePerPage",
 		}),
 	},
-	mounted() {
-		console.log(this.maxImagePerPage)
-	}
 };
 </script>
 

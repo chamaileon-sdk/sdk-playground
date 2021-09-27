@@ -2,7 +2,7 @@
 	<div>
 		<h2>Developer settings</h2>
 		<p>
-			This is a warning here!!
+			
 		</p>
 		<OptionsWrapper>
 			<ApiBackendSelector class="rounded-t rounded-0 d-flex pa-4" />

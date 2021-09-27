@@ -5,31 +5,9 @@ export default function () {
 	let db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src",] });
 	let images = db.collection("images");
 
-	const rootImages = [
-		{
-			parentId: "root",
-			name: "Favorite image",
-			src: "https://images.pexels.com/photos/22221/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-			_id: "001",
-			createdAt: new Date() - 100
-		},
-		{
-			parentId: "root",
-			name: "Favorite image 2",
-			src: "https://images.pexels.com/photos/761993/pexels-photo-761993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-			_id: "002",
-			createdAt: new Date() - 1000
-		},
-		{
-			parentId: "root",
-			name: "Favorite image 3",
-			src: "https://images.pexels.com/photos/2050999/pexels-photo-2050999.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-			_id: "003",
-			createdAt: new Date() - 10000
-		},
-	];
+	const rootImages = [ ... ];
 
-	images.update(rootImages).catch(error => console.error(error));
+	images.insert(rootImages).catch(error => console.error(error));
 	let count = 0;
 	let loadedItems = [];
 

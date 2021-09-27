@@ -6,28 +6,99 @@ let images = db.collection("images");
 const rootImages = [
 	{
 		parentId: "root",
-		name: "Favorite image",
+		name: "Choose Joy",
 		src: "https://images.pexels.com/photos/22221/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
 		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
 		createdAt: new Date(),
 	},
 	{
 		parentId: "root",
-		name: "Favorite image 2",
+		name: "Happy girl with tablet",
 		src: "https://images.pexels.com/photos/761993/pexels-photo-761993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-		_id: "002",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
 		createdAt: new Date(),
 	},
 	{
 		parentId: "root",
-		name: "Favorite image 3",
+		name: "Happy girl in the garden",
 		src: "https://images.pexels.com/photos/2050999/pexels-photo-2050999.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
 		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
 		createdAt: new Date(),
 	},
+	{
+		parentId: "root",
+		name: "Flowers",
+		src: "https://images.pexels.com/photos/68507/spring-flowers-flowers-collage-floral-68507.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Love <3 is love",
+		src: "https://images.pexels.com/photos/2519130/pexels-photo-2519130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Happy family",
+		src: "https://images.pexels.com/photos/5792901/pexels-photo-5792901.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Kitty cat",
+		src: "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Best friend",
+		src: "https://images.pexels.com/photos/34504/soldier-dog-companion-service.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Chamaileon Logo",
+		src: "https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/13958031_207694299633505_3207991402669478877_o.png?_nc_cat=107&ccb=1-5&_nc_sid=973b4a&_nc_ohc=Ea0CT0G5B1AAX8uCHYQ&_nc_ht=scontent.fbud5-1.fna&oh=6eae5f3aa70fb20b3b32d38b125b41aa&oe=617868EE",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Branding",
+		src: "https://images.pexels.com/photos/7661590/pexels-photo-7661590.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Abc ...",
+		src: "https://images.pexels.com/photos/1337382/pexels-photo-1337382.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Keep distance",
+		src: "https://images.pexels.com/photos/6999226/pexels-photo-6999226.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
+	{
+		parentId: "root",
+		name: "Support a small business",
+		src: "https://images.pexels.com/photos/7661216/pexels-photo-7661216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
+		createdAt: new Date(),
+	},
 ];
+images.remove({ parentId: { $eq: "root" } });
+images.insert(rootImages).catch(error => console.error(error));
 
-images.update(rootImages).catch(error => console.error(error));
 let count = 0;
 let loadedItems = [];
 

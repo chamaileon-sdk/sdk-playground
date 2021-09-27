@@ -5,12 +5,15 @@
 				<Description
 					:title="'Mega Gallery'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
-					:image="'EmailEditorIllustration.svg'"
+					:image="'EmailThumbnailIllustration.svg'"
 				>
 					<p>
-						You can use our Gallery plugin to show image assets to your users. 
-						Users can use our basic editing tool to crop, 
-						resize the image or you can add 3rd party application for more advanced experience.
+						The Gallery plugin shows stored image assets to choose from and insert into emails during creation.
+						Out of the box supports some basic editing features like cropping and resizing, but 
+						with 3rd party image-editor, you can extend it's capability.
+						<br>
+						<br>
+						After set up, open the Gallery from the editor with editing an image element. 
 					</p>
 				</Description>
 			</div>

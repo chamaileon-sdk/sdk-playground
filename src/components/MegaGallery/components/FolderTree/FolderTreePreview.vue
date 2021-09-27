@@ -112,6 +112,7 @@ export default {
 	watch: {
 		activeFolders: {
 			handler: function (value) {
+				if(!value[0]) return;
 				this.setSelectedFolderId(value[0]);
 			},
 			deep: true,
