@@ -1,8 +1,17 @@
 export default function (sdkConfig) {
 	return `const chamaileonPlugins = await window.chamaileonSdk.init({
-		container: document.getElementById("mega-gallery-wrapper"),
-		editImgSrc: editImgSrc,
-		dimensions: dimensions,
-		settings: state.settings,
-    });`;
+		mode: "serverless",
+		accessToken: accessToken,
+		whitelabel: {
+			urls: {
+				createLogoJS: "${sdkConfig.urls.createLogoJS}",
+				splashScreen: "${sdkConfig.urls.splashScreen}",
+			},
+			colors: {
+				primary: "${sdkConfig.colors.primary}",
+				secondary: "${sdkConfig.colors.secondary}",
+			},
+			locale: '${sdkConfig.locale}',
+		}
+	});`;
 }

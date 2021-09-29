@@ -67,7 +67,6 @@ export default {
 		isAvailable() {
 			return this.$vuetify.breakpoint.width > 960;
 		},
-
 	},
 	components: {
 		MenuReworked,
