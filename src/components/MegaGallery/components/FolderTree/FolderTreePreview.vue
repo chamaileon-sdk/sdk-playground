@@ -36,6 +36,13 @@
 				slot-scope="{ item, open }"
 			>
 				<v-icon
+					v-if="selectedFolderId === item._id"
+					color="orange"
+					class="mr-1"
+				>
+					mdi-star
+				</v-icon>
+				<v-icon
 					color="primary"
 				>
 					{{ item._id === "root" ? "mdi-home-city" : open ? "mdi-folder-open" : "mdi-folder" }}
@@ -96,6 +103,7 @@ export default {
 	computed: {
 		...mapState({
 			folderTree: (state) => state.megaGalleryConfig.settings.folderTree,
+			selectedFolderId: (state) => state.megaGalleryConfig.settings.selectedFolderId,
 		}),
 		...mapGetters({
 			fullPathsToFoldersById: "fullPathsToFoldersById",
