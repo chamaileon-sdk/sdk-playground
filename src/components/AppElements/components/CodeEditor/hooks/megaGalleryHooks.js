@@ -41,7 +41,7 @@ export default function () {
 		const _id = Date.now() + Math.random();	
 		const newImageData = {
 			name: image.name,
-			folderId: selectedFolderId,
+			parentId: selectedFolderId,
 			src: image.url || null,
 			createdAt: new Date(),
 			_id,
