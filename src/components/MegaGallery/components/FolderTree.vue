@@ -9,33 +9,49 @@
 		<OptionsWrapper>
 			<FolderTreePreview />
 		</OptionsWrapper>
+		<OptionsWrapper>
+				<v-row
+					elevation="0"
+					class="d-flex white rounded justify-center align-center pa-4"
+				>
+					<v-col cols="12" class="pa-0 ma-0">
+						<v-icon
+							color="primary"	
+						>
+							mdi-folder
+						</v-icon>
+						
+						
+						<span>
+								<b> selectedFolderId: </b> {{ selectedFolderId || "Select a folder!" }}
+						</span>
+						
+					</v-col>
+				</v-row>
+		</OptionsWrapper>
 	</div>
 </template>
 
 <script>
 import FolderTreePreview from "./FolderTree/FolderTreePreview.vue";
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
 	components: {
 		FolderTreePreview,
 		OptionsWrapper,
 	},
+	computed: {
+		...mapState({
+			selectedFolderId: (state) => state.megaGalleryConfig.settings.selectedFolderId,
+		}),
+	},
 	methods: {
 		...mapMutations({
 			addBtn: "addEditorBtn",
 			addDD: "addEditorDropdown",
 		}),
-	},
-	data() {
-		return {
-			rules: {
-				required: (value) => !!value || "Required.",
-				unique: (value) =>
-					!this.$store.state.editorConfig.idArr.includes(value),
-			},
-		};
 	},
 };
 </script>
