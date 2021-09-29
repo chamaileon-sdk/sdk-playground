@@ -135,7 +135,7 @@ export default {
 			},
 			{
 				title: "Variable Editor",
-				icon: "variable",
+				icon: "application-variable-outline",
 				to: "variableeditor",
 				children: [
 					{

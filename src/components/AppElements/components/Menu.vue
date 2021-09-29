@@ -29,7 +29,7 @@
 							<v-icon>mdi-{{ m.icon }}</v-icon>
 						</v-list-item-icon>
 
-						<v-list-item-title>{{ m.title }} </v-list-item-title>
+						<v-list-item-title>{{ m.title }}</v-list-item-title>
 					</v-list-item>
 
 					<template v-if="isActive(m.to)">

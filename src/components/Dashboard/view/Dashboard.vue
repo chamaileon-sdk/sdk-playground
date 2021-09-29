@@ -57,9 +57,6 @@ export default {
 		Language,
 		Description,
 	},
-	created() {
-		this.showDeveloper = process.env.NODE_ENV === "developement" ? true : false;
-	}
 };
 </script>
 
