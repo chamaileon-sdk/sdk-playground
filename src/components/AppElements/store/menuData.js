@@ -115,9 +115,9 @@ export default {
 				],
 			},
 			{
-				title: "Mega Gallery",
+				title: "Gallery",
 				icon: "image",
-				to: "megagallery",
+				to: "gallery",
 				children: [
 					{
 						title: "Folder Tree",

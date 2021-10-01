@@ -41,7 +41,7 @@ const routes = [
 		component: EmailEditor,
 	},
 	{
-		path: "/megagallery",
+		path: "/gallery",
 		component: MegaGallery,
 	},
 	{
@@ -60,7 +60,6 @@ const routes = [
 		path: "/htmlgenerator",
 		component: HtmlGenerator,
 	},
-	
 	{
 		path: "/htmlimport",
 		component: HtmlImport,

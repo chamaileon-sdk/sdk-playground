@@ -113,7 +113,7 @@ export default {
 				JSON.stringify(this.$store.state.document)
 			);
 			localStorage.setItem(
-				"megaGalleryConfig",
+				"galleryConfig",
 				JSON.stringify(this.$store.state.megaGalleryConfig)
 			);
 		}.bind(this);
@@ -122,7 +122,7 @@ export default {
 			"sdkConfig",
 			"editorConfig",
 			"previewConfig",
-			"megaGalleryConfig",
+			"galleryConfig",
 			"variableEditorConfig",
 			"thumbnailConfig",
 			"generatorConfig",

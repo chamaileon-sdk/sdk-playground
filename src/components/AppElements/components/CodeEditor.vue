@@ -8,7 +8,7 @@
 					route !== '/htmlgenerator' &&
 					route !== '/htmlimport' &&
 					route !== '/sdk' && 
-					route !== '/megagallery'
+					route !== '/gallery'
 				"
 			>
 				Document
@@ -17,7 +17,7 @@
 				v-show="
 					route === '/emailpreview' ||
 					route === '/emaileditor' ||
-					route === '/megagallery' ||
+					route === '/gallery' ||
 					route === '/variableeditor'
 				"
 			>
@@ -277,7 +277,7 @@ export default {
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
 			else if (this.$route.path === "/sdk") return this.sdkCode;
-			else if (this.$route.path === "/megagallery") return this.galleryCode;
+			else if (this.$route.path === "/gallery") return this.galleryCode;
 			else if (this.$route.path === "/emailpreview") return this.previewCode;
 			else if (this.$route.path === "/emailthumbnail")
 				return this.thumbnailCode;
@@ -292,7 +292,7 @@ export default {
 		hooks() {
 			if (this.$route.path === "/emaileditor") return this.editorHooks;
 			else if (this.$route.path === "/emailpreview") return this.previewHooks;
-			else if (this.$route.path === "/megagallery") return this.galleryHooks;
+			else if (this.$route.path === "/gallery") return this.galleryHooks;
 			else if (this.$route.path === "/variableeditor")
 				return this.variableEditorHooks;
 			else return "//There are no hooks available";

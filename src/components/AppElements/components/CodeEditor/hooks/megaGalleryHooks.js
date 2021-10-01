@@ -19,7 +19,7 @@ export default function () {
 		}, 0);
 	}
 	
-	const megaGalleryHooks = {
+	const galleryHooks = {
 	onUploadImage: async ( { selectedFolderId, parents, image } ) => {	
 		const _id = Date.now() + Math.random();	
 		const newImageData = {
