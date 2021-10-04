@@ -12,8 +12,8 @@ const getDefaultState = () => {
 				"https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js",
 		},
 		colors: {
-			primary: "#000000",
-			secondary: "#000000",
+			primary: "#00bee6",
+			secondary: "#9b9b9b",
 		},
 	}
 }
