@@ -1,11 +1,8 @@
 import BlockLibData from "./editorBlockLibraryContainer";
 import Vue from "vue";
 
-export default {
-	modules: {
-		BlockLibData,
-	},
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		key: 0,
 		blKey: 0,
 		ffKey: 0,
@@ -63,8 +60,19 @@ export default {
 		},
 		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
 		autoSaveInterval: 15000,
-	}),
+	}
+}
+
+export default {
+	modules: {
+		BlockLibData,
+	},
+	state: getDefaultState(),
 	mutations: {
+		resetEditorState (state) {
+			Object.assign(state, getDefaultState());
+		},
+
 		addEditorBtn(state) {
 			state.settings.buttons.header.push({
 				id: `yourBtn-${state.key}`,

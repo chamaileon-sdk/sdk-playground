@@ -1,5 +1,5 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		apiKey: "",
 		chamaileonSdk: "https://plugins.chamaileon.io/static/chamaileonSdk.js",
@@ -15,11 +15,18 @@ export default {
 			primary: "#000000",
 			secondary: "#000000",
 		},
-	}),
+	}
+}
+
+export default {
+	state: getDefaultState(),
 	mutations: {
 		updateSDKConfig(state, payload) {
 			for (const key in payload) state[key] = payload[key];
 		},
+		resetSdkConfigState(state) {
+			Object.assign(state, getDefaultState());
+		}
 	},
 	actions: {},
 	getters: {},

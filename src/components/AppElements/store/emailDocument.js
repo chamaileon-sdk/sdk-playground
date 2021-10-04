@@ -1,5 +1,5 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		body: {
 			eid: "root",
 			type: "body",
@@ -6171,13 +6171,20 @@ export default {
 		title: "Business Promo",
 		previewText: "",
 		subjectLine: "",
-	}),
+	}
+}
+  
+export default {	
+	state: getDefaultState(),
 	mutations: {
 		updateDocument(state, payload) {
 			state.title = payload.title;
 			state.body = payload.body;
 			state.variables = payload.variables;
 		},
+		resetEmailDocumentState (state) {
+			Object.assign(state, getDefaultState())
+		}
 	},
 	actions: {},
 	getters: {

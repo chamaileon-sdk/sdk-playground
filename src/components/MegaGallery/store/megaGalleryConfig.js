@@ -111,9 +111,8 @@ function closeGallery() {
 	}, 0);
 }
 
-
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		settings: {
 			folderTree: {
 				_id: "root",
@@ -129,7 +128,12 @@ export default {
 			maxImagePerPage: 12,
 			maxFileSize: 6,
 		},
-	}),
+	}
+}
+
+
+export default {
+	state: getDefaultState(),
 	getters: {
 		fullPathsToFoldersById(state) {
 			const fullPathsToFoldersById = new Map();
@@ -157,6 +161,9 @@ export default {
 		},
 	},
 	mutations: {
+		resetGalleryState (state) {
+			Object.assign(state, getDefaultState());
+		},
 		setGallery(state, payload) {
 			Object.entries(payload).forEach(([key, value]) => {
 				state[key] = value;

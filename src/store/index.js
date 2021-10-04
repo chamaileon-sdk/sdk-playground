@@ -13,6 +13,13 @@ import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
 import importConfig from "../components/HtmlImport/store/htmlImport";
 
 Vue.use(Vuex);
+const getDefaultState = () => {
+	return {
+		logoCreatorFunction: undefined,
+		sdk: null,
+	}
+}
+  
 
 export default new Vuex.Store({
 	strict: true,
@@ -28,11 +35,11 @@ export default new Vuex.Store({
 		generatorConfig,
 		importConfig,
 	},
-	state: {
-		logoCreatorFunction: undefined,
-		sdk: null,
-	},
+	state: getDefaultState(),
 	mutations: {
+		resetState (state) {
+			Object.assign(state, getDefaultState());
+		},
 		//Load from local storage
 		sdkConfigLoad(state, sdkConfig) {
 			state.sdkConfig = sdkConfig;
@@ -53,7 +60,7 @@ export default new Vuex.Store({
 			};
 		},
 
-		megaGalleryConfigLoad(state, megaGalleryConfig) {
+		galleryConfigLoad(state, megaGalleryConfig) {
 			state.megaGalleryConfig = megaGalleryConfig;
 		},
 
@@ -172,6 +179,18 @@ export default new Vuex.Store({
 			
 			dispatch("initSDK");
 		},
+		resetPlayGround({commit}) {
+			commit("resetState");
+			commit("resetEmailDocumentState");
+			commit("resetSdkConfigState");
+			commit("resetEditorState");
+			commit("resetEditorBlockLibraryContainerState");
+			commit("resetHtmlGeneratorState");
+			commit("resetGalleryState");
+			commit("resetPreviewState");
+			commit("resetThumbnailState");
+			commit("resetVariableEditorState");
+		}
 	},
 	getters: {
 		getEmail: (state) => {
