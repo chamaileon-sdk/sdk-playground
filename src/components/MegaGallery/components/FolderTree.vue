@@ -2,8 +2,8 @@
 	<div>
 		<h2>Folder Tree</h2>
 		<p>
-			You can add a Folder Tree to the Gallery plugin and with it help your users to be organized. 
-			This can and recommended to follow the folder structure of saved emails. 
+			You can add a Folder Tree to the Gallery plugin and help your users to be organized. 
+			This can, and of course recommended to follow the folder structure of the saved emails. 
 			Select a folder, that will be the default when you open the Gallery and ready to pick an image from.
 		</p>
 		<OptionsWrapper>

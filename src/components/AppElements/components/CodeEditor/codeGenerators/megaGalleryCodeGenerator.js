@@ -9,6 +9,6 @@ const galleryInstance = await chamaileonPlugins.openGallery({ editImgSrc, dimens
         maxImagePerPage: ${ megaGalleryConfig.settings.maxImagePerPage },
         maxFileSize: ${ megaGalleryConfig.settings.maxFileSize },
     },
-    hooks: megaGallerHooks, //see "hooks" tab
+    hooks: galleryHooks, //see "hooks" tab
 });`;
 }

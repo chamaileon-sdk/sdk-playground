@@ -139,11 +139,11 @@ export default {
 					},
 
 					onEditImage: ({
-						editImgSrc,
-						dimensions,
+						originalImage,
+						lockDimensions,
 					}) => {
 						return new Promise((resolve) =>  {
-							this.openGallery( {  editImgSrc, dimensions , resolve });
+							this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions, resolve });
 						});
 					},
 

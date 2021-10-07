@@ -183,11 +183,11 @@ export default {
 		}
 	},
 	actions: {
-		async openGallery({ state, rootState }, { editImgSrc = null, dimensions = null, resolve = null } = {}) {
+		async openGallery({ state, rootState }, { editImgSrc, dimensions, resolve } = {}) {
 			rootState.sdk.openGallery({
 				container: document.getElementById("mega-gallery-wrapper"),
-				editImgSrc: editImgSrc,
-				dimensions: dimensions,
+				editImgSrc,
+				dimensions,
 				settings: state.settings,
 				hooks: {
 					onUploadImage: async ( { selectedFolderId, parents, image } ) => {	
