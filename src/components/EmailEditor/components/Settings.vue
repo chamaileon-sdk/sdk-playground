@@ -108,6 +108,100 @@
 				></v-switch>-->
 			</v-card>
 		</OptionWrapper>
+		<h3>Toolboxes</h3>
+		<p>
+			You can disable the toolboxes for any element type. With disabled toolboxes, elements will not be customizable.
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4" width="100%">
+					<v-row>
+						<v-col 
+							v-for="(value, name) in toolboxes"
+							:key="name"
+							cols="6" 
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								class="ma-0 pa-0"
+								v-model="toolboxes[name]"
+								color="primary"
+								hide-details
+							></v-switch>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+		<h3>Block Action Menu</h3> 
+		<p>
+			You can control what your users capable to do with blocks. Drag, save, duplicate or delete. All this functionality can be turned off.
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4" width="100%">
+					<v-row>
+						<v-col 
+							v-for="(value, name) in blockActions"
+							:key="name"
+							cols="6" 
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								class="ma-0 pa-0"
+								v-model="blockActions[name]"
+								color="primary"
+								hide-details
+							></v-switch>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+
+		<h3>Dropzones</h3> 
+		<p>
+			We did not stop here, you can easily turn off block level dropzones as well.
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4" width="100%">
+					<v-row>
+						<v-col 
+							v-for="(value, name) in blockDropzones"
+							:key="name"
+							cols="6" 
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								class="ma-0 pa-0"
+								v-model="blockDropzones[name]"
+								color="primary"
+								hide-details
+							></v-switch>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
 	</div>
 </template>
 
@@ -116,15 +210,9 @@ import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import { mapMutations } from "vuex";
 
 export default {
-	methods: {
-		processName(name) {
-			if (name.length > 6) return name.substr(0, name.indexOf(" ") + 1) + "...";
-
-			return name;
-		},
-		...mapMutations(["updateUser", "updateAutosave", "updateSaticAssets"]),
+	components: {
+		OptionWrapper,
 	},
-
 	computed: {
 		avatarEnabled: {
 			get() {
@@ -168,10 +256,38 @@ export default {
 				this.updateSaticAssets(val);
 			},
 		},
+		toolboxes: {
+			get() {
+				return this.$store.state.editorConfig.settings.toolboxes;
+			},
+			set(val) {
+				this.updateToolboxes(val);
+			}
+		},
+		blockActions: {
+			get() {
+				return this.$store.state.editorConfig.settings.actionMenu.block
+			},
+			set(val) {
+				this.updateBlockActionMenu(val);
+			}
+		},
+		blockDropzones: {
+			get() {
+				return this.$store.state.editorConfig.settings.dropzones
+			},
+			set(val) {
+				this.updateBlockActionMenu(val);
+			}
+		}
 	},
+	methods: {
+		...mapMutations(["updateUser", "updateAutosave", "updateSaticAssets", "updateToolboxes"]),
+		processName(name) {
+			if (name.length > 6) return name.substr(0, name.indexOf(" ") + 1) + "...";
 
-	components: {
-		OptionWrapper,
+			return name;
+		},
 	},
 };
 </script>

@@ -13,6 +13,36 @@ const getDefaultState = () => {
 			avatar: "",
 		},
 		settings: {
+			actionMenu: {
+				block: {
+					drag: true,
+					save: true, 
+					duplicate: true,
+					delete: true,
+				} 
+			},
+			toolboxes: {
+				body: true,
+				fullwidth: true,
+				text: true,
+				button: true,
+				box: true,
+				multicolumn: true,
+				image: true,
+				divider: true,
+				code: true,
+				social: true,
+				column: true,
+				loop: true,
+				conditional: true,
+				"dynamic-image": true,
+				video: true,
+				"block-level-conditional": true,
+				"block-level-loop": true,
+			},
+			dropzones: {
+				block: true,
+			},
 			fontFiles: {},
 			fontStacks: [],
 			hideDefaultFonts: false,
@@ -283,6 +313,21 @@ export default {
 		updateSaticAssets(state, url) {
 			state.staticAssetsBaseUrl = url;
 		},
+
+		// Toolboxes
+		updateToolboxes(state, toolboxes) {
+			state.settings.toolboxes = toolboxes;
+		},
+
+		// Block Action Menu
+		updateBlockActionMenu(state, blockActionMenu) {
+			state.settings.actionMenu.block = blockActionMenu;
+		},
+
+		// Block Dropzone
+		updateBlockActionMenu(state, blockDropzone) {
+			state.settings.actionMenu.dropzones.block = blockDropzone;
+		}
 	},
 	actions: {},
 	getters: {
