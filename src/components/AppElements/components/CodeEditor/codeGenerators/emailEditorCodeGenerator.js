@@ -1,22 +1,7 @@
 export default function (config) {
 	return `const editorInstance = await chamaileonPlugins.editEmail({
 	document: emailDocument, // see "document" tab
-	settings: {
-		buttons: {
-			header: ${calculateHeader(config)}
-			textInsert: ${calculateTextInsert(config)}
-		},
-		elements: ${calculateElements(config)},
-		blockLibraries: ${calculateBlockLibs(config)},
-		fontFiles: ${calculateFontFiles(config)},
-		fontStacks: ${calculateFontStacks(config)},
-		hideDefaultFonts: ${JSON.stringify(config.settings.hideDefaultFonts)},
-		addons: {
-			blockLock: ${calculateBL(config)},
-			variableSystem: ${calculateVE(config)}
-		},
-		staticAssetsBaseUrl: "${config.staticAssetsBaseUrl}",
-	},
+	settings: ${JSON.stringify(config.settings, null, 6 )},
 	autoSaveInterval: ${config.autoSaveInterval},
 	user: ${
 	config.user
