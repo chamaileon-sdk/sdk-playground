@@ -94,7 +94,6 @@ export default {
 			openGallery: "openGallery",
 		}),
 		openEditor() {
-			console.log(this.$store.getters.getConfigObject)
 			this.sdk.editEmail({
 				...this.$store.getters.getConfigObject,
 				hooks: {
