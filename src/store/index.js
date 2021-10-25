@@ -174,6 +174,10 @@ export default new Vuex.Store({
 			//TODO: Variable Editor icon has to be mdi-*iconTitle*
 
 			x.hooks = state.editorConfig.hooks;
+
+			x.settings.staticAssetsBaseUrl = state.editorConfig.staticAssetsBaseUrl;
+			x.settings.videoElementBaseUrl = state.editorConfig.videoElementBaseUrl;
+
 			return x;
 		},
 
