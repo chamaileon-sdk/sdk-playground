@@ -63,7 +63,7 @@ export default {
 			},
 		},
 		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
-		videoElementBaseUrl: "https://yourdomain.com/path/to/video/backend/",
+		videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 		autoSaveInterval: 15000,
 	}),
 	mutations: {

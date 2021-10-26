@@ -68,9 +68,9 @@
 
 		<h3>Video element</h3>
 		<p>
-			This is the backend url that our video element uses for image generation.
+			This is the url that our video element uses for image generation.
 			The default url is only provided to showcase the functionality and has a rate limit set up on it.
-			If you want this functionality then you have to set up our on-premise backend on your end.
+			If you want this functionality then you have to set up our video backend on your end.
 		</p>
 		<OptionWrapper>
 			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
