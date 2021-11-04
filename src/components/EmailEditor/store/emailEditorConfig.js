@@ -31,6 +31,7 @@ export default {
 					divider: true,
 					social: false,
 					code: false,
+					video: false,
 				},
 				structure: {
 					fullWidth: false,
@@ -62,6 +63,7 @@ export default {
 			},
 		},
 		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
+		videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 		autoSaveInterval: 15000,
 	}),
 	mutations: {
@@ -274,6 +276,11 @@ export default {
 		//Static Assets
 		updateSaticAssets(state, url) {
 			state.staticAssetsBaseUrl = url;
+		},
+
+		//Static Assets
+		updateVideoElementBaseUrl(state, url) {
+			state.videoElementBaseUrl = url;
 		},
 	},
 	actions: {},
