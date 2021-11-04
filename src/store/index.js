@@ -175,7 +175,10 @@ export default new Vuex.Store({
 
 			x.hooks = state.editorConfig.hooks;
 
-			x.settings.staticAssetsBaseUrl = state.editorConfig.staticAssetsBaseUrl;
+			// TOOD: figure out static asset base url on the playground because for now it's not
+			// passed to the editor
+			//x.settings.staticAssetsBaseUrl = state.editorConfig.staticAssetsBaseUrl;
+
 			x.settings.videoElementBaseUrl = state.editorConfig.videoElementBaseUrl;
 
 			return x;
