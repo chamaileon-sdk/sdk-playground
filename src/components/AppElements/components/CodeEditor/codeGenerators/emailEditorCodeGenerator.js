@@ -16,6 +16,7 @@ export default function (config) {
 			variableSystem: ${calculateVE(config)}
 		},
 		staticAssetsBaseUrl: "${config.staticAssetsBaseUrl}",
+		videoElementBaseUrl: "${config.videoElementBaseUrl}",
 	},
 	autoSaveInterval: ${config.autoSaveInterval},
 	user: ${
@@ -86,6 +87,7 @@ const calcualteConfig = (config) => {
 				divider: ${config.settings.elements.content.divider},
 				social: ${config.settings.elements.content.social},
 				code:  ${config.settings.elements.content.code},
+				video:  ${config.settings.elements.content.video},
 			},`;
 };
 

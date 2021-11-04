@@ -11,7 +11,7 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
-					class="my-0 py-0 mb-6 mb-xl-0"
+					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
 					v-for="(element, index) in contentElements"
@@ -52,7 +52,7 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
-					class="my-0 py-0 mb-6 mb-xl-0"
+					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
 					v-for="(element, index) in structureElements"
@@ -93,7 +93,7 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
-					class="my-0 py-0 mb-6 mb-xl-0"
+					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
 					v-for="(element, index) in advancedElements"
@@ -175,6 +175,10 @@ export default {
 					type: "code",
 					icon: "mdi-code-tags",
 				},
+				{
+					type: "video",
+					icon: "mdi-video-outline",
+				},
 			],
 			structureElements: [
 				{
@@ -183,9 +187,9 @@ export default {
 					icon: "mdi-window-maximize",
 				},
 				/*{
-          type: 'column',
-          icon: 'view_column',
-        },*/
+					type: 'column',
+					icon: 'view_column',
+				},*/
 				{
 					type: "box",
 					icon: "mdi-checkbox-blank-outline",
