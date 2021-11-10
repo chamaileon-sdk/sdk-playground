@@ -249,6 +249,13 @@ export default new Vuex.Store({
 			//TODO: Variable Editor icon has to be mdi-*iconTitle*
 
 			x.hooks = state.editorConfig.hooks;
+
+			// TOOD: figure out static asset base url on the playground because for now it's not
+			// passed to the editor
+			//x.settings.staticAssetsBaseUrl = state.editorConfig.staticAssetsBaseUrl;
+
+			x.settings.videoElementBaseUrl = state.editorConfig.videoElementBaseUrl;
+
 			return x;
 		},
 
