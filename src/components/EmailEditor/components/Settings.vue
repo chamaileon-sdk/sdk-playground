@@ -309,15 +309,7 @@ export default {
 				this.updateVideoElementBaseUrl(val);
 			},
 		},
-	},
-	methods: {
-		...mapMutations(["updateUser", "updateAutosave", "updateSaticAssets", "updateToolboxes"]),
-		processName(name) {
-			if (name.length > 6) return name.substr(0, name.indexOf(" ") + 1) + "...";
-
-			return name;
-		},
-	},
+	}
 };
 </script>
 
