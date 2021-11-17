@@ -31,6 +31,10 @@
 				<Footer />
 			</div>
 
+			<div class="section" id="custom-fonts">
+				<CustomFonts noFontFiles="true" />
+			</div>
+
 			<div class="section" id="text-insert">
 				<TextInsert />
 			</div>
@@ -51,6 +55,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import TextInsert from "../components/TextInsert.vue";
+import CustomFonts from "../../sharedComponents/CustomFonts";
 import VariablesToEdit from "../components/VariablesToEdit.vue";
 import NavFooter from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
@@ -66,6 +71,7 @@ export default {
 		Header,
 		Footer,
 		NavFooter,
+		CustomFonts,
 		TextInsert,
 		SectionObserver,
 		OpenButton,
