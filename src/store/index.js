@@ -205,6 +205,11 @@ export default new Vuex.Store({
 
 			out.settings.variablesToEdit = tmpArr;
 
+			const editorConfig = JSON.parse(JSON.stringify(state.editorConfig));
+
+			out.settings.fontStacks = editorConfig.settings.fontStacks;
+			out.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
+
 			return out;
 		},
 
