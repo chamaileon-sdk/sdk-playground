@@ -3,7 +3,7 @@ export default function (config) {
 	document: emailDocument, // see "document" tab
 	settings: {
 		buttons: {
-			header: ${calculateHeader(config)}
+			header: ${calculateHeader(config)},
 			textInsert: ${calculateTextInsert(config)}
 		},
 		elements: ${calculateElements(config)},
