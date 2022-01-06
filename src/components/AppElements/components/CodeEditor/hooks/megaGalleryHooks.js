@@ -15,17 +15,7 @@ const galleryHooks = {
     },
     onDeleteImage: async ({ imageId, parents, selectedFolderId }) => {
         // Delete image					
-    },  		
-    onError: (err) => {
-        closeGallery();
-        reject(err);
     },
-    onPick: (data) => {
-        closeGallery();
-        resolve({
-            src: data.url,
-        });
-    }
 }` 
 	return str;
 };
