@@ -183,9 +183,8 @@ export default {
 		}
 	},
 	actions: {
-		async openGallery({ state, rootState }, { editImgSrc, dimensions, resolve } = {}) {
-			rootState.sdk.openGallery({
-				container: document.getElementById("mega-gallery-wrapper"),
+		async openGallery({ state, rootState }, { editImgSrc, dimensions } = {}) {
+			return rootState.sdk.openGallery({
 				editImgSrc,
 				dimensions,
 				settings: state.settings,
@@ -275,16 +274,6 @@ export default {
 							throw e;
 						}						
 					},  		
-					onError: (err) => {
-						closeGallery();
-						reject(err);
-					},
-					onPick: (data) => {
-						closeGallery();
-						resolve({
-							src: data.url,
-						});
-					}
 				},
 			});
 		},

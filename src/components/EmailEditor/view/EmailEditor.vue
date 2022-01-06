@@ -113,44 +113,39 @@ export default {
 							}.bind(this)
 						);
 					},
-
 					onChange: () => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
 					onBeforeClose: () => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
 					onAfterClose: () => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
 					onEditTitle: ({ title }) => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
-					onEditImage: ({
+					onEditImage: async ({
 						originalImage,
 						lockDimensions,
 					}) => {
-						return new Promise((resolve) =>  {
-							this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions, resolve });
-						});
+						const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
+						return { src };
 					},
-
-					onEditBackgroundImage: () => {
-						return new Promise((resolve) => {
-							resolve({ src });
-						});
+					onEditBackgroundImage: async ({
+						originalImage,
+						lockDimensions,
+					}) => {
+						const { url: src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
+						return { src };
 					},
 
 					onLoadBlocks: ({ libId }) => {
