@@ -58,6 +58,7 @@ const getDefaultState = () => {
 					divider: true,
 					social: false,
 					code: false,
+					video: false,
 				},
 				structure: {
 					fullWidth: false,
@@ -89,6 +90,7 @@ const getDefaultState = () => {
 			},
 		},
 		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
+		videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 		autoSaveInterval: 15000,
 	}
 }
@@ -327,7 +329,11 @@ export default {
 		// Block Dropzone
 		updateBlockActionMenu(state, blockDropzone) {
 			state.settings.actionMenu.dropzones.block = blockDropzone;
-		}
+		},
+		//Static Assets
+		updateVideoElementBaseUrl(state, url) {
+			state.videoElementBaseUrl = url;
+		},
 	},
 	actions: {},
 	getters: {

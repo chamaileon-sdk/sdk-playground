@@ -66,6 +66,40 @@
 			</v-card>
 		</OptionWrapper>
 
+		<h3>Video element</h3>
+		<p>
+			This is the url that our video element uses for image generation.
+			The default url is only provided to showcase the functionality and has a rate limit set up on it.
+			If you want this functionality then you have to set up our video backend on your end.
+		</p>
+		<OptionWrapper>
+			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
+				<v-row>
+					<v-col class="align-self-center">
+						<v-card-title
+							class="ma-0 pa-0 text-subtitle-1"
+							style="margin-bottom: -3px !important"
+						>
+							Video element base url
+						</v-card-title>
+						<!--<p class="ma-0">{{ item.description }}</p>-->
+					</v-col>
+
+					<v-col class="align-self-center" cols="6" lg="6">
+						<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
+							<v-text-field
+								dense
+								outlined
+								label="URL"
+								:hide-details="true"
+								v-model="videoElementBaseUrl"
+							></v-text-field>
+						</v-card>
+					</v-col>
+				</v-row>
+			</v-card>
+		</OptionWrapper>
+
 		<h3>Avatar</h3>
 		<p>
 			You can customize the name and the avatar of the current user, but it's
@@ -279,17 +313,30 @@ export default {
 			set(val) {
 				this.updateBlockActionMenu(val);
 			}
-		}
+		},
+		videoElementBaseUrl: {
+			get() {
+				return this.$store.state.editorConfig.videoElementBaseUrl;
+			},
+			set(val) {
+				this.updateVideoElementBaseUrl(val);
+			},
+		},
 	},
 	methods: {
-		...mapMutations(["updateUser", "updateAutosave", "updateSaticAssets", "updateToolboxes"]),
 		processName(name) {
 			if (name.length > 6) return name.substr(0, name.indexOf(" ") + 1) + "...";
 
 			return name;
 		},
+		...mapMutations([
+			"updateUser",
+			"updateAutosave",
+			"updateSaticAssets",
+			"updateVideoElementBaseUrl"
+		]),
 	},
-};
+}
 </script>
 
 <style scoped>

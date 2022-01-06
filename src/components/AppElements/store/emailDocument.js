@@ -6168,6 +6168,7 @@ const getDefaultState = () => {
 				type: "color",
 			},
 		],
+		fontFiles: {},
 		title: "Business Promo",
 		previewText: "",
 		subjectLine: "",
@@ -6181,6 +6182,7 @@ export default {
 			state.title = payload.title;
 			state.body = payload.body;
 			state.variables = payload.variables;
+			state.fontFiles = payload.fontFiles;
 		},
 		resetEmailDocumentState (state) {
 			Object.assign(state, getDefaultState())

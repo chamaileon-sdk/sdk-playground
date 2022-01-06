@@ -157,6 +157,12 @@ export default {
 						codePropToMatch: "footer",
 					},
 					{
+						title: "Custom Fonts",
+						icon: "format-font",
+						to: "#custom-fonts",
+						codePropToMatch: "fontFiles",
+					},
+					{
 						title: "Text Insert",
 						icon: "format-text",
 						to: "#text-insert",
