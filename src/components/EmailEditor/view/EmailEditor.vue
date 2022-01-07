@@ -49,8 +49,8 @@
 		<Footer
 			:previous="'Email Preview'"
 			:prevTo="'/emailpreview'"
-			:next="'Mega Gallery'"
-			:nextTo="'/megagallery'"
+			:next="'Gallery'"
+			:nextTo="'/gallery'"
 		/>
 		<OpenButton @openEditorClicked="openEditor" />
 	</div>
