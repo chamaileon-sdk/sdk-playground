@@ -3,8 +3,8 @@
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
-					:title="'Mega Gallery'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
+					:title="'Gallery'"
+					:docUrl="'https://chamaileon.io/sdk/docs/gallery/'"
 					:image="'EmailThumbnailIllustration.svg'"
 				>
 					<p>

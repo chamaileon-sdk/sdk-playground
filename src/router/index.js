@@ -7,7 +7,7 @@ import Dashboard from "../components/Dashboard/view/Dashboard";
 //Email editor
 import EmailEditor from "../components/EmailEditor/view/EmailEditor";
 
-//Mega Gallery
+//Gallery
 import MegaGallery from "../components/MegaGallery/view/MegaGallery";
 
 //Thumbnail

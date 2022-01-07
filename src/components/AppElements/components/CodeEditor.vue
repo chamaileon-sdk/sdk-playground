@@ -230,7 +230,7 @@ export default {
 			return emailEditorHooksGenerator();
 		},
 
-		// Mega Gallery
+		// Gallery
 
 		galleryCode() {
 			return megaGalleryCodeGenerator(this.$store.getters.getGalleryConfigObject);
