@@ -277,6 +277,7 @@ export default {
 			for (const [key, value] of Object.entries(this.fontFiles)) {
 				fontFilesArray.push({ fontName: key, fontFile: value});
 			}
+			// eslint-disable-next-line consistent-return
 			return fontFilesArray;
 		},
 		breakpoint() {

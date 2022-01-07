@@ -1,7 +1,7 @@
 import dummyDoc from "./dummyDocument";
 
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		fetchingHTML: false,
 		json: dummyDoc,
 		html: "",
@@ -37,8 +37,16 @@ export default {
 				value: "handlebars",
 			},
 		},
-	}),
+	}
+}
+
+export default {
+	state: getDefaultState(),
 	mutations: {
+		resetHtmlGeneratorState (state) {
+			Object.assign(state, getDefaultState());
+		},
+
 		toggleFetching(state) {
 			state.fetchingHTML = !state.fetchingHTML;
 		},

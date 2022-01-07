@@ -1,13 +1,20 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		key: 0,
 		settings: {
 			buttons: {
 				header: [],
 			},
 		},
-	}),
+	}
+}
+  
+export default {
+	state: getDefaultState(),
 	mutations: {
+		resetPreviewState (state) {
+			Object.assign(state, getDefaultState());
+		},
 		addPreviewBtn(state) {
 			state.settings.buttons.header.push({
 				id: `yourBtn-${state.key}`,

@@ -28,6 +28,9 @@
 			<div class="section" id="language">
 				<Language />
 			</div>
+			<div class="section" id="developer">
+				<Developer />
+			</div>
 		</SectionObserver>
 		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
 	</div>
@@ -39,6 +42,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Logo from "../components/Logo.vue";
 import Language from "../components/Language.vue";
 import Colors from "../components/Colors.vue";
+import Developer from "../components/Developer.vue";
 import SplashScreen from "../components/SplashScreen.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
@@ -48,6 +52,7 @@ export default {
 		Footer,
 		Logo,
 		Colors,
+		Developer,
 		SplashScreen,
 		Language,
 		Description,

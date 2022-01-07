@@ -16,6 +16,7 @@
 			<v-list>
 				<template v-for="(m, ind) in Menu">
 					<v-list-item
+						v-if="!m.disabled"
 						:key="ind"
 						class="pl-6"
 						color="primary"
@@ -37,16 +38,20 @@
 							class="pl-xl-12 navLink scrollactive-item"
 							v-ripple="{ class: `primary--text` }"
 							:class="addActiveClass(c.to)"
-							v-for="c in m.children"
+							v-for="c in m.children.filter(item => item.disabled !== true)"
 							:key="c.to"
 							link
 							:to="{ path: m.to, hash: c.to }"
 						>
-							<v-list-item-icon class="ml-6 mr-6">
-								<v-icon>mdi-{{ c.icon }}</v-icon>
-							</v-list-item-icon>
+							<div
+								v-if="!c.disabled" class="d-flex"
+							>
+								<v-list-item-icon class="ml-6 mr-6">
+									<v-icon>mdi-{{ c.icon }}</v-icon>
+								</v-list-item-icon>
 
-							<v-list-item-title>{{ c.title }}</v-list-item-title>
+								<v-list-item-title>{{ c.title }}</v-list-item-title>
+							</div>
 						</v-list-item>
 					</template>
 				</template>

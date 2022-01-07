@@ -43,16 +43,14 @@ const emailEditorHooks = {
 		});
 	},
 
-    onEditImage: ({ originalImage, lockDimensions: { width, height } }) => {
-		return new Promise(resolve => {
-			resolve({ src });
-		});
+    onEditImage: async ({ originalImage, lockDimensions: { width, height } }) => {
+		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
+		return { src };
 	},
 
-    onEditBackgroundImage: () => {
-		return new Promise(resolve => {
-			resolve({ src });
-		});
+    onEditBackgroundImage: async ({ originalImage, lockDimensions: { width, height } }) => {
+		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
+		return { src };
 	},
 
     onLoadBlocks: ({ libId }) => {

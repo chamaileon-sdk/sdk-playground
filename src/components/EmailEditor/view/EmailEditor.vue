@@ -49,8 +49,8 @@
 		<Footer
 			:previous="'Email Preview'"
 			:prevTo="'/emailpreview'"
-			:next="'Variable Editor'"
-			:nextTo="'/variableeditor'"
+			:next="'Gallery'"
+			:nextTo="'/gallery'"
 		/>
 		<OpenButton @openEditorClicked="openEditor" />
 	</div>
@@ -69,15 +69,9 @@ import Addons from "../components/Addons";
 import Settings from "../components/Settings";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 
 export default {
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	},
 	components: {
 		SectionObserver,
 		Header,
@@ -91,8 +85,14 @@ export default {
 		OpenButton,
 		Description,
 	},
-
+	computed: {
+		...mapState(["sdk"]),
+		...mapGetters(["getConfigObject"]),
+	},
 	methods: {
+		...mapActions({
+			openGallery: "openGallery",
+		}),
 		openEditor() {
 			this.sdk.editEmail({
 				...this.$store.getters.getConfigObject,
@@ -113,44 +113,39 @@ export default {
 							}.bind(this)
 						);
 					},
-
 					onChange: () => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
 					onBeforeClose: () => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
 					onAfterClose: () => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
 					onEditTitle: ({ title }) => {
 						return new Promise((resolve) => {
 							resolve();
 						});
 					},
-
-					onEditImage: ({
+					onEditImage: async ({
 						originalImage,
-						lockDimensions: { width, height },
+						lockDimensions,
 					}) => {
-						return new Promise((resolve) => {
-							resolve({ src });
-						});
+						const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
+						return { src };
 					},
-
-					onEditBackgroundImage: () => {
-						return new Promise((resolve) => {
-							resolve({ src });
-						});
+					onEditBackgroundImage: async ({
+						originalImage,
+						lockDimensions,
+					}) => {
+						const { url: src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
+						return { src };
 					},
 
 					onLoadBlocks: ({ libId }) => {
@@ -212,10 +207,11 @@ export default {
 			});
 		},
 	},
-
-	computed: {
-		...mapState(["sdk"]),
-		...mapGetters(["getConfigObject"]),
+	mounted() {
+		this.$store.dispatch("updateSDK");
+	},
+	destroyed() {
+		window.chamaileonSdk.destroy;
 	},
 };
 </script>

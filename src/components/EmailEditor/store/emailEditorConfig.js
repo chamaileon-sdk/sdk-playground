@@ -1,11 +1,8 @@
 import BlockLibData from "./editorBlockLibraryContainer";
 import Vue from "vue";
 
-export default {
-	modules: {
-		BlockLibData,
-	},
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		key: 0,
 		blKey: 0,
 		ffKey: 0,
@@ -16,6 +13,36 @@ export default {
 			avatar: "",
 		},
 		settings: {
+			actionMenu: {
+				block: {
+					drag: true,
+					save: true, 
+					duplicate: true,
+					delete: true,
+				} 
+			},
+			toolboxes: {
+				body: true,
+				fullWidth: true,
+				text: true,
+				button: true,
+				box: true,
+				multiColumn: true,
+				image: true,
+				divider: true,
+				code: true,
+				social: true,
+				column: true,
+				loop: true,
+				conditional: true,
+				dynamicImage: true,
+				video: true,
+				blockLevelConditional :true,
+				blockLevelLoop: true,
+			},
+			dropzones: {
+				block: true,
+			},
 			fontFiles: {},
 			fontStacks: [],
 			hideDefaultFonts: false,
@@ -65,8 +92,19 @@ export default {
 		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
 		videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 		autoSaveInterval: 15000,
-	}),
+	}
+}
+
+export default {
+	modules: {
+		BlockLibData,
+	},
+	state: getDefaultState(),
 	mutations: {
+		resetEditorState (state) {
+			Object.assign(state, getDefaultState());
+		},
+
 		addEditorBtn(state) {
 			state.settings.buttons.header.push({
 				id: `yourBtn-${state.key}`,
@@ -278,6 +316,20 @@ export default {
 			state.staticAssetsBaseUrl = url;
 		},
 
+		// Toolboxes
+		updateToolboxes(state, toolboxes) {
+			state.settings.toolboxes = toolboxes;
+		},
+
+		// Block Action Menu
+		updateBlockActionMenu(state, blockActionMenu) {
+			state.settings.actionMenu.block = blockActionMenu;
+		},
+
+		// Block Dropzone
+		updateBlockActionMenu(state, blockDropzone) {
+			state.settings.actionMenu.dropzones.block = blockDropzone;
+		},
 		//Static Assets
 		updateVideoElementBaseUrl(state, url) {
 			state.videoElementBaseUrl = url;
