@@ -1,8 +1,16 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		blockLibsData: {},
-	}),
+	}
+}
+
+export default {
+	state: getDefaultState(),
 	mutations: {
+		resetEditorBlockLibraryContainerState (state) {
+			Object.assign(state, getDefaultState());
+		},
+
 		createBlockLibData(state, libId) {
 			let obj = {};
 			obj[libId] = new Array();

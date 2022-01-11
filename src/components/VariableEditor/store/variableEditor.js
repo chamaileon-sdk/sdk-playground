@@ -1,5 +1,5 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		id: 0,
 		idArr: [],
 		fid: 0,
@@ -19,8 +19,15 @@ export default {
 				textInsertPlugin: [],
 			},
 		},
-	}),
+	}
+}
+
+export default {
+	state: getDefaultState() ,
 	mutations: {
+		resetVariableEditorState (state) {
+			Object.assign(state, getDefaultState());
+		},
 		resetVariablesToEditArray(state, array) {
 			state.settings.variablesToEdit = [];
 			array.forEach((c) => {

@@ -30,6 +30,13 @@ export default {
 						to: "#language",
 						codePropToMatch: "locale",
 					},
+					{
+						title: "Developer",
+						icon: "alarm-light",
+						disabled: process.env.NODE_ENV === "development" ? false : true,
+						to: "#developer",
+						codePropToMatch: "developer",
+					},
 				],
 			},
 			{
@@ -108,8 +115,27 @@ export default {
 				],
 			},
 			{
+				title: "Gallery",
+				icon: "image",
+				to: "gallery",
+				children: [
+					{
+						title: "Folder Tree",
+						icon: "folder",
+						to: "#folder",
+						codePropToMatch: "folder",
+					},
+					{
+						title: "Settings",
+						icon: "cog-outline",
+						to: "#settings",
+						codePropToMatch: "settings",
+					}
+				],
+			},
+			{
 				title: "Variable Editor",
-				icon: "iframe-variable-outline",
+				icon: "application-variable-outline",
 				to: "variableeditor",
 				children: [
 					{

@@ -1,5 +1,5 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		settings: {
 			width: 320,
 			height: 240,
@@ -7,8 +7,15 @@ export default {
 			scroll: false,
 			container: "#email-thumbnail",
 		},
-	}),
+	}
+}
+
+export default {
+	state: getDefaultState(),
 	mutations: {
+		resetThumbnailState (state) {
+			Object.assign(state, getDefaultState());
+		},
 		updateThumbnail(state, payload) {
 			let key = Object.keys(payload)[0];
 			let intVal = payload[key].length === 0 ? 0 : parseInt(payload[key]);
