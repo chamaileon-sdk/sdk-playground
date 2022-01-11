@@ -52,7 +52,7 @@
 				slot="append"
 				slot-scope="{ item }"
 			>	
-				<v-btn v-if="(!item.children || item.children.length === 0) && item._id !== 'root'" fab x-small text outlined class="mx-1"  @click.stop="deleteFolder(item)">
+				<v-btn v-if="(!item.children || item.children.length === 0) && item._id !== 'root' && item._id !== '16322284940689326'" fab x-small text outlined class="mx-1"  @click.stop="deleteFolder(item)">
 					<v-icon
 						color="red"
 						class="mx-3"
