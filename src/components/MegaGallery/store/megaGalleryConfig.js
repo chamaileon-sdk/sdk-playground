@@ -63,7 +63,7 @@ const favoriteImages = [
 	{
 		parentId: "16322284940689326",
 		name: "Chamaileon Logo",
-		src: "https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/13958031_207694299633505_3207991402669478877_o.png?_nc_cat=107&ccb=1-5&_nc_sid=973b4a&_nc_ohc=Ea0CT0G5B1AAX8uCHYQ&_nc_ht=scontent.fbud5-1.fna&oh=6eae5f3aa70fb20b3b32d38b125b41aa&oe=617868EE",
+		src: "https://scontent.fbud5-1.fna.fbcdn.net/v/t31.18172-8/13958031_207694299633505_3207991402669478877_o.png?_nc_cat=107&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=4KnpVY9WdtQAX_RqDjj&_nc_ht=scontent.fbud5-1.fna&oh=00_AT9ikY82w_qDSGo5H0hcxM7xUzQtqb9UI3kdtEzBDe93tw&oe=6202D66E",
 		_id: ((new Date().valueOf() + Math.random()) * 10000).toString(),
 		createdAt: new Date(),
 	},
@@ -97,19 +97,22 @@ const favoriteImages = [
 	},
 ];
 
-images.remove({ parentId: { $eq: "16322284940689326" } });
-images.insert(favoriteImages).catch(error => console.error(error));
+async function isFavorites() {
+	const respond =  await images.findOne({ parentId: { $eq: "16322284940689326" } });
+	return !!respond;
+}
+isFavorites().then(async (data) => {
+	if(!data) try {
+		await images.insert(favoriteImages);
+		return;
+	} catch (error) {
+		console.error(error);
+	}
+});
 
 let count = 0;
 let loadedItems = [];
 
-function closeGallery() {
-	const wrapper = document.getElementById("mega-gallery-wrapper");
-	window.setTimeout(() => {
-		wrapper.innerHTML = "";
-		wrapper.style.marginTop = "100%";
-	}, 0);
-}
 
 const getDefaultState = () => {
 	return {
