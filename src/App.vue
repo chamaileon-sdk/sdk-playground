@@ -85,7 +85,7 @@ export default {
 	mounted() {
 		window.onbeforeunload = function () {
 			localStorage.setItem(
-				"sdkConfig",
+				"sdkInitConfig",
 				JSON.stringify(this.$store.state.sdkConfig)
 			);
 			localStorage.setItem(
@@ -119,7 +119,7 @@ export default {
 		}.bind(this);
 
 		for (let elem of [
-			"sdkConfig",
+			"sdkInitConfig",
 			"editorConfig",
 			"previewConfig",
 			"galleryConfig",
