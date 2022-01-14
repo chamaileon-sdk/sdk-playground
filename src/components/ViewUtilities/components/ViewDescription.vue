@@ -42,16 +42,17 @@
 				<v-icon left>mdi-book-open</v-icon>
 				read more
 			</v-btn>
+
 		</div>
 
-		<img
-			v-if="image"
-			width="100%"
+		<inline-svg 
+			:src="img" 
+			width="100%" 
+			:fill="this.$vuetify.theme.themes.light.primary "
 			style="margin-top: auto"
 			class="rounded-0"
-			:src="img"
 			alt=""
-		/>
+		></inline-svg>
 	</div>
 </template>
 
