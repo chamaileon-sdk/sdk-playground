@@ -1,5 +1,29 @@
 <template>
 	<div>
+		<div class="stickyDiv" v-if="this.section !== '#home'">
+			<v-btn
+				depressed
+				class="grey lighten-3 pa-3 custom-btn primary--text"
+				width="100%"
+				height="100%"
+				min-width="0"
+				@click="openEditor"
+			>
+				<div
+				class="
+					d-flex
+					flex-wrap flex-column
+					text-wrap
+					grey--text
+					text--darken-2
+				"
+				style="width: 100px"
+				>
+				<v-icon >mdi-eye</v-icon>
+				<span>preview</span>
+				</div>
+			</v-btn>
+		</div>
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
@@ -45,12 +69,10 @@
 			:next="'Email HTML Generator'"
 			:nextTo="'/htmlgenerator'"
 		/>
-		<OpenButton @openEditorClicked="openEditor" />
 	</div>
 </template>
 
 <script>
-import OpenButton from "../../AppElements/components/OpenButton.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
@@ -74,9 +96,16 @@ export default {
 		CustomFonts,
 		TextInsert,
 		SectionObserver,
-		OpenButton,
 		VariablesToEdit,
 		Description,
+	},
+	data() {
+		return {
+			section: null
+		}
+	},
+	created() {
+		this.section = this.$route.hash
 	},
 	methods: {
 		async openEditor() {
@@ -95,6 +124,11 @@ export default {
 			});
 		},
 	},
+	watch: {
+		$route(to, from) {
+			this.section = to.hash
+		}
+  	}
 };
 </script>
 
