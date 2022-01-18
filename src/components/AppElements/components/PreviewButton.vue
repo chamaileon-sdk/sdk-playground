@@ -68,7 +68,7 @@ export default {
   height: 50px;
 }
 
-.stickyDiv:hover {
+.previewBtn:hover {
   background-color: rgba(240, 238, 238, 0.619);
   cursor: pointer;
 }
