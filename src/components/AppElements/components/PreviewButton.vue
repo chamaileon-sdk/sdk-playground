@@ -53,12 +53,13 @@ export default {
   position: fixed;
   top: 0;
   z-index: 5;
-  height: 65px !important;
+  height: 63px !important;
   line-height: 50px;
   margin-top: 0px !important;
   padding-top: 5px;
   width: 50%;
   left: 19.127%;
+  border-bottom: 2px solid rgb(238, 238, 238);
 }
 
 .previewBtn {
