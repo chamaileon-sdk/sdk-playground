@@ -4,7 +4,7 @@
 
 		<slot />
 
-		<div style="margin-top: 23px; margin-bottom: 100px !important">
+		<div style="margin-top: 23px; margin-bottom: 80px !important">
 			<v-btn
 				v-if="!hideGetStarted"
 				@click="scrollToFirst"
@@ -42,16 +42,46 @@
 				<v-icon left>mdi-book-open</v-icon>
 				read more
 			</v-btn>
+
 		</div>
 
-		<img
-			v-if="image"
-			width="100%"
+		<div v-if="buttonText" class="previewBtn" v-observe-visibility="{
+				callback: visibilityChanged,
+				intersection: {
+					threshold: 0.5,
+				},
+		}">
+			<v-btn
+				depressed
+				class="grey lighten-3 pa-3 custom-btn primary--text"
+				width="100%"
+				height="100%"
+				min-width="0"
+				@click="emitClick"
+			>
+				<div
+				class="
+					d-flex
+					flex-wrap flex-column
+					grey--text
+					text--darken-2
+				"
+				style="width: 100px"
+				>
+				<v-icon >mdi-eye</v-icon>
+				<span>{{this.buttonText}}</span>
+				</div>
+			</v-btn>
+		</div>
+
+		<inline-svg 
+			:src="img" 
+			width="100%" 
+			:fill="this.$vuetify.theme.themes.light.primary "
 			style="margin-top: auto"
 			class="rounded-0"
-			:src="img"
 			alt=""
-		/>
+		></inline-svg>
 	</div>
 </template>
 
@@ -65,6 +95,12 @@ export default {
 		scrollToFirst() {
 			window.scrollTo({ top: window.innerHeight + 80, behavior: "smooth" });
 		},
+		visibilityChanged (isVisible) {
+			this.$emit("showPreviewButton", isVisible);
+		},
+		emitClick() {
+			this.$emit("previewClick");
+		}
 	},
 
 	data() {
@@ -82,12 +118,22 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		buttonText: String
 	},
 };
 </script>
 
-<style>
+<style scoped>
 .imgWrapper {
 	position: relative;
 }
+
+.previewBtn {
+  width: 35vw;
+  height: 50px;
+  margin: auto;
+  margin-bottom: 60px;
+}
+
+
 </style>

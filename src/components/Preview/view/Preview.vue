@@ -1,11 +1,19 @@
 <template>
 	<div>
+		<PreviewButton 
+			buttonText="Open preview"
+			:previewButtonVisible="this.previewButtonVisible"
+			@previewClick="this.openEditor"
+		/>
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
 					:title="'Email Preview'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-preview/'"
 					:image="'EmailPreviewIllustration.svg'"
+					buttonText="Open preview"
+					@showPreviewButton="showPreviewButton"
+					@previewClick="this.openEditor"
 				>
 					<p>
 						This plugin helps you to show your customers how an email looks like
@@ -26,7 +34,6 @@
 			:next="'Email Editor'"
 			:nextTo="'/emaileditor'"
 		/>
-		<OpenButton @openEditorClicked="openEditor" />
 	</div>
 </template>
 
@@ -34,24 +41,31 @@
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
-import OpenButton from "../../AppElements/components/OpenButton.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
 export default {
 	components: {
 		Header,
 		Footer,
 		SectionObserver,
-		OpenButton,
 		Description,
+		PreviewButton
 	},
-
+	data() {
+		return {
+			previewButtonVisible: true,
+		}
+	},
 	methods: {
 		openEditor() {
 			this.$store.state.sdk.previewEmail({
 				...this.$store.getters.getPreviewConfigObject,
 			});
 		},
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
+		}
 	},
 
 	mounted() {
@@ -60,8 +74,6 @@ export default {
 
 	destroyed() {
 		window.chamaileonSdk.destroy;
-	},
+	}
 };
 </script>
-
-<style></style>

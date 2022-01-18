@@ -11,10 +11,17 @@ import "vue-highlight.js/lib/allLanguages";
 
 import "highlight.js/styles/monokai-sublime.css";
 
+import {InlineSvgPlugin} from "vue-inline-svg";
+import VueObserveVisibility from "vue-observe-visibility"
+
+
 Vue.use(VueHighlightJS);
 
 Vue.use(VueScrollactive);
 Vue.use(VueMeta);
+
+Vue.use(InlineSvgPlugin);
+Vue.use(VueObserveVisibility)
 
 Vue.config.productionTip = false;
 

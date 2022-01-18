@@ -1,63 +1,69 @@
 <template>
-	<div>
-		<SectionObserver>
-			<div class="section" id="home">
-				<Description
-					:title="'Email Editor'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
-					:image="'EmailEditorIllustration.svg'"
-				>
-					<p>
-						With the help of the email editor plugin your users can create
-						beautiful emails from scratch. The editor offers many ways of
-						customization regarding functionality. You can create a personalized
-						layout, design systems for your emails, and you can even change the
-						access of your team members to those libraries in a team
-						environment.
-					</p>
-				</Description>
-			</div>
+  <div>
+	<PreviewButton 
+		buttonText="Open editor"
+		:previewButtonVisible="this.previewButtonVisible"
+		@previewClick="this.openEditor"
+	/>
+    <SectionObserver >
+      <div class="section" id="home">
+        <Description
+          :title="'Email Editor'"
+          :docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
+          :image="'EmailEditorIllustration.svg'"
+		  buttonText="Open editor"
+		  @showPreviewButton="showPreviewButton"
+		  @previewClick="this.openEditor"
+        >
+          <p>
+            With the help of the email editor plugin your users can create
+            beautiful emails from scratch. The editor offers many ways of
+            customization regarding functionality. You can create a personalized
+            layout, design systems for your emails, and you can even change the
+            access of your team members to those libraries in a team
+            environment.
+          </p>
+        </Description>
+      </div>
 
-			<div class="section" id="header">
-				<Header />
-			</div>
+      <div class="section" id="header">
+        <Header />
+      </div>
 
-			<div class="section" id="text-insert">
-				<TextInsert />
-			</div>
+      <div class="section" id="text-insert">
+        <TextInsert />
+      </div>
 
-			<div class="section" id="elements">
-				<Elements />
-			</div>
+      <div class="section" id="elements">
+        <Elements />
+      </div>
 
-			<div class="section" id="block-libraries">
-				<BlockLibraries />
-			</div>
+      <div class="section" id="block-libraries">
+        <BlockLibraries />
+      </div>
 
-			<div class="section" id="custom-fonts">
-				<CustomFonts />
-			</div>
+      <div class="section" id="custom-fonts">
+        <CustomFonts />
+      </div>
 
-			<div class="section" id="addons">
-				<Addons />
-			</div>
+      <div class="section" id="addons">
+        <Addons />
+      </div>
 
-			<div class="section" id="settings">
-				<Settings />
-			</div>
-		</SectionObserver>
-		<Footer
-			:previous="'Email Preview'"
-			:prevTo="'/emailpreview'"
-			:next="'Gallery'"
-			:nextTo="'/gallery'"
-		/>
-		<OpenButton @openEditorClicked="openEditor" />
-	</div>
+      <div class="section" id="settings">
+        <Settings />
+      </div>
+    </SectionObserver>
+    <Footer
+      :previous="'Email Preview'"
+      :prevTo="'/emailpreview'"
+      :next="'Gallery'"
+      :nextTo="'/gallery'"
+    />
+  </div>
 </template>
 
 <script>
-import OpenButton from "../../AppElements/components/OpenButton.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header";
@@ -68,6 +74,7 @@ import TextInsert from "../components/TextInsert";
 import Addons from "../components/Addons";
 import Settings from "../components/Settings";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
 import { mapGetters, mapState, mapActions } from "vuex";
 
@@ -82,8 +89,13 @@ export default {
 		TextInsert,
 		Addons,
 		Settings,
-		OpenButton,
 		Description,
+		PreviewButton
+	},
+	data() {
+		return {
+			previewButtonVisible: true,
+		}
 	},
 	computed: {
 		...mapState(["sdk"]),
@@ -206,28 +218,33 @@ export default {
 				},
 			});
 		},
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
+		}
 	},
+
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},
 	destroyed() {
 		window.chamaileonSdk.destroy;
-	},
+	}
 };
 </script>
 
 <style>
 .v-btn--example {
-	position: fixed;
-	bottom: 0;
-	right: 31%;
-	margin-bottom: 64px;
+  position: fixed;
+  bottom: 0;
+  right: 31%;
+  margin-bottom: 64px;
 }
 
 body {
-	overflow: hidden !important;
+  overflow: hidden !important;
 }
 iframe {
-	position: fixed;
+  position: fixed;
 }
+
 </style>

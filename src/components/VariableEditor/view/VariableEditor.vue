@@ -1,11 +1,19 @@
 <template>
 	<div>
+		<PreviewButton 
+			buttonText="Open editor"
+			:previewButtonVisible="this.previewButtonVisible"
+			@previewClick="this.openEditor"
+		/>
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
 					:title="'Email Variable Editor'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
 					:image="'VariableEditorIllustration.svg'"
+					buttonText="Open editor"
+					@showPreviewButton="showPreviewButton"
+					@previewClick="this.openEditor"
 				>
 					<p>
 						This plugin is a restricted editor, with which you can only modify
@@ -45,12 +53,10 @@
 			:next="'Email HTML Generator'"
 			:nextTo="'/htmlgenerator'"
 		/>
-		<OpenButton @openEditorClicked="openEditor" />
 	</div>
 </template>
 
 <script>
-import OpenButton from "../../AppElements/components/OpenButton.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
@@ -59,6 +65,7 @@ import CustomFonts from "../../sharedComponents/CustomFonts";
 import VariablesToEdit from "../components/VariablesToEdit.vue";
 import NavFooter from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
 export default {
 	mounted() {
@@ -74,9 +81,14 @@ export default {
 		CustomFonts,
 		TextInsert,
 		SectionObserver,
-		OpenButton,
 		VariablesToEdit,
 		Description,
+		PreviewButton
+	},
+	data() {
+		return {
+			previewButtonVisible: true,
+		}
 	},
 	methods: {
 		async openEditor() {
@@ -94,7 +106,10 @@ export default {
 				},
 			});
 		},
-	},
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
+		}
+	}
 };
 </script>
 
