@@ -49,13 +49,13 @@ export default {
 
 .stickyDiv {
   text-align: center;
-  background-color: white !important;
+  background-color: white;
   position: fixed;
   top: 0;
   z-index: 5;
-  height: 63px !important;
+  height: 63px;
   line-height: 50px;
-  margin-top: 0px !important;
+  margin-top: 0px;
   padding-top: 5px;
   width: 50%;
   left: 19.127%;
