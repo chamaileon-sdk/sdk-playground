@@ -1,35 +1,19 @@
 <template>
 	<div>
-		<div class="stickyDiv" v-if="this.section !== '#home'">
-		<v-btn
-			depressed
-			class="grey lighten-3 pa-3 custom-btn primary--text"
-			width="100%"
-			height="100%"
-			min-width="0"
-			@click="openGallery"
-		>
-			<div
-			class="
-				d-flex
-				flex-wrap flex-column
-				text-wrap
-				grey--text
-				text--darken-2
-			"
-			style="width: 100px"
-			>
-			<v-icon >mdi-eye</v-icon>
-			<span>preview</span>
-			</div>
-		</v-btn>
-		</div>
+		<PreviewButton 
+			buttonText="Open gallery"
+			:previewButtonVisible="this.previewButtonVisible"
+			@previewClick="this.openGallery"
+		/>
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
 					:title="'Gallery'"
 					:docUrl="'https://chamaileon.io/sdk/docs/gallery/'"
 					:image="'EmailThumbnailIllustration.svg'"
+					buttonText="Open gallery"
+					@showPreviewButton="showPreviewButton"
+					@previewClick="this.openGallery"
 				>
 					<p>
 						The Gallery plugin shows stored image assets to choose from and insert into emails during creation.
@@ -64,6 +48,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import FolderTree from "../components/FolderTree";
 import Settings from "../components/Settings.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
 import { mapActions } from "vuex";
 
@@ -74,14 +59,12 @@ export default {
 		Footer,
 		Description,
 		Settings,
+		PreviewButton
 	},
 	data() {
 		return {
-			section: null
+			previewButtonVisible: true
 		}
-	},
-	created() {
-		this.section = this.$route.hash
 	},
 	mounted() {
 		this.$store.dispatch("updateSDK");
@@ -92,13 +75,11 @@ export default {
 	methods: {
 		...mapActions({
 			openGallery: "openGallery"
-		})
-	},
-	watch: {
-		$route(to, from) {
-			this.section = to.hash
+		}),
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
 		}
-  	}
+	}
 };
 </script>
 
@@ -115,22 +96,5 @@ body {
 }
 iframe {
 	position: fixed;
-}
-
-.stickyDiv {
-  text-align: center;
-  background-color: rgb(240, 238, 238);
-  position: fixed;
-  width: 40%;
-  left: 24.127%;
-  z-index: 5;
-  height: 50px;
-  line-height: 50px;
-  margin-top: 5px;
-}
-
-.stickyDiv:hover {
-  background-color: rgba(240, 238, 238, 0.619);
-  cursor: pointer;
 }
 </style>

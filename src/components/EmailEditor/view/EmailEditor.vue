@@ -1,35 +1,19 @@
 <template>
   <div>
-    <div class="stickyDiv" v-if="this.section !== '#home'">
-      <v-btn
-        depressed
-        class="grey lighten-3 pa-3 custom-btn primary--text"
-        width="100%"
-        height="100%"
-        min-width="0"
-		@click="openEditor"
-      >
-        <div
-          class="
-            d-flex
-            flex-wrap flex-column
-            text-wrap
-            grey--text
-            text--darken-2
-          "
-          style="width: 100px"
-        >
-          <v-icon >mdi-eye</v-icon>
-          <span>preview</span>
-        </div>
-      </v-btn>
-    </div>
-    <SectionObserver>
+	<PreviewButton 
+		buttonText="Open editor"
+		:previewButtonVisible="this.previewButtonVisible"
+		@previewClick="this.openEditor"
+	/>
+    <SectionObserver >
       <div class="section" id="home">
         <Description
           :title="'Email Editor'"
           :docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
           :image="'EmailEditorIllustration.svg'"
+		  buttonText="Open editor"
+		  @showPreviewButton="showPreviewButton"
+		  @previewClick="this.openEditor"
         >
           <p>
             With the help of the email editor plugin your users can create
@@ -90,6 +74,7 @@ import TextInsert from "../components/TextInsert";
 import Addons from "../components/Addons";
 import Settings from "../components/Settings";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
 import { mapGetters, mapState, mapActions } from "vuex";
 
@@ -105,18 +90,16 @@ export default {
 		Addons,
 		Settings,
 		Description,
+		PreviewButton
 	},
 	data() {
 		return {
-			section: null
+			previewButtonVisible: true,
 		}
 	},
 	computed: {
 		...mapState(["sdk"]),
 		...mapGetters(["getConfigObject"]),
-	},
-	created() {
-		this.section = this.$route.hash
 	},
 	methods: {
 		...mapActions({
@@ -235,18 +218,17 @@ export default {
 				},
 			});
 		},
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
+		}
 	},
+
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},
 	destroyed() {
 		window.chamaileonSdk.destroy;
-	},
-	watch: {
-		$route(to, from) {
-			this.section = to.hash
-		}
-  	}
+	}
 };
 </script>
 
@@ -265,20 +247,4 @@ iframe {
   position: fixed;
 }
 
-.stickyDiv {
-  text-align: center;
-  background-color: rgb(240, 238, 238);
-  position: fixed;
-  width: 40%;
-  left: 24.127%;
-  z-index: 5;
-  height: 50px;
-  line-height: 50px;
-  margin-top: 5px;
-}
-
-.stickyDiv:hover {
-  background-color: rgba(240, 238, 238, 0.619);
-  cursor: pointer;
-}
 </style>

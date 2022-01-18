@@ -1,35 +1,19 @@
 <template>
 	<div>
-		<div class="stickyDiv" v-if="this.section !== '#home'">
-			<v-btn
-				depressed
-				class="grey lighten-3 pa-3 custom-btn primary--text"
-				width="100%"
-				height="100%"
-				min-width="0"
-				@click="openEditor"
-			>
-				<div
-				class="
-					d-flex
-					flex-wrap flex-column
-					text-wrap
-					grey--text
-					text--darken-2
-				"
-				style="width: 100px"
-				>
-				<v-icon >mdi-eye</v-icon>
-				<span>preview</span>
-				</div>
-			</v-btn>
-		</div>
+		<PreviewButton 
+			buttonText="Open editor"
+			:previewButtonVisible="this.previewButtonVisible"
+			@previewClick="this.openEditor"
+		/>
 		<SectionObserver>
 			<div class="section" id="home">
 				<Description
 					:title="'Email Variable Editor'"
 					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
 					:image="'VariableEditorIllustration.svg'"
+					buttonText="Open editor"
+					@showPreviewButton="showPreviewButton"
+					@previewClick="this.openEditor"
 				>
 					<p>
 						This plugin is a restricted editor, with which you can only modify
@@ -81,6 +65,7 @@ import CustomFonts from "../../sharedComponents/CustomFonts";
 import VariablesToEdit from "../components/VariablesToEdit.vue";
 import NavFooter from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
 export default {
 	mounted() {
@@ -98,14 +83,12 @@ export default {
 		SectionObserver,
 		VariablesToEdit,
 		Description,
+		PreviewButton
 	},
 	data() {
 		return {
-			section: null
+			previewButtonVisible: true,
 		}
-	},
-	created() {
-		this.section = this.$route.hash
 	},
 	methods: {
 		async openEditor() {
@@ -123,12 +106,10 @@ export default {
 				},
 			});
 		},
-	},
-	watch: {
-		$route(to, from) {
-			this.section = to.hash
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
 		}
-  	}
+	}
 };
 </script>
 
