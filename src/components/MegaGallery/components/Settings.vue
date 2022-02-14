@@ -2,7 +2,7 @@
 	<div>
 		<h2>Other settings</h2>
 		<p>
-			You can also set the maximum size (in Megabytes) of the images that your users still can upload to your server. 
+			You can also set the maximum size (in Megabytes) of the images that your users still can upload to your server.
 			The Gallery uses infinite scrolling to show the images. You can set the number of pictures to load with a single request.
 		</p>
 		<OptionsWrapper>
@@ -54,7 +54,7 @@ export default {
 				return this.maxFileSize;
 			},
 			set(value) {
-				this.setMaxFileSize(value)
+				this.setMaxFileSize(value);
 			}
 		},
 		imagePerPage: {
@@ -65,7 +65,7 @@ export default {
 				this.setMaxImagePerPage(value)
 			}
 		},
-		
+
 	},
 	methods: {
 		...mapMutations({
