@@ -5,10 +5,11 @@ const getDefaultState = () => {
 			buttons: {
 				header: [],
 			},
+			defaultView: "mobile",
 		},
 	}
 }
-  
+
 export default {
 	state: getDefaultState(),
 	mutations: {
@@ -94,11 +95,18 @@ export default {
 		updatePreviewDropdownBtnOrder(state, payload) {
 			state.settings.buttons.header[payload.parentIndex].items = payload.newArr;
 		},
+
+		setDefaultView(state, payload) {
+			state.settings.defaultView = payload;
+		},
 	},
 	actions: {},
 	getters: {
 		getPreviewBtns: (state) => {
 			return state.settings.buttons.header;
+		},
+		getDefaultView: (state) => {
+			return state.settings.defaultView;
 		},
 	},
 };

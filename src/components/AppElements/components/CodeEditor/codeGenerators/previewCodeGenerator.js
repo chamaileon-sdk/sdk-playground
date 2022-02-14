@@ -5,10 +5,11 @@ export default function (previewConfig) {
         buttons: {
             header: ${calculatePreviewHeader(previewConfig)}
         },
+		defaultView: "${previewConfig.settings.defaultView}",
     },
     hooks: emailPreviewHooks //see 'hooks' tab
 };
-    
+
 const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 }
 
