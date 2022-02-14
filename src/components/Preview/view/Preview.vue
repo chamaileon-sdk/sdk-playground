@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<PreviewButton 
+		<PreviewButton
 			buttonText="Open preview"
 			:previewButtonVisible="this.previewButtonVisible"
 			@previewClick="this.openEditor"
@@ -27,6 +27,9 @@
 			<div class="section" id="header">
 				<Header />
 			</div>
+			<div class="section" id="settings">
+				<Settings />
+			</div>
 		</SectionObserver>
 		<Footer
 			:previous="'Email Thumbnail'"
@@ -41,6 +44,7 @@
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
+import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue"
 
@@ -50,6 +54,7 @@ export default {
 		Footer,
 		SectionObserver,
 		Description,
+		Settings,
 		PreviewButton
 	},
 	data() {
