@@ -3,7 +3,7 @@
 		<PreviewButton
 			buttonText="Open preview"
 			:previewButtonVisible="this.previewButtonVisible"
-			@previewClick="this.openEditor"
+			@previewClick="this.openPreview"
 		/>
 		<SectionObserver>
 			<div class="section" id="home">
@@ -63,7 +63,7 @@ export default {
 		}
 	},
 	methods: {
-		openEditor() {
+		openPreview() {
 			this.$store.state.sdk.previewEmail({
 				...this.$store.getters.getPreviewConfigObject,
 			});
