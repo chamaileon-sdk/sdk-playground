@@ -3,7 +3,7 @@ const getDefaultState = () => {
 		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		apiKey: "",
 		chamaileonSdk: "https://plugins.chamaileon.io/static/chamaileonSdk.js",
-		environmentName: location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
+		environmentName: "dev", // location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
 		locale: "en",
 		urls: {
 			splashScreen:

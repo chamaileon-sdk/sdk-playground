@@ -12,6 +12,8 @@ import sdkConfig from "../components/Dashboard/store/sdkConfig";
 import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
 import importConfig from "../components/HtmlImport/store/htmlImport";
 
+import createChamaileonSdk from "@chamaileon-sdk/plugins"
+
 Vue.use(Vuex);
 const getDefaultState = () => {
 	return {
@@ -19,7 +21,8 @@ const getDefaultState = () => {
 		sdk: null,
 	}
 }
-  
+
+const chamaileonSdk = createChamaileonSdk();
 
 export default new Vuex.Store({
 	strict: true,
@@ -41,7 +44,7 @@ export default new Vuex.Store({
 			Object.assign(state, getDefaultState());
 		},
 		//Load from local storage
-		sdkConfigLoad(state, sdkConfig) {
+		sdkInitConfigLoad(state, sdkConfig) {
 			state.sdkConfig = sdkConfig;
 		},
 
@@ -94,6 +97,7 @@ export default new Vuex.Store({
 	},
 	actions: {
 		async initSDK({ commit, state }) {
+			console.log("INIT SDK")
 			const apiBackend = state.sdkConfig.apiBackend;
 
 			async function fetchAccessToken() {				
@@ -141,7 +145,7 @@ export default new Vuex.Store({
 
 			const accessToken = await getAccessToken();
 
-			const chamaileonPlugins = await window.chamaileonSdk.init({
+			const chamaileonPlugins = await chamaileonSdk.init({
 				mode: "serverless",
 				environmentName: state.sdkConfig.environmentName,
 				accessToken,
@@ -150,11 +154,12 @@ export default new Vuex.Store({
 				},
 			});
 
+			console.log(chamaileonPlugins)
 			commit("addSDK", chamaileonPlugins);
 			commit("changeLogoFunction", window.createLogo);
 		},
 		async updateSDK({ dispatch }) {
-			window.chamaileonSdk.destroy();
+			chamaileonSdk.destroy();
 			
 			window.document
 				.querySelectorAll(".in-chamaileon-iframe")
