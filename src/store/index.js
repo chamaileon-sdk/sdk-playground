@@ -144,17 +144,19 @@ export default new Vuex.Store({
 
 
 			const accessToken = await getAccessToken();
+			console.log(chamaileonSdk);
 
 			const chamaileonPlugins = await chamaileonSdk.init({
 				mode: "serverless",
-				environmentName: state.sdkConfig.environmentName,
+				environmentName: "dev",
 				accessToken,
 				whitelabel: {
 					...this.state.sdkConfig,
 				},
 			});
 
-			console.log(chamaileonPlugins)
+			console.log("chamaileonPlugins")
+
 			commit("addSDK", chamaileonPlugins);
 			commit("changeLogoFunction", window.createLogo);
 		},

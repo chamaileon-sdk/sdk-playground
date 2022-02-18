@@ -3,9 +3,12 @@
   "version": "0.1.7",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "npx vue-cli-service lint . --ext .js,.mjs,.cjs,.json,.vue --no-fix",
+    "lint-fix": "npx vue-cli-service lint . --ext .js,.mjs,.cjs,.json,.vue",
+    "prepare": "husky install",
+    "serve": "vue-cli-service serve",
+    "test": "npm run lint"
   },
   "dependencies": {
     "@chamaileon-sdk/plugins": "latest",
@@ -34,17 +37,13 @@
     "zangodb": "^1.0.8"
   },
   "devDependencies": {
+    "@EDMdesigner/eslint-config-edmdesigner": "^2.1.2",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "prettier": "^2.3.2",
+    "husky": "^7.0.0",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
     "vue-cli-plugin-vuetify": "~2.4.1",
