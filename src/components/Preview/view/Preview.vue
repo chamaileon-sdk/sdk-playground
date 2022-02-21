@@ -1,41 +1,41 @@
 <template>
 	<div>
 		<PreviewButton
-			buttonText="Open preview"
-			:previewButtonVisible="this.previewButtonVisible"
-			@previewClick="this.openPreview"
+			button-text="Open preview"
+			:preview-button-visible="previewButtonVisible"
+			@previewClick="openPreview"
 		/>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email Preview'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-preview/'"
+					:doc-url="'https://chamaileon.io/sdk/docs/email-preview/'"
 					:image="'EmailPreviewIllustration.svg'"
-					buttonText="Open preview"
+					button-text="Open preview"
 					@showPreviewButton="showPreviewButton"
-					@previewClick="this.openPreview"
+					@previewClick="openPreview"
 				>
 					<p>
 						This plugin helps you to show your customers how an email looks like
-						on different devices.<br />
+						on different devices.<br>
 						You can fully customize and extend the functionality of this plugin
 						by adding different buttons to the header and defining how each
 						button behaves, through a hook.
 					</p>
 				</Description>
 			</div>
-			<div class="section" id="header">
+			<div id="header" class="section">
 				<Header />
 			</div>
-			<div class="section" id="settings">
+			<div id="settings" class="section">
 				<Settings />
 			</div>
 		</SectionObserver>
 		<Footer
 			:previous="'Email Thumbnail'"
-			:prevTo="'/emailthumbnail'"
+			:prev-to="'/emailthumbnail'"
 			:next="'Email Editor'"
-			:nextTo="'/emaileditor'"
+			:next-to="'/emaileditor'"
 		/>
 	</div>
 </template>
@@ -46,7 +46,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
 import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
-import PreviewButton from "../../AppElements/components/PreviewButton.vue"
+import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
 export default {
 	components: {
@@ -55,12 +55,20 @@ export default {
 		SectionObserver,
 		Description,
 		Settings,
-		PreviewButton
+		PreviewButton,
 	},
 	data() {
 		return {
 			previewButtonVisible: true,
-		}
+		};
+	},
+
+	mounted() {
+		this.$store.dispatch("updateSDK");
+	},
+
+	destroyed() {
+		window.chamaileonSdk.destroy;
 	},
 	methods: {
 		openPreview() {
@@ -70,15 +78,7 @@ export default {
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
-		}
+		},
 	},
-
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	}
 };
 </script>
