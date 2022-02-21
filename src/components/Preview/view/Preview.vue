@@ -13,7 +13,7 @@
 					:image="'EmailPreviewIllustration.svg'"
 					buttonText="Open preview"
 					@showPreviewButton="showPreviewButton"
-					@previewClick="this.openEditor"
+					@previewClick="this.openPreview"
 				>
 					<p>
 						This plugin helps you to show your customers how an email looks like
