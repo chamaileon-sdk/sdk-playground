@@ -48,6 +48,8 @@ import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
+import { mapGetters, mapActions } from "vuex";
+
 export default {
 	components: {
 		Header,
@@ -62,19 +64,30 @@ export default {
 			previewButtonVisible: true,
 		};
 	},
-
+	computed: {
+		...mapGetters({
+			getMegaPreviewInterface: "getMegaPreviewInterface",
+			getPreviewConfigObject: "getPreviewConfigObject",
+		}),
+	},
 	mounted() {
 		this.$store.dispatch("updateSDK");
 	},
-
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	},
 	methods: {
-		openPreview() {
-			this.$store.state.sdk.previewEmail({
-				...this.$store.getters.getPreviewConfigObject,
-			});
+		...mapActions({
+			initMegaPreview: "initMegaPreview",
+		}),
+		async openPreview() {
+			if (!this.getMegaPreviewInterface) {
+				await this.initMegaPreview({
+					...this.getPreviewConfigObject,
+				});
+			}
+			while (!this.getMegaPreviewInterface) {
+				// eslint-disable-next-line no-await-in-loop
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			this.getMegaPreviewInterface.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;

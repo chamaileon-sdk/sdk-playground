@@ -1,3 +1,5 @@
+/* eslint-disable require-await */
+/* eslint-disable no-shadow */
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -19,6 +21,8 @@ const getDefaultState = () => {
 	return {
 		logoCreatorFunction: undefined,
 		sdk: null,
+		megaPreviewInterface: null,
+		variablePreviewInterface: null,
 	};
 };
 
@@ -47,11 +51,9 @@ export default new Vuex.Store({
 		sdkInitConfigLoad(state, sdkConfig) {
 			state.sdkConfig = sdkConfig;
 		},
-
 		setIsGalleryVisible(state, payload) {
 			state.isGalleryVisible = payload;
 		},
-
 		editorConfigLoad(state, editorConfig) {
 			state.editorConfig = {
 				...state.editorConfig,
@@ -62,37 +64,36 @@ export default new Vuex.Store({
 				},
 			};
 		},
-
 		galleryConfigLoad(state, megaGalleryConfig) {
 			state.megaGalleryConfig = megaGalleryConfig;
 		},
-
 		previewConfigLoad(state, previewConfig) {
 			state.previewConfig = previewConfig;
 		},
-
 		variableEditorConfigLoad(state, variableEditorConfig) {
 			state.variableEditorConfig = variableEditorConfig;
 		},
-
 		thumbnailConfigLoad(state, thumbnailConfig) {
 			state.thumbnailConfig = thumbnailConfig;
 		},
-
 		generatorConfigLoad(state, generatorConfig) {
 			state.generatorConfig.settings = generatorConfig.settings;
 		},
-
 		emailDocumentLoad(state, emailDocument) {
 			state.document = emailDocument;
 		},
 		// SDK Settings
-
 		changeLogoFunction(state, fn) {
 			state.logoCreatorFunction = fn;
 		},
 		addSDK(state, sdk) {
 			state.sdk = sdk;
+		},
+		addMegaPreviewInterface(state, megaPreviewInterface) {
+			state.megaPreviewInterface = megaPreviewInterface;
+		},
+		addvariablePreviewInterface(state, variablePreviewInterface) {
+			state.variablePreviewInterface = variablePreviewInterface;
 		},
 	},
 	actions: {
@@ -198,12 +199,10 @@ export default new Vuex.Store({
 		getEmail: (state) => {
 			return state.document;
 		},
-
 		getGalleryConfigObject: (state) => {
 			const x = JSON.parse(JSON.stringify(state.megaGalleryConfig));
 			return x;
 		},
-
 		getConfigObject: (state) => {
 			// Deep copy
 			const x = JSON.parse(JSON.stringify(state.editorConfig));
@@ -259,46 +258,67 @@ export default new Vuex.Store({
 
 			return x;
 		},
-
 		getVariableEditorConfigObject: (state) => {
-			const out = {};
+			const config = {};
 
-			out.document = state.document;
-			out.settings = JSON.parse(
+			const documentJSON = JSON.parse(JSON.stringify(state.document));
+
+			config.data = { documentJSON }; // !important change we set data from now, not document
+
+			config.settings = JSON.parse(
 				JSON.stringify(state.variableEditorConfig.settings),
 			);
 
-			out.settings.buttons.header.left = [
+			config.settings.buttons.header.left = [
 				{ id: "close", label: "close", icon: "mdi-arrow-left" },
-				...out.settings.buttons.header.left,
+				...config.settings.buttons.header.left,
 			];
 
 			const tmpArr = [];
 
-			out.settings.variablesToEdit.forEach((c) => {
-				if (c.edit) tmpArr.push(c.name);
+			config.settings.variablesToEdit.forEach((variable) => {
+				if (variable.edit) tmpArr.push(variable.name);
 			});
 
-			out.settings.variablesToEdit = tmpArr;
+			config.settings.variablesToEdit = tmpArr;
 
 			const editorConfig = JSON.parse(JSON.stringify(state.editorConfig));
 
-			out.settings.fontStacks = editorConfig.settings.fontStacks;
-			out.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
+			config.settings.fontStacks = editorConfig.settings.fontStacks;
+			config.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
 
-			return out;
+			return config;
 		},
-
 		getPreviewConfigObject: (state) => {
-			const out = {};
+			const config = {};
+			const documentJSON = JSON.parse(JSON.stringify(state.document));
 
-			const doc = JSON.parse(JSON.stringify(state.document));
+			config.data = { documentJSON }; // !important change we set data from now, not document
+			config.settings = state.previewConfig.settings;
+			config.hooks = {
+				close: () => {
+					state.megaPreviewInterface.hide("slideToLeft");
+				},
+				onHeaderButtonClicked: ({ buttonId }) => {
+					if (buttonId === "hideHeader") {
+						state.megaPreviewInterface.methods.updateSettings({ hideHeader: true });
+						setTimeout(() => {
+							state.megaPreviewInterface.methods.updateSettings({ hideHeader: false });
+						}, 5000);
+					}
+				},
+				shareEmail: ({ documentJSON }) => console.log("share: " + documentJSON),
+				sendTestEmail: ({ documentJSON }) => console.log("test: " + documentJSON),
+				requestReview: ({ documentJSON }) => console.log("review: " + documentJSON),
 
-			out.document = doc;
-			out.settings = state.previewConfig.settings;
-			out.hooks = {};
-
-			return out;
+			};
+			return config;
+		},
+		getMegaPreviewInterface: (state) => {
+			return state.megaPreviewInterface;
+		},
+		getvariablePreviewInterface: (state) => {
+			return state.variablePreviewInterface;
 		},
 	},
 });

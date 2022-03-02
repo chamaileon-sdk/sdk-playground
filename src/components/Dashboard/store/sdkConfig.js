@@ -15,8 +15,8 @@ const getDefaultState = () => {
 			primary: "#00bee6",
 			secondary: "#9b9b9b",
 		},
-	}
-}
+	};
+};
 
 export default {
 	state: getDefaultState(),
@@ -26,7 +26,7 @@ export default {
 		},
 		resetSdkConfigState(state) {
 			Object.assign(state, getDefaultState());
-		}
+		},
 	},
 	actions: {},
 	getters: {},

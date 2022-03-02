@@ -1,19 +1,19 @@
 <template>
 	<div>
-		<PreviewButton 
-			buttonText="Open editor"
-			:previewButtonVisible="this.previewButtonVisible"
-			@previewClick="this.openEditor"
+		<PreviewButton
+			button-text="Open editor"
+			:preview-button-visible="previewButtonVisible"
+			@previewClick="openVariableEditor"
 		/>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email Variable Editor'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
+					:doc-url="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
 					:image="'VariableEditorIllustration.svg'"
-					buttonText="Open editor"
+					button-text="Open editor"
 					@showPreviewButton="showPreviewButton"
-					@previewClick="this.openEditor"
+					@previewClick="openVariableEditor"
 				>
 					<p>
 						This plugin is a restricted editor, with which you can only modify
@@ -27,31 +27,31 @@
 				</Description>
 			</div>
 
-			<div class="section" id="variablestoedit">
+			<div id="variablestoedit" class="section">
 				<VariablesToEdit />
 			</div>
 
-			<div class="section" id="header">
+			<div id="header" class="section">
 				<Header />
 			</div>
 
-			<div class="section" id="footer">
+			<div id="footer" class="section">
 				<Footer />
 			</div>
 
-			<div class="section" id="custom-fonts">
-				<CustomFonts noFontFiles="true" />
+			<div id="custom-fonts" class="section">
+				<CustomFonts no-font-files="true" />
 			</div>
 
-			<div class="section" id="text-insert">
+			<div id="text-insert" class="section">
 				<TextInsert />
 			</div>
 		</SectionObserver>
 		<NavFooter
 			:previous="'Email Editor'"
-			:prevTo="'/emaileditor'"
+			:prev-to="'/emaileditor'"
 			:next="'Email HTML Generator'"
-			:nextTo="'/htmlgenerator'"
+			:next-to="'/htmlgenerator'"
 		/>
 	</div>
 </template>
@@ -65,15 +65,10 @@ import CustomFonts from "../../sharedComponents/CustomFonts";
 import VariablesToEdit from "../components/VariablesToEdit.vue";
 import NavFooter from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
-import PreviewButton from "../../AppElements/components/PreviewButton.vue"
+import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	},
 	components: {
 		Header,
 		Footer,
@@ -83,33 +78,54 @@ export default {
 		SectionObserver,
 		VariablesToEdit,
 		Description,
-		PreviewButton
+		PreviewButton,
 	},
 	data() {
 		return {
 			previewButtonVisible: true,
-		}
+		};
+	},
+	computed: {
+		...mapGetters({
+			getvariablePreviewInterface: "getvariablePreviewInterface",
+		}),
+	},
+	mounted() {
+		this.$store.dispatch("updateSDK");
+	},
+	destroyed() {
+		// window.chamaileonSdk.destroy;
 	},
 	methods: {
-		async openEditor() {
-			const variableEditor = await this.$store.state.sdk.editVariables({
-				...this.$store.getters.getVariableEditorConfigObject,
-				hooks: {
-					onButtonClicked: async ({ buttonId }) => {
-						if (buttonId === "close") {
-							const newJson = await variableEditor.getDocument();
-							this.$store.commit("updateDocument", newJson);
-							//exampleJsonTextArea.value = JSON.stringify(newJson);
-							variableEditor.close();
-						}
+		...mapActions({
+			initVariableEditor: "initVariableEditor",
+		}),
+		async openVariableEditor() {
+			if (!this.getvariablePreviewInterface) {
+				const variablePreviewInterface = await this.initVariableEditor({
+					...this.$store.getters.getVariableEditorConfigObject,
+					hooks: {
+						onButtonClicked: async ({ buttonId }) => {
+							if (buttonId === "close") {
+								const newJson = await variablePreviewInterface.getDocument();
+								this.$store.commit("updateDocument", newJson);
+								// exampleJsonTextArea.value = JSON.stringify(newJson);
+								variablePreviewInterface.hide();
+							}
+						},
 					},
-				},
-			});
+				});
+				while (!this.getvariablePreviewInterface) {
+					// eslint-disable-next-line no-await-in-loop
+					await new Promise(resolve => setTimeout(resolve, 100));
+				}
+				this.getvariablePreviewInterface.show();
+			}
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
-		}
-	}
+		},
+	},
 };
 </script>
 

@@ -15,7 +15,7 @@ const previewInstance = await chamaileonPlugins.previewEmail(previewConfig);`;
 
 const calculatePreviewHeader = (previewConfig) => {
 	let literal = "";
-	let arr = previewConfig.settings.buttons.header;
+	const arr = previewConfig.settings.buttons.header;
 
 	if (arr.length === 0) return "[],";
 

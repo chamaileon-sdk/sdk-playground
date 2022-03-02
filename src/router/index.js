@@ -1,28 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-//Dashboard
+// Dashboard
 import Dashboard from "../components/Dashboard/view/Dashboard";
 
-//Email editor
+// Email editor
 import EmailEditor from "../components/EmailEditor/view/EmailEditor";
 
-//Gallery
+// Gallery
 import MegaGallery from "../components/MegaGallery/view/MegaGallery";
 
-//Thumbnail
+// Thumbnail
 import Thumbnail from "../components/Thumbnail/view/Thumbnail";
 
-//Preview
+// Preview
 import Preview from "../components/Preview/view/Preview";
 
-//Variable Editor
+// Variable Editor
 import VariableEditor from "../components/VariableEditor/view/VariableEditor";
 
-//Html Generator
+// Html Generator
 import HtmlGenerator from "../components/HtmlGenerator/view/HtmlGenerator";
 
-//Html Import
+// Html Import
 import HtmlImport from "../components/HtmlImport/view/HtmlImport";
 
 Vue.use(VueRouter);
@@ -69,8 +69,8 @@ const routes = [
 const router = new VueRouter({
 	mode: "history",
 	routes,
-	scrollBehavior: function (to, from, savedPosition) {
-		if (to.path != from.path) return { x: 0, y: 0 };
+	scrollBehavior(to, from, savedPosition) {
+		if (to.path !== from.path) return { x: 0, y: 0 };
 
 		if (savedPosition) return savedPosition;
 
