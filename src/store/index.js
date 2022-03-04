@@ -20,9 +20,6 @@ Vue.use(Vuex);
 const getDefaultState = () => {
 	return {
 		logoCreatorFunction: undefined,
-		sdk: null,
-		megaPreviewInterface: null,
-		variablePreviewInterface: null,
 	};
 };
 
@@ -152,7 +149,7 @@ export default new Vuex.Store({
 				},
 			});
 
-			commit("addSDK", chamaileonPlugins);
+			Vue.prototype.$chamaileon = chamaileonPlugins;
 			commit("changeLogoFunction", window.createLogo);
 		},
 		async updateSDK({ dispatch }) {
@@ -261,9 +258,9 @@ export default new Vuex.Store({
 		getVariableEditorConfigObject: (state) => {
 			const config = {};
 
-			const documentJSON = JSON.parse(JSON.stringify(state.document));
+			const document = JSON.parse(JSON.stringify(state.document));
 
-			config.data = { documentJSON }; // !important change we set data from now, not document
+			config.data = { document }; // !important change we set data from now, not document
 
 			config.settings = JSON.parse(
 				JSON.stringify(state.variableEditorConfig.settings),
@@ -287,38 +284,18 @@ export default new Vuex.Store({
 			config.settings.fontStacks = editorConfig.settings.fontStacks;
 			config.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
 
+			console.log(config);
+
 			return config;
 		},
 		getPreviewConfigObject: (state) => {
 			const config = {};
-			const documentJSON = JSON.parse(JSON.stringify(state.document));
+			const document = JSON.parse(JSON.stringify(state.document));
 
-			config.data = { documentJSON }; // !important change we set data from now, not document
+			config.data = { document }; // !important change we set data from now, not document
 			config.settings = state.previewConfig.settings;
-			config.hooks = {
-				close: () => {
-					state.megaPreviewInterface.hide("slideToLeft");
-				},
-				onHeaderButtonClicked: ({ buttonId }) => {
-					if (buttonId === "hideHeader") {
-						state.megaPreviewInterface.methods.updateSettings({ hideHeader: true });
-						setTimeout(() => {
-							state.megaPreviewInterface.methods.updateSettings({ hideHeader: false });
-						}, 5000);
-					}
-				},
-				shareEmail: ({ documentJSON }) => console.log("share: " + documentJSON),
-				sendTestEmail: ({ documentJSON }) => console.log("test: " + documentJSON),
-				requestReview: ({ documentJSON }) => console.log("review: " + documentJSON),
 
-			};
 			return config;
-		},
-		getMegaPreviewInterface: (state) => {
-			return state.megaPreviewInterface;
-		},
-		getvariablePreviewInterface: (state) => {
-			return state.variablePreviewInterface;
 		},
 	},
 });

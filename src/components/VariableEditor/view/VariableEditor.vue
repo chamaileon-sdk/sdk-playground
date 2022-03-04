@@ -66,7 +66,7 @@ import VariablesToEdit from "../components/VariablesToEdit.vue";
 import NavFooter from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -86,9 +86,6 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters({
-			getvariablePreviewInterface: "getvariablePreviewInterface",
-		}),
 	},
 	mounted() {
 		this.$store.dispatch("updateSDK");
@@ -101,25 +98,30 @@ export default {
 			initVariableEditor: "initVariableEditor",
 		}),
 		async openVariableEditor() {
-			if (!this.getvariablePreviewInterface) {
-				const variablePreviewInterface = await this.initVariableEditor({
+			if (!this.$chamaileon.variableEditorInterface) {
+				this.$chamaileon.variableEditor = await this.$chamaileon.createVariablePreview({
 					...this.$store.getters.getVariableEditorConfigObject,
 					hooks: {
-						onButtonClicked: async ({ buttonId }) => {
+						onButtonClicked: async ({ buttonId, data }) => {
+							console.log("variable editor => button clicked: ", buttonId, data);
+
 							if (buttonId === "close") {
-								const newJson = await variablePreviewInterface.getDocument();
+								console.log("variable editor => closing");
+								console.log(this.$chamaileon);
+								const newJson = await this.$chamaileon.variableEditor.methods.getDocument();
 								this.$store.commit("updateDocument", newJson);
 								// exampleJsonTextArea.value = JSON.stringify(newJson);
-								variablePreviewInterface.hide();
+								this.$chamaileon.variableEditor.hide();
 							}
 						},
 					},
 				});
-				while (!this.getvariablePreviewInterface) {
+				while (!this.$chamaileon.variableEditor) {
 					// eslint-disable-next-line no-await-in-loop
 					await new Promise(resolve => setTimeout(resolve, 100));
 				}
-				this.getvariablePreviewInterface.show();
+
+				this.$chamaileon.variableEditor.show();
 			}
 		},
 		showPreviewButton(isVisible) {

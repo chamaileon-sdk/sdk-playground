@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 /* eslint-disable no-shadow */
 const getDefaultState = () => {
 	return {
@@ -96,9 +98,8 @@ export default {
 
 	},
 	actions: {
-		async initMegaPreview({ commit, rootState }, previewConfig) {
-			console.log("initMegaPreview", previewConfig);
-			const megaPreviewInterface = await rootState.sdk.createMegaPreview(previewConfig);
+		async initMegaPreview({ commit }, previewConfig) {
+			const megaPreviewInterface = await Vue.prototype.$chamaileon.createMegaPreview(previewConfig);
 			commit("addMegaPreviewInterface", megaPreviewInterface, { root: true });
 			window.megaPreviewInterface = megaPreviewInterface;
 		},

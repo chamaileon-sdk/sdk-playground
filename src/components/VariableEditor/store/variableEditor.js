@@ -1,4 +1,6 @@
 /* eslint-disable no-shadow */
+import Vue from "vue";
+
 const getDefaultState = () => {
 	return {
 		id: 0,
@@ -187,13 +189,6 @@ export default {
 				...c,
 				...newObj,
 			});
-		},
-	},
-	actions: {
-		async initVariableEditor({ commit, rootState }, previewConfig) {
-			const variablePreviewInterface = await rootState.sdk.createVariablePreview(previewConfig);
-			commit("addvariablePreviewInterface", variablePreviewInterface, { root: true });
-			window.variablePreviewInterface = variablePreviewInterface;
 		},
 	},
 	getters: {

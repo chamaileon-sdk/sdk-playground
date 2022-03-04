@@ -78,16 +78,28 @@ export default {
 			initMegaPreview: "initMegaPreview",
 		}),
 		async openPreview() {
-			if (!this.getMegaPreviewInterface) {
-				await this.initMegaPreview({
+			if (!this.$chamaileon.previewPlugin) {
+				this.$chamaileon.previewPlugin = await this.$chamaileon.createMegaPreview({
 					...this.getPreviewConfigObject,
+					hooks: {
+						close: () => {
+							this.$chamaileon.previewPlugin.hide();
+						},
+						onHeaderButtonClicked: ({ buttonId }) => {
+							if (buttonId === "hideHeader") {
+								this.$chamaileon.previewPlugin.methods.updateSettings({ hideHeader: true });
+								setTimeout(() => {
+									this.$chamaileon.previewPlugin.methods.updateSettings({ hideHeader: false });
+								}, 5000);
+							}
+						},
+						shareEmail: ({ document }) => console.log("share: " + document),
+						sendTestEmail: ({ document }) => console.log("test: " + document),
+						requestReview: ({ document }) => console.log("review: " + document),
+					},
 				});
 			}
-			while (!this.getMegaPreviewInterface) {
-				// eslint-disable-next-line no-await-in-loop
-				await new Promise(resolve => setTimeout(resolve, 100));
-			}
-			this.getMegaPreviewInterface.show();
+			this.$chamaileon.previewPlugin.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
