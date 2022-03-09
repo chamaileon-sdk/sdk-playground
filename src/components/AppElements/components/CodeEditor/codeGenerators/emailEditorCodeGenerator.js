@@ -1,39 +1,27 @@
-export default function (config) {
-	return `const editorInstance = await chamaileonPlugins.editEmail({
-	document: emailDocument, // see "document" tab
-	settings: {
-		buttons: {
-			header: ${calculateHeader(config)},
-			textInsert: ${calculateTextInsert(config)}
-		},
-		elements: ${calculateElements(config)},
-		blockLibraries: ${calculateBlockLibs(config)},
-		fontFiles: ${calculateFontFiles(config)},
-		fontStacks: ${calculateFontStacks(config)},
-		hideDefaultFonts: ${JSON.stringify(config.settings.hideDefaultFonts)},
-		addons: {
-			blockLock: ${calculateBL(config)},
-			variableSystem: ${calculateVE(config)}
-		},
-		staticAssetsBaseUrl: "${config.staticAssetsBaseUrl}",
-		videoElementBaseUrl: "${config.videoElementBaseUrl}",
-	},
-	autoSaveInterval: ${config.autoSaveInterval},
-	user: ${
-	config.user
-		? `{
-		name: "${config.user.name}",
-		avatar: "${config.user.avatar}"
-	}`
-		: "false"
-},
-	hooks: emailEditorHooks, //see "hooks" tab
-});`;
-}
+const calculateDDItems = (arr) => {
+	if (arr.length === 0) return "[]";
+
+	let literal = "";
+
+	literal += "[\n";
+
+	arr.forEach((c, i) => {
+		literal += "\t\t\t\t\t\t{\n";
+		literal += `\t\t\t\t\t\t\tid: "${c.id}",\n`;
+		literal += `\t\t\t\t\t\t\tlabel: "${c.label}",\n`;
+		literal += `\t\t\t\t\t\t\ticon: "${c.icon}",\n`;
+		literal += "\t\t\t\t\t\t}";
+		literal += i === arr.length - 1 ? "," : ",\n";
+	});
+
+	literal += "\n\t\t\t\t\t],";
+
+	return literal;
+};
 
 const calculateHeader = (config) => {
 	let literal = "";
-	let arr = config.settings.buttons.header;
+	const arr = config.settings.buttons.header;
 
 	if (arr.length === 0) return "[]";
 
@@ -52,27 +40,6 @@ const calculateHeader = (config) => {
 		literal += i === arr.length - 1 ? "," : ",\n";
 	});
 	literal += "\n\t\t\t],";
-
-	return literal;
-};
-
-const calculateDDItems = (arr) => {
-	if (arr.length === 0) return "[]";
-
-	let literal = "";
-
-	literal += "[\n";
-
-	arr.forEach((c, i) => {
-		literal += "\t\t\t\t\t\t{\n";
-		literal += `\t\t\t\t\t\t\tid: "${c.id}",\n`;
-		literal += `\t\t\t\t\t\t\tlabel: "${c.label}",\n`;
-		literal += `\t\t\t\t\t\t\ticon: "${c.icon}",\n`;
-		literal += "\t\t\t\t\t\t}";
-		literal += i === arr.length - 1 ? "," : ",\n";
-	});
-
-	literal += "\n\t\t\t\t\t],";
 
 	return literal;
 };
@@ -122,24 +89,24 @@ const calculateElements = (config) => {
 };
 
 const calculateBL = (config) => {
-	if (!config.addons.blockLock) return "false";
+	if (!config.settings.addons.blockLock) return "false";
 
 	return `{
-				enabled: ${config.addons.blockLock.enabled},
+				enabled: ${config.settings.addons.blockLock.enabled},
 			}`;
 };
 
 const calculateVE = (config) => {
-	if (!config.addons.variableSystem) return "false,";
+	if (!config.settings.addons.variableSystem) return "false,";
 
 	return `{
-				enabled: ${config.addons.variableSystem.enabled},
+				enabled: ${config.settings.addons.variableSystem.enabled},
 			},`;
 };
 
 const calculateBlockLibs = (config) => {
 	let literal = "";
-	let arr = config.blockLibraries;
+	const arr = config.settings.blockLibraries;
 
 	if (arr.length === 0) return "[]";
 
@@ -160,7 +127,7 @@ const calculateBlockLibs = (config) => {
 
 const calculateTextInsert = (config) => {
 	let literal = "";
-	let arr = config.settings.buttons.textInsert;
+	const arr = config.settings.buttons.textInsert;
 
 	if (arr.length === 0) return "[]";
 
@@ -182,15 +149,48 @@ const calculateTextInsert = (config) => {
 
 const calculateFontFiles = (config) => {
 	const objKeysAndValues = Object.entries(config.settings.fontFiles).map(([key, value]) => {
-		return `\t\t\t"${key}": "${value}"`
+		return `\t\t\t"${key}": "${value}"`;
 	}).join(",\n");
-	return `{\n${objKeysAndValues}\n\t\t}`
-}
+	return `{\n${objKeysAndValues}\n\t\t}`;
+};
 
 const calculateFontStacks = (config) => {
-	const innerArrays = config.settings.fontStacks.map(stack => {
+	const innerArrays = config.settings.fontStacks.map((stack) => {
 		return `\n\t\t\t[\n${stack.map(item => `\t\t\t\t"${item}"`).join(",\n")}\n\t\t\t]`;
 	});
 
 	return `[${innerArrays}\n\t\t]`;
+};
+
+export default function (config) {
+	return `const editorInstance = await chamaileonPlugins.editEmail({
+	document: emailDocument, // see "document" tab
+	settings: {
+		buttons: {
+			header: ${calculateHeader(config)},
+			textInsert: ${calculateTextInsert(config)}
+		},
+		elements: ${calculateElements(config)},
+		blockLibraries: ${calculateBlockLibs(config)},
+		fontFiles: ${calculateFontFiles(config)},
+		fontStacks: ${calculateFontStacks(config)},
+		hideDefaultFonts: ${JSON.stringify(config.settings.hideDefaultFonts)},
+		addons: {
+			blockLock: ${calculateBL(config)},
+			variableSystem: ${calculateVE(config)}
+		},
+		staticAssetsBaseUrl: "${config.staticAssetsBaseUrl}",
+		videoElementBaseUrl: "${config.videoElementBaseUrl}",
+	},
+	autoSaveInterval: ${config.autoSaveInterval},
+	user: ${
+	config.user
+		? `{
+		name: "${config.user.name}",
+		avatar: "${config.user.avatar}"
+	}`
+		: "false"
+},
+	hooks: emailEditorHooks, //see "hooks" tab
+});`;
 }

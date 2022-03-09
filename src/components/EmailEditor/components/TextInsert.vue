@@ -19,17 +19,23 @@
 			the same time.
 		</p>
 		<OptionWrapper>
-			<template>
-				<v-row align="center" justify="end" class="ma-0">
-					<AddButton @click="addTextInsertButton"> New Button </AddButton>
+			<div>
+				<v-row
+					align="center"
+					justify="end"
+					class="ma-0"
+				>
+					<AddButton @click="addTextInsertButton">
+						New Button
+					</AddButton>
 				</v-row>
-			</template>
+			</div>
 			<div
 				v-if="btnArr.length > 0"
 				class="mt-8 list3 rounded"
 				style="max-height: 218px; overflow-y: auto"
 			>
-				<draggable handle=".dtrigger" v-model="btnArr">
+				<Draggable v-model="btnArr" handle=".dtrigger">
 					<div v-for="(item, ind) in btnArr" :key="ind">
 						<ListItem3
 							:id="item.id"
@@ -55,9 +61,9 @@
 							"
 							@deleteClicked="deleteTextInsertButton(ind)"
 						/>
-						<v-divider v-show="ind !== btnArr.length - 1"></v-divider>
+						<v-divider v-show="ind !== btnArr.length - 1" />
 					</div>
-				</draggable>
+				</Draggable>
 			</div>
 		</OptionWrapper>
 	</div>
@@ -68,17 +74,16 @@ import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import ListItem3 from "../../Lists/components/ListItem3.vue";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";
-import draggable from "vuedraggable";
+import Draggable from "vuedraggable";
 import { mapMutations } from "vuex";
 
 export default {
-	methods: {
-		...mapMutations([
-			"addTextInsertButton",
-			"deleteTextInsertButton",
-			"updateTextInsertOrder",
-			"updateTextInsertButton",
-		]),
+	components: {
+		AddButton,
+		OptionWrapper,
+		Draggable,
+		TextInsertPreview,
+		ListItem3,
 	},
 	computed: {
 		btnArr: {
@@ -90,12 +95,13 @@ export default {
 			},
 		},
 	},
-	components: {
-		AddButton,
-		OptionWrapper,
-		draggable,
-		TextInsertPreview,
-		ListItem3,
+	methods: {
+		...mapMutations([
+			"addTextInsertButton",
+			"deleteTextInsertButton",
+			"updateTextInsertOrder",
+			"updateTextInsertButton",
+		]),
 	},
 };
 </script>

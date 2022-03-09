@@ -10,7 +10,11 @@
 			to your own asset library.
 		</p>
 		<OptionWrapper>
-			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
+			<v-card
+				min-height="72px"
+				flat
+				class="rounded-0 rounded-t d-flex pa-4"
+			>
 				<v-row>
 					<v-col class="align-self-center">
 						<v-card-title
@@ -22,23 +26,31 @@
 						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
-					<v-col class="align-self-center" cols="6" lg="6">
+					<v-col
+						class="align-self-center"
+						cols="6"
+						lg="6"
+					>
 						<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 							<v-text-field
+								v-model="staticAssets"
 								dense
 								outlined
 								label="URL"
 								:hide-details="true"
-								v-model="staticAssets"
-							></v-text-field>
+							/>
 						</v-card>
 					</v-col>
 				</v-row>
 			</v-card>
 
-			<v-divider></v-divider>
+			<v-divider />
 
-			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
+			<v-card
+				min-height="72px"
+				flat
+				class="rounded-0 rounded-t d-flex pa-4"
+			>
 				<v-row>
 					<v-col class="align-self-center">
 						<v-card-title
@@ -50,16 +62,20 @@
 						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
-					<v-col class="align-self-center" cols="5" lg="3">
+					<v-col
+						class="align-self-center"
+						cols="5"
+						lg="3"
+					>
 						<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 							<v-text-field
+								v-model="autosave"
 								suffix="ms"
 								dense
 								outlined
 								label="Interval"
 								:hide-details="true"
-								v-model="autosave"
-							></v-text-field>
+							/>
 						</v-card>
 					</v-col>
 				</v-row>
@@ -73,7 +89,11 @@
 			If you want this functionality then you have to set up our video backend on your end.
 		</p>
 		<OptionWrapper>
-			<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4">
+			<v-card
+				min-height="72px"
+				flat
+				class="rounded-0 rounded-t d-flex pa-4"
+			>
 				<v-row>
 					<v-col class="align-self-center">
 						<v-card-title
@@ -85,15 +105,19 @@
 						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
-					<v-col class="align-self-center" cols="6" lg="6">
+					<v-col
+						class="align-self-center"
+						cols="6"
+						lg="6"
+					>
 						<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 							<v-text-field
+								v-model="videoElementBaseUrl"
 								dense
 								outlined
 								label="URL"
 								:hide-details="true"
-								v-model="videoElementBaseUrl"
-							></v-text-field>
+							/>
 						</v-card>
 					</v-col>
 				</v-row>
@@ -109,29 +133,30 @@
 			<v-card elevation="0" class="d-flex px-2">
 				<!--<v-card-title class="py-4 px-2 text-subtitle-1">Avatar</v-card-title>-->
 				<v-text-field
+					v-model="avatarUserName"
 					dense
 					label="Displayed Name"
 					class="rounded align-self-center py-4 px-2"
 					outlined
 					hide-details="true"
-					v-model="avatarUserName"
-				></v-text-field
-				><v-text-field
+				/><v-text-field
+					v-model="avatarImg"
 					label="Avatar URL"
 					dense
 					class="rounded align-self-center py-4 px-2"
 					outlined
 					hide-details="true"
-					v-model="avatarImg"
-				></v-text-field>
+				/>
 				<v-btn
 					icon
 					class="align-self-center px-2"
 					@click="avatarEnabled = !avatarEnabled"
 				>
-					<v-icon :color="avatarEnabled ? 'primary' : ''"
-						>mdi-{{ avatarEnabled ? "eye" : "eye-off" }}</v-icon
+					<v-icon
+						:color="avatarEnabled ? 'primary' : ''"
 					>
+						mdi-{{ avatarEnabled ? "eye" : "eye-off" }}
+					</v-icon>
 				</v-btn>
 				<!--<v-switch
 					class="align-self-center my-0 py-0 pl-4 pr-0"
@@ -148,12 +173,17 @@
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">
-				<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4" width="100%">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
 					<v-row>
-						<v-col 
+						<v-col
 							v-for="(value, name) in toolboxes"
 							:key="name"
-							cols="6" 
+							cols="6"
 							class="d-flex justify-space-between align-center"
 						>
 							<v-card-title
@@ -163,28 +193,33 @@
 								{{ name }}
 							</v-card-title>
 							<v-switch
-								class="ma-0 pa-0"
 								v-model="toolboxes[name]"
+								class="ma-0 pa-0"
 								color="primary"
 								hide-details
-							></v-switch>
+							/>
 						</v-col>
 					</v-row>
 				</v-card>
 			</v-card>
 		</OptionWrapper>
-		<h3>Block Action Menu</h3> 
+		<h3>Block Action Menu</h3>
 		<p>
 			You can control what your users capable to do with blocks. Drag, save, duplicate or delete. All this functionality can be turned off.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">
-				<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4" width="100%">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
 					<v-row>
-						<v-col 
+						<v-col
 							v-for="(value, name) in blockActions"
 							:key="name"
-							cols="6" 
+							cols="6"
 							class="d-flex justify-space-between align-center"
 						>
 							<v-card-title
@@ -194,29 +229,34 @@
 								{{ name }}
 							</v-card-title>
 							<v-switch
-								class="ma-0 pa-0"
 								v-model="blockActions[name]"
+								class="ma-0 pa-0"
 								color="primary"
 								hide-details
-							></v-switch>
+							/>
 						</v-col>
 					</v-row>
 				</v-card>
 			</v-card>
 		</OptionWrapper>
 
-		<h3>Dropzones</h3> 
+		<h3>Dropzones</h3>
 		<p>
 			We did not stop here, you can easily turn off block level dropzones as well.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">
-				<v-card min-height="72px" flat class="rounded-0 rounded-t d-flex pa-4" width="100%">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
 					<v-row>
-						<v-col 
+						<v-col
 							v-for="(value, name) in blockDropzones"
 							:key="name"
-							cols="6" 
+							cols="6"
 							class="d-flex justify-space-between align-center"
 						>
 							<v-card-title
@@ -226,11 +266,11 @@
 								{{ name }}
 							</v-card-title>
 							<v-switch
-								class="ma-0 pa-0"
 								v-model="blockDropzones[name]"
+								class="ma-0 pa-0"
 								color="primary"
 								hide-details
-							></v-switch>
+							/>
 						</v-col>
 					</v-row>
 				</v-card>
@@ -250,7 +290,7 @@ export default {
 	computed: {
 		avatarEnabled: {
 			get() {
-				return this.$store.state.editorConfig.user.enabled;
+				return this.$store.state.editorConfig.settings.user.enabled;
 			},
 			set(val) {
 				this.updateUser({ enabled: val });
@@ -258,7 +298,7 @@ export default {
 		},
 		avatarUserName: {
 			get() {
-				return this.$store.state.editorConfig.user.name;
+				return this.$store.state.editorConfig.settings.user.name;
 			},
 			set(val) {
 				this.updateUser({ name: val });
@@ -266,7 +306,7 @@ export default {
 		},
 		avatarImg: {
 			get() {
-				return this.$store.state.editorConfig.user.avatar;
+				return this.$store.state.editorConfig.settings.user.avatar;
 			},
 			set(val) {
 				this.updateUser({ avatar: val });
@@ -275,7 +315,7 @@ export default {
 
 		autosave: {
 			get() {
-				return this.$store.state.editorConfig.autoSaveInterval;
+				return this.$store.state.editorConfig.settings.autoSaveInterval;
 			},
 			set(val) {
 				this.updateAutosave(val);
@@ -284,7 +324,7 @@ export default {
 
 		staticAssets: {
 			get() {
-				return this.$store.state.editorConfig.staticAssetsBaseUrl;
+				return this.$store.state.editorConfig.settings.staticAssetsBaseUrl;
 			},
 			set(val) {
 				this.updateSaticAssets(val);
@@ -296,27 +336,27 @@ export default {
 			},
 			set(val) {
 				this.updateToolboxes(val);
-			}
+			},
 		},
 		blockActions: {
 			get() {
-				return this.$store.state.editorConfig.settings.actionMenu.block
+				return this.$store.state.editorConfig.settings.actionMenu.block;
 			},
 			set(val) {
 				this.updateBlockActionMenu(val);
-			}
+			},
 		},
 		blockDropzones: {
 			get() {
-				return this.$store.state.editorConfig.settings.dropzones
+				return this.$store.state.editorConfig.settings.dropzones;
 			},
 			set(val) {
-				this.updateBlockActionMenu(val);
-			}
+				this.updateBlockActionMenuDropzones(val);
+			},
 		},
 		videoElementBaseUrl: {
 			get() {
-				return this.$store.state.editorConfig.videoElementBaseUrl;
+				return this.$store.state.editorConfig.settings.videoElementBaseUrl;
 			},
 			set(val) {
 				this.updateVideoElementBaseUrl(val);
@@ -333,10 +373,10 @@ export default {
 			"updateUser",
 			"updateAutosave",
 			"updateSaticAssets",
-			"updateVideoElementBaseUrl"
+			"updateVideoElementBaseUrl",
 		]),
 	},
-}
+};
 </script>
 
 <style scoped>

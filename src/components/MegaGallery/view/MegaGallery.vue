@@ -3,6 +3,7 @@
 		<PreviewButton
 			button-text="Open gallery"
 			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
 			@previewClick="openGallery"
 		/>
 		<SectionObserver>
@@ -12,6 +13,7 @@
 					:doc-url="'https://chamaileon.io/sdk/docs/gallery/'"
 					:image="'EmailThumbnailIllustration.svg'"
 					button-text="Open gallery"
+					:is-inited="isInited"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openGallery"
 				>
@@ -52,13 +54,6 @@ import Settings from "../components/Settings.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
 import { mapState, mapActions } from "vuex";
-import zango from "zangodb";
-import favoriteImages from "./favoriteImages";
-
-let count = 0;
-let loadedItems = [];
-let db;
-let images = [];
 
 export default {
 	components: {
@@ -77,21 +72,25 @@ export default {
 	computed: {
 		...mapState({
 			gallerySettings: state => state.megaGalleryConfig.settings,
+			galleryInited: state => state.galleryInited,
+			sdkInited: state => state.sdkInited,
 		}),
-	},
-	async mounted() {
-		db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
-		images = db.collection("images");
-		const isFavoritesExists = !!await images.findOne({ parentId: { $eq: "16322284940689326" } });
-
-		if (!isFavoritesExists) {
-			try {
-				await images.insert(favoriteImages);
-				return;
-			} catch (error) {
-				console.error(error);
+		isInited() {
+			if (this.sdkInited === true) {
+				return this.galleryInited;
 			}
-		}
+			return "pending";
+		},
+	},
+	watch: {
+		isInited: {
+			handler(v) {
+				if (v === false) {
+					this.$store.dispatch("initGallery");
+				}
+			},
+			immediate: true,
+		},
 	},
 	methods: {
 		...mapActions({
@@ -101,90 +100,13 @@ export default {
 			this.previewButtonVisible = isVisible;
 		},
 		async openGallery() {
-			if (!this.$chamaileon.gallery) {
-				this.$chamaileon.gallery = await this.$chamaileon.createGallery({
-					data: {
-						editedImageUrl: null,
-						dimensions: null,
-					},
-					settings: this.gallerySettings,
-					hooks: {
-						close: () => {
-							this.$chamaileon.gallery.hide();
-						},
-						onUploadImage: async ({ selectedFolderId, parents, image }) => {
-							const _id = Date.now() + Math.random();
-							const newImageData = {
-								name: image.name,
-								parentId: selectedFolderId,
-								src: image.data || null,
-								createdAt: new Date(),
-								_id,
-							};
-							await images.insert([ newImageData ]);
-							return newImageData;
-						},
-						onSaveUrl:	async ({ selectedFolderId, parents, image }) => {
-							const _id = Date.now() + Math.random();
-							const newImageData = {
-								name: image.name,
-								parentId: selectedFolderId,
-								src: image.url || null,
-								createdAt: new Date(),
-								_id,
-							};
-							await images.insert([ newImageData ]);
-							return newImageData;
-						},
-						onFolderSelected: async ({ selectedFolderId, parents, searchValue, orderValue, maxImagePerPage, pageNumber }) => {
-							// reset when the first banch of items loaded
-							if (pageNumber === 0) {
-								loadedItems = [];
-								count = 0;
-								await images.find({ parentId: { $eq: selectedFolderId } }).forEach(() => count++);
-							}
-
-							const exclude = loadedItems.map(item => item._id);
-
-							const query = searchValue
-								? 							{
-									parentId: { $eq: selectedFolderId },
-									_id: { $nin: exclude.length > 0 ? exclude : "notavalidId" },
-									name: {	$regex: searchValue, $options: "i" },
-								}
-								: 							{
-									parentId: { $eq: selectedFolderId },
-									_id: { $nin: exclude.length > 0 ? exclude : "notavalidId" },
-								};
-
-							const result = [];
-							await images.find({
-								...query,
-							}).limit(maxImagePerPage).sort(orderValue)
-								.forEach((
-									(image) => {
-										result.push(image);
-										loadedItems = [...loadedItems, ...result];
-									}));
-
-							console.log(images);
-							return { images: result, count };
-						},
-						onUpdateImage: async ({ imageId, parents, selectedFolderId, image }) => {
-							await images.update({
-								_id: { $eq: imageId },
-							}, { name: image.name });
-						},
-						onDeleteImage: async ({ imageId, parents, selectedFolderId }) => {
-							await images.remove({ _id: { $eq: imageId } });
-						},
-					},
-				});
+			if (this.isInited === false) {
+				await this.$store.dispatch("initGallery");
 			}
 			this.$chamaileon.gallery.show();
-			const image = await this.$chamaileon.gallery.methods.pickImage();
-			console.log(image);
+			await this.$chamaileon.gallery.methods.pickImage();
 			this.$chamaileon.gallery.hide();
+			return;
 		},
 	},
 };

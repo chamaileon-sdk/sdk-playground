@@ -17,8 +17,8 @@
 						ind === 0
 							? 'rounded-t'
 							: ind === addonArrLength - 1
-							? 'rounded-b'
-							: ''
+								? 'rounded-b'
+								: ''
 					"
 				>
 					<v-row>
@@ -42,8 +42,10 @@
 									:color="item.state === 'enabled' ? 'primary' : ''"
 									@click="updateAddonState({ id: item.id, state: 'enabled' })"
 								>
-									<v-icon size="25"
-										>mdi-check-circle{{
+									<v-icon
+										size="25"
+									>
+										mdi-check-circle{{
 											item.state !== "enabled" ? "-outline" : ""
 										}}
 									</v-icon>
@@ -57,8 +59,10 @@
 									:color="item.state === 'disabled' ? 'primary' : ''"
 									@click="updateAddonState({ id: item.id, state: 'disabled' })"
 								>
-									<v-icon size="25"
-										>mdi-close-circle{{
+									<v-icon
+										size="25"
+									>
+										mdi-close-circle{{
 											item.state !== "disabled" ? "-outline" : ""
 										}}
 									</v-icon>
@@ -72,15 +76,17 @@
 									:color="item.state === 'hidden' ? 'primary' : ''"
 									@click="updateAddonState({ id: item.id, state: 'hidden' })"
 								>
-									<v-icon size="25"
-										>mdi-eye-off{{ item.state !== "hidden" ? "-outline" : "" }}
+									<v-icon
+										size="25"
+									>
+										mdi-eye-off{{ item.state !== "hidden" ? "-outline" : "" }}
 									</v-icon>
 								</v-btn>
 							</v-card>
 						</v-col>
 					</v-row>
 				</v-card>
-				<v-divider v-show="ind !== addonArrLength - 1"></v-divider>
+				<v-divider v-show="ind !== addonArrLength - 1" />
 			</div>
 		</OptionWrapper>
 	</div>
@@ -94,19 +100,19 @@ export default {
 	components: {
 		OptionWrapper,
 	},
-	methods: {
-		...mapMutations(["updateAddonState"]),
-	},
 	computed: {
-		...mapGetters(["getAddonStateById"]),
+		...mapGetters([ "getAddonStateById" ]),
 		addonArr() {
-			return this.$store.state.editorConfig.addons;
+			return this.$store.state.editorConfig.settings.addons;
 		},
-
 		addonArrLength() {
 			return Object.keys(this.addonArr).length;
 		},
 	},
+	methods: {
+		...mapMutations([ "updateAddonState" ]),
+	},
+
 };
 </script>
 

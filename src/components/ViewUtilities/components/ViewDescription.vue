@@ -65,6 +65,8 @@
 			<v-btn
 				depressed
 				class="grey lighten-3 pa-3 custom-btn primary--text"
+				:disabled="isInited === 'pending'"
+				:loading="isInited === 'pending'"
 				width="100%"
 				height="100%"
 				min-width="0"
@@ -114,6 +116,11 @@ export default {
 		},
 		// eslint-disable-next-line vue/require-default-prop
 		buttonText: String,
+		isInited: {
+			type: [Boolean, String],
+			default: false,
+			required: true,
+		},
 	},
 
 	data() {

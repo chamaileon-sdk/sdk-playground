@@ -87,40 +87,25 @@ export default {
 	},
 	computed: {
 	},
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		// window.chamaileonSdk.destroy;
-	},
 	methods: {
 		...mapActions({
 			initVariableEditor: "initVariableEditor",
 		}),
 		async openVariableEditor() {
-			if (!this.$chamaileon.variableEditorInterface) {
-				this.$chamaileon.variableEditor = await this.$chamaileon.createVariablePreview({
+			if (!this.$chamaileon.variableEditor) {
+				this.$chamaileon.variableEditor = await this.$chamaileon.createVariableEditor({
 					...this.$store.getters.getVariableEditorConfigObject,
 					hooks: {
-						onButtonClicked: async ({ buttonId, data }) => {
-							console.log("variable editor => button clicked: ", buttonId, data);
-
+						onButtonClicked: async ({ buttonId }) => {
 							if (buttonId === "close") {
-								console.log("variable editor => closing");
-								console.log(this.$chamaileon);
 								const newJson = await this.$chamaileon.variableEditor.methods.getDocument();
 								this.$store.commit("updateDocument", newJson);
-								// exampleJsonTextArea.value = JSON.stringify(newJson);
+								//  exampleJsonTextArea.value = JSON.stringify(newJson);
 								this.$chamaileon.variableEditor.hide();
 							}
 						},
 					},
 				});
-				while (!this.$chamaileon.variableEditor) {
-					// eslint-disable-next-line no-await-in-loop
-					await new Promise(resolve => setTimeout(resolve, 100));
-				}
-
 				this.$chamaileon.variableEditor.show();
 			}
 		},

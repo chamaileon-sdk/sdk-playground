@@ -1,8 +1,9 @@
 <template>
 	<div>
 		<PreviewButton
-			button-text="Open preview"
+			:button-text="'SHOW PREVIEW'"
 			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
 			@previewClick="openPreview"
 		/>
 		<SectionObserver>
@@ -11,7 +12,8 @@
 					:title="'Email Preview'"
 					:doc-url="'https://chamaileon.io/sdk/docs/email-preview/'"
 					:image="'EmailPreviewIllustration.svg'"
-					button-text="Open preview"
+					:button-text="'SHOW PREVIEW'"
+					:is-inited="isInited"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openPreview"
 				>
@@ -48,7 +50,7 @@ import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
 	components: {
@@ -65,41 +67,39 @@ export default {
 		};
 	},
 	computed: {
+		...mapState({
+			emailPreviewInited: state => state.emailPreviewInited,
+			sdkInited: state => state.sdkInited,
+		}),
 		...mapGetters({
-			getMegaPreviewInterface: "getMegaPreviewInterface",
 			getPreviewConfigObject: "getPreviewConfigObject",
 		}),
+		isInited() {
+			if (this.sdkInited === true) {
+				return this.emailPreviewInited;
+			}
+			return "pending";
+		},
 	},
-	mounted() {
-		this.$store.dispatch("updateSDK");
+	watch: {
+		isInited: {
+			handler(v) {
+				if (v === false) {
+					this.$store.dispatch("initEmailPreview");
+				}
+			},
+			immediate: true,
+		},
 	},
 	methods: {
 		...mapActions({
 			initMegaPreview: "initMegaPreview",
 		}),
 		async openPreview() {
-			if (!this.$chamaileon.previewPlugin) {
-				this.$chamaileon.previewPlugin = await this.$chamaileon.createMegaPreview({
-					...this.getPreviewConfigObject,
-					hooks: {
-						close: () => {
-							this.$chamaileon.previewPlugin.hide();
-						},
-						onHeaderButtonClicked: ({ buttonId }) => {
-							if (buttonId === "hideHeader") {
-								this.$chamaileon.previewPlugin.methods.updateSettings({ hideHeader: true });
-								setTimeout(() => {
-									this.$chamaileon.previewPlugin.methods.updateSettings({ hideHeader: false });
-								}, 5000);
-							}
-						},
-						shareEmail: ({ document }) => console.log("share: " + document),
-						sendTestEmail: ({ document }) => console.log("test: " + document),
-						requestReview: ({ document }) => console.log("review: " + document),
-					},
-				});
+			if (this.isInited === false) {
+				await this.$store.dispatch("initEmailPreview");
 			}
-			this.$chamaileon.previewPlugin.show();
+			this.$chamaileon.emailPreview.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;

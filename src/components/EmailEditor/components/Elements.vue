@@ -11,11 +11,11 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
+					v-for="(element, index) in contentElements"
+					:key="index"
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					v-for="(element, index) in contentElements"
-					:key="index"
 					@click="toggleElement({ type: 'content', element: element.type })"
 				>
 					<v-btn
@@ -52,11 +52,11 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
+					v-for="(element, index) in structureElements"
+					:key="index"
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					v-for="(element, index) in structureElements"
-					:key="index"
 					@click="toggleElement({ type: 'structure', element: element.type })"
 				>
 					<v-btn
@@ -93,11 +93,11 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
+					v-for="(element, index) in advancedElements"
+					:key="index"
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					v-for="(element, index) in advancedElements"
-					:key="index"
 					@click="toggleElement({ type: 'advanced', element: element.type })"
 				>
 					<v-btn
@@ -146,7 +146,7 @@ export default {
 		}),
 	},
 	methods: {
-		...mapMutations(["toggleElement"]),
+		...mapMutations([ "toggleElement" ]),
 	},
 	data() {
 		return {
@@ -186,7 +186,7 @@ export default {
 					type: "fullWidth",
 					icon: "mdi-window-maximize",
 				},
-				/*{
+				/* {
 					type: 'column',
 					icon: 'view_column',
 				},*/

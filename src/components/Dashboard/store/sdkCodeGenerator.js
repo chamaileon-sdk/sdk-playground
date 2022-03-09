@@ -3,7 +3,7 @@ export default function (sdkConfig) {
         accessToken: accessToken,
         whitelabel: {
             urls: {
-                createLogoJS: "${sdkConfig.urls.createLogoJS}",
+                updateSdkConfig: "${sdkConfig.urls.updateSdkConfig}",
                 splashScreen: "${sdkConfig.urls.splashScreen}",
             },
             colors: {

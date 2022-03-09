@@ -13,8 +13,14 @@
 		</p>
 		<OptionWrapper>
 			<template>
-				<v-row align="center" justify="end" class="ma-0">
-					<AddButton @click="addBlockLibararies"> New Library </AddButton>
+				<v-row
+					align="center"
+					justify="end"
+					class="ma-0"
+				>
+					<AddButton @click="addBlockLibararies">
+						New Library
+					</AddButton>
 				</v-row>
 			</template>
 			<v-card
@@ -24,24 +30,35 @@
 				max-height="396"
 				style="overflow-y: auto"
 			>
-				<draggable handle=".dtrigger" v-model="blockLibsArr">
+				<Draggable v-model="blockLibsArr" handle=".dtrigger">
 					<div v-for="(b, ind) in blockLibsArr" :key="ind">
-						<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
+						<v-card
+							class="ma-0 pa-2 d-flex align-center"
+							elevation="0"
+							tile
+						>
 							<v-list-item-icon class="align-self-center ma-0 mx-3">
-								<v-icon class="dtrigger">mdi-menu</v-icon>
+								<v-icon class="dtrigger">
+									mdi-menu
+								</v-icon>
 							</v-list-item-icon>
 							<v-list-item-content class="ma-0 pa-0">
 								<v-row class="ma-0 pa-0">
-									<v-col cols="6" xl="3" class="pa-2" align-self="center">
+									<v-col
+										cols="6"
+										xl="3"
+										class="pa-2"
+										align-self="center"
+									>
 										<v-text-field
 											dense
 											hide-details="true"
 											label="ID"
 											:rules="[noEmpty, noMatching(ind)]"
 											:value="b.id"
-											@input="updateID(ind, $event)"
 											outlined
-										></v-text-field>
+											@input="updateID(ind, $event)"
+										/>
 									</v-col>
 
 									<v-col
@@ -53,20 +70,30 @@
 									>
 										<DeleteButton
 											@click="removeBlockLibararies(ind, b.id)"
-										></DeleteButton>
+										/>
 									</v-col>
 
-									<v-col cols="6" xl="3" class="pa-2" align-self="center">
+									<v-col
+										cols="6"
+										xl="3"
+										class="pa-2"
+										align-self="center"
+									>
 										<v-text-field
 											dense
 											hide-details="true"
 											label="Label"
 											:value="b.label"
-											@input="updateBlockLibs({ index: ind, label: $event })"
 											outlined
-										></v-text-field>
+											@input="updateBlockLibs({ index: ind, label: $event })"
+										/>
 									</v-col>
-									<v-col cols="6" xl="3" class="pa-2" align-self="center">
+									<v-col
+										cols="6"
+										xl="3"
+										class="pa-2"
+										align-self="center"
+									>
 										<v-card flat class="d-flex justify-space-between">
 											<v-btn
 												icon
@@ -81,11 +108,13 @@
 													})
 												"
 											>
-												<v-icon size="25"
-													>mdi-delete{{
-														!b.canDeleteBlock ? "-outline" : ""
-													}}</v-icon
+												<v-icon
+													size="25"
 												>
+													mdi-delete{{
+														!b.canDeleteBlock ? "-outline" : ""
+													}}
+												</v-icon>
 											</v-btn>
 											<v-btn
 												icon
@@ -100,11 +129,13 @@
 													})
 												"
 											>
-												<v-icon size="25"
-													>mdi-pencil{{
-														!b.canRenameBlock ? "-outline" : ""
-													}}</v-icon
+												<v-icon
+													size="25"
 												>
+													mdi-pencil{{
+														!b.canRenameBlock ? "-outline" : ""
+													}}
+												</v-icon>
 											</v-btn>
 											<v-btn
 												icon
@@ -119,11 +150,13 @@
 													})
 												"
 											>
-												<v-icon size="25"
-													>mdi-content-save{{
-														!b.canSaveBlock ? "-outline" : ""
-													}}</v-icon
+												<v-icon
+													size="25"
 												>
+													mdi-content-save{{
+														!b.canSaveBlock ? "-outline" : ""
+													}}
+												</v-icon>
 											</v-btn>
 										</v-card>
 									</v-col>
@@ -137,15 +170,15 @@
 									>
 										<DeleteButton
 											@click="removeBlockLibararies(ind, b.id)"
-										></DeleteButton>
+										/>
 									</v-col>
 								</v-row>
 							</v-list-item-content>
 						</v-card>
 
-						<v-divider v-show="ind !== blockLibsArr.length - 1"></v-divider>
+						<v-divider v-show="ind !== blockLibsArr.length - 1" />
 					</div>
-				</draggable>
+				</Draggable>
 			</v-card>
 		</OptionWrapper>
 	</div>
@@ -154,7 +187,7 @@
 <script>
 import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
-import draggable from "vuedraggable";
+import Draggable from "vuedraggable";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import { mapMutations } from "vuex";
 
@@ -162,8 +195,21 @@ export default {
 	components: {
 		DeleteButton,
 		AddButton,
-		draggable,
+		Draggable,
 		OptionWrapper,
+	},
+	computed: {
+		breakpoint() {
+			return this.$vuetify.breakpoint;
+		},
+		blockLibsArr: {
+			get() {
+				return this.$store.getters.getBlockLibs;
+			},
+			set(value) {
+				this.updateBlockLibsOrder(value);
+			},
+		},
 	},
 	methods: {
 		...mapMutations([
@@ -177,7 +223,7 @@ export default {
 			this.addBlockLibs();
 			this.$store.commit(
 				"createBlockLibData",
-				this.blockLibsArr[this.blockLibsArr.length - 1].id
+				this.blockLibsArr[this.blockLibsArr.length - 1].id,
 			);
 		},
 
@@ -193,7 +239,7 @@ export default {
 				oldLibId: this.blockLibsArr[index].id,
 				newLibId: id,
 			});
-			this.updateBlockLibs({ index: index, id: id });
+			this.updateBlockLibs({ index, id });
 		},
 		noEmpty(e) {
 			return e.length !== 0;
@@ -201,7 +247,7 @@ export default {
 		noMatching(ind) {
 			return function (e) {
 				let i = 0;
-				let arr = this.$store.state.editorConfig.blockLibraries;
+				const arr = this.$store.state.editorConfig.settings.blockLibraries;
 
 				while (i < arr.length && !(arr[i].id === e && i !== ind)) {
 					i++;
@@ -209,19 +255,6 @@ export default {
 
 				return i === arr.length;
 			}.bind(this);
-		},
-	},
-	computed: {
-		breakpoint() {
-			return this.$vuetify.breakpoint;
-		},
-		blockLibsArr: {
-			get() {
-				return this.$store.getters.getBlockLibs;
-			},
-			set(value) {
-				this.updateBlockLibsOrder(value);
-			},
 		},
 	},
 };

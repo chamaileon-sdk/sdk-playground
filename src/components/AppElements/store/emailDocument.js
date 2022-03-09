@@ -6189,9 +6189,8 @@ export default {
 		},
 	},
 	actions: {
-		updateDocument({ commit, rootState }, payload) {
+		updateDocument({ commit }, payload) {
 			commit("updateDocument", payload);
-			rootState.megaPreviewInterface.methods.updateData({ document: payload });
 		},
 	},
 	getters: {

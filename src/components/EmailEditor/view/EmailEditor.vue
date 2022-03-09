@@ -3,6 +3,7 @@
 		<PreviewButton
 			button-text="Open editor"
 			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
 			@previewClick="openEditor"
 		/>
 		<SectionObserver>
@@ -12,6 +13,7 @@
 					:doc-url="'https://chamaileon.io/sdk/docs/email-editor/'"
 					:image="'EmailEditorIllustration.svg'"
 					button-text="Open editor"
+					:is-inited="isInited"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openEditor"
 				>
@@ -98,119 +100,34 @@ export default {
 		};
 	},
 	computed: {
-		...mapState([ "sdk" ]),
+		...mapState(["emailEditorInited", "sdkInited"]),
 		...mapGetters([ "getConfigObject" ]),
+		isInited() {
+			if (this.sdkInited === true) {
+				return this.emailEditorInited;
+			}
+			return "pending";
+		},
 	},
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		window.chamaileonSdk.destroy;
+	watch: {
+		isInited: {
+			handler(v) {
+				if (v === false) {
+					this.$store.dispatch("initEmailEditor");
+				}
+			},
+			immediate: true,
+		},
 	},
 	methods: {
 		...mapActions({
 			openGallery: "openGallery",
 		}),
-		openEditor() {
-			this.sdk.editEmail({
-				...this.$store.getters.getConfigObject,
-				hooks: {
-					onSave: async (obj) => {
-						await this.$store.dispatch("updateDocument", obj.document);
-					},
-					onAutoSave: (obj) => {
-						return new Promise(
-							function (resolve) {
-								this.$store.commit("updateDocument", obj.document);
-								return resolve();
-							}.bind(this),
-						);
-					},
-					onChange: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onBeforeClose: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onAfterClose: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onEditTitle: ({ title }) => {
-						return new Promise((resolve) => {
-							resolve(title);
-						});
-					},
-					onEditImage: async ({
-						originalImage,
-						lockDimensions,
-					}) => {
-						const { src } = await this.openGallery({ editImgSrc: originalImage, dimensions: lockDimensions });
-						return { src };
-					},
-					onEditBackgroundImage: async ({
-						originalImage,
-						lockDimensions,
-					}) => {
-						const { url: src } = await this.openGallery({ editImgSrc: originalImage, dimensions: lockDimensions });
-						return { src };
-					},
-					onLoadBlocks: ({ libId }) => {
-						const blocks = this.$store.getters.getBlocksById(libId);
-
-						return new Promise((resolve) => {
-							resolve({ blocks });
-						});
-					},
-					onBlockSave: ({ libId, block }) => {
-						this.$store.commit("addBlockToLib", { libId, block });
-
-						return new Promise((resolve) => {
-							resolve({ block });
-						});
-					},
-					onBlockRename: ({ libId, block: { _id, title } }) => {
-						this.$store.commit("renameBlock", {
-							libId,
-							block: { _id, title },
-						});
-
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onBlockDelete: ({ libId, block: { _id } }) => {
-						this.$store.commit("deleteBlock", {
-							libId,
-							blockId: _id,
-						});
-
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onHeaderButtonClicked: ({ buttonId }) => {
-						return new Promise((resolve) => {
-							resolve(buttonId);
-						});
-					},
-					onTextInsertPluginButtonClicked: ({ buttonId }) => {
-						return new Promise((resolve) => {
-							resolve({ value: buttonId });
-						});
-					},
-					onExpressionEditClicked: ({ expression }) => {
-						return new Promise((resolve) => {
-							resolve({ expression });
-						});
-					},
-				},
-			});
+		async openEditor() {
+			if (this.isInited === false) {
+				await this.$store.dispatch("initEmailEditor");
+			}
+			this.$chamaileon.emailEditor.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;

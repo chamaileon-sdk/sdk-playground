@@ -1,3 +1,5 @@
+/* eslint-disable require-await */
+/* eslint-disable no-shadow */
 import BlockLibData from "./editorBlockLibraryContainer";
 import Vue from "vue";
 
@@ -7,19 +9,19 @@ const getDefaultState = () => {
 		blKey: 0,
 		ffKey: 0,
 		tiID: 0,
-		user: {
-			enabled: true,
-			name: "Your Username",
-			avatar: "",
-		},
 		settings: {
+			user: {
+				enabled: true,
+				name: "Your Username",
+				avatar: "",
+			},
 			actionMenu: {
 				block: {
 					drag: true,
-					save: true, 
+					save: true,
 					duplicate: true,
 					delete: true,
-				} 
+				},
 			},
 			toolboxes: {
 				body: true,
@@ -37,7 +39,7 @@ const getDefaultState = () => {
 				conditional: true,
 				dynamicImage: true,
 				video: true,
-				blockLevelConditional :true,
+				blockLevelConditional: true,
 				blockLevelLoop: true,
 			},
 			dropzones: {
@@ -71,29 +73,29 @@ const getDefaultState = () => {
 					dynamicImage: true,
 				},
 			},
-		},
-		blockLibraries: [],
-		addons: {
-			blockLock: {
-				icon: "table-lock",
-				id: "Block Lock",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
-				state: "disabled",
+			blockLibraries: [],
+			addons: {
+				blockLock: {
+					icon: "table-lock",
+					id: "Block Lock",
+					description:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
+					state: "disabled",
+				},
+				variableSystem: {
+					icon: "iframe-variable-outline",
+					id: "Variable System",
+					description:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
+					state: "disabled",
+				},
 			},
-			variableSystem: {
-				icon: "iframe-variable-outline",
-				id: "Variable System",
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
-				state: "disabled",
-			},
+			staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
+			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
+			autoSaveInterval: 15000,
 		},
-		staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
-		videoElementBaseUrl: "https://video-demo.chamaileon.io/",
-		autoSaveInterval: 15000,
-	}
-}
+	};
+};
 
 export default {
 	modules: {
@@ -101,7 +103,7 @@ export default {
 	},
 	state: getDefaultState(),
 	mutations: {
-		resetEditorState (state) {
+		resetEditorState(state) {
 			Object.assign(state, getDefaultState());
 		},
 
@@ -124,8 +126,8 @@ export default {
 			state.settings.buttons.header = payload;
 		},
 		updateEditorBtn(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.header[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.header[payload.index];
 
 			state.settings.buttons.header.splice(payload.index, 1, {
 				...c,
@@ -133,7 +135,7 @@ export default {
 			});
 		},
 
-		//Dropdown
+		// Dropdown
 		addEditorDropdown(state) {
 			state.settings.buttons.header.push({
 				id: `yourBtn-${state.key}`,
@@ -151,7 +153,7 @@ export default {
 		removeEditorDropdownBtn(state, payload) {
 			state.settings.buttons.header[payload.parentIndex].items.splice(
 				payload.obj.index,
-				1
+				1,
 			);
 		},
 
@@ -166,7 +168,7 @@ export default {
 		},
 
 		updateEditorDropdownBtn(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload.obj);
+			const newObj = (({ index, ...payload }) => payload)(payload.obj);
 
 			state.settings.buttons.header[payload.parentIndex].items.splice(
 				payload.obj.index,
@@ -176,7 +178,7 @@ export default {
 						payload.obj.index
 					],
 					...newObj,
-				}
+				},
 			);
 		},
 
@@ -184,15 +186,14 @@ export default {
 			state.settings.buttons.header[payload.parentIndex].items = payload.newArr;
 		},
 
-		//Elements
+		// Elements
 		toggleElement(state, payload) {
-			state.settings.elements[payload.type][payload.element] =
-				!state.settings.elements[payload.type][payload.element];
+			state.settings.elements[payload.type][payload.element] =				!state.settings.elements[payload.type][payload.element];
 		},
 
-		//BlockLibs
+		// BlockLibs
 		addBlockLibs(state) {
-			state.blockLibraries.push({
+			state.settings.blockLibraries.push({
 				id: `${state.blKey}`,
 				label: `Block Library ${state.blKey}`,
 				canDeleteBlock: false,
@@ -204,24 +205,24 @@ export default {
 		},
 
 		removeBlockLibs(state, index) {
-			state.blockLibraries.splice(index, 1);
+			state.settings.blockLibraries.splice(index, 1);
 		},
 
 		updateBlockLibsOrder(state, payload) {
-			state.blockLibraries = payload;
+			state.settings.blockLibraries = payload;
 		},
 
 		updateBlockLibs(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.blockLibraries[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.blockLibraries[payload.index];
 
-			state.blockLibraries.splice(payload.index, 1, {
+			state.settings.blockLibraries.splice(payload.index, 1, {
 				...c,
 				...newObj,
 			});
 		},
 
-		//Fontfiles
+		// Fontfiles
 		addFontFile(state) {
 			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, ""); // eslint-disable-line
 			state.ffKey++;
@@ -232,7 +233,7 @@ export default {
 		},
 
 		updateFontFile(state, newFontFiles) {
-			Vue.set(state.settings, "fontFiles", newFontFiles)
+			Vue.set(state.settings, "fontFiles", newFontFiles);
 		},
 
 		// FontStacks
@@ -240,12 +241,12 @@ export default {
 			state.settings.fontStacks.push([]);
 		},
 
-		removeFontStack(state, index){
+		removeFontStack(state, index) {
 			state.settings.fontStacks.splice(index, 1);
 		},
 
-		async updateFontStack(state, {index, fontStackString}) {
-			const fontStacks =  state.settings.fontStacks;
+		async updateFontStack(state, { index, fontStackString }) {
+			const fontStacks = state.settings.fontStacks;
 			const newFontStack = fontStackString.split(",")
 				.map(str => JSON.parse(JSON.stringify(str.trim())))
 				.filter(x => !!x);
@@ -256,7 +257,7 @@ export default {
 			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 
-		//Text insert
+		// Text insert
 		updateTextInsertOrder(state, payload) {
 			state.settings.buttons.textInsert = payload;
 		},
@@ -275,7 +276,7 @@ export default {
 		},
 
 		updateTextInsertButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload); //Separate other properties from index
+			const newObj = (({ index, ...payload }) => payload)(payload); // Separate other properties from index
 
 			state.settings.buttons.textInsert = state.settings.buttons.textInsert.map(
 				(c, i) => {
@@ -284,36 +285,38 @@ export default {
 					}
 
 					return c;
-				}
+				},
 			);
 		},
 
-		//Addons
+		// Addons
 		updateAddonState(state, payload) {
-			const obj = state.addons;
+			const obj = state.settings.addons;
 			for (const addon in obj) {
-				if (obj[addon].id === payload.id)
+				if (obj[addon].id === payload.id) {
+					// eslint-disable-next-line no-return-assign
 					return (obj[addon].state = payload.state);
+				}
 			}
 
 			return state;
 		},
 
-		//User
+		// User
 		updateUser(state, payload) {
-			state.user = { ...state.user, ...payload };
+			state.settings.user = { ...state.settings.user, ...payload };
 		},
 
-		//Autosave
+		// Autosave
 		updateAutosave(state, payload) {
-			let x = parseInt(payload);
+			const x = parseInt(payload);
 
-			state.autoSaveInterval = x >= 0 ? x : 0;
+			state.settings.autoSaveInterval = x >= 0 ? x : 0;
 		},
 
-		//Static Assets
+		// Static Assets
 		updateSaticAssets(state, url) {
-			state.staticAssetsBaseUrl = url;
+			state.settings.staticAssetsBaseUrl = url;
 		},
 
 		// Toolboxes
@@ -327,10 +330,10 @@ export default {
 		},
 
 		// Block Dropzone
-		updateBlockActionMenu(state, blockDropzone) {
+		updateBlockActionMenuDropzones(state, blockDropzone) {
 			state.settings.actionMenu.dropzones.block = blockDropzone;
 		},
-		//Static Assets
+		// Static Assets
 		updateVideoElementBaseUrl(state, url) {
 			state.videoElementBaseUrl = url;
 		},
@@ -343,12 +346,12 @@ export default {
 		getElements: (state) => {
 			return state.settings.elements;
 		},
-		getBlockLibs: (state) => state.blockLibraries,
-		getFontFiles: (state) => state.settings.fontFiles,
-		getFontStacks: (state) => state.settings.fontStacks,
-		gethideDefaultFonts: (state) => state.settings.hideDefaultFonts,
-		getAddonStateById: (state) => (id) => {
-			const obj = state.addons;
+		getBlockLibs: state => state.settings.blockLibraries,
+		getFontFiles: state => state.settings.fontFiles,
+		getFontStacks: state => state.settings.fontStacks,
+		gethideDefaultFonts: state => state.settings.hideDefaultFonts,
+		getAddonStateById: state => (id) => {
+			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === id) return obj[addon].state;
 			}
