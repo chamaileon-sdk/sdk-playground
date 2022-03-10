@@ -15,9 +15,10 @@ import sdkConfig from "../components/Dashboard/store/sdkConfig";
 import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
 import importConfig from "../components/HtmlImport/store/htmlImport";
 
-import createChamaileonSdk from "../../../chamaileon-sdk/src/chamaileonSdk";
+// import createChamaileonSdk from "../../../chamaileon-sdk/src/chamaileonSdk";
 import zango from "zangodb";
 import favoriteImages from "./favoriteImages";
+import createChamaileonSdk from "@chamaileon-sdk/plugins";
 
 Vue.use(Vuex);
 const getDefaultState = () => {
@@ -108,21 +109,21 @@ export default new Vuex.Store({
 			if (Vue.prototype?.$chamaileon?.sdk?.destroy && typeof Vue.prototype?.$chamaileon?.sdk?.destroy === "function") {
 				Vue.prototype.$chamaileon.sdk.destroy();
 			}
-			const apiBackend = "https://sdk-demo-api.chamaileon.io/getAuthToken";
+			const apiBackend = "http://localhost:12101/api/v1/tokens/generate";
 
 			async function fetchAccessToken() {
-				if (apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
-					const accessTokenRequest = await fetch(
-						"https://sdk-demo-api.chamaileon.io/getAuthToken",
-					);
-					const accessTokenResponse = await accessTokenRequest.json();
-					return accessTokenResponse.result;
-				} else {
+				// if (apiBackend === "http://localhost:12101/api/v1/tokens/generate") {
+				// 	const accessTokenRequest = await fetch(
+				// 		"http://localhost:12101/api/v1/tokens/generate",
+				// 	);
+				// 	const accessTokenResponse = await accessTokenRequest.json();
+				// 	return accessTokenResponse.result;
+				// } else {
 					const apiKey = state.sdkConfig.apiKey;
 					const accessTokenRequest = await fetch(apiBackend, {
 						method: "GET",
 						headers: {
-							Authorization: `Bearer ${apiKey}`,
+							Authorization: `Bearer qtme1WMFYwzULdmMVW4u`,
 						},
 					});
 					if (!accessTokenRequest.ok) {
@@ -130,7 +131,7 @@ export default new Vuex.Store({
 					}
 					const accessTokenResponse = await accessTokenRequest.json();
 					return accessTokenResponse.result;
-				}
+				// }
 			}
 
 			async function getAccessToken() {
@@ -454,6 +455,10 @@ export default new Vuex.Store({
 		},
 		getGalleryConfigObject: (state) => {
 			const x = JSON.parse(JSON.stringify(state.megaGalleryConfig));
+			return x;
+		},
+		getHtmlImportConfigObject: (state) => {
+			const x = JSON.parse(JSON.stringify(state.htmlImportConfig));
 			return x;
 		},
 		getConfigObject: (state) => {
