@@ -319,8 +319,6 @@ export default {
 										result.push(image);
 										loadedItems = [...loadedItems, ...result];
 									}));
-
-							console.log(images);
 							return { images: result, count };
 						},
 						onUpdateImage: async ({ imageId, parents, selectedFolderId, image }) => {

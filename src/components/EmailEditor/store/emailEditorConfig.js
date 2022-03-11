@@ -304,7 +304,6 @@ export default {
 
 		// User
 		updateUser(state, payload) {
-			console.log("updateUser", state, payload);
 			state.settings.user = { ...state.settings.user, ...payload };
 		},
 

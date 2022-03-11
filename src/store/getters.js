@@ -91,8 +91,6 @@ export default {
 		config.settings.fontStacks = editorConfig.settings.fontStacks;
 		config.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
 
-		console.log(config);
-
 		return config;
 	},
 	getPreviewConfigObject: (state) => {
