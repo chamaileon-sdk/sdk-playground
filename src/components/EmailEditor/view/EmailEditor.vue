@@ -100,7 +100,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["emailEditorInited", "sdkInited"]),
+		...mapState(["emailEditorInited", "sdkInited", "document"]),
 		...mapGetters([ "getConfigObject" ]),
 		isInited() {
 			if (this.sdkInited === true) {
@@ -111,9 +111,13 @@ export default {
 	},
 	watch: {
 		isInited: {
-			handler(v) {
-				if (v === false) {
-					this.$store.dispatch("initEmailEditor");
+			async handler(editorInited) {
+				if (editorInited === false) {
+					await this.$store.dispatch("initEmailEditor");
+				}
+				if (editorInited === true) {
+					await this.$store.dispatch("initGallery");
+					await this.$store.dispatch("initEmailPreview");
 				}
 			},
 			immediate: true,
@@ -127,7 +131,18 @@ export default {
 			if (this.isInited === false) {
 				await this.$store.dispatch("initEmailEditor");
 			}
+
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document }; // !important change we set data from now, not document
+			const settings = {
+				...this.getConfigObject.settings,
+			};
+
 			this.$chamaileon.emailEditor.show();
+			await new Promise(resolve => setTimeout(resolve, 500));
+			this.$chamaileon.emailEditor.methods.updateSettings(settings);
+			await new Promise(resolve => setTimeout(resolve, 500));
+			this.$chamaileon.emailEditor.methods.updateData(data);
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;

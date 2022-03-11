@@ -119,7 +119,7 @@ export default {
 		isInited: {
 			type: [Boolean, String],
 			default: false,
-			required: true,
+			required: false,
 		},
 	},
 
