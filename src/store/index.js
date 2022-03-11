@@ -160,6 +160,7 @@ export default new Vuex.Store({
 				...state.sdkConfig,
 				accessToken,
 			});
+			console.log(Vue.prototype.$chamaileon.createPlugins);
 
 			commit("setSdkInited", true);
 			commit("changeLogoFunction", window.createLogo);

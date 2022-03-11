@@ -1,8 +1,9 @@
 <template>
 	<div>
 		<PreviewButton
-			button-text="Open preview"
+			:button-text="'SHOW PREVIEW'"
 			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
 			@previewClick="openHtmlImport"
 		/>
 		<SectionObserver>
@@ -33,6 +34,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
 	components: {
@@ -46,13 +48,29 @@ export default {
 			previewButtonVisible: true,
 		};
 	},
+	computed: {
+		...mapState({
+			emailPreviewInited: state => state.emailPreviewInited,
+			sdkInited: state => state.sdkInited,
+		}),
+		...mapGetters({
+			getPreviewConfigObject: "getPreviewConfigObject",
+		}),
+		isInited() {
+			// if (this.sdkInited === true) {
+			// 	return this.emailPreviewInited;
+			// }
+			return "false";
+		},
+	},
 	mounted() {
 		this.$store.dispatch("fetchDummyHtml");
 	},
 	methods: {
 		async openHtmlImport() {
+			debugger;
 			if (!this.$chamaileon.htmlImport) {
-				this.$chamaileon.htmlImport = await this.$chamaileon.createHtmlImport({
+				this.$chamaileon.htmlImport = await this.$chamaileon.createPlugins.createHtmlImport({
 					// ...this.$store.getters.getHtmlImportConfigObject,				
 					id: "htmlImport",
 					hooks: {
