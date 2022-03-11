@@ -92,7 +92,7 @@ const getDefaultState = () => {
 			},
 			staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
-			autoSaveInterval: 15000,
+			autoSaveInterval: false,
 		},
 	};
 };
@@ -304,6 +304,7 @@ export default {
 
 		// User
 		updateUser(state, payload) {
+			console.log("updateUser", state, payload);
 			state.settings.user = { ...state.settings.user, ...payload };
 		},
 

@@ -3,6 +3,7 @@
 		<PreviewButton
 			button-text="Open editor"
 			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
 			@previewClick="openVariableEditor"
 		/>
 		<SectionObserver>
@@ -11,6 +12,7 @@
 					:title="'Email Variable Editor'"
 					:doc-url="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
 					:image="'VariableEditorIllustration.svg'"
+					:is-inited="isInited"
 					button-text="Open editor"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openVariableEditor"
@@ -66,7 +68,7 @@ import VariablesToEdit from "../components/VariablesToEdit.vue";
 import NavFooter from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -86,28 +88,36 @@ export default {
 		};
 	},
 	computed: {
+		...mapState({
+			variableEditorInited: state => state.variableEditorInited,
+			sdkInited: state => state.sdkInited,
+		}),
+		isInited() {
+			if (this.sdkInited === true) {
+				return this.variableEditorInited;
+			}
+			return "pending";
+		},
+	},
+	watch: {
+		isInited: {
+			handler(v) {
+				if (v === false) {
+					this.$store.dispatch("initVariableEditor");
+				}
+			},
+			immediate: true,
+		},
 	},
 	methods: {
 		...mapActions({
 			initVariableEditor: "initVariableEditor",
 		}),
 		async openVariableEditor() {
-			if (!this.$chamaileon.variableEditor) {
-				this.$chamaileon.variableEditor = await this.$chamaileon.createVariableEditor({
-					...this.$store.getters.getVariableEditorConfigObject,
-					hooks: {
-						onButtonClicked: async ({ buttonId }) => {
-							if (buttonId === "close") {
-								const newJson = await this.$chamaileon.variableEditor.methods.getDocument();
-								this.$store.commit("updateDocument", newJson);
-								//  exampleJsonTextArea.value = JSON.stringify(newJson);
-								this.$chamaileon.variableEditor.hide();
-							}
-						},
-					},
-				});
-				this.$chamaileon.variableEditor.show();
+			if (this.isInited === false) {
+				await this.$store.dispatch("initVariableEditor");
 			}
+			this.$chamaileon.variableEditor.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
