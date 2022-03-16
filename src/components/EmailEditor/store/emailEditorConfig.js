@@ -288,6 +288,7 @@ export default {
 
 		// Addons
 		updateAddonState(state, payload) {
+			console.log("updateAddonState", payload);
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {
@@ -295,7 +296,6 @@ export default {
 					return (obj[addon].state = payload.state);
 				}
 			}
-
 			return state;
 		},
 
@@ -336,13 +336,14 @@ export default {
 		},
 	},
 	actions: {
-		async updateEditorSettings({ state, rootState }) {
+		async updateEditorSettings({ getters, rootState }) {
+			const settings = getters.getConfigObject.settings;
 			while (rootState.emailEditorInited === "pending") {
 				// eslint-disable-next-line no-await-in-loop
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.emailEditorInited === true) {
-				Vue.prototype.$chamaileon.emailEditor.methods.updateSettings({ ...state.settings });
+				Vue.prototype.$chamaileon.emailEditor.methods.updateSettings(settings);
 			}
 		},
 	},
