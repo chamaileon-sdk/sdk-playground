@@ -43,21 +43,21 @@
 								updateVETextInsertButton({
 									index: ind,
 									id: $event,
-								})
+								}); updateVariableEditorSettings();
 							"
 							@labelChange="
 								updateVETextInsertButton({
 									index: ind,
 									label: $event,
-								})
+								}); updateVariableEditorSettings();
 							"
 							@iconChange="
 								updateVETextInsertButton({
 									index: ind,
 									icon: $event,
-								})
+								}); updateVariableEditorSettings();
 							"
-							@deleteClicked="deleteVETextInsertButton(ind)"
+							@deleteClicked="deleteVETextInsertButton(ind); updateVariableEditorSettings();"
 						/>
 						<v-divider v-show="ind !== btnArr.length - 1" />
 					</div>
@@ -74,7 +74,7 @@ import ListItem3 from "../../Lists/components/ListItem3.vue";
 
 import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";
 import Draggable from "vuedraggable";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -92,6 +92,7 @@ export default {
 			},
 			set(val) {
 				this.updateVETextInsertOrder(val);
+				this.updateVariableEditorSettings();
 			},
 		},
 	},
@@ -102,6 +103,9 @@ export default {
 			"updateVETextInsertOrder",
 			"updateVETextInsertButton",
 		]),
+		...mapActions({
+			updateVariableEditorSettings: "updateVariableEditorSettings",
+		}),
 	},
 };
 </script>

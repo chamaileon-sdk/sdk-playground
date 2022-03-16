@@ -101,6 +101,7 @@
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import Draggable from "vuedraggable";
 import ListItem3 from "./ListItem3.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -150,8 +151,12 @@ export default {
 		},
 	},
 	methods: {
+		...mapActions({
+			updateVariableEditorSettings: "updateVariableEditorSettings",
+		}),
 		addLeftButton() {
 			this.$store.commit(`addVariableEditor${this.section}LeftButton`);
+			this.updateVariableEditorSettings();
 		},
 
 		updateLeftButton(payload) {
@@ -159,6 +164,7 @@ export default {
 				`updateVariableEditor${this.section}LeftButton`,
 				payload,
 			);
+			this.updateVariableEditorSettings();
 		},
 
 		deleteLeftButton(payload) {
@@ -166,10 +172,12 @@ export default {
 				`deleteVariableEditor${this.section}LeftButton`,
 				payload,
 			);
+			this.updateVariableEditorSettings();
 		},
 
 		addRightButton() {
 			this.$store.commit(`addVariableEditor${this.section}RightButton`);
+			this.updateVariableEditorSettings();
 		},
 
 		updateRightButton(payload) {
@@ -177,6 +185,7 @@ export default {
 				`updateVariableEditor${this.section}RightButton`,
 				payload,
 			);
+			this.updateVariableEditorSettings();
 		},
 
 		deleteRightButton(payload) {
@@ -184,6 +193,7 @@ export default {
 				`deleteVariableEditor${this.section}RightButton`,
 				payload,
 			);
+			this.updateVariableEditorSettings();
 		},
 	},
 };

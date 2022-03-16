@@ -91,6 +91,7 @@ export default {
 		...mapState({
 			variableEditorInited: state => state.variableEditorInited,
 			sdkInited: state => state.sdkInited,
+			document: state => state.document,
 		}),
 		isInited() {
 			if (this.sdkInited === true) {
@@ -101,9 +102,14 @@ export default {
 	},
 	watch: {
 		isInited: {
-			handler(v) {
-				if (v === false) {
+			handler(variableEditorInited) {
+				if (variableEditorInited === false) {
 					this.$store.dispatch("initVariableEditor");
+				}
+				if (variableEditorInited === true) {
+					const document = JSON.parse(JSON.stringify(this.document));
+					const data = { document }; // !important change we set data from now, not document
+					this.$chamaileon.variableEditor.methods.updateData(data);
 				}
 			},
 			immediate: true,

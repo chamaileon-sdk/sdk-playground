@@ -84,9 +84,14 @@ export default {
 	},
 	watch: {
 		isInited: {
-			handler(v) {
-				if (v === false) {
+			handler(previewInited) {
+				if (previewInited === false) {
 					this.$store.dispatch("initEmailPreview");
+				}
+				if (previewInited === true) {
+					const document = JSON.parse(JSON.stringify(this.document));
+					const data = { document }; // !important change we set data from now, not document
+					this.$chamaileon.emailPreview.methods.updateData(data);
 				}
 			},
 			immediate: true,
@@ -100,14 +105,6 @@ export default {
 			if (this.isInited === false) {
 				await this.$store.dispatch("initEmailPreview");
 			}
-			const document = JSON.parse(JSON.stringify(this.document));
-			const data = { document }; // !important change we set data from now, not document
-			const settings = {
-				...this.$store.getters.getPreviewConfigObject,
-			};
-
-			this.$chamaileon.emailEditor.methods.updateSettings(settings);
-			this.$chamaileon.emailEditor.methods.updateData(data);
 			this.$chamaileon.emailPreview.show();
 		},
 		showPreviewButton(isVisible) {

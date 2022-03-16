@@ -288,7 +288,6 @@ export default {
 
 		// Addons
 		updateAddonState(state, payload) {
-			console.log("updateAddonState", payload);
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {

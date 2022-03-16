@@ -105,7 +105,6 @@ export default {
 			}
 			this.$chamaileon.gallery.show();
 			await this.$chamaileon.gallery.methods.pickImage();
-			this.$chamaileon.gallery.hide();
 			return;
 		},
 	},

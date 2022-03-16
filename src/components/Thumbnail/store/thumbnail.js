@@ -16,7 +16,6 @@ export default {
 			Object.assign(state, getDefaultState());
 		},
 		updateThumbnail(state, payload) {
-			console.log("updateThumbnail", payload);
 			if (payload.scroll && typeof payload.scroll !== "boolean") {
 				throw new Error("scroll must be a boolean");
 			}

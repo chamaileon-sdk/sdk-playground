@@ -72,5 +72,17 @@ export default {
 		},
 	},
 	actions: {
+		async updateGallerySettings({ getters, rootState }) {
+			const settings = getters.getGalleryConfigObject.settings;
+			console.log("updateGallerySettings");
+			console.log(settings);
+			while (rootState.galleryInited === "pending") {
+				// eslint-disable-next-line no-await-in-loop
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			if (rootState.galleryInited === true) {
+				Vue.prototype.$chamaileon.gallery.methods.updateSettings(settings);
+			}
+		},
 	},
 };
