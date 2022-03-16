@@ -1,6 +1,6 @@
 export default function (thumbnailConfig) {
 	return `const thumbnailInstance = await chamaileonPlugins.createThumbnail({
-    document: emailDocument, //see "Document" tab
+    document: { document }, //see "Document" tab
     container: "${thumbnailConfig.container}", //your container selector
     width: ${thumbnailConfig.width},
     height: ${thumbnailConfig.height},

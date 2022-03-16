@@ -9,19 +9,27 @@
 				elevation="0"
 				class="d-flex white rounded justify-center align-center pa-4"
 			>
-				<v-col cols="12" md="6" class="pa-0 ma-0">
+				<v-col
+					cols="12"
+					md="6"
+					class="pa-0 ma-0"
+				>
 					Default view
 				</v-col>
-				<v-col cols="12" md="6" class="pa-0 ma-0">
+				<v-col
+					cols="12"
+					md="6"
+					class="pa-0 ma-0"
+				>
 					<v-select
+						v-model="defaultViewValue"
 						class="right-input"
 						dense
 						outlined
 						label="View tab"
 						:items="['mobile', 'desktop']"
 						:hide-details="true"
-						v-model="defaultViewValue"
-					></v-select>
+					/>
 				</v-col>
 			</v-row>
 		</OptionWrapper>
@@ -38,7 +46,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			defaultView: (state) => state.previewConfig.settings.defaultView,
+			defaultView: state => state.previewConfig.settings.defaultView,
 		}),
 		defaultViewValue: {
 			get() {
@@ -46,7 +54,7 @@ export default {
 			},
 			set(value) {
 				this.setDefaultView(value);
-			}
+			},
 		},
 	},
 	methods: {

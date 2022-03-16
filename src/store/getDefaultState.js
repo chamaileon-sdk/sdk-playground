@@ -6,5 +6,6 @@ export default () => {
 		emailPreviewInited: false,
 		galleryInited: false,
 		variableEditorInited: false,
+		thumbnailInited: false,
 	};
 };

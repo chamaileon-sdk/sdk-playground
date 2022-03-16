@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable require-await */
 import Vue from "vue";
@@ -14,6 +15,7 @@ export default {
 		commit("setEmailPreviewInited", false);
 		commit("setGalleryInited", false);
 		commit("setVariableEditorInited", false);
+		commit("setThumbnailInited", false);
 
 		if (Vue.prototype?.$chamaileon?.sdk?.destroy && typeof Vue.prototype?.$chamaileon?.sdk?.destroy === "function") {
 			Vue.prototype.$chamaileon.sdk.destroy();
@@ -81,7 +83,7 @@ export default {
 			commit("setEmailEditorInited", "pending");
 			try {
 				Vue.prototype.$chamaileon.emailEditor = await Vue.prototype.$chamaileon.createPlugins.createEmailEditor({
-					// ...getters.getConfigObject,
+					...getters.getConfigObject,
 					hooks: {
 						close: () => {
 							Vue.prototype.$chamaileon.emailEditor.hide();
@@ -361,6 +363,34 @@ export default {
 				console.error(e);
 				Vue.prototype.$chamaileon.variableEditor = null;
 				commit("setVariableEditorInited", false);
+			}
+		}
+	},
+	async initThumbnail({ commit, getters, state }, container) {
+		if (!container) return;
+		if (!state.thumbnailUnited) {
+			commit("setThumbnailInited", "pending");
+			try {
+				const document = JSON.parse(JSON.stringify(state.document));
+				Vue.prototype.$chamaileon.thumbnail = await Vue.prototype.$chamaileon.createPlugins.createThumbnail(
+					{
+						data: { document },
+						settings: { ...getters.getThumbnailSettings },
+						hooks: {
+							sendDOMHeight(message) {
+								console.log("received DOMheight: " + message.height);
+							},
+						},
+					},
+					{
+						container,
+					},
+				);
+				commit("setThumbnailInited", true);
+			} catch (e) {
+				console.error(e);
+				Vue.prototype.$chamaileon.thumbnail = null;
+				commit("setThumbnailInited", false);
 			}
 		}
 	},

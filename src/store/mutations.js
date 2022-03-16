@@ -58,4 +58,7 @@ export default {
 	setVariableEditorInited(state, payload) {
 		state.variableEditorInited = payload;
 	},
+	setThumbnailInited(state, payload) {
+		state.thumbnailInited = payload;
+	},
 };

@@ -70,6 +70,7 @@ export default {
 		...mapState({
 			emailPreviewInited: state => state.emailPreviewInited,
 			sdkInited: state => state.sdkInited,
+			document: state => state.document,
 		}),
 		...mapGetters({
 			getPreviewConfigObject: "getPreviewConfigObject",
@@ -99,6 +100,14 @@ export default {
 			if (this.isInited === false) {
 				await this.$store.dispatch("initEmailPreview");
 			}
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document }; // !important change we set data from now, not document
+			const settings = {
+				...this.$store.getters.getPreviewConfigObject,
+			};
+
+			this.$chamaileon.emailEditor.methods.updateSettings(settings);
+			this.$chamaileon.emailEditor.methods.updateData(data);
 			this.$chamaileon.emailPreview.show();
 		},
 		showPreviewButton(isVisible) {

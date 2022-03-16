@@ -30,15 +30,14 @@
 					justify="end"
 					class="ma-0"
 				>
-					<AddButton class="mr-lg-6" @click="addBtn">
+					<AddButton class="mr-lg-6" @click="addBtn(); updateEditorSettings();">
 						New Button
 					</AddButton>
-					<AddButton class="mt-6 mt-lg-0" @click="addDD">
+					<AddButton class="mt-6 mt-lg-0" @click="addDD(); updateEditorSettings();">
 						New DropDown
 					</AddButton>
 				</v-row>
 			</v-container>
-
 			<List6 :section="'Editor'" />
 		</OptionsWrapper>
 	</div>
@@ -49,7 +48,7 @@ import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import HeaderPreview from "./Header/HeaderPreview.vue";
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import List6 from "../../Lists/components/List6.vue";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -70,6 +69,9 @@ export default {
 		...mapMutations({
 			addBtn: "addEditorBtn",
 			addDD: "addEditorDropdown",
+		}),
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
 		}),
 	},
 };

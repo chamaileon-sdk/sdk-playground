@@ -16,18 +16,25 @@
 		<h3>Buttons and Dropdowns</h3>
 		<p>
 			You can add and customize your buttons and dropdowns below. The icon is
-			required to be a <br />
-			<a href="https://materialdesignicons.com/" target="_blank"
-				>Material Design Icon</a
-			>
+			required to be a <br>
+			<a
+				href="https://materialdesignicons.com/"
+				target="_blank"
+			>Material Design Icon</a>
 			without <em>mdi-</em> prefix. Keep in mind that the header can only store
 			a limited amount of buttons.
 		</p>
 
 		<OptionWrapper>
 			<template>
-				<v-row align="center" justify="end" class="ma-0">
-					<AddButton class="mr-lg-6" @click="addBtn"> New Button </AddButton>
+				<v-row
+					align="center"
+					justify="end"
+					class="ma-0"
+				>
+					<AddButton class="mr-lg-6" @click="addBtn">
+						New Button
+					</AddButton>
 					<AddButton class="mt-6 mt-lg-0" @click="addDD">
 						New DropDown
 					</AddButton>
@@ -53,21 +60,19 @@ export default {
 		OptionWrapper,
 		Header,
 	},
+	data() {
+		return {
+			rules: {
+				required: value => !!value || "Required.",
+				unique: value => !this.$store.state.editorConfig.idArr.includes(value),
+			},
+		};
+	},
 	methods: {
 		...mapMutations({
 			addBtn: "addPreviewBtn",
 			addDD: "addPreviewDropdown",
 		}),
-	},
-
-	data() {
-		return {
-			rules: {
-				required: (value) => !!value || "Required.",
-				unique: (value) =>
-					!this.$store.state.editorConfig.idArr.includes(value),
-			},
-		};
 	},
 };
 </script>

@@ -17,7 +17,7 @@
 			</div>
 
 			<div id="settings" class="section">
-				<Settings />
+				<Settings ref="settings" />
 			</div>
 		</SectionObserver>
 		<Footer
@@ -41,11 +41,7 @@ export default {
 		SectionObserver,
 		Footer,
 		Description,
-	},
-	mounted() {
-		this.$store.dispatch("updateSDK");
+
 	},
 };
 </script>
-
-<style></style>

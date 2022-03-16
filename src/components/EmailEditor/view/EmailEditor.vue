@@ -134,13 +134,8 @@ export default {
 
 			const document = JSON.parse(JSON.stringify(this.document));
 			const data = { document }; // !important change we set data from now, not document
-			const settings = {
-				...this.getConfigObject.settings,
-			};
 
 			this.$chamaileon.emailEditor.show();
-			await new Promise(resolve => setTimeout(resolve, 500));
-			this.$chamaileon.emailEditor.methods.updateSettings(settings);
 			await new Promise(resolve => setTimeout(resolve, 500));
 			this.$chamaileon.emailEditor.methods.updateData(data);
 		},

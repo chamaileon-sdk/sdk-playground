@@ -39,7 +39,7 @@
 
 							<!-- Dropdown add button on small screens -->
 							<v-col
-								v-if="breakpoint != 'xl' && breakpoint != 'xl'"
+								v-if="breakpoint !== 'xl' && breakpoint !== 'xl'"
 								v-show="b.items"
 								class="pa-2"
 								xl="4"
@@ -61,7 +61,7 @@
 
 							<!-- Delete button on small screens -->
 							<v-col
-								v-if="breakpoint != 'xl' && breakpoint != 'xl'"
+								v-if="breakpoint !== 'xl' && breakpoint !== 'xl'"
 								class="pa-2"
 								xl="4"
 								cols="6"
@@ -90,7 +90,7 @@
 
 							<!-- Dropdown add button on large screens -->
 							<v-col
-								v-if="breakpoint == 'xl' || breakpoint == 'xl'"
+								v-if="breakpoint === 'xl' || breakpoint === 'xl'"
 								v-show="b.items"
 								class="pa-2"
 								xl="4"
@@ -112,7 +112,7 @@
 
 							<!-- Delete add button on large screens -->
 							<v-col
-								v-if="breakpoint == 'xl' || breakpoint == 'xl'"
+								v-if="breakpoint === 'xl' || breakpoint === 'xl'"
 								class="pa-2"
 								xl="4"
 								cols="6"
@@ -211,7 +211,7 @@
 								</v-col>
 
 								<v-col
-									v-if="breakpoint != 'xl' && breakpoint != 'xl'"
+									v-if="breakpoint !== 'xl' && breakpoint !== 'xl'"
 									xl="3"
 									cols="6"
 									align-self="center"
@@ -265,13 +265,13 @@
 											updateDDBtn({
 												parentIndex: i,
 												obj: { index: bi, label: $event },
-											})
+											});
 										"
 									/>
 								</v-col>
 
 								<v-col
-									v-if="breakpoint == 'xl' || breakpoint == 'xl'"
+									v-if="breakpoint === 'xl' || breakpoint === 'xl'"
 									xl="3"
 									cols="6"
 									align-self="center"
@@ -283,7 +283,7 @@
 											deleteDDBtn({
 												parentIndex: i,
 												obj: { index: bi },
-											})
+											});
 										"
 									/>
 								</v-col>
@@ -304,6 +304,7 @@
 import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 import Draggable from "vuedraggable";
 import ColorPicker from "../../ViewUtilities/components/ColorPicker.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
@@ -333,6 +334,7 @@ export default {
 			},
 			set(value) {
 				this.$store.commit(`update${this.section}BtnOrder`, value);
+				this.updateEditorSettings();
 			},
 		},
 		ddArrById: {
@@ -345,57 +347,72 @@ export default {
 					parentId,
 					newArr,
 				});
+				this.updateEditorSettings();
 			},
 		},
 	},
 	methods: {
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
 		updateLabel(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
 				index,
 				label: val,
 			});
+			this.updateEditorSettings();
 		},
 		updateColor(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
 				index,
 				color: val,
 			});
+			this.updateEditorSettings();
 		},
 		updateIcon(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
 				index,
 				icon: val,
 			});
+			this.updateEditorSettings();
 		},
 		updateStyle(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
 				index,
 				style: val,
 			});
+			this.updateEditorSettings();
 		},
 		updateID(val, index) {
 			this.$store.commit(`update${this.section}Btn`, { index, id: val });
+			this.updateEditorSettings();
 		},
 		updateDDID(val, parentIndex, index) {
 			this.$store.commit(`update${this.section}DropdownBtn`, {
 				parentIndex,
 				obj: { index, id: val },
 			});
+			this.updateEditorSettings();
 		},
 		updateDDBtn(payload) {
 			this.$store.commit(`update${this.section}DropdownBtn`, payload);
+			this.updateEditorSettings();
 		},
 		addDDBtn(payload) {
 			this.$store.commit(`add${this.section}DropdownBtn`, payload);
+			this.updateEditorSettings();
 		},
 		deleteDDBtn(payload) {
 			this.$store.commit(`remove${this.section}DropdownBtn`, payload);
+			this.updateEditorSettings();
 		},
 		updateDDBtnOrder(payload) {
 			this.$store.commit(`update${this.section}DropdownBtnOrder`, payload);
+			this.updateEditorSettings();
 		},
 		deleteBtn(payload) {
 			this.$store.commit(`remove${this.section}Btn`, payload);
+			this.updateEditorSettings();
 		},
 	},
 };

@@ -5,24 +5,30 @@ const getDefaultState = () => {
 			height: 240,
 			scale: 1,
 			scroll: false,
-			container: "#email-thumbnail",
 		},
-	}
-}
+	};
+};
 
 export default {
 	state: getDefaultState(),
 	mutations: {
-		resetThumbnailState (state) {
+		resetThumbnailState(state) {
 			Object.assign(state, getDefaultState());
 		},
 		updateThumbnail(state, payload) {
-			let key = Object.keys(payload)[0];
-			let intVal = payload[key].length === 0 ? 0 : parseInt(payload[key]);
+			console.log("updateThumbnail", payload);
+			if (payload.scroll && typeof payload.scroll !== "boolean") {
+				throw new Error("scroll must be a boolean");
+			}
+			if (payload.scale) {
+				parseFloat(payload.scale);
+			}
+			if (payload.width) {
+				parseInt(payload.width);
+			}
 
-			if (!("scroll" in payload)) {
-				if (intVal !== NaN) payload[key] = intVal;
-				else return;
+			if (payload.length) {
+				parseInt(payload.length);
 			}
 
 			state.settings = { ...state.settings, ...payload };
@@ -30,6 +36,6 @@ export default {
 	},
 	actions: {},
 	getters: {
-		getThumbnailSettings: (state) => state.settings,
+		getThumbnailSettings: state => state.settings,
 	},
 };

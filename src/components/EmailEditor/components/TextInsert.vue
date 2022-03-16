@@ -25,7 +25,7 @@
 					justify="end"
 					class="ma-0"
 				>
-					<AddButton @click="addTextInsertButton">
+					<AddButton @click="addTextInsertButton(); updateEditorSettings();">
 						New Button
 					</AddButton>
 				</v-row>
@@ -45,21 +45,22 @@
 								updateTextInsertButton({
 									index: ind,
 									id: $event,
-								})
+								}); updateEditorSettings();
 							"
 							@labelChange="
 								updateTextInsertButton({
 									index: ind,
 									label: $event,
-								})
+								}); updateEditorSettings();
 							"
 							@iconChange="
 								updateTextInsertButton({
 									index: ind,
 									icon: $event,
-								})
+								});
+								updateEditorSettings();
 							"
-							@deleteClicked="deleteTextInsertButton(ind)"
+							@deleteClicked="deleteTextInsertButton(ind); updateEditorSettings();"
 						/>
 						<v-divider v-show="ind !== btnArr.length - 1" />
 					</div>
@@ -75,7 +76,7 @@ import ListItem3 from "../../Lists/components/ListItem3.vue";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";
 import Draggable from "vuedraggable";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -102,6 +103,10 @@ export default {
 			"updateTextInsertOrder",
 			"updateTextInsertButton",
 		]),
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
+
 	},
 };
 </script>
