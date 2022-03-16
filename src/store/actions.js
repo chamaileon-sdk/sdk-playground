@@ -28,7 +28,7 @@ export default {
 				const accessTokenResponse = await accessTokenRequest.json();
 				return accessTokenResponse.result;
 			} else {
-				const apiKey = state.sdkConfig.apiKey;
+				const apiKey = state.sdkConfig.apiKey;		
 				const accessTokenRequest = await fetch(apiBackend, {
 					method: "GET",
 					headers: {
@@ -68,6 +68,7 @@ export default {
 		Vue.prototype.$chamaileon.createPlugins = await Vue.prototype.$chamaileon.sdk.init({
 			...state.sdkConfig,
 			accessToken,
+			getAccessToken
 		});
 
 		commit("setSdkInited", true);
