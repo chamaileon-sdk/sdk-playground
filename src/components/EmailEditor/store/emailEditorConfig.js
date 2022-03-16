@@ -149,21 +149,18 @@ export default {
 
 			state.key++;
 		},
-
 		removeEditorDropdownBtn(state, payload) {
 			state.settings.buttons.header[payload.parentIndex].items.splice(
 				payload.obj.index,
 				1,
 			);
 		},
-
 		addEditorDropdownBtn(state, index) {
 			state.settings.buttons.header[index].items.push({
 				id: `yourBtn-${state.key}`,
 				icon: "at",
 				label: "",
 			});
-
 			state.key++;
 		},
 
@@ -338,7 +335,17 @@ export default {
 			state.videoElementBaseUrl = url;
 		},
 	},
-	actions: {},
+	actions: {
+		async updateEditorSettings({ state, rootState }) {
+			while (rootState.emailEditorInited === "pending") {
+				// eslint-disable-next-line no-await-in-loop
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			if (rootState.emailEditorInited === true) {
+				Vue.prototype.$chamaileon.emailEditor.methods.updateSettings({ ...state.settings });
+			}
+		},
+	},
 	getters: {
 		getHeaderBtns: (state) => {
 			return state.settings.buttons.header;
