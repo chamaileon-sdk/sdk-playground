@@ -119,12 +119,20 @@ export default {
 							originalImage,
 							lockDimensions,
 						}) => {
-							if (!Vue.prototype.$chamaileon.gallery) {
+							while (state.galleryInited === "pending") {
+								// eslint-disable-next-line no-await-in-loop
+								await new Promise(resolve => setTimeout(resolve, 450));
+							}
+							if (state.galleryInited === false) {
 								await dispatch("initGallery");
 							}
-							if (Vue.prototype.$chamaileon.gallery.show) {
+
+							if (state.galleryInited === true) {
+								Vue.prototype.$chamaileon.gallery.updateSettings({ originalImage, lockDimensions });
 								Vue.prototype.$chamaileon.gallery.show();
+
 								const { url } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+								Vue.prototype.$chamaileon.gallery.hide();
 								return url;
 							}
 						},
@@ -132,12 +140,20 @@ export default {
 							originalImage,
 							lockDimensions,
 						}) => {
-							if (!Vue.prototype.$chamaileon.gallery) {
+							while (state.galleryInited === "pending") {
+								// eslint-disable-next-line no-await-in-loop
+								await new Promise(resolve => setTimeout(resolve, 450));
+							}
+							if (state.galleryInited === false) {
 								await dispatch("initGallery");
 							}
-							if (Vue.prototype.$chamaileon.gallery.show) {
+
+							if (state.galleryInited === true) {
+								Vue.prototype.$chamaileon.gallery.updateSettings({ originalImage, lockDimensions });
 								Vue.prototype.$chamaileon.gallery.show();
+
 								const { url } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+								Vue.prototype.$chamaileon.gallery.hide();
 								return url;
 							}
 						},
@@ -177,10 +193,15 @@ export default {
 						},
 						onHeaderButtonClicked: async ({ buttonId }) => {
 							if (buttonId === "preview") {
-								if (!Vue.prototype.$chamaileon.emailPreview) {
+								while (state.emailEditorInited === "pending") {
+									// eslint-disable-next-line no-await-in-loop
+									await new Promise(resolve => setTimeout(resolve, 450));
+								}
+								if (state.emailPreviewInited === false) {
 									await dispatch("initEmailPreview");
 								}
-								if (Vue.prototype.$chamaileon.emailPreview.show) {
+
+								if (state.emailPreviewInited === true) {
 									Vue.prototype.$chamaileon.emailPreview.methods.updateData({ document: getters.getEmail });
 									Vue.prototype.$chamaileon.emailPreview.show();
 								}
