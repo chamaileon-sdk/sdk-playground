@@ -19,7 +19,7 @@ jobs:
     - run: npm ci
       env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
-    - run: npm run build      
+    - run: npm run build
       
     # Upload to S3
     - name: sync s3
