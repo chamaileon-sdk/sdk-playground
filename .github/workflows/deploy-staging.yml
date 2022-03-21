@@ -18,10 +18,11 @@ jobs:
         node-version: '14.x'
         scope: '@EDMdesigner'
         registry-url: 'https://npm.pkg.github.com/'
-      run: npm ci
+      run: |
+        npm ci
+        npm run build
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
-      run: npm run build
       
     # Upload to S3
     - name: sync s3
