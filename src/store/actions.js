@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable require-await */
 import Vue from "vue";
-import createChamaileonSdk from "../../../chamaileon-sdk/src/chamaileonSdk";
+import createChamaileonSdk from "@/chamaileon-sdk/plugins";
 import zango from "zangodb";
 import favoriteImages from "./favoriteImages";
 
