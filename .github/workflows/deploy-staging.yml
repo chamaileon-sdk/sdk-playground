@@ -18,6 +18,7 @@ jobs:
       env:
       # Specify custom .npmrc because actions/setup-node@v2 doesn't
         NPM_CONFIG_USERCONFIG: .npmrc.ci
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
     - run: npm run build
       
     # Upload to S3
