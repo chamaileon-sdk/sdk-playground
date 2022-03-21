@@ -23,12 +23,6 @@ jobs:
       run: |
         npm ci
         npm run build
-      with:
-        node-version: '14.x'
-        scope: '@EDMdesigner'
-        registry-url: 'https://npm.pkg.github.com/'
-      env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
       
     # Upload to S3
     - name: sync s3
