@@ -11,15 +11,13 @@ jobs:
     - name: checkout
       uses: actions/checkout@master
 
-    - name: setup node
+    # Run the build script which populates the ./dist folder
+    - name: build
       uses: actions/setup-node@v2
       with:
         node-version: '14.x'
         scope: '@EDMdesigner'
         registry-url: 'https://npm.pkg.github.com/'
-
-    # Run the build script which populates the ./dist folder
-    - name: build
       run: npm ci
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
