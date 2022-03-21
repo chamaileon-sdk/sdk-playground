@@ -8,23 +8,18 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@v2
-
-    - name: setup node
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
       with:
         node-version: 14
         scope: '@EDMdesigner'
         registry-url: 'https://npm.pkg.github.com/'
 
-    # Run the build script which populates the ./dist folder
-    - name: install
-      run: npm ci
+  # Run the build script which populates the ./dist folder
+    - run: npm ci
       env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
-    - name: build
-      run: npm run build      
+    - run: npm run build
       
     # Upload to S3
     - name: sync s3
