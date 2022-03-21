@@ -10,17 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@EDMdesigner'
+
 
   # Run the build script which populates the ./dist folder
+    - run: sed -i s/%%AUTH_TOKEN%%/${{ secrets.NPM_GH_PACKAGES }}/ .npmrc.ci
     - run: npm install
       env:
       # Specify custom .npmrc because actions/setup-node@v2 doesn't
         NPM_CONFIG_USERCONFIG: .npmrc.ci
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
     - run: npm run build
       
     # Upload to S3
