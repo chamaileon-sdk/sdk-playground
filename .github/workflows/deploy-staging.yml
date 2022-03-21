@@ -15,9 +15,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14.x'
-        with:
-            scope: '@EDMdesigner'
-            registry-url: 'https://npm.pkg.github.com/'
+        scope: '@EDMdesigner'
+        registry-url: 'https://npm.pkg.github.com/'
 
     # Run the build script which populates the ./dist folder
     - name: build
