@@ -98,10 +98,15 @@ export default {
 
 	},
 	actions: {
-		async initMegaPreview({ commit }, previewConfig) {
-			const megaPreviewInterface = await Vue.prototype.$chamaileon.createMegaPreview(previewConfig);
-			commit("addMegaPreviewInterface", megaPreviewInterface, { root: true });
-			window.megaPreviewInterface = megaPreviewInterface;
+		async updatePreviewSettings({ getters, rootState }) {
+			const settings = getters.getPreviewConfigObject.settings;
+			while (rootState.emailPreviewInited === "pending") {
+				// eslint-disable-next-line no-await-in-loop
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			if (rootState.emailPreviewInited === true) {
+				Vue.prototype.$chamaileon.emailPreview.methods.updateSettings(settings);
+			}
 		},
 	},
 	getters: {

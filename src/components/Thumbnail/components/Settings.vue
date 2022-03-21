@@ -76,11 +76,11 @@
 			If you change the settings above, the thumbnail below will automatically
 			update.
 		</p>
-		<v-row class="d-flex justify-center">
+		<v-row class="d-flex justify-center grey lighten-3  rounded mt-4">
 			<v-card
 				:style="`max-width: 100%; width: ${width*scale}px;`"
 				:height="height*scale"
-				class="my-2"
+				class="my-4 "
 			>
 				<v-card-text
 					id="PreviewJSON"
@@ -193,7 +193,6 @@ export default {
 			if (timeoutId) {
 				clearTimeout(timeoutId);
 			}
-
 			timeoutId = setTimeout(async () => {
 				this.$store.commit("updateThumbnail", obj);
 				await this.updateThumbnail();

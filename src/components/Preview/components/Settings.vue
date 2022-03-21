@@ -38,7 +38,7 @@
 
 <script>
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -54,12 +54,16 @@ export default {
 			},
 			set(value) {
 				this.setDefaultView(value);
+				this.updatePreviewSettings();
 			},
 		},
 	},
 	methods: {
 		...mapMutations({
 			setDefaultView: "setDefaultView",
+		}),
+		...mapActions({
+			updatePreviewSettings: "updatePreviewSettings",
 		}),
 	},
 };

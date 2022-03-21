@@ -195,4 +195,16 @@ export default {
 		headerButtons: state => state.settings.buttons.header,
 		footerButtons: state => state.settings.buttons.footer,
 	},
+	actions: {
+		async updateVariableEditorSettings({ getters, rootState }) {
+			const settings = getters.getVariableEditorConfigObject.settings;
+			while (rootState.variableEditorInited === "pending") {
+				// eslint-disable-next-line no-await-in-loop
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			if (rootState.variableEditorInited === true) {
+				Vue.prototype.$chamaileon.variableEditor.methods.updateSettings(settings);
+			}
+		},
+	},
 };

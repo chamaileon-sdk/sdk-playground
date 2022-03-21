@@ -281,7 +281,7 @@
 
 <script>
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -294,6 +294,7 @@ export default {
 			},
 			set(val) {
 				this.updateUser({ enabled: val });
+				this.updateEditorSettings();
 			},
 		},
 		avatarUserName: {
@@ -302,6 +303,7 @@ export default {
 			},
 			set(val) {
 				this.updateUser({ name: val });
+				this.updateEditorSettings();
 			},
 		},
 		avatarImg: {
@@ -310,6 +312,7 @@ export default {
 			},
 			set(val) {
 				this.updateUser({ avatar: val });
+				this.updateEditorSettings();
 			},
 		},
 
@@ -319,6 +322,7 @@ export default {
 			},
 			set(val) {
 				this.updateAutosave(val);
+				this.updateEditorSettings();
 			},
 		},
 
@@ -328,6 +332,7 @@ export default {
 			},
 			set(val) {
 				this.updateSaticAssets(val);
+				this.updateEditorSettings();
 			},
 		},
 		toolboxes: {
@@ -336,6 +341,7 @@ export default {
 			},
 			set(val) {
 				this.updateToolboxes(val);
+				this.updateEditorSettings();
 			},
 		},
 		blockActions: {
@@ -344,6 +350,7 @@ export default {
 			},
 			set(val) {
 				this.updateBlockActionMenu(val);
+				this.updateEditorSettings();
 			},
 		},
 		blockDropzones: {
@@ -352,6 +359,7 @@ export default {
 			},
 			set(val) {
 				this.updateBlockActionMenuDropzones(val);
+				this.updateEditorSettings();
 			},
 		},
 		videoElementBaseUrl: {
@@ -360,6 +368,7 @@ export default {
 			},
 			set(val) {
 				this.updateVideoElementBaseUrl(val);
+				this.updateEditorSettings();
 			},
 		},
 	},
@@ -375,6 +384,9 @@ export default {
 			"updateSaticAssets",
 			"updateVideoElementBaseUrl",
 		]),
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
 	},
 };
 </script>

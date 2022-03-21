@@ -40,7 +40,7 @@
 									small
 									:ripple="false"
 									:color="item.state === 'enabled' ? 'primary' : ''"
-									@click="updateAddonState({ id: item.id, state: 'enabled' })"
+									@click="updateAddonState({ id: item.id, state: 'enabled' }); updateEditorSettings();"
 								>
 									<v-icon
 										size="25"
@@ -57,7 +57,7 @@
 									small
 									:ripple="false"
 									:color="item.state === 'disabled' ? 'primary' : ''"
-									@click="updateAddonState({ id: item.id, state: 'disabled' })"
+									@click="updateAddonState({ id: item.id, state: 'disabled' }); updateEditorSettings();"
 								>
 									<v-icon
 										size="25"
@@ -74,7 +74,7 @@
 									small
 									:ripple="false"
 									:color="item.state === 'hidden' ? 'primary' : ''"
-									@click="updateAddonState({ id: item.id, state: 'hidden' })"
+									@click="updateAddonState({ id: item.id, state: 'hidden' }); updateEditorSettings();"
 								>
 									<v-icon
 										size="25"
@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 
 export default {
@@ -111,6 +111,9 @@ export default {
 	},
 	methods: {
 		...mapMutations([ "updateAddonState" ]),
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
 	},
 
 };

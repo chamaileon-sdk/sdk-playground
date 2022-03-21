@@ -7,7 +7,7 @@
 			@previewClick="openHtmlImport"
 		/>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email HTML Import'"
 					:doc-url="'https://chamaileon.io/sdk/docs/email-html-importer/'"
@@ -25,7 +25,7 @@
 				</Description>
 			</div>
 		</SectionObserver>
-		<Footer :previous="'Email HTML Generator'" :prevTo="'/htmlgenerator'" />
+		<Footer :previous="'Email HTML Generator'" :prev-to="'/htmlgenerator'" />
 	</div>
 </template>
 
@@ -70,21 +70,21 @@ export default {
 		async openHtmlImport() {
 			if (!this.$chamaileon.htmlImport) {
 				this.$chamaileon.htmlImport = await this.$chamaileon.createPlugins.createHtmlImport({
-					// ...this.$store.getters.getHtmlImportConfigObject,				
+					// ...this.$store.getters.getHtmlImportConfigObject,
 					id: "htmlImport",
 					hooks: {
 						cancel: () => {
-							console.log('TODO CANCEL');
+							console.log("TODO CANCEL");
 							this.$chamaileon.htmlImport.hide();
 						},
 						close: () => {
-							console.log('TODO CLOSE');
+							console.log("TODO CLOSE");
 							this.$chamaileon.htmlImport.hide();
 						},
 						importReady: async (message) => {
-							console.log('TODO onButtonClicked');
+							console.log("TODO onButtonClicked");
 							const template = {
-								content: message.document
+								content: message.document,
 							};
 							console.log(message.document);
 							this.$chamaileon.htmlImport.hide();
@@ -104,7 +104,7 @@ export default {
 							// this.closeHtmlImport();
 						},
 						onButtonClicked: async ({ buttonId, data }) => {
-							console.log('TODO onButtonClicked');
+							console.log("TODO onButtonClicked");
 							// console.log("variable editor => button clicked: ", buttonId, data);
 
 							// if (buttonId === "close") {
@@ -119,13 +119,12 @@ export default {
 					},
 				});
 			}
-			console.log(this.$chamaileon.htmlImport);
 			this.$chamaileon.htmlImport.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
 		},
-	}
+	},
 };
 </script>
 

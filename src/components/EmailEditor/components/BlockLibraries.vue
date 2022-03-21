@@ -85,7 +85,7 @@
 											label="Label"
 											:value="b.label"
 											outlined
-											@input="updateBlockLibs({ index: ind, label: $event })"
+											@input="updateBlockLibs({ index: ind, label: $event }), updateEditorSettings();"
 										/>
 									</v-col>
 									<v-col
@@ -105,7 +105,8 @@
 													updateBlockLibs({
 														index: ind,
 														canDeleteBlock: !b.canDeleteBlock,
-													})
+													});
+													updateEditorSettings();
 												"
 											>
 												<v-icon
@@ -126,7 +127,8 @@
 													updateBlockLibs({
 														index: ind,
 														canRenameBlock: !b.canRenameBlock,
-													})
+													});
+													updateEditorSettings();
 												"
 											>
 												<v-icon
@@ -147,7 +149,8 @@
 													updateBlockLibs({
 														index: ind,
 														canSaveBlock: !b.canSaveBlock,
-													})
+													});
+													updateEditorSettings();
 												"
 											>
 												<v-icon
@@ -189,7 +192,7 @@ import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import Draggable from "vuedraggable";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -208,6 +211,7 @@ export default {
 			},
 			set(value) {
 				this.updateBlockLibsOrder(value);
+				this.updateEditorSettings();
 			},
 		},
 	},
@@ -218,18 +222,22 @@ export default {
 			"addBlockLibs",
 			"removeBlockLibs",
 		]),
-
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
 		addBlockLibararies() {
 			this.addBlockLibs();
 			this.$store.commit(
 				"createBlockLibData",
 				this.blockLibsArr[this.blockLibsArr.length - 1].id,
 			);
+			this.updateEditorSettings();
 		},
 
 		removeBlockLibararies(ind, id) {
 			this.removeBlockLibs(ind);
 			this.$store.commit("deleteBlockLibData", id);
+			this.updateEditorSettings();
 		},
 
 		updateID(index, id) {
@@ -240,6 +248,7 @@ export default {
 				newLibId: id,
 			});
 			this.updateBlockLibs({ index, id });
+			this.updateEditorSettings();
 		},
 		noEmpty(e) {
 			return e.length !== 0;

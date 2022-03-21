@@ -32,10 +32,10 @@
 					justify="end"
 					class="ma-0"
 				>
-					<AddButton class="mr-lg-6" @click="addBtn">
+					<AddButton class="mr-lg-6" @click="addBtn(); updatePreviewSettings()">
 						New Button
 					</AddButton>
-					<AddButton class="mt-6 mt-lg-0" @click="addDD">
+					<AddButton class="mt-6 mt-lg-0" @click="addDD(); updatePreviewSettings()">
 						New DropDown
 					</AddButton>
 				</v-row>
@@ -51,7 +51,7 @@ import List6 from "../../Lists/components/List6.vue";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import Header from "./Header/HeaderPreview.vue";
 
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -72,6 +72,9 @@ export default {
 		...mapMutations({
 			addBtn: "addPreviewBtn",
 			addDD: "addPreviewDropdown",
+		}),
+		...mapActions({
+			updatePreviewSettings: "updatePreviewSettings",
 		}),
 	},
 };

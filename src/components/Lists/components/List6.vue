@@ -335,6 +335,7 @@ export default {
 			set(value) {
 				this.$store.commit(`update${this.section}BtnOrder`, value);
 				this.updateEditorSettings();
+				this.updatePreviewSettings();
 			},
 		},
 		ddArrById: {
@@ -348,12 +349,14 @@ export default {
 					newArr,
 				});
 				this.updateEditorSettings();
+				this.updatePreviewSettings();
 			},
 		},
 	},
 	methods: {
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
+			updatePreviewSettings: "updatePreviewSettings",
 		}),
 		updateLabel(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -361,6 +364,7 @@ export default {
 				label: val,
 			});
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		updateColor(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -368,6 +372,7 @@ export default {
 				color: val,
 			});
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		updateIcon(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -375,6 +380,7 @@ export default {
 				icon: val,
 			});
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		updateStyle(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -382,10 +388,12 @@ export default {
 				style: val,
 			});
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		updateID(val, index) {
 			this.$store.commit(`update${this.section}Btn`, { index, id: val });
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		updateDDID(val, parentIndex, index) {
 			this.$store.commit(`update${this.section}DropdownBtn`, {
@@ -393,10 +401,12 @@ export default {
 				obj: { index, id: val },
 			});
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		updateDDBtn(payload) {
 			this.$store.commit(`update${this.section}DropdownBtn`, payload);
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		addDDBtn(payload) {
 			this.$store.commit(`add${this.section}DropdownBtn`, payload);
@@ -409,10 +419,12 @@ export default {
 		updateDDBtnOrder(payload) {
 			this.$store.commit(`update${this.section}DropdownBtnOrder`, payload);
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 		deleteBtn(payload) {
 			this.$store.commit(`remove${this.section}Btn`, payload);
 			this.updateEditorSettings();
+			this.updatePreviewSettings();
 		},
 	},
 };

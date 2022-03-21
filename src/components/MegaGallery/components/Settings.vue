@@ -10,26 +10,34 @@
 				elevation="0"
 				class="d-flex white rounded justify-center align-center pa-4"
 			>
-				<v-col cols="12" md="6" class="pa-0 ma-0">
+				<v-col
+					cols="12"
+					md="6"
+					class="pa-0 ma-0"
+				>
 					<v-text-field
-						dense
 						v-model.lazy="fileSize"
+						dense
 						class="rounded mr-2"
 						hide-details="true"
 						label="Maximum File Size"
 						outlined
 						suffix="MBs"
-					></v-text-field>
+					/>
 				</v-col>
-				<v-col cols="12" md="6" class="pa-0 ma-0">
+				<v-col
+					cols="12"
+					md="6"
+					class="pa-0 ma-0"
+				>
 					<v-text-field
-						dense
 						v-model.lazy="imagePerPage"
+						dense
 						class="rounded ml-2 mr-xl-2"
 						hide-details="true"
 						label="Number of Image Loaded Per Request"
 						outlined
-					></v-text-field>
+					/>
 				</v-col>
 			</v-row>
 		</OptionsWrapper>
@@ -38,7 +46,7 @@
 
 <script>
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -46,8 +54,8 @@ export default {
 	},
 	computed: {
 		...mapState({
-			maxFileSize: (state) => state.megaGalleryConfig.settings.maxFileSize,
-			maxImagePerPage: (state) => state.megaGalleryConfig.settings.maxImagePerPage
+			maxFileSize: state => state.megaGalleryConfig.settings.maxFileSize,
+			maxImagePerPage: state => state.megaGalleryConfig.settings.maxImagePerPage,
 		}),
 		fileSize: {
 			get() {
@@ -55,15 +63,17 @@ export default {
 			},
 			set(value) {
 				this.setMaxFileSize(value);
-			}
+				this.updateGallerySettings();
+			},
 		},
 		imagePerPage: {
 			get() {
-				return this.maxImagePerPage
+				return this.maxImagePerPage;
 			},
 			set(value) {
-				this.setMaxImagePerPage(value)
-			}
+				this.setMaxImagePerPage(value);
+				this.updateGallerySettings();
+			},
 		},
 
 	},
@@ -71,6 +81,9 @@ export default {
 		...mapMutations({
 			setMaxFileSize: "setMaxFileSize",
 			setMaxImagePerPage: "setMaxImagePerPage",
+		}),
+		...mapActions({
+			updateGallerySettings: "updateGallerySettings",
 		}),
 	},
 };

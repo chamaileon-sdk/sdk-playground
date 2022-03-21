@@ -116,6 +116,9 @@ export default {
 					await this.$store.dispatch("initEmailEditor");
 				}
 				if (editorInited === true) {
+					const document = JSON.parse(JSON.stringify(this.document));
+					const data = { document }; // !important change we set data from now, not document
+					this.$chamaileon.emailEditor.methods.updateData(data);
 					await this.$store.dispatch("initGallery");
 					await this.$store.dispatch("initEmailPreview");
 				}
@@ -131,13 +134,8 @@ export default {
 			if (this.isInited === false) {
 				await this.$store.dispatch("initEmailEditor");
 			}
-
-			const document = JSON.parse(JSON.stringify(this.document));
-			const data = { document }; // !important change we set data from now, not document
-
 			this.$chamaileon.emailEditor.show();
 			await new Promise(resolve => setTimeout(resolve, 500));
-			this.$chamaileon.emailEditor.methods.updateData(data);
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
