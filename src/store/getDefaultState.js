@@ -4,6 +4,7 @@ export default () => {
 		sdkInited: false,
 		emailEditorInited: false,
 		emailPreviewInited: false,
+		htmlImportInited: false,
 		galleryInited: false,
 		variableEditorInited: false,
 		thumbnailInited: false,

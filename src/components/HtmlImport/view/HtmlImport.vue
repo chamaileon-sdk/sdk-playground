@@ -50,7 +50,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			emailPreviewInited: state => state.emailPreviewInited,
+			htmlImportInited: state => state.htmlImportInited,
 			sdkInited: state => state.sdkInited,
 		}),
 		...mapGetters({
@@ -58,7 +58,7 @@ export default {
 		}),
 		isInited() {
 			// if (this.sdkInited === true) {
-			// 	return this.emailPreviewInited;
+			// 	return this.htmlImportInited;
 			// }
 			return "false";
 		},
@@ -68,7 +68,6 @@ export default {
 	},
 	methods: {
 		async openHtmlImport() {
-			debugger;
 			if (!this.$chamaileon.htmlImport) {
 				this.$chamaileon.htmlImport = await this.$chamaileon.createPlugins.createHtmlImport({
 					// ...this.$store.getters.getHtmlImportConfigObject,				

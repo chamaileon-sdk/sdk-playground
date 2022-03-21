@@ -13,6 +13,7 @@ export default {
 		// RESET ALL PLUGINS STATE
 		commit("setEmailEditorInited", false);
 		commit("setEmailPreviewInited", false);
+		commit("setHtmlImportInited", false);
 		commit("setGalleryInited", false);
 		commit("setVariableEditorInited", false);
 		commit("setThumbnailInited", false);
@@ -20,17 +21,28 @@ export default {
 		if (Vue.prototype?.$chamaileon?.sdk?.destroy && typeof Vue.prototype?.$chamaileon?.sdk?.destroy === "function") {
 			Vue.prototype.$chamaileon.sdk.destroy();
 		}
-		const apiBackend = "https://sdk-demo-api.chamaileon.io/getAuthToken";
+		// const apiBackend = "https://sdk-demo-api.chamaileon.io/getAuthToken";
 
+		// async function fetchAccessToken() {
+		// 	if (apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
+		// 		const accessTokenRequest = await fetch(
+		// 			"https://sdk-demo-api.chamaileon.io/getAuthToken",
+		// 		);
+		// 		const accessTokenResponse = await accessTokenRequest.json();
+		// 		return accessTokenResponse.result;
+		//	 } else {
+		//	 	const apiKey = state.sdkConfig.apiKey;		
+
+		const apiBackend = "http://localhost:12101/api/v1/tokens/generate";
 		async function fetchAccessToken() {
-			if (apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
-				const accessTokenRequest = await fetch(
-					"https://sdk-demo-api.chamaileon.io/getAuthToken",
-				);
-				const accessTokenResponse = await accessTokenRequest.json();
-				return accessTokenResponse.result;
-			} else {
-				const apiKey = state.sdkConfig.apiKey;		
+			// if (apiBackend === "http://localhost:12101/api/v1/tokens/generate") {
+			// 	const accessTokenRequest = await fetch(
+			// 		"http://localhost:12101/api/v1/tokens/generate",
+			// 	);
+			// 	const accessTokenResponse = await accessTokenRequest.json();
+			// 	return accessTokenResponse.result;
+			// } else {
+				const apiKey = "qtme1WMFYwzULdmMVW4u";
 				const accessTokenRequest = await fetch(apiBackend, {
 					method: "GET",
 					headers: {
@@ -42,7 +54,7 @@ export default {
 				}
 				const accessTokenResponse = await accessTokenRequest.json();
 				return accessTokenResponse.result;
-			}
+			// }
 		}
 
 		async function getAccessToken() {
@@ -234,6 +246,37 @@ export default {
 				console.error(error);
 				Vue.prototype.$chamaileon.emailPreview = null;
 				commit("setEmailPreviewInited", false);
+			}
+		}
+	},
+	async initHtmlImport({ getters, commit, state }) {
+		if (!state.emailPreviewInited) {
+			commit("setHtmlImportInited", "pending");
+			try {
+				Vue.prototype.$chamaileon.emailPreview = await Vue.prototype.$chamaileon.createPlugins.createEmailPreview({
+					...getters.getPreviewConfigObject,
+					hooks: {
+						close: () => {
+							Vue.prototype.$chamaileon.emailPreview.hide();
+						},
+						onHeaderButtonClicked: ({ buttonId }) => {
+							if (buttonId === "hideHeader") {
+								Vue.prototype.$chamaileon.emailPreview.methods.updateSettings({ hideHeader: true });
+								setTimeout(() => {
+									Vue.prototype.$chamaileon.emailPreview.methods.updateSettings({ hideHeader: false });
+								}, 5000);
+							}
+						},
+						shareEmail: ({ document }) => console.log("share: " + document),
+						sendTestEmail: ({ document }) => console.log("test: " + document),
+						requestReview: ({ document }) => console.log("review: " + document),
+					},
+				});
+				commit("setHtmlImportInited", true);
+			} catch (error) {
+				console.error(error);
+				Vue.prototype.$chamaileon.emailPreview = null;
+				commit("setHtmlImportInited", false);
 			}
 		}
 	},
