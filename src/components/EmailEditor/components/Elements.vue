@@ -11,12 +11,12 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
+					v-for="(element, index) in contentElements"
+					:key="index"
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					v-for="(element, index) in contentElements"
-					:key="index"
-					@click="toggleElement({ type: 'content', element: element.type })"
+					@click="toggleElement({ type: 'content', element: element.type }); updateEditorSettings();"
 				>
 					<v-btn
 						depressed
@@ -52,12 +52,12 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
+					v-for="(element, index) in structureElements"
+					:key="index"
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					v-for="(element, index) in structureElements"
-					:key="index"
-					@click="toggleElement({ type: 'structure', element: element.type })"
+					@click="toggleElement({ type: 'structure', element: element.type }); updateEditorSettings();"
 				>
 					<v-btn
 						depressed
@@ -93,12 +93,12 @@
 		<OptionWrapper>
 			<v-row class="ma-0 pa-0 mx-n3 mb-n6 mb-xl-0">
 				<v-col
+					v-for="(element, index) in advancedElements"
+					:key="index"
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					v-for="(element, index) in advancedElements"
-					:key="index"
-					@click="toggleElement({ type: 'advanced', element: element.type })"
+					@click="toggleElement({ type: 'advanced', element: element.type }); updateEditorSettings();"
 				>
 					<v-btn
 						depressed
@@ -133,20 +133,12 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 
 export default {
 	components: {
 		OptionWrapper,
-	},
-	computed: {
-		...mapGetters({
-			elementsArr: "getElements",
-		}),
-	},
-	methods: {
-		...mapMutations(["toggleElement"]),
 	},
 	data() {
 		return {
@@ -186,10 +178,10 @@ export default {
 					type: "fullWidth",
 					icon: "mdi-window-maximize",
 				},
-				/*{
-					type: 'column',
-					icon: 'view_column',
-				},*/
+				/* {
+						type: 'column',
+						icon: 'view_column',
+					},*/
 				{
 					type: "box",
 					icon: "mdi-checkbox-blank-outline",
@@ -217,6 +209,17 @@ export default {
 				},
 			],
 		};
+	},
+	computed: {
+		...mapGetters({
+			elementsArr: "getElements",
+		}),
+	},
+	methods: {
+		...mapMutations([ "toggleElement" ]),
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
 	},
 };
 </script>

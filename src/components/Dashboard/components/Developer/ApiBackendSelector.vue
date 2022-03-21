@@ -15,7 +15,7 @@ export default {
 	data () {
 		return {
 			apiBackends: [ 
-				{ text: "demo", value: "https://sdk-demo-api.chamaileon.io/getAuthToken" },
+				{ text: "demo", value: "localhost:12101/api/v1/tokens/generate" },
 				{ text: "production", value: "https://sdk-api.chamaileon.io/api/v1/tokens/generate" },
 				{ text: "staging", value: "https://sdk-api-staging.chamaileon.io/api/v1/tokens/generate" }
 			],

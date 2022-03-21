@@ -5,16 +5,16 @@
 				<ColorPicker
 					:index="0"
 					:value="primaryColor"
-					@colorChange="changePrimary"
 					:label="'Primary Color'"
+					@colorChange="changePrimary"
 				/>
 			</v-col>
 			<v-col>
 				<ColorPicker
 					:index="1"
 					:value="secondaryColor"
-					@colorChange="changeSecondary"
 					:label="'Secondary Color'"
+					@colorChange="changeSecondary"
 				/>
 			</v-col>
 		</v-row>
@@ -29,23 +29,23 @@ export default {
 	components: {
 		ColorPicker,
 	},
+	computed: {
+		...mapState({
+			primaryColor: state => state.sdkConfig.colors.primary,
+			secondaryColor: state => state.sdkConfig.colors.secondary,
+		}),
+	},
 	methods: {
 		changePrimary(value) {
-			this.$store.commit("updateSDKConfig", {
+			this.$store.dispatch("updateSdkConfig", {
 				colors: { ...this.$store.state.sdkConfig.colors, primary: value },
 			});
 		},
 		changeSecondary(value) {
-			this.$store.commit("updateSDKConfig", {
+			this.$store.dispatch("updateSdkConfig", {
 				colors: { ...this.$store.state.sdkConfig.colors, secondary: value },
 			});
 		},
-	},
-	computed: {
-		...mapState({
-			primaryColor: (state) => state.sdkConfig.colors.primary,
-			secondaryColor: (state) => state.sdkConfig.colors.secondary,
-		}),
 	},
 };
 </script>

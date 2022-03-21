@@ -1,12 +1,20 @@
 <template>
 	<div>
+		<PreviewButton
+			:button-text="'SHOW PREVIEW'"
+			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
+			@previewClick="openHtmlImport"
+		/>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email HTML Import'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-html-importer/'"
+					:doc-url="'https://chamaileon.io/sdk/docs/email-html-importer/'"
 					:image="'HtmlImportIllustration.svg'"
-					:hideGetStarted="true"
+					button-text="Open preview"
+					@showPreviewButton="showPreviewButton"
+					@previewClick="openHtmlImport"
 				>
 					<p>
 						Our HTML import plugin allows you to import an existing HTML email
@@ -17,7 +25,7 @@
 				</Description>
 			</div>
 		</SectionObserver>
-		<Footer :previous="'Email HTML Generator'" :prevTo="'/htmlgenerator'" />
+		<Footer :previous="'Email HTML Generator'" :prev-to="'/htmlgenerator'" />
 	</div>
 </template>
 
@@ -25,16 +33,98 @@
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
-	mounted() {
-		this.$store.dispatch("fetchDummyHtml");
-	},
-
 	components: {
 		SectionObserver,
 		Description,
 		Footer,
+		PreviewButton,
+	},
+	data() {
+		return {
+			previewButtonVisible: true,
+		};
+	},
+	computed: {
+		...mapState({
+			emailPreviewInited: state => state.emailPreviewInited,
+			sdkInited: state => state.sdkInited,
+		}),
+		...mapGetters({
+			getPreviewConfigObject: "getPreviewConfigObject",
+		}),
+		isInited() {
+			// if (this.sdkInited === true) {
+			// 	return this.emailPreviewInited;
+			// }
+			return "false";
+		},
+	},
+	mounted() {
+		this.$store.dispatch("fetchDummyHtml");
+	},
+	methods: {
+		async openHtmlImport() {
+			debugger;
+			if (!this.$chamaileon.htmlImport) {
+				this.$chamaileon.htmlImport = await this.$chamaileon.createPlugins.createHtmlImport({
+					// ...this.$store.getters.getHtmlImportConfigObject,
+					id: "htmlImport",
+					hooks: {
+						cancel: () => {
+							console.log("TODO CANCEL");
+							this.$chamaileon.htmlImport.hide();
+						},
+						close: () => {
+							console.log("TODO CLOSE");
+							this.$chamaileon.htmlImport.hide();
+						},
+						importReady: async (message) => {
+							console.log("TODO onButtonClicked");
+							const template = {
+								content: message.document,
+							};
+							console.log(message.document);
+							this.$chamaileon.htmlImport.hide();
+							// let templateBody;
+							// if (template.version !== "2.0.0") {
+							// 	templateBody = convertNodes(template.content);
+							// 	const emailData = {
+							// 		...templateBody,
+							// 		blocks: template.blocks || [],
+							// 		version: "2.0.0",
+							// 	};
+							// 	await this.createEmail(emailData, "import");
+							// } else {
+							// 	await this.createEmail(template, "import");
+							// }
+
+							// this.closeHtmlImport();
+						},
+						onButtonClicked: async ({ buttonId, data }) => {
+							console.log("TODO onButtonClicked");
+							// console.log("variable editor => button clicked: ", buttonId, data);
+
+							// if (buttonId === "close") {
+							// 	console.log("variable editor => closing");
+							// 	console.log(this.$chamaileon);
+							// 	const newJson = await this.$chamaileon.htmlImport.methods.getDocument();
+							// 	this.$store.commit("updateDocument", newJson);
+							// 	// exampleJsonTextArea.value = JSON.stringify(newJson);
+							// 	this.$chamaileon.htmlImport.hide();
+							// }
+						},
+					},
+				});
+			}
+			this.$chamaileon.htmlImport.show();
+		},
+		showPreviewButton(isVisible) {
+			this.previewButtonVisible = isVisible;
+		},
 	},
 };
 </script>

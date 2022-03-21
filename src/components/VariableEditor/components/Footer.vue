@@ -13,10 +13,11 @@
 		<h3>Buttons</h3>
 		<p>
 			You can add and customize your buttons and dropdowns below. The icon is
-			required to be a <br />
-			<a href="https://materialdesignicons.com/" target="_blank"
-				>Material Design Icon</a
-			>
+			required to be a <br>
+			<a
+				href="https://materialdesignicons.com/"
+				target="_blank"
+			>Material Design Icon</a>
 			without <em>mdi-</em> prefix. Keep in mind that the footer can only store
 			a limited amount of buttons.
 		</p>

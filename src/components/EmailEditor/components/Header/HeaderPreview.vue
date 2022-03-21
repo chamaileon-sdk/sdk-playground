@@ -1,7 +1,11 @@
 <template>
 	<div id="header">
 		<v-card class="d-flex flex-nowrap align-center py-2" flat>
-			<v-btn icon id="leaveEditorBtn" class="mx-2">
+			<v-btn
+				id="leaveEditorBtn"
+				icon
+				class="mx-2"
+			>
 				<v-icon>mdi-arrow-left</v-icon>
 			</v-btn>
 
@@ -19,10 +23,16 @@
 				</v-btn>
 
 				<v-btn icon class="mx-2">
-					<v-icon class="grey--text text--darken-2"> mdi-content-save </v-icon>
+					<v-icon class="grey--text text--darken-2">
+						mdi-content-save
+					</v-icon>
 				</v-btn>
 
-				<div v-for="(button, index) in buttons" :key="index" class="mx-2">
+				<div
+					v-for="(button, index) in buttons"
+					:key="index"
+					class="mx-2"
+				>
 					<v-btn
 						v-if="!button.items"
 						:id="button.id"
@@ -41,7 +51,9 @@
 									button.style === 'depressed' || button.style === 'filled',
 							}"
 						>
-							<v-icon v-if="button.icon"> mdi-{{ button.icon }} </v-icon>
+							<v-icon v-if="button.icon">
+								mdi-{{ button.icon }}
+							</v-icon>
 							<span v-if="button.label" class="ml-2">
 								{{ button.label }}
 							</span>
@@ -55,10 +67,9 @@
 						left
 						offset-y
 					>
-						<template v-slot:activator="{ on, attrs }">
+						<template #activator="{ on, attrs }">
 							<v-btn
 								v-bind="attrs"
-								v-on="on"
 								:id="button.id"
 								:label="button.label"
 								:color="button.color"
@@ -67,6 +78,7 @@
 								:outlined="button.style === 'outlined'"
 								:rounded="button.style === 'rounded'"
 								:icon="!button.label"
+								v-on="on"
 							>
 								<div
 									class="d-flex align-center"
@@ -75,7 +87,9 @@
 											button.style === 'depressed' || button.style === 'filled',
 									}"
 								>
-									<v-icon v-if="button.icon"> mdi-{{ button.icon }} </v-icon>
+									<v-icon v-if="button.icon">
+										mdi-{{ button.icon }}
+									</v-icon>
 									<span v-if="button.label" class="ml-2">
 										{{ button.label }}
 									</span>
@@ -106,13 +120,14 @@
 import { mapGetters } from "vuex";
 
 export default {
+	// eslint-disable-next-line vue/match-component-file-name
 	name: "EditorHeader",
 
 	computed: {
 		...mapGetters({
 			buttons: "getHeaderBtns",
 		}),
-		...mapGetters(["documentTitle"]),
+		...mapGetters([ "documentTitle" ]),
 	},
 };
 </script>

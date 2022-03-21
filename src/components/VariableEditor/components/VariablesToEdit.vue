@@ -9,13 +9,13 @@
 		</p>
 		<OptionWrapper>
 			<v-chip
+				v-for="(v, i) in varsArray"
+				:key="i"
 				color="primary"
 				:style="!v.edit ? 'background-color: white !important' : ''"
 				class="mx-2 rounded"
 				:class="!v.edit ? 'primary--text' : ''"
-				v-for="(v, i) in varsArray"
-				:key="i"
-				@click="toggleVariableToEdit(i)"
+				@click="toggleVariableToEdit(i); updateVariableEditorSettings();"
 			>
 				{{ v.name }}
 			</v-chip>
@@ -24,27 +24,28 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 
 export default {
-	mounted() {
-		this.resetVariablesToEditArray(this.$store.state.document.variables);
+	components: {
+		OptionWrapper,
 	},
-
-	methods: {
-		...mapMutations(["resetVariablesToEditArray", "toggleVariableToEdit"]),
-	},
-
 	computed: {
 		varsArray() {
 			return this.$store.state.variableEditorConfig.settings.variablesToEdit;
 		},
 	},
-
-	components: {
-		OptionWrapper,
+	mounted() {
+		this.resetVariablesToEditArray(this.$store.state.document.variables);
 	},
+	methods: {
+		...mapMutations(["resetVariablesToEditArray", "toggleVariableToEdit"]),
+		...mapActions({
+			updateVariableEditorSettings: "updateVariableEditorSettings",
+		}),
+	},
+
 };
 </script>
 

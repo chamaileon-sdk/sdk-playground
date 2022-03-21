@@ -1,14 +1,25 @@
 <template>
-	<v-card class="rounded-0 pa-0 ma-0" width="100%" dark fixed flat>
-		<v-tabs style="width: 90%" v-model="tab" :show-arrows="true" dark>
-			<v-tabs-slider color="yellow"></v-tabs-slider>
+	<v-card
+		class="rounded-0 pa-0 ma-0"
+		width="100%"
+		dark
+		fixed
+		flat
+	>
+		<v-tabs
+			v-model="tab"
+			style="width: 90%"
+			:show-arrows="true"
+			dark
+		>
+			<v-tabs-slider color="yellow" />
 			<v-tab> Settings </v-tab>
 			<v-tab
 				v-show="
 					route !== '/htmlgenerator' &&
-					route !== '/htmlimport' &&
-					route !== '/sdk' && 
-					route !== '/gallery'
+						route !== '/htmlimport' &&
+						route !== '/sdk' &&
+						route !== '/gallery'
 				"
 			>
 				Document
@@ -16,20 +27,32 @@
 			<v-tab
 				v-show="
 					route === '/emailpreview' ||
-					route === '/emaileditor' ||
-					route === '/gallery' ||
-					route === '/variableeditor'
+						route === '/emaileditor' ||
+						route === '/gallery' ||
+						route === '/variableeditor'
 				"
 			>
 				Hooks
 			</v-tab>
-			<v-tab v-show="route === '/emaileditor'">Block Libraries</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">Examples</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">Input JSON</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">Output HTML</v-tab>
+			<v-tab v-show="route === '/emaileditor'">
+				Block Libraries
+			</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">
+				Examples
+			</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">
+				Input JSON
+			</v-tab>
+			<v-tab v-show="route === '/htmlgenerator'">
+				Output HTML
+			</v-tab>
 
-			<v-tab v-show="route === '/htmlimport'">Input HTML</v-tab>
-			<v-tab v-show="route === '/htmlimport'">Output JSON</v-tab>
+			<v-tab v-show="route === '/htmlimport'">
+				Input HTML
+			</v-tab>
+			<v-tab v-show="route === '/htmlimport'">
+				Output JSON
+			</v-tab>
 		</v-tabs>
 
 		<v-card
@@ -40,7 +63,11 @@
 			fixed
 			flat
 		>
-			<highlight-code :code="code" class="pa-0" lang="javascript" />
+			<HighlightCode
+				:code="code"
+				class="pa-0"
+				lang="javascript"
+			/>
 		</v-card>
 
 		<v-card
@@ -51,7 +78,11 @@
 			fixed
 			flat
 		>
-			<highlight-code :code="doc" class="pa-0" lang="javascript" />
+			<HighlightCode
+				:code="doc"
+				class="pa-0"
+				lang="javascript"
+			/>
 		</v-card>
 
 		<v-card
@@ -62,7 +93,11 @@
 			fixed
 			flat
 		>
-			<highlight-code class="pa-0" lang="javascript" :code="hooks" />
+			<HighlightCode
+				class="pa-0"
+				lang="javascript"
+				:code="hooks"
+			/>
 		</v-card>
 
 		<v-card
@@ -73,7 +108,11 @@
 			fixed
 			flat
 		>
-			<highlight-code class="pa-0" lang="javascript" :code="blockLibs" />
+			<HighlightCode
+				class="pa-0"
+				lang="javascript"
+				:code="blockLibs"
+			/>
 		</v-card>
 
 		<v-card
@@ -84,7 +123,11 @@
 			fixed
 			flat
 		>
-			<highlight-code class="pa-0" lang="html" :code="htmlCode" />
+			<HighlightCode
+				class="pa-0"
+				lang="html"
+				:code="htmlCode"
+			/>
 		</v-card>
 
 		<v-card
@@ -95,7 +138,11 @@
 			fixed
 			flat
 		>
-			<highlight-code class="pa-0" lang="json" :code="htmlGeneratorDummyJSON" />
+			<HighlightCode
+				class="pa-0"
+				lang="json"
+				:code="htmlGeneratorDummyJSON"
+			/>
 		</v-card>
 
 		<v-card
@@ -106,22 +153,34 @@
 			fixed
 			flat
 		>
-			<highlight-code class="pa-0" lang="html" :code="getDummyHtmlDocument" />
+			<HighlightCode
+				class="pa-0"
+				lang="html"
+				:code="getDummyHtmlDocument"
+			/>
 		</v-card>
 
-		<v-card dark class="copyCard rounded-pill" elevation="0" v-show="snackbar"
-			><v-card-text class="pa-1 px-4 success--text text-button"
-				>Copied to Clipboard</v-card-text
-			></v-card
+		<v-card
+			v-show="snackbar"
+			dark
+			class="copyCard rounded-pill"
+			elevation="0"
 		>
+			<v-card-text
+				class="pa-1 px-4 success--text text-button"
+			>
+				Copied to Clipboard
+			</v-card-text>
+		</v-card>
 		<v-tab>
 			<v-btn
 				dark
 				icon
 				class="copyToClipboard grey--text text--darken-1"
 				@click="copyToClipboard"
-				><v-icon>mdi-clipboard-file-outline</v-icon></v-btn
 			>
+				<v-icon>mdi-clipboard-file-outline</v-icon>
+			</v-btn>
 		</v-tab>
 	</v-card>
 </template>
@@ -147,12 +206,6 @@ import megaGalleryHooksGenerator from "./CodeEditor/hooks/megaGalleryHooks";
 import { mapGetters } from "vuex";
 
 export default {
-	updated() {
-		let el = document.querySelector(".v-navigation-drawer .v-tab--active");
-		let style = window.getComputedStyle(el);
-
-		if (style.display === "none") this.tab = 0;
-	},
 
 	data: () => ({
 		ignore: 0,
@@ -160,24 +213,6 @@ export default {
 		tab: 0,
 		watchRouteChange: false,
 	}),
-
-	mounted() {
-		let wait = setInterval(() => {
-			if (this.$store.state.sdk) {
-				clearInterval(wait);
-				this.scrollCode({ hash: "#home" }, this.$route);
-				this.ignore = 0;
-				this.watchRouteChange = true;
-			}
-		}, 100);
-	},
-
-	watch: {
-		$route(to, from) {
-			if (this.watchRouteChange) this.scrollCode(from, to);
-		},
-	},
-
 	computed: {
 		...mapGetters({ menus: "getMenu" }),
 		...mapGetters([
@@ -187,105 +222,87 @@ export default {
 			"getDummyJSON",
 			"getSize",
 		]),
-
 		route() {
 			return this.$route.path;
 		},
-
 		doc() {
 			return documentCodeGenerator(this.$store.state.document);
 		},
-
 		sdkCode() {
 			return sdkCodeGenerator(this.$store.state.sdkConfig);
 		},
-
-		//Thumbnail
+		// Thumbnail
 		thumbnailCode() {
 			return thumbnailCodeGenerator(this.$store.getters.getThumbnailSettings);
 		},
-
-		//Preview
+		// Preview
 		previewCode() {
 			return previewCodeGenerator(this.$store.getters.getPreviewConfigObject);
 		},
-
 		previewHooks() {
 			return previewHooksGenerator();
 		},
-
-		//Email Editor
+		// Email Editor
 		blockLibs() {
 			return blockLibrariesCodeGenerator(
 				this.$store.state.editorConfig.BlockLibData.blockLibsData,
-				this.$store.getters.getBlockLibs
+				this.$store.getters.getBlockLibs,
 			);
 		},
-
 		emailCode() {
 			return emailEditorCodeGenerator(this.$store.getters.getConfigObject);
 		},
-
 		editorHooks() {
 			return emailEditorHooksGenerator();
 		},
-
 		// Gallery
 
 		galleryCode() {
 			return megaGalleryCodeGenerator(this.$store.getters.getGalleryConfigObject);
 		},
-
-		galleryHooks() { 
+		galleryHooks() {
 			return megaGalleryHooksGenerator();
 		},
-
-		//Variable Editor
+		// Variable Editor
 		variableEditorCode() {
 			return variableEditorCodeGenerator(
-				this.$store.getters.getVariableEditorConfigObject
+				this.$store.getters.getVariableEditorConfigObject,
 			);
 		},
-
 		variableEditorHooks() {
 			return variableEditorHooksGenerator();
 		},
-
-		//Html generator
+		// Html generator
 		htmlGeneratorCode() {
 			return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
 		},
-
 		htmlGeneratorDummyJSON() {
 			return JSON.stringify(this.getDummyJSON, null, " ");
 		},
-
 		htmlCode() {
 			return dummyHtmlCodeGenerator(
 				this.getDummyHtmlDocument,
 				this.getSize,
-				this.getHtmlGeneratorConfigObject.lineLength
+				this.getHtmlGeneratorConfigObject.lineLength,
 			);
 		},
-
-		//Html import
+		// Html import
 		htmlImportCode() {
 			return htmlImportCodeGenerator();
 		},
-
-		//Final
+		// Final
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
 			else if (this.$route.path === "/sdk") return this.sdkCode;
 			else if (this.$route.path === "/gallery") return this.galleryCode;
 			else if (this.$route.path === "/emailpreview") return this.previewCode;
-			else if (this.$route.path === "/emailthumbnail")
+			else if (this.$route.path === "/emailthumbnail") {
 				return this.thumbnailCode;
-			else if (this.$route.path === "/variableeditor")
+			} else if (this.$route.path === "/variableeditor") {
 				return this.variableEditorCode;
-			else if (this.$route.path === "/htmlgenerator")
+			} else if (this.$route.path === "/htmlgenerator") {
 				return this.htmlGeneratorCode;
-			else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
+			} else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
 			else return `console.log("${this.$route.path}");`;
 		},
 
@@ -293,12 +310,32 @@ export default {
 			if (this.$route.path === "/emaileditor") return this.editorHooks;
 			else if (this.$route.path === "/emailpreview") return this.previewHooks;
 			else if (this.$route.path === "/gallery") return this.galleryHooks;
-			else if (this.$route.path === "/variableeditor")
+			else if (this.$route.path === "/variableeditor") {
 				return this.variableEditorHooks;
-			else return "//There are no hooks available";
+			} else return "//There are no hooks available";
 		},
 	},
+	watch: {
+		$route(to, from) {
+			if (this.watchRouteChange) this.scrollCode(from, to);
+		},
+	},
+	updated() {
+		const el = document.querySelector(".v-navigation-drawer .v-tab--active");
+		const style = window.getComputedStyle(el);
 
+		if (style.display === "none") this.tab = 0;
+	},
+	mounted() {
+		const wait = setInterval(() => {
+			if (this.$store.state.sdk) {
+				clearInterval(wait);
+				this.scrollCode({ hash: "#home" }, this.$route);
+				this.ignore = 0;
+				this.watchRouteChange = true;
+			}
+		}, 100);
+	},
 	methods: {
 		scrollCode(from, to) {
 			if (this.ignore > 0) {
@@ -306,34 +343,34 @@ export default {
 				return;
 			}
 
-			let pageIndex = this.menus.findIndex((el) => el.to === to.path.slice(1));
+			const pageIndex = this.menus.findIndex(el => el.to === to.path.slice(1));
 
 			if (!this.menus[pageIndex].children) return;
 
-			let routes = this.menus[pageIndex].children;
+			const routes = this.menus[pageIndex].children;
 
-			let toHash = to.hash;
-			let fromHash = from.hash;
+			const toHash = to.hash;
+			const fromHash = from.hash;
 
-			let toInd = routes.findIndex((el) => el.to === toHash) + 1;
-			let fromInd = routes.findIndex((el) => el.to === fromHash) + 1;
+			let toInd = routes.findIndex(el => el.to === toHash) + 1;
+			let fromInd = routes.findIndex(el => el.to === fromHash) + 1;
 
 			if (to.hash === "#home") toInd = 0;
 			if (from.hash === "#home") fromInd = 0;
 
-			if (toInd === -1 || fromInd === -1) throw "CodeEditor: Menu not found";
+			if (toInd === -1 || fromInd === -1) throw new Error("CodeEditor: Menu not found");
 
-			let dist = Math.abs(toInd - fromInd);
+			const dist = Math.abs(toInd - fromInd);
 
-			if (toInd === 0)
+			if (toInd === 0) {
 				document.querySelector("code.hljs").scroll({
 					top: 0,
 					behavior: "smooth",
 				});
-			else {
+			} else {
 				document.querySelectorAll(".hljs-attr").forEach((c) => {
 					if (c.innerHTML === routes[toInd - 1].codePropToMatch) {
-						let parent = c.parentElement;
+						const parent = c.parentElement;
 						parent.scroll({
 							top: c.offsetTop,
 							behavior: "smooth",
@@ -349,32 +386,32 @@ export default {
 			let str;
 
 			switch (this.tab) {
-			case 0:
-				str = this.code;
-				break;
-			case 1:
-				str = this.doc;
-				break;
-			case 2:
-				str = this.hooks;
-				break;
-			case 3:
-				str = this.blockLibs;
-				break;
-			case 4:
-				str = this.htmlCode;
-				break;
-			case 5:
-			case 8:
-				str = this.htmlGeneratorDummyJSON;
-				break;
-			case 6:
-			case 7:
-				str = this.getDummyHtmlDocument;
-				break;
-			default:
-				str = "";
-				break;
+				case 0:
+					str = this.code;
+					break;
+				case 1:
+					str = this.doc;
+					break;
+				case 2:
+					str = this.hooks;
+					break;
+				case 3:
+					str = this.blockLibs;
+					break;
+				case 4:
+					str = this.htmlCode;
+					break;
+				case 5:
+				case 8:
+					str = this.htmlGeneratorDummyJSON;
+					break;
+				case 6:
+				case 7:
+					str = this.getDummyHtmlDocument;
+					break;
+				default:
+					str = "";
+					break;
 			}
 
 			const el = document.createElement("textarea");

@@ -1,11 +1,11 @@
 <template>
 	<v-card flat class="pa-4">
 		<v-text-field
-			hide-details="true"
 			v-model="environmentName"
+			hide-details="true"
 			outlined
 			label="environmentName"
-		></v-text-field>
+		/>
 	</v-card>
 </template>
 
@@ -17,7 +17,7 @@ export default {
 				return this.$store.state.sdkConfig.environmentName;
 			},
 			set(value) {
-				this.$store.commit("updateSDKConfig", { environmentName: value });
+				this.$store.dispatch("updateSdkConfig", { environmentName: value });
 			},
 		},
 	},

@@ -1,9 +1,6 @@
 const getDefaultState = () => {
 	return {
-		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
-		apiKey: "",
-		chamaileonSdk: "https://plugins.chamaileon.io/static/chamaileonSdk.js",
-		environmentName: location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
+		environmentName: location.host === "localhost:8080" ? "dev" : location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
 		locale: "en",
 		urls: {
 			splashScreen:
@@ -15,19 +12,24 @@ const getDefaultState = () => {
 			primary: "#00bee6",
 			secondary: "#9b9b9b",
 		},
-	}
-}
+	};
+};
 
 export default {
 	state: getDefaultState(),
 	mutations: {
-		updateSDKConfig(state, payload) {
+		UPDATE_SDK_CONFIG(state, payload) {
 			for (const key in payload) state[key] = payload[key];
 		},
 		resetSdkConfigState(state) {
 			Object.assign(state, getDefaultState());
-		}
+		},
 	},
-	actions: {},
+	actions: {
+		updateSdkConfig({ commit, dispatch }, payload) {
+			commit("UPDATE_SDK_CONFIG", payload);
+			dispatch("updateSDK");
+		},
+	},
 	getters: {},
 };

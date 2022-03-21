@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+import Vue from "vue";
+
 const getDefaultState = () => {
 	return {
 		id: 0,
@@ -19,13 +22,13 @@ const getDefaultState = () => {
 				textInsertPlugin: [],
 			},
 		},
-	}
-}
+	};
+};
 
 export default {
-	state: getDefaultState() ,
+	state: getDefaultState(),
 	mutations: {
-		resetVariableEditorState (state) {
+		resetVariableEditorState(state) {
 			Object.assign(state, getDefaultState());
 		},
 		resetVariablesToEditArray(state, array) {
@@ -46,11 +49,10 @@ export default {
 		},
 
 		toggleVariableToEdit(state, index) {
-			state.settings.variablesToEdit[index].edit =
-				!state.settings.variablesToEdit[index].edit;
+			state.settings.variablesToEdit[index].edit =				!state.settings.variablesToEdit[index].edit;
 		},
 
-		//Left
+		// Left
 		updateVariableEditorHeaderLeftOrder(state, payload) {
 			state.settings.buttons.header.left = payload;
 		},
@@ -69,8 +71,8 @@ export default {
 		},
 
 		updateVariableEditorHeaderLeftButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.header.left[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.header.left[payload.index];
 
 			state.settings.buttons.header.left.splice(payload.index, 1, {
 				...c,
@@ -78,7 +80,7 @@ export default {
 			});
 		},
 
-		//Right
+		// Right
 		updateVariableEditorHeaderRightOrder(state, payload) {
 			state.settings.buttons.header.right = payload;
 		},
@@ -97,8 +99,8 @@ export default {
 		},
 
 		updateVariableEditorHeaderRightButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.header.right[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.header.right[payload.index];
 
 			state.settings.buttons.header.right.splice(payload.index, 1, {
 				...c,
@@ -106,7 +108,7 @@ export default {
 			});
 		},
 
-		//Footer left
+		// Footer left
 		updateVariableEditorFooterLeftOrder(state, payload) {
 			state.settings.buttons.footer.left = payload;
 		},
@@ -125,8 +127,8 @@ export default {
 		},
 
 		updateVariableEditorFooterLeftButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.footer.left[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.footer.left[payload.index];
 
 			state.settings.buttons.footer.left.splice(payload.index, 1, {
 				...c,
@@ -152,8 +154,8 @@ export default {
 		},
 
 		updateVariableEditorFooterRightButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.footer.right[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.footer.right[payload.index];
 
 			state.settings.buttons.footer.right.splice(payload.index, 1, {
 				...c,
@@ -161,7 +163,7 @@ export default {
 			});
 		},
 
-		//Text Insert
+		// Text Insert
 		updateVETextInsertOrder(state, payload) {
 			state.settings.buttons.textInsertPlugin = payload;
 		},
@@ -180,8 +182,8 @@ export default {
 		},
 
 		updateVETextInsertButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.textInsertPlugin[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.textInsertPlugin[payload.index];
 
 			state.settings.buttons.textInsertPlugin.splice(payload.index, 1, {
 				...c,
@@ -189,9 +191,20 @@ export default {
 			});
 		},
 	},
-	actions: {},
 	getters: {
-		headerButtons: (state) => state.settings.buttons.header,
-		footerButtons: (state) => state.settings.buttons.footer,
+		headerButtons: state => state.settings.buttons.header,
+		footerButtons: state => state.settings.buttons.footer,
+	},
+	actions: {
+		async updateVariableEditorSettings({ getters, rootState }) {
+			const settings = getters.getVariableEditorConfigObject.settings;
+			while (rootState.variableEditorInited === "pending") {
+				// eslint-disable-next-line no-await-in-loop
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			if (rootState.variableEditorInited === true) {
+				Vue.prototype.$chamaileon.variableEditor.methods.updateSettings(settings);
+			}
+		},
 	},
 };

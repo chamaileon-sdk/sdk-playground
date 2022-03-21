@@ -13,12 +13,13 @@
 				class="mt-8 list3 rounded"
 				style="max-height: 257px; overflow-y: auto"
 			>
-				<draggable handle=".dtrigger" v-model="buttonsLeft">
+				<Draggable v-model="buttonsLeft" handle=".dtrigger">
 					<div v-for="(item, ind) in buttonsLeft" :key="ind">
 						<ListItem3
 							:id="item.id"
 							:icon="item.icon"
 							:label="item.label"
+							:split="true"
 							@idChange="
 								updateLeftButton({
 									index: ind,
@@ -38,17 +39,22 @@
 								})
 							"
 							@deleteClicked="deleteLeftButton(ind)"
-							:split="true"
 						/>
-						<v-divider v-show="ind !== buttonsLeft.length - 1"></v-divider>
+						<v-divider v-show="ind !== buttonsLeft.length - 1" />
 					</div>
-				</draggable>
+				</Draggable>
 			</div>
 		</v-col>
-		<v-col cols="12" xl="6" class="mt-2 mt-xl-0">
+		<v-col
+			cols="12"
+			xl="6"
+			class="mt-2 mt-xl-0"
+		>
 			<template>
 				<v-row align="center" class="ma-0 justify-end">
-					<AddButton @click="addRightButton"> New Button</AddButton>
+					<AddButton @click="addRightButton">
+						New Button
+					</AddButton>
 				</v-row>
 			</template>
 			<div
@@ -56,12 +62,13 @@
 				class="mt-8 list3 rounded"
 				style="max-height: 257px; overflow-y: auto"
 			>
-				<draggable handle=".dtrigger" v-model="buttonsRight">
+				<Draggable v-model="buttonsRight" handle=".dtrigger">
 					<div v-for="(item, ind) in buttonsRight" :key="ind">
 						<ListItem3
 							:id="item.id"
 							:icon="item.icon"
 							:label="item.label"
+							:split="true"
 							@idChange="
 								updateRightButton({
 									index: ind,
@@ -81,11 +88,10 @@
 								})
 							"
 							@deleteClicked="deleteRightButton(ind)"
-							:split="true"
 						/>
-						<v-divider v-show="ind !== buttonsRight.length - 1"></v-divider>
+						<v-divider v-show="ind !== buttonsRight.length - 1" />
 					</div>
-				</draggable>
+				</Draggable>
 			</div>
 		</v-col>
 	</v-row>
@@ -93,13 +99,14 @@
 
 <script>
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
-import draggable from "vuedraggable";
+import Draggable from "vuedraggable";
 import ListItem3 from "./ListItem3.vue";
+import { mapActions } from "vuex";
 
 export default {
 	components: {
 		AddButton,
-		draggable,
+		Draggable,
 		ListItem3,
 	},
 
@@ -107,47 +114,10 @@ export default {
 		section: {
 			type: String,
 			required: true,
-			validator: function (value) {
+			validator(value) {
 				// The value must match one of these strings
 				return ["Header", "Footer"].indexOf(value) !== -1;
 			},
-		},
-	},
-	methods: {
-		addLeftButton() {
-			this.$store.commit(`addVariableEditor${this.section}LeftButton`);
-		},
-
-		updateLeftButton(payload) {
-			this.$store.commit(
-				`updateVariableEditor${this.section}LeftButton`,
-				payload
-			);
-		},
-
-		deleteLeftButton(payload) {
-			this.$store.commit(
-				`deleteVariableEditor${this.section}LeftButton`,
-				payload
-			);
-		},
-
-		addRightButton() {
-			this.$store.commit(`addVariableEditor${this.section}RightButton`);
-		},
-
-		updateRightButton(payload) {
-			this.$store.commit(
-				`updateVariableEditor${this.section}RightButton`,
-				payload
-			);
-		},
-
-		deleteRightButton(payload) {
-			this.$store.commit(
-				`deleteVariableEditor${this.section}RightButton`,
-				payload
-			);
 		},
 	},
 
@@ -161,7 +131,7 @@ export default {
 			set(value) {
 				this.$store.commit(
 					`updateVariableEditor${this.section}LeftOrder`,
-					value
+					value,
 				);
 			},
 		},
@@ -175,9 +145,55 @@ export default {
 			set(value) {
 				this.$store.commit(
 					`updateVariableEditor${this.section}RightOrder`,
-					value
+					value,
 				);
 			},
+		},
+	},
+	methods: {
+		...mapActions({
+			updateVariableEditorSettings: "updateVariableEditorSettings",
+		}),
+		addLeftButton() {
+			this.$store.commit(`addVariableEditor${this.section}LeftButton`);
+			this.updateVariableEditorSettings();
+		},
+
+		updateLeftButton(payload) {
+			this.$store.commit(
+				`updateVariableEditor${this.section}LeftButton`,
+				payload,
+			);
+			this.updateVariableEditorSettings();
+		},
+
+		deleteLeftButton(payload) {
+			this.$store.commit(
+				`deleteVariableEditor${this.section}LeftButton`,
+				payload,
+			);
+			this.updateVariableEditorSettings();
+		},
+
+		addRightButton() {
+			this.$store.commit(`addVariableEditor${this.section}RightButton`);
+			this.updateVariableEditorSettings();
+		},
+
+		updateRightButton(payload) {
+			this.$store.commit(
+				`updateVariableEditor${this.section}RightButton`,
+				payload,
+			);
+			this.updateVariableEditorSettings();
+		},
+
+		deleteRightButton(payload) {
+			this.$store.commit(
+				`deleteVariableEditor${this.section}RightButton`,
+				payload,
+			);
+			this.updateVariableEditorSettings();
 		},
 	},
 };

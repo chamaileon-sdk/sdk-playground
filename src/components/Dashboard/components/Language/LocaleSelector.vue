@@ -1,13 +1,13 @@
 <template>
-  <v-card flat class="pa-4">
-    <v-select
-      hide-details="true"
-      v-model="locale"
-      :items="['en', 'hu']"
-      outlined
-      label="Language"
-    ></v-select>
-  </v-card>
+	<v-card flat class="pa-4">
+		<v-select
+			v-model="locale"
+			hide-details="true"
+			:items="['en', 'hu']"
+			outlined
+			label="Language"
+		/>
+	</v-card>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
 				return this.$store.state.sdkConfig.locale;
 			},
 			set(value) {
-				this.$store.commit("updateSDKConfig", { locale: value });
+				this.$store.dispatch("updateSdkConfig", { locale: value });
 			},
 		},
 	},

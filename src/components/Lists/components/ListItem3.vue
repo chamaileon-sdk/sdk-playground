@@ -1,7 +1,13 @@
 <template>
-	<v-card class="ma-0 pa-2 d-flex align-center" elevation="0" tile>
+	<v-card
+		class="ma-0 pa-2 d-flex align-center"
+		elevation="0"
+		tile
+	>
 		<v-list-item-icon class="align-self-center ma-0 mx-3">
-			<v-icon class="dtrigger">mdi-menu</v-icon>
+			<v-icon class="dtrigger">
+				mdi-menu
+			</v-icon>
 		</v-list-item-icon>
 		<v-list-item-content class="ma-0 pa-0">
 			<v-row class="ma-0 pa-0">
@@ -18,10 +24,10 @@
 						outlined
 						@input="
 							(e) => {
-								this.$emit('idChange', e);
+								$emit('idChange', e);
 							}
 						"
-					></v-text-field>
+					/>
 				</v-col>
 
 				<!-- If split: delete button will be rendered as 2nd element -->
@@ -34,10 +40,10 @@
 					<DeleteButton
 						@click="
 							() => {
-								this.$emit('deleteClicked');
+								$emit('deleteClicked');
 							}
 						"
-					></DeleteButton>
+					/>
 				</v-col>
 
 				<v-col
@@ -50,13 +56,13 @@
 						:value="label"
 						hide-details="true"
 						outlined
+						label="Label"
 						@input="
 							(e) => {
-								this.$emit('labelChange', e);
+								$emit('labelChange', e);
 							}
 						"
-						label="Label"
-					></v-text-field>
+					/>
 				</v-col>
 
 				<v-col
@@ -67,31 +73,31 @@
 					<v-text-field
 						dense
 						:value="icon"
-						@input="
-							(e) => {
-								this.$emit('iconChange', e);
-							}
-						"
 						hide-details="true"
 						label="Icon"
 						outlined
-					></v-text-field>
+						@input="
+							(e) => {
+								$emit('iconChange', e);
+							}
+						"
+					/>
 				</v-col>
 
 				<!-- If not split: delete button will be rendered as 4th element -->
 				<v-col
-					class="pa-2"
 					v-show="!split && !breakpoint.lgAndDown"
+					class="pa-2"
 					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
 				>
 					<DeleteButton
 						@click="
 							() => {
-								this.$emit('deleteClicked');
+								$emit('deleteClicked');
 							}
 						"
-					></DeleteButton>
+					/>
 				</v-col>
 			</v-row>
 		</v-list-item-content>
@@ -99,6 +105,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/match-component-file-name */
 import Vue from "vue";
 import {
 	VRow,
@@ -111,13 +118,13 @@ import {
 } from "vuetify/lib";
 import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 
-Vue.component("v-col", VCol);
-Vue.component("v-row", VRow);
-Vue.component("v-card", VCard);
-Vue.component("v-list-item-icon", VListItemIcon);
-Vue.component("v-list-item-content", VListItemContent);
-Vue.component("v-text-field", VTextField);
-Vue.component("v-icon", VIcon);
+Vue.component("VCol", VCol);
+Vue.component("VRow", VRow);
+Vue.component("VCard", VCard);
+Vue.component("VListItemIcon", VListItemIcon);
+Vue.component("VListItemContent", VListItemContent);
+Vue.component("VTextField", VTextField);
+Vue.component("VIcon", VIcon);
 Vue.component("DeleteButton", DeleteButton);
 
 export default {

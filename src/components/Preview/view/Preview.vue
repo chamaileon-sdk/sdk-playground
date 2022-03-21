@@ -1,41 +1,43 @@
 <template>
 	<div>
 		<PreviewButton
-			buttonText="Open preview"
-			:previewButtonVisible="this.previewButtonVisible"
-			@previewClick="this.openEditor"
+			:button-text="'SHOW PREVIEW'"
+			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
+			@previewClick="openPreview"
 		/>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email Preview'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-preview/'"
+					:doc-url="'https://chamaileon.io/sdk/docs/email-preview/'"
 					:image="'EmailPreviewIllustration.svg'"
-					buttonText="Open preview"
+					:button-text="'SHOW PREVIEW'"
+					:is-inited="isInited"
 					@showPreviewButton="showPreviewButton"
-					@previewClick="this.openEditor"
+					@previewClick="openPreview"
 				>
 					<p>
 						This plugin helps you to show your customers how an email looks like
-						on different devices.<br />
+						on different devices.<br>
 						You can fully customize and extend the functionality of this plugin
 						by adding different buttons to the header and defining how each
 						button behaves, through a hook.
 					</p>
 				</Description>
 			</div>
-			<div class="section" id="header">
+			<div id="header" class="section">
 				<Header />
 			</div>
-			<div class="section" id="settings">
+			<div id="settings" class="section">
 				<Settings />
 			</div>
 		</SectionObserver>
 		<Footer
 			:previous="'Email Thumbnail'"
-			:prevTo="'/emailthumbnail'"
+			:prev-to="'/emailthumbnail'"
 			:next="'Email Editor'"
-			:nextTo="'/emaileditor'"
+			:next-to="'/emaileditor'"
 		/>
 	</div>
 </template>
@@ -46,7 +48,9 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Header from "../components/Header.vue";
 import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
-import PreviewButton from "../../AppElements/components/PreviewButton.vue"
+import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
 	components: {
@@ -55,30 +59,57 @@ export default {
 		SectionObserver,
 		Description,
 		Settings,
-		PreviewButton
+		PreviewButton,
 	},
 	data() {
 		return {
 			previewButtonVisible: true,
-		}
+		};
+	},
+	computed: {
+		...mapState({
+			emailPreviewInited: state => state.emailPreviewInited,
+			sdkInited: state => state.sdkInited,
+			document: state => state.document,
+		}),
+		...mapGetters({
+			getPreviewConfigObject: "getPreviewConfigObject",
+		}),
+		isInited() {
+			if (this.sdkInited === true) {
+				return this.emailPreviewInited;
+			}
+			return "pending";
+		},
+	},
+	watch: {
+		isInited: {
+			handler(previewInited) {
+				if (previewInited === false) {
+					this.$store.dispatch("initEmailPreview");
+				}
+				if (previewInited === true) {
+					const document = JSON.parse(JSON.stringify(this.document));
+					const data = { document }; // !important change we set data from now, not document
+					this.$chamaileon.emailPreview.methods.updateData(data);
+				}
+			},
+			immediate: true,
+		},
 	},
 	methods: {
-		openEditor() {
-			this.$store.state.sdk.previewEmail({
-				...this.$store.getters.getPreviewConfigObject,
-			});
+		...mapActions({
+			initMegaPreview: "initMegaPreview",
+		}),
+		async openPreview() {
+			if (this.isInited === false) {
+				await this.$store.dispatch("initEmailPreview");
+			}
+			this.$chamaileon.emailPreview.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
-		}
+		},
 	},
-
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	}
 };
 </script>

@@ -19,15 +19,21 @@
 			the same time.
 		</p>
 		<OptionWrapper>
-			<v-row align="center" justify="end" class="ma-0">
-				<AddButton @click="addVETextInsertButton"> New Button</AddButton>
+			<v-row
+				align="center"
+				justify="end"
+				class="ma-0"
+			>
+				<AddButton @click="addVETextInsertButton">
+					New Button
+				</AddButton>
 			</v-row>
 			<div
 				v-show="btnArr.length > 0"
 				class="mt-8 list3 rounded"
 				style="max-height: 218px; overflow-y: auto"
 			>
-				<draggable handle=".dtrigger" v-model.lazy="btnArr">
+				<Draggable v-model.lazy="btnArr" handle=".dtrigger">
 					<div v-for="(item, ind) in btnArr" :key="ind">
 						<ListItem3
 							:id="item.id"
@@ -37,25 +43,25 @@
 								updateVETextInsertButton({
 									index: ind,
 									id: $event,
-								})
+								}); updateVariableEditorSettings();
 							"
 							@labelChange="
 								updateVETextInsertButton({
 									index: ind,
 									label: $event,
-								})
+								}); updateVariableEditorSettings();
 							"
 							@iconChange="
 								updateVETextInsertButton({
 									index: ind,
 									icon: $event,
-								})
+								}); updateVariableEditorSettings();
 							"
-							@deleteClicked="deleteVETextInsertButton(ind)"
+							@deleteClicked="deleteVETextInsertButton(ind); updateVariableEditorSettings();"
 						/>
-						<v-divider v-show="ind !== btnArr.length - 1"></v-divider>
+						<v-divider v-show="ind !== btnArr.length - 1" />
 					</div>
-				</draggable>
+				</Draggable>
 			</div>
 		</OptionWrapper>
 	</div>
@@ -67,17 +73,16 @@ import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import ListItem3 from "../../Lists/components/ListItem3.vue";
 
 import TextInsertPreview from "./TextInsert/TextInsertPreview.vue";
-import draggable from "vuedraggable";
-import { mapMutations } from "vuex";
+import Draggable from "vuedraggable";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
-	methods: {
-		...mapMutations([
-			"addVETextInsertButton",
-			"deleteVETextInsertButton",
-			"updateVETextInsertOrder",
-			"updateVETextInsertButton",
-		]),
+	components: {
+		AddButton,
+		OptionWrapper,
+		Draggable,
+		TextInsertPreview,
+		ListItem3,
 	},
 	computed: {
 		btnArr: {
@@ -87,15 +92,20 @@ export default {
 			},
 			set(val) {
 				this.updateVETextInsertOrder(val);
+				this.updateVariableEditorSettings();
 			},
 		},
 	},
-	components: {
-		AddButton,
-		OptionWrapper,
-		draggable,
-		TextInsertPreview,
-		ListItem3,
+	methods: {
+		...mapMutations([
+			"addVETextInsertButton",
+			"deleteVETextInsertButton",
+			"updateVETextInsertOrder",
+			"updateVETextInsertButton",
+		]),
+		...mapActions({
+			updateVariableEditorSettings: "updateVariableEditorSettings",
+		}),
 	},
 };
 </script>
