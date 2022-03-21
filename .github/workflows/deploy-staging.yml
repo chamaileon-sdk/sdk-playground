@@ -23,6 +23,8 @@ jobs:
       run: |
         npm i
         npm run build
+      env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GH_PACKAGES }}
       
     # Upload to S3
     - name: sync s3
