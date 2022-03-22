@@ -49,7 +49,14 @@ const getDefaultState = () => {
 			fontStacks: [],
 			hideDefaultFonts: false,
 			buttons: {
-				header: [],
+				header: [ {
+					id: "preview",
+					type: "button",
+					icon: "eye",
+					label: "Preview",
+					color: "#D0021B",
+					style: "outlined",
+				} ],
 				textInsert: [],
 			},
 			elements: {
