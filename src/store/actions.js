@@ -13,6 +13,7 @@ export default {
 		// RESET ALL PLUGINS STATE
 		commit("setEmailEditorInited", false);
 		commit("setEmailPreviewInited", false);
+		commit("setHtmlImportInited", false);
 		commit("setGalleryInited", false);
 		commit("setVariableEditorInited", false);
 		commit("setThumbnailInited", false);
@@ -29,8 +30,8 @@ export default {
 				);
 				const accessTokenResponse = await accessTokenRequest.json();
 				return accessTokenResponse.result;
-			} else {
-				const apiKey = state.sdkConfig.apiKey;
+			 } else {
+			 	const apiKey = state.sdkConfig.apiKey;
 				const accessTokenRequest = await fetch(apiBackend, {
 					method: "GET",
 					headers: {
@@ -255,6 +256,44 @@ export default {
 				console.error(error);
 				Vue.prototype.$chamaileon.emailPreview = null;
 				commit("setEmailPreviewInited", false);
+			}
+		}
+	},
+	async initHtmlImport({ getters, commit, state }) {
+		if (!state.htmlImportInited) {
+			commit("setHtmlImportInited", "pending");
+			try {
+				Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createPlugins.createHtmlImport({
+					...getters.getHtmlImportConfigObject,
+					id: "htmlImport",
+					hooks: {
+						cancel: () => {
+							console.log("TODO CANCEL");
+							Vue.prototype.$chamaileon.htmlImport.hide();
+						},
+						close: () => {
+							console.log("TODO CLOSE");
+							Vue.prototype.$chamaileon.htmlImport.hide();
+						},
+						importReady: async (message) => {
+							console.log("TODO onButtonClicked");
+							const template = {
+								content: message.document,
+							};
+							console.log(message.document);
+							Vue.prototype.$chamaileon.htmlImport.hide();
+
+						},
+						onButtonClicked: async ({ buttonId, data }) => {
+							console.log("TODO onButtonClicked", buttonId, data);
+						},
+					},
+				});
+				commit("setHtmlImportInited", true);
+			} catch (error) {
+				console.error(error);
+				Vue.prototype.$chamaileon.emailPreview = null;
+				commit("setHtmlImportInited", false);
 			}
 		}
 	},
