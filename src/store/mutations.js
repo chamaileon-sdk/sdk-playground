@@ -52,6 +52,9 @@ export default {
 	setEmailPreviewInited(state, payload) {
 		state.emailPreviewInited = payload;
 	},
+	setHtmlImportInited(state, payload) {
+		state.htmlImportInited = payload;
+	},
 	setGalleryInited(state, payload) {
 		state.galleryInited = payload;
 	},

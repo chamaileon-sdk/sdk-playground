@@ -272,26 +272,33 @@ export default {
 		}
 	},
 	async initHtmlImport({ getters, commit, state }) {
-		if (!state.emailPreviewInited) {
+		if (!state.htmlImportInited) {
 			commit("setHtmlImportInited", "pending");
 			try {
-				Vue.prototype.$chamaileon.emailPreview = await Vue.prototype.$chamaileon.createPlugins.createEmailPreview({
-					...getters.getPreviewConfigObject,
+				Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createPlugins.createHtmlImport({
+					...getters.getHtmlImportConfigObject,
+					id: "htmlImport",
 					hooks: {
+						cancel: () => {
+							console.log("TODO CANCEL");
+							Vue.prototype.$chamaileon.htmlImport.hide();
+						},
 						close: () => {
-							Vue.prototype.$chamaileon.emailPreview.hide();
+							console.log("TODO CLOSE");
+							Vue.prototype.$chamaileon.htmlImport.hide();
 						},
-						onHeaderButtonClicked: ({ buttonId }) => {
-							if (buttonId === "hideHeader") {
-								Vue.prototype.$chamaileon.emailPreview.methods.updateSettings({ hideHeader: true });
-								setTimeout(() => {
-									Vue.prototype.$chamaileon.emailPreview.methods.updateSettings({ hideHeader: false });
-								}, 5000);
-							}
+						importReady: async (message) => {
+							console.log("TODO onButtonClicked");
+							const template = {
+								content: message.document,
+							};
+							console.log(message.document);
+							Vue.prototype.$chamaileon.htmlImport.hide();
+
 						},
-						shareEmail: ({ document }) => console.log("share: " + document),
-						sendTestEmail: ({ document }) => console.log("test: " + document),
-						requestReview: ({ document }) => console.log("review: " + document),
+						onButtonClicked: async ({ buttonId, data }) => {
+							console.log("TODO onButtonClicked", buttonId, data);
+						},
 					},
 				});
 				commit("setHtmlImportInited", true);
