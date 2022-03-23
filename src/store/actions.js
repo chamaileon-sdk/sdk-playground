@@ -21,29 +21,17 @@ export default {
 		if (Vue.prototype?.$chamaileon?.sdk?.destroy && typeof Vue.prototype?.$chamaileon?.sdk?.destroy === "function") {
 			Vue.prototype.$chamaileon.sdk.destroy();
 		}
-		// TODO
-		// const apiBackend = "https://sdk-demo-api.chamaileon.io/getAuthToken";
+		const apiBackend = "https://sdk-demo-api.chamaileon.io/getAuthToken";
 
-		// async function fetchAccessToken() {
-		// 	if (apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
-		// 		const accessTokenRequest = await fetch(
-		// 			"https://sdk-demo-api.chamaileon.io/getAuthToken",
-		// 		);
-		// 		const accessTokenResponse = await accessTokenRequest.json();
-		// 		return accessTokenResponse.result;
-		//	 } else {
-		//	 	const apiKey = state.sdkConfig.apiKey;		
-
-		const apiBackend = "http://localhost:12101/api/v1/tokens/generate";
 		async function fetchAccessToken() {
-			// if (apiBackend === "http://localhost:12101/api/v1/tokens/generate") {
-			// 	const accessTokenRequest = await fetch(
-			// 		"http://localhost:12101/api/v1/tokens/generate",
-			// 	);
-			// 	const accessTokenResponse = await accessTokenRequest.json();
-			// 	return accessTokenResponse.result;
-			// } else {
-				const apiKey = "qtme1WMFYwzULdmMVW4u";
+			if (apiBackend === "https://sdk-demo-api.chamaileon.io/getAuthToken") {
+				const accessTokenRequest = await fetch(
+					"https://sdk-demo-api.chamaileon.io/getAuthToken",
+				);
+				const accessTokenResponse = await accessTokenRequest.json();
+				return accessTokenResponse.result;
+			 } else {
+			 	const apiKey = state.sdkConfig.apiKey;
 				const accessTokenRequest = await fetch(apiBackend, {
 					method: "GET",
 					headers: {
@@ -55,7 +43,7 @@ export default {
 				}
 				const accessTokenResponse = await accessTokenRequest.json();
 				return accessTokenResponse.result;
-			// }
+			}
 		}
 
 		async function getAccessToken() {
