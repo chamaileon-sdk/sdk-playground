@@ -65,13 +65,15 @@ export default {
 
 		const accessToken = await getAccessToken();
 
-		Vue.prototype.$chamaileon = {};
-		Vue.prototype.$chamaileon.sdk = createChamaileonSdk();
-		Vue.prototype.$chamaileon.createPlugins = await Vue.prototype.$chamaileon.sdk.init({
-			...state.sdkConfig,
-			accessToken,
-			getAccessToken,
-		});
+		Vue.prototype.$chamaileon = createChamaileonSdk();
+		Vue.prototype.$chamaileon = {
+			...Vue.prototype.$chamaileon,
+			...await Vue.prototype.$chamaileon.init({
+				...state.sdkConfig,
+				accessToken,
+				getAccessToken,
+			}),
+		};
 
 		commit("setSdkInited", true);
 		commit("changeLogoFunction", window.createLogo);
@@ -83,7 +85,8 @@ export default {
 		if (!state.emailEditorInited) {
 			commit("setEmailEditorInited", "pending");
 			try {
-				Vue.prototype.$chamaileon.emailEditor = await Vue.prototype.$chamaileon.createPlugins.createEmailEditor({
+				Vue.prototype.$chamaileon.emailEditor = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+					plugin: "editor",
 					...getters.getConfigObject,
 					hooks: {
 						close: () => {
@@ -231,7 +234,8 @@ export default {
 		if (!state.emailPreviewInited) {
 			commit("setEmailPreviewInited", "pending");
 			try {
-				Vue.prototype.$chamaileon.emailPreview = await Vue.prototype.$chamaileon.createPlugins.createEmailPreview({
+				Vue.prototype.$chamaileon.emailPreview = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+					plugin: "preview",
 					...getters.getPreviewConfigObject,
 					hooks: {
 						close: () => {
@@ -252,7 +256,7 @@ export default {
 				});
 				commit("setEmailPreviewInited", true);
 			} catch (error) {
-				console.error(error);
+				console.error("Preview: " + error);
 				Vue.prototype.$chamaileon.emailPreview = null;
 				commit("setEmailPreviewInited", false);
 			}
@@ -279,7 +283,8 @@ export default {
 					}
 				});
 
-				Vue.prototype.$chamaileon.gallery = await Vue.prototype.$chamaileon.createPlugins.createGallery({
+				Vue.prototype.$chamaileon.gallery = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+					plugin: "gallery",
 					data: {
 						editedImageUrl: null,
 						dimensions: null,
@@ -367,7 +372,8 @@ export default {
 		if (!state.variableEditorInited) {
 			commit("setVariableEditorInited", "pending");
 			try {
-				Vue.prototype.$chamaileon.variableEditor = await Vue.prototype.$chamaileon.createPlugins.createVariableEditor({
+				Vue.prototype.$chamaileon.variableEditor = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+					plugin: "variable-editor",
 					...getters.getVariableEditorConfigObject,
 					hooks: {
 						onButtonClicked: async ({ buttonId }) => {
@@ -394,8 +400,9 @@ export default {
 			commit("setThumbnailInited", "pending");
 			try {
 				const document = JSON.parse(JSON.stringify(state.document));
-				Vue.prototype.$chamaileon.thumbnail = await Vue.prototype.$chamaileon.createPlugins.createThumbnail(
+				Vue.prototype.$chamaileon.thumbnail = await Vue.prototype.$chamaileon.createInlinePlugin(
 					{
+						plugin: "thumbnail",
 						data: { document },
 						settings: { ...getters.getThumbnailSettings },
 						hooks: {

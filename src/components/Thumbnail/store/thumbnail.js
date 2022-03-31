@@ -1,8 +1,8 @@
 const getDefaultState = () => {
 	return {
 		settings: {
-			width: 320,
-			height: 240,
+			width: 300,
+			height: 520,
 			scale: 1,
 			scroll: false,
 		},

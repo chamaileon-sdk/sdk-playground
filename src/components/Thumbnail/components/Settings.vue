@@ -83,7 +83,7 @@
 				class="my-4 "
 			>
 				<v-card-text
-					id="PreviewJSON"
+					id="thumbnail"
 					elevation="2"
 					class="d-flex justify-center align-center PreviewJSON my-0 pa-0 "
 					color="white"
@@ -122,7 +122,6 @@ export default {
 					return 6;
 			}
 		},
-
 		configObj() {
 			return this.$store.getters.getThumbnailSettings;
 		},
@@ -132,7 +131,7 @@ export default {
 				return this.configObj.width;
 			},
 			set(val) {
-				this.updateSettings({ width: val });
+				this.updateSettings({ width: Number(val) });
 			},
 		},
 
@@ -141,10 +140,9 @@ export default {
 				return this.configObj.height;
 			},
 			set(val) {
-				this.updateSettings({ height: val });
+				this.updateSettings({ height: Number(val) });
 			},
 		},
-
 		scroll: {
 			get() {
 				return this.configObj.scroll;
@@ -185,9 +183,9 @@ export default {
 				this.$chamaileon.thumbnail.destroy();
 				this.setThumbnailInited(false);
 			}
-			const container = document.getElementById("PreviewJSON");
+			const container = document.getElementById("thumbnail");
 			container.innerHTML = "";
-			await this.$store.dispatch("initThumbnail", document.getElementById("PreviewJSON"));
+			await this.$store.dispatch("initThumbnail", container);
 		},
 		updateSettings(obj) {
 			if (timeoutId) {

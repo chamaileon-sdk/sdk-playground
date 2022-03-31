@@ -119,8 +119,9 @@ export default {
 					const document = JSON.parse(JSON.stringify(this.document));
 					const data = { document }; // !important change we set data from now, not document
 					this.$chamaileon.emailEditor.methods.updateData(data);
-					await this.$store.dispatch("initGallery");
-					await this.$store.dispatch("initEmailPreview");
+					// Should not await since it can couse lag in the ui
+					this.$store.dispatch("initGallery");
+					this.$store.dispatch("initEmailPreview");
 				}
 			},
 			immediate: true,
@@ -135,7 +136,6 @@ export default {
 				await this.$store.dispatch("initEmailEditor");
 			}
 			this.$chamaileon.emailEditor.show();
-			await new Promise(resolve => setTimeout(resolve, 500));
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
