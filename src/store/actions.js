@@ -4,7 +4,7 @@
 import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import zango from "zangodb";
-import favoriteImages from "./favoriteImages";
+import { favoriteImages } from "./favoriteImages";
 
 export default {
 	async initSDK({ commit, dispatch, state }) {
@@ -264,7 +264,6 @@ export default {
 		}
 	},
 	async initGallery({ commit, state }) {
-		console.log(favoriteImages);
 		if (!state.galleryInited) {
 			commit("setGalleryInited", "pending");
 			let count = 0;
