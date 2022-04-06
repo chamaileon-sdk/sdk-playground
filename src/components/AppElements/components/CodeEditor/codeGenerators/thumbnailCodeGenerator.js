@@ -1,10 +1,15 @@
 export default function (thumbnailConfig) {
-	return `const thumbnailInstance = await chamaileonPlugins.createThumbnail({
+	return `const thumbnailInstance = await chamaileonPlugins.createInlinePlugin({
     document: { document }, //see "Document" tab
-    container: "${thumbnailConfig.container}", //your container selector
-    width: ${thumbnailConfig.width},
-    height: ${thumbnailConfig.height},
-    scale: ${thumbnailConfig.scale},
-    scroll: ${thumbnailConfig.scroll}
+	settings: { 
+		width: ${thumbnailConfig.width},
+		height: ${thumbnailConfig.height},
+		scale: ${thumbnailConfig.scale},
+		scroll: ${thumbnailConfig.scroll}
+
+	},
+	{
+		container: "#thumbnail", //your container query selector or HTML element
+	}
 });`;
 }

@@ -65,15 +65,17 @@ export default {
 
 		const accessToken = await getAccessToken();
 
-		Vue.prototype.$chamaileon = createChamaileonSdk();
+		const chamaileonPlugins = await createChamaileonSdk(
+			{ ...state.sdkConfig,
+				accessToken,
+				getAccessToken },
+		);
+
 		Vue.prototype.$chamaileon = {
 			...Vue.prototype.$chamaileon,
-			...await Vue.prototype.$chamaileon.init({
-				...state.sdkConfig,
-				accessToken,
-				getAccessToken,
-			}),
+			...chamaileonPlugins,
 		};
+		console.log(Vue.prototype.$chamaileon);
 
 		commit("setSdkInited", true);
 		commit("changeLogoFunction", window.createLogo);
@@ -82,6 +84,7 @@ export default {
 		dispatch("initEmailEditor");
 	},
 	async initEmailEditor({ commit, dispatch, getters, state }) {
+		let msgId = 0;
 		if (!state.emailEditorInited) {
 			commit("setEmailEditorInited", "pending");
 			try {
@@ -196,7 +199,7 @@ export default {
 						},
 						onHeaderButtonClicked: async ({ buttonId }) => {
 							if (buttonId === "preview") {
-								while (state.emailEditorInited === "pending") {
+								while (state.emailPreviewInited === "pending") {
 									// eslint-disable-next-line no-await-in-loop
 									await new Promise(resolve => setTimeout(resolve, 450));
 								}
@@ -204,8 +207,11 @@ export default {
 									await dispatch("initEmailPreview");
 								}
 
+								const document = getters.getEmail;
+
 								if (state.emailPreviewInited === true) {
-									Vue.prototype.$chamaileon.emailPreview.methods.updateData({ document: getters.getEmail });
+									// eslint-disable-next-line no-const-assign
+									Vue.prototype.$chamaileon.emailPreview.methods.updateData({ document: { ...document, kakaka: msgId++ } });
 									Vue.prototype.$chamaileon.emailPreview.show();
 								}
 							}
@@ -242,12 +248,7 @@ export default {
 							Vue.prototype.$chamaileon.emailPreview.hide();
 						},
 						onHeaderButtonClicked: ({ buttonId }) => {
-							if (buttonId === "hideHeader") {
-								Vue.prototype.$chamaileon.emailPreview.methods.updateSettings({ hideHeader: true });
-								setTimeout(() => {
-									Vue.prototype.$chamaileon.emailPreview.methods.updateSettings({ hideHeader: false });
-								}, 5000);
-							}
+							console.log("Button clicked: " + buttonId);
 						},
 						shareEmail: ({ document }) => console.log("share: " + document),
 						sendTestEmail: ({ document }) => console.log("test: " + document),
@@ -263,6 +264,7 @@ export default {
 		}
 	},
 	async initGallery({ commit, state }) {
+		console.log(favoriteImages);
 		if (!state.galleryInited) {
 			commit("setGalleryInited", "pending");
 			let count = 0;

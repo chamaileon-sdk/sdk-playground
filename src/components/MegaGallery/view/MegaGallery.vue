@@ -104,8 +104,8 @@ export default {
 				await this.$store.dispatch("initGallery");
 			}
 			this.$chamaileon.gallery.show();
-			await this.$chamaileon.gallery.methods.pickImage();
-			return;
+			const { url } = await this.$chamaileon.gallery.methods.pickImage();
+			console.log("Picked image: " + url);
 		},
 	},
 };

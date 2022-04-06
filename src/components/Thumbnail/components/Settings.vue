@@ -55,20 +55,6 @@
 					/>
 				</v-col>
 			</v-row>
-			<v-row>
-				<v-card width="100%" class="mt-4 px-2">
-					<v-slider
-						v-model.lazy="scale"
-						step="0.1"
-						height="20"
-						ticks
-						:tick-labels="['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%']"
-						class="mt-5 mb-3"
-						max="1"
-						min="0.1"
-					/>
-				</v-card>
-			</v-row>
 		</OptionWrapper>
 
 		<h3>Thumbnail</h3>
@@ -184,7 +170,9 @@ export default {
 				this.setThumbnailInited(false);
 			}
 			const container = document.getElementById("thumbnail");
-			container.innerHTML = "";
+			if (container) {
+				container.innerHTML = "";
+			}
 			await this.$store.dispatch("initThumbnail", container);
 		},
 		updateSettings(obj) {
