@@ -135,6 +135,7 @@ export default {
 			handler(value) {
 				if (!value[0]) return;
 				this.setSelectedFolderId(value[0]);
+				this.updateGallerySettings();
 			},
 			deep: true,
 		},
@@ -167,7 +168,6 @@ export default {
 			this.setFolderTree(obj);
 			this.openFolders.push(item._id);
 			this.activeFolders[0] = _id;
-			console.log("created", _id);
 			this.updateGallerySettings();
 		},
 		deleteFolder(item) {
