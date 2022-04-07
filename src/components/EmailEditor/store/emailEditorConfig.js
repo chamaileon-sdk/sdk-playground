@@ -10,6 +10,7 @@ const getDefaultState = () => {
 		ffKey: 0,
 		tiID: 0,
 		settings: {
+			hideHeader: false,
 			user: {
 				enabled: true,
 				name: "Your Username",

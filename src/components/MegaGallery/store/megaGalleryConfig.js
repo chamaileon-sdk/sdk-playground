@@ -4,6 +4,7 @@ import Vue from "vue";
 const getDefaultState = () => {
 	return {
 		settings: {
+			hideHeader: false,
 			folderTree: {
 				_id: "root",
 				name: "root",

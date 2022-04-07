@@ -9,6 +9,7 @@ const getDefaultState = () => {
 		fidArr: [],
 		tid: 0,
 		settings: {
+			hideHeader: false,
 			variablesToEdit: [],
 			buttons: {
 				header: {
