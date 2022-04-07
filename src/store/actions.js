@@ -75,7 +75,6 @@ export default {
 			...Vue.prototype.$chamaileon,
 			...chamaileonPlugins,
 		};
-		console.log(Vue.prototype.$chamaileon);
 
 		commit("setSdkInited", true);
 		commit("changeLogoFunction", window.createLogo);

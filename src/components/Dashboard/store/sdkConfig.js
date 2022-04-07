@@ -1,6 +1,6 @@
 const getDefaultState = () => {
 	return {
-		environmentName: location.host === "localhost:8080" ? "dev" : location.host === "sdk-playground.chamaileon.io" ? "sdk-playground-prod" : "sdk-playground-staging",
+		environmentName: location.host === "localhost:8080" ? "dev" : location.host === "sdk-playground.chamaileon.io" ? "sdk-prod" : "sdk-staging",
 		locale: "en",
 		urls: {
 			splashScreen:
