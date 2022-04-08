@@ -233,7 +233,7 @@ import DeleteButton from "../ViewUtilities/components/DeleteButton.vue";
 import AddButton from "../ViewUtilities/components/AddButton.vue";
 // import Draggable from "vuedraggable";
 import OptionWrapper from "../ViewUtilities/components/OptionWrapper.vue";
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations, mapActions, mapGetters } from "vuex";
 
 function debounce(callback, wait = 500) {
 	let timoutId = "";
@@ -253,6 +253,9 @@ export default {
 	},
 	props: [ "noFontFiles" ],
 	methods: {
+		...mapActions([
+			"updateEditorSettings"
+		]),
 		...mapMutations([
 			"updateBlockLibsOrder",
 			"updateBlockLibs",
@@ -268,6 +271,7 @@ export default {
 
 		addFontFileMethod() {
 			this.addFontFile();
+			this.updateEditorSettings();
 		},
 
 		updateFontFileDebounced: debounce(function (payload) {
@@ -278,18 +282,22 @@ export default {
 				[font.fontName]: font.fontFile,
 			}), {});
 			this.updateFontFile(newFontFiles);
+			this.updateEditorSettings();
 		}),
 
 		addFontStackMethod() {
 			this.addFontStack();
+			this.updateEditorSettings();
 		},
 
 		removeFontStackMethod() {
 			this.removeFontStack();
+			this.updateEditorSettings();
 		},
 
 		updateFontStackDebounced: debounce(function ({ index, fontStackString }) {
 			this.updateFontStack({ index, fontStackString });
+			this.updateEditorSettings();
 		}),
 
 	},
@@ -305,6 +313,7 @@ export default {
 			},
 			set(value) {
 				this.setHideDefaultFont(value);
+				this.updateEditorSettings();
 			},
 		},
 		fontFilesArray() {

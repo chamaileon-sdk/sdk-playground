@@ -13,6 +13,7 @@ export default {
 		// RESET ALL PLUGINS STATE
 		commit("setEmailEditorInited", false);
 		commit("setEmailPreviewInited", false);
+		commit("setHtmlImportInited", false);
 		commit("setGalleryInited", false);
 		commit("setVariableEditorInited", false);
 		commit("setThumbnailInited", false);
@@ -29,8 +30,8 @@ export default {
 				);
 				const accessTokenResponse = await accessTokenRequest.json();
 				return accessTokenResponse.result;
-			} else {
-				const apiKey = state.sdkConfig.apiKey;
+			 } else {
+			 	const apiKey = state.sdkConfig.apiKey;
 				const accessTokenRequest = await fetch(apiBackend, {
 					method: "GET",
 					headers: {

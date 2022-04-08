@@ -62,12 +62,9 @@ export default {
 	},
 	watch: {
 		isInited: {
-			handler(htmlImportInited) {
-				if (htmlImportInited === false) {
+			handler(v) {
+				if (v === false) {
 					this.$store.dispatch("initHtmlImport");
-				}
-				if (htmlImportInited === true) {
-
 				}
 			},
 			immediate: true,
@@ -82,6 +79,7 @@ export default {
 				await this.$store.dispatch("initHtmlImport");
 			}
 			this.$chamaileon.htmlImport.show();
+			return;
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
