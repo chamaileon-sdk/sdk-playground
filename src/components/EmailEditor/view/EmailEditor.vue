@@ -118,7 +118,7 @@ export default {
 				if (editorInited === true) {
 					const document = JSON.parse(JSON.stringify(this.document));
 					const data = { document }; // !important change we set data from now, not document
-					this.$chamaileon.emailEditor.methods.updateData(data);
+					await this.$chamaileon.emailEditor.methods.updateData(data);
 					// Should not await since it can couse lag in the ui
 					this.$store.dispatch("initGallery");
 					this.$store.dispatch("initEmailPreview");
@@ -135,7 +135,7 @@ export default {
 			if (this.isInited === false) {
 				await this.$store.dispatch("initEmailEditor");
 			}
-			this.$chamaileon.emailEditor.show();
+			await this.$chamaileon.emailEditor.show();
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;

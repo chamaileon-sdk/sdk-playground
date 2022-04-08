@@ -53,9 +53,6 @@ export default {
 			htmlImportInited: state => state.htmlImportInited,
 			sdkInited: state => state.sdkInited,
 		}),
-		...mapGetters({
-			getPreviewConfigObject: "getPreviewConfigObject",
-		}),
 		isInited() {
 			if (this.sdkInited === true) {
 				return this.htmlImportInited;
