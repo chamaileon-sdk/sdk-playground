@@ -262,6 +262,45 @@ export default {
 			}
 		}
 	},
+	async initHtmlImport({ getters, commit, state }) {
+		console.log(state);
+		if (!state.htmlImportInited) {
+			commit("setHtmlImportInited", "pending");
+			try {
+				Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+					// ...this.$store.getters.getHtmlImportConfigObject,
+					plugin: "import",
+					hooks: {
+						cancel: () => {
+							console.log("TODO CANCEL");
+							this.$chamaileon.htmlImport.hide();
+						},
+						close: () => {
+							console.log("TODO CLOSE");
+							this.$chamaileon.htmlImport.hide();
+						},
+						importReady: async (message) => {
+							console.log("TODO onButtonClicked");
+							const template = {
+								content: message.document,
+							};
+							console.log(message.document);
+							this.$chamaileon.htmlImport.hide();
+						},
+						onButtonClicked: async ({ buttonId, data }) => {
+							console.log("TODO onButtonClicked");
+						},
+					}
+				});
+				console.log(Vue.prototype.$chamaileon);
+				commit("setHtmlImportInited", true);
+			} catch (error) {
+				console.error("Import: " + error);
+				Vue.prototype.$chamaileon.htmlImport = null;
+				commit("setHtmlImportInited", false);
+			}
+		}
+	},
 	async initGallery({ commit, state }) {
 		if (!state.galleryInited) {
 			commit("setGalleryInited", "pending");
