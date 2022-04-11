@@ -274,11 +274,11 @@ export default {
 					hooks: {
 						cancel: () => {
 							console.log("TODO CANCEL");
-							this.$chamaileon.htmlImport.hide();
+							Vue.prototype.$chamaileon.htmlImport.hide();
 						},
 						close: () => {
 							console.log("TODO CLOSE");
-							this.$chamaileon.htmlImport.hide();
+							Vue.prototype.$chamaileon.htmlImport.hide();
 						},
 						importReady: async (message) => {
 							console.log("TODO onButtonClicked");
@@ -286,7 +286,7 @@ export default {
 								content: message.document,
 							};
 							console.log(message.document);
-							this.$chamaileon.htmlImport.hide();
+							Vue.prototype.$chamaileon.htmlImport.hide();
 						},
 						onButtonClicked: async ({ buttonId, data }) => {
 							console.log("TODO onButtonClicked");
