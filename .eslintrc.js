@@ -1,3 +1,3 @@
 module.exports = {
-	extends: "@EDMdesigner/eslint-config-edmdesigner",
+	extends: "@chamaileon-sdk/eslint-config",
 };

@@ -43,17 +43,15 @@
 				Font Files
 			</div>
 			<OptionWrapper>
-				<template>
-					<v-row
-						align="center"
-						justify="end"
-						class="ma-0"
-					>
-						<AddButton @click="addFontFileMethod">
-							New Font File
-						</AddButton>
-					</v-row>
-				</template>
+				<v-row
+					align="center"
+					justify="end"
+					class="ma-0"
+				>
+					<AddButton @click="addFontFileMethod">
+						New Font File
+					</AddButton>
+				</v-row>
 				<v-card
 					class="mx-auto mt-8 list3 rounded"
 					elevation="0"
@@ -143,17 +141,15 @@
 		<p>Font stacks are displayed in an alphabetical order in the editor.</p>
 
 		<OptionWrapper>
-			<template>
-				<v-row
-					align="center"
-					justify="end"
-					class="ma-0"
-				>
-					<AddButton @click="addFontStackMethod">
-						New Font Stack
-					</AddButton>
-				</v-row>
-			</template>
+			<v-row
+				align="center"
+				justify="end"
+				class="ma-0"
+			>
+				<AddButton @click="addFontStackMethod">
+					New Font Stack
+				</AddButton>
+			</v-row>
 			<v-card
 				class="mx-auto mt-8 list3 rounded"
 				elevation="0"
@@ -251,10 +247,40 @@ export default {
 		// draggable,
 		OptionWrapper,
 	},
+	// eslint-disable-next-line vue/require-prop-types
 	props: [ "noFontFiles" ],
+	computed: {
+		...mapGetters({
+			fontFiles: "getFontFiles",
+			fontStacks: "getFontStacks",
+			hideDefaultFonts: "getHideDefaultFonts",
+		}),
+		hideDefaultFontsValue: {
+			get() {
+				return this.hideDefaultFonts;
+			},
+			set(value) {
+				this.setHideDefaultFont(value);
+				this.updateEditorSettings();
+			},
+		},
+		fontFilesArray() {
+			if (!this.fontFiles) {
+				return;
+			}
+			const fontFilesArray = [];
+			for (const [key, value] of Object.entries(this.fontFiles)) {
+				fontFilesArray.push({ fontName: key, fontFile: value });
+			}
+			return fontFilesArray;
+		},
+		breakpoint() {
+			return this.$vuetify.breakpoint;
+		},
+	},
 	methods: {
 		...mapActions([
-			"updateEditorSettings"
+			"updateEditorSettings",
 		]),
 		...mapMutations([
 			"updateBlockLibsOrder",
@@ -301,36 +327,7 @@ export default {
 		}),
 
 	},
-	computed: {
-		...mapGetters({
-			fontFiles: "getFontFiles",
-			fontStacks: "getFontStacks",
-			hideDefaultFonts: "gethideDefaultFonts",
-		}),
-		hideDefaultFontsValue: {
-			get() {
-				return this.hideDefaultFonts;
-			},
-			set(value) {
-				this.setHideDefaultFont(value);
-				this.updateEditorSettings();
-			},
-		},
-		fontFilesArray() {
-			if (!this.fontFiles) {
-				return;
-			}
-			const fontFilesArray = [];
-			for (const [key, value] of Object.entries(this.fontFiles)) {
-				fontFilesArray.push({ fontName: key, fontFile: value });
-			}
-			// eslint-disable-next-line consistent-return
-			return fontFilesArray;
-		},
-		breakpoint() {
-			return this.$vuetify.breakpoint;
-		},
-	},
+
 };
 </script>
 

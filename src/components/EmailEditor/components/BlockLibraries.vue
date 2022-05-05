@@ -12,17 +12,15 @@
 			way to your users to be able to create their own block libraries.
 		</p>
 		<OptionWrapper>
-			<template>
-				<v-row
-					align="center"
-					justify="end"
-					class="ma-0"
-				>
-					<AddButton @click="addBlockLibararies">
-						New Library
-					</AddButton>
-				</v-row>
-			</template>
+			<v-row
+				align="center"
+				justify="end"
+				class="ma-0"
+			>
+				<AddButton @click="addBlockLibararies">
+					New Library
+				</AddButton>
+			</v-row>
 			<v-card
 				v-if="blockLibsArr.length > 0"
 				class="mx-auto mt-8 list3 rounded"

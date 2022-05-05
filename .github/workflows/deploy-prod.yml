@@ -19,7 +19,7 @@ jobs:
     # Run the build script which populates the ./dist folder
     - name: build
       run: |
-        npm i
+        npm ci
         npm run build
 
     # Upload to S3

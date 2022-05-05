@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<PreviewButton
-			button-text="Open editor"
+			button-text="Open variable editor"
 			:preview-button-visible="previewButtonVisible"
 			:is-inited="isInited"
 			@previewClick="openVariableEditor"
@@ -10,10 +10,10 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Variable Editor'"
-					:doc-url="'https://chamaileon.io/sdk/docs/email-variable-editor/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/email-variable-editor/'"
 					:image="'VariableEditorIllustration.svg'"
 					:is-inited="isInited"
-					button-text="Open editor"
+					button-text="Open variable editor"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openVariableEditor"
 				>

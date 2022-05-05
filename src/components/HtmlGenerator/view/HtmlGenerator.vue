@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email HTML Generator'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-html-generator/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/email-html-generator/'"
 					:image="'HtmlGeneratorIllustration.svg'"
 				>
 					<p>
@@ -15,15 +15,15 @@
 				</Description>
 			</div>
 
-			<div class="section" id="settings">
+			<div id="settings" class="section">
 				<Settings />
 			</div>
 		</SectionObserver>
 		<Footer
 			:previous="'Variable Editor'"
-			:prevTo="'/variableeditor'"
+			:prev-to="'/variableeditor'"
 			:next="'Email HTML Import'"
-			:nextTo="'/htmlimport'"
+			:next-to="'/htmlimport'"
 		/>
 	</div>
 </template>

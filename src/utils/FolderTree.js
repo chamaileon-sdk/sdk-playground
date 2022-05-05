@@ -45,7 +45,7 @@ export default class FolderTree {
 	}
 
 	_initFolderChildren() {
-		this._foldersById.forEach(folder => {
+		this._foldersById.forEach((folder) => {
 			folder.children = [];
 		});
 	}
@@ -54,12 +54,12 @@ export default class FolderTree {
 		const tempChildsNoParent = [];
 		const folderParentPropName = this._folderParentProp;
 
-		this._foldersById.forEach(folder => {
+		this._foldersById.forEach((folder) => {
 			if (this._hasParent(folder)) {
 				const parentFolder = this._parentOf(folder);
 				parentFolder.children.push(folder);
 			} else {
-				if(folder[folderParentPropName] === null) {
+				if (folder[folderParentPropName] === null) {
 					this._tree.push(folder);
 					return;
 				}
@@ -79,6 +79,7 @@ export default class FolderTree {
 
 	_isWorkspaceFolder(folder) {
 		const folderParentPropName = this._folderParentProp;
+		// eslint-disable-next-line eqeqeq
 		return !!folder && folder[folderParentPropName] == null;
 	}
 
@@ -101,7 +102,7 @@ export default class FolderTree {
 	}
 
 	closeLeafFolders() {
-		this._openFolderIds = this._openFolderIds.filter(folderId => {
+		this._openFolderIds = this._openFolderIds.filter((folderId) => {
 			const folder = this._folderWithId(folderId);
 			return !this._isLeafFolder(folder);
 		});
@@ -121,12 +122,12 @@ export default class FolderTree {
 			this._tree.sort((folder1, folder2) => this._compareFolders(folder1, folder2));
 		}
 
-		this._tree.forEach(rootFolder => {
+		this._tree.forEach((rootFolder) => {
 			this._sortDescendantsOf(rootFolder);
 		});
 	}
 
-	_compareFolders(folder1, folder2){
+	_compareFolders(folder1, folder2) {
 		return folder1.name.localeCompare(folder2.name);
 	}
 
@@ -151,7 +152,7 @@ export default class FolderTree {
 	}
 
 	activateFolder(toActivateId) {
-		this._activeFolderIds = this._existsFolderWithId(toActivateId) ? [toActivateId] : [];
+		this._activeFolderIds = this._existsFolderWithId(toActivateId) ? [ toActivateId ] : [];
 	}
 
 	pathToFolder(destinationId) {

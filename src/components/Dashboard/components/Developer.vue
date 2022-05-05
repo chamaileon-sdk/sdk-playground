@@ -3,6 +3,7 @@
 		<h2>Developer settings</h2>
 		<p />
 		<OptionsWrapper>
+			<ApiBackendSelector class="rounded-b rounded-0 d-flex pa-4" />
 			<EnvironmentName class="rounded-b rounded-0 d-flex pa-4" />
 			<v-btn
 				target="_blank"
@@ -36,11 +37,13 @@
 <script>
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import EnvironmentName from "./Developer/EnvironmentName.vue";
+import ApiBackendSelector from "./Developer/ApiBackendSelector.vue";
 
 export default {
 	components: {
 		OptionsWrapper,
 		EnvironmentName,
+		ApiBackendSelector,
 	},
 	methods: {
 		updateSDK() {

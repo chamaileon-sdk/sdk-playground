@@ -92,7 +92,7 @@ export default {
 	},
 	computed: {
 		...mapState(["thumbnailInited", "sdkInited", "document"]),
-		...mapGetters([ "getConfigObject" ]),
+		...mapGetters([ "getEditorConfigObject" ]),
 		isInited() {
 			if (this.sdkInited === true) {
 				return this.thumbnailInited;

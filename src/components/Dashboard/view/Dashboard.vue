@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Chamaileon SDK'"
-					:docUrl="'https://chamaileon.io/sdk/docs/'"
-					:readMoreUrl="'https://chamaileon.io/sdk/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/'"
+					:read-more-url="'https://chamaileon.io/sdk/'"
 					:image="'SdkIllustration.svg'"
 				>
 					<p>
@@ -16,23 +16,23 @@
 					</p>
 				</Description>
 			</div>
-			<div class="section" id="sdklogo">
+			<div id="sdklogo" class="section">
 				<Logo />
 			</div>
-			<div class="section" id="splashscreen">
+			<div id="splashscreen" class="section">
 				<SplashScreen />
 			</div>
-			<div class="section" id="colors">
+			<div id="colors" class="section">
 				<Colors />
 			</div>
-			<div class="section" id="language">
+			<div id="language" class="section">
 				<Language />
 			</div>
-			<div class="section" id="developer">
+			<div id="developer" class="section">
 				<Developer />
 			</div>
 		</SectionObserver>
-		<Footer :next="'Email Thumbnail'" :nextTo="'/emailthumbnail'" />
+		<Footer :next="'Email Thumbnail'" :next-to="'/emailthumbnail'" />
 	</div>
 </template>
 

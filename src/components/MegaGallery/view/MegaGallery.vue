@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Gallery'"
-					:doc-url="'https://chamaileon.io/sdk/docs/gallery/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/gallery/'"
 					:image="'EmailThumbnailIllustration.svg'"
 					button-text="Open gallery"
 					:is-inited="isInited"
@@ -44,8 +44,6 @@
 </template>
 
 <script>
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";

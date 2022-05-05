@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-divider></v-divider>
+		<v-divider />
 		<v-row class="my-3">
 			<v-col class="d-flex justify-start align-center primary--text" cols="4">
 				<v-card
@@ -9,7 +9,9 @@
 					class="pa-0 ma-0 primary--text d-flex align-center"
 					:to="prevTo"
 				>
-					<v-icon color="primary">mdi-chevron-left</v-icon>
+					<v-icon color="primary">
+						mdi-chevron-left
+					</v-icon>
 					{{ previous }}
 				</v-card>
 			</v-col>
@@ -23,7 +25,9 @@
 					href="https://calendly.com/gyula/chamaileon-sdk"
 					target="_blank"
 				>
-					<v-icon left> mdi-message-reply </v-icon>
+					<v-icon left>
+						mdi-message-reply
+					</v-icon>
 					Need help?
 				</v-btn>
 			</v-col>
@@ -36,7 +40,9 @@
 					:to="nextTo"
 				>
 					{{ next }}
-					<v-icon color="primary">mdi-chevron-right</v-icon>
+					<v-icon color="primary">
+						mdi-chevron-right
+					</v-icon>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -48,7 +54,9 @@ export default {
 	props: {
 		previous: { type: String, default: "" },
 		next: { type: String, default: "" },
+		// eslint-disable-next-line vue/require-default-prop
 		prevTo: String,
+		// eslint-disable-next-line vue/require-default-prop
 		nextTo: String,
 	},
 };

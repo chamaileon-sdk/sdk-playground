@@ -48,8 +48,7 @@
 export default {
 	computed: {
 		btnArr() {
-			return this.$store.state.variableEditorConfig.settings.buttons
-				.textInsertPlugin;
+			return this.$store.state.variableEditorConfig.settings.buttons.textInsert;
 		},
 	},
 };

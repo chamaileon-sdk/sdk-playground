@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable require-await */
-/* eslint-disable no-shadow */
 import Vue from "vue";
 import Vuex from "vuex";
 

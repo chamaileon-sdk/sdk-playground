@@ -14,11 +14,11 @@
 				>
 					<div
 						class="
-                        d-flex
-                        flex-wrap flex-column
-                        grey--text
-                        text--darken-2
-                    "
+							d-flex
+							flex-wrap flex-column
+							grey--text
+							text--darken-2
+						"
 						style="width: 100px"
 					>
 						<v-icon>mdi-eye</v-icon>

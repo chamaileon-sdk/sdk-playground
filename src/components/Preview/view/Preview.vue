@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Preview'"
-					:doc-url="'https://chamaileon.io/sdk/docs/email-preview/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/email-preview/'"
 					:image="'EmailPreviewIllustration.svg'"
 					:button-text="'SHOW PREVIEW'"
 					:is-inited="isInited"

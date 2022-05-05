@@ -1,9 +1,9 @@
 export default function () {
-	let str = `//Key: libraryID, Value: Array of stored blocks
+	const str = `//Key: libraryID, Value: Array of stored blocks
 const blockLibraryData = new Map();
 
 const emailEditorHooks = {
-    onSave: ({ document }) => {
+	onSave: ({ document }) => {
 		emailDocument = document;
 
 		return new Promise(resolve => {
@@ -11,7 +11,7 @@ const emailEditorHooks = {
 		});
 	},
 
-    onAutoSave: ({ document }) => {
+	onAutoSave: ({ document }) => {
 		emailDocument = document;
 
 		return new Promise(resolve => {
@@ -19,44 +19,44 @@ const emailEditorHooks = {
 		});
 	},
 
-    onChange: () => {
+	onChange: () => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
-    onBeforeClose: () => {
+	onBeforeClose: () => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
-    onAfterClose: () => {
+	onAfterClose: () => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
-    onEditTitle: ({ title }) => {
+	onEditTitle: ({ title }) => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
-    onEditImage: async ({ originalImage, lockDimensions: { width, height } }) => {
-		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
+	onEditImage: async ({ originalImage, lockDimensions: { width, height } }) => {
+		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
 		return { src };
 	},
 
-    onEditBackgroundImage: async ({ originalImage, lockDimensions: { width, height } }) => {
-		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
+	onEditBackgroundImage: async ({ originalImage, lockDimensions: { width, height } }) => {
+		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
 		return { src };
 	},
 
-    onLoadBlocks: ({ libId }) => {
+	onLoadBlocks: ({ libId }) => {
 		let blocks = [];
 
-      	if (!blockLibraryData.has(libId)) {
+		if (!blockLibraryData.has(libId)) {
 			blocks = [];
 		} else {
 			blocks = blockLibraryData.get(libId);
@@ -67,19 +67,19 @@ const emailEditorHooks = {
 		});
 	},
 
-    onBlockSave: ({ libId, block }) => {
+	onBlockSave: ({ libId, block }) => {
 		if (!blockLibraryData.has(libId)) {
 			blockLibraryData.set(libId, []);
 		}
 
-    	blockLibraryData.get(libId).push(block);
+		blockLibraryData.get(libId).push(block);
 
 		return new Promise(resolve => {
 			resolve({ block });
 		});
 	},
 
-    onBlockRename: ({ libId, block: { _id, title } }) => {
+	onBlockRename: ({ libId, block: { _id, title } }) => {
 		let array = blockLibraryData.get(libId);
 
 		array.forEach(c => {
@@ -95,7 +95,7 @@ const emailEditorHooks = {
 		});
 	},
 
-    onBlockDelete: ({ libId, block: { _id } }) => {
+	onBlockDelete: ({ libId, block: { _id } }) => {
 		let array = blockLibraryData.get(libId);
 
 		array = array.filter(c => c._id !== _id);
@@ -107,19 +107,19 @@ const emailEditorHooks = {
 		});
 	},
 
-    onHeaderButtonClicked: ({ buttonId }) => {
+	onHeaderButtonClicked: ({ buttonId }) => {
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
-    onTextInsertPluginButtonClicked: ({ buttonId }) => {
+	onTextInsertPluginButtonClicked: ({ buttonId }) => {
 		return new Promise(resolve => {
 			resolve({ value: "Your inserted text." });
 		});
 	},
 
-    onExpressionEditClicked: ({ expression }) => {
+	onExpressionEditClicked: ({ expression }) => {
 		return new Promise(resolve => {
 			resolve({ expression: "<Your inserted expression>" });
 		});

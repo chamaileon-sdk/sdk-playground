@@ -1,4 +1,3 @@
-/* eslint-disable require-await */
 /* eslint-disable no-shadow */
 import BlockLibData from "./editorBlockLibraryContainer";
 import Vue from "vue";
@@ -10,7 +9,6 @@ const getDefaultState = () => {
 		ffKey: 0,
 		tiID: 0,
 		settings: {
-			hideHeader: false,
 			user: {
 				enabled: true,
 				name: "Your Username",
@@ -67,7 +65,6 @@ const getDefaultState = () => {
 					button: true,
 					divider: true,
 					social: false,
-					code: false,
 					video: false,
 				},
 				structure: {
@@ -76,6 +73,7 @@ const getDefaultState = () => {
 					multiColumn: true,
 				},
 				advanced: {
+					code: false,
 					loop: true,
 					conditional: true,
 					dynamicImage: true,
@@ -98,9 +96,9 @@ const getDefaultState = () => {
 					state: "disabled",
 				},
 			},
-			staticAssetsBaseUrl: "https://yourdomain.com/path/to/static/assets/",
+			staticAssetsBaseUrl: "https://plugins.chamaileon.io/real-time-editor/latest/static/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
-			autoSaveInterval: false,
+			autoSaveInterval: 15000,
 		},
 	};
 };
@@ -193,7 +191,7 @@ export default {
 
 		// Elements
 		toggleElement(state, payload) {
-			state.settings.elements[payload.type][payload.element] =				!state.settings.elements[payload.type][payload.element];
+			state.settings.elements[payload.type][payload.element] = !state.settings.elements[payload.type][payload.element];
 		},
 
 		// BlockLibs
@@ -229,7 +227,7 @@ export default {
 
 		// Fontfiles
 		addFontFile(state) {
-			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, ""); // eslint-disable-line
+			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, "");
 			state.ffKey++;
 		},
 
@@ -250,7 +248,7 @@ export default {
 			state.settings.fontStacks.splice(index, 1);
 		},
 
-		async updateFontStack(state, { index, fontStackString }) {
+		updateFontStack(state, { index, fontStackString }) {
 			const fontStacks = state.settings.fontStacks;
 			const newFontStack = fontStackString.split(",")
 				.map(str => JSON.parse(JSON.stringify(str.trim())))
@@ -308,34 +306,46 @@ export default {
 
 		// User
 		updateUser(state, payload) {
-			state.settings.user = { ...state.settings.user, ...payload };
+			Vue.set(state.settings, "user", { ...state.settings.user, ...payload });
 		},
 
 		// Autosave
-		updateAutosave(state, payload) {
+		updateAutoSave(state, payload) {
 			const x = parseInt(payload);
 
 			state.settings.autoSaveInterval = x >= 0 ? x : 0;
 		},
 
 		// Static Assets
-		updateSaticAssets(state, url) {
+		updateStaticAssets(state, url) {
 			state.settings.staticAssetsBaseUrl = url;
 		},
 
 		// Toolboxes
-		updateToolboxes(state, toolboxes) {
-			state.settings.toolboxes = toolboxes;
+		updateToolboxes(state, toolbox) {
+			Vue.set(
+				state.settings,
+				"toolboxes",
+				{ ...state.settings.toolboxes, ...toolbox },
+			);
 		},
 
 		// Block Action Menu
 		updateBlockActionMenu(state, blockActionMenu) {
-			state.settings.actionMenu.block = blockActionMenu;
+			Vue.set(
+				state.settings.actionMenu,
+				"block",
+				{ ...state.settings.actionMenu.block, ...blockActionMenu },
+			);
 		},
 
 		// Block Dropzone
-		updateBlockActionMenuDropzones(state, blockDropzone) {
-			state.settings.actionMenu.dropzones.block = blockDropzone;
+		updateDropZones(state, dropZone) {
+			Vue.set(
+				state.settings,
+				"dropzones",
+				{ ...state.settings.dropZone, ...dropZone },
+			);
 		},
 		// Static Assets
 		updateVideoElementBaseUrl(state, url) {
@@ -344,9 +354,8 @@ export default {
 	},
 	actions: {
 		async updateEditorSettings({ getters, rootState }) {
-			const settings = getters.getConfigObject.settings;
+			const settings = JSON.parse(JSON.stringify(getters.getEditorConfigObject.settings));
 			while (rootState.emailEditorInited === "pending") {
-				// eslint-disable-next-line no-await-in-loop
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.emailEditorInited === true) {
@@ -364,7 +373,7 @@ export default {
 		getBlockLibs: state => state.settings.blockLibraries,
 		getFontFiles: state => state.settings.fontFiles,
 		getFontStacks: state => state.settings.fontStacks,
-		gethideDefaultFonts: state => state.settings.hideDefaultFonts,
+		getHideDefaultFonts: state => state.settings.hideDefaultFonts,
 		getAddonStateById: state => (id) => {
 			const obj = state.settings.addons;
 			for (const addon in obj) {

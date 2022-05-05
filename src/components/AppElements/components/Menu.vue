@@ -15,7 +15,7 @@ export default {
 		primary: "",
 	}),
 	computed: {
-		...mapGetters([ "getConfigObject" ]),
+		...mapGetters([ "getEditorConfigObject" ]),
 		...mapGetters({ Menu: "getMenu" }),
 	},
 	mounted() {

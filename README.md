@@ -16,7 +16,7 @@ The config object for each plugin can be found in the `src/components/%viewName%
 The routes are stored in `src/router/index.js`, while the hashes and code matching helpers are stored as part of the menu configuration in `src/components/AppElements/store/menuData.js`
 
 ## Hash matching on scroll
-An `IntersectionObserver` is used for matching the `hash` with the current submenu while scrolling. It will look for elements with `.section` class and expects these elements to have an `id` as the hash will be the section's id. 
+An `IntersectionObserver` is used for matching the `hash` with the current submenu while scrolling. It will look for elements with `.section` class and expects these elements to have an `id` as the hash will be the section's id.
 
 A best practice is to wrap each section into a `SectionObserver` component. For example:
 
@@ -28,14 +28,14 @@ A best practice is to wrap each section into a `SectionObserver` component. For 
 </SectionObserver>
 ```
 
-**Note:** The component shown above is only responsible for hash matching on scroll, without it the app is fully functional, but it won't react to scrolling! 
+**Note:** The component shown above is only responsible for hash matching on scroll, without it the app is fully functional, but it won't react to scrolling!
 
 
 ## Auto-scrolling to active component
 
-Scrolling to the component selected in the menu is done by `vue-scrollactive`, except for the main menu points (the ones with id `home`). Their scrolling (scrolling to top) is handled manually with the `scrollToTop()` function found in `src/components/AppElements/components/Menu.vue`. 
+Scrolling to the component selected in the menu is done by `vue-scrollactive`, except for the main menu points (the ones with id `home`). Their scrolling (scrolling to top) is handled manually with the `scrollToTop()` function found in `src/components/AppElements/components/Menu.vue`.
 
-The reason for it being handled separately is that whenever you click on a `.scrollactive-item`,  `vue-scrollactive` will scroll to that item from the current one even if they have the same position. The default duration for such a scroll is `650ms` which means, if the `#home` compoenents are `.scrollactive-item`s,  the user has to wait `650ms` after a vie change to be able to scroll down.
+The reason for it being handled separately is that whenever you click on a `.scrollactive-item`,  `vue-scrollactive` will scroll to that item from the current one even if they have the same position. The default duration for such a scroll is `650ms` which means, if the `#home` components are `.scrollactive-item`s,  the user has to wait `650ms` after a vie change to be able to scroll down.
 
 
 ## Matching code to active component

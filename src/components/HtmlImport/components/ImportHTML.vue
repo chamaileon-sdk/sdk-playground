@@ -8,25 +8,34 @@
 			fugit optio non.
 		</p>
 		<OptionWrapper>
-			<template>
-				<v-row align="center" justify="end" class="ma-0 mb-8">
-					<v-btn depressed @click="importDocument" color="success">
-						<v-icon v-show="!fetching" left> mdi-plus </v-icon>
-						<v-progress-circular
-							v-show="fetching"
-							color="white"
-							:indeterminate="true"
-							:value="0"
-							size="20"
-							width="3"
-							class="mr-3"
-						></v-progress-circular>
-						Import
-					</v-btn>
-				</v-row>
-			</template>
+			<v-row
+				align="center"
+				justify="end"
+				class="ma-0 mb-8"
+			>
+				<v-btn
+					depressed
+					color="success"
+					@click="importDocument"
+				>
+					<v-icon v-show="!fetching" left>
+						mdi-plus
+					</v-icon>
+					<v-progress-circular
+						v-show="fetching"
+						color="white"
+						:indeterminate="true"
+						:value="0"
+						size="20"
+						width="3"
+						class="mr-3"
+					/>
+					Import
+				</v-btn>
+			</v-row>
 			<v-card flat class="pa-4">
 				<v-textarea
+					v-model="value"
 					class="customScroll pa-0"
 					background-color="white"
 					color="primary"
@@ -34,8 +43,7 @@
 					no-resize
 					hide-details="true"
 					placeholder="Insert HTML here..."
-					v-model="value"
-				></v-textarea>
+				/>
 			</v-card>
 		</OptionWrapper>
 	</v-app>
@@ -46,14 +54,14 @@ import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import { mapGetters } from "vuex";
 
 export default {
+
+	components: {
+		OptionWrapper,
+	},
 	data() {
 		return {
 			value: "",
 		};
-	},
-
-	components: {
-		OptionWrapper,
 	},
 
 	computed: {

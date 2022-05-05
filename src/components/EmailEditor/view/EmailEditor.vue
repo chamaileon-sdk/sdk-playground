@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Editor'"
-					:doc-url="'https://chamaileon.io/sdk/docs/email-editor/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/email-editor/'"
 					:image="'EmailEditorIllustration.svg'"
 					button-text="Open editor"
 					:is-inited="isInited"
@@ -101,7 +101,7 @@ export default {
 	},
 	computed: {
 		...mapState(["emailEditorInited", "sdkInited", "document"]),
-		...mapGetters([ "getConfigObject" ]),
+		...mapGetters([ "getEditorConfigObject" ]),
 		isInited() {
 			if (this.sdkInited === true) {
 				return this.emailEditorInited;
@@ -119,7 +119,7 @@ export default {
 					const document = JSON.parse(JSON.stringify(this.document));
 					const data = { document }; // !important change we set data from now, not document
 					await this.$chamaileon.emailEditor.methods.updateData(data);
-					// Should not await since it can couse lag in the ui
+					// Should not await since it can cause lag in the ui
 					this.$store.dispatch("initGallery");
 					this.$store.dispatch("initEmailPreview");
 				}
@@ -146,17 +146,17 @@ export default {
 
 <style>
 .v-btn--example {
-  position: fixed;
-  bottom: 0;
-  right: 31%;
-  margin-bottom: 64px;
+	position: fixed;
+	bottom: 0;
+	right: 31%;
+	margin-bottom: 64px;
 }
 
 body {
-  overflow: hidden !important;
+	overflow: hidden !important;
 }
 iframe {
-  position: fixed;
+	position: fixed;
 }
 
 </style>

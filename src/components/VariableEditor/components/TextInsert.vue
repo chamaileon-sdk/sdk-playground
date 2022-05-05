@@ -87,8 +87,7 @@ export default {
 	computed: {
 		btnArr: {
 			get() {
-				return this.$store.state.variableEditorConfig.settings.buttons
-					.textInsertPlugin;
+				return this.$store.state.variableEditorConfig.settings.buttons.textInsert;
 			},
 			set(val) {
 				this.updateVETextInsertOrder(val);

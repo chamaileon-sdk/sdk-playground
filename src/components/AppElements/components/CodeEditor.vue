@@ -25,14 +25,24 @@
 				Document
 			</v-tab>
 			<v-tab
-				v-show="
-					route === '/emailpreview' ||
-						route === '/emaileditor' ||
-						route === '/gallery' ||
-						route === '/variableeditor'
+				v-show="route === '/emailpreview'
+					|| route === '/emaileditor'
+					|| route === '/gallery'
+					|| route === '/variableeditor'
+					|| route === '/emailthumbnail'
 				"
 			>
 				Hooks
+			</v-tab>
+			<v-tab
+				v-show="route === '/emailpreview'
+					|| route === '/emaileditor'
+					|| route === '/gallery'
+					|| route === '/variableeditor'
+					|| route === '/emailthumbnail'
+				"
+			>
+				Methods
 			</v-tab>
 			<v-tab v-show="route === '/emaileditor'">
 				Block Libraries
@@ -111,12 +121,27 @@
 			<HighlightCode
 				class="pa-0"
 				lang="javascript"
-				:code="blockLibs"
+				:code="methods"
 			/>
 		</v-card>
 
 		<v-card
 			v-show="tab === 4"
+			class="rounded-0 pa-0 ma-0"
+			width="100%"
+			dark
+			fixed
+			flat
+		>
+			<HighlightCode
+				class="pa-0"
+				lang="javascript"
+				:code="blockLibs"
+			/>
+		</v-card>
+
+		<v-card
+			v-show="tab === 5"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -131,7 +156,7 @@
 		</v-card>
 
 		<v-card
-			v-show="tab === 5 || tab === 8"
+			v-show="tab === 6 || tab === 9"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -146,7 +171,7 @@
 		</v-card>
 
 		<v-card
-			v-show="tab === 6 || tab === 7"
+			v-show="tab === 7 || tab === 8"
 			class="rounded-0 pa-0 ma-0"
 			width="100%"
 			dark
@@ -202,6 +227,13 @@ import previewHooksGenerator from "./CodeEditor/hooks/previewHooks";
 import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks";
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 import megaGalleryHooksGenerator from "./CodeEditor/hooks/megaGalleryHooks";
+import thumbnailHooksGenerator from "./CodeEditor/hooks/thumbnailHooks";
+
+import thumbnailMethodsGenerator from "./CodeEditor/methods/thumbnailMethods";
+import previewMethodsGenerator from "./CodeEditor/methods/previewMethods";
+import emailEditorMethodsGenerator from "./CodeEditor/methods/emailEditorMethods";
+import megaGalleryMethodsGenerator from "./CodeEditor/methods/megaGalleryMethods";
+import variableEditorMethodsGenerator from "./CodeEditor/methods/variableEditorMethods";
 
 import { mapGetters } from "vuex";
 
@@ -235,12 +267,21 @@ export default {
 		thumbnailCode() {
 			return thumbnailCodeGenerator(this.$store.getters.getThumbnailSettings);
 		},
+		thumbnailHooks() {
+			return thumbnailHooksGenerator();
+		},
+		thumbnailMethods() {
+			return thumbnailMethodsGenerator(this.$store.getters.getThumbnailSettings);
+		},
 		// Preview
 		previewCode() {
 			return previewCodeGenerator(this.$store.getters.getPreviewConfigObject);
 		},
 		previewHooks() {
 			return previewHooksGenerator();
+		},
+		previewMethods() {
+			return previewMethodsGenerator(this.$store.getters.getPreviewConfigObject);
 		},
 		// Email Editor
 		blockLibs() {
@@ -250,18 +291,23 @@ export default {
 			);
 		},
 		emailCode() {
-			return emailEditorCodeGenerator(this.$store.getters.getConfigObject);
+			return emailEditorCodeGenerator(this.$store.getters.getEditorConfigObject);
 		},
 		editorHooks() {
 			return emailEditorHooksGenerator();
 		},
+		editorMethods() {
+			return emailEditorMethodsGenerator(this.$store.getters.getEditorConfigObject);
+		},
 		// Gallery
-
 		galleryCode() {
 			return megaGalleryCodeGenerator(this.$store.getters.getGalleryConfigObject);
 		},
 		galleryHooks() {
 			return megaGalleryHooksGenerator();
+		},
+		galleryMethods() {
+			return megaGalleryMethodsGenerator(this.$store.getters.getGalleryConfigObject);
 		},
 		// Variable Editor
 		variableEditorCode() {
@@ -271,6 +317,11 @@ export default {
 		},
 		variableEditorHooks() {
 			return variableEditorHooksGenerator();
+		},
+		variableEditorMethods() {
+			return variableEditorMethodsGenerator(
+				this.$store.getters.getVariableEditorConfigObject,
+			);
 		},
 		// Html generator
 		htmlGeneratorCode() {
@@ -303,16 +354,24 @@ export default {
 			} else if (this.$route.path === "/htmlgenerator") {
 				return this.htmlGeneratorCode;
 			} else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
-			else return `console.log("${this.$route.path}");`;
+			else return "//There are no code available";
 		},
 
 		hooks() {
 			if (this.$route.path === "/emaileditor") return this.editorHooks;
 			else if (this.$route.path === "/emailpreview") return this.previewHooks;
 			else if (this.$route.path === "/gallery") return this.galleryHooks;
-			else if (this.$route.path === "/variableeditor") {
-				return this.variableEditorHooks;
-			} else return "//There are no hooks available";
+			else if (this.$route.path === "/variableeditor") return this.variableEditorHooks;
+			else if (this.$route.path === "/emailthumbnail") return this.thumbnailHooks;
+			else return "//There are no hooks available";
+		},
+		methods() {
+			if (this.$route.path === "/emaileditor") return this.editorMethods;
+			else if (this.$route.path === "/emailpreview") return this.previewMethods;
+			else if (this.$route.path === "/gallery") return this.galleryMethods;
+			else if (this.$route.path === "/variableeditor") return this.variableEditorMethods;
+			else if (this.$route.path === "/emailthumbnail") return this.thumbnailMethods;
+			else return "//There are no methods available";
 		},
 	},
 	watch: {
@@ -396,17 +455,20 @@ export default {
 					str = this.hooks;
 					break;
 				case 3:
-					str = this.blockLibs;
+					str = this.methods;
 					break;
 				case 4:
-					str = this.htmlCode;
+					str = this.blockLibs;
 					break;
 				case 5:
-				case 8:
-					str = this.htmlGeneratorDummyJSON;
+					str = this.htmlCode;
 					break;
 				case 6:
+				case 9:
+					str = this.htmlGeneratorDummyJSON;
+					break;
 				case 7:
+				case 8:
 					str = this.getDummyHtmlDocument;
 					break;
 				default:

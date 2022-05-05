@@ -37,13 +37,13 @@ const getDefaultState = () => {
 				value: "handlebars",
 			},
 		},
-	}
-}
+	};
+};
 
 export default {
 	state: getDefaultState(),
 	mutations: {
-		resetHtmlGeneratorState (state) {
+		resetHtmlGeneratorState(state) {
 			Object.assign(state, getDefaultState());
 		},
 
@@ -56,7 +56,7 @@ export default {
 		},
 
 		updateInt(state, payload) {
-			let x = parseInt(payload.value);
+			const x = parseInt(payload.value);
 
 			state.settings[payload.key].value = x >= 0 ? x : 0;
 		},
@@ -84,7 +84,7 @@ export default {
 						document: context.state.json,
 						settings: context.getters.getHtmlGeneratorConfigObject,
 					}),
-				}
+				},
 			);
 
 			if (!genRequest.ok) {
@@ -105,7 +105,7 @@ export default {
 		},
 
 		getHtmlGeneratorConfigObject(state) {
-			let cnfg = {};
+			const cnfg = {};
 
 			for (const key in state.settings) {
 				if (key === "buttonType") {
@@ -118,16 +118,16 @@ export default {
 			return cnfg;
 		},
 
-		getHtmlDocument: (state) => state.html,
+		getHtmlDocument: state => state.html,
 
-		getDummyJSON: (state) => state.json,
+		getDummyJSON: state => state.json,
 
-		getDummyHtmlDocument: (state) => state.dummyHtml,
+		getDummyHtmlDocument: state => state.dummyHtml,
 
 		getHTMLFetchStatus(state) {
 			return state.fetchingHTML;
 		},
 
-		getSize: (state) => state.htmlSize,
+		getSize: state => state.htmlSize,
 	},
 };

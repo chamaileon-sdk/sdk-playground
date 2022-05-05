@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<PreviewButton
-			:button-text="'SHOW PREVIEW'"
+			:button-text="'Open HTML import'"
 			:preview-button-visible="previewButtonVisible"
 			:is-inited="isInited"
 			@previewClick="openHtmlImport"
@@ -10,9 +10,9 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email HTML Import'"
-					:doc-url="'https://chamaileon.io/sdk/docs/email-html-importer/'"
+					:doc-url="'https://chamaileon.io/sdkv2/docs/email-html-importer/'"
 					:image="'HtmlImportIllustration.svg'"
-					button-text="Open preview"
+					:button-text="/*'Open HTML import'*/null"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openHtmlImport"
 				>
@@ -34,7 +34,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
 	components: {

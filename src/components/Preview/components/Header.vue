@@ -26,20 +26,18 @@
 		</p>
 
 		<OptionWrapper>
-			<template>
-				<v-row
-					align="center"
-					justify="end"
-					class="ma-0"
-				>
-					<AddButton class="mr-lg-6" @click="addBtn(); updatePreviewSettings()">
-						New Button
-					</AddButton>
-					<AddButton class="mt-6 mt-lg-0" @click="addDD(); updatePreviewSettings()">
-						New DropDown
-					</AddButton>
-				</v-row>
-			</template>
+			<v-row
+				align="center"
+				justify="end"
+				class="ma-0"
+			>
+				<AddButton class="mr-lg-6" @click="addBtn(); updatePreviewSettings()">
+					New Button
+				</AddButton>
+				<AddButton class="mt-6 mt-lg-0" @click="addDD(); updatePreviewSettings()">
+					New DropDown
+				</AddButton>
+			</v-row>
 			<List6 :section="'Preview'" />
 		</OptionWrapper>
 	</div>

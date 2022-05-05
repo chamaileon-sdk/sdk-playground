@@ -9,7 +9,6 @@ const getDefaultState = () => {
 		fidArr: [],
 		tid: 0,
 		settings: {
-			hideHeader: false,
 			variablesToEdit: [],
 			buttons: {
 				header: {
@@ -20,8 +19,11 @@ const getDefaultState = () => {
 					left: [],
 					right: [],
 				},
-				textInsertPlugin: [],
+				textInsert: [],
 			},
+			fontFiles: {},
+			fontStacks: [],
+			hideDefaultFonts: false,
 		},
 	};
 };
@@ -50,7 +52,7 @@ export default {
 		},
 
 		toggleVariableToEdit(state, index) {
-			state.settings.variablesToEdit[index].edit =				!state.settings.variablesToEdit[index].edit;
+			state.settings.variablesToEdit[index].edit = !state.settings.variablesToEdit[index].edit;
 		},
 
 		// Left
@@ -166,15 +168,15 @@ export default {
 
 		// Text Insert
 		updateVETextInsertOrder(state, payload) {
-			state.settings.buttons.textInsertPlugin = payload;
+			state.settings.buttons.textInsert = payload;
 		},
 
 		deleteVETextInsertButton(state, index) {
-			state.settings.buttons.textInsertPlugin.splice(index, 1);
+			state.settings.buttons.textInsert.splice(index, 1);
 		},
 
 		addVETextInsertButton(state) {
-			state.settings.buttons.textInsertPlugin.push({
+			state.settings.buttons.textInsert.push({
 				id: `ti-btn-${state.tid}`,
 				label: "Button",
 				icon: "",
@@ -184,9 +186,9 @@ export default {
 
 		updateVETextInsertButton(state, payload) {
 			const newObj = (({ index, ...payload }) => payload)(payload);
-			const c = state.settings.buttons.textInsertPlugin[payload.index];
+			const c = state.settings.buttons.textInsert[payload.index];
 
-			state.settings.buttons.textInsertPlugin.splice(payload.index, 1, {
+			state.settings.buttons.textInsert.splice(payload.index, 1, {
 				...c,
 				...newObj,
 			});
@@ -200,7 +202,6 @@ export default {
 		async updateVariableEditorSettings({ getters, rootState }) {
 			const settings = getters.getVariableEditorConfigObject.settings;
 			while (rootState.variableEditorInited === "pending") {
-				// eslint-disable-next-line no-await-in-loop
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.variableEditorInited === true) {

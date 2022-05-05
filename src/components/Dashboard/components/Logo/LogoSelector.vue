@@ -127,11 +127,11 @@ export default {
 			importScript.async = false;
 
 			const runScript = document.createElement("script");
-			runScript.innerText =				"document.getElementById(\"container\").appendChild(createLogo());";
+			runScript.innerText = "document.getElementById(\"container\").appendChild(createLogo());";
 
 			const html = `<html><head></head><body style="margin: 0"><div id="container" style="display: flex; height: 100vh; align-items: center; margin: 0; padding: 0; justify-content: center;">
-      ${importScript.outerHTML}${runScript.outerHTML}
-      </div></body></html>`;
+	${importScript.outerHTML}${runScript.outerHTML}
+	</div></body></html>`;
 			return html;
 		},
 		calculateOpacity(url) {

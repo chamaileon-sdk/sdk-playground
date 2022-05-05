@@ -15,8 +15,8 @@
 						ind === 0
 							? 'rounded-t'
 							: ind === settingsLength - 1
-							? 'rounded-b'
-							: ''
+								? 'rounded-b'
+								: ''
 					"
 				>
 					<v-row>
@@ -46,25 +46,25 @@
 									:hide-details="true"
 									:ripple="false"
 									:value="true"
+									:input-value="item.value"
 									@change="
 										updateSettings({
 											key: key,
 											value: $event !== null,
 										})
 									"
-									:input-value="item.value"
-								></v-switch>
+								/>
 
 								<v-text-field
-									class="right-input"
 									v-show="typeof item.value === typeof 0"
+									class="right-input"
 									dense
 									outlined
 									label="Value"
 									:hide-details="true"
 									:value="item.value"
 									@change="updateIntSettings({ key: key, value: $event })"
-								></v-text-field>
+								/>
 							</v-card>
 						</v-col>
 						<v-col
@@ -81,14 +81,14 @@
 									label="Value"
 									:items="['handlebars', 'liquid', 'mustache']"
 									:hide-details="true"
-									@change="updateSettings({ key: key, value: $event })"
 									:value="item.value"
-								></v-select>
+									@change="updateSettings({ key: key, value: $event })"
+								/>
 							</v-card>
 						</v-col>
 					</v-row>
 				</v-card>
-				<v-divider v-show="ind !== settingsLength - 1"></v-divider>
+				<v-divider v-show="ind !== settingsLength - 1" />
 			</div>
 		</OptionWrapper>
 	</div>
