@@ -8,9 +8,9 @@ const getDefaultState = () => {
 		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		urls: {
 			splashScreen:
-				"https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html",
+				"https://app.chamaileon.io/splashScreen.html",
 			createLogoJS:
-				"https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js",
+				"https://app.chamaileon.io/createLogoWithText.js",
 		},
 		colors: {
 			primary: "#00bee6",
