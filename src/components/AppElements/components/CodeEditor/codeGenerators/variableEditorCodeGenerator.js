@@ -28,21 +28,10 @@ const calculateButtons = (arr, indent) => {
 	return literal;
 };
 
-const calculateFontFiles = (editorConfig, indent) => {
-	if (Object.keys(editorConfig.settings.fontFiles).length === 0) return "{},";
+const calculateFontStacks = (variableEditorConfig, indent) => {
+	if (variableEditorConfig.settings.fontStacks.length === 0) return "[],";
 
-	const objKeysAndValues = Object.entries(editorConfig.settings.fontFiles).map(([key, value]) => {
-		return `${"\t".repeat(indent + 1)}"${key}": "${value}"`;
-	}).join(",\n");
-	return `{
-${objKeysAndValues},
-${"\t".repeat(indent)}},`;
-};
-
-const calculateFontStacks = (editorConfig, indent) => {
-	if (!editorConfig.settings.fontStacks.length === 0) return "[],";
-
-	const innerArrays = editorConfig.settings.fontStacks.map((stack) => {
+	const innerArrays = variableEditorConfig.settings.fontStacks.map((stack) => {
 		return `
 ${"\t".repeat(indent)}[
 ${stack.map(item => `${"\t".repeat(indent + 1)}"${item}"`).join(",\n")}
@@ -81,7 +70,6 @@ ${"\t".repeat(indent + 1)}textInsert: ${calculateButtons(
 	indent + 2,
 )}
 ${"\t".repeat(indent)}},
-${"\t".repeat(indent)}fontFiles: ${calculateFontFiles(variableEditorConfig, indent)}
 ${"\t".repeat(indent)}fontStacks: ${calculateFontStacks(variableEditorConfig, indent + 1)}
 ${"\t".repeat(indent)}hideDefaultFonts: ${variableEditorConfig.settings.hideDefaultFonts},
 ${"\t".repeat(indent - 1)}}`;

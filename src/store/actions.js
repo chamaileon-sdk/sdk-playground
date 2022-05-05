@@ -5,8 +5,20 @@ import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
 
 export default {
+	async waitForSdkToBeInited({ dispatch, state }) {
+		if (state.sdkInited === false) {
+			await dispatch("initSDK");
+		}
+
+		while (state.sdkInited === "pending") {
+			await new Promise(resolve => setTimeout(resolve, 100));
+		}
+	},
 	async initSDK({ commit, dispatch, state }) {
 		commit("setSdkInited", "pending");
+		while (state.localStorageLoaded === "pending" || state.localStorageLoaded === false) {
+			await new Promise(resolve => setTimeout(resolve, 100));
+		}
 
 		if (Vue.prototype?.$chamaileon?.destroy && typeof Vue.prototype?.$chamaileon?.destroy === "function") {
 			Vue.prototype.$chamaileon.destroy();
@@ -46,8 +58,6 @@ export default {
 		async function getAccessToken() {
 			let accessTokenCache = JSON.parse(localStorage.getItem("chamaileonSdkAccessTokenCache"));
 			const now = new Date();
-			// TODO: figure this out why the token randomly changes to a different env
-			console.log(state.sdkConfig.apiBackend);
 			if (!accessTokenCache || !accessTokenCache.accessToken || now - new Date(accessTokenCache.createdAt) > 3600000) {
 				const accessToken = await fetchAccessToken();
 
@@ -64,13 +74,20 @@ export default {
 
 		const accessToken = await getAccessToken();
 
-		const chamaileonPlugins = await createChamaileonSdk(
-			{
-				...state.sdkConfig,
-				accessToken,
-				getAccessToken,
-			},
-		);
+		let chamaileonPlugins;
+
+		try {
+			chamaileonPlugins = await createChamaileonSdk(
+				{
+					...state.sdkConfig,
+					accessToken,
+					getAccessToken,
+				},
+			);
+		} catch (error) {
+			console.error("Failed to initialize SDK: ", error);
+			commit("setSdkInited", false);
+		}
 
 		Vue.prototype.$chamaileon = {
 			...Vue.prototype.$chamaileon,
@@ -81,14 +98,15 @@ export default {
 		commit("changeLogoFunction", window.createLogo);
 
 		dispatch("initEmailEditor");
+		// dispatch("initVariableEditor");
 		dispatch("initEmailPreview");
 		// dispatch("initHtmlImport");
 		dispatch("initGallery");
-		dispatch("initVariableEditor");
 	},
 	async initEmailEditor({ commit, dispatch, getters, state }) {
 		if (state.emailEditorInited === true || state.emailEditorInited === "pending") return;
 		commit("setEmailEditorInited", "pending");
+		await dispatch("waitForSdkToBeInited");
 		try {
 			Vue.prototype.$chamaileon.emailEditor = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "editor",
@@ -127,11 +145,9 @@ export default {
 						originalImage,
 						lockDimensions,
 					}) => {
+						dispatch("initGallery");
 						while (state.galleryInited === "pending") {
-							await new Promise(resolve => setTimeout(resolve, 450));
-						}
-						if (state.galleryInited === false) {
-							await dispatch("initGallery");
+							await new Promise(resolve => setTimeout(resolve, 100));
 						}
 
 						if (state.galleryInited === true) {
@@ -147,11 +163,9 @@ export default {
 						originalImage,
 						lockDimensions,
 					}) => {
+						dispatch("initGallery");
 						while (state.galleryInited === "pending") {
-							await new Promise(resolve => setTimeout(resolve, 450));
-						}
-						if (state.galleryInited === false) {
-							await dispatch("initGallery");
+							await new Promise(resolve => setTimeout(resolve, 100));
 						}
 
 						if (state.galleryInited === true) {
@@ -199,11 +213,9 @@ export default {
 					},
 					onHeaderButtonClicked: async ({ buttonId }) => {
 						if (buttonId === "preview") {
+							dispatch("initEmailPreview");
 							while (state.emailPreviewInited === "pending") {
-								await new Promise(resolve => setTimeout(resolve, 450));
-							}
-							if (state.emailPreviewInited === false) {
-								await dispatch("initEmailPreview");
+								await new Promise(resolve => setTimeout(resolve, 100));
 							}
 
 							const document = getters.getEmail;
@@ -233,9 +245,10 @@ export default {
 			commit("setEmailEditorInited", false);
 		}
 	},
-	async initEmailPreview({ getters, commit, state }) {
+	async initEmailPreview({ getters, commit, state, dispatch }) {
 		if (state.emailPreviewInited === true || state.emailPreviewInited === "pending") return;
 		commit("setEmailPreviewInited", "pending");
+		await dispatch("waitForSdkToBeInited");
 		try {
 			Vue.prototype.$chamaileon.emailPreview = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "preview",
@@ -258,6 +271,7 @@ export default {
 	},
 	async initHtmlImport() {
 		//  if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
+		//  await dispatch("waitForSdkToBeInited");
 		// 	commit("setHtmlImportInited", "pending");
 		// 	try {
 		// 		Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
@@ -296,9 +310,10 @@ export default {
 		// 	}
 		// }
 	},
-	async initGallery({ commit, state }) {
+	async initGallery({ commit, state, dispatch }) {
 		if (state.galleryInited === true || state.galleryInited === "pending") return;
 		commit("setGalleryInited", "pending");
+		await dispatch("waitForSdkToBeInited");
 		let count = 0;
 		let loadedItems = [];
 		let images = [];
@@ -401,9 +416,10 @@ export default {
 			commit("setGalleryInited", false);
 		}
 	},
-	async initVariableEditor({ commit, getters, state }) {
+	async initVariableEditor({ commit, getters, state, dispatch }) {
 		if (state.variableEditorInited === true || state.variableEditorInited === "pending") return;
 		commit("setVariableEditorInited", "pending");
+		await dispatch("waitForSdkToBeInited");
 		try {
 			Vue.prototype.$chamaileon.variableEditor = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "variable-editor",
@@ -425,10 +441,11 @@ export default {
 			commit("setVariableEditorInited", false);
 		}
 	},
-	async initThumbnail({ commit, getters, state }, container) {
+	async initThumbnail({ commit, getters, state, dispatch }, container) {
 		if (!container) return;
 		if (state.thumbnailInited === true || state.thumbnailInited === "pending") return;
 		commit("setThumbnailInited", "pending");
+		await dispatch("waitForSdkToBeInited");
 		try {
 			const document = JSON.parse(JSON.stringify(state.document));
 			Vue.prototype.$chamaileon.thumbnail = await Vue.prototype.$chamaileon.createInlinePlugin(
@@ -456,7 +473,7 @@ export default {
 	updateSDK({ dispatch }) {
 		dispatch("initSDK");
 	},
-	resetPlayGround({ commit }) {
+	resetPlayGround({ commit, dispatch }) {
 		commit("resetState");
 		commit("resetEmailDocumentState");
 		commit("resetSdkConfigState");
@@ -467,5 +484,8 @@ export default {
 		commit("resetPreviewState");
 		commit("resetThumbnailState");
 		commit("resetVariableEditorState");
+		localStorage.clear(); // Remove everything from the localStorage as well
+		commit("setLocalStorageLoaded", true);
+		dispatch("initSDK");
 	},
 };

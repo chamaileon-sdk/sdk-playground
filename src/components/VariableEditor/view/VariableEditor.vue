@@ -90,29 +90,10 @@ export default {
 	computed: {
 		...mapState({
 			variableEditorInited: state => state.variableEditorInited,
-			sdkInited: state => state.sdkInited,
 			document: state => state.document,
 		}),
 		isInited() {
-			if (this.sdkInited === true) {
-				return this.variableEditorInited;
-			}
-			return "pending";
-		},
-	},
-	watch: {
-		isInited: {
-			handler(variableEditorInited) {
-				if (variableEditorInited === false) {
-					this.$store.dispatch("initVariableEditor");
-				}
-				if (variableEditorInited === true) {
-					const document = JSON.parse(JSON.stringify(this.document));
-					const data = { document }; // !important change we set data from now, not document
-					this.$chamaileon.variableEditor.methods.updateData(data);
-				}
-			},
-			immediate: true,
+			return this.variableEditorInited;
 		},
 	},
 	methods: {
@@ -120,9 +101,10 @@ export default {
 			initVariableEditor: "initVariableEditor",
 		}),
 		async openVariableEditor() {
-			if (this.isInited === false) {
-				await this.$store.dispatch("initVariableEditor");
-			}
+			await this.$store.dispatch("initVariableEditor");
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document };
+			this.$chamaileon.variableEditor.methods.updateData(data);
 			this.$chamaileon.variableEditor.show();
 		},
 		showPreviewButton(isVisible) {

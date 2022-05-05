@@ -21,7 +21,6 @@ const getDefaultState = () => {
 				},
 				textInsert: [],
 			},
-			fontFiles: {},
 			fontStacks: [],
 			hideDefaultFonts: false,
 		},
@@ -192,6 +191,27 @@ export default {
 				...c,
 				...newObj,
 			});
+		},
+
+		// FontStacks
+		addFontStackToVariableEditorConfig(state) {
+			state.settings.fontStacks.push([]);
+		},
+
+		removeFontStackFromVariableEditorConfig(state, index) {
+			state.settings.fontStacks.splice(index, 1);
+		},
+
+		updateFontStackInVariableEditorConfig(state, { index, fontStackString }) {
+			const fontStacks = state.settings.fontStacks;
+			const newFontStack = fontStackString.split(",")
+				.map(str => JSON.parse(JSON.stringify(str.trim())))
+				.filter(x => !!x);
+			fontStacks.splice(index, 1, newFontStack);
+		},
+		// HideDefaultFonts
+		setHideDefaultFontInVariableEditorConfig(state, value) {
+			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 	},
 	getters: {

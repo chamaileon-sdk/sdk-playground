@@ -55,7 +55,7 @@ export default function (previewConfig) {
 	plugin: "preview",
 	data: { document }, // see 'document' tab
 	settings: ${settingsGenerator(previewConfig, 2)},
-	hooks: emailPreviewHooks //see 'hooks' tab
+	hooks: emailPreviewHooks, //see 'hooks' tab
 };`;
 }
 

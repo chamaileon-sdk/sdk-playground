@@ -64,4 +64,7 @@ export default {
 	setThumbnailInited(state, payload) {
 		state.thumbnailInited = payload;
 	},
+	setLocalStorageLoaded(state, payload) {
+		state.localStorageLoaded = payload;
+	},
 };

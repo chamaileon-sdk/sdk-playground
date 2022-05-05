@@ -100,31 +100,10 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["emailEditorInited", "sdkInited", "document"]),
+		...mapState(["document", "emailEditorInited"]),
 		...mapGetters([ "getEditorConfigObject" ]),
 		isInited() {
-			if (this.sdkInited === true) {
-				return this.emailEditorInited;
-			}
-			return "pending";
-		},
-	},
-	watch: {
-		isInited: {
-			async handler(editorInited) {
-				if (editorInited === false) {
-					await this.$store.dispatch("initEmailEditor");
-				}
-				if (editorInited === true) {
-					const document = JSON.parse(JSON.stringify(this.document));
-					const data = { document }; // !important change we set data from now, not document
-					await this.$chamaileon.emailEditor.methods.updateData(data);
-					// Should not await since it can cause lag in the ui
-					this.$store.dispatch("initGallery");
-					this.$store.dispatch("initEmailPreview");
-				}
-			},
-			immediate: true,
+			return this.emailEditorInited;
 		},
 	},
 	methods: {
@@ -132,10 +111,13 @@ export default {
 			openGallery: "openGallery",
 		}),
 		async openEditor() {
-			if (this.isInited === false) {
-				await this.$store.dispatch("initEmailEditor");
-			}
-			await this.$chamaileon.emailEditor.show();
+			await this.$store.dispatch("initEmailEditor");
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document };
+			this.$chamaileon.emailEditor.methods.updateData(data);
+			this.$chamaileon.emailEditor.show();
+			this.$store.dispatch("initGallery");
+			this.$store.dispatch("initEmailPreview");
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;

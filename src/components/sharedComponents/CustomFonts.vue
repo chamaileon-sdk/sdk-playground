@@ -48,7 +48,7 @@
 					justify="end"
 					class="ma-0"
 				>
-					<AddButton @click="addFontFileMethod">
+					<AddButton @click="addFontFile">
 						New Font File
 					</AddButton>
 				</v-row>
@@ -146,7 +146,7 @@
 				justify="end"
 				class="ma-0"
 			>
-				<AddButton @click="addFontStackMethod">
+				<AddButton @click="addFontStack">
 					New Font Stack
 				</AddButton>
 			</v-row>
@@ -260,8 +260,11 @@ export default {
 				return this.hideDefaultFonts;
 			},
 			set(value) {
-				this.setHideDefaultFont(value);
+				this.setHideDefaultFontInEditorConfig(value);
 				this.updateEditorSettings();
+
+				this.setHideDefaultFontInVariableEditorConfig(value);
+				this.updateVariableEditorSettings();
 			},
 		},
 		fontFilesArray() {
@@ -281,22 +284,27 @@ export default {
 	methods: {
 		...mapActions([
 			"updateEditorSettings",
+			"updateVariableEditorSettings",
 		]),
 		...mapMutations([
 			"updateBlockLibsOrder",
 			"updateBlockLibs",
 			"removeBlockLibs",
-			"addFontFile",
-			"removeFontFile",
-			"updateFontFile",
-			"addFontStack",
-			"updateFontStack",
-			"removeFontStack",
-			"setHideDefaultFont",
+			"addFontFileToEditorConfig",
+			"removeFontFileFromEditorConfig",
+			"updateFontFileInEditorConfig",
+			"addFontStackToEditorConfig",
+			"addFontStackToVariableEditorConfig",
+			"updateFontStackInEditorConfig",
+			"updateFontStackInVariableEditorConfig",
+			"removeFontStackFromEditorConfig",
+			"removeFontStackFromVariableEditorConfig",
+			"setHideDefaultFontInEditorConfig",
+			"setHideDefaultFontInVariableEditorConfig",
 		]),
 
-		addFontFileMethod() {
-			this.addFontFile();
+		addFontFile() {
+			this.addFontFileToEditorConfig();
 			this.updateEditorSettings();
 		},
 
@@ -307,24 +315,38 @@ export default {
 				...map,
 				[font.fontName]: font.fontFile,
 			}), {});
-			this.updateFontFile(newFontFiles);
+			this.updateFontFileInEditorConfig(newFontFiles);
 			this.updateEditorSettings();
 		}),
 
-		addFontStackMethod() {
-			this.addFontStack();
+		removeFontFile(fontName) {
+			this.removeFontFileFromEditorConfig(fontName);
 			this.updateEditorSettings();
 		},
 
-		removeFontStackMethod() {
-			this.removeFontStack();
+		addFontStack() {
+			this.addFontStackToEditorConfig();
 			this.updateEditorSettings();
+
+			this.addFontStackToVariableEditorConfig();
+			this.updateVariableEditorSettings();
 		},
 
 		updateFontStackDebounced: debounce(function ({ index, fontStackString }) {
-			this.updateFontStack({ index, fontStackString });
+			this.updateFontStackInEditorConfig({ index, fontStackString });
 			this.updateEditorSettings();
+
+			this.updateFontStackInVariableEditorConfig({ index, fontStackString });
+			this.updateVariableEditorSettings();
 		}),
+
+		removeFontStack(index) {
+			this.removeFontStackFromEditorConfig(index);
+			this.updateEditorSettings();
+
+			this.removeFontStackFromEditorConfig(index);
+			this.removeFontStackFromVariableEditorConfig();
+		},
 
 	},
 

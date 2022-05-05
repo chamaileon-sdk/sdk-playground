@@ -154,7 +154,7 @@ ${"\t".repeat(indent)}},`;
 };
 
 const calculateFontStacks = (editorConfig, indent) => {
-	if (!editorConfig.settings.fontStacks.length === 0) return "[],";
+	if (editorConfig.settings.fontStacks.length === 0) return "[],";
 
 	const innerArrays = editorConfig.settings.fontStacks.map((stack) => {
 		return `

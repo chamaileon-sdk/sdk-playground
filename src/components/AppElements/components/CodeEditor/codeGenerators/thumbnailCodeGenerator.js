@@ -8,15 +8,17 @@ ${"\t".repeat(indent - 1)}}`;
 };
 
 export default function (thumbnailConfig) {
-	return `const thumbnailInstance = await chamaileonPlugins.createInlinePlugin({
-	plugin: "thumbnail",
-	data: { document }, //see "document" tab
-	settings: ${settingsGenerator(thumbnailConfig, 2)},
-	hooks: thumbnailHooks //see 'hooks' tab
+	return `const thumbnailInstance = await chamaileonPlugins.createInlinePlugin(
+	{
+		plugin: "thumbnail",
+		data: { document }, //see "document" tab
+		settings: ${settingsGenerator(thumbnailConfig, 3)},
+		hooks: thumbnailHooks, //see 'hooks' tab
+	},
 	{
 		container: "#thumbnail", //your container query selector or HTML element
 	}
-});`;
+);`;
 }
 
 export {

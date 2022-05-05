@@ -225,30 +225,30 @@ export default {
 			});
 		},
 
-		// Fontfiles
-		addFontFile(state) {
+		// FontFiles
+		addFontFileToEditorConfig(state) {
 			Vue.set(state.settings.fontFiles, `Font Family ${state.ffKey}`, "");
 			state.ffKey++;
 		},
 
-		removeFontFile(state, fontName) {
+		removeFontFileFromEditorConfig(state, fontName) {
 			Vue.delete(state.settings.fontFiles, fontName);
 		},
 
-		updateFontFile(state, newFontFiles) {
+		updateFontFileInEditorConfig(state, newFontFiles) {
 			Vue.set(state.settings, "fontFiles", newFontFiles);
 		},
 
 		// FontStacks
-		addFontStack(state) {
+		addFontStackToEditorConfig(state) {
 			state.settings.fontStacks.push([]);
 		},
 
-		removeFontStack(state, index) {
+		removeFontStackFromEditorConfig(state, index) {
 			state.settings.fontStacks.splice(index, 1);
 		},
 
-		updateFontStack(state, { index, fontStackString }) {
+		updateFontStackInEditorConfig(state, { index, fontStackString }) {
 			const fontStacks = state.settings.fontStacks;
 			const newFontStack = fontStackString.split(",")
 				.map(str => JSON.parse(JSON.stringify(str.trim())))
@@ -256,7 +256,7 @@ export default {
 			fontStacks.splice(index, 1, newFontStack);
 		},
 		// HideDefaultFonts
-		setHideDefaultFont(state, value) {
+		setHideDefaultFontInEditorConfig(state, value) {
 			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 

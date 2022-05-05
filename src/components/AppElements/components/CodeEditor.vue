@@ -354,7 +354,7 @@ export default {
 			} else if (this.$route.path === "/htmlgenerator") {
 				return this.htmlGeneratorCode;
 			} else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
-			else return "//There are no code available";
+			else return "//There is no code available";
 		},
 
 		hooks() {
