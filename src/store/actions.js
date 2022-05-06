@@ -98,7 +98,7 @@ export default {
 		commit("changeLogoFunction", window.createLogo);
 
 		dispatch("initEmailEditor");
-		// dispatch("initVariableEditor");
+		dispatch("initVariableEditor");
 		dispatch("initEmailPreview");
 		// dispatch("initHtmlImport");
 		dispatch("initGallery");
@@ -486,6 +486,7 @@ export default {
 		commit("resetVariableEditorState");
 		localStorage.clear(); // Remove everything from the localStorage as well
 		commit("setLocalStorageLoaded", true);
+		dispatch("fetchDummyHtml");
 		dispatch("initSDK");
 	},
 };
