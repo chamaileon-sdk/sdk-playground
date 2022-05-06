@@ -151,7 +151,7 @@ export default {
 						}
 
 						if (state.galleryInited === true) {
-							Vue.prototype.$chamaileon.gallery.methods.updateData({ editedImageUrl: originalImage, dimensions: lockDimensions });
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ editImgSrc: originalImage, dimensions: lockDimensions });
 							Vue.prototype.$chamaileon.gallery.show();
 
 							const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
@@ -169,7 +169,7 @@ export default {
 						}
 
 						if (state.galleryInited === true) {
-							Vue.prototype.$chamaileon.gallery.methods.updateData({ editedImageUrl: originalImage, dimensions: lockDimensions });
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ editImgSrc: originalImage, dimensions: lockDimensions });
 							Vue.prototype.$chamaileon.gallery.show();
 
 							const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
