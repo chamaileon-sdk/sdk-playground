@@ -126,16 +126,6 @@ export default {
 							resolve();
 						});
 					},
-					onBeforeClose: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onAfterClose: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
 					onEditTitle: ({ title }) => {
 						return new Promise((resolve) => {
 							resolve(title);
@@ -151,7 +141,7 @@ export default {
 						}
 
 						if (state.galleryInited === true) {
-							Vue.prototype.$chamaileon.gallery.methods.updateData({ editImgSrc: originalImage, dimensions: lockDimensions });
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: originalImage, dimensions: lockDimensions });
 							Vue.prototype.$chamaileon.gallery.show();
 
 							const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
@@ -169,7 +159,7 @@ export default {
 						}
 
 						if (state.galleryInited === true) {
-							Vue.prototype.$chamaileon.gallery.methods.updateData({ editImgSrc: originalImage, dimensions: lockDimensions });
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: originalImage, dimensions: lockDimensions });
 							Vue.prototype.$chamaileon.gallery.show();
 
 							const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
@@ -430,6 +420,21 @@ export default {
 							const newJson = await Vue.prototype.$chamaileon.variableEditor.methods.getDocument();
 							commit("updateDocument", newJson);
 							Vue.prototype.$chamaileon.variableEditor.hide();
+						}
+					},
+					onEditImage: async () => {
+						dispatch("initGallery");
+						while (state.galleryInited === "pending") {
+							await new Promise(resolve => setTimeout(resolve, 100));
+						}
+
+						if (state.galleryInited === true) {
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: "", dimensions: null });
+							Vue.prototype.$chamaileon.gallery.show();
+
+							const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+							Vue.prototype.$chamaileon.gallery.hide();
+							return { src };
 						}
 					},
 				},

@@ -11,7 +11,7 @@
 				class="pa-0 mr-3"
 				@click="
 					changeLogo(
-						'https://app.chamaileon.io/createLogoWithText.js',
+						'https://cdn.chamaileon.io/assets/createLogoWithText.js',
 					)
 				"
 			>
@@ -24,7 +24,7 @@
 					:style="`fill: ${
 						$vuetify.presets.framework.theme.themes.light.primary
 					}; ${calculateOpacity(
-						'https://app.chamaileon.io/createLogoWithText.js',
+						'https://cdn.chamaileon.io/assets/createLogoWithText.js',
 					)}`"
 				/>
 			</v-tab>

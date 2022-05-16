@@ -1,7 +1,12 @@
 export default function () {
 	const str = `const variableEditorHooks = {
-	onEditImage: ({ originalImg }) => {
+	onEditImage: () => {
 		return new Promise(resolve => {
+			await galleryInstance.methods.updateData({ currentImgSrc: "", dimensions: null });
+			await galleryInstance.show();
+			const { src } = await galleryInstance.methods.pickImage();
+			await galleryInstance.hide();
+
 			resolve({ src });
 		});
 	},
@@ -13,10 +18,8 @@ export default function () {
 	},
 
 	onButtonClicked: ({ buttonId }) => {
-
-		if (buttonId === "close") variableEditorInstance.close();
-
 		return new Promise(resolve => {
+			if (buttonId === "close") variableEditorInstance.close();
 			resolve();
 		});
 	},

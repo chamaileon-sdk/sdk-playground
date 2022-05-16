@@ -12,7 +12,7 @@
 				class="pa-0 mr-3 rounded-lg"
 				@click="
 					changeSplash(
-						'https://app.chamaileon.io/splashScreen.html',
+						'https://cdn.chamaileon.io/assets/splashScreen.html',
 					)
 				"
 			>
@@ -25,7 +25,7 @@
 					elevation="0"
 					:style="
 						calculateOpacity(
-							'https://app.chamaileon.io/splashScreen.html',
+							'https://cdn.chamaileon.io/assets/splashScreen.html',
 						)
 					"
 				/>

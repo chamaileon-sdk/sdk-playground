@@ -3,6 +3,13 @@ export default function () {
 const blockLibraryData = new Map();
 
 const emailEditorHooks = {
+	close: () => {
+		return new Promise(resolve => {
+			editorInstance.hide();
+			resolve();
+		});
+	},
+
 	onSave: ({ document }) => {
 		emailDocument = document;
 
@@ -19,19 +26,7 @@ const emailEditorHooks = {
 		});
 	},
 
-	onChange: () => {
-		return new Promise(resolve => {
-			resolve();
-		});
-	},
-
-	onBeforeClose: () => {
-		return new Promise(resolve => {
-			resolve();
-		});
-	},
-
-	onAfterClose: () => {
+	onChange: ({ mutation }) => {
 		return new Promise(resolve => {
 			resolve();
 		});
@@ -43,13 +38,21 @@ const emailEditorHooks = {
 		});
 	},
 
-	onEditImage: async ({ originalImage, lockDimensions: { width, height } }) => {
-		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
+	onEditImage: async ({ originalImage, lockDimensions }) => {
+		await galleryInstance.methods.updateData({ currentImgSrc: originalImage, dimensions: lockDimensions });
+		await galleryInstance.show();
+		const { src } = await galleryInstance.methods.pickImage();
+		await galleryInstance.hide();
+
 		return { src };
 	},
 
-	onEditBackgroundImage: async ({ originalImage, lockDimensions: { width, height } }) => {
-		const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
+	onEditBackgroundImage: async ({ originalImage }) => {
+		await galleryInstance.methods.updateData({ currentImgSrc: originalImage });
+		await galleryInstance.show();
+		const { src } = await galleryInstance.methods.pickImage();
+		await galleryInstance.hide();
+
 		return { src };
 	},
 
@@ -122,6 +125,12 @@ const emailEditorHooks = {
 	onExpressionEditClicked: ({ expression }) => {
 		return new Promise(resolve => {
 			resolve({ expression: "<Your inserted expression>" });
+		});
+	},
+
+	onUserEvent = ({ userEvent }) => {
+		return new Promise(resolve => {
+			resolve();
 		});
 	},
 };`;

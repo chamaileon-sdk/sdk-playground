@@ -30,8 +30,8 @@ export default function (galleryConfig) {
 const galleryInstance = await chamaileonPlugins.createFullscreenPlugin({
 	plugin: "gallery",
 	data: {
-		editImgSrc: editImgSrc,
-		dimensions: dimensions,
+		currentImgSrc,
+		dimensions,
 	},
 	settings: ${settingsGenerator(galleryConfig, 2)},
 	hooks: galleryHooks, //see "hooks" tab

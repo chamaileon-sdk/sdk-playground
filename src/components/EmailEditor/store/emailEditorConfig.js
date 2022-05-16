@@ -48,14 +48,16 @@ const getDefaultState = () => {
 			fontStacks: [],
 			hideDefaultFonts: false,
 			buttons: {
-				header: [ {
-					id: "preview",
-					type: "button",
-					icon: "eye",
-					label: "Preview",
-					color: "#D0021B",
-					style: "outlined",
-				} ],
+				header: [
+					{
+						id: "preview",
+						type: "button",
+						icon: "eye",
+						label: "Preview",
+						color: "#D0021B",
+						style: "outlined",
+					},
+				],
 				textInsert: [],
 			},
 			elements: {
@@ -96,7 +98,7 @@ const getDefaultState = () => {
 					state: "disabled",
 				},
 			},
-			staticAssetsBaseUrl: "https://plugins.chamaileon.io/real-time-editor/latest/static/",
+			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 			autoSaveInterval: 15000,
 		},

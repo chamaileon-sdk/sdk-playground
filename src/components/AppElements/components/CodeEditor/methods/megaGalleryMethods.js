@@ -2,8 +2,8 @@ import { settingsGenerator } from "../codeGenerators/megaGalleryCodeGenerator";
 
 export default function (galleryConfig) {
 	const str = `galleryInstance.methods.updateData({
-	editImgSrc: editImgSrc,
-	dimensions: dimensions,
+	currentImgSrc,
+	dimensions,
 });
 
 galleryInstance.methods.updateSettings(${settingsGenerator(galleryConfig, 1)});

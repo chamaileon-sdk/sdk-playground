@@ -81,12 +81,6 @@ export default {
 
 		config.settings.variablesToEdit = tmpArr;
 
-		const editorConfig = JSON.parse(JSON.stringify(state.editorConfig));
-
-		// TODO: THIS IS NOT A SOLUTION !!
-		config.settings.fontStacks = editorConfig.settings.fontStacks;
-		config.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
-
 		return config;
 	},
 	getPreviewConfigObject: (state) => {
