@@ -151,7 +151,6 @@ export default {
 					},
 					onEditBackgroundImage: async ({
 						originalImage,
-						lockDimensions,
 					}) => {
 						dispatch("initGallery");
 						while (state.galleryInited === "pending") {
@@ -159,7 +158,7 @@ export default {
 						}
 
 						if (state.galleryInited === true) {
-							Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: originalImage, dimensions: lockDimensions });
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: originalImage, dimensions: null });
 							Vue.prototype.$chamaileon.gallery.show();
 
 							const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();

@@ -48,7 +48,7 @@ const emailEditorHooks = {
 	},
 
 	onEditBackgroundImage: async ({ originalImage }) => {
-		await galleryInstance.methods.updateData({ currentImgSrc: originalImage });
+		await galleryInstance.methods.updateData({ currentImgSrc: originalImage, dimensions: null });
 		await galleryInstance.show();
 		const { src } = await galleryInstance.methods.pickImage();
 		await galleryInstance.hide();
