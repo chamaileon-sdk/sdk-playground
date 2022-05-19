@@ -38,6 +38,7 @@ export default {
 	},
 	mounted() {
 		this.resetVariablesToEditArray(this.$store.state.document.variables);
+		this.updateVariableEditorSettings();
 	},
 	methods: {
 		...mapMutations(["resetVariablesToEditArray", "toggleVariableToEdit"]),

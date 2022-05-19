@@ -437,6 +437,11 @@ export default {
 							return { src };
 						}
 					},
+					onTextInsertPluginButtonClicked: ({ buttonId }) => {
+						return new Promise((resolve) => {
+							resolve({ value: buttonId });
+						});
+					},
 				},
 			});
 			commit("setVariableEditorInited", true);
