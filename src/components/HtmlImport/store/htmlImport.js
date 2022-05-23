@@ -11,18 +11,20 @@ export default {
 		async fetchJSON({ commit }, html) {
 			commit("toggleFetching");
 
+			const { accessToken = "" } = JSON.parse(localStorage.getItem("chamaileonSdkAccessTokenCache"));
+
 			const genRequest = await fetch(
 				"https://sdk-api.chamaileon.io/api/v1/emails/import",
 				{
 					method: "POST",
 					headers: {
-						Authorization: `Bearer ${apikey}`,
+						Authorization: `Bearer ${accessToken}`,
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						html: html,
+						html,
 					}),
-				}
+				},
 			);
 
 			if (!genRequest.ok) {

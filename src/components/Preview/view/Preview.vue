@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Preview'"
-					:doc-url="'https://chamaileon.io/sdk/docs/email-preview/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-preview/'"
 					:image="'EmailPreviewIllustration.svg'"
 					:button-text="'SHOW PREVIEW'"
 					:is-inited="isInited"
@@ -69,32 +69,13 @@ export default {
 	computed: {
 		...mapState({
 			emailPreviewInited: state => state.emailPreviewInited,
-			sdkInited: state => state.sdkInited,
 			document: state => state.document,
 		}),
 		...mapGetters({
 			getPreviewConfigObject: "getPreviewConfigObject",
 		}),
 		isInited() {
-			if (this.sdkInited === true) {
-				return this.emailPreviewInited;
-			}
-			return "pending";
-		},
-	},
-	watch: {
-		isInited: {
-			handler(previewInited) {
-				if (previewInited === false) {
-					this.$store.dispatch("initEmailPreview");
-				}
-				if (previewInited === true) {
-					const document = JSON.parse(JSON.stringify(this.document));
-					const data = { document }; // !important change we set data from now, not document
-					this.$chamaileon.emailPreview.methods.updateData(data);
-				}
-			},
-			immediate: true,
+			return this.emailPreviewInited;
 		},
 	},
 	methods: {
@@ -102,9 +83,10 @@ export default {
 			initMegaPreview: "initMegaPreview",
 		}),
 		async openPreview() {
-			if (this.isInited === false) {
-				await this.$store.dispatch("initEmailPreview");
-			}
+			await this.$store.dispatch("initEmailPreview");
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document };
+			this.$chamaileon.emailPreview.methods.updateData(data);
 			this.$chamaileon.emailPreview.show();
 		},
 		showPreviewButton(isVisible) {

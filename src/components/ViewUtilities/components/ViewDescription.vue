@@ -152,10 +152,10 @@ export default {
 }
 
 .previewBtn {
-  width: 35vw;
-  height: 50px;
-  margin: auto;
-  margin-bottom: 60px;
+	width: 35vw;
+	height: 50px;
+	margin: auto;
+	margin-bottom: 60px;
 }
 
 </style>

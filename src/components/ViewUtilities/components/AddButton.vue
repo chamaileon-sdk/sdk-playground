@@ -1,14 +1,16 @@
 <template>
 	<v-btn
 		depressed
+		color="success"
 		@click="
 			() => {
-				this.$emit('click');
+				$emit('click');
 			}
 		"
-		color="success"
 	>
-		<v-icon left> mdi-plus </v-icon>
+		<v-icon left>
+			mdi-plus
+		</v-icon>
 		<slot />
 	</v-btn>
 </template>

@@ -9,7 +9,6 @@ const getDefaultState = () => {
 		fidArr: [],
 		tid: 0,
 		settings: {
-			hideHeader: false,
 			variablesToEdit: [],
 			buttons: {
 				header: {
@@ -20,8 +19,10 @@ const getDefaultState = () => {
 					left: [],
 					right: [],
 				},
-				textInsertPlugin: [],
+				textInsert: [],
 			},
+			fontStacks: [],
+			hideDefaultFonts: false,
 		},
 	};
 };
@@ -50,7 +51,7 @@ export default {
 		},
 
 		toggleVariableToEdit(state, index) {
-			state.settings.variablesToEdit[index].edit =				!state.settings.variablesToEdit[index].edit;
+			state.settings.variablesToEdit[index].edit = !state.settings.variablesToEdit[index].edit;
 		},
 
 		// Left
@@ -166,15 +167,15 @@ export default {
 
 		// Text Insert
 		updateVETextInsertOrder(state, payload) {
-			state.settings.buttons.textInsertPlugin = payload;
+			state.settings.buttons.textInsert = payload;
 		},
 
 		deleteVETextInsertButton(state, index) {
-			state.settings.buttons.textInsertPlugin.splice(index, 1);
+			state.settings.buttons.textInsert.splice(index, 1);
 		},
 
 		addVETextInsertButton(state) {
-			state.settings.buttons.textInsertPlugin.push({
+			state.settings.buttons.textInsert.push({
 				id: `ti-btn-${state.tid}`,
 				label: "Button",
 				icon: "",
@@ -184,12 +185,33 @@ export default {
 
 		updateVETextInsertButton(state, payload) {
 			const newObj = (({ index, ...payload }) => payload)(payload);
-			const c = state.settings.buttons.textInsertPlugin[payload.index];
+			const c = state.settings.buttons.textInsert[payload.index];
 
-			state.settings.buttons.textInsertPlugin.splice(payload.index, 1, {
+			state.settings.buttons.textInsert.splice(payload.index, 1, {
 				...c,
 				...newObj,
 			});
+		},
+
+		// FontStacks
+		addFontStackToVariableEditorConfig(state) {
+			state.settings.fontStacks.push([]);
+		},
+
+		removeFontStackFromVariableEditorConfig(state, index) {
+			state.settings.fontStacks.splice(index, 1);
+		},
+
+		updateFontStackInVariableEditorConfig(state, { index, fontStackString }) {
+			const fontStacks = state.settings.fontStacks;
+			const newFontStack = fontStackString.split(",")
+				.map(str => JSON.parse(JSON.stringify(str.trim())))
+				.filter(x => !!x);
+			fontStacks.splice(index, 1, newFontStack);
+		},
+		// HideDefaultFonts
+		setHideDefaultFontInVariableEditorConfig(state, value) {
+			Vue.set(state.settings, "hideDefaultFonts", value);
 		},
 	},
 	getters: {
@@ -200,7 +222,6 @@ export default {
 		async updateVariableEditorSettings({ getters, rootState }) {
 			const settings = getters.getVariableEditorConfigObject.settings;
 			while (rootState.variableEditorInited === "pending") {
-				// eslint-disable-next-line no-await-in-loop
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.variableEditorInited === true) {

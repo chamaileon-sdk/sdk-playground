@@ -94,6 +94,7 @@ export default {
 			);
 		}.bind(this);
 
+		this.$store.commit("setLocalStorageLoaded", "pending");
 		for (const elem of [
 			"sdkConfig",
 			"emailEditorConfig",
@@ -111,7 +112,7 @@ export default {
 				);
 			}
 		}
-
+		this.$store.commit("setLocalStorageLoaded", true);
 		this.$store.dispatch("fetchDummyHtml");
 	},
 };

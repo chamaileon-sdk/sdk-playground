@@ -6,7 +6,7 @@ export default {
 		const x = JSON.parse(JSON.stringify(state.megaGalleryConfig));
 		return x;
 	},
-	getConfigObject: (state) => {
+	getEditorConfigObject: (state) => {
 		// Deep copy
 		const config = JSON.parse(JSON.stringify(state.editorConfig));
 		delete config.BlockLibData;
@@ -49,16 +49,11 @@ export default {
 		// User processing
 		if (!config.settings.user.enabled) config.user = false;
 
-		// config.data = { document: state.document };
-		// TODO: Variable Editor icon has to be mdi-*iconTitle*
+		const document = JSON.parse(JSON.stringify(state.document));
+
+		config.data = { document };
 
 		config.hooks = state.editorConfig.hooks;
-
-		// TOOD: figure out static asset base url on the playground because for now it's not
-		// passed to the editor
-		// x.settings.staticAssetsBaseUrl = state.editorConfig.staticAssetsBaseUrl;
-
-		config.settings.videoElementBaseUrl = state.editorConfig.videoElementBaseUrl;
 
 		return config;
 	},
@@ -67,7 +62,7 @@ export default {
 
 		const document = JSON.parse(JSON.stringify(state.document));
 
-		config.data = { document }; // !important change we set data from now, not document
+		config.data = { document };
 
 		config.settings = JSON.parse(
 			JSON.stringify(state.variableEditorConfig.settings),
@@ -86,18 +81,13 @@ export default {
 
 		config.settings.variablesToEdit = tmpArr;
 
-		const editorConfig = JSON.parse(JSON.stringify(state.editorConfig));
-
-		config.settings.fontStacks = editorConfig.settings.fontStacks;
-		config.settings.hideDefaultFonts = editorConfig.settings.hideDefaultFonts;
-
 		return config;
 	},
 	getPreviewConfigObject: (state) => {
 		const config = {};
 		const document = JSON.parse(JSON.stringify(state.document));
 
-		config.data = { document }; // !important change we set data from now, not document
+		config.data = { document };
 		config.settings = state.previewConfig.settings;
 
 		return config;

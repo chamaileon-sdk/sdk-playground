@@ -1,12 +1,16 @@
 const getDefaultState = () => {
 	return {
-		environmentName: location.host === "localhost:8080" ? "dev" : location.host === "sdk-playground.chamaileon.io" ? "sdk-prod" : "sdk-staging",
+		environmentName: location.host !== "sdk-playground-staging.chamaileon.io"
+			? "sdk-playground-prod"
+			: "sdk-playground-staging",
 		locale: "en",
+		apiKey: "sdkApiKeyThatWasGeneratedWithTheAutomatedScript",
+		apiBackend: "https://sdk-demo-api.chamaileon.io/getAuthToken",
 		urls: {
 			splashScreen:
-				"https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html",
+				"https://cdn.chamaileon.io/assets/splashScreen.html",
 			createLogoJS:
-				"https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js",
+				"https://cdn.chamaileon.io/assets/createLogoWithText.js",
 		},
 		colors: {
 			primary: "#00bee6",

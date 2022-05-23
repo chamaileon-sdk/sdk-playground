@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Gallery'"
-					:doc-url="'https://chamaileon.io/sdk/docs/gallery/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/gallery/'"
 					:image="'EmailThumbnailIllustration.svg'"
 					button-text="Open gallery"
 					:is-inited="isInited"
@@ -44,8 +44,6 @@
 </template>
 
 <script>
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
@@ -73,23 +71,9 @@ export default {
 		...mapState({
 			gallerySettings: state => state.megaGalleryConfig.settings,
 			galleryInited: state => state.galleryInited,
-			sdkInited: state => state.sdkInited,
 		}),
 		isInited() {
-			if (this.sdkInited === true) {
-				return this.galleryInited;
-			}
-			return "pending";
-		},
-	},
-	watch: {
-		isInited: {
-			handler(v) {
-				if (v === false) {
-					this.$store.dispatch("initGallery");
-				}
-			},
-			immediate: true,
+			return this.galleryInited;
 		},
 	},
 	methods: {
@@ -100,12 +84,11 @@ export default {
 			this.previewButtonVisible = isVisible;
 		},
 		async openGallery() {
-			if (this.isInited === false) {
-				await this.$store.dispatch("initGallery");
-			}
+			await this.$store.dispatch("initGallery");
 			this.$chamaileon.gallery.show();
-			const { url } = await this.$chamaileon.gallery.methods.pickImage();
-			console.log("Picked image: " + url);
+			const { src } = await this.$chamaileon.gallery.methods.pickImage();
+			console.info("Picked image: ", src);
+			this.$chamaileon.gallery.hide();
 		},
 	},
 };

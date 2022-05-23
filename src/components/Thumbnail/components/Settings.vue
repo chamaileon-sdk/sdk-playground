@@ -91,13 +91,10 @@ export default {
 		OptionWrapper,
 	},
 	computed: {
-		...mapState(["thumbnailInited", "sdkInited", "document"]),
-		...mapGetters([ "getConfigObject" ]),
+		...mapState(["thumbnailInited", "document"]),
+		...mapGetters([ "getEditorConfigObject" ]),
 		isInited() {
-			if (this.sdkInited === true) {
-				return this.thumbnailInited;
-			}
-			return "pending";
+			return this.thumbnailInited;
 		},
 		columns() {
 			switch (this.$vuetify.breakpoint.name) {
@@ -145,16 +142,6 @@ export default {
 			set(val) {
 				this.updateSettings({ scale: val });
 			},
-		},
-	},
-	watch: {
-		isInited: {
-			async handler(isThumbnailInited) {
-				if (isThumbnailInited === false) {
-					await this.updateThumbnail();
-				}
-			},
-			immediate: true,
 		},
 	},
 	mounted() {

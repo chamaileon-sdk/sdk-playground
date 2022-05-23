@@ -164,10 +164,6 @@ export default {
 					icon: "mdi-account-multiple",
 				},
 				{
-					type: "code",
-					icon: "mdi-code-tags",
-				},
-				{
 					type: "video",
 					icon: "mdi-video-outline",
 				},
@@ -193,6 +189,10 @@ export default {
 				},
 			],
 			advancedElements: [
+				{
+					type: "code",
+					icon: "mdi-code-tags",
+				},
 				{
 					type: "loop",
 					icon: "mdi-refresh",

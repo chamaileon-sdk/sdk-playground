@@ -101,7 +101,6 @@ export default {
 		async updatePreviewSettings({ getters, rootState }) {
 			const settings = getters.getPreviewConfigObject.settings;
 			while (rootState.emailPreviewInited === "pending") {
-				// eslint-disable-next-line no-await-in-loop
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.emailPreviewInited === true) {

@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
 import Vue from "vue";
 
 const getDefaultState = () => {
 	return {
 		settings: {
-			hideHeader: false,
 			folderTree: {
 				_id: "root",
 				name: "root",
@@ -76,7 +74,6 @@ export default {
 		async updateGallerySettings({ getters, rootState }) {
 			const settings = getters.getGalleryConfigObject.settings;
 			while (rootState.galleryInited === "pending") {
-				// eslint-disable-next-line no-await-in-loop
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.galleryInited === true) {

@@ -43,17 +43,15 @@
 				Font Files
 			</div>
 			<OptionWrapper>
-				<template>
-					<v-row
-						align="center"
-						justify="end"
-						class="ma-0"
-					>
-						<AddButton @click="addFontFileMethod">
-							New Font File
-						</AddButton>
-					</v-row>
-				</template>
+				<v-row
+					align="center"
+					justify="end"
+					class="ma-0"
+				>
+					<AddButton @click="addFontFile">
+						New Font File
+					</AddButton>
+				</v-row>
 				<v-card
 					class="mx-auto mt-8 list3 rounded"
 					elevation="0"
@@ -143,17 +141,15 @@
 		<p>Font stacks are displayed in an alphabetical order in the editor.</p>
 
 		<OptionWrapper>
-			<template>
-				<v-row
-					align="center"
-					justify="end"
-					class="ma-0"
-				>
-					<AddButton @click="addFontStackMethod">
-						New Font Stack
-					</AddButton>
-				</v-row>
-			</template>
+			<v-row
+				align="center"
+				justify="end"
+				class="ma-0"
+			>
+				<AddButton @click="addFontStack">
+					New Font Stack
+				</AddButton>
+			</v-row>
 			<v-card
 				class="mx-auto mt-8 list3 rounded"
 				elevation="0"
@@ -251,69 +247,24 @@ export default {
 		// draggable,
 		OptionWrapper,
 	},
+	// eslint-disable-next-line vue/require-prop-types
 	props: [ "noFontFiles" ],
-	methods: {
-		...mapActions([
-			"updateEditorSettings"
-		]),
-		...mapMutations([
-			"updateBlockLibsOrder",
-			"updateBlockLibs",
-			"removeBlockLibs",
-			"addFontFile",
-			"removeFontFile",
-			"updateFontFile",
-			"addFontStack",
-			"updateFontStack",
-			"removeFontStack",
-			"setHideDefaultFont",
-		]),
-
-		addFontFileMethod() {
-			this.addFontFile();
-			this.updateEditorSettings();
-		},
-
-		updateFontFileDebounced: debounce(function (payload) {
-			const newFontFilesArray = JSON.parse(JSON.stringify(this.fontFilesArray));
-			newFontFilesArray[payload.fontIndex] = { fontName: payload.fontName, fontFile: payload.fontFile };
-			const newFontFiles = newFontFilesArray.reduce((map, font) => ({
-				...map,
-				[font.fontName]: font.fontFile,
-			}), {});
-			this.updateFontFile(newFontFiles);
-			this.updateEditorSettings();
-		}),
-
-		addFontStackMethod() {
-			this.addFontStack();
-			this.updateEditorSettings();
-		},
-
-		removeFontStackMethod() {
-			this.removeFontStack();
-			this.updateEditorSettings();
-		},
-
-		updateFontStackDebounced: debounce(function ({ index, fontStackString }) {
-			this.updateFontStack({ index, fontStackString });
-			this.updateEditorSettings();
-		}),
-
-	},
 	computed: {
 		...mapGetters({
 			fontFiles: "getFontFiles",
 			fontStacks: "getFontStacks",
-			hideDefaultFonts: "gethideDefaultFonts",
+			hideDefaultFonts: "getHideDefaultFonts",
 		}),
 		hideDefaultFontsValue: {
 			get() {
 				return this.hideDefaultFonts;
 			},
 			set(value) {
-				this.setHideDefaultFont(value);
+				this.setHideDefaultFontInEditorConfig(value);
 				this.updateEditorSettings();
+
+				this.setHideDefaultFontInVariableEditorConfig(value);
+				this.updateVariableEditorSettings();
 			},
 		},
 		fontFilesArray() {
@@ -324,13 +275,81 @@ export default {
 			for (const [key, value] of Object.entries(this.fontFiles)) {
 				fontFilesArray.push({ fontName: key, fontFile: value });
 			}
-			// eslint-disable-next-line consistent-return
 			return fontFilesArray;
 		},
 		breakpoint() {
 			return this.$vuetify.breakpoint;
 		},
 	},
+	methods: {
+		...mapActions([
+			"updateEditorSettings",
+			"updateVariableEditorSettings",
+		]),
+		...mapMutations([
+			"updateBlockLibsOrder",
+			"updateBlockLibs",
+			"removeBlockLibs",
+			"addFontFileToEditorConfig",
+			"removeFontFileFromEditorConfig",
+			"updateFontFileInEditorConfig",
+			"addFontStackToEditorConfig",
+			"addFontStackToVariableEditorConfig",
+			"updateFontStackInEditorConfig",
+			"updateFontStackInVariableEditorConfig",
+			"removeFontStackFromEditorConfig",
+			"removeFontStackFromVariableEditorConfig",
+			"setHideDefaultFontInEditorConfig",
+			"setHideDefaultFontInVariableEditorConfig",
+		]),
+
+		addFontFile() {
+			this.addFontFileToEditorConfig();
+			this.updateEditorSettings();
+		},
+
+		updateFontFileDebounced: debounce(function (payload) {
+			const newFontFilesArray = JSON.parse(JSON.stringify(this.fontFilesArray));
+			newFontFilesArray[payload.fontIndex] = { fontName: payload.fontName, fontFile: payload.fontFile };
+			const newFontFiles = newFontFilesArray.reduce((map, font) => ({
+				...map,
+				[font.fontName]: font.fontFile,
+			}), {});
+			this.updateFontFileInEditorConfig(newFontFiles);
+			this.updateEditorSettings();
+		}),
+
+		removeFontFile(fontName) {
+			this.removeFontFileFromEditorConfig(fontName);
+			this.updateEditorSettings();
+		},
+
+		addFontStack() {
+			this.addFontStackToEditorConfig();
+			this.updateEditorSettings();
+
+			this.addFontStackToVariableEditorConfig();
+			this.updateVariableEditorSettings();
+		},
+
+		updateFontStackDebounced: debounce(function ({ index, fontStackString }) {
+			this.updateFontStackInEditorConfig({ index, fontStackString });
+			this.updateEditorSettings();
+
+			this.updateFontStackInVariableEditorConfig({ index, fontStackString });
+			this.updateVariableEditorSettings();
+		}),
+
+		removeFontStack(index) {
+			this.removeFontStackFromEditorConfig(index);
+			this.updateEditorSettings();
+
+			this.removeFontStackFromEditorConfig(index);
+			this.removeFontStackFromVariableEditorConfig();
+		},
+
+	},
+
 };
 </script>
 

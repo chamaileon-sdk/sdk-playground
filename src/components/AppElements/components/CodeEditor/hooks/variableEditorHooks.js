@@ -1,25 +1,28 @@
 export default function () {
-	let str = `const variableEditorHooks = {
-    onEditImage: ({ originalImg }) => {
-        return new Promise(resolve => {
-            resolve({ src });
-        });
-    },
-    
-    onTextInsertPluginButtonClicked: ({ buttonId }) => {
-        return new Promise(resolve => {
-            resolve({ value: "Your inserted text." });
-        });
-    },
-    
-    onButtonClicked: ({ buttonId }) => {
+	const str = `const variableEditorHooks = {
+	onEditImage: () => {
+		return new Promise(resolve => {
+			await galleryInstance.methods.updateData({ currentImgSrc: "", dimensions: null });
+			await galleryInstance.show();
+			const { src } = await galleryInstance.methods.pickImage();
+			await galleryInstance.hide();
 
-        if (buttonId === "close") variableEditorInstance.close();
+			resolve({ src });
+		});
+	},
 
-        return new Promise(resolve => {
-            resolve();
-        });
-    },
+	onTextInsertPluginButtonClicked: ({ buttonId }) => {
+		return new Promise(resolve => {
+			resolve({ value: "Your inserted text." });
+		});
+	},
+
+	onButtonClicked: ({ buttonId }) => {
+		return new Promise(resolve => {
+			if (buttonId === "close") variableEditorInstance.close();
+			resolve();
+		});
+	},
 }`;
 
 	return str;

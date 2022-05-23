@@ -1,13 +1,11 @@
 <template>
 	<v-row>
 		<v-col cols="12" xl="6">
-			<template>
-				<v-row align="center" class="ma-0 justify-begin">
-					<AddButton class="ml-auto ml-xl-0" @click="addLeftButton">
-						New Button
-					</AddButton>
-				</v-row>
-			</template>
+			<v-row align="center" class="ma-0 justify-begin">
+				<AddButton class="ml-auto ml-xl-0" @click="addLeftButton">
+					New Button
+				</AddButton>
+			</v-row>
 			<div
 				v-if="buttonsLeft.length > 0"
 				class="mt-8 list3 rounded"
@@ -50,13 +48,11 @@
 			xl="6"
 			class="mt-2 mt-xl-0"
 		>
-			<template>
-				<v-row align="center" class="ma-0 justify-end">
-					<AddButton @click="addRightButton">
-						New Button
-					</AddButton>
-				</v-row>
-			</template>
+			<v-row align="center" class="ma-0 justify-end">
+				<AddButton @click="addRightButton">
+					New Button
+				</AddButton>
+			</v-row>
 			<div
 				v-if="buttonsRight.length > 0"
 				class="mt-8 list3 rounded"

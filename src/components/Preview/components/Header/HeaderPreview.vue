@@ -1,20 +1,28 @@
 <template>
-	<div class="d-flex align-center rounded" id="preview-header">
+	<div id="preview-header" class="d-flex align-center rounded">
 		<div class="d-flex pt-2 pb-2 px-2 header-container align-center">
 			<div class="title-container d-flex align-center">
-				<v-btn text icon id="btnLeavePreview">
-					<v-icon dark> mdi-arrow-left </v-icon>
+				<v-btn
+					id="btnLeavePreview"
+					text
+					icon
+				>
+					<v-icon dark>
+						mdi-arrow-left
+					</v-icon>
 				</v-btn>
-				<div class="template-title">{{ documentTitle }}</div>
+				<div class="template-title">
+					{{ documentTitle }}
+				</div>
 			</div>
 
 			<div
-				class="d-flex justify-center align-center"
 				id="logo"
 				v-dlogo="logo"
+				class="d-flex justify-center align-center"
 				style="max-height: 61px"
 				:style="`fill: ${primary}`"
-			></div>
+			/>
 
 			<div class="share-button-container">
 				<div v-if="headerButtons" class="d-flex align-center justify-end">
@@ -24,21 +32,25 @@
 						class="mx-2"
 					>
 						<!--<v-badge
-              class="badge"
-              :color="button.badge.color"
-              :value="button.badge"
-              offset-x="10"
-              offset-y="10"
-              overlap
-            >
-              <template v-if="button.badge" v-slot:badge>
-                <v-icon> mdi-{{ button.badge.icon }} </v-icon>
-              </template>-->
-						<v-menu transition="slide-y-transition" bottom left offset-y>
-							<template v-slot:activator="{ on, attrs }">
+							class="badge"
+							:color="button.badge.color"
+							:value="button.badge"
+							offset-x="10"
+							offset-y="10"
+							overlap
+						>
+						<template v-if="button.badge" v-slot:badge>
+						<v-icon> mdi-{{ button.badge.icon }} </v-icon>
+						</template>-->
+						<v-menu
+							transition="slide-y-transition"
+							bottom
+							left
+							offset-y
+						>
+							<template #activator="{ on, attrs }">
 								<v-btn
 									v-bind="attrs"
-									v-on="on"
 									:id="button.id"
 									:color="button.color"
 									:label="button.label"
@@ -47,12 +59,15 @@
 									:text="button.style === 'text'"
 									:outlined="button.style === 'outlined'"
 									:rounded="button.style === 'rounded'"
+									v-on="on"
 								>
 									<div
 										class="d-flex align-center"
 										:class="{ 'white--text': button.style === 'depressed' }"
 									>
-										<v-icon v-if="button.icon"> mdi-{{ button.icon }} </v-icon>
+										<v-icon v-if="button.icon">
+											mdi-{{ button.icon }}
+										</v-icon>
 										<span v-if="button.label" class="ml-2">
 											{{ button.label }}
 										</span>
@@ -85,32 +100,32 @@
 import { mapGetters } from "vuex";
 
 export default {
-	data() {
-		return {
-			primary: this.$store.state.sdkConfig.colors.primary,
-		};
-	},
 	directives: {
 		dlogo: {
-			inserted: function (el, binding) {
+			inserted(el, binding) {
 				if (typeof binding.value === "function") {
-					let x = el.children[0];
+					const x = el.children[0];
 					if (x) x.remove();
 					el.appendChild(binding.value());
 				}
 			},
-			update: function (el, binding) {
+			update(el, binding) {
 				if (typeof binding.value === "function") {
-					let x = el.children[0];
+					const x = el.children[0];
 					if (x) x.remove();
 					el.appendChild(binding.value());
 				}
 			},
 		},
 	},
+	data() {
+		return {
+			primary: this.$store.state.sdkConfig.colors.primary,
+		};
+	},
 	computed: {
 		...mapGetters({ headerButtons: "getPreviewBtns" }),
-		...mapGetters(["documentTitle"]),
+		...mapGetters([ "documentTitle" ]),
 
 		logo() {
 			return this.$store.state.logoCreatorFunction;

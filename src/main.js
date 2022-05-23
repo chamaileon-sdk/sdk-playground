@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
-import VueScrollactive from "vue-scrollactive";
+import VueScrollActive from "vue-scrollactive";
 import VueHighlightJS from "vue-highlight.js";
 import VueMeta from "vue-meta";
 
@@ -16,7 +16,7 @@ import VueObserveVisibility from "vue-observe-visibility";
 
 Vue.use(VueHighlightJS);
 
-Vue.use(VueScrollactive);
+Vue.use(VueScrollActive);
 Vue.use(VueMeta);
 
 // eslint-disable-next-line vue/match-component-file-name

@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Editor'"
-					:doc-url="'https://chamaileon.io/sdk/docs/email-editor/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-editor/'"
 					:image="'EmailEditorIllustration.svg'"
 					button-text="Open editor"
 					:is-inited="isInited"
@@ -100,31 +100,10 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(["emailEditorInited", "sdkInited", "document"]),
-		...mapGetters([ "getConfigObject" ]),
+		...mapState(["document", "emailEditorInited"]),
+		...mapGetters([ "getEditorConfigObject" ]),
 		isInited() {
-			if (this.sdkInited === true) {
-				return this.emailEditorInited;
-			}
-			return "pending";
-		},
-	},
-	watch: {
-		isInited: {
-			async handler(editorInited) {
-				if (editorInited === false) {
-					await this.$store.dispatch("initEmailEditor");
-				}
-				if (editorInited === true) {
-					const document = JSON.parse(JSON.stringify(this.document));
-					const data = { document }; // !important change we set data from now, not document
-					await this.$chamaileon.emailEditor.methods.updateData(data);
-					// Should not await since it can couse lag in the ui
-					this.$store.dispatch("initGallery");
-					this.$store.dispatch("initEmailPreview");
-				}
-			},
-			immediate: true,
+			return this.emailEditorInited;
 		},
 	},
 	methods: {
@@ -132,10 +111,15 @@ export default {
 			openGallery: "openGallery",
 		}),
 		async openEditor() {
-			if (this.isInited === false) {
-				await this.$store.dispatch("initEmailEditor");
-			}
-			await this.$chamaileon.emailEditor.show();
+			await this.$store.dispatch("initEmailEditor");
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document };
+			await this.$chamaileon.emailEditor.showSplashScreen();
+			this.$chamaileon.emailEditor.show();
+			await this.$chamaileon.emailEditor.methods.updateData(data);
+			this.$chamaileon.emailEditor.hideSplashScreen();
+			this.$store.dispatch("initGallery");
+			this.$store.dispatch("initEmailPreview");
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
@@ -146,17 +130,17 @@ export default {
 
 <style>
 .v-btn--example {
-  position: fixed;
-  bottom: 0;
-  right: 31%;
-  margin-bottom: 64px;
+	position: fixed;
+	bottom: 0;
+	right: 31%;
+	margin-bottom: 64px;
 }
 
 body {
-  overflow: hidden !important;
+	overflow: hidden !important;
 }
 iframe {
-  position: fixed;
+	position: fixed;
 }
 
 </style>

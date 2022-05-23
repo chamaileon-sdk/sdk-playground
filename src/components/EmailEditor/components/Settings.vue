@@ -193,10 +193,11 @@
 								{{ name }}
 							</v-card-title>
 							<v-switch
-								v-model="toolboxes[name]"
+								:input-value="toolboxes[name]"
 								class="ma-0 pa-0"
 								color="primary"
 								hide-details
+								@change="updateToolbox($event, name)"
 							/>
 						</v-col>
 					</v-row>
@@ -229,10 +230,12 @@
 								{{ name }}
 							</v-card-title>
 							<v-switch
-								v-model="blockActions[name]"
+								:input-value="blockActions[name]"
 								class="ma-0 pa-0"
 								color="primary"
 								hide-details
+								:true-value="true"
+								@change="updateActionMenu($event, name)"
 							/>
 						</v-col>
 					</v-row>
@@ -254,7 +257,7 @@
 				>
 					<v-row>
 						<v-col
-							v-for="(value, name) in blockDropzones"
+							v-for="(value, name) in dropZones"
 							:key="name"
 							cols="6"
 							class="d-flex justify-space-between align-center"
@@ -266,10 +269,12 @@
 								{{ name }}
 							</v-card-title>
 							<v-switch
-								v-model="blockDropzones[name]"
+								:input-value="dropZones[name]"
 								class="ma-0 pa-0"
 								color="primary"
 								hide-details
+								:true-value="true"
+								@change="updateDropZone($event, name)"
 							/>
 						</v-col>
 					</v-row>
@@ -321,7 +326,7 @@ export default {
 				return this.$store.state.editorConfig.settings.autoSaveInterval;
 			},
 			set(val) {
-				this.updateAutosave(val);
+				this.updateAutoSave(val);
 				this.updateEditorSettings();
 			},
 		},
@@ -331,36 +336,18 @@ export default {
 				return this.$store.state.editorConfig.settings.staticAssetsBaseUrl;
 			},
 			set(val) {
-				this.updateSaticAssets(val);
+				this.updateStaticAssets(val);
 				this.updateEditorSettings();
 			},
 		},
-		toolboxes: {
-			get() {
-				return this.$store.state.editorConfig.settings.toolboxes;
-			},
-			set(val) {
-				this.updateToolboxes(val);
-				this.updateEditorSettings();
-			},
+		toolboxes() {
+			return this.$store.state.editorConfig.settings.toolboxes;
 		},
-		blockActions: {
-			get() {
-				return this.$store.state.editorConfig.settings.actionMenu.block;
-			},
-			set(val) {
-				this.updateBlockActionMenu(val);
-				this.updateEditorSettings();
-			},
+		blockActions() {
+			return this.$store.state.editorConfig.settings.actionMenu.block;
 		},
-		blockDropzones: {
-			get() {
-				return this.$store.state.editorConfig.settings.dropzones;
-			},
-			set(val) {
-				this.updateBlockActionMenuDropzones(val);
-				this.updateEditorSettings();
-			},
+		dropZones() {
+			return this.$store.state.editorConfig.settings.dropzones;
 		},
 		videoElementBaseUrl: {
 			get() {
@@ -378,10 +365,25 @@ export default {
 
 			return name;
 		},
+		updateDropZone(value, name) {
+			this.updateDropZones({ [name]: !!value });
+			this.updateEditorSettings();
+		},
+		updateActionMenu(value, name) {
+			this.updateBlockActionMenu({ [name]: !!value });
+			this.updateEditorSettings();
+		},
+		updateToolbox(value, name) {
+			this.updateToolboxes({ [name]: !!value });
+			this.updateEditorSettings();
+		},
 		...mapMutations([
 			"updateUser",
-			"updateAutosave",
-			"updateSaticAssets",
+			"updateAutoSave",
+			"updateStaticAssets",
+			"updateBlockActionMenu",
+			"updateDropZones",
+			"updateToolboxes",
 			"updateVideoElementBaseUrl",
 		]),
 		...mapActions({

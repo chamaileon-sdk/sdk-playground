@@ -7,16 +7,21 @@
 					disabled
 					depressed
 					style="background-color: rgba(1, 1, 1, 0) !important"
-				>
-				</v-btn>
+				/>
 				<v-btn
 					v-for="(item, ind) in btnArr"
 					:key="ind"
 					text
 					:icon="item.icon.length !== 0"
 				>
-					<img v-if="item.icon" style="max-width: 30px" :src="item.icon" />
-					<div v-else>{{ item.label }}</div>
+					<img
+						v-if="item.icon"
+						style="max-width: 30px"
+						:src="item.icon"
+					>
+					<div v-else>
+						{{ item.label }}
+					</div>
 				</v-btn>
 			</div>
 		</v-card>
@@ -24,18 +29,18 @@
 			class="mb-3 grey lighten-1 rounded-0 rounded-sm"
 			height="12px"
 			flat
-		></v-card>
+		/>
 		<v-card
 			class="mb-3 grey lighten-1 rounded-0 rounded-sm"
 			height="12px"
 			flat
-		></v-card>
+		/>
 		<v-card
 			class="grey lighten-1 rounded-0 rounded-sm"
 			height="12px"
 			width="61.78%"
 			flat
-		></v-card>
+		/>
 	</div>
 </template>
 

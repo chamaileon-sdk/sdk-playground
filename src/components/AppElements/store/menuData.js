@@ -33,7 +33,7 @@ export default {
 					{
 						title: "Developer",
 						icon: "alarm-light",
-						disabled: process.env.NODE_ENV === "development" ? false : true,
+						disabled: process.env.NODE_ENV !== "development",
 						to: "#developer",
 						codePropToMatch: "developer",
 					},
@@ -136,7 +136,7 @@ export default {
 						icon: "cog-outline",
 						to: "#settings",
 						codePropToMatch: "settings",
-					}
+					},
 				],
 			},
 			{
@@ -172,7 +172,7 @@ export default {
 						title: "Text Insert",
 						icon: "format-text",
 						to: "#text-insert",
-						codePropToMatch: "textInsertPlugin",
+						codePropToMatch: "textInsert",
 					},
 				],
 			},
