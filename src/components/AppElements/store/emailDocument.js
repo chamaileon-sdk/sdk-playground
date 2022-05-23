@@ -386,7 +386,7 @@ const getDefaultState = () => {
 											style: {
 												"max-height": "36px",
 												"max-width": "167px",
-												src: "https://via.placeholder.com/167x36/ffffff/5C9AEB%3Ftext=Logo",
+												src: "https://via.placeholder.com/167x36/ffffff/5C9AEB&text=Logo",
 												width: "167px",
 												"background-color": "",
 												"border-radius": "0px",

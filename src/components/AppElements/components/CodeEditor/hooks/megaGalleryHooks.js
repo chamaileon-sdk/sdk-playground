@@ -1,6 +1,11 @@
 export default function () {
-	const str = `
-const galleryHooks = {
+	const str = `const galleryHooks = {
+	close: () => {
+		return new Promise(resolve => {
+			galleryInstance.hide();
+			resolve();
+		});
+	},
 	onUploadImage: async ( { selectedFolderId, parents, image } ) => {
 		// Store image data
 	},

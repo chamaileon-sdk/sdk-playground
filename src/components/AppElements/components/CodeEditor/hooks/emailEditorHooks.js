@@ -11,16 +11,12 @@ const emailEditorHooks = {
 	},
 
 	onSave: ({ document }) => {
-		emailDocument = document;
-
 		return new Promise(resolve => {
 			resolve();
 		});
 	},
 
 	onAutoSave: ({ document }) => {
-		emailDocument = document;
-
 		return new Promise(resolve => {
 			resolve();
 		});
