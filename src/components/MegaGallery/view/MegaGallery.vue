@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Gallery'"
-					:doc-url="'https://chamaileon.io/sdkv2/docs/gallery/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/gallery/'"
 					:image="'EmailThumbnailIllustration.svg'"
 					button-text="Open gallery"
 					:is-inited="isInited"

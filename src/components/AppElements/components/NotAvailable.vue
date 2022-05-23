@@ -33,7 +33,7 @@
 		<h2 class="notFoundH2 primary--text">
 			This website is not available on your device! If you are interested in our
 			SDK, please check out the
-			<a href="https://chamaileon.io/sdkv2/docs/">documentation</a>.
+			<a href="https://chamaileon.io/sdk/v2/docs/">documentation</a>.
 		</h2>
 	</v-card>
 </template>

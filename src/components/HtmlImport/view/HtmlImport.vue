@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email HTML Import'"
-					:doc-url="'https://chamaileon.io/sdkv2/docs/email-html-importer/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-html-importer/'"
 					:image="'HtmlImportIllustration.svg'"
 					:button-text="/*'Open HTML import'*/null"
 					@showPreviewButton="showPreviewButton"

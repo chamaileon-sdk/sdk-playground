@@ -10,7 +10,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Variable Editor'"
-					:doc-url="'https://chamaileon.io/sdkv2/docs/email-variable-editor/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-variable-editor/'"
 					:image="'VariableEditorIllustration.svg'"
 					:is-inited="isInited"
 					button-text="Open variable editor"

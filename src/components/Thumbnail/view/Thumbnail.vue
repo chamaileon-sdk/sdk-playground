@@ -4,7 +4,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email Thumbnail'"
-					:doc-url="'https://chamaileon.io/sdkv2/docs/email-thumbnail/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-thumbnail/'"
 					:image="'EmailThumbnailIllustration.svg'"
 				>
 					<p>

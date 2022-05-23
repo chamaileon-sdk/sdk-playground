@@ -4,7 +4,7 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Chamaileon SDK'"
-					:doc-url="'https://chamaileon.io/sdkv2/docs/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/'"
 					:read-more-url="'https://chamaileon.io/sdk/'"
 					:image="'SdkIllustration.svg'"
 				>
