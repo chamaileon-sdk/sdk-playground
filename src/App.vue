@@ -44,6 +44,11 @@ export default {
 		CodeEditor,
 		NotAvailable,
 	},
+	data() {
+		return {
+			localStorageVersion: "v2",
+		};
+	},
 	computed: {
 		isAvailable() {
 			return this.$vuetify.breakpoint.width > 960;
@@ -61,53 +66,53 @@ export default {
 	mounted() {
 		window.onbeforeunload = function () {
 			localStorage.setItem(
-				"sdkConfig",
+				`sdkConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.sdkConfig),
 			);
 			localStorage.setItem(
-				"emailEditorConfig",
+				`emailEditorConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.editorConfig),
 			);
 			localStorage.setItem(
-				"previewConfig",
+				`previewConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.previewConfig),
 			);
 			localStorage.setItem(
-				"variableEditorConfig",
+				`variableEditorConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.variableEditorConfig),
 			);
 			localStorage.setItem(
-				"thumbnailConfig",
+				`thumbnailConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.thumbnailConfig),
 			);
 			localStorage.setItem(
-				"generatorConfig",
+				`generatorConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.generatorConfig),
 			);
 			localStorage.setItem(
-				"emailDocument",
+				`emailDocument_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.document),
 			);
 			localStorage.setItem(
-				"galleryConfig",
+				`galleryConfig_${this.localStorageVersion}`,
 				JSON.stringify(this.$store.state.megaGalleryConfig),
 			);
 		}.bind(this);
 
 		this.$store.commit("setLocalStorageLoaded", "pending");
 		for (const elem of [
-			"sdkConfig",
-			"emailEditorConfig",
-			"previewConfig",
-			"galleryConfig",
-			"variableEditorConfig",
-			"thumbnailConfig",
-			"generatorConfig",
-			"emailDocument",
+			`sdkConfig_${this.localStorageVersion}`,
+			`emailEditorConfig_${this.localStorageVersion}`,
+			`previewConfig_${this.localStorageVersion}`,
+			`galleryConfig_${this.localStorageVersion}`,
+			`variableEditorConfig_${this.localStorageVersion}`,
+			`thumbnailConfig_${this.localStorageVersion}`,
+			`generatorConfig_${this.localStorageVersion}`,
+			`emailDocument_${this.localStorageVersion}`,
 		]) {
 			if (localStorage.getItem(elem)) {
 				this.$store.commit(
-					`${elem}Load`,
+					`${elem.replace(`_${this.localStorageVersion}`, "")}Load`,
 					JSON.parse(localStorage.getItem(elem)),
 				);
 			}
