@@ -344,7 +344,7 @@ export default {
 			this.removeFontStackFromEditorConfig(index);
 			this.updateEditorSettings();
 
-			this.removeFontStackFromEditorConfig(index);
+			this.removeFontStackFromVariableEditorConfig(index);
 			this.removeFontStackFromVariableEditorConfig();
 		},
 
