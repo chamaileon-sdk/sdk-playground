@@ -112,10 +112,10 @@ export default {
 		}),
 		async openEditor() {
 			await this.$store.dispatch("initEmailEditor");
-			const document = JSON.parse(JSON.stringify(this.document));
-			const data = { document };
 			this.$chamaileon.emailEditor.showSplashScreen();
 			this.$chamaileon.emailEditor.show();
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document };
 			await this.$chamaileon.emailEditor.methods.updateData(data);
 			this.$chamaileon.emailEditor.hideSplashScreen();
 			this.$store.dispatch("initGallery");

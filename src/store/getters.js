@@ -69,7 +69,7 @@ export default {
 		);
 
 		config.settings.buttons.header.left = [
-			{ id: "close", label: "close", icon: "mdi-arrow-left" },
+			{ id: "close", icon: "arrow-left" },
 			...config.settings.buttons.header.left,
 		];
 
