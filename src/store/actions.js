@@ -111,6 +111,7 @@ export default {
 			Vue.prototype.$chamaileon.emailEditor = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "editor",
 				...getters.getEditorConfigObject,
+				data: { document: {} },
 				hooks: {
 					close: () => {
 						Vue.prototype.$chamaileon.emailEditor.hide();
@@ -119,6 +120,7 @@ export default {
 						await dispatch("updateDocument", obj.document);
 					},
 					onAutoSave: (obj) => {
+						console.log(obj.document);
 						commit("updateDocument", obj.document);
 					},
 					onChange: () => {

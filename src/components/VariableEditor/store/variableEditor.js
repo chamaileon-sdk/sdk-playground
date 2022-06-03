@@ -68,6 +68,8 @@ export default {
 				id: `ve-btn-${state.id}`,
 				label: `Left ${state.id}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.id++;
 		},
@@ -96,6 +98,8 @@ export default {
 				id: `ve-btn-${state.id}`,
 				label: `Right ${state.id}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.id++;
 		},
@@ -124,6 +128,8 @@ export default {
 				id: `vf-btn-${state.fid}`,
 				label: `Left ${state.fid}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.fid++;
 		},
@@ -151,6 +157,8 @@ export default {
 				id: `vf-btn-${state.fid}`,
 				label: `Right ${state.fid}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.fid++;
 		},

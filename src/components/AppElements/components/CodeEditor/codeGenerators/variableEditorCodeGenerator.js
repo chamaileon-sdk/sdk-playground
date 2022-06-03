@@ -21,6 +21,8 @@ const calculateButtons = (arr, indent) => {
 		literal += `${"\t".repeat(indent + 1)}id: '${c.id}',\n`;
 		literal += `${"\t".repeat(indent + 1)}icon: '${c.icon}',\n`;
 		literal += `${"\t".repeat(indent + 1)}label: '${c.label}',\n`;
+		literal += `${"\t".repeat(indent + 1)}color: "${c.color}",\n`;
+		literal += `${"\t".repeat(indent + 1)}style: "${c.style}"\n`;
 		literal += `${"\t".repeat(indent)}},\n`;
 	});
 
