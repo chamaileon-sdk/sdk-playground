@@ -18,7 +18,7 @@
 			You can add and customize your buttons and dropdowns below. The icon is
 			required to be a <br>
 			<a
-				href="https://materialdesignicons.com/"
+				href="https://pictogrammers.github.io/@mdi/font/6.5.95/"
 				target="_blank"
 			>Material Design Icon</a>
 			without <em>mdi-</em> prefix. Keep in mind that the header can only store
