@@ -13,10 +13,12 @@
 			>
 				<Draggable v-model="buttonsLeft" handle=".dtrigger">
 					<div v-for="(item, ind) in buttonsLeft" :key="ind">
-						<ListItem3
+						<ListItem6
 							:id="item.id"
 							:icon="item.icon"
 							:label="item.label"
+							:item-style="item.style"
+							:color="item.color"
 							:split="true"
 							@idChange="
 								updateLeftButton({
@@ -34,6 +36,18 @@
 								updateLeftButton({
 									index: ind,
 									icon: $event,
+								})
+							"
+							@colorChange="
+								updateLeftButton({
+									index: ind,
+									color: $event,
+								})
+							"
+							@styleChange="
+								updateLeftButton({
+									index: ind,
+									style: $event,
 								})
 							"
 							@deleteClicked="deleteLeftButton(ind)"
@@ -60,10 +74,12 @@
 			>
 				<Draggable v-model="buttonsRight" handle=".dtrigger">
 					<div v-for="(item, ind) in buttonsRight" :key="ind">
-						<ListItem3
+						<ListItem6
 							:id="item.id"
 							:icon="item.icon"
 							:label="item.label"
+							:item-style="item.style"
+							:color="item.color"
 							:split="true"
 							@idChange="
 								updateRightButton({
@@ -83,6 +99,18 @@
 									icon: $event,
 								})
 							"
+							@colorChange="
+								updateRightButton({
+									index: ind,
+									color: $event,
+								})
+							"
+							@styleChange="
+								updateRightButton({
+									index: ind,
+									style: $event,
+								})
+							"
 							@deleteClicked="deleteRightButton(ind)"
 						/>
 						<v-divider v-show="ind !== buttonsRight.length - 1" />
@@ -96,14 +124,14 @@
 <script>
 import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import Draggable from "vuedraggable";
-import ListItem3 from "./ListItem3.vue";
+import ListItem6 from "./ListItem6.vue";
 import { mapActions } from "vuex";
 
 export default {
 	components: {
 		AddButton,
 		Draggable,
-		ListItem3,
+		ListItem6,
 	},
 
 	props: {

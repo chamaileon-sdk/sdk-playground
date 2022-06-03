@@ -1,69 +1,76 @@
 <template>
 	<v-card
-		color="white"
 		app
-		elevation="0"
 		height="64"
-		clipped-left
-		class="app-header"
+		flat
+		class="d-flex align-center px-3 flex-wrap"
 	>
-		<div class="left-button-holder ml-3">
-			<div class="left-button-wrapper d-flex align-center">
+		<div>
+			<v-btn
+				text
+				icon
+				class="mr-2"
+				color="#000"
+			>
+				<v-icon>mdi-arrow-left</v-icon>
+			</v-btn>
+			<span v-for="(button, ind) in headerButtons.left" :key="ind">
 				<v-btn
-					icon
-					small
-					class="mr-2"
+					v-if="!button.items"
+					:id="button.id"
+					:label="button.label"
+					:color="button.color"
+					:depressed="button.style === 'depressed'"
+					:text="button.style === 'text'"
+					:outlined="button.style === 'outlined'"
+					:rounded="button.style === 'rounded'"
+					:icon="!button.label"
+					class="ml-2"
 				>
-					<v-icon>mdi-arrow-left</v-icon>
+					<div
+						class="d-flex align-center"
+						:class="{ 'white--text': button.style === 'depressed' }"
+					>
+						<v-icon v-if="button.icon">
+							mdi-{{ button.icon }}
+						</v-icon>
+						<span v-if="button.label" class="ml-2">
+							{{ button.label }}
+						</span>
+					</div>
 				</v-btn>
-				<span v-for="(button, ind) in headerButtons.left" :key="ind">
-					<v-btn
-						v-if="!button.icon"
-						outlined
-						class="mr-2"
-					>
-						{{ button.label }}
-					</v-btn>
-
-					<v-btn
-						v-if="button.icon"
-						icon
-						small
-						class="mr-2"
-					>
-						<v-icon>mdi-{{ button.icon }}</v-icon>
-					</v-btn>
-				</span>
-			</div>
+			</span>
 		</div>
 
-		<div class="text-center">
-			<v-toolbar-title class="center">
-				{{ documentTitle }}
-			</v-toolbar-title>
-		</div>
+		<v-spacer />
 
-		<div class="right-button-holder mr-3">
-			<div class="right-button-wrapper d-flex align-center">
-				<span v-for="(button, ind) in headerButtons.right" :key="ind">
-					<v-btn
-						v-if="!button.icon"
-						outlined
-						class="ml-2"
+		<div>
+			<span v-for="(button, ind) in headerButtons.right" :key="ind">
+				<v-btn
+					v-if="!button.items"
+					:id="button.id"
+					:label="button.label"
+					:color="button.color"
+					:depressed="button.style === 'depressed'"
+					:text="button.style === 'text'"
+					:outlined="button.style === 'outlined'"
+					:rounded="button.style === 'rounded'"
+					:icon="!button.label"
+					class="ml-2"
+				>
+					<div
+						class="d-flex align-center"
+						:class="{ 'white--text': button.style === 'depressed' }"
 					>
-						{{ button.label }}
-					</v-btn>
-
-					<v-btn
-						v-if="button.icon"
-						icon
-						small
-						class="ml-2"
-					>
-						<v-icon>mdi-{{ button.icon }}</v-icon>
-					</v-btn>
-				</span>
-			</div>
+						<v-icon v-if="button.icon">
+							mdi-{{ button.icon }}
+						</v-icon>
+						<span v-if="button.label" class="ml-2">
+							{{ button.label }}
+						</span>
+					</div>
+				</v-btn>
+			</span>
 		</div>
 	</v-card>
 </template>

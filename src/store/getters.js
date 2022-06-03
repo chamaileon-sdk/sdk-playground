@@ -69,7 +69,7 @@ export default {
 		);
 
 		config.settings.buttons.header.left = [
-			{ id: "close", icon: "arrow-left" },
+			{ id: "close", icon: "arrow-left", color: "#000", label: "", style: "text" },
 			...config.settings.buttons.header.left,
 		];
 

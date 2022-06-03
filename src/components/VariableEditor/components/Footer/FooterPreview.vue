@@ -8,20 +8,28 @@
 		<div>
 			<span v-for="(button, ind) in footerButtons.left" :key="ind">
 				<v-btn
-					v-if="!button.icon"
-					outlined
-					class="mr-2"
+					v-if="!button.items"
+					:id="button.id"
+					:label="button.label"
+					:color="button.color"
+					:depressed="button.style === 'depressed'"
+					:text="button.style === 'text'"
+					:outlined="button.style === 'outlined'"
+					:rounded="button.style === 'rounded'"
+					:icon="!button.label"
+					class="ml-2"
 				>
-					{{ button.label }}
-				</v-btn>
-
-				<v-btn
-					v-if="button.icon"
-					icon
-					small
-					class="mr-2"
-				>
-					<v-icon>mdi-{{ button.icon }}</v-icon>
+					<div
+						class="d-flex align-center"
+						:class="{ 'white--text': button.style === 'depressed' }"
+					>
+						<v-icon v-if="button.icon">
+							mdi-{{ button.icon }}
+						</v-icon>
+						<span v-if="button.label" class="ml-2">
+							{{ button.label }}
+						</span>
+					</div>
 				</v-btn>
 			</span>
 		</div>
@@ -31,20 +39,28 @@
 		<div>
 			<span v-for="(button, ind) in footerButtons.right" :key="ind">
 				<v-btn
-					v-if="!button.icon"
-					outlined
+					v-if="!button.items"
+					:id="button.id"
+					:label="button.label"
+					:color="button.color"
+					:depressed="button.style === 'depressed'"
+					:text="button.style === 'text'"
+					:outlined="button.style === 'outlined'"
+					:rounded="button.style === 'rounded'"
+					:icon="!button.label"
 					class="ml-2"
 				>
-					{{ button.label }}
-				</v-btn>
-
-				<v-btn
-					v-if="button.icon"
-					icon
-					small
-					class="ml-2"
-				>
-					<v-icon>mdi-{{ button.icon }}</v-icon>
+					<div
+						class="d-flex align-center"
+						:class="{ 'white--text': button.style === 'depressed' }"
+					>
+						<v-icon v-if="button.icon">
+							mdi-{{ button.icon }}
+						</v-icon>
+						<span v-if="button.label" class="ml-2">
+							{{ button.label }}
+						</span>
+					</div>
 				</v-btn>
 			</span>
 		</div>
