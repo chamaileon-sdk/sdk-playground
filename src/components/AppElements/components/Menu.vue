@@ -1,42 +1,5 @@
-<script>
-/* eslint-disable vue/component-name-in-template-casing */
-const chamaileonLogo = require("chamaileon-logo");
-import { mapGetters } from "vuex";
-
-export default {
-	directives: {
-		chamaileonLogo: {
-			inserted(el) {
-				el.appendChild(chamaileonLogo({ withText: true }));
-			},
-		},
-	},
-	data: () => ({
-		primary: "",
-	}),
-	computed: {
-		...mapGetters([ "getEditorConfigObject" ]),
-		...mapGetters({ Menu: "getMenu" }),
-	},
-	mounted() {
-		this.primary = this.$vuetify.presets.framework.theme.themes.light.primary;
-	},
-	methods: {
-		isActive(path) {
-			return "/" + path === this.$route.path;
-		},
-		addActiveClass(hash) {
-			if (window.location.hash === hash) return "v-list-item--active";
-			return "";
-		},
-		scrollToTop() {
-			window.scrollTo({ top: 0, behavior: "smooth" });
-		},
-	},
-};
-</script>
-
 <template>
+	<!-- eslint-disable-next-line vue/component-name-in-template-casing -->
 	<scrollactive class="menuScroll">
 		<v-card flat height="100%">
 			<v-card
@@ -98,6 +61,43 @@ export default {
 		</v-card>
 	</scrollactive>
 </template>
+
+<script>
+const chamaileonLogo = require("chamaileon-logo");
+import { mapGetters } from "vuex";
+
+export default {
+	directives: {
+		chamaileonLogo: {
+			inserted(el) {
+				el.appendChild(chamaileonLogo({ withText: true }));
+			},
+		},
+	},
+	data: () => ({
+		primary: "",
+	}),
+	computed: {
+		...mapGetters([ "getEditorConfigObject" ]),
+		...mapGetters({ Menu: "getMenu" }),
+	},
+	mounted() {
+		this.primary = this.$vuetify.presets.framework.theme.themes.light.primary;
+	},
+	methods: {
+		isActive(path) {
+			return "/" + path === this.$route.path;
+		},
+		addActiveClass(hash) {
+			if (window.location.hash === hash) return "v-list-item--active";
+			return "";
+		},
+		scrollToTop() {
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		},
+	},
+};
+</script>
 
 <style scoped>
 .v-card--link:before {
