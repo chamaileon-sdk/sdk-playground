@@ -1,66 +1,68 @@
 <template>
-  <div>
-	<PreviewButton 
-		buttonText="Open editor"
-		:previewButtonVisible="this.previewButtonVisible"
-		@previewClick="this.openEditor"
-	/>
-    <SectionObserver >
-      <div class="section" id="home">
-        <Description
-          :title="'Email Editor'"
-          :docUrl="'https://chamaileon.io/sdk/docs/email-editor/'"
-          :image="'EmailEditorIllustration.svg'"
-		  buttonText="Open editor"
-		  @showPreviewButton="showPreviewButton"
-		  @previewClick="this.openEditor"
-        >
-          <p>
-            With the help of the email editor plugin your users can create
-            beautiful emails from scratch. The editor offers many ways of
-            customization regarding functionality. You can create a personalized
-            layout, design systems for your emails, and you can even change the
-            access of your team members to those libraries in a team
-            environment.
-          </p>
-        </Description>
-      </div>
+	<div>
+		<PreviewButton
+			button-text="Open editor"
+			:preview-button-visible="previewButtonVisible"
+			:is-inited="isInited"
+			@previewClick="openEditor"
+		/>
+		<SectionObserver>
+			<div id="home" class="section">
+				<Description
+					:title="'Email Editor'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-editor/'"
+					:image="'EmailEditorIllustration.svg'"
+					button-text="Open editor"
+					:is-inited="isInited"
+					@showPreviewButton="showPreviewButton"
+					@previewClick="openEditor"
+				>
+					<p>
+						With the help of the email editor plugin your users can create
+						beautiful emails from scratch. The editor offers many ways of
+						customization regarding functionality. You can create a personalized
+						layout, design systems for your emails, and you can even change the
+						access of your team members to those libraries in a team
+						environment.
+					</p>
+				</Description>
+			</div>
 
-      <div class="section" id="header">
-        <Header />
-      </div>
+			<div id="header" class="section">
+				<Header />
+			</div>
 
-      <div class="section" id="text-insert">
-        <TextInsert />
-      </div>
+			<div id="text-insert" class="section">
+				<TextInsert />
+			</div>
 
-      <div class="section" id="elements">
-        <Elements />
-      </div>
+			<div id="elements" class="section">
+				<Elements />
+			</div>
 
-      <div class="section" id="block-libraries">
-        <BlockLibraries />
-      </div>
+			<div id="block-libraries" class="section">
+				<BlockLibraries />
+			</div>
 
-      <div class="section" id="custom-fonts">
-        <CustomFonts />
-      </div>
+			<div id="custom-fonts" class="section">
+				<CustomFonts />
+			</div>
 
-      <div class="section" id="addons">
-        <Addons />
-      </div>
+			<div id="addons" class="section">
+				<Addons />
+			</div>
 
-      <div class="section" id="settings">
-        <Settings />
-      </div>
-    </SectionObserver>
-    <Footer
-      :previous="'Email Preview'"
-      :prevTo="'/emailpreview'"
-      :next="'Gallery'"
-      :nextTo="'/gallery'"
-    />
-  </div>
+			<div id="settings" class="section">
+				<Settings />
+			</div>
+		</SectionObserver>
+		<Footer
+			:previous="'Email Preview'"
+			:prev-to="'/emailpreview'"
+			:next="'Gallery'"
+			:next-to="'/gallery'"
+		/>
+	</div>
 </template>
 
 <script>
@@ -74,7 +76,7 @@ import TextInsert from "../components/TextInsert";
 import Addons from "../components/Addons";
 import Settings from "../components/Settings";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
-import PreviewButton from "../../AppElements/components/PreviewButton.vue"
+import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
 import { mapGetters, mapState, mapActions } from "vuex";
 
@@ -90,161 +92,55 @@ export default {
 		Addons,
 		Settings,
 		Description,
-		PreviewButton
+		PreviewButton,
 	},
 	data() {
 		return {
 			previewButtonVisible: true,
-		}
+		};
 	},
 	computed: {
-		...mapState(["sdk"]),
-		...mapGetters(["getConfigObject"]),
+		...mapState(["document", "emailEditorInited"]),
+		...mapGetters([ "getEditorConfigObject" ]),
+		isInited() {
+			return this.emailEditorInited;
+		},
 	},
 	methods: {
 		...mapActions({
 			openGallery: "openGallery",
 		}),
-		openEditor() {
-			this.sdk.editEmail({
-				...this.$store.getters.getConfigObject,
-				hooks: {
-					onSave: (obj) => {
-						return new Promise(
-							function (resolve) {
-								this.$store.commit("updateDocument", obj.document);
-								return resolve();
-							}.bind(this)
-						);
-					},
-					onAutoSave: (obj) => {
-						return new Promise(
-							function (resolve) {
-								this.$store.commit("updateDocument", obj.document);
-								return resolve();
-							}.bind(this)
-						);
-					},
-					onChange: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onBeforeClose: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onAfterClose: () => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onEditTitle: ({ title }) => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-					onEditImage: async ({
-						originalImage,
-						lockDimensions,
-					}) => {
-						const { src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });					
-						return { src };
-					},
-					onEditBackgroundImage: async ({
-						originalImage,
-						lockDimensions,
-					}) => {
-						const { url: src }  = await this.openGallery( { editImgSrc: originalImage, dimensions: lockDimensions });
-						return { src };
-					},
-
-					onLoadBlocks: ({ libId }) => {
-						const blocks = this.$store.getters.getBlocksById(libId);
-
-						return new Promise((resolve) => {
-							resolve({ blocks });
-						});
-					},
-
-					onBlockSave: ({ libId, block }) => {
-						this.$store.commit("addBlockToLib", { libId: libId, block: block });
-
-						return new Promise((resolve) => {
-							resolve({ block });
-						});
-					},
-
-					onBlockRename: ({ libId, block: { _id, title } }) => {
-						this.$store.commit("renameBlock", {
-							libId: libId,
-							block: { _id, title },
-						});
-
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-
-					onBlockDelete: ({ libId, block: { _id } }) => {
-						this.$store.commit("deleteBlock", {
-							libId: libId,
-							blockId: _id,
-						});
-
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-
-					onHeaderButtonClicked: ({ buttonId }) => {
-						return new Promise((resolve) => {
-							resolve();
-						});
-					},
-
-					onTextInsertPluginButtonClicked: ({ buttonId }) => {
-						return new Promise((resolve) => {
-							resolve({ value: "Your inserted text." });
-						});
-					},
-
-					onExpressionEditClicked: ({ expression }) => {
-						return new Promise((resolve) => {
-							resolve({ expression: "<Your inserted expression>" });
-						});
-					},
-				},
-			});
+		async openEditor() {
+			await this.$store.dispatch("initEmailEditor");
+			this.$chamaileon.emailEditor.showSplashScreen();
+			this.$chamaileon.emailEditor.show();
+			const document = JSON.parse(JSON.stringify(this.document));
+			const data = { document };
+			await this.$chamaileon.emailEditor.methods.updateData(data);
+			this.$chamaileon.emailEditor.hideSplashScreen();
+			this.$store.dispatch("initGallery");
+			this.$store.dispatch("initEmailPreview");
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
-		}
+		},
 	},
-
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	}
 };
 </script>
 
 <style>
 .v-btn--example {
-  position: fixed;
-  bottom: 0;
-  right: 31%;
-  margin-bottom: 64px;
+	position: fixed;
+	bottom: 0;
+	right: 31%;
+	margin-bottom: 64px;
 }
 
 body {
-  overflow: hidden !important;
+	overflow: hidden !important;
 }
 iframe {
-  position: fixed;
+	position: fixed;
 }
 
 </style>

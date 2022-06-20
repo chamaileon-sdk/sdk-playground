@@ -1,25 +1,25 @@
 const getDefaultState = () => {
 	return {
 		blockLibsData: {},
-	}
-}
+	};
+};
 
 export default {
 	state: getDefaultState(),
 	mutations: {
-		resetEditorBlockLibraryContainerState (state) {
+		resetEditorBlockLibraryContainerState(state) {
 			Object.assign(state, getDefaultState());
 		},
 
 		createBlockLibData(state, libId) {
-			let obj = {};
+			const obj = {};
 			obj[libId] = new Array();
 
 			state.blockLibsData = { ...state.blockLibsData, ...obj };
 		},
 
 		moveBlockLibData(state, { oldLibId, newLibId }) {
-			let obj = {};
+			const obj = {};
 			obj[newLibId] = state.blockLibsData[oldLibId];
 
 			delete state.blockLibsData[oldLibId];
@@ -45,13 +45,13 @@ export default {
 
 		deleteBlock(state, { libId, blockId }) {
 			state.blockLibsData[libId] = state.blockLibsData[libId].filter(
-				(c) => c._id !== blockId
+				c => c._id !== blockId,
 			);
 		},
 	},
 	actions: {},
 	getters: {
-		getBlocksById: (state) => (id) => {
+		getBlocksById: state => (id) => {
 			return state.blockLibsData[id];
 		},
 	},

@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+import Vue from "vue";
+
 const getDefaultState = () => {
 	return {
 		id: 0,
@@ -16,16 +19,18 @@ const getDefaultState = () => {
 					left: [],
 					right: [],
 				},
-				textInsertPlugin: [],
+				textInsert: [],
 			},
+			fontStacks: [],
+			hideDefaultFonts: false,
 		},
-	}
-}
+	};
+};
 
 export default {
-	state: getDefaultState() ,
+	state: getDefaultState(),
 	mutations: {
-		resetVariableEditorState (state) {
+		resetVariableEditorState(state) {
 			Object.assign(state, getDefaultState());
 		},
 		resetVariablesToEditArray(state, array) {
@@ -46,11 +51,10 @@ export default {
 		},
 
 		toggleVariableToEdit(state, index) {
-			state.settings.variablesToEdit[index].edit =
-				!state.settings.variablesToEdit[index].edit;
+			state.settings.variablesToEdit[index].edit = !state.settings.variablesToEdit[index].edit;
 		},
 
-		//Left
+		// Left
 		updateVariableEditorHeaderLeftOrder(state, payload) {
 			state.settings.buttons.header.left = payload;
 		},
@@ -64,13 +68,15 @@ export default {
 				id: `ve-btn-${state.id}`,
 				label: `Left ${state.id}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.id++;
 		},
 
 		updateVariableEditorHeaderLeftButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.header.left[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.header.left[payload.index];
 
 			state.settings.buttons.header.left.splice(payload.index, 1, {
 				...c,
@@ -78,7 +84,7 @@ export default {
 			});
 		},
 
-		//Right
+		// Right
 		updateVariableEditorHeaderRightOrder(state, payload) {
 			state.settings.buttons.header.right = payload;
 		},
@@ -92,13 +98,15 @@ export default {
 				id: `ve-btn-${state.id}`,
 				label: `Right ${state.id}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.id++;
 		},
 
 		updateVariableEditorHeaderRightButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.header.right[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.header.right[payload.index];
 
 			state.settings.buttons.header.right.splice(payload.index, 1, {
 				...c,
@@ -106,7 +114,7 @@ export default {
 			});
 		},
 
-		//Footer left
+		// Footer left
 		updateVariableEditorFooterLeftOrder(state, payload) {
 			state.settings.buttons.footer.left = payload;
 		},
@@ -120,13 +128,15 @@ export default {
 				id: `vf-btn-${state.fid}`,
 				label: `Left ${state.fid}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.fid++;
 		},
 
 		updateVariableEditorFooterLeftButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.footer.left[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.footer.left[payload.index];
 
 			state.settings.buttons.footer.left.splice(payload.index, 1, {
 				...c,
@@ -147,13 +157,15 @@ export default {
 				id: `vf-btn-${state.fid}`,
 				label: `Right ${state.fid}`,
 				icon: "",
+				color: "#000000",
+				style: "outlined",
 			});
 			state.fid++;
 		},
 
 		updateVariableEditorFooterRightButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.footer.right[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.footer.right[payload.index];
 
 			state.settings.buttons.footer.right.splice(payload.index, 1, {
 				...c,
@@ -161,17 +173,17 @@ export default {
 			});
 		},
 
-		//Text Insert
+		// Text Insert
 		updateVETextInsertOrder(state, payload) {
-			state.settings.buttons.textInsertPlugin = payload;
+			state.settings.buttons.textInsert = payload;
 		},
 
 		deleteVETextInsertButton(state, index) {
-			state.settings.buttons.textInsertPlugin.splice(index, 1);
+			state.settings.buttons.textInsert.splice(index, 1);
 		},
 
 		addVETextInsertButton(state) {
-			state.settings.buttons.textInsertPlugin.push({
+			state.settings.buttons.textInsert.push({
 				id: `ti-btn-${state.tid}`,
 				label: "Button",
 				icon: "",
@@ -180,18 +192,49 @@ export default {
 		},
 
 		updateVETextInsertButton(state, payload) {
-			let newObj = (({ index, ...payload }) => payload)(payload);
-			let c = state.settings.buttons.textInsertPlugin[payload.index];
+			const newObj = (({ index, ...payload }) => payload)(payload);
+			const c = state.settings.buttons.textInsert[payload.index];
 
-			state.settings.buttons.textInsertPlugin.splice(payload.index, 1, {
+			state.settings.buttons.textInsert.splice(payload.index, 1, {
 				...c,
 				...newObj,
 			});
 		},
+
+		// FontStacks
+		addFontStackToVariableEditorConfig(state) {
+			state.settings.fontStacks.push([]);
+		},
+
+		removeFontStackFromVariableEditorConfig(state, index) {
+			state.settings.fontStacks.splice(index, 1);
+		},
+
+		updateFontStackInVariableEditorConfig(state, { index, fontStackString }) {
+			const fontStacks = state.settings.fontStacks;
+			const newFontStack = fontStackString.split(",")
+				.map(str => JSON.parse(JSON.stringify(str.trim())))
+				.filter(x => !!x);
+			fontStacks.splice(index, 1, newFontStack);
+		},
+		// HideDefaultFonts
+		setHideDefaultFontInVariableEditorConfig(state, value) {
+			Vue.set(state.settings, "hideDefaultFonts", value);
+		},
 	},
-	actions: {},
 	getters: {
-		headerButtons: (state) => state.settings.buttons.header,
-		footerButtons: (state) => state.settings.buttons.footer,
+		headerButtons: state => state.settings.buttons.header,
+		footerButtons: state => state.settings.buttons.footer,
+	},
+	actions: {
+		async updateVariableEditorSettings({ getters, rootState }) {
+			const settings = getters.getVariableEditorConfigObject.settings;
+			while (rootState.variableEditorInited === "pending") {
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
+			if (rootState.variableEditorInited === true) {
+				Vue.prototype.$chamaileon.variableEditor.methods.updateSettings(settings);
+			}
+		},
 	},
 };

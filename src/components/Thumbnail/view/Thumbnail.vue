@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<SectionObserver>
-			<div class="section" id="home">
+			<div id="home" class="section">
 				<Description
 					:title="'Email Thumbnail'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-thumbnail/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-thumbnail/'"
 					:image="'EmailThumbnailIllustration.svg'"
 				>
 					<p>
@@ -16,15 +16,15 @@
 				</Description>
 			</div>
 
-			<div class="section" id="settings">
-				<Settings />
+			<div id="settings" class="section">
+				<Settings ref="settings" />
 			</div>
 		</SectionObserver>
 		<Footer
 			:previous="'SDK'"
-			:prevTo="'/sdk'"
+			:prev-to="'/sdk'"
 			:next="'Email Preview'"
-			:nextTo="'/emailpreview'"
+			:next-to="'/emailpreview'"
 		/>
 	</div>
 </template>
@@ -36,19 +36,12 @@ import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 
 export default {
-	mounted() {
-		this.$store.dispatch("updateSDK");
-	},
-	destroyed() {
-		window.chamaileonSdk.destroy;
-	},
 	components: {
 		Settings,
 		SectionObserver,
 		Footer,
 		Description,
+
 	},
 };
 </script>
-
-<style></style>

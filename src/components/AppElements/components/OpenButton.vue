@@ -5,10 +5,10 @@
 				class="openbtn ma-3"
 				:class="
 					(hover ? 'on-hover' : '') +
-					' ' +
-					(breakpoint.lg ? 'openbtnLG' : '') +
-					' ' +
-					(breakpoint.md ? 'openbtnSM' : '')
+						' ' +
+						(breakpoint.lg ? 'openbtnLG' : '') +
+						' ' +
+						(breakpoint.md ? 'openbtnSM' : '')
 				"
 			>
 				<v-btn
@@ -16,8 +16,8 @@
 					class="grey lighten-3 pa-3 custom-btn primary--text"
 					width="100%"
 					height="100%"
-					@click="emitClick"
 					min-width="0"
+					@click="emitClick"
 				>
 					<div
 						class="
@@ -29,10 +29,12 @@
 						"
 						:style="!breakpoint.md ? 'width: 100px' : ''"
 					>
-						<v-icon class="ma-2">mdi-eye</v-icon>
-						<span :class="breakpoint.md ? 'verticalText' : ''"
-							>preview changes</span
-						>
+						<v-icon class="ma-2">
+							mdi-eye
+						</v-icon>
+						<span
+							:class="breakpoint.md ? 'verticalText' : ''"
+						>preview changes</span>
 					</div>
 				</v-btn>
 			</div>
@@ -42,10 +44,10 @@
 				class="openbtnl ma-3"
 				:class="
 					(hover ? 'on-hover' : '') +
-					' ' +
-					(breakpoint.lg ? 'openbtnlLG' : '') +
-					' ' +
-					(breakpoint.md ? 'openbtnlSM' : '')
+						' ' +
+						(breakpoint.lg ? 'openbtnlLG' : '') +
+						' ' +
+						(breakpoint.md ? 'openbtnlSM' : '')
 				"
 			>
 				<v-btn
@@ -53,8 +55,8 @@
 					class="grey lighten-3 pa-3 custom-btn primary--text"
 					width="100%"
 					height="100%"
-					@click="emitClick"
 					min-width="0"
+					@click="emitClick"
 				>
 					<div
 						class="
@@ -66,7 +68,9 @@
 						"
 						:style="!breakpoint.md ? 'width: 100px' : ''"
 					>
-						<v-icon class="ma-2">mdi-eye</v-icon>
+						<v-icon class="ma-2">
+							mdi-eye
+						</v-icon>
 						<div :class="breakpoint.md ? 'verticalText' : ''">
 							preview changes
 						</div>
@@ -79,9 +83,6 @@
 
 <script>
 export default {
-	mounted() {
-		if (this.$route.hash !== "#home") this.showBtns();
-	},
 
 	data() {
 		return {
@@ -96,9 +97,12 @@ export default {
 	},
 
 	watch: {
-		$route(to, from) {
+		$route(to) {
 			if (!this.autoShown && to.hash !== "#home") this.showBtns();
 		},
+	},
+	mounted() {
+		if (this.$route.hash !== "#home") this.showBtns();
 	},
 
 	methods: {

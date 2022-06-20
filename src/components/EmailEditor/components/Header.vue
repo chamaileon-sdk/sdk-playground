@@ -15,23 +15,29 @@
 		<h3>Your Buttons and Dropdowns</h3>
 		<p>
 			You can add and customize your buttons and dropdowns below. The icon is
-			required to be a <br />
-			<a href="https://materialdesignicons.com/" target="_blank"
-				>Material Design Icon</a
-			>
+			required to be a <br>
+			<a
+				href="https://pictogrammers.github.io/@mdi/font/6.5.95/"
+				target="_blank"
+			>Material Design Icon</a>
 			without <em>mdi-</em> prefix. Keep in mind that the header can only store
 			a limited amount of buttons.
 		</p>
 		<OptionsWrapper>
-			<template>
-				<v-row align="center" justify="end" class="ma-0">
-					<AddButton class="mr-lg-6" @click="addBtn"> New Button </AddButton>
-					<AddButton class="mt-6 mt-lg-0" @click="addDD">
+			<v-container>
+				<v-row
+					align="center"
+					justify="end"
+					class="ma-0"
+				>
+					<AddButton class="mr-lg-6" @click="addBtn(); updateEditorSettings();">
+						New Button
+					</AddButton>
+					<AddButton class="mt-6 mt-lg-0" @click="addDD(); updateEditorSettings();">
 						New DropDown
 					</AddButton>
 				</v-row>
-			</template>
-
+			</v-container>
 			<List6 :section="'Editor'" />
 		</OptionsWrapper>
 	</div>
@@ -42,7 +48,7 @@ import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import HeaderPreview from "./Header/HeaderPreview.vue";
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import List6 from "../../Lists/components/List6.vue";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
 	components: {
@@ -51,20 +57,22 @@ export default {
 		OptionsWrapper,
 		List6,
 	},
+	data() {
+		return {
+			rules: {
+				required: value => !!value || "Required.",
+				unique: value => !this.$store.state.editorConfig.idArr.includes(value),
+			},
+		};
+	},
 	methods: {
 		...mapMutations({
 			addBtn: "addEditorBtn",
 			addDD: "addEditorDropdown",
 		}),
-	},
-	data() {
-		return {
-			rules: {
-				required: (value) => !!value || "Required.",
-				unique: (value) =>
-					!this.$store.state.editorConfig.idArr.includes(value),
-			},
-		};
+		...mapActions({
+			updateEditorSettings: "updateEditorSettings",
+		}),
 	},
 };
 </script>

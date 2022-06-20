@@ -11,22 +11,22 @@
 				class="pa-0 mr-3"
 				@click="
 					changeLogo(
-						'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
+						'https://cdn.chamaileon.io/assets/createLogoWithText.js',
 					)
 				"
 			>
 				<v-card
+					v-chamaileonLogo
 					elevation="0"
 					class="pa-5 d-flex"
 					height="100px"
 					width="220px"
 					:style="`fill: ${
-						this.$vuetify.presets.framework.theme.themes.light.primary
+						$vuetify.presets.framework.theme.themes.light.primary
 					}; ${calculateOpacity(
-						'https://plugins.chamaileon.io/mega-spa/3.2.2/createLogoWithText.js'
+						'https://cdn.chamaileon.io/assets/createLogoWithText.js',
 					)}`"
-					v-chamaileonLogo
-				></v-card>
+				/>
 			</v-tab>
 			<v-tab
 				v-for="(l, i) in logos"
@@ -51,14 +51,14 @@
 								height: 100%;
 								z-index: 2;
 							"
-						></div>
+						/>
 						<iframe
 							width="100%"
 							height="100%"
 							style="z-index: 1; top: 0; left: 0; position: relative"
 							:srcdoc="processScript(l.url)"
 							frameborder="0"
-						></iframe>
+						/>
 					</div>
 				</v-card>
 			</v-tab>
@@ -74,8 +74,12 @@
 					elevation="0"
 					color="grey--text"
 				>
-					<v-icon class="pa-0 ma-0" x-large>mdi-plus</v-icon>
-					<v-card-text class="pa-0 ma-0">Create your own</v-card-text>
+					<v-icon class="pa-0 ma-0" x-large>
+						mdi-plus
+					</v-icon>
+					<v-card-text class="pa-0 ma-0">
+						Create your own
+					</v-card-text>
 				</v-card>
 			</v-tab>
 		</v-tabs>
@@ -86,6 +90,13 @@
 const chamaileonLogo = require("chamaileon-logo");
 
 export default {
+	directives: {
+		chamaileonLogo: {
+			inserted(el) {
+				el.appendChild(chamaileonLogo({ withText: true }));
+			},
+		},
+	},
 	data() {
 		return {
 			logos: [
@@ -94,13 +105,6 @@ export default {
 				},
 			],
 		};
-	},
-	directives: {
-		chamaileonLogo: {
-			inserted: function (el) {
-				el.appendChild(chamaileonLogo({ withText: true }));
-			},
-		},
 	},
 	computed: {
 		border() {
@@ -112,23 +116,22 @@ export default {
 	},
 	methods: {
 		changeLogo(value) {
-			this.$store.commit("updateSDKConfig", {
+			this.$store.dispatch("updateSdkConfig", {
 				urls: { ...this.$store.state.sdkConfig.urls, createLogoJS: value },
 			});
 		},
-		processScript: function (url) {
+		processScript(url) {
 			const importScript = document.createElement("script");
 			importScript.src = url;
 			importScript.type = "text/javascript";
 			importScript.async = false;
 
 			const runScript = document.createElement("script");
-			runScript.innerText =
-				"document.getElementById(\"container\").appendChild(createLogo());";
+			runScript.innerText = "document.getElementById(\"container\").appendChild(createLogo());";
 
 			const html = `<html><head></head><body style="margin: 0"><div id="container" style="display: flex; height: 100vh; align-items: center; margin: 0; padding: 0; justify-content: center;">
-      ${importScript.outerHTML}${runScript.outerHTML}
-      </div></body></html>`;
+	${importScript.outerHTML}${runScript.outerHTML}
+	</div></body></html>`;
 			return html;
 		},
 		calculateOpacity(url) {

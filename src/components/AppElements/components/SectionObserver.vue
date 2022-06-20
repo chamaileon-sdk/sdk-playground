@@ -6,23 +6,23 @@
 
 <script>
 export default {
-	mounted() {
-		this.observer = new IntersectionObserver(this.handleIntersect, {
-			threshold: 0.25,
-			//rootMargin: '-20% 0% -80% 0%',
-		});
-
-		const sections = document.querySelectorAll(".section");
-
-		sections.forEach((c) => this.observer.observe(c));
-	},
-	destroyed() {
-		this.observer.disconnect();
-	},
 	data() {
 		return {
 			observer: null,
 		};
+	},
+	mounted() {
+		this.observer = new IntersectionObserver(this.handleIntersect, {
+			threshold: 0.25,
+			// rootMargin: '-20% 0% -80% 0%',
+		});
+
+		const sections = document.querySelectorAll(".section");
+
+		sections.forEach(c => this.observer.observe(c));
+	},
+	destroyed() {
+		this.observer.disconnect();
 	},
 	methods: {
 		handleIntersect(e) {
@@ -32,7 +32,7 @@ export default {
 					window.history.pushState(
 						null,
 						null,
-						this.$route.path + `#${c.target.id}`
+						this.$route.path + `#${c.target.id}`,
 					);
 
 					this.$router

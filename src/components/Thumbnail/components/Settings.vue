@@ -14,49 +14,45 @@
 			>
 				<v-col :cols="columns" class="pa-0 ma-0">
 					<v-text-field
+						v-model.lazy="width"
 						dense
-						v-model="width"
 						class="rounded mr-2"
 						hide-details="true"
 						label="Width"
 						outlined
 						suffix="px"
-						@change="openThumbnail"
-					></v-text-field>
+					/>
 				</v-col>
 				<v-col :cols="columns" class="pa-0 ma-0">
 					<v-text-field
+						v-model.lazy="height"
 						dense
-						v-model="height"
 						class="rounded ml-2 mr-xl-2"
 						hide-details="true"
 						label="Height"
 						outlined
 						suffix="px"
-						@change="openThumbnail"
-					></v-text-field>
+					/>
 				</v-col>
 				<v-col :cols="columns" class="pa-0 ma-0 mt-4 mt-xl-0">
 					<v-text-field
+						v-model.lazy="scale"
 						dense
-						v-model="scale"
 						class="rounded mr-2 ml-xl-2"
 						hide-details="true"
 						label="Scale"
 						outlined
-						@change="openThumbnail"
-					></v-text-field>
+					/>
 				</v-col>
 				<v-col :cols="Math.max(columns, 2)" class="pa-0 ma-0 mt-4 mt-xl-0">
 					<v-switch
-						v-model="scroll"
+						v-model.lazy="scroll"
 						class="ma-0 pa-0 ml-2"
 						label="Scroll"
 						hide-details="true"
 						color="primary"
 						inset
-						@change="openThumbnail"
-					></v-switch>
+					/>
 				</v-col>
 			</v-row>
 		</OptionWrapper>
@@ -66,45 +62,49 @@
 			If you change the settings above, the thumbnail below will automatically
 			update.
 		</p>
-		<OptionWrapper>
+		<v-row class="d-flex justify-center grey lighten-3  rounded mt-4">
 			<v-card
-				elevation="0"
-				id="email-thumbnail"
-				class="d-flex justify-center align-center"
-				color="transparent"
+				:style="`max-width: 100%; width: ${width*scale}px;`"
+				:height="height*scale"
+				class="my-4 "
 			>
+				<v-card-text
+					id="thumbnail"
+					elevation="2"
+					class="d-flex justify-center align-center PreviewJSON my-0 pa-0 "
+					color="white"
+					:style="`max-width: 100%; width: ${width}px; max-height: ${height};`"
+				/>
 			</v-card>
-		</OptionWrapper>
+		</v-row>
 	</div>
 </template>
 
 <script>
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
+import { mapGetters, mapMutations, mapState } from "vuex";
+
+let timeoutId;
 
 export default {
-	mounted() {
-		let interval = setInterval(() => {
-			if (this.$store.state.sdk && document.getElementById("email-thumbnail")) {
-				clearInterval(interval);
-				this.openThumbnail();
-			}
-		}, 500);
-	},
 	components: {
 		OptionWrapper,
 	},
-
 	computed: {
+		...mapState(["thumbnailInited", "document"]),
+		...mapGetters([ "getEditorConfigObject" ]),
+		isInited() {
+			return this.thumbnailInited;
+		},
 		columns() {
 			switch (this.$vuetify.breakpoint.name) {
-			case "xl":
-				return 0;
+				case "xl":
+					return 0;
 
-			default:
-				return 6;
+				default:
+					return 6;
 			}
 		},
-
 		configObj() {
 			return this.$store.getters.getThumbnailSettings;
 		},
@@ -114,7 +114,7 @@ export default {
 				return this.configObj.width;
 			},
 			set(val) {
-				this.$store.commit("updateThumbnail", { width: val });
+				this.updateSettings({ width: Number(val) });
 			},
 		},
 
@@ -123,16 +123,15 @@ export default {
 				return this.configObj.height;
 			},
 			set(val) {
-				this.$store.commit("updateThumbnail", { height: val });
+				this.updateSettings({ height: Number(val) });
 			},
 		},
-
 		scroll: {
 			get() {
 				return this.configObj.scroll;
 			},
 			set(val) {
-				this.$store.commit("updateThumbnail", { scroll: val });
+				this.updateSettings({ scroll: val });
 			},
 		},
 
@@ -141,35 +140,55 @@ export default {
 				return this.configObj.scale;
 			},
 			set(val) {
-				this.$store.commit("updateThumbnail", { scale: val });
+				this.updateSettings({ scale: val });
 			},
 		},
 	},
-
+	mounted() {
+		if (this.isInited !== "pending") {
+			this.updateThumbnail();
+		}
+	},
 	methods: {
-		openThumbnail() {
-			document.getElementById("email-thumbnail").innerHTML = "";
-			this.$store.state.sdk.createThumbnail({
-				document: this.$store.getters.getEmail, // email document JSON
-				container: this.configObj.container,
-				height: this.configObj.height,
-				width: this.configObj.width,
-				scale: this.configObj.scale, // the real size will be 320x240 in this case
-				scroll: this.configObj.scroll,
-			});
+		...mapMutations([ "setThumbnailInited" ]),
+		async updateThumbnail() {
+			if (this.$chamaileon.thumbnail) {
+				this.$chamaileon.thumbnail.destroy();
+				this.setThumbnailInited(false);
+			}
+			const container = document.getElementById("thumbnail");
+			if (container) {
+				container.innerHTML = "";
+			}
+			await this.$store.dispatch("initThumbnail", container);
+		},
+		updateSettings(obj) {
+			if (timeoutId) {
+				clearTimeout(timeoutId);
+			}
+			timeoutId = setTimeout(async () => {
+				this.$store.commit("updateThumbnail", obj);
+				await this.updateThumbnail();
+			}, 750);
 		},
 	},
 };
 </script>
 
 <style>
-#email-thumbnail div iframe {
-	position: inherit !important;
-	transform-origin: 50% 0 !important;
-}
-
-#email-thumbnail div {
-	display: flex;
-	justify-content: center;
-}
+	.PreviewJSON {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		overflow-y: auto;
+		overflow-x: auto;
+	}
+	.PreviewJSON > div > iframe {
+		position: absolute !important;
+		left: 0px !important;
+		border: none;
+	}
+	.PreviewJSON > div > iframe html{
+		overflow: hidden;
+	}
 </style>

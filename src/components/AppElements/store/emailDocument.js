@@ -386,7 +386,7 @@ const getDefaultState = () => {
 											style: {
 												"max-height": "36px",
 												"max-width": "167px",
-												src: "https://via.placeholder.com/167x36/ffffff/5C9AEB%3Ftext=Logo",
+												src: "https://via.placeholder.com/167x36/ffffff/5C9AEB&text=Logo",
 												width: "167px",
 												"background-color": "",
 												"border-radius": "0px",
@@ -6172,10 +6172,10 @@ const getDefaultState = () => {
 		title: "Business Promo",
 		previewText: "",
 		subjectLine: "",
-	}
-}
-  
-export default {	
+	};
+};
+
+export default {
 	state: getDefaultState(),
 	mutations: {
 		updateDocument(state, payload) {
@@ -6184,12 +6184,16 @@ export default {
 			state.variables = payload.variables;
 			state.fontFiles = payload.fontFiles;
 		},
-		resetEmailDocumentState (state) {
-			Object.assign(state, getDefaultState())
-		}
+		resetEmailDocumentState(state) {
+			Object.assign(state, getDefaultState());
+		},
 	},
-	actions: {},
+	actions: {
+		updateDocument({ commit }, payload) {
+			commit("updateDocument", payload);
+		},
+	},
 	getters: {
-		documentTitle: (state) => state.title,
+		documentTitle: state => state.title,
 	},
 };

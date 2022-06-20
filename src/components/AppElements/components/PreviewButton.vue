@@ -1,41 +1,46 @@
 <template>
 	<transition name="slide-fade">
-        <div class="stickyDiv" v-if="!this.previewButtonVisible">
-            <div class="previewBtn">
-                <v-btn
-                    depressed
-                    class="grey lighten-3 pa-3 custom-btn primary--text"
-                    width="100%"
-                    height="100%"
-                    min-width="0"
-                    @click="emitClick"
-                >
-                    <div
-                    class="
-                        d-flex
-                        flex-wrap flex-column
-                        grey--text
-                        text--darken-2
-                    "
-                    style="width: 100px"
-                    >
-                    <v-icon >mdi-eye</v-icon>
-                    <span>{{this.buttonText}}</span>
-                    </div>
-                </v-btn>
-            </div>
-        </div>
+		<div v-if="!previewButtonVisible" class="stickyDiv">
+			<div class="previewBtn">
+				<v-btn
+					depressed
+					class="grey lighten-3 pa-3 custom-btn primary--text"
+					:disabled="isInited === 'pending'"
+					:loading="isInited === 'pending'"
+					width="100%"
+					height="100%"
+					min-width="0"
+					@click="emitClick"
+				>
+					<div
+						class="
+							d-flex
+							flex-wrap flex-column
+							grey--text
+							text--darken-2
+						"
+						style="width: 100px"
+					>
+						<v-icon>mdi-eye</v-icon>
+						<span>{{ buttonText }}</span>
+					</div>
+				</v-btn>
+			</div>
+		</div>
 	</transition>
 </template>
 
 <script>
 export default {
-
 	props: {
-		buttonText: String,
+		buttonText: { type: String, default: "Preview" },
 		previewButtonVisible: Boolean,
+		isInited: {
+			type: [Boolean, String],
+			default: false,
+			required: true,
+		},
 	},
-
 	methods: {
 		emitClick() {
 			this.$emit("previewClick");
@@ -43,7 +48,6 @@ export default {
 	},
 };
 </script>
-
 
 <style scoped>
 

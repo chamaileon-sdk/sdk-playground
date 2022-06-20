@@ -9,14 +9,15 @@
 			slider-size="3"
 		>
 			<v-tab
+				class="pa-0 mr-3 rounded-lg"
 				@click="
 					changeSplash(
-						'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html'
+						'https://cdn.chamaileon.io/assets/splashScreen.html',
 					)
 				"
-				class="pa-0 mr-3 rounded-lg"
 			>
 				<v-card
+					v-chamaileonLogoNoText
 					class="rounded-lg primary pa-5"
 					style="fill: white; opacity: 0.3"
 					width="300px"
@@ -24,12 +25,10 @@
 					elevation="0"
 					:style="
 						calculateOpacity(
-							'https://plugins.chamaileon.io/mega-spa/3.2.2/splashScreen.html'
+							'https://cdn.chamaileon.io/assets/splashScreen.html',
 						)
 					"
-					v-chamaileonLogoNoText
-				>
-				</v-card>
+				/>
 			</v-tab>
 			<v-tab
 				v-for="(l, i) in splashs"
@@ -55,7 +54,7 @@
 								height: 100%;
 								z-index: 1;
 							"
-						></div>
+						/>
 						<iframe
 							class="rounded-lg"
 							width="100%"
@@ -63,7 +62,7 @@
 							style="z-index: 0; top: 0; left: 0; position: relative"
 							:src="l.url"
 							frameborder="0"
-						></iframe>
+						/>
 					</div>
 				</v-card>
 			</v-tab>
@@ -80,8 +79,12 @@
 					outlined
 					color="grey--text"
 				>
-					<v-icon class="pa-0 ma-0" x-large>mdi-plus</v-icon>
-					<v-card-text class="pa-0 ma-0">Create your own</v-card-text>
+					<v-icon class="pa-0 ma-0" x-large>
+						mdi-plus
+					</v-icon>
+					<v-card-text class="pa-0 ma-0">
+						Create your own
+					</v-card-text>
 				</v-card>
 			</v-tab>
 		</v-tabs>
@@ -92,6 +95,15 @@
 const chamaileonLogo = require("chamaileon-logo");
 
 export default {
+	directives: {
+		chamaileonLogoNoText: {
+			inserted(el) {
+				const logo = chamaileonLogo();
+				logo.style.height = "100%";
+				el.appendChild(logo);
+			},
+		},
+	},
 	data() {
 		return {
 			splashs: [
@@ -106,24 +118,15 @@ export default {
 			return this.$store.state.sdkConfig.urls.splashScreen;
 		},
 	},
-	directives: {
-		chamaileonLogoNoText: {
-			inserted: function (el) {
-				let logo = chamaileonLogo();
-				logo.style.height = "100%";
-				el.appendChild(logo);
-			},
-		},
-	},
 	methods: {
 		hoverOnSplashContainer(e, url) {
-			let x = e.target;
-			let y = x.querySelector("iframe");
+			const x = e.target;
+			const y = x.querySelector("iframe");
 			y.src = url;
 		},
 
 		changeSplash(value) {
-			this.$store.commit("updateSDKConfig", {
+			this.$store.dispatch("updateSdkConfig", {
 				urls: { ...this.$store.state.sdkConfig.urls, splashScreen: value },
 			});
 		},

@@ -1,26 +1,27 @@
 <template>
+	<!-- eslint-disable-next-line vue/component-name-in-template-casing -->
 	<scrollactive class="menuScroll">
 		<v-card flat height="100%">
 			<v-card
+				id="logo"
+				v-chamaileonLogo
 				:ripple="false"
 				to="/sdk#home"
-				:style="`fill: ${this.$vuetify.presets.framework.theme.themes.light.primary}`"
+				:style="`fill: ${$vuetify.presets.framework.theme.themes.light.primary}`"
 				color="transparent"
 				flat
 				width="100%"
 				class="px-6 pt-6 pb-4"
-				id="logo"
-				v-chamaileonLogo
 				@click="scrollToTop"
-			></v-card>
+			/>
 			<v-list>
 				<template v-for="(m, ind) in Menu">
 					<v-list-item
 						v-if="!m.disabled"
 						:key="ind"
+						v-ripple="{ class: `primary--text` }"
 						class="pl-6"
 						color="primary"
-						v-ripple="{ class: `primary--text` }"
 						exact
 						:to="{ path: m.to, hash: 'home' }"
 						@click="scrollToTop"
@@ -34,17 +35,18 @@
 
 					<template v-if="isActive(m.to)">
 						<v-list-item
-							color="primary"
-							class="pl-xl-12 navLink scrollactive-item"
-							v-ripple="{ class: `primary--text` }"
-							:class="addActiveClass(c.to)"
 							v-for="c in m.children.filter(item => item.disabled !== true)"
 							:key="c.to"
+							v-ripple="{ class: `primary--text` }"
+							color="primary"
+							class="pl-xl-12 navLink scrollactive-item"
+							:class="addActiveClass(c.to)"
 							link
 							:to="{ path: m.to, hash: c.to }"
 						>
 							<div
-								v-if="!c.disabled" class="d-flex"
+								v-if="!c.disabled"
+								class="d-flex"
 							>
 								<v-list-item-icon class="ml-6 mr-6">
 									<v-icon>mdi-{{ c.icon }}</v-icon>
@@ -65,6 +67,20 @@ const chamaileonLogo = require("chamaileon-logo");
 import { mapGetters } from "vuex";
 
 export default {
+	directives: {
+		chamaileonLogo: {
+			inserted(el) {
+				el.appendChild(chamaileonLogo({ withText: true }));
+			},
+		},
+	},
+	data: () => ({
+		primary: "",
+	}),
+	computed: {
+		...mapGetters([ "getEditorConfigObject" ]),
+		...mapGetters({ Menu: "getMenu" }),
+	},
 	mounted() {
 		this.primary = this.$vuetify.presets.framework.theme.themes.light.primary;
 	},
@@ -80,20 +96,6 @@ export default {
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		},
 	},
-	directives: {
-		chamaileonLogo: {
-			inserted: function (el) {
-				el.appendChild(chamaileonLogo({ withText: true }));
-			},
-		},
-	},
-	computed: {
-		...mapGetters(["getConfigObject"]),
-		...mapGetters({ Menu: "getMenu" }),
-	},
-	data: () => ({
-		primary: "",
-	}),
 };
 </script>
 

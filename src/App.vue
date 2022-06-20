@@ -1,7 +1,12 @@
 <template>
 	<v-app v-if="isAvailable">
-		<v-navigation-drawer class="leftSection" width="19.127%" app permanent>
-			<MenuReworked />
+		<v-navigation-drawer
+			class="leftSection"
+			width="19.127%"
+			app
+			permanent
+		>
+			<Menu />
 		</v-navigation-drawer>
 
 		<v-main>
@@ -30,51 +35,27 @@
 
 <script>
 import CodeEditor from "./components/AppElements/components/CodeEditor.vue";
-import MenuReworked from "./components/AppElements/components/Menu.vue";
+import Menu from "./components/AppElements/components/Menu.vue";
 import NotAvailable from "./components/AppElements/components/NotAvailable.vue";
 
-import { mapState } from "vuex"
-
 export default {
-	metaInfo() {
-		return {
-			script: [
-				{
-					src: this.chamaileonSdk,
-					async: true,
-					defer: true,
-					callback: () => {
-						this.isChamaileonSDKLoaded = true 
-					} 
-				}
-			],	
-		}
+	components: {
+		Menu,
+		CodeEditor,
+		NotAvailable,
 	},
 	data() {
 		return {
-			isChamaileonSDKLoaded: false
-		}
-	},
-	watch: {
-		isChamaileonSDKLoaded() {
-			this.$store.dispatch("initSDK");
-		}
+			localStorageVersion: "v2",
+		};
 	},
 	computed: {
-		...mapState({
-			chamaileonSdk: (state) => state.sdkConfig.chamaileonSdk,
-		}),
 		isAvailable() {
 			return this.$vuetify.breakpoint.width > 960;
 		},
 	},
-	components: {
-		MenuReworked,
-		CodeEditor,
-		NotAvailable,
-	},
 	created() {
-		this.$store.commit("updateSDKConfig", {
+		this.$store.dispatch("updateSdkConfig", {
 			colors: {
 				...this.$store.state.sdkConfig.colors,
 				primary: this.$vuetify.presets.framework.theme.themes.light.primary,
@@ -85,56 +66,58 @@ export default {
 	mounted() {
 		window.onbeforeunload = function () {
 			localStorage.setItem(
-				"sdkInitConfig",
-				JSON.stringify(this.$store.state.sdkConfig)
+				`sdkConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.sdkConfig),
 			);
 			localStorage.setItem(
-				"editorConfig",
-				JSON.stringify(this.$store.state.editorConfig)
+				`emailEditorConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.editorConfig),
 			);
 			localStorage.setItem(
-				"previewConfig",
-				JSON.stringify(this.$store.state.previewConfig)
+				`previewConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.previewConfig),
 			);
 			localStorage.setItem(
-				"variableEditorConfig",
-				JSON.stringify(this.$store.state.variableEditorConfig)
+				`variableEditorConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.variableEditorConfig),
 			);
 			localStorage.setItem(
-				"thumbnailConfig",
-				JSON.stringify(this.$store.state.thumbnailConfig)
+				`thumbnailConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.thumbnailConfig),
 			);
 			localStorage.setItem(
-				"generatorConfig",
-				JSON.stringify(this.$store.state.generatorConfig)
+				`generatorConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.generatorConfig),
 			);
 			localStorage.setItem(
-				"emailDocument",
-				JSON.stringify(this.$store.state.document)
+				`emailDocument_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.document),
 			);
 			localStorage.setItem(
-				"galleryConfig",
-				JSON.stringify(this.$store.state.megaGalleryConfig)
+				`galleryConfig_${this.localStorageVersion}`,
+				JSON.stringify(this.$store.state.megaGalleryConfig),
 			);
 		}.bind(this);
 
-		for (let elem of [
-			"sdkInitConfig",
-			"editorConfig",
-			"previewConfig",
-			"galleryConfig",
-			"variableEditorConfig",
-			"thumbnailConfig",
-			"generatorConfig",
-			"emailDocument",
+		this.$store.commit("setLocalStorageLoaded", "pending");
+		for (const elem of [
+			`sdkConfig_${this.localStorageVersion}`,
+			`emailEditorConfig_${this.localStorageVersion}`,
+			`previewConfig_${this.localStorageVersion}`,
+			`galleryConfig_${this.localStorageVersion}`,
+			`variableEditorConfig_${this.localStorageVersion}`,
+			`thumbnailConfig_${this.localStorageVersion}`,
+			`generatorConfig_${this.localStorageVersion}`,
+			`emailDocument_${this.localStorageVersion}`,
 		]) {
-			if (localStorage.getItem(elem))
+			if (localStorage.getItem(elem)) {
 				this.$store.commit(
-					`${elem}Load`,
-					JSON.parse(localStorage.getItem(elem))
+					`${elem.replace(`_${this.localStorageVersion}`, "")}Load`,
+					JSON.parse(localStorage.getItem(elem)),
 				);
+			}
 		}
-
+		this.$store.commit("setLocalStorageLoaded", true);
 		this.$store.dispatch("fetchDummyHtml");
 	},
 };
