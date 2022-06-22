@@ -20,7 +20,7 @@ export default {
 			await new Promise(resolve => setTimeout(resolve, 100));
 		}
 
-		if (Vue.prototype?.$chamaileon?.destroy && typeof Vue.prototype?.$chamaileon?.destroy === "function") {
+		if (Vue.prototype.$chamaileon && Vue.prototype.$chamaileon.destroy && typeof Vue.prototype.$chamaileon.destroy === "function") {
 			Vue.prototype.$chamaileon.destroy();
 		}
 

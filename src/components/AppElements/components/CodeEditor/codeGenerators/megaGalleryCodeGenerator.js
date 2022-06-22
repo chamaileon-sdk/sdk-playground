@@ -3,7 +3,7 @@ const generateFolderTreeItem = (item, indent) => {
 ${"\t".repeat(indent + 1)}_id: "${item._id}"
 ${"\t".repeat(indent + 1)}name: "${item.name}"
 `;
-	if (item?.children) {
+	if (item && item.children) {
 		string += `${"\t".repeat(indent + 1)}children: [`;
 		item.children.forEach((subItem) => {
 			string += `\n${"\t".repeat(indent + 2)}${generateFolderTreeItem(subItem, indent + 2)}`;
