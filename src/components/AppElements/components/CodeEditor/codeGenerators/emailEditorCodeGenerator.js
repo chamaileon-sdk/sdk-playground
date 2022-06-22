@@ -208,7 +208,7 @@ ${"\t".repeat(indent - 1)}},`;
 const settingsGenerator = (editorConfig, indent = 2) => {
 	let string = "{\n";
 
-	if (editorConfig.settings.user?.enabled) {
+	if (editorConfig.settings.user && editorConfig.settings.user.enabled) {
 		string += `${"\t".repeat(indent)}user: {
 ${"\t".repeat(indent + 1)}name: "${editorConfig.settings.user.name}",
 ${"\t".repeat(indent + 1)}avatar: "${editorConfig.settings.user.avatar}"
