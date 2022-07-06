@@ -100,7 +100,7 @@ export default {
 		dispatch("initEmailEditor");
 		dispatch("initVariableEditor");
 		dispatch("initEmailPreview");
-		// dispatch("initHtmlImport");
+		dispatch("initHtmlImport");
 		dispatch("initGallery");
 	},
 	async initEmailEditor({ commit, dispatch, getters, state }) {
@@ -260,46 +260,53 @@ export default {
 			commit("setEmailPreviewInited", false);
 		}
 	},
-	async initHtmlImport() {
-		//  if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
-		//  await dispatch("waitForSdkToBeInited");
-		// 	commit("setHtmlImportInited", "pending");
-		// 	try {
-		// 		Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
-		// 			// ...this.$store.getters.getHtmlImportConfigObject,
-		// 			plugin: "import",
-		// 			hooks: {
-		// 				cancel: () => {
-		// 					console.log("TODO CANCEL");
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				close: () => {
-		// 					console.log("TODO CLOSE");
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				importReady: (message) => {
-		// 					console.log("TODO onButtonClicked");
-		// 					// eslint-disable-next-line no-unused-vars
-		// 					const template = {
-		// 						content: message.document,
-		// 					};
-		// 					console.log(message.document);
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				// eslint-disable-next-line no-unused-vars, require-await
-		// 				onButtonClicked: async ({ buttonId, data }) => {
-		// 					console.log("TODO onButtonClicked");
-		// 				},
-		// 			},
-		// 		});
-		// 		console.log(Vue.prototype.$chamaileon);
-		// 		commit("setHtmlImportInited", true);
-		// 	} catch (error) {
-		// 		console.error("Failed to initialize html import: ", error);
-		// 		Vue.prototype.$chamaileon.htmlImport = null;
-		// 		commit("setHtmlImportInited", false);
-		// 	}
-		// }
+	async initHtmlImport({ getters, commit, state, dispatch }) {
+		if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
+		commit("setHtmlImportInited", "pending");
+		await dispatch("waitForSdkToBeInited");
+		try {
+			Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+				...getters.getHtmlImportConfigObject,
+				plugin: "import",
+				hooks: {
+					cancel: () => {
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+					close: () => {
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+					onReplaceImage: src => src,
+					onImport: async ({ html }) => {
+						if (!html) throw new Error("HTML missing");
+						const response = await fetch("https://sdk-api.chamaileon.io/api/v1/emails/import", {
+							method: "POST",
+							headers: {
+								Authorization: `Bearer ${state.sdkConfig.apiKey}`,
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								title: "",
+								emailHTML: html,
+							}),
+						});
+						if (response.status !== 200) throw new Error("Request error");
+						const answer = await response.json();
+						if (answer.error) throw new Error(answer.error);
+						return answer;
+					},
+					onImportReady: (result) => {
+						console.log(result.document);
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+				},
+			});
+			console.log(Vue.prototype.$chamaileon);
+			commit("setHtmlImportInited", true);
+		} catch (error) {
+			console.error("Failed to initialize html import: ", error);
+			Vue.prototype.$chamaileon.htmlImport = null;
+			commit("setHtmlImportInited", false);
+		}
 	},
 	async initGallery({ commit, state, dispatch }) {
 		if (state.galleryInited === true || state.galleryInited === "pending") return;
