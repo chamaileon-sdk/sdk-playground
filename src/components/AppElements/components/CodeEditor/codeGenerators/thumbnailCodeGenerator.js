@@ -1,13 +1,10 @@
 const settingsGenerator = (thumbnailConfig, indent = 2) => {
 	return `{
-${"\t".repeat(indent)}width: ${thumbnailConfig.width},
-${"\t".repeat(indent)}height: ${thumbnailConfig.height},
-${"\t".repeat(indent)}scale: ${thumbnailConfig.scale},
 ${"\t".repeat(indent)}scroll: ${thumbnailConfig.scroll}
 ${"\t".repeat(indent - 1)}}`;
 };
 
-export default function (thumbnailConfig) {
+export default function (thumbnailConfig, thumbnailDimensions) {
 	return `const thumbnailInstance = await chamaileonPlugins.createInlinePlugin(
 	{
 		plugin: "thumbnail",
@@ -16,7 +13,12 @@ export default function (thumbnailConfig) {
 		hooks: thumbnailHooks, //see 'hooks' tab
 	},
 	{
-		container: "#thumbnail", //your container query selector or HTML element
+		container: "#thumbnail", //your container query selector or HTML element,
+		dimensions: {
+			width: ${thumbnailDimensions.width},
+			height: ${thumbnailDimensions.height},
+			scale: ${thumbnailDimensions.scale},
+		}
 	}
 );`;
 }
