@@ -1,6 +1,11 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.0.2] 2022-07-06
+
+### Changed
+- New chamaileon-sdk version that fixes inline plugin dimensions
+
 ## [1.0.1] 2022-06-21
 
 ### Changed
