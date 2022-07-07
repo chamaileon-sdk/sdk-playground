@@ -28,15 +28,12 @@ export default {
 			}
 			if (Object.prototype.hasOwnProperty.call(payload, "scale")) {
 				dimensions.scale = parseFloat(payload.scale);
-				settings.scale = parseFloat(payload.scale); // fallback for now
 			}
 			if (Object.prototype.hasOwnProperty.call(payload, "width")) {
 				dimensions.width = parseInt(payload.width);
-				settings.width = parseFloat(payload.width); // fallback for now
 			}
 			if (Object.prototype.hasOwnProperty.call(payload, "height")) {
 				dimensions.height = parseInt(payload.height);
-				settings.height = parseFloat(payload.height); // fallback for now
 			}
 
 			state.settings = { ...state.settings, ...settings };
