@@ -265,7 +265,7 @@ export default {
 		},
 		// Thumbnail
 		thumbnailCode() {
-			return thumbnailCodeGenerator(this.$store.getters.getThumbnailSettings);
+			return thumbnailCodeGenerator(this.$store.getters.getThumbnailSettings, this.$store.getters.getThumbnailDimensions);
 		},
 		thumbnailHooks() {
 			return thumbnailHooksGenerator();
