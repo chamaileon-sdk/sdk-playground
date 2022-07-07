@@ -472,6 +472,7 @@ export default {
 				},
 				{
 					container,
+					dimensions: { ...getters.getThumbnailDimensions },
 				},
 			);
 			commit("setThumbnailInited", true);
