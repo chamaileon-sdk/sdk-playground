@@ -70,7 +70,7 @@ export default {
 		getHtmlImportSettings(state) {
 			return state.settings;
 		},
-		
+
 		getJSONFetchStatus(state) {
 			return state.fetchingJSON;
 		},

@@ -100,7 +100,7 @@ export default {
 	},
 
 	methods: {
-		...mapMutations(["updateHtmlImportSettings"]),
+		...mapMutations([ "updateHtmlImportSettings" ]),
 
 		updateSettings(obj) {
 			this.updateHtmlImportSettings(obj);

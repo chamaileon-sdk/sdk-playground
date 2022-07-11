@@ -1,5 +1,5 @@
 export default function (importConfig) {
-  const printConfig = (config) => {
+	const printConfig = (config) => {
 		let str = "";
 		for (const key in config) {
 			str += "\t" + key + ": ";

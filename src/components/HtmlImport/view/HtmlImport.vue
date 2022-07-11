@@ -48,7 +48,7 @@ export default {
 		Description,
 		Footer,
 		PreviewButton,
-		Settings
+		Settings,
 	},
 	data() {
 		return {
