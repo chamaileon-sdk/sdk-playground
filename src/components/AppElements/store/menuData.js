@@ -193,6 +193,14 @@ export default {
 				title: "Email HTML Import",
 				icon: "code-json",
 				to: "htmlimport",
+				children: [
+					{
+						title: "Settings",
+						icon: "cog-outline",
+						to: "#settings",
+						codePropToMatch: "document",
+					},
+				],
 			},
 		],
 	}),
