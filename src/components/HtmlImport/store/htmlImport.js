@@ -1,10 +1,32 @@
-export default {
-	state: () => ({
+const getDefaultState = () => {
+	return {
 		fetchingJSON: false,
-	}),
+		settings: {
+			replaceImages: {
+				displayText: "Replace image URLs",
+				value: true,
+			},
+			showReplaceSwitch: {
+				displayText: "Show a toggle button to replace images",
+				value: true,
+			},
+		},
+	};
+};
+
+export default {
+	state: getDefaultState(),
 	mutations: {
+		resetHtmlImportState(state) {
+			Object.assign(state, getDefaultState());
+		},
+
 		toggleFetching(state) {
 			state.fetchingJSON = !state.fetchingJSON;
+		},
+
+		updateHtmlImportSettings(state, payload) {
+			state.settings[payload.key].value = payload.value;
 		},
 	},
 	actions: {
@@ -45,6 +67,10 @@ export default {
 		},
 	},
 	getters: {
+		getHtmlImportSettings(state) {
+			return state.settings;
+		},
+		
 		getJSONFetchStatus(state) {
 			return state.fetchingJSON;
 		},

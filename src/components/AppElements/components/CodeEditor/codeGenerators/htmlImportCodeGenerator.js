@@ -1,22 +1,24 @@
-export default function () {
-	return `const htmlString = document.querySelector('textarea').value;
+export default function (importConfig) {
+  const printConfig = (config) => {
+		let str = "";
+		for (const key in config) {
+			str += "\t" + key + ": ";
+			if (typeof config[key] === typeof "string") {
+				str += "\"" + config[key].value + "\",\n";
+			} else {
+				str += config[key].value + ",\n";
+			}
+		}
 
-	const genRequest = await fetch('https://sdk-api.chamaileon.io/api/v1/emails/import', {
-	method: 'POST',
-	headers: {
-		'Authorization': \`\${yourApiKey}\`,
-		'Content-Type': 'application/json',
-	},
-	body: JSON.stringify({
-		html: htmlInput //see "HTML Input" tab
-	})
-})
+		return str.slice(0, -1);
+	};
 
-if (!genRequest.ok) {
-	throw new Error("Auth error")
-}
-
-const response = await genRequest.json()
-
-jsonOutput = response.result.document //see "JSON Output" tab`;
+	return `const importInstance = await chamaileonPlugins.createFullscreenPlugin({
+  plugin: "import",
+  data: {},
+  settings: {
+  ${printConfig(importConfig)}
+  },
+  hooks: htmlImportHooks, // see 'hooks' tab
+};`;
 }

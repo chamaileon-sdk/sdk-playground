@@ -10,19 +10,24 @@
 			<div id="home" class="section">
 				<Description
 					:title="'Email HTML Import'"
-					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-html-importer/'"
+					:doc-url="'https://chamaileon.io/sdk/v2/docs/email-html-import-plugin/'"
 					:image="'HtmlImportIllustration.svg'"
-					:button-text="/*'Open HTML import'*/null"
+					:button-text="'Open HTML import'"
+					:is-inited="isInited"
 					@showPreviewButton="showPreviewButton"
 					@previewClick="openHtmlImport"
 				>
 					<p>
-						Our HTML import plugin allows you to import an existing HTML email
-						to the editor and make changes to it. The output is a JSON object,
-						which the editor can process. Currently, there are no available
-						options for this plugin.
+						Our HTML import plugin allows you to import an existing HTML email and
+						convert it into our email document JSON format. Then, you can directly
+						load it into any of our other plugins, make changes to it or save it in
+						your system. Currently, there's two customizable options for this plugin.
 					</p>
 				</Description>
+			</div>
+
+			<div id="settings" class="section">
+				<Settings />
 			</div>
 		</SectionObserver>
 		<Footer :previous="'Email HTML Generator'" :prev-to="'/htmlgenerator'" />
@@ -34,6 +39,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+import Settings from "../components/Settings.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -42,6 +48,7 @@ export default {
 		Description,
 		Footer,
 		PreviewButton,
+		Settings
 	},
 	data() {
 		return {

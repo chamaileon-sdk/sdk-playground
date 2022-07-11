@@ -30,6 +30,7 @@
 					|| route === '/gallery'
 					|| route === '/variableeditor'
 					|| route === '/emailthumbnail'
+					|| route === '/htmlimport'
 				"
 			>
 				Hooks
@@ -55,13 +56,6 @@
 			</v-tab>
 			<v-tab v-show="route === '/htmlgenerator'">
 				Output HTML
-			</v-tab>
-
-			<v-tab v-show="route === '/htmlimport'">
-				Input HTML
-			</v-tab>
-			<v-tab v-show="route === '/htmlimport'">
-				Output JSON
 			</v-tab>
 		</v-tabs>
 
@@ -228,6 +222,7 @@ import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 import megaGalleryHooksGenerator from "./CodeEditor/hooks/megaGalleryHooks";
 import thumbnailHooksGenerator from "./CodeEditor/hooks/thumbnailHooks";
+import htmlImportHooksGenerator from "./CodeEditor/hooks/htmlImportHooks";
 
 import thumbnailMethodsGenerator from "./CodeEditor/methods/thumbnailMethods";
 import previewMethodsGenerator from "./CodeEditor/methods/previewMethods";
@@ -249,6 +244,7 @@ export default {
 		...mapGetters({ menus: "getMenu" }),
 		...mapGetters([
 			"getHtmlGeneratorConfigObject",
+			"getHtmlImportSettings",
 			"getHtmlDocument",
 			"getDummyHtmlDocument",
 			"getDummyJSON",
@@ -339,7 +335,10 @@ export default {
 		},
 		// Html import
 		htmlImportCode() {
-			return htmlImportCodeGenerator();
+			return htmlImportCodeGenerator(this.getHtmlImportSettings);
+		},
+		htmlImportHooks() {
+			return htmlImportHooksGenerator();
 		},
 		// Final
 		code() {
@@ -353,7 +352,9 @@ export default {
 				return this.variableEditorCode;
 			} else if (this.$route.path === "/htmlgenerator") {
 				return this.htmlGeneratorCode;
-			} else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
+			} else if (this.$route.path === "/htmlimport") {
+				return this.htmlImportCode;
+			}
 			else return "//There is no code available";
 		},
 
@@ -363,6 +364,7 @@ export default {
 			else if (this.$route.path === "/gallery") return this.galleryHooks;
 			else if (this.$route.path === "/variableeditor") return this.variableEditorHooks;
 			else if (this.$route.path === "/emailthumbnail") return this.thumbnailHooks;
+			else if (this.$route.path === "/htmlimport") return this.htmlImportHooks;
 			else return "//There are no hooks available";
 		},
 		methods() {
