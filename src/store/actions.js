@@ -294,9 +294,11 @@ export default {
 						if (answer.error) throw new Error(answer.error);
 						return answer;
 					},
-					onImportReady: (result) => {
-						console.log(result.document);
+					onImportReady: async (result) => {
+						let document = { ...result.document, title: 'Imported email' }
 						Vue.prototype.$chamaileon.htmlImport.hide();
+						await Vue.prototype.$chamaileon.emailEditor.methods.updateData({ document });
+						Vue.prototype.$chamaileon.emailEditor.show();
 					},
 				},
 			});
