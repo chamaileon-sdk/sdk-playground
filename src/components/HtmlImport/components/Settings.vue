@@ -5,7 +5,7 @@
 			You can choose between the following options to make our plugin better fit you needs.
 		</p>
 		<OptionWrapper>
-			<div v-for="(item, key, ind) in settings" :key="key">
+			<div v-for="(item, key, ind) in togglableSettings()" :key="key">
 				<v-card
 					min-height="72px"
 					flat
@@ -92,7 +92,7 @@ export default {
 	},
 
 	computed: {
-		...mapGetters({ settings: "getHtmlImportSettings" }),
+		...mapGetters({ settings: "getImportSettings" }),
 
 		settingsLength() {
 			return Object.keys(this.settings).length;
@@ -100,11 +100,17 @@ export default {
 	},
 
 	methods: {
-		...mapMutations([ "updateHtmlImportSettings" ]),
+		...mapMutations([ "updateImportSettings" ]),
 
 		updateSettings(obj) {
-			this.updateHtmlImportSettings(obj);
+			this.updateImportSettings(obj);
 		},
+
+		togglableSettings() {
+			const asArray = Object.entries(this.settings);
+			const filtered = asArray.filter(([key, item]) => typeof item.value === 'boolean');
+			return Object.fromEntries(filtered);
+		}
 	},
 };
 </script>

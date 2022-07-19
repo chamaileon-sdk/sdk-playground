@@ -92,10 +92,13 @@ export default {
 
 		return config;
 	},
-	getHtmlImportConfigObject: () => {
+	getImportConfigObject: () => {
 		return {
 			data: {},
 			settings: {
+				buttons: {
+					header: []
+				},
 				showReplaceSwitch: true,
 				replaceImages: true,
 			},

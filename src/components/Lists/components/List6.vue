@@ -318,7 +318,7 @@ export default {
 			required: true,
 			validator(value) {
 				// The value must match one of these strings
-				return ["Editor", "Preview"].indexOf(value) !== -1;
+				return ["Editor", "Preview", "Import"].indexOf(value) !== -1;
 			},
 		},
 	},

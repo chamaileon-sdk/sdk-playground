@@ -25,7 +25,9 @@
 					</p>
 				</Description>
 			</div>
-
+			<div id="header" class="section">
+				<Header />
+			</div>
 			<div id="settings" class="section">
 				<Settings />
 			</div>
@@ -39,11 +41,13 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+import Header from "../components/Header.vue";
 import Settings from "../components/Settings.vue";
 import { mapState } from "vuex";
 
 export default {
 	components: {
+		Header,
 		SectionObserver,
 		Description,
 		Footer,

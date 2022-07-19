@@ -244,7 +244,7 @@ export default {
 		...mapGetters({ menus: "getMenu" }),
 		...mapGetters([
 			"getHtmlGeneratorConfigObject",
-			"getHtmlImportSettings",
+			"getImportSettings",
 			"getHtmlDocument",
 			"getDummyHtmlDocument",
 			"getDummyJSON",
@@ -335,7 +335,7 @@ export default {
 		},
 		// Html import
 		htmlImportCode() {
-			return htmlImportCodeGenerator(this.getHtmlImportSettings);
+			return htmlImportCodeGenerator(this.getImportSettings);
 		},
 		htmlImportHooks() {
 			return htmlImportHooksGenerator();

@@ -195,6 +195,12 @@ export default {
 				to: "htmlimport",
 				children: [
 					{
+						title: "Header",
+						icon: "border-top-variant",
+						to: "#header",
+						codePropToMatch: "header",
+					},
+					{
 						title: "Settings",
 						icon: "cog-outline",
 						to: "#settings",

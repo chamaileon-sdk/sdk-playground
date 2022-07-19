@@ -268,6 +268,10 @@ export default {
 			Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				...getters.getHtmlImportConfigObject,
 				plugin: "import",
+				settings: {
+					replaceImages: true,
+					showReplaceSwitch: true,
+				},
 				hooks: {
 					cancel: () => {
 						Vue.prototype.$chamaileon.htmlImport.hide();
