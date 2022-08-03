@@ -81,6 +81,56 @@ const getDefaultState = () => {
 					dynamicImage: true,
 				},
 			},
+			variables: {
+				text: {
+					canAdd: true,
+					canEdit: true,
+					canDelete: true,
+					canReplaceAll: true,
+					canRemoveAll: true,
+				},
+				image: {
+					canAdd: true,
+					canEdit: true,
+					canDelete: true,
+					canReplaceAll: true,
+					canRemoveAll: true,
+				},
+				color: {
+					canAdd: true,
+					canEdit: true,
+					canDelete: true,
+					canReplaceAll: true,
+					canRemoveAll: true,
+				},
+				fontStack: {
+					canAdd: true,
+					canEdit: true,
+					canDelete: true,
+					canReplaceAll: true,
+					canRemoveAll: true,
+				},
+				link: {
+					canAdd: true,
+					canEdit: true,
+					canDelete: true,
+					canReplaceAll: true,
+					canRemoveAll: true,
+				},
+			},
+			elementDefaults: {
+				attrs: {
+					text: {
+						text: "<p>Double click to edit text!</p>",
+					},
+					button: {
+						text: "<p>Click here to edit me</p>",
+					},
+				},
+			},
+			panels: {
+				details: null,
+			},
 			blockLibraries: [],
 			addons: {
 				blockLock: {
@@ -89,6 +139,7 @@ const getDefaultState = () => {
 					description:
 						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
+					disabledReason: "This addon is disabled",
 				},
 				variableSystem: {
 					icon: "iframe-variable-outline",
@@ -96,6 +147,7 @@ const getDefaultState = () => {
 					description:
 						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
+					disabledReason: "This addon is disabled",
 				},
 			},
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
@@ -306,6 +358,10 @@ export default {
 			return state;
 		},
 
+		updateAddonDisabledState(state, payload) {
+			Vue.set(state.settings.addons[payload.name], "disabledReason", payload.value);
+		},
+
 		// User
 		updateUser(state, payload) {
 			Vue.set(state.settings, "user", { ...state.settings.user, ...payload });
@@ -349,9 +405,34 @@ export default {
 				{ ...state.settings.dropZone, ...dropZone },
 			);
 		},
-		// Static Assets
+
+		// Panels
+		updatePanels(state, panel) {
+			Vue.set(
+				state.settings,
+				"panels",
+				{ ...state.settings.panels, ...panel },
+			);
+		},
+
+		// Video element url
 		updateVideoElementBaseUrl(state, url) {
-			state.videoElementBaseUrl = url;
+			Vue.set(state.settings, "videoElementBaseUrl", url);
+		},
+
+		// Variables
+		updateVariablePermissions(state, payload) {
+			Vue.set(state.settings.variables[payload.variableTypeName], payload.name, payload.value);
+		},
+
+		// text element default text
+		updateTextElementDefaultText(state, payload) {
+			Vue.set(state.settings.elementDefaults.attrs.text, "text", payload);
+		},
+
+		// button element default text
+		updateButtonElementDefaultText(state, payload) {
+			Vue.set(state.settings.elementDefaults.attrs.button, "text", payload);
 		},
 	},
 	actions: {

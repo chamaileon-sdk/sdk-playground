@@ -5,6 +5,8 @@ export default function (thumbnailConfig) {
 
 thumbnailInstance.methods.updateSettings(${settingsGenerator(thumbnailConfig, 1)});
 
+thumbnailInstance.methods.updateHooks({ hooks: thumbnailHooks, resetHooks: false }); // see 'hooks' tab
+
 thumbnailInstance.methods.getDocumentHeight();
 `;
 	return str;

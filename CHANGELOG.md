@@ -1,6 +1,20 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.0] 2022-08-03
+
+### Added
+- updateHooks example code for every plugin
+- email editor setting variable parameters
+- email editor setting elementDefaults
+- email editor setting panels
+- email editor setting addon disabledReason
+- fonts in the setting editor config
+
+### Changed
+- New chamaileon-sdk version that ads updateHooks functionality
+- vuetify color palette update in the sdk config
+
 ## [1.0.2] 2022-07-06
 
 ### Changed

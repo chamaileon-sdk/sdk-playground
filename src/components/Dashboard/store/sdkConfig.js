@@ -15,6 +15,14 @@ const getDefaultState = () => {
 		colors: {
 			primary: "#00bee6",
 			secondary: "#9b9b9b",
+			error: "#FF5252",
+			info: "#2196F3",
+			success: "#4CAF50",
+			warning: "#FFC107",
+		},
+		font: {
+			url: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700",
+			family: "'Roboto', sans-serif",
 		},
 	};
 };
