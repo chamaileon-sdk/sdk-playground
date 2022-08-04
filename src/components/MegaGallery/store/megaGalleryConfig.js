@@ -6,10 +6,13 @@ const getDefaultState = () => {
 			folderTree: {
 				_id: "root",
 				name: "root",
+				canCreateSubfolder: true,
 				children: [
 					{
 						_id: "16322284940689326",
 						name: "Favorite Images",
+						canCreateSubfolder: true,
+						canRename: true,
 					},
 				],
 			},

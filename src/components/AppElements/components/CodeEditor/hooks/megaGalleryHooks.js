@@ -21,6 +21,15 @@ export default function () {
 	onDeleteImage: async ({ imageId, parents, selectedFolderId }) => {
 		// Delete image
 	},
+	onCreateSubfolder: async ({ selectedFolderId, parents, name }) => {
+		// Create subfolder
+	},
+	onRenameFolder: async ({ selectedFolderId, parents, name }) => {
+		// Rename folder
+	},
+	onDeleteFolder: async ({ selectedFolderId, parents }) => {
+		// Delete folder
+	},
 }`;
 	return str;
 }
