@@ -145,8 +145,8 @@ export default {
 			while (rootState.htmlImportInited=== "pending") {
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
-			if (rootState.ImportInited === true) {
-				Vue.prototype.$chamaileon.Import.methods.updateSettings(settings);
+			if (rootState.htmlImportInited=== true) {
+				Vue.prototype.$chamaileon.htmlImport.methods.updateSettings(settings);
 			}
 		},
 	},
