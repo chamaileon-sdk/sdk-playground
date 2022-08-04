@@ -41,6 +41,7 @@
 					|| route === '/gallery'
 					|| route === '/variableeditor'
 					|| route === '/emailthumbnail'
+					|| route === '/htmlimport'
 				"
 			>
 				Methods
@@ -229,6 +230,7 @@ import previewMethodsGenerator from "./CodeEditor/methods/previewMethods";
 import emailEditorMethodsGenerator from "./CodeEditor/methods/emailEditorMethods";
 import megaGalleryMethodsGenerator from "./CodeEditor/methods/megaGalleryMethods";
 import variableEditorMethodsGenerator from "./CodeEditor/methods/variableEditorMethods";
+import htmlImportMethodsGenerator from "./CodeEditor/methods/htmlImportMethods";
 
 import { mapGetters } from "vuex";
 
@@ -340,6 +342,11 @@ export default {
 		htmlImportHooks() {
 			return htmlImportHooksGenerator();
 		},
+		htmlImportMethods() {
+			return htmlImportMethodsGenerator(
+				this.$store.getters.getImportSettings,
+			);
+		},
 		// Final
 		code() {
 			if (this.$route.path === "/emaileditor") return this.emailCode;
@@ -372,6 +379,7 @@ export default {
 			else if (this.$route.path === "/gallery") return this.galleryMethods;
 			else if (this.$route.path === "/variableeditor") return this.variableEditorMethods;
 			else if (this.$route.path === "/emailthumbnail") return this.thumbnailMethods;
+			else if (this.$route.path === "/htmlimport") return this.htmlImportMethods;
 			else return "//There are no methods available";
 		},
 	},

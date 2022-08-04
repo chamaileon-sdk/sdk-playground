@@ -55,25 +55,6 @@
 								/>
 							</v-card>
 						</v-col>
-						<v-col
-							v-show="typeof item.value === typeof '000'"
-							class="align-self-center"
-							lg="4"
-							cols="5"
-						>
-							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
-								<v-select
-									class="right-input"
-									dense
-									outlined
-									label="Value"
-									:items="['handlebars', 'liquid', 'mustache']"
-									:hide-details="true"
-									:value="item.value"
-									@change="updateSettings({ key: key, value: $event })"
-								/>
-							</v-card>
-						</v-col>
 					</v-row>
 				</v-card>
 				<v-divider v-show="ind !== settingsLength - 1" />
