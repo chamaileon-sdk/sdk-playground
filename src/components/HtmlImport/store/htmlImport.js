@@ -142,7 +142,7 @@ export default {
 		},
 		async updateImportSettings({ getters, rootState }) {
 			const settings = getters.getImportConfigObject.settings;
-			while (rootState.ImportInited === "pending") {
+			while (rootState.htmlImportInited=== "pending") {
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
 			if (rootState.ImportInited === true) {
