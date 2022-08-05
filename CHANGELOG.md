@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - New chamaileon-sdk version that ads updateHooks functionality
 - vuetify color palette update in the sdk config
+- French lang option for language selector
 
 ## [1.1.0] 2022-08-05
 
