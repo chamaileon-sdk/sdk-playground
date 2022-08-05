@@ -144,6 +144,14 @@ export default {
 		return {
 			contentElements: [
 				{
+					type: "title",
+					icon: "mdi-format-header-1",
+				},
+				{
+					type: "paragraph",
+					icon: "mdi-format-paragraph",
+				},
+				{
 					type: "text",
 					icon: "mdi-format-text",
 				},

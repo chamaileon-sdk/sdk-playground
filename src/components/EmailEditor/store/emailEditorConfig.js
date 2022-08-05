@@ -62,7 +62,9 @@ const getDefaultState = () => {
 			},
 			elements: {
 				content: {
-					text: true,
+					title: true,
+					paragraph: true,
+					text: false,
 					image: true,
 					button: true,
 					divider: true,
@@ -193,9 +195,20 @@ export default {
 
 		// Elements
 		toggleElement(state, payload) {
+			if (payload.type === "content") {
+				const content = state.settings.elements.content;
+
+				if (payload.element === "text") {
+					content.paragraph = content.text;
+					content.title = content.text;
+				} else if (payload.element === "paragraph" || payload.element === "title") {
+					content.text = (payload.element === "paragraph" && content.paragraph && !content.title)
+						|| (payload.element === "title" && content.title && !content.paragraph);
+				}
+			}
+
 			state.settings.elements[payload.type][payload.element] = !state.settings.elements[payload.type][payload.element];
 		},
-
 		// BlockLibs
 		addBlockLibs(state) {
 			state.settings.blockLibraries.push({

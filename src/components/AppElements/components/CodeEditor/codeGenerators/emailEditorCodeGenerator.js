@@ -45,6 +45,8 @@ const calculateConfig = (editorConfig, indent) => {
 	if (!editorConfig.settings.elements.content) return "false,";
 
 	return `{
+${"\t".repeat(indent)}title: ${editorConfig.settings.elements.content.title},
+${"\t".repeat(indent)}paragraph: ${editorConfig.settings.elements.content.paragraph},
 ${"\t".repeat(indent)}text: ${editorConfig.settings.elements.content.text},
 ${"\t".repeat(indent)}image: ${editorConfig.settings.elements.content.image},
 ${"\t".repeat(indent)}button: ${editorConfig.settings.elements.content.button},
