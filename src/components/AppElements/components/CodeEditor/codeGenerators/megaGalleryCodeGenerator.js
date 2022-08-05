@@ -1,7 +1,20 @@
 const generateFolderTreeItem = (item, indent) => {
 	let string = `{
-${"\t".repeat(indent + 1)}_id: "${item._id}"
-${"\t".repeat(indent + 1)}name: "${item.name}"
+${"\t".repeat(indent + 1)}_id: "${item._id}",
+${"\t".repeat(indent + 1)}name: "${item.name}",`;
+	if (Object.prototype.hasOwnProperty.call(item, "canCreateSubfolder")) {
+		string += `
+${"\t".repeat(indent + 1)}canCreateSubfolder: ${item.canCreateSubfolder},`;
+	}
+	if (Object.prototype.hasOwnProperty.call(item, "canRename")) {
+		string += `
+${"\t".repeat(indent + 1)}canRename: ${item.canRename},`;
+	}
+	if (Object.prototype.hasOwnProperty.call(item, "canDelete")) {
+		string += `
+${"\t".repeat(indent + 1)}canDelete: ${item.canDelete},`;
+	}
+	string += `
 `;
 	if (item && item.children) {
 		string += `${"\t".repeat(indent + 1)}children: [`;
