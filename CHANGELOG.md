@@ -1,6 +1,12 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.0] 2022-08-05
+
+### Added
+- Folder handling in gallery foldertree
+- New gallery hooks
+
 ## [1.0.2] 2022-07-06
 
 ### Changed
@@ -39,9 +45,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Playground now works with the demo backend on locally started instances as well
 - SDK config options are now changeable and stored in the localStorage
-
-## [1.1.0] 2022-08-05
-
-### Added
-- Folder handling in gallery foldertree
-- New gallery hooks
