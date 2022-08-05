@@ -1,7 +1,6 @@
 const getDefaultState = () => {
 	return {
 		key: 0,
-		fetchingJSON: false,
 		settings: {
 			buttons: {
 				header: [],
