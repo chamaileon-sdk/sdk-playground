@@ -306,7 +306,6 @@ export default {
 					},
 				},
 			});
-			console.log(Vue.prototype.$chamaileon);
 			commit("setHtmlImportInited", true);
 		} catch (error) {
 			console.error("Failed to initialize html import: ", error);

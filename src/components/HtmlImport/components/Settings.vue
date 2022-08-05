@@ -73,8 +73,9 @@ export default {
 	},
 
 	computed: {
-		...mapGetters({ settings: "getImportSettings" }),
-
+		...mapGetters({ 
+			settings: "getImportSettings" 
+		}),
 		settingsLength() {
 			return Object.keys(this.settings).length;
 		},

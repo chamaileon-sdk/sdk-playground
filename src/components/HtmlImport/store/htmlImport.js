@@ -6,14 +6,8 @@ const getDefaultState = () => {
 			buttons: {
 				header: [],
 			},
-			replaceImages: {
-				displayText: "Replace image URLs",
-				value: true,
-			},
-			showReplaceSwitch: {
-				displayText: "Show a toggle button to replace images",
-				value: true,
-			},
+			replaceImages: true,
+			showReplaceSwitch: true,
 		},
 	};
 };
@@ -148,17 +142,6 @@ export default {
 			if (rootState.htmlImportInited=== true) {
 				Vue.prototype.$chamaileon.htmlImport.methods.updateSettings(settings);
 			}
-		},
-	},
-	getters: {
-		getImportSettings(state) {
-			return state.settings;
-		},
-		getJSONFetchStatus(state) {
-			return state.fetchingJSON;
-		},
-		getImportBtns: (state) => {
-			return state.settings.buttons.header;
 		},
 	},
 };
