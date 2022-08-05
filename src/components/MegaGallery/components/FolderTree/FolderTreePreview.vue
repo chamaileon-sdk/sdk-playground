@@ -51,7 +51,7 @@
 				slot-scope="{ item }"
 			>
 				<v-btn
-					v-if="(!item.children || item.children.length === 0) && item._id !== 'root' && item._id !== '16322284940689326'"
+					v-if="item._id !== 'root' && item._id !== '16322284940689326'"
 					fab
 					x-small
 					text
@@ -82,27 +82,50 @@
 						mdi-plus
 					</v-icon>
 				</v-btn>
+				<v-menu offset-x>
+					<template #activator="{ on, attrs }">
+						<v-btn
+							icon
+							v-bind="attrs"
+							v-on="on"
+						>
+							<v-icon>
+								mdi-dots-vertical
+							</v-icon>
+						</v-btn>
+					</template>
+					<v-list>
+						<div
+							v-for="(config, index) in folderConfigOptions"
+							:key="index"
+						>
+							<v-list-item
+								v-if="!config.notAllowedIds.includes(item._id)"
+								@click.stop="toggleConfigOption(item, config.name)"
+							>
+								<v-icon
+									:color="item[config.name] ? 'primary' : ''"
+								>
+									{{ config.icon }}{{
+										item[config.name] ? "" : "-outline"
+									}}
+								</v-icon>
+								<v-list-item-title class="pl-2">
+									{{ config.name }}
+								</v-list-item-title>
+							</v-list-item>
+						</div>
+					</v-list>
+				</v-menu>
 			</template>
 		</v-treeview>
 	</div>
 </template>
 
 <script>
+import Vue from "vue";
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-
-function searchTree(obj, id) {
-	if (obj._id === id) {
-		return obj;
-	} else if (obj.children) {
-		let i;
-		let result = null;
-		for (i = 0; result === null && i < obj.children.length; i++) {
-			result = searchTree(obj.children[i], id);
-		}
-		return result;
-	}
-	return null;
-}
+import searchTree from "../../../../utils/searchTree.js";
 
 export default {
 	data() {
@@ -111,6 +134,28 @@ export default {
 			openFolders: [],
 			activeFolders: [],
 			newFolderName: {},
+			folderConfigOptions: [
+				{
+					name: "canCreateSubfolder",
+					icon: "mdi-plus-circle",
+					notAllowedIds: [],
+				},
+				{
+					name: "canRename",
+					icon: "mdi-pencil-circle",
+					notAllowedIds: [
+						"root",
+					],
+				},
+				{
+					name: "canDelete",
+					icon: "mdi-delete-circle",
+					notAllowedIds: [
+						"root",
+						"16322284940689326",
+					],
+				},
+			],
 		};
 	},
 	computed: {
@@ -161,6 +206,9 @@ export default {
 			const child = {
 				name: "New Folder",
 				_id,
+				canCreateSubfolder: true,
+				canDelete: true,
+				canRename: true,
 			};
 			const node = searchTree(obj, item._id);
 			if (!node.children) node.children = [];
@@ -175,7 +223,25 @@ export default {
 			const parentId = this.fullPathsToFoldersById.get(item._id)[this.fullPathsToFoldersById.get(item._id).length - 2]._id;
 			const obj = JSON.parse(JSON.stringify(this.folderTree));
 			const node = searchTree(obj, parentId);
-			node.children = node.children.filter(folder => folder._id !== item._id);
+			const foundIdx = node.children.findIndex(folder => folder._id === item._id);
+			if (foundIdx === -1) {
+				return;
+			}
+			const selectedDeletedNode = searchTree(node.children[foundIdx], this.selectedFolderId);
+			if (selectedDeletedNode) {
+				this.setSelectedFolderId(node._id);
+			}
+			node.children.splice(foundIdx, 1);
+			this.setFolderTree(obj);
+			this.updateGallerySettings();
+		},
+		toggleConfigOption(item, configName) {
+			const obj = JSON.parse(JSON.stringify(this.folderTree));
+			const node = searchTree(obj, item._id);
+			if (!Object.prototype.hasOwnProperty.call(node, configName)) {
+				Vue.set(node, configName, false);
+			}
+			node[configName] = !node[configName];
 			this.setFolderTree(obj);
 			this.updateGallerySettings();
 		},

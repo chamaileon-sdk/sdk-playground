@@ -3,6 +3,7 @@ import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
+import searchTree from "../utils/searchTree.js";
 
 export default {
 	async waitForSdkToBeInited({ dispatch, state }) {
@@ -397,6 +398,49 @@ export default {
 					},
 					onDeleteImage: async ({ imageId }) => {
 						await images.remove({ _id: { $eq: imageId } });
+					},
+					// Folders
+					onCreateSubfolder: ({ selectedFolderId, name }) => {
+						const _id = ((new Date().valueOf() + Math.random()) * 10000).toString();
+						const folderTree = JSON.parse(JSON.stringify(state.megaGalleryConfig.settings.folderTree));
+						const subfolder = {
+							_id,
+							name,
+							canCreateSubfolder: true,
+							canDelete: true,
+							canRename: true,
+						};
+						const node = searchTree(folderTree, selectedFolderId);
+						if (!node.children) {
+							node.children = [];
+						}
+						node.children.push(subfolder);
+						commit("setFolderTree", folderTree);
+
+						return subfolder;
+					},
+					onRenameFolder: ({ selectedFolderId, name }) => {
+						const folderTree = JSON.parse(JSON.stringify(state.megaGalleryConfig.settings.folderTree));
+						const node = searchTree(folderTree, selectedFolderId);
+						node.name = name;
+						commit("setFolderTree", folderTree);
+						return { name };
+					},
+					onDeleteFolder: ({ selectedFolderId, parents }) => {
+						if (selectedFolderId === "root") {
+							return;
+						}
+						const parentId = parents[parents.length - 2]._id;
+						const folderTree = JSON.parse(JSON.stringify(state.megaGalleryConfig.settings.folderTree));
+						const node = searchTree(folderTree, parentId);
+						node.children = node.children.filter(folder => folder._id !== selectedFolderId);
+						commit("setFolderTree", folderTree);
+
+						// select parent if the selected folder was deleted
+						const selectedDeletedNode = searchTree(parents[parents.length - 1], state.megaGalleryConfig.settings.selectedFolderId);
+						if (selectedDeletedNode) {
+							commit("setSelectedFolderId", parents[parents.length - 2]._id);
+						}
 					},
 				},
 			});
