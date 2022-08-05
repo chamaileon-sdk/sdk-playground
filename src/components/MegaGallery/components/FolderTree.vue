@@ -6,6 +6,19 @@
 			This can, and of course recommended to follow the folder structure of the saved emails.
 			Select a folder, that will be the default when you open the Gallery and ready to pick an image from.
 		</p>
+		<v-alert
+			color="primary"
+			text
+			icon="mdi-information-outline"
+		>
+			By clicking the
+			(<v-icon color="primary">
+				mdi-dots-vertical
+			</v-icon>)
+			icon, you can
+			enable / disable whether the users can create, rename or delete
+			folders within the gallery.
+		</v-alert>
 		<OptionsWrapper>
 			<FolderTreePreview />
 		</OptionsWrapper>
