@@ -19,7 +19,7 @@
 				>
 					<v-tooltip bottom :disabled="!disableTextElements(element.type)">
 						<template #activator="{ on, attrs }">
-							<div :on="on">
+							<div v-on="on">
 								<v-btn
 									depressed
 									class="pa-0 d-flex"
