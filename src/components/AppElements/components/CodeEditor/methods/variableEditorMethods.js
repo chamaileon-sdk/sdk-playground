@@ -5,6 +5,8 @@ export default function (variableEditorConfig) {
 
 variableEditorInstance.methods.updateSettings(${settingsGenerator(variableEditorConfig, 1)});
 
+variableEditorInstance.methods.updateHooks({ hooks: variableEditorHooks, resetHooks: false }); // see 'hooks' tab
+
 document = await variableEditorInstance.methods.getDocument();
 `;
 	return str;

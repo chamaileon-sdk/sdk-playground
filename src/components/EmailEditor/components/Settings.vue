@@ -245,7 +245,7 @@
 
 		<h3>Dropzones</h3>
 		<p>
-			We did not stop here, you can easily turn off block level dropzones as well.
+			You can easily turn off block level dropzones as well.
 		</p>
 		<OptionWrapper>
 			<v-card elevation="0" class="d-flex px-2">
@@ -275,6 +275,95 @@
 								hide-details
 								:true-value="true"
 								@change="updateDropZone($event, name)"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+
+		<h3>Variables</h3>
+		<p>
+			You can disable variable actions for each variable type.
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
+					<v-row>
+						<v-col
+							v-for="(variableTypeValues, variableTypeName) in variables"
+							:key="variableTypeName"
+							cols="12"
+							class="d-flex justify-space-between align-center"
+						>
+							<v-row class="mb-4">
+								<v-col cols="12">
+									<h4>{{ variableTypeName }}</h4>
+								</v-col>
+								<v-col
+									v-for="(value, name) in variableTypeValues"
+									:key="name"
+									cols="6"
+									class="d-flex justify-space-between align-center"
+								>
+									<v-card-title
+										class="ma-0 pa-0 text-subtitle-1"
+										style="margin-bottom: -3px !important"
+									>
+										{{ name }}
+									</v-card-title>
+									<v-switch
+										:input-value="variables[variableTypeName][name]"
+										class="ma-0 pa-0"
+										color="primary"
+										hide-details
+										@change="updateVariable($event, variableTypeName, name)"
+									/>
+								</v-col>
+							</v-row>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+
+		<h3>Panels</h3>
+		<p>
+			You can toggle the default state of our panels as well
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
+					<v-row>
+						<v-col
+							v-for="(value, name) in panels"
+							:key="name"
+							cols="6"
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								:input-value="panels[name]"
+								class="ma-0 pa-0"
+								color="primary"
+								hide-details
+								:true-value="true"
+								@change="updatePanel($event, name)"
 							/>
 						</v-col>
 					</v-row>
@@ -349,6 +438,12 @@ export default {
 		dropZones() {
 			return this.$store.state.editorConfig.settings.dropzones;
 		},
+		variables() {
+			return this.$store.state.editorConfig.settings.variables;
+		},
+		panels() {
+			return this.$store.state.editorConfig.settings.panels;
+		},
 		videoElementBaseUrl: {
 			get() {
 				return this.$store.state.editorConfig.settings.videoElementBaseUrl;
@@ -377,6 +472,14 @@ export default {
 			this.updateToolboxes({ [name]: !!value });
 			this.updateEditorSettings();
 		},
+		updateVariable(value, variableTypeName, name) {
+			this.updateVariablePermissions({ name, variableTypeName, value });
+			this.updateEditorSettings();
+		},
+		updatePanel(value, name) {
+			this.updatePanels({ [name]: !!value });
+			this.updateEditorSettings();
+		},
 		...mapMutations([
 			"updateUser",
 			"updateAutoSave",
@@ -385,6 +488,8 @@ export default {
 			"updateDropZones",
 			"updateToolboxes",
 			"updateVideoElementBaseUrl",
+			"updateVariablePermissions",
+			"updatePanels",
 		]),
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",

@@ -32,10 +32,14 @@ export default {
 		for (const key in addons) {
 			switch (addons[key].state) {
 				case "enabled":
-					addons[key] = { enabled: true };
+					addons[key] = { enabled: true, disabledReason: "" };
 					break;
 				case "disabled":
-					addons[key] = { enabled: false };
+					if (addons[key].disabledReason) {
+						addons[key] = { enabled: false, disabledReason: addons[key].disabledReason };
+					} else {
+						addons[key] = { enabled: false, disabledReason: "" };
+					}
 					break;
 				case "hidden":
 					addons[key] = false;

@@ -25,6 +25,9 @@
 			<div id="colors" class="section">
 				<Colors />
 			</div>
+			<div id="font" class="section">
+				<Font />
+			</div>
 			<div id="language" class="section">
 				<Language />
 			</div>
@@ -42,6 +45,7 @@ import SectionObserver from "../../AppElements/components/SectionObserver.vue";
 import Logo from "../components/Logo.vue";
 import Language from "../components/Language.vue";
 import Colors from "../components/Colors.vue";
+import Font from "../components/Font.vue";
 import Developer from "../components/Developer.vue";
 import SplashScreen from "../components/SplashScreen.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
@@ -52,6 +56,7 @@ export default {
 		Footer,
 		Logo,
 		Colors,
+		Font,
 		Developer,
 		SplashScreen,
 		Language,
