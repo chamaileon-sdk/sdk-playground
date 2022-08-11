@@ -8,6 +8,8 @@ export default function (galleryConfig) {
 
 galleryInstance.methods.updateSettings(${settingsGenerator(galleryConfig, 1)});
 
+galleryInstance.methods.updateHooks({ hooks: galleryHooks, resetHooks: false }); // see 'hooks' tab
+
 const { src } = await galleryInstance.methods.pickImage();
 `;
 	return str;

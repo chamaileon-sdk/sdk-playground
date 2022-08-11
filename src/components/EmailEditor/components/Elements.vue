@@ -129,6 +129,69 @@
 				</v-col>
 			</v-row>
 		</OptionWrapper>
+
+		<h2 class="pt-6">
+			Element defaults
+		</h2>
+		<OptionWrapper>
+			<v-card
+				flat
+				class="rounded-0 d-flex pa-4 rounded-t"
+			>
+				<v-row>
+					<v-col class="align-self-center">
+						<v-card-title
+							class="ma-0 pa-0 text-subtitle-1"
+							style="margin-bottom: -3px !important"
+						>
+							Text element default text
+						</v-card-title>
+					</v-col>
+
+					<v-col
+						class="align-content-right"
+						cols="6"
+					>
+						<v-text-field
+							v-model="textElementDefaultText"
+							hide-details="true"
+							dense
+							outlined
+							label="text"
+						/>
+					</v-col>
+				</v-row>
+			</v-card>
+			<v-divider />
+			<v-card
+				flat
+				class="rounded-0 d-flex pa-4 rounded-b"
+			>
+				<v-row>
+					<v-col class="align-self-center">
+						<v-card-title
+							class="ma-0 pa-0 text-subtitle-1"
+							style="margin-bottom: -3px !important"
+						>
+							Button element default text
+						</v-card-title>
+					</v-col>
+
+					<v-col
+						class="align-content-right"
+						cols="6"
+					>
+						<v-text-field
+							v-model="buttonElementDefaultText"
+							hide-details="true"
+							dense
+							outlined
+							label="text"
+						/>
+					</v-col>
+				</v-row>
+			</v-card>
+		</OptionWrapper>
 	</div>
 </template>
 
@@ -214,9 +277,31 @@ export default {
 		...mapGetters({
 			elementsArr: "getElements",
 		}),
+		textElementDefaultText: {
+			get() {
+				return this.$store.state.editorConfig.settings.elementDefaults.attrs.text.text;
+			},
+			set(val) {
+				this.updateTextElementDefaultText(val);
+				this.updateEditorSettings();
+			},
+		},
+		buttonElementDefaultText: {
+			get() {
+				return this.$store.state.editorConfig.settings.elementDefaults.attrs.button.text;
+			},
+			set(val) {
+				this.updateButtonElementDefaultText(val);
+				this.updateEditorSettings();
+			},
+		},
 	},
 	methods: {
-		...mapMutations([ "toggleElement" ]),
+		...mapMutations([
+			"toggleElement",
+			"updateTextElementDefaultText",
+			"updateButtonElementDefaultText",
+		]),
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
 		}),

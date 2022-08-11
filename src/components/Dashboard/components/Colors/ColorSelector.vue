@@ -17,6 +17,38 @@
 					@colorChange="changeSecondary"
 				/>
 			</v-col>
+			<v-col>
+				<ColorPicker
+					:index="2"
+					:value="errorColor"
+					:label="'Error'"
+					@colorChange="changeError"
+				/>
+			</v-col>
+			<v-col>
+				<ColorPicker
+					:index="3"
+					:value="infoColor"
+					:label="'Info'"
+					@colorChange="changeInfo"
+				/>
+			</v-col>
+			<v-col>
+				<ColorPicker
+					:index="4"
+					:value="successColor"
+					:label="'Success'"
+					@colorChange="changeSuccess"
+				/>
+			</v-col>
+			<v-col>
+				<ColorPicker
+					:index="5"
+					:value="warningColor"
+					:label="'Warning'"
+					@colorChange="changeWarning"
+				/>
+			</v-col>
 		</v-row>
 	</v-card>
 </template>
@@ -33,6 +65,10 @@ export default {
 		...mapState({
 			primaryColor: state => state.sdkConfig.colors.primary,
 			secondaryColor: state => state.sdkConfig.colors.secondary,
+			errorColor: state => state.sdkConfig.colors.error,
+			infoColor: state => state.sdkConfig.colors.info,
+			successColor: state => state.sdkConfig.colors.success,
+			warningColor: state => state.sdkConfig.colors.warning,
 		}),
 	},
 	methods: {
@@ -44,6 +80,26 @@ export default {
 		changeSecondary(value) {
 			this.$store.dispatch("updateSdkConfig", {
 				colors: { ...this.$store.state.sdkConfig.colors, secondary: value },
+			});
+		},
+		changeError(value) {
+			this.$store.dispatch("updateSdkConfig", {
+				colors: { ...this.$store.state.sdkConfig.colors, error: value },
+			});
+		},
+		changeInfo(value) {
+			this.$store.dispatch("updateSdkConfig", {
+				colors: { ...this.$store.state.sdkConfig.colors, info: value },
+			});
+		},
+		changeSuccess(value) {
+			this.$store.dispatch("updateSdkConfig", {
+				colors: { ...this.$store.state.sdkConfig.colors, success: value },
+			});
+		},
+		changeWarning(value) {
+			this.$store.dispatch("updateSdkConfig", {
+				colors: { ...this.$store.state.sdkConfig.colors, warning: value },
 			});
 		},
 	},

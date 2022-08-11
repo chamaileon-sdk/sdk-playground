@@ -25,6 +25,12 @@ export default {
 						codePropToMatch: "colors",
 					},
 					{
+						title: "Font",
+						icon: "format-text",
+						to: "#font",
+						codePropToMatch: "font",
+					},
+					{
 						title: "Language",
 						icon: "web",
 						to: "#language",

@@ -22,7 +22,7 @@
 					text
 					color="primary"
 					class="rounded"
-					href="https://calendly.com/gyula/chamaileon-sdk"
+					href="https://chamaileon.io/sdk/#sdk-demo-booking-form"
 					target="_blank"
 				>
 					<v-icon left>
