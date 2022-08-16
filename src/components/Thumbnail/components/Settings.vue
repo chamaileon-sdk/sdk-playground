@@ -73,7 +73,7 @@
 					elevation="2"
 					class="d-flex justify-center align-center PreviewJSON my-0 pa-0 "
 					color="white"
-					:style="`max-width: 100%; width: ${width}px; max-height: ${height};`"
+					:style="`max-width: 100%; width: ${width}px; max-height: ${height}px;`"
 				/>
 			</v-card>
 		</v-row>
@@ -108,22 +108,25 @@ export default {
 		configObj() {
 			return this.$store.getters.getThumbnailSettings;
 		},
+		dimensions() {
+			return this.$store.getters.getThumbnailDimensions;
+		},
 
 		width: {
 			get() {
-				return this.configObj.width;
+				return this.dimensions.width;
 			},
 			set(val) {
-				this.updateSettings({ width: Number(val) });
+				this.updateProperties({ width: Number(val) });
 			},
 		},
 
 		height: {
 			get() {
-				return this.configObj.height;
+				return this.dimensions.height;
 			},
 			set(val) {
-				this.updateSettings({ height: Number(val) });
+				this.updateProperties({ height: Number(val) });
 			},
 		},
 		scroll: {
@@ -131,16 +134,16 @@ export default {
 				return this.configObj.scroll;
 			},
 			set(val) {
-				this.updateSettings({ scroll: val });
+				this.updateProperties({ scroll: val });
 			},
 		},
 
 		scale: {
 			get() {
-				return this.configObj.scale;
+				return this.dimensions.scale;
 			},
 			set(val) {
-				this.updateSettings({ scale: val });
+				this.updateProperties({ scale: val });
 			},
 		},
 	},
@@ -162,7 +165,7 @@ export default {
 			}
 			await this.$store.dispatch("initThumbnail", container);
 		},
-		updateSettings(obj) {
+		updateProperties(obj) {
 			if (timeoutId) {
 				clearTimeout(timeoutId);
 			}

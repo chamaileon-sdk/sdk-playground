@@ -32,7 +32,21 @@
 							<!--<p class="ma-0">{{ item.description }}</p>-->
 						</v-col>
 
-						<v-col class="align-self-center" cols="2">
+						<v-col
+							v-if="item.state === 'disabled'"
+							class="align-content-right"
+						>
+							<v-text-field
+								:value="getDisabledReason(name)"
+								hide-details="true"
+								dense
+								outlined
+								label="disabledReason"
+								@input="setDisabledReason(name, $event)"
+							/>
+						</v-col>
+
+						<v-col class="align-self-center">
 							<v-card flat class="d-flex justify-end align-center">
 								<v-btn
 									class="ml-3"
@@ -110,10 +124,20 @@ export default {
 		},
 	},
 	methods: {
-		...mapMutations([ "updateAddonState" ]),
+		...mapMutations([
+			"updateAddonState",
+			"updateAddonDisabledState",
+		]),
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
 		}),
+		getDisabledReason(name) {
+			return this.$store.state.editorConfig.settings.addons[name].disabledReason;
+		},
+		setDisabledReason(name, value) {
+			this.updateAddonDisabledState({ name, value });
+			this.updateEditorSettings();
+		},
 	},
 
 };

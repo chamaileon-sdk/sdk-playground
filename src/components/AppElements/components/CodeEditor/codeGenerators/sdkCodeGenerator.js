@@ -20,7 +20,15 @@ const chamaileonPlugins = await window.chamaileonSdk({
 	colors: {
 		primary: "${sdkConfig.colors.primary}",
 		secondary: "${sdkConfig.colors.secondary}",
+		error: "${sdkConfig.colors.error}",
+		info: "${sdkConfig.colors.info}",
+		success: "${sdkConfig.colors.success}",
+		warning: "${sdkConfig.colors.warning}",
 	},
-	locale: '${sdkConfig.locale}',
+	font: {
+		family: "${sdkConfig.font.family}",
+		url: "${sdkConfig.font.url}",
+	}
+	locale: "${sdkConfig.locale}",
 });`;
 }
