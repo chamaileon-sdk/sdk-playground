@@ -380,8 +380,6 @@ export default {
 			this.updateImportPluginSettings();
 		},
 		updateIcon(val, index) {
-			console.log("I am alive");
-			console.log(this.section);
 			this.$store.commit(`update${this.section}Btn`, {
 				index,
 				icon: val,

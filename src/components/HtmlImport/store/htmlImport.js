@@ -24,7 +24,6 @@ export default {
 			state.fetchingJSON = !state.fetchingJSON;
 		},
 		updateImportSettings(state, payload) {
-			console.log(payload);
 			state.settings[payload.key] = payload.value;
 		},
 		addImportBtn(state) {
@@ -151,7 +150,7 @@ export default {
 		getImportBtns: (state) => {
 			return state.settings.buttons.header;
 		},
-		getDefaultView: (state) => {
+		getDefaultImportView: (state) => {
 			return state.settings.defaultView;
 		},
 	},

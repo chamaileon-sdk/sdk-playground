@@ -6,19 +6,23 @@ import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
 import mockedJson from "./mockedJson.js";
 
-let images = [];
-const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
-images = db.collection("images");
-images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
-	if (!isExists) {
-		try {
-			images.insert(favoriteImages);
-			return;
-		} catch (error) {
-			console.error(error);
+try {
+	let images = [];
+	const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
+	images = db.collection("images");
+	images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
+		if (!isExists) {
+			try {
+				images.insert(favoriteImages);
+				return;
+			} catch (error) {
+				console.error(error);
+			}
 		}
-	}
-});
+	});
+} catch (error) {
+	console.error(error);
+}
 
 function processFileupload(url) {
 	// eslint-disable-next-line no-async-promise-executor
@@ -323,10 +327,6 @@ export default {
 			Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				...getters.getHtmlImportConfigObject,
 				plugin: "import",
-				settings: {
-					replaceImages: true,
-					showReplaceSwitch: true,
-				},
 				hooks: {
 					cancel: () => {
 						Vue.prototype.$chamaileon.htmlImport.hide();
@@ -342,7 +342,6 @@ export default {
 							// purging duplicates and nullies
 							const imageSrcArrayFiltered = [ ...new Set(imageSrcArray) ].filter(x => !!x);
 
-							console.log("imageSrcArrayFiltered", imageSrcArrayFiltered);
 							const imagesArrayReplaced = await Promise.allSettled(imageSrcArrayFiltered.map((imageSrc) => {
 								// eslint-disable-next-line no-async-promise-executor
 								return new Promise(async (resolve, reject) => {
@@ -371,7 +370,6 @@ export default {
 											_id,
 										};
 										const result = await images.insert([ newImageData ]);
-										console.log("result", result);
 
 										return resolve({
 											oldSrc: imageSrc,

@@ -17,9 +17,9 @@ export default function () {
 				resolve();
 			});
 		},
-		onReplaceImage: (oldImageSrc) => {
+		onReplaceImages: (imageSrcArray) => {
 			return new Promise(resolve => {
-				resolve(newImageSrc);
+				resolve(imageSrcArrayReplaced);
 			});
 		},
 		onImportReady: (result) => {

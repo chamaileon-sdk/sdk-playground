@@ -1,5 +1,5 @@
 <template>
-	<div id="preview-header" class="d-flex align-center rounded">
+	<div id="import-header" class="d-flex align-center rounded">
 		<div class="d-flex pt-2 pb-2 px-2 header-container align-center">
 			<div class="title-container d-flex align-center">
 				<v-btn
@@ -134,7 +134,7 @@ export default {
 </script>
 
 <style>
-#preview-header {
+#import-header {
 	background-color: #ffffff;
 	height: 61px;
 }

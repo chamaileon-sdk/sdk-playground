@@ -37,15 +37,9 @@
 									color="primary"
 									flat
 									inset
+									v-model="replaceImages"
 									:hide-details="true"
 									:ripple="false"
-									:input-value="replaceImages"
-									@change="
-										updateSettings({
-											key: 'replaceImages',
-											value: $event,
-										})
-									"
 								/>
 							</v-card>
 						</v-col>
@@ -87,15 +81,9 @@
 									color="primary"
 									flat
 									inset
+									v-model="showReplaceSwitch"
 									:hide-details="true"
 									:ripple="false"
-									:input-value="showReplaceSwitch"
-									@change="
-										updateSettings({
-											key: 'showReplaceSwitch',
-											value: $event,
-										})
-									"
 								/>
 							</v-card>
 						</v-col>
@@ -161,7 +149,7 @@ export default {
 				return this.$store.state.importConfig.settings.replaceImages;
 			},
 			set(val) {
-				this.updateImportSettings({ replaceImages: val });
+				this.updateImportSettings({ key: "replaceImages", value: val });
 				this.updateImportPluginSettings();
 			},
 		},
@@ -182,7 +170,7 @@ export default {
 				return this.$store.state.importConfig.settings.showReplaceSwitch;
 			},
 			set(val) {
-				this.updateImportSettings({ showReplaceSwitch: val });
+				this.updateImportSettings({ key: "showReplaceSwitch", value: val });
 				this.updateImportPluginSettings();
 			},
 		},
@@ -190,11 +178,6 @@ export default {
 	methods: {
 		...mapMutations([ "updateImportSettings" ]),
 		...mapActions([ "updateImportPluginSettings" ]),
-
-		updateSettings(obj) {
-			this.updateImportSettings(obj);
-			this.updateImportPluginSettings();
-		},
 	},
 };
 </script>
