@@ -3,6 +3,60 @@ import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
+import mockedJson from "./mockedJson.js";
+
+let images = [];
+const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
+images = db.collection("images");
+images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
+	if (!isExists) {
+		try {
+			images.insert(favoriteImages);
+			return;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+});
+
+function processFileupload(url) {
+	// eslint-disable-next-line no-async-promise-executor
+	return new Promise(async (resolve, reject) => {
+		try {
+			let controller = new AbortController();
+			let timeoutId = setTimeout(() => controller.abort(), 15000);
+			try {
+				const response = await fetch(url, { signal: controller.signal });
+				if (response.status !== 200) {
+					throw new Error("failed to fetch image");
+				}
+				const reader = new window.FileReader();
+				reader.onload = e => resolve(e);
+				reader.onerror = reject;
+				reader.readAsDataURL(await response.blob());
+			} catch (error) {
+				clearTimeout(timeoutId);
+				controller = new AbortController();
+				timeoutId = setTimeout(() => controller.abort(), 15000);
+				let urlProcessed;
+				if (url !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(url)}`) {
+					urlProcessed = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(url)}`;
+				}
+				const response = await fetch(urlProcessed, { signal: controller.signal });
+				clearTimeout(timeoutId);
+				if (response.status !== 200) {
+					throw new Error("fetching image failed");
+				}
+				const reader = new window.FileReader();
+				reader.onload = e => resolve(e);
+				reader.onerror = reject;
+				reader.readAsDataURL(await response.blob());
+			}
+		} catch (error) {
+			reject(error);
+		}
+	});
+}
 
 export default {
 	async waitForSdkToBeInited({ dispatch, state }) {
@@ -279,27 +333,78 @@ export default {
 					close: () => {
 						Vue.prototype.$chamaileon.htmlImport.hide();
 					},
-					onReplaceImage: src => src,
-					onImport: async ({ html }) => {
+					onReplaceImages: async (imageSrcArray) => {
+						if (!imageSrcArray || imageSrcArray.length === 0) {
+							return null;
+						}
+						try {
+							// purging duplicates and nullies
+							const imageSrcArrayFiltered = [ ...new Set(imageSrcArray) ].filter(x => !!x);
+
+							console.log("imageSrcArrayFiltered", imageSrcArrayFiltered);
+							const imagesArrayReplaced = await Promise.allSettled(imageSrcArrayFiltered.map((imageSrc) => {
+								// eslint-disable-next-line no-async-promise-executor
+								return new Promise(async (resolve, reject) => {
+									try {
+										const imageIsOnOurDomain = /(https?:\/\/(.+?\.)?(chamaileon\.io|plugins\.edmdesigner\.com)(\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]*)?)/.test(imageSrc);
+										if (imageIsOnOurDomain) {
+											return resolve({
+												oldSrc: imageSrc,
+												newSrc: imageSrc,
+											});
+										}
+
+										const dataUri = await processFileupload(imageSrc);
+
+										if (!dataUri) {
+											return null;
+										}
+
+										const imageName = imageSrc.substr(imageSrc.lastIndexOf("/") + 1);
+										const _id = Date.now() + Math.random();
+										const newImageData = {
+											name: decodeURIComponent(imageName),
+											parentId: "root",
+											src: dataUri.target.result,
+											createdAt: new Date(),
+											_id,
+										};
+										const result = await images.insert([ newImageData ]);
+										console.log("result", result);
+
+										return resolve({
+											oldSrc: imageSrc,
+											newSrc: result.src,
+										});
+									} catch (e) {
+										console.error(e);
+										reject(imageSrc);
+									}
+								});
+							}));
+
+							const responseArray = imagesArrayReplaced.map((response) => {
+								if (response.status === "rejected") {
+									return {
+										oldSrc: response.reason,
+										newSrc: response.reason,
+									};
+								}
+								return response.value;
+							});
+
+							return responseArray;
+						} catch (e) {
+							console.error(e);
+							return null;
+						}
+					},
+					onImport: ({ html }) => {
 						if (!html) throw new Error("HTML missing");
-						const response = await fetch("https://sdk-api.chamaileon.io/api/v1/emails/import", {
-							method: "POST",
-							headers: {
-								Authorization: `Bearer ${state.sdkConfig.apiKey}`,
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({
-								title: "",
-								emailHTML: html,
-							}),
-						});
-						if (response.status !== 200) throw new Error("Request error");
-						const answer = await response.json();
-						if (answer.error) throw new Error(answer.error);
-						return answer;
+						return mockedJson;
 					},
 					onImportReady: async (result) => {
-						let document = { ...result.document, title: 'Imported email' }
+						const document = { ...result.document, title: "Imported email" };
 						Vue.prototype.$chamaileon.htmlImport.hide();
 						await Vue.prototype.$chamaileon.emailEditor.methods.updateData({ document });
 						Vue.prototype.$chamaileon.emailEditor.show();
@@ -319,22 +424,8 @@ export default {
 		await dispatch("waitForSdkToBeInited");
 		let count = 0;
 		let loadedItems = [];
-		let images = [];
 
 		try {
-			const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
-			images = db.collection("images");
-			images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
-				if (!isExists) {
-					try {
-						images.insert(favoriteImages);
-						return;
-					} catch (error) {
-						console.error(error);
-					}
-				}
-			});
-
 			Vue.prototype.$chamaileon.gallery = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "gallery",
 				data: {

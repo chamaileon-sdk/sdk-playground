@@ -4,19 +4,17 @@
 		<p>
 			You can choose between the following options to make our plugin better fit you needs.
 		</p>
+		<h3>Replace images</h3>
+		<p>
+			You can import images from your HTML to your gallery, and replace them in the template. This parameter sets the default behaviour.
+		</p>
 		<OptionWrapper>
-			<div v-for="(item, key, ind) in togglableSettings()" :key="key">
+			<div>
 				<v-card
 					min-height="72px"
 					flat
 					class="rounded-0 d-flex pa-4"
-					:class="
-						ind === 0
-							? 'rounded-t'
-							: ind === settingsLength - 1
-								? 'rounded-b'
-								: ''
-					"
+					:class="'rounded-t'"
 				>
 					<v-row>
 						<v-col class="align-self-center">
@@ -24,32 +22,28 @@
 								class="ma-0 pa-0 text-subtitle-1"
 								style="margin-bottom: -3px !important"
 							>
-								{{ item.displayText }}
+								replaceImages
 							</v-card-title>
-							<!--<p class="ma-0">{{ item.description }}</p>-->
 						</v-col>
 
 						<v-col
-							v-show="typeof item.value !== typeof '000'"
 							class="align-self-center"
 							cols="3"
 							lg="2"
 						>
 							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 								<v-switch
-									v-show="typeof item.value === typeof true"
 									class="ma-0 pa-0 mr-n3"
 									color="primary"
 									flat
 									inset
 									:hide-details="true"
 									:ripple="false"
-									:value="true"
-									:input-value="item.value"
+									:input-value="replaceImages"
 									@change="
 										updateSettings({
-											key: key,
-											value: $event !== null,
+											key: 'replaceImages',
+											value: $event,
 										})
 									"
 								/>
@@ -57,7 +51,86 @@
 						</v-col>
 					</v-row>
 				</v-card>
-				<v-divider v-show="ind !== settingsLength - 1" />
+				<v-divider />
+			</div>
+		</OptionWrapper>
+		<h3>Show Replace Images switch</h3>
+		<p>
+			You can hide or show the possibility to change the replace image behaviour in the plugin.
+		</p>
+		<OptionWrapper>
+			<div>
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 d-flex pa-4"
+					:class="'rounded-t'"
+				>
+					<v-row>
+						<v-col class="align-self-center">
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								showReplaceSwitch
+							</v-card-title>
+						</v-col>
+
+						<v-col
+							class="align-self-center"
+							cols="3"
+							lg="2"
+						>
+							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
+								<v-switch
+									class="ma-0 pa-0 mr-n3"
+									color="primary"
+									flat
+									inset
+									:hide-details="true"
+									:ripple="false"
+									:input-value="showReplaceSwitch"
+									@change="
+										updateSettings({
+											key: 'showReplaceSwitch',
+											value: $event,
+										})
+									"
+								/>
+							</v-card>
+						</v-col>
+					</v-row>
+				</v-card>
+				<v-divider />
+			</div>
+		</OptionWrapper>
+		<h3>Replace switch label</h3>
+		<p>
+			You can overwrite the default replace switch label with your own.
+		</p>
+		<OptionWrapper>
+			<div>
+				<div
+					class="font-weight-medium ma-0 pa-0 text-subtitle-1"
+					style="margin-bottom: -3px !important"
+				>
+					replaceImagesMessage
+				</div>
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 d-flex pa-4"
+					:class="'rounded-t'"
+				>
+					<v-row>
+						<v-col>
+							<v-text-field
+								v-model="replaceImagesMessage"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+				<v-divider />
 			</div>
 		</OptionWrapper>
 	</div>
@@ -65,34 +138,63 @@
 
 <script>
 import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
 	components: {
 		OptionWrapper,
 	},
-
+	data() {
+		return {
+			debounce: null,
+		};
+	},
 	computed: {
-		...mapGetters({ 
-			settings: "getImportSettings" 
+		...mapGetters({
+			settings: "getImportSettings",
 		}),
 		settingsLength() {
-			return Object.keys(this.settings).length;
+			return 2;
+		},
+		replaceImages: {
+			get() {
+				return this.$store.state.importConfig.settings.replaceImages;
+			},
+			set(val) {
+				this.updateImportSettings({ replaceImages: val });
+				this.updateImportPluginSettings();
+			},
+		},
+		replaceImagesMessage: {
+			get() {
+				return this.$store.state.importConfig.settings.replaceImagesMessage;
+			},
+			set(val) {
+				clearTimeout(this.debounce);
+				this.debounce = setTimeout(() => {
+					this.updateImportSettings({ key: "replaceImagesMessage", value: val });
+					this.updateImportPluginSettings();
+				}, 600);
+			},
+		},
+		showReplaceSwitch: {
+			get() {
+				return this.$store.state.importConfig.settings.showReplaceSwitch;
+			},
+			set(val) {
+				this.updateImportSettings({ showReplaceSwitch: val });
+				this.updateImportPluginSettings();
+			},
 		},
 	},
-
 	methods: {
 		...mapMutations([ "updateImportSettings" ]),
+		...mapActions([ "updateImportPluginSettings" ]),
 
 		updateSettings(obj) {
 			this.updateImportSettings(obj);
+			this.updateImportPluginSettings();
 		},
-
-		togglableSettings() {
-			const asArray = Object.entries(this.settings);
-			const filtered = asArray.filter(([key, item]) => typeof item.value === 'boolean');
-			return Object.fromEntries(filtered);
-		}
 	},
 };
 </script>

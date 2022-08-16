@@ -6,10 +6,13 @@ const getDefaultState = () => {
 				header: [],
 			},
 			replaceImages: true,
+			replaceImagesMessage: "Import images from your HTML into your gallery",
 			showReplaceSwitch: true,
 		},
 	};
 };
+
+import Vue from "vue";
 
 export default {
 	state: getDefaultState(),
@@ -21,7 +24,8 @@ export default {
 			state.fetchingJSON = !state.fetchingJSON;
 		},
 		updateImportSettings(state, payload) {
-			state.settings[payload.key].value = payload.value;
+			console.log(payload);
+			state.settings[payload.key] = payload.value;
 		},
 		addImportBtn(state) {
 			state.settings.buttons.header.push({
@@ -42,7 +46,7 @@ export default {
 			state.settings.buttons.header = payload;
 		},
 		updateImportBtn(state, payload) {
-			const newObj = (({ index, ...payload }) => payload)(payload);
+			const newObj = (({ index, ...obj }) => obj)(payload);
 			const c = state.settings.buttons.header[payload.index];
 
 			state.settings.buttons.header.splice(payload.index, 1, {
@@ -80,7 +84,7 @@ export default {
 			state.key++;
 		},
 		updateImportDropdownBtn(state, payload) {
-			const newObj = (({ index, ...payload }) => payload)(payload.obj);
+			const newObj = (({ index, ...obj }) => obj)(payload.obj);
 
 			state.settings.buttons.header[payload.parentIndex].items.splice(
 				payload.obj.index,
@@ -133,14 +137,22 @@ export default {
 
 			commit("toggleFetching");
 		},
-		async updateImportSettings({ getters, rootState }) {
+		async updateImportPluginSettings({ getters, rootState }) {
 			const settings = getters.getImportConfigObject.settings;
-			while (rootState.htmlImportInited=== "pending") {
+			while (rootState.htmlImportInited === "pending") {
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
-			if (rootState.htmlImportInited=== true) {
+			if (rootState.htmlImportInited === true) {
 				Vue.prototype.$chamaileon.htmlImport.methods.updateSettings(settings);
 			}
+		},
+	},
+	getters: {
+		getImportBtns: (state) => {
+			return state.settings.buttons.header;
+		},
+		getDefaultView: (state) => {
+			return state.settings.defaultView;
 		},
 	},
 };

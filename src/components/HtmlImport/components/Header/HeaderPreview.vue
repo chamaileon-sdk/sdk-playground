@@ -126,7 +126,6 @@ export default {
 	computed: {
 		...mapGetters({ headerButtons: "getImportBtns" }),
 		...mapGetters([ "documentTitle" ]),
-
 		logo() {
 			return this.$store.state.logoCreatorFunction;
 		},

@@ -31,10 +31,10 @@
 				justify="end"
 				class="ma-0"
 			>
-				<AddButton class="mr-lg-6" @click="addBtn(); updateImportSettings()">
+				<AddButton class="mr-lg-6" @click="addBtn(); updateImportPluginSettings()">
 					New Button
 				</AddButton>
-				<AddButton class="mt-6 mt-lg-0" @click="addDD(); updateImportSettings()">
+				<AddButton class="mt-6 mt-lg-0" @click="addDD(); updateImportPluginSettings()">
 					New Dropdown
 				</AddButton>
 			</v-row>
@@ -72,7 +72,7 @@ export default {
 			addDD: "addImportDropdown",
 		}),
 		...mapActions({
-			updateImportSettings: "updateImportSettings",
+			updateImportPluginSettings: "updateImportPluginSettings",
 		}),
 	},
 };

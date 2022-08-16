@@ -336,6 +336,7 @@ export default {
 				this.$store.commit(`update${this.section}BtnOrder`, value);
 				this.updateEditorSettings();
 				this.updatePreviewSettings();
+				this.updateImportPluginSettings();
 			},
 		},
 		ddArrById: {
@@ -350,6 +351,7 @@ export default {
 				});
 				this.updateEditorSettings();
 				this.updatePreviewSettings();
+				this.updateImportPluginSettings();
 			},
 		},
 	},
@@ -357,6 +359,7 @@ export default {
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
 			updatePreviewSettings: "updatePreviewSettings",
+			updateImportPluginSettings: "updateImportPluginSettings",
 		}),
 		updateLabel(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -365,6 +368,7 @@ export default {
 			});
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		updateColor(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -373,14 +377,18 @@ export default {
 			});
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		updateIcon(val, index) {
+			console.log("I am alive");
+			console.log(this.section);
 			this.$store.commit(`update${this.section}Btn`, {
 				index,
 				icon: val,
 			});
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		updateStyle(val, index) {
 			this.$store.commit(`update${this.section}Btn`, {
@@ -389,11 +397,13 @@ export default {
 			});
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		updateID(val, index) {
 			this.$store.commit(`update${this.section}Btn`, { index, id: val });
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		updateDDID(val, parentIndex, index) {
 			this.$store.commit(`update${this.section}DropdownBtn`, {
@@ -402,11 +412,13 @@ export default {
 			});
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		updateDDBtn(payload) {
 			this.$store.commit(`update${this.section}DropdownBtn`, payload);
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		addDDBtn(payload) {
 			this.$store.commit(`add${this.section}DropdownBtn`, payload);
@@ -420,11 +432,13 @@ export default {
 			this.$store.commit(`update${this.section}DropdownBtnOrder`, payload);
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 		deleteBtn(payload) {
 			this.$store.commit(`remove${this.section}Btn`, payload);
 			this.updateEditorSettings();
 			this.updatePreviewSettings();
+			this.updateImportPluginSettings();
 		},
 	},
 };
