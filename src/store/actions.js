@@ -4,6 +4,64 @@ import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
+import mockedJson from "./mockedJson.js";
+
+try {
+	let images = [];
+	const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
+	images = db.collection("images");
+	images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
+		if (!isExists) {
+			try {
+				images.insert(favoriteImages);
+				return;
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	});
+} catch (error) {
+	console.error(error);
+}
+
+function processFileupload(url) {
+	// eslint-disable-next-line no-async-promise-executor
+	return new Promise(async (resolve, reject) => {
+		try {
+			let controller = new AbortController();
+			let timeoutId = setTimeout(() => controller.abort(), 15000);
+			try {
+				const response = await fetch(url, { signal: controller.signal });
+				if (response.status !== 200) {
+					throw new Error("failed to fetch image");
+				}
+				const reader = new window.FileReader();
+				reader.onload = e => resolve(e);
+				reader.onerror = reject;
+				reader.readAsDataURL(await response.blob());
+			} catch (error) {
+				clearTimeout(timeoutId);
+				controller = new AbortController();
+				timeoutId = setTimeout(() => controller.abort(), 15000);
+				let urlProcessed;
+				if (url !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(url)}`) {
+					urlProcessed = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(url)}`;
+				}
+				const response = await fetch(urlProcessed, { signal: controller.signal });
+				clearTimeout(timeoutId);
+				if (response.status !== 200) {
+					throw new Error("fetching image failed");
+				}
+				const reader = new window.FileReader();
+				reader.onload = e => resolve(e);
+				reader.onerror = reject;
+				reader.readAsDataURL(await response.blob());
+			}
+		} catch (error) {
+			reject(error);
+		}
+	});
+}
 
 export default {
 	async waitForSdkToBeInited({ dispatch, state }) {
@@ -101,7 +159,7 @@ export default {
 		dispatch("initEmailEditor");
 		dispatch("initVariableEditor");
 		dispatch("initEmailPreview");
-		// dispatch("initHtmlImport");
+		dispatch("initHtmlImport");
 		dispatch("initGallery");
 	},
 	async initEmailEditor({ commit, dispatch, getters, state }) {
@@ -261,46 +319,103 @@ export default {
 			commit("setEmailPreviewInited", false);
 		}
 	},
-	async initHtmlImport() {
-		//  if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
-		//  await dispatch("waitForSdkToBeInited");
-		// 	commit("setHtmlImportInited", "pending");
-		// 	try {
-		// 		Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
-		// 			// ...this.$store.getters.getHtmlImportConfigObject,
-		// 			plugin: "import",
-		// 			hooks: {
-		// 				cancel: () => {
-		// 					console.log("TODO CANCEL");
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				close: () => {
-		// 					console.log("TODO CLOSE");
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				importReady: (message) => {
-		// 					console.log("TODO onButtonClicked");
-		// 					// eslint-disable-next-line no-unused-vars
-		// 					const template = {
-		// 						content: message.document,
-		// 					};
-		// 					console.log(message.document);
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				// eslint-disable-next-line no-unused-vars, require-await
-		// 				onButtonClicked: async ({ buttonId, data }) => {
-		// 					console.log("TODO onButtonClicked");
-		// 				},
-		// 			},
-		// 		});
-		// 		console.log(Vue.prototype.$chamaileon);
-		// 		commit("setHtmlImportInited", true);
-		// 	} catch (error) {
-		// 		console.error("Failed to initialize html import: ", error);
-		// 		Vue.prototype.$chamaileon.htmlImport = null;
-		// 		commit("setHtmlImportInited", false);
-		// 	}
-		// }
+	async initHtmlImport({ getters, commit, state, dispatch }) {
+		if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
+		commit("setHtmlImportInited", "pending");
+		await dispatch("waitForSdkToBeInited");
+		try {
+			Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+				...getters.getHtmlImportConfigObject,
+				plugin: "import",
+				hooks: {
+					cancel: () => {
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+					close: () => {
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+					onReplaceImages: async (imageSrcArray) => {
+						if (!imageSrcArray || imageSrcArray.length === 0) {
+							return null;
+						}
+						try {
+							// purging duplicates and nullies
+							const imageSrcArrayFiltered = [ ...new Set(imageSrcArray) ].filter(x => !!x);
+
+							const imagesArrayReplaced = await Promise.allSettled(imageSrcArrayFiltered.map((imageSrc) => {
+								// eslint-disable-next-line no-async-promise-executor
+								return new Promise(async (resolve, reject) => {
+									try {
+										const imageIsOnOurDomain = /(https?:\/\/(.+?\.)?(chamaileon\.io|plugins\.edmdesigner\.com)(\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]*)?)/.test(imageSrc);
+										if (imageIsOnOurDomain) {
+											return resolve({
+												oldSrc: imageSrc,
+												newSrc: imageSrc,
+											});
+										}
+
+										const dataUri = await processFileupload(imageSrc);
+
+										if (!dataUri) {
+											return null;
+										}
+
+										const imageName = imageSrc.substr(imageSrc.lastIndexOf("/") + 1);
+										const _id = Date.now() + Math.random();
+										const newImageData = {
+											name: decodeURIComponent(imageName),
+											parentId: "root",
+											src: dataUri.target.result,
+											createdAt: new Date(),
+											_id,
+										};
+										const result = await images.insert([ newImageData ]);
+
+										return resolve({
+											oldSrc: imageSrc,
+											newSrc: result.src,
+										});
+									} catch (e) {
+										console.error(e);
+										reject(imageSrc);
+									}
+								});
+							}));
+
+							const responseArray = imagesArrayReplaced.map((response) => {
+								if (response.status === "rejected") {
+									return {
+										oldSrc: response.reason,
+										newSrc: response.reason,
+									};
+								}
+								return response.value;
+							});
+
+							return responseArray;
+						} catch (e) {
+							console.error(e);
+							return null;
+						}
+					},
+					onImport: ({ html }) => {
+						if (!html) throw new Error("HTML missing");
+						return mockedJson;
+					},
+					onImportReady: async (result) => {
+						const document = { ...result.document, title: "Imported email" };
+						Vue.prototype.$chamaileon.htmlImport.hide();
+						await Vue.prototype.$chamaileon.emailEditor.methods.updateData({ document });
+						Vue.prototype.$chamaileon.emailEditor.show();
+					},
+				},
+			});
+			commit("setHtmlImportInited", true);
+		} catch (error) {
+			console.error("Failed to initialize html import: ", error);
+			Vue.prototype.$chamaileon.htmlImport = null;
+			commit("setHtmlImportInited", false);
+		}
 	},
 	async initGallery({ commit, state, dispatch }) {
 		if (state.galleryInited === true || state.galleryInited === "pending") return;
@@ -308,22 +423,8 @@ export default {
 		await dispatch("waitForSdkToBeInited");
 		let count = 0;
 		let loadedItems = [];
-		let images = [];
 
 		try {
-			const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
-			images = db.collection("images");
-			images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
-				if (!isExists) {
-					try {
-						images.insert(favoriteImages);
-						return;
-					} catch (error) {
-						console.error(error);
-					}
-				}
-			});
-
 			Vue.prototype.$chamaileon.gallery = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "gallery",
 				data: {

@@ -30,6 +30,7 @@
 					|| route === '/gallery'
 					|| route === '/variableeditor'
 					|| route === '/emailthumbnail'
+					|| route === '/htmlimport'
 				"
 			>
 				Hooks
@@ -40,6 +41,7 @@
 					|| route === '/gallery'
 					|| route === '/variableeditor'
 					|| route === '/emailthumbnail'
+					|| route === '/htmlimport'
 				"
 			>
 				Methods
@@ -55,13 +57,6 @@
 			</v-tab>
 			<v-tab v-show="route === '/htmlgenerator'">
 				Output HTML
-			</v-tab>
-
-			<v-tab v-show="route === '/htmlimport'">
-				Input HTML
-			</v-tab>
-			<v-tab v-show="route === '/htmlimport'">
-				Output JSON
 			</v-tab>
 		</v-tabs>
 
@@ -228,12 +223,14 @@ import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 import megaGalleryHooksGenerator from "./CodeEditor/hooks/megaGalleryHooks";
 import thumbnailHooksGenerator from "./CodeEditor/hooks/thumbnailHooks";
+import htmlImportHooksGenerator from "./CodeEditor/hooks/htmlImportHooks";
 
 import thumbnailMethodsGenerator from "./CodeEditor/methods/thumbnailMethods";
 import previewMethodsGenerator from "./CodeEditor/methods/previewMethods";
 import emailEditorMethodsGenerator from "./CodeEditor/methods/emailEditorMethods";
 import megaGalleryMethodsGenerator from "./CodeEditor/methods/megaGalleryMethods";
 import variableEditorMethodsGenerator from "./CodeEditor/methods/variableEditorMethods";
+import htmlImportMethodsGenerator from "./CodeEditor/methods/htmlImportMethods";
 
 import { mapGetters } from "vuex";
 
@@ -249,6 +246,7 @@ export default {
 		...mapGetters({ menus: "getMenu" }),
 		...mapGetters([
 			"getHtmlGeneratorConfigObject",
+			"getImportSettings",
 			"getHtmlDocument",
 			"getDummyHtmlDocument",
 			"getDummyJSON",
@@ -339,7 +337,15 @@ export default {
 		},
 		// Html import
 		htmlImportCode() {
-			return htmlImportCodeGenerator();
+			return htmlImportCodeGenerator(this.getImportSettings);
+		},
+		htmlImportHooks() {
+			return htmlImportHooksGenerator();
+		},
+		htmlImportMethods() {
+			return htmlImportMethodsGenerator(
+				this.$store.getters.getImportSettings,
+			);
 		},
 		// Final
 		code() {
@@ -353,8 +359,9 @@ export default {
 				return this.variableEditorCode;
 			} else if (this.$route.path === "/htmlgenerator") {
 				return this.htmlGeneratorCode;
-			} else if (this.$route.path === "/htmlimport") return this.htmlImportCode;
-			else return "//There is no code available";
+			} else if (this.$route.path === "/htmlimport") {
+				return this.htmlImportCode;
+			} else return "//There is no code available";
 		},
 
 		hooks() {
@@ -363,6 +370,7 @@ export default {
 			else if (this.$route.path === "/gallery") return this.galleryHooks;
 			else if (this.$route.path === "/variableeditor") return this.variableEditorHooks;
 			else if (this.$route.path === "/emailthumbnail") return this.thumbnailHooks;
+			else if (this.$route.path === "/htmlimport") return this.htmlImportHooks;
 			else return "//There are no hooks available";
 		},
 		methods() {
@@ -371,6 +379,7 @@ export default {
 			else if (this.$route.path === "/gallery") return this.galleryMethods;
 			else if (this.$route.path === "/variableeditor") return this.variableEditorMethods;
 			else if (this.$route.path === "/emailthumbnail") return this.thumbnailMethods;
+			else if (this.$route.path === "/htmlimport") return this.htmlImportMethods;
 			else return "//There are no methods available";
 		},
 	},
