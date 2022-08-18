@@ -6,8 +6,8 @@ import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
 import mockedJson from "./mockedJson.js";
 
+let images = [];
 try {
-	let images = [];
 	const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
 	images = db.collection("images");
 	images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
@@ -24,44 +24,62 @@ try {
 	console.error(error);
 }
 
-function processFileupload(url) {
-	// eslint-disable-next-line no-async-promise-executor
-	return new Promise(async (resolve, reject) => {
+function processFileupload(src, outputFormat) {
+	return new Promise( (resolve, reject) => {
 		try {
-			let controller = new AbortController();
-			let timeoutId = setTimeout(() => controller.abort(), 15000);
-			try {
-				const response = await fetch(url, { signal: controller.signal });
-				if (response.status !== 200) {
-					throw new Error("failed to fetch image");
-				}
-				const reader = new window.FileReader();
-				reader.onload = e => resolve(e);
-				reader.onerror = reject;
-				reader.readAsDataURL(await response.blob());
-			} catch (error) {
-				clearTimeout(timeoutId);
-				controller = new AbortController();
-				timeoutId = setTimeout(() => controller.abort(), 15000);
-				let urlProcessed;
-				if (url !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(url)}`) {
-					urlProcessed = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(url)}`;
-				}
-				const response = await fetch(urlProcessed, { signal: controller.signal });
-				clearTimeout(timeoutId);
-				if (response.status !== 200) {
-					throw new Error("fetching image failed");
-				}
-				const reader = new window.FileReader();
-				reader.onload = e => resolve(e);
-				reader.onerror = reject;
-				reader.readAsDataURL(await response.blob());
+			var img = new Image();
+			img.crossOrigin = 'Anonymous';
+			img.onload = function() {
+				var canvas = document.createElement('CANVAS');
+				var ctx = canvas.getContext('2d');
+				var dataURL;
+				canvas.height = this.naturalHeight;
+				canvas.width = this.naturalWidth;
+				ctx.drawImage(this, 0, 0);
+				dataURL = canvas.toDataURL(outputFormat);
+				return resolve(dataURL);
+			};
+			img.onerror = secondTry;
+			img.src = src;
+			if (img.complete || img.complete === undefined) {
+				img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+				img.src = src;
 			}
 		} catch (error) {
-			reject(error);
+			return reject(error);
+		}
+
+		// second try through our image proxy
+		function secondTry() {
+			let srcProcessed;
+			if (src !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`) {
+				srcProcessed = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`;
+			}
+			try {
+				var img = new Image();
+				img.crossOrigin = 'Anonymous';
+				img.onload = function() {
+					var canvas = document.createElement('CANVAS');
+					var ctx = canvas.getContext('2d');
+					var dataURL;
+					canvas.height = this.naturalHeight;
+					canvas.width = this.naturalWidth;
+					ctx.drawImage(this, 0, 0);
+					dataURL = canvas.toDataURL(outputFormat);
+					resolve(dataURL);
+				};
+				img.onerror = reject;
+				img.src = srcProcessed;
+				if (img.complete || img.complete === undefined) {
+					img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+					img.src = srcProcessed;
+				}
+			} catch (error) {
+				return reject(error);
+			}
 		}
 	});
-}
+  }
 
 export default {
 	async waitForSdkToBeInited({ dispatch, state }) {
@@ -365,7 +383,7 @@ export default {
 										const newImageData = {
 											name: decodeURIComponent(imageName),
 											parentId: "root",
-											src: dataUri.target.result,
+											src: dataUri,
 											createdAt: new Date(),
 											_id,
 										};
@@ -373,7 +391,7 @@ export default {
 
 										return resolve({
 											oldSrc: imageSrc,
-											newSrc: result.src,
+											newSrc: dataUri,
 										});
 									} catch (e) {
 										console.error(e);
