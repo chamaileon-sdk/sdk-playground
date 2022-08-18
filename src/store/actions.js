@@ -27,7 +27,7 @@ try {
 function processFileupload(src, outputFormat) {
 	return new Promise( (resolve, reject) => {
 		try {
-			var img = new Image();
+			let img = new Image();
 			img.crossOrigin = 'Anonymous';
 			img.onload = function() {
 				var canvas = document.createElement('CANVAS');
@@ -39,7 +39,17 @@ function processFileupload(src, outputFormat) {
 				dataURL = canvas.toDataURL(outputFormat);
 				return resolve(dataURL);
 			};
-			img.onerror = secondTry;
+			img.onerror = (e) => {
+				try {
+					if (img.src !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURI(src)}`) {
+						img.src = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURI(src)}`;
+						return;
+					}
+					reject("Can't load image", e);
+				} catch {
+					reject("Can't load image editor with image:", src);
+				}
+			};
 			img.src = src;
 			if (img.complete || img.complete === undefined) {
 				img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
@@ -47,36 +57,6 @@ function processFileupload(src, outputFormat) {
 			}
 		} catch (error) {
 			return reject(error);
-		}
-
-		// second try through our image proxy
-		function secondTry() {
-			let srcProcessed;
-			if (src !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`) {
-				srcProcessed = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`;
-			}
-			try {
-				var img = new Image();
-				img.crossOrigin = 'Anonymous';
-				img.onload = function() {
-					var canvas = document.createElement('CANVAS');
-					var ctx = canvas.getContext('2d');
-					var dataURL;
-					canvas.height = this.naturalHeight;
-					canvas.width = this.naturalWidth;
-					ctx.drawImage(this, 0, 0);
-					dataURL = canvas.toDataURL(outputFormat);
-					resolve(dataURL);
-				};
-				img.onerror = reject;
-				img.src = srcProcessed;
-				if (img.complete || img.complete === undefined) {
-					img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-					img.src = srcProcessed;
-				}
-			} catch (error) {
-				return reject(error);
-			}
 		}
 	});
   }
