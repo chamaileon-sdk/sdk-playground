@@ -33,11 +33,11 @@
 						>
 							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 								<v-switch
+									v-model="replaceImages"
 									class="ma-0 pa-0 mr-n3"
 									color="primary"
 									flat
 									inset
-									v-model="replaceImages"
 									:hide-details="true"
 									:ripple="false"
 								/>
@@ -77,11 +77,11 @@
 						>
 							<v-card flat class="ma-0 pa-0 d-flex justify-end align-center">
 								<v-switch
+									v-model="showReplaceSwitch"
 									class="ma-0 pa-0 mr-n3"
 									color="primary"
 									flat
 									inset
-									v-model="showReplaceSwitch"
 									:hide-details="true"
 									:ripple="false"
 								/>
