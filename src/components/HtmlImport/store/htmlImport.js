@@ -149,6 +149,6 @@ export default {
 	getters: {
 		getImportBtns: (state) => {
 			return state.settings.buttons.header;
-		}
+		},
 	},
 };

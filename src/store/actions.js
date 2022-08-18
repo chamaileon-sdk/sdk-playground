@@ -25,18 +25,17 @@ try {
 }
 
 function processFileupload(src, outputFormat) {
-	return new Promise( (resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		try {
-			let img = new Image();
-			img.crossOrigin = 'Anonymous';
-			img.onload = function() {
-				var canvas = document.createElement('CANVAS');
-				var ctx = canvas.getContext('2d');
-				var dataURL;
+			const img = new Image();
+			img.crossOrigin = "Anonymous";
+			img.onload = function () {
+				const canvas = document.createElement("CANVAS");
+				const ctx = canvas.getContext("2d");
 				canvas.height = this.naturalHeight;
 				canvas.width = this.naturalWidth;
 				ctx.drawImage(this, 0, 0);
-				dataURL = canvas.toDataURL(outputFormat);
+				const dataURL = canvas.toDataURL(outputFormat);
 				return resolve(dataURL);
 			};
 			img.onerror = (e) => {
@@ -44,7 +43,7 @@ function processFileupload(src, outputFormat) {
 					img.src = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`;
 					return;
 				}
-				reject("Can't load image", e);
+				reject(e);
 			};
 			img.src = src;
 			if (img.complete || img.complete === undefined) {
@@ -55,7 +54,7 @@ function processFileupload(src, outputFormat) {
 			return reject(error);
 		}
 	});
-  }
+}
 
 export default {
 	async waitForSdkToBeInited({ dispatch, state }) {
@@ -363,7 +362,8 @@ export default {
 											createdAt: new Date(),
 											_id,
 										};
-										const result = await images.insert([ newImageData ]);
+
+										await images.insert([ newImageData ]);
 
 										return resolve({
 											oldSrc: imageSrc,
