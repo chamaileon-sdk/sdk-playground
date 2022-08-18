@@ -40,15 +40,11 @@ function processFileupload(src, outputFormat) {
 				return resolve(dataURL);
 			};
 			img.onerror = (e) => {
-				try {
-					if (img.src !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURI(src)}`) {
-						img.src = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURI(src)}`;
-						return;
-					}
-					reject("Can't load image", e);
-				} catch {
-					reject("Can't load image editor with image:", src);
+				if (img.src !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`) {
+					img.src = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`;
+					return;
 				}
+				reject("Can't load image", e);
 			};
 			img.src = src;
 			if (img.complete || img.complete === undefined) {
