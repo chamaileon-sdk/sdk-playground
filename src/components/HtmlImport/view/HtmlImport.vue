@@ -28,9 +28,7 @@
 			<div id="header" class="section">
 				<Header />
 			</div>
-			<div id="settings" class="section">
-				<Settings />
-			</div>
+
 		</SectionObserver>
 		<Footer :previous="'Email HTML Generator'" :prev-to="'/htmlgenerator'" />
 	</div>
@@ -42,7 +40,6 @@ import Footer from "../../ViewUtilities/components/Footer.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 import Header from "../components/Header.vue";
-import Settings from "../components/Settings.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -52,7 +49,6 @@ export default {
 		Description,
 		Footer,
 		PreviewButton,
-		Settings,
 	},
 	data() {
 		return {

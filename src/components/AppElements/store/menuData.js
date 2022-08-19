@@ -206,12 +206,6 @@ export default {
 						to: "#header",
 						codePropToMatch: "header",
 					},
-					{
-						title: "Settings",
-						icon: "cog-outline",
-						to: "#settings",
-						codePropToMatch: "document",
-					},
 				],
 			},
 		],

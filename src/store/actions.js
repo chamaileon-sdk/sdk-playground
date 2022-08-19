@@ -4,7 +4,6 @@ import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
-import mockedJson from "./mockedJson.js";
 
 let images = [];
 try {
@@ -375,7 +374,6 @@ export default {
 									}
 								});
 							}));
-
 							const responseArray = imagesArrayReplaced.map((response) => {
 								if (response.status === "rejected") {
 									return {
@@ -391,10 +389,6 @@ export default {
 							console.error(e);
 							return null;
 						}
-					},
-					onImport: ({ html }) => {
-						if (!html) throw new Error("HTML missing");
-						return mockedJson;
 					},
 					onImportReady: async (result) => {
 						const document = { ...result.document, title: "Imported email" };

@@ -46,9 +46,6 @@ const settingsGenerator = (importConfig, indent = 2) => {
 ${"\t".repeat(indent)}buttons: {
 ${"\t".repeat(indent + 1)}header: ${calculatePreviewHeader(importConfig, 2 + indent)}
 ${"\t".repeat(indent)}},
-${"\t".repeat(indent)}replaceImages: ${importConfig.replaceImages},
-${"\t".repeat(indent)}replaceImagesMessage: "${importConfig.replaceImagesMessage}",
-${"\t".repeat(indent)}showReplaceSwitch: ${importConfig.showReplaceSwitch},
 ${"\t".repeat(indent - 1)}}`;
 };
 

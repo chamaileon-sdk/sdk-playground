@@ -12,11 +12,6 @@ export default function () {
 				resolve();
 			});
 		},
-		onImport: ({ html }) => {
-			return new Promise(resolve => {
-				resolve();
-			});
-		},
 		onReplaceImages: (imageSrcArray) => {
 			return new Promise(resolve => {
 				resolve(imageSrcArrayReplaced);

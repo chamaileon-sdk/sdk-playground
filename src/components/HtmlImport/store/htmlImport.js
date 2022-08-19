@@ -4,10 +4,7 @@ const getDefaultState = () => {
 		settings: {
 			buttons: {
 				header: [],
-			},
-			replaceImages: true,
-			replaceImagesMessage: "Import images from your HTML into your gallery",
-			showReplaceSwitch: true,
+			}
 		},
 	};
 };
