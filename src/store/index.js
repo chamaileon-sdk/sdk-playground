@@ -9,6 +9,7 @@ import thumbnailConfig from "../components/Thumbnail/store/thumbnail";
 import document from "../components/AppElements/store/emailDocument";
 import menu from "../components/AppElements/store/menuData";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
+import importPluginConfig from "../components/HtmlImportPlugin/store/htmlImportPlugin";
 import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
 import importConfig from "../components/HtmlImport/store/htmlImport";
 import actions from "./actions";
@@ -30,6 +31,7 @@ export default new Vuex.Store({
 		sdkConfig,
 		menu,
 		generatorConfig,
+		importPluginConfig,
 		importConfig,
 	},
 	state: getDefaultState(),

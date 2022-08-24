@@ -183,6 +183,19 @@ export default {
 				],
 			},
 			{
+				title: "Email HTML Import Plugin",
+				icon: "code-json",
+				to: "htmlimportplugin",
+				children: [
+					{
+						title: "Header",
+						icon: "border-top-variant",
+						to: "#header",
+						codePropToMatch: "header",
+					},
+				],
+			},
+			{
 				title: "Email HTML Generator",
 				icon: "xml",
 				to: "htmlgenerator",
@@ -199,14 +212,6 @@ export default {
 				title: "Email HTML Import",
 				icon: "code-json",
 				to: "htmlimport",
-				children: [
-					{
-						title: "Header",
-						icon: "border-top-variant",
-						to: "#header",
-						codePropToMatch: "header",
-					},
-				],
 			},
 		],
 	}),

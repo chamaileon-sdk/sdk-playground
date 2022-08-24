@@ -20,8 +20,8 @@
 			</div>
 		</SectionObserver>
 		<Footer
-			:previous="'Variable Editor'"
-			:prev-to="'/variableeditor'"
+			:previous="'Email HTML Import Plugin'"
+			:prev-to="'/htmlimportplugin'"
 			:next="'Email HTML Import'"
 			:next-to="'/htmlimport'"
 		/>
