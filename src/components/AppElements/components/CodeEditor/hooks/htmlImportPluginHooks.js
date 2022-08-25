@@ -1,5 +1,5 @@
 export default function () {
-	return `const htmlImportHooks = {
+	return `const htmlImportPluginHooks = {
 		cancel: () => {
 			return new Promise(resolve => {
 				importInstance.hide();

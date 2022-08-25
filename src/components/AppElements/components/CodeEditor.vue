@@ -17,6 +17,7 @@
 			<v-tab
 				v-show="
 					route !== '/htmlgenerator' &&
+						route !== '/htmlimportplugin' &&
 						route !== '/htmlimport' &&
 						route !== '/sdk' &&
 						route !== '/gallery'
@@ -30,7 +31,7 @@
 					|| route === '/gallery'
 					|| route === '/variableeditor'
 					|| route === '/emailthumbnail'
-					|| route === '/htmlimport'
+					|| route === '/htmlimportplugin'
 				"
 			>
 				Hooks
@@ -41,7 +42,7 @@
 					|| route === '/gallery'
 					|| route === '/variableeditor'
 					|| route === '/emailthumbnail'
-					|| route === '/htmlimport'
+					|| route === '/htmlimportplugin'
 				"
 			>
 				Methods
@@ -57,6 +58,12 @@
 			</v-tab>
 			<v-tab v-show="route === '/htmlgenerator'">
 				Output HTML
+			</v-tab>
+			<v-tab v-show="route === '/htmlimport'">
+				Input HTML
+			</v-tab>
+			<v-tab v-show="route === '/htmlimport'">
+				Output JSON
 			</v-tab>
 		</v-tabs>
 
@@ -214,6 +221,7 @@ import megaGalleryCodeGenerator from "./CodeEditor/codeGenerators/megaGalleryCod
 import variableEditorCodeGenerator from "./CodeEditor/codeGenerators/variableEditorCodeGenerator";
 import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrariesCodeGenerator";
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
+import htmlImportPluginCodeGenerator from "./CodeEditor/codeGenerators/htmlImportPluginCodeGenerator";
 import htmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/htmlGeneratorCodeGenerator";
 import htmlImportCodeGenerator from "./CodeEditor/codeGenerators/htmlImportCodeGenerator";
 import dummyHtmlCodeGenerator from "./CodeEditor/codeGenerators/dummyHtmlCodeGenerator";
@@ -223,14 +231,14 @@ import variableEditorHooksGenerator from "./CodeEditor/hooks/variableEditorHooks
 import emailEditorHooksGenerator from "./CodeEditor/hooks/emailEditorHooks";
 import megaGalleryHooksGenerator from "./CodeEditor/hooks/megaGalleryHooks";
 import thumbnailHooksGenerator from "./CodeEditor/hooks/thumbnailHooks";
-import htmlImportHooksGenerator from "./CodeEditor/hooks/htmlImportHooks";
+import htmlImportPluginHooksGenerator from "./CodeEditor/hooks/htmlImportPluginHooks";
 
 import thumbnailMethodsGenerator from "./CodeEditor/methods/thumbnailMethods";
 import previewMethodsGenerator from "./CodeEditor/methods/previewMethods";
 import emailEditorMethodsGenerator from "./CodeEditor/methods/emailEditorMethods";
 import megaGalleryMethodsGenerator from "./CodeEditor/methods/megaGalleryMethods";
 import variableEditorMethodsGenerator from "./CodeEditor/methods/variableEditorMethods";
-import htmlImportMethodsGenerator from "./CodeEditor/methods/htmlImportMethods";
+import htmlImportPluginMethodsGenerator from "./CodeEditor/methods/htmlImportPluginMethods";
 
 import { mapGetters } from "vuex";
 
@@ -321,6 +329,18 @@ export default {
 				this.$store.getters.getVariableEditorConfigObject,
 			);
 		},
+		// Html import plugin
+		htmlImportPluginCode() {
+			return htmlImportPluginCodeGenerator(this.getImportSettings);
+		},
+		htmlImportPluginHooks() {
+			return htmlImportPluginHooksGenerator();
+		},
+		htmlImportPluginMethods() {
+			return htmlImportPluginMethodsGenerator(
+				this.$store.getters.getImportSettings,
+			);
+		},
 		// Html generator
 		htmlGeneratorCode() {
 			return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
@@ -337,15 +357,7 @@ export default {
 		},
 		// Html import
 		htmlImportCode() {
-			return htmlImportCodeGenerator(this.getImportSettings);
-		},
-		htmlImportHooks() {
-			return htmlImportHooksGenerator();
-		},
-		htmlImportMethods() {
-			return htmlImportMethodsGenerator(
-				this.$store.getters.getImportSettings,
-			);
+			return htmlImportCodeGenerator();
 		},
 		// Final
 		code() {
@@ -359,6 +371,8 @@ export default {
 				return this.variableEditorCode;
 			} else if (this.$route.path === "/htmlgenerator") {
 				return this.htmlGeneratorCode;
+			} else if (this.$route.path === "/htmlimportplugin") {
+				return this.htmlImportPluginCode;
 			} else if (this.$route.path === "/htmlimport") {
 				return this.htmlImportCode;
 			} else return "//There is no code available";
@@ -370,7 +384,7 @@ export default {
 			else if (this.$route.path === "/gallery") return this.galleryHooks;
 			else if (this.$route.path === "/variableeditor") return this.variableEditorHooks;
 			else if (this.$route.path === "/emailthumbnail") return this.thumbnailHooks;
-			else if (this.$route.path === "/htmlimport") return this.htmlImportHooks;
+			else if (this.$route.path === "/htmlimportplugin") return this.htmlImportPluginHooks;
 			else return "//There are no hooks available";
 		},
 		methods() {
@@ -379,7 +393,7 @@ export default {
 			else if (this.$route.path === "/gallery") return this.galleryMethods;
 			else if (this.$route.path === "/variableeditor") return this.variableEditorMethods;
 			else if (this.$route.path === "/emailthumbnail") return this.thumbnailMethods;
-			else if (this.$route.path === "/htmlimport") return this.htmlImportMethods;
+			else if (this.$route.path === "/htmlimportplugin") return this.htmlImportPluginMethods;
 			else return "//There are no methods available";
 		},
 	},
