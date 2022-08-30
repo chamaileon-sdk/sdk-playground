@@ -10,13 +10,13 @@ export default function () {
 	body: JSON.stringify({
 		html: htmlInput //see "HTML Input" tab
 	})
-})
+});
 
 if (!genRequest.ok) {
-	throw new Error("Auth error")
+	throw new Error("Auth error");
 }
 
-const response = await genRequest.json()
+const response = await genRequest.json();
 
-jsonOutput = response.result.document //see "JSON Output" tab`;
+jsonOutput = response.result.document; //see "JSON Output" tab`
 }

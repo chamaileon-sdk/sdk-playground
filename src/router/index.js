@@ -19,6 +19,9 @@ import Preview from "../components/Preview/view/Preview";
 // Variable Editor
 import VariableEditor from "../components/VariableEditor/view/VariableEditor";
 
+// Html Import
+import HtmlImportPlugin from "../components/HtmlImportPlugin/view/HtmlImportPlugin";
+
 // Html Generator
 import HtmlGenerator from "../components/HtmlGenerator/view/HtmlGenerator";
 
@@ -55,6 +58,10 @@ const routes = [
 	{
 		path: "/variableeditor",
 		component: VariableEditor,
+	},
+	{
+		path: "/htmlimportplugin",
+		component: HtmlImportPlugin,
 	},
 	{
 		path: "/htmlgenerator",

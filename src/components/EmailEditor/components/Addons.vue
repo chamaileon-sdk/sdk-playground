@@ -35,7 +35,6 @@
 						<v-col
 							v-if="item.state === 'disabled'"
 							class="align-content-right"
-							cols="6"
 						>
 							<v-text-field
 								:value="getDisabledReason(name)"
@@ -47,7 +46,7 @@
 							/>
 						</v-col>
 
-						<v-col class="align-self-center" cols="2">
+						<v-col class="align-self-center">
 							<v-card flat class="d-flex justify-end align-center">
 								<v-btn
 									class="ml-3"

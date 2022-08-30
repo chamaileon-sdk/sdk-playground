@@ -96,4 +96,7 @@ export default {
 
 		return config;
 	},
+	getImportPluginConfigObject: (state) => {
+		return JSON.parse(JSON.stringify(state.importPluginConfig));
+	},
 };

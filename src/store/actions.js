@@ -5,6 +5,56 @@ import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
 
+let images = [];
+try {
+	const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
+	images = db.collection("images");
+	images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
+		if (!isExists) {
+			try {
+				images.insert(favoriteImages);
+				return;
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	});
+} catch (error) {
+	console.error(error);
+}
+
+function processFileupload(src, outputFormat) {
+	return new Promise((resolve, reject) => {
+		try {
+			const img = new Image();
+			img.crossOrigin = "Anonymous";
+			img.onload = function () {
+				const canvas = document.createElement("CANVAS");
+				const ctx = canvas.getContext("2d");
+				canvas.height = this.naturalHeight;
+				canvas.width = this.naturalWidth;
+				ctx.drawImage(this, 0, 0);
+				const dataURL = canvas.toDataURL(outputFormat);
+				return resolve(dataURL);
+			};
+			img.onerror = (e) => {
+				if (img.src !== `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`) {
+					img.src = `https://image-proxy.prod.chamaileon.io/?requestedUrl=${encodeURIComponent(src)}`;
+					return;
+				}
+				reject(e);
+			};
+			img.src = src;
+			if (img.complete || img.complete === undefined) {
+				img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+				img.src = src;
+			}
+		} catch (error) {
+			return reject(error);
+		}
+	});
+}
+
 export default {
 	async waitForSdkToBeInited({ dispatch, state }) {
 		if (state.sdkInited === false) {
@@ -101,7 +151,7 @@ export default {
 		dispatch("initEmailEditor");
 		dispatch("initVariableEditor");
 		dispatch("initEmailPreview");
-		// dispatch("initHtmlImport");
+		dispatch("initHtmlImport");
 		dispatch("initGallery");
 	},
 	async initEmailEditor({ commit, dispatch, getters, state }) {
@@ -261,46 +311,99 @@ export default {
 			commit("setEmailPreviewInited", false);
 		}
 	},
-	async initHtmlImport() {
-		//  if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
-		//  await dispatch("waitForSdkToBeInited");
-		// 	commit("setHtmlImportInited", "pending");
-		// 	try {
-		// 		Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
-		// 			// ...this.$store.getters.getHtmlImportConfigObject,
-		// 			plugin: "import",
-		// 			hooks: {
-		// 				cancel: () => {
-		// 					console.log("TODO CANCEL");
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				close: () => {
-		// 					console.log("TODO CLOSE");
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				importReady: (message) => {
-		// 					console.log("TODO onButtonClicked");
-		// 					// eslint-disable-next-line no-unused-vars
-		// 					const template = {
-		// 						content: message.document,
-		// 					};
-		// 					console.log(message.document);
-		// 					Vue.prototype.$chamaileon.htmlImport.hide();
-		// 				},
-		// 				// eslint-disable-next-line no-unused-vars, require-await
-		// 				onButtonClicked: async ({ buttonId, data }) => {
-		// 					console.log("TODO onButtonClicked");
-		// 				},
-		// 			},
-		// 		});
-		// 		console.log(Vue.prototype.$chamaileon);
-		// 		commit("setHtmlImportInited", true);
-		// 	} catch (error) {
-		// 		console.error("Failed to initialize html import: ", error);
-		// 		Vue.prototype.$chamaileon.htmlImport = null;
-		// 		commit("setHtmlImportInited", false);
-		// 	}
-		// }
+	async initHtmlImport({ getters, commit, state, dispatch }) {
+		if (state.htmlImportInited === true || state.htmlImportInited === "pending") return;
+		commit("setHtmlImportInited", "pending");
+		await dispatch("waitForSdkToBeInited");
+		try {
+			Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
+				...getters.getImportPluginConfigObject,
+				plugin: "import",
+				hooks: {
+					cancel: () => {
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+					close: () => {
+						Vue.prototype.$chamaileon.htmlImport.hide();
+					},
+					onReplaceImages: async (imageSrcArray) => {
+						if (!imageSrcArray || imageSrcArray.length === 0) {
+							return null;
+						}
+						try {
+							// purging duplicates and nullies
+							const imageSrcArrayFiltered = [ ...new Set(imageSrcArray) ].filter(x => !!x);
+
+							const imagesArrayReplaced = await Promise.allSettled(imageSrcArrayFiltered.map((imageSrc) => {
+								// eslint-disable-next-line no-async-promise-executor
+								return new Promise(async (resolve, reject) => {
+									try {
+										const imageIsOnOurDomain = /(https?:\/\/(.+?\.)?(chamaileon\.io|plugins\.edmdesigner\.com)).*/.test(imageSrc);
+										if (imageIsOnOurDomain) {
+											return resolve({
+												oldSrc: imageSrc,
+												newSrc: imageSrc,
+											});
+										}
+
+										const dataUri = await processFileupload(imageSrc);
+
+										if (!dataUri) {
+											return null;
+										}
+
+										const imageName = imageSrc.substr(imageSrc.lastIndexOf("/") + 1);
+										const _id = Date.now() + Math.random();
+										const newImageData = {
+											name: decodeURIComponent(imageName),
+											parentId: "root",
+											src: dataUri,
+											createdAt: new Date(),
+											_id,
+										};
+
+										await images.insert([ newImageData ]);
+
+										return resolve({
+											oldSrc: imageSrc,
+											newSrc: dataUri,
+										});
+									} catch (e) {
+										console.error(e);
+										reject(imageSrc);
+									}
+								});
+							}));
+							const responseArray = imagesArrayReplaced.map((response) => {
+								if (response.status === "rejected") {
+									return {
+										oldSrc: response.reason,
+										newSrc: response.reason,
+									};
+								}
+								return response.value;
+							});
+
+							return responseArray;
+						} catch (e) {
+							console.error(e);
+							return null;
+						}
+					},
+					onImportReady: async (result) => {
+						const document = { ...result.document, title: "Imported email" };
+						await Vue.prototype.$chamaileon.emailEditor.methods.updateData({ document });
+						await Vue.prototype.$chamaileon.htmlImport.hide();
+						Vue.prototype.$chamaileon.emailEditor.show();
+					},
+				},
+			});
+			commit("setHtmlImportInited", true);
+		} catch (error) {
+			console.error("Failed to initialize html import: ", error);
+			Vue.prototype.$chamaileon.htmlImport = null;
+			commit("setHtmlImportInited", false);
+		}
 	},
 	async initGallery({ commit, state, dispatch }) {
 		if (state.galleryInited === true || state.galleryInited === "pending") return;
@@ -308,22 +411,8 @@ export default {
 		await dispatch("waitForSdkToBeInited");
 		let count = 0;
 		let loadedItems = [];
-		let images = [];
 
 		try {
-			const db = new zango.Db("chamaileonSDKGalleryDataBase", { images: ["_id", "parentId", "name", "createdAt", "src"] });
-			images = db.collection("images");
-			images.findOne({ parentId: { $eq: "16322284940689326" } }).then((isExists) => {
-				if (!isExists) {
-					try {
-						images.insert(favoriteImages);
-						return;
-					} catch (error) {
-						console.error(error);
-					}
-				}
-			});
-
 			Vue.prototype.$chamaileon.gallery = await Vue.prototype.$chamaileon.createFullscreenPlugin({
 				plugin: "gallery",
 				data: {

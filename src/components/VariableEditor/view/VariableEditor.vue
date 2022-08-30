@@ -50,10 +50,10 @@
 			</div>
 		</SectionObserver>
 		<NavFooter
-			:previous="'Email Editor'"
-			:prev-to="'/emaileditor'"
-			:next="'Email HTML Generator'"
-			:next-to="'/htmlgenerator'"
+			:previous="'Gallery'"
+			:prev-to="'/gallery'"
+			:next="'Email HTML Import Plugin'"
+			:next-to="'/htmlimportplugin'"
 		/>
 	</div>
 </template>

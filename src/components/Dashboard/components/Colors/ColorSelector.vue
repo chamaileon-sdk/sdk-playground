@@ -1,7 +1,11 @@
 <template>
 	<v-card flat class="pa-4">
 		<v-row>
-			<v-col>
+			<v-col
+				md="6"
+				xl="2"
+				lg="4"
+			>
 				<ColorPicker
 					:index="0"
 					:value="primaryColor"
@@ -9,7 +13,11 @@
 					@colorChange="changePrimary"
 				/>
 			</v-col>
-			<v-col>
+			<v-col
+				md="6"
+				xl="2"
+				lg="4"
+			>
 				<ColorPicker
 					:index="1"
 					:value="secondaryColor"
@@ -17,7 +25,11 @@
 					@colorChange="changeSecondary"
 				/>
 			</v-col>
-			<v-col>
+			<v-col
+				md="6"
+				xl="2"
+				lg="4"
+			>
 				<ColorPicker
 					:index="2"
 					:value="errorColor"
@@ -25,7 +37,11 @@
 					@colorChange="changeError"
 				/>
 			</v-col>
-			<v-col>
+			<v-col
+				md="6"
+				xl="2"
+				lg="4"
+			>
 				<ColorPicker
 					:index="3"
 					:value="infoColor"
@@ -33,7 +49,11 @@
 					@colorChange="changeInfo"
 				/>
 			</v-col>
-			<v-col>
+			<v-col
+				md="6"
+				xl="2"
+				lg="4"
+			>
 				<ColorPicker
 					:index="4"
 					:value="successColor"
@@ -41,7 +61,11 @@
 					@colorChange="changeSuccess"
 				/>
 			</v-col>
-			<v-col>
+			<v-col
+				md="6"
+				xl="2"
+				lg="4"
+			>
 				<ColorPicker
 					:index="5"
 					:value="warningColor"
