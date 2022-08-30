@@ -13,7 +13,7 @@ export default function () {
 		});
 	},
 	onReplaceImages: (imageSrcArray) => {
-		const imageSrcArrayReplaced = imageSrcArray.map(src => src);
+		const imageSrcArrayReplaced = imageSrcArray.map(src => { oldSrc: src, newSrc: src });
 		return new Promise(resolve => {
 			resolve(imageSrcArrayReplaced);
 		});
