@@ -317,7 +317,7 @@ export default {
 		await dispatch("waitForSdkToBeInited");
 		try {
 			Vue.prototype.$chamaileon.htmlImport = await Vue.prototype.$chamaileon.createFullscreenPlugin({
-				...getters.getHtmlImportConfigObject,
+				...getters.getImportPluginConfigObject,
 				plugin: "import",
 				hooks: {
 					cancel: () => {
@@ -338,7 +338,7 @@ export default {
 								// eslint-disable-next-line no-async-promise-executor
 								return new Promise(async (resolve, reject) => {
 									try {
-										const imageIsOnOurDomain = /(https?:\/\/(.+?\.)?(chamaileon\.io|plugins\.edmdesigner\.com)(\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]*)?)/.test(imageSrc);
+										const imageIsOnOurDomain = /(https?:\/\/(.+?\.)?(chamaileon\.io|plugins\.edmdesigner\.com)).*/.test(imageSrc);
 										if (imageIsOnOurDomain) {
 											return resolve({
 												oldSrc: imageSrc,
@@ -392,8 +392,8 @@ export default {
 					},
 					onImportReady: async (result) => {
 						const document = { ...result.document, title: "Imported email" };
-						Vue.prototype.$chamaileon.htmlImport.hide();
 						await Vue.prototype.$chamaileon.emailEditor.methods.updateData({ document });
+						await Vue.prototype.$chamaileon.htmlImport.hide();
 						Vue.prototype.$chamaileon.emailEditor.show();
 					},
 				},

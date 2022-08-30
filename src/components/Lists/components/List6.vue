@@ -318,7 +318,7 @@ export default {
 			required: true,
 			validator(value) {
 				// The value must match one of these strings
-				return ["Editor", "Preview", "Import"].indexOf(value) !== -1;
+				return ["Editor", "Preview", "ImportPlugin"].indexOf(value) !== -1;
 			},
 		},
 	},
@@ -329,7 +329,7 @@ export default {
 
 		buttonsArr: {
 			get() {
-				return this.$store.state[this.section.toLowerCase() + "Config"].settings
+				return this.$store.state[this.section.charAt(0).toLowerCase() + this.section.slice(1) + "Config"].settings
 					.buttons.header;
 			},
 			set(value) {
@@ -341,7 +341,7 @@ export default {
 		},
 		ddArrById: {
 			get(parentId) {
-				return this.$store.state[this.section.toLowerCase() + "Config"].settings
+				return this.$store.state[this.section.charAt(0).toLowerCase() + this.section.slice(1) + "Config"].settings
 					.buttons.header[parentId].items;
 			},
 			set(parentId, newArr) {

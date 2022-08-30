@@ -38,7 +38,7 @@
 					New Dropdown
 				</AddButton>
 			</v-row>
-			<List6 :section="'Import'" />
+			<List6 :section="'ImportPlugin'" />
 		</OptionWrapper>
 	</div>
 </template>
