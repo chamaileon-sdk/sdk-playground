@@ -38,7 +38,7 @@ export default {
 		updatePreviewBtnOrder(state, payload) {
 			state.settings.buttons.header = payload;
 		},
-		updateImportBtn(state, payload) {
+		updateImportPluginBtn(state, payload) {
 			const newObj = (({ index, ...obj }) => obj)(payload);
 			const c = state.settings.buttons.header[payload.index];
 
@@ -96,7 +96,7 @@ export default {
 	},
 	actions: {
 		async updateImportPluginSettings({ getters, rootState }) {
-			const settings = getters.getImportConfigObject.settings;
+			const settings = getters.getImportPluginConfigObject.settings;
 			while (rootState.htmlImportInited === "pending") {
 				await new Promise(resolve => setTimeout(resolve, 100));
 			}
