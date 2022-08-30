@@ -210,7 +210,7 @@ export default {
 			},
 			{
 				title: "Email HTML Import",
-				icon: "code-json",
+				icon: "code-tags",
 				to: "htmlimport",
 			},
 		],

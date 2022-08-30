@@ -4,7 +4,7 @@
 			<div class="section" id="home">
 				<Description
 					:title="'Email HTML Import'"
-					:docUrl="'https://chamaileon.io/sdk/docs/email-html-importer/'"
+					:docUrl="'https://chamaileon.io/sdk/v2/docs/email-html-importer/'"
 					:image="'HtmlImportIllustration.svg'"
 					:hideGetStarted="true"
 				>

@@ -6,14 +6,14 @@ const calculatePreviewDDItems = (arr, indent) => {
 	literal += "[\n";
 
 	arr.forEach((item) => {
-		literal += `${"  ".repeat(indent)}{\n`;
-		literal += `${"  ".repeat(indent + 1)}id: "${item.id}",\n`;
-		literal += `${"  ".repeat(indent + 1)}label: "${item.label}",\n`;
-		literal += `${"  ".repeat(indent + 1)}icon: "${item.icon}",\n`;
-		literal += `${"  ".repeat(indent)}},`;
+		literal += `${"\t".repeat(indent)}{\n`;
+		literal += `${"\t".repeat(indent + 1)}id: "${item.id}",\n`;
+		literal += `${"\t".repeat(indent + 1)}label: "${item.label}",\n`;
+		literal += `${"\t".repeat(indent + 1)}icon: "${item.icon}",\n`;
+		literal += `${"\t".repeat(indent)}},`;
 	});
 
-	literal += `\n${"  ".repeat(indent - 1)}],`;
+	literal += `\n${"\t".repeat(indent - 1)}],`;
 	return literal;
 };
 
@@ -25,18 +25,18 @@ const calculatePreviewHeader = (importConfig, indent) => {
 
 	literal += "[\n";
 	arr.forEach((item) => {
-		literal += `${"  ".repeat(indent)}{\n`;
-		literal += item.type === "button" ? `${"  ".repeat(indent + 1)}id: "${item.id}",\n` : "";
-		literal += `${"  ".repeat(indent + 1)}icon: "${item.icon}",\n`;
-		literal += `${"  ".repeat(indent + 1)}label: "${item.label}",\n`;
-		literal += `${"  ".repeat(indent + 1)}color: "${item.color}",\n`;
-		literal += `${"  ".repeat(indent + 1)}style: "${item.style}"`;
+		literal += `${"\t".repeat(indent)}{\n`;
+		literal += item.type === "button" ? `${"\t".repeat(indent + 1)}id: "${item.id}",\n` : "";
+		literal += `${"\t".repeat(indent + 1)}icon: "${item.icon}",\n`;
+		literal += `${"\t".repeat(indent + 1)}label: "${item.label}",\n`;
+		literal += `${"\t".repeat(indent + 1)}color: "${item.color}",\n`;
+		literal += `${"\t".repeat(indent + 1)}style: "${item.style}"`;
 		literal += item.items
-			? `,\n${"  ".repeat(indent + 1)}items: ${calculatePreviewDDItems(item.items, indent + 2)}\n`
+			? `,\n${"\t".repeat(indent + 1)}items: ${calculatePreviewDDItems(item.items, indent + 2)}\n`
 			: ",\n";
-		literal += `${"  ".repeat(indent)}},\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
 	});
-	literal += `${"  ".repeat(indent - 1)}],`;
+	literal += `${"\t".repeat(indent - 1)}],`;
 
 	return literal;
 };
@@ -51,10 +51,10 @@ ${"\t".repeat(indent - 1)}}`;
 
 export default function (importConfig) {
 	return `const importInstance = await chamaileonPlugins.createFullscreenPlugin({
-		plugin: "import",
-		settings: ${settingsGenerator(importConfig)},
-		hooks: htmlImportPluginHooks, // see 'hooks' tab
-	};`;
+	plugin: "import",
+	settings: ${settingsGenerator(importConfig)},
+	hooks: htmlImportPluginHooks, // see 'hooks' tab
+};`;
 }
 
 export {

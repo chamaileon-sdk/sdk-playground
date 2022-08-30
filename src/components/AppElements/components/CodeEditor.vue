@@ -254,7 +254,7 @@ export default {
 		...mapGetters({ menus: "getMenu" }),
 		...mapGetters([
 			"getHtmlGeneratorConfigObject",
-			"getImportSettings",
+			"getImportPluginConfigObject",
 			"getHtmlDocument",
 			"getDummyHtmlDocument",
 			"getDummyJSON",
@@ -331,14 +331,14 @@ export default {
 		},
 		// Html import plugin
 		htmlImportPluginCode() {
-			return htmlImportPluginCodeGenerator(this.getImportSettings);
+			return htmlImportPluginCodeGenerator(this.getImportPluginConfigObject.settings);
 		},
 		htmlImportPluginHooks() {
 			return htmlImportPluginHooksGenerator();
 		},
 		htmlImportPluginMethods() {
 			return htmlImportPluginMethodsGenerator(
-				this.$store.getters.getImportSettings,
+				this.$store.getters.getImportPluginConfigObject.settings,
 			);
 		},
 		// Html generator

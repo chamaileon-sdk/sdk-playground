@@ -11,7 +11,6 @@ import menu from "../components/AppElements/store/menuData";
 import sdkConfig from "../components/Dashboard/store/sdkConfig";
 import importPluginConfig from "../components/HtmlImportPlugin/store/htmlImportPlugin";
 import generatorConfig from "../components/HtmlGenerator/store/htmlGenerator";
-import importConfig from "../components/HtmlImport/store/htmlImport";
 import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
@@ -32,7 +31,6 @@ export default new Vuex.Store({
 		menu,
 		generatorConfig,
 		importPluginConfig,
-		importConfig,
 	},
 	state: getDefaultState(),
 	mutations,

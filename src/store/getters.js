@@ -96,10 +96,7 @@ export default {
 
 		return config;
 	},
-	getImportConfigObject: (state) => {
-		return JSON.parse(JSON.stringify(state.importConfig));
-	},
-	getImportSettings: (state) => {
-		return JSON.parse(JSON.stringify(state.importConfig.settings));
+	getImportPluginConfigObject: (state) => {
+		return JSON.parse(JSON.stringify(state.importPluginConfig));
 	},
 };
