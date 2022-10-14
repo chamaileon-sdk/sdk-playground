@@ -74,7 +74,7 @@ import BlockLibraries from "../components/BlockLibraries";
 import CustomFonts from "../../sharedComponents/CustomFonts";
 import TextInsert from "../components/TextInsert";
 import Addons from "../components/Addons.vue";
-import Settings from "../components/Settings";
+import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
