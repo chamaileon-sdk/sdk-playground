@@ -248,7 +248,7 @@ const calculateComponents = (editorConfig, indent) => {
 	return `{${Object.keys(editorConfig.settings.components).map((key) => {
 		return `\n${"\t".repeat(indent)}${key}: {
 ${"\t".repeat(indent + 1)}add: ${editorConfig.settings.components[key].add},
-${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.components[key]._delete},
+${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.components[key].delete},
 ${"\t".repeat(indent + 1)}save: ${editorConfig.settings.components[key].save},
 ${"\t".repeat(indent + 1)}edit: ${editorConfig.settings.components[key].edit},
 ${"\t".repeat(indent + 1)}reset: ${editorConfig.settings.components[key].reset},
