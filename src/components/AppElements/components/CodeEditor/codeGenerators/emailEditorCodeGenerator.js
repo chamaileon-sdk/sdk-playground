@@ -107,6 +107,20 @@ ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.variableSystem.ena
 	return config;
 };
 
+const calculateComponents = (editorConfig, indent) => {
+	const { components } = editorConfig.settings.addons;
+
+	if (!components) return "false,";
+
+	let config = `{
+${"\t".repeat(indent)}enabled: ${components.enabled},`;
+	if (components.disabledReason) config += `\n${ "\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.components.disabledReason}",`;
+	if (components.behaviour) config += `\n${ "\t".repeat(indent)}behaviour: "${components.behaviour}",`;
+	config += `\n${"\t".repeat(indent - 1)}},`;
+
+	return config;
+};
+
 const calculateBlockLibs = (editorConfig, indent) => {
 	let literal = "";
 	const arr = editorConfig.settings.blockLibraries;
@@ -265,6 +279,7 @@ ${"\t".repeat(indent)}hideDefaultFonts: ${editorConfig.settings.hideDefaultFonts
 ${"\t".repeat(indent)}addons: {
 ${"\t".repeat(indent + 1)}blockLock: ${calculateBL(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}variableSystem: ${calculateVE(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}components: ${calculateComponents(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}actionMenu: ${calculateActionMenu(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}toolboxes: ${calculateToolboxes(editorConfig, indent + 1)}

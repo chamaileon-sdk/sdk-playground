@@ -133,6 +133,10 @@ const getDefaultState = () => {
 			},
 			blockLibraries: [],
 			addons: {
+				components: {
+					enabled: true,
+					behaviour: "nested",
+				},
 				blockLock: {
 					icon: "table-lock",
 					id: "Block Lock",
