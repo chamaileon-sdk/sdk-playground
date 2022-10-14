@@ -32,7 +32,7 @@ export default {
 		for (const key in addons) {
 			switch (addons[key].state) {
 				case "enabled":
-					addons[key] = { enabled: true, disabledReason: "" };
+					addons[key] = { enabled: true, behaviour: addons[key].behaviour, disabledReason: "" };
 					break;
 				case "disabled":
 					if (addons[key].disabledReason) {

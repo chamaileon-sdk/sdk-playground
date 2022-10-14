@@ -377,7 +377,11 @@ export default {
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {
-					obj[addon].state = payload.state;
+					if (payload.key) {
+						obj[addon][payload.key] = payload.value;
+					} else {
+						obj[addon].state = payload.state;
+					}
 				}
 			}
 			return state;
@@ -448,6 +452,12 @@ export default {
 		// Variables
 		updateVariablePermissions(state, payload) {
 			Vue.set(state.settings.variables[payload.variableTypeName], payload.name, payload.value);
+		},
+
+		// Components
+		updateComponentPermissions(state, payload) {
+			const { componentTypeName, name, value } = payload;
+			Vue.set(state.settings.components[componentTypeName], name, value);
 		},
 
 		// text element default text
