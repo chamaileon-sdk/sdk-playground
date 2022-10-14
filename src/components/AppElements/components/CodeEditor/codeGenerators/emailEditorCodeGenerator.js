@@ -107,7 +107,7 @@ ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.variableSystem.ena
 	return config;
 };
 
-const calculateComponents = (editorConfig, indent) => {
+const calculateAddonsComponents = (editorConfig, indent) => {
 	const { components } = editorConfig.settings.addons;
 
 	if (!components) return "false,";
@@ -244,6 +244,20 @@ ${"\t".repeat(indent)}}`;
 ${"\t".repeat(indent - 1)}}`;
 };
 
+const calculateComponents = (editorConfig, indent) => {
+	return `{${Object.keys(editorConfig.settings.components).map((key) => {
+		return `\n${"\t".repeat(indent)}${key}: {
+${"\t".repeat(indent + 1)}add: ${editorConfig.settings.components[key].add},
+${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.components[key]._delete},
+${"\t".repeat(indent + 1)}save: ${editorConfig.settings.components[key].save},
+${"\t".repeat(indent + 1)}edit: ${editorConfig.settings.components[key].edit},
+${"\t".repeat(indent + 1)}reset: ${editorConfig.settings.components[key].reset},
+${"\t".repeat(indent + 1)}unlink: ${editorConfig.settings.components[key].unlink},
+${"\t".repeat(indent)}}`;
+	})}
+${"\t".repeat(indent - 1)}}`;
+};
+
 const calculateElementDefaults = (editorConfig, indent) => {
 	return `{${Object.keys(editorConfig.settings.elementDefaults).map((mainKey) => {
 		return `\n${"\t".repeat(indent)}${mainKey}: {${Object.keys(editorConfig.settings.elementDefaults[mainKey]).map((elemKey) => {
@@ -279,12 +293,13 @@ ${"\t".repeat(indent)}hideDefaultFonts: ${editorConfig.settings.hideDefaultFonts
 ${"\t".repeat(indent)}addons: {
 ${"\t".repeat(indent + 1)}blockLock: ${calculateBL(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}variableSystem: ${calculateVE(editorConfig, indent + 2)}
-${"\t".repeat(indent + 1)}components: ${calculateComponents(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}components: ${calculateAddonsComponents(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}actionMenu: ${calculateActionMenu(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}toolboxes: ${calculateToolboxes(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}dropzones: ${calculateDropZones(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}variables: ${calculateVariables(editorConfig, indent + 1)}
+${"\t".repeat(indent)}components: ${calculateComponents(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}panels: ${calculatePanels(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}staticAssetsBaseUrl: "${editorConfig.settings.staticAssetsBaseUrl}",
 ${"\t".repeat(indent)}videoElementBaseUrl: "${editorConfig.settings.videoElementBaseUrl}",

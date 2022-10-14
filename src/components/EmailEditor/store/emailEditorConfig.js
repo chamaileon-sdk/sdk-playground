@@ -118,6 +118,24 @@ const getDefaultState = () => {
 					canRemoveAll: true,
 				},
 			},
+			components: {
+				image: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: false,
+				},
+				text: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: false,
+				},
+			},
 			elementDefaults: {
 				attrs: {
 					text: {
