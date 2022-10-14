@@ -152,7 +152,11 @@ const getDefaultState = () => {
 			blockLibraries: [],
 			addons: {
 				components: {
-					enabled: true,
+					id: "Components System",
+					description:
+						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi",
+					state: "disabled",
+					disabledReason: "This addon is disabled",
 					behaviour: "nested",
 				},
 				blockLock: {
@@ -373,8 +377,7 @@ export default {
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {
-					// eslint-disable-next-line no-return-assign
-					return (obj[addon].state = payload.state);
+					obj[addon].state = payload.state;
 				}
 			}
 			return state;
