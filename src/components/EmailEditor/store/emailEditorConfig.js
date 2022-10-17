@@ -174,8 +174,6 @@ const getDefaultState = () => {
 			addons: {
 				components: {
 					id: "Components System",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 					behaviour: "nested",
@@ -183,16 +181,12 @@ const getDefaultState = () => {
 				blockLock: {
 					icon: "table-lock",
 					id: "Block Lock",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
 				variableSystem: {
 					icon: "iframe-variable-outline",
 					id: "Variable System",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},

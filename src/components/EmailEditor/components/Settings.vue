@@ -23,7 +23,6 @@
 						>
 							Static Assets
 						</v-card-title>
-						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
 					<v-col
@@ -59,7 +58,6 @@
 						>
 							Autosave
 						</v-card-title>
-						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
 					<v-col
@@ -102,7 +100,6 @@
 						>
 							Video element base url
 						</v-card-title>
-						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
 					<v-col
