@@ -135,6 +135,27 @@ const getDefaultState = () => {
 					reset: true,
 					unlink: false,
 				},
+				video: {
+					add: true,
+					delete: true,
+					save: true,
+					reset: true,
+					ulink: true,
+				},
+				button: {
+					add: true,
+					delete: true,
+					save: true,
+					reset: true,
+					ulink: true,
+				},
+				divider: {
+					add: true,
+					delete: true,
+					save: true,
+					reset: true,
+					ulink: true,
+				},
 			},
 			elementDefaults: {
 				attrs: {
