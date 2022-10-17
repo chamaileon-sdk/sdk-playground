@@ -125,7 +125,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: false,
+					unlink: true,
 				},
 				text: {
 					add: true,
@@ -133,7 +133,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: false,
+					unlink: true,
 				},
 				video: {
 					add: true,
