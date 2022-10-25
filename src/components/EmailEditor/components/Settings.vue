@@ -23,7 +23,6 @@
 						>
 							Static Assets
 						</v-card-title>
-						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
 					<v-col
@@ -59,7 +58,6 @@
 						>
 							Autosave
 						</v-card-title>
-						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
 					<v-col
@@ -102,7 +100,6 @@
 						>
 							Video element base url
 						</v-card-title>
-						<!--<p class="ma-0">{{ item.description }}</p>-->
 					</v-col>
 
 					<v-col
@@ -332,6 +329,56 @@
 			</v-card>
 		</OptionWrapper>
 
+		<h3>Components</h3>
+		<p>
+			You can disable component actions for each component type.
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
+					<v-row>
+						<v-col
+							v-for="(componentTypeValues, componentTypeName) in components"
+							:key="componentTypeName"
+							cols="12"
+							class="d-flex justify-space-between align-center"
+						>
+							<v-row class="mb-4">
+								<v-col cols="12">
+									<h4>{{ componentTypeName }}</h4>
+								</v-col>
+								<v-col
+									v-for="(value, name) in componentTypeValues"
+									:key="name"
+									cols="6"
+									class="d-flex justify-space-between align-center"
+								>
+									<v-card-title
+										class="ma-0 pa-0 text-subtitle-1"
+										style="margin-bottom: -3px !important"
+									>
+										{{ name }}
+									</v-card-title>
+									<v-switch
+										:input-value="components[componentTypeName][name]"
+										class="ma-0 pa-0"
+										color="primary"
+										hide-details
+										@change="updateComponent($event, componentTypeName, name)"
+									/>
+								</v-col>
+							</v-row>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+
 		<h3>Panels</h3>
 		<p>
 			You can toggle the default state of our panels as well
@@ -441,6 +488,9 @@ export default {
 		variables() {
 			return this.$store.state.editorConfig.settings.variables;
 		},
+		components() {
+			return this.$store.state.editorConfig.settings.components;
+		},
 		panels() {
 			return this.$store.state.editorConfig.settings.panels;
 		},
@@ -476,6 +526,10 @@ export default {
 			this.updateVariablePermissions({ name, variableTypeName, value });
 			this.updateEditorSettings();
 		},
+		updateComponent(value, componentTypeName, name) {
+			this.updateComponentPermissions({ name, componentTypeName, value });
+			this.updateEditorSettings();
+		},
 		updatePanel(value, name) {
 			this.updatePanels({ [name]: !!value });
 			this.updateEditorSettings();
@@ -489,6 +543,7 @@ export default {
 			"updateToolboxes",
 			"updateVideoElementBaseUrl",
 			"updateVariablePermissions",
+			"updateComponentPermissions",
 			"updatePanels",
 		]),
 		...mapActions({

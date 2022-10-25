@@ -118,6 +118,48 @@ const getDefaultState = () => {
 					canRemoveAll: true,
 				},
 			},
+			components: {
+				image: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: true,
+				},
+				text: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: true,
+				},
+				video: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: true,
+				},
+				button: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: true,
+				},
+				divider: {
+					add: true,
+					delete: true,
+					save: true,
+					edit: true,
+					reset: true,
+					unlink: true,
+				},
+			},
 			elementDefaults: {
 				attrs: {
 					text: {
@@ -133,19 +175,21 @@ const getDefaultState = () => {
 			},
 			blockLibraries: [],
 			addons: {
+				components: {
+					id: "Components System",
+					state: "disabled",
+					disabledReason: "This addon is disabled",
+					behaviour: "nested",
+				},
 				blockLock: {
 					icon: "table-lock",
 					id: "Block Lock",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
 				variableSystem: {
 					icon: "iframe-variable-outline",
 					id: "Variable System",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
@@ -351,8 +395,11 @@ export default {
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {
-					// eslint-disable-next-line no-return-assign
-					return (obj[addon].state = payload.state);
+					if (payload.key) {
+						obj[addon][payload.key] = payload.value;
+					} else {
+						obj[addon].state = payload.state;
+					}
 				}
 			}
 			return state;
@@ -423,6 +470,12 @@ export default {
 		// Variables
 		updateVariablePermissions(state, payload) {
 			Vue.set(state.settings.variables[payload.variableTypeName], payload.name, payload.value);
+		},
+
+		// Components
+		updateComponentPermissions(state, payload) {
+			const { componentTypeName, name, value } = payload;
+			Vue.set(state.settings.components[componentTypeName], name, value);
 		},
 
 		// text element default text

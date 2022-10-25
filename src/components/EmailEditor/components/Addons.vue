@@ -29,7 +29,6 @@
 							>
 								{{ item.id }}
 							</v-card-title>
-							<!--<p class="ma-0">{{ item.description }}</p>-->
 						</v-col>
 
 						<v-col
@@ -45,7 +44,18 @@
 								@input="setDisabledReason(name, $event)"
 							/>
 						</v-col>
-
+						<v-col
+							v-if="item.state === 'enabled' && item.behaviour"
+							class="align-content-right"
+						>
+							<v-select
+								v-model="selectedComponentBehaviour"
+								hide-details="true"
+								:items="componentBehaviours"
+								label="behaviour"
+								@change="updateAddonState({ id: item.id, key: 'behaviour', value: $event })"
+							/>
+						</v-col>
 						<v-col class="align-self-center">
 							<v-card flat class="d-flex justify-end align-center">
 								<v-btn
@@ -113,6 +123,12 @@ import OptionWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 export default {
 	components: {
 		OptionWrapper,
+	},
+	data() {
+		return {
+			selectedComponentBehaviour: this.$store.state.editorConfig.settings.addons.components.behaviour,
+			componentBehaviours: ["nested", "unique", "both"],
+		};
 	},
 	computed: {
 		...mapGetters([ "getAddonStateById" ]),

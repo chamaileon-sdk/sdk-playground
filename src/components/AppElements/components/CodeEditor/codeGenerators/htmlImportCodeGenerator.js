@@ -18,5 +18,5 @@ if (!genRequest.ok) {
 
 const response = await genRequest.json();
 
-jsonOutput = response.result.document; //see "JSON Output" tab`
+jsonOutput = response.result.document; //see "JSON Output" tab`;
 }
