@@ -252,7 +252,7 @@ ${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.components[key].delete
 ${"\t".repeat(indent + 1)}save: ${editorConfig.settings.components[key].save},
 ${"\t".repeat(indent + 1)}edit: ${editorConfig.settings.components[key].edit},
 ${"\t".repeat(indent + 1)}reset: ${editorConfig.settings.components[key].reset},
-${"\t".repeat(indent + 1)}unlink: ${editorConfig.settings.components[key].unlink},
+${"\t".repeat(indent + 1)}detach: ${editorConfig.settings.components[key].detach},
 ${"\t".repeat(indent)}}`;
 	})}
 ${"\t".repeat(indent - 1)}}`;
