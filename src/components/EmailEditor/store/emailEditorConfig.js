@@ -125,7 +125,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: true,
+					detach: true,
 				},
 				text: {
 					add: true,
@@ -133,7 +133,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: true,
+					detach: true,
 				},
 				video: {
 					add: true,
@@ -141,7 +141,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: true,
+					detach: true,
 				},
 				button: {
 					add: true,
@@ -149,7 +149,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: true,
+					detach: true,
 				},
 				divider: {
 					add: true,
@@ -157,7 +157,7 @@ const getDefaultState = () => {
 					save: true,
 					edit: true,
 					reset: true,
-					unlink: true,
+					detach: true,
 				},
 			},
 			elementDefaults: {
