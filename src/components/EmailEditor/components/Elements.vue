@@ -16,34 +16,43 @@
 					class="my-0 py-2 mb-6 mb-xl-0"
 					cols="4"
 					xl="2"
-					@click="toggleElement({ type: 'content', element: element.type }); updateEditorSettings();"
 				>
-					<v-btn
-						depressed
-						class="pa-0 d-flex"
-						height="100%"
-						width="100%"
-						:color="elementsArr.content[element.type] ? 'primary' : 'white'"
-					>
-						<v-responsive :aspect-ratio="1">
-							<div
-								class="d-flex flex-column justify-space-around"
-								style="height: 100%"
-							>
-								<div>
-									<v-icon x-large>
-										{{ element.icon }}
-									</v-icon>
-									<div v-if="element.alt">
-										{{ element.alt }}
-									</div>
-									<div v-else class="element-break-word">
-										{{ element.type }}
-									</div>
-								</div>
+					<v-tooltip bottom :disabled="!disableTextElements(element.type)">
+						<template #activator="{ on, attrs }">
+							<div v-on="on">
+								<v-btn
+									depressed
+									class="pa-0 d-flex"
+									height="100%"
+									width="100%"
+									:attrs="attrs"
+									:color="elementsArr.content[element.type] ? 'primary' : 'white'"
+									:disabled="disableTextElements(element.type)"
+									@click="toggleElement({ type: 'content', element: element.type }); updateEditorSettings();"
+								>
+									<v-responsive :aspect-ratio="1">
+										<div
+											class="d-flex flex-column justify-space-around"
+											style="height: 100%"
+										>
+											<div>
+												<v-icon x-large>
+													{{ element.icon }}
+												</v-icon>
+												<div v-if="element.alt">
+													{{ element.alt }}
+												</div>
+												<div v-else class="element-break-word">
+													{{ element.type }}
+												</div>
+											</div>
+										</div>
+									</v-responsive>
+								</v-btn>
 							</div>
-						</v-responsive>
-					</v-btn>
+						</template>
+						<span>{{ getDisabledTooltipText(element.type) }}</span>
+					</v-tooltip>
 				</v-col>
 			</v-row>
 		</OptionWrapper>
@@ -207,6 +216,14 @@ export default {
 		return {
 			contentElements: [
 				{
+					type: "title",
+					icon: "mdi-format-header-1",
+				},
+				{
+					type: "paragraph",
+					icon: "mdi-format-paragraph",
+				},
+				{
 					type: "text",
 					icon: "mdi-format-text",
 				},
@@ -305,6 +322,22 @@ export default {
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
 		}),
+		disableTextElements(type) {
+			if (this.elementsArr.content.text && (type === "title" || type === "paragraph")) {
+				return true;
+			} else if ((this.elementsArr.content.title || this.elementsArr.content.paragraph) && type === "text") {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		getDisabledTooltipText(type) {
+			if (this.elementsArr.content.text && (type === "title" || type === "paragraph")) {
+				return "To enable this element, disable the text element";
+			} else if ((this.elementsArr.content.title || this.elementsArr.content.paragraph) && type === "text") {
+				return "To enable this element, disable the title and paragraph elements";
+			}
+		},
 	},
 };
 </script>
