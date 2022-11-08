@@ -5,7 +5,7 @@ import VueRouter from "vue-router";
 import Dashboard from "../components/Dashboard/view/Dashboard";
 
 // Email editor
-import EmailEditor from "../components/EmailEditor/view/EmailEditor";
+import EmailEditor from "../components/EmailEditor/view/EmailEditor.vue";
 
 // Gallery
 import MegaGallery from "../components/MegaGallery/view/MegaGallery";
