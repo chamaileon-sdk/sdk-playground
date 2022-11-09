@@ -182,7 +182,7 @@ const getDefaultState = () => {
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 					behaviorDescription: "description of the current behavior",
-					behaviour: "nested",
+					behavior: "nested",
 				},
 				blockLock: {
 					icon: "table-lock",

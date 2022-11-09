@@ -44,15 +44,15 @@
 							/>
 						</v-col>
 						<v-col
-							v-if="item.state === 'enabled' && item.behaviour"
+							v-if="item.state === 'enabled' && item.behavior"
 							class="align-content-right"
 						>
 							<v-select
-								:value="currentComponentBehaviour"
+								:value="currentComponentBehavior"
 								hide-details="true"
-								:items="componentBehaviours"
-								label="behaviour"
-								@input="updateAddonState({ id: item.id, key: 'behaviour', value: $event }); updateEditorSettings()"
+								:items="componentBehaviors"
+								label="behavior"
+								@input="updateAddonState({ id: item.id, key: 'behavior', value: $event }); updateEditorSettings()"
 							/>
 						</v-col>
 						<v-col class="align-self-center">
@@ -117,7 +117,7 @@
 							class="ma-4"
 							:value="behaviorDescription"
 							label="behaviorDescription"
-							@input="setComponentBehaviourDescription(item.id, $event)"
+							@input="setComponentBehaviorDescription(item.id, $event)"
 						/>
 					</v-row>
 				</v-card>
@@ -137,8 +137,8 @@ export default {
 	},
 	data() {
 		return {
-			currentComponentBehaviour: this.$store.state.editorConfig.settings.addons.components.behaviour,
-			componentBehaviours: ["nested", "unique", "both"],
+			currentComponentBehavior: this.$store.state.editorConfig.settings.addons.components.behavior,
+			componentBehaviors: ["nested", "unique", "both"],
 		};
 	},
 	computed: {
@@ -168,7 +168,7 @@ export default {
 			this.updateAddonDisabledState({ name, value });
 			this.updateEditorSettings();
 		},
-		setComponentBehaviourDescription(id, $event) {
+		setComponentBehaviorDescription(id, $event) {
 			this.updateAddonState({ id, key: "behaviorDescription", value: $event });
 			this.updateEditorSettings();
 		},

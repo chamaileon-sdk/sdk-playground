@@ -118,7 +118,7 @@ const calculateAddonsComponents = (editorConfig, indent) => {
 ${"\t".repeat(indent)}enabled: ${components.enabled},`;
 
 	if (components.disabledReason) config += `\n${ "\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.components.disabledReason}",`;
-	if (components.behaviour) config += `\n${ "\t".repeat(indent)}behaviour: "${components.behaviour}",`;
+	if (components.behavior) config += `\n${ "\t".repeat(indent)}behavior: "${components.behavior}",`;
 	if (components.behaviorDescription) config += `\n${ "\t".repeat(indent)}behaviorDescription: "${components.behaviorDescription}",`;
 
 	config += `\n${"\t".repeat(indent - 1)}},`;
