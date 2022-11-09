@@ -48,7 +48,7 @@
 							class="align-content-right"
 						>
 							<v-select
-								v-model="currentComponentBehaviour"
+								:value="currentComponentBehaviour"
 								hide-details="true"
 								:items="componentBehaviours"
 								label="behaviour"
