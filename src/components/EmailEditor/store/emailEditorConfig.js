@@ -181,7 +181,8 @@ const getDefaultState = () => {
 					id: "Components System",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
-					behaviour: "nested",
+					behaviorDescription: "description of the current behavior",
+					behavior: "nested",
 				},
 				blockLock: {
 					icon: "table-lock",
@@ -408,11 +409,7 @@ export default {
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {
-					if (payload.key) {
-						obj[addon][payload.key] = payload.value;
-					} else {
-						obj[addon].state = payload.state;
-					}
+					obj[addon][payload.key] = payload.value;
 				}
 			}
 			return state;

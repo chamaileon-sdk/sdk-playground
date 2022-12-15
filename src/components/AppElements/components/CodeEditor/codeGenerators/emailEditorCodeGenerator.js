@@ -92,7 +92,7 @@ const calculateBL = (editorConfig, indent) => {
 
 	let config = `{
 ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.blockLock.enabled},`;
-	if (editorConfig.settings.addons.blockLock.disabledReason) config += `\n${ "\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.blockLock.disabledReason}",`;
+	if (editorConfig.settings.addons.blockLock.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.blockLock.disabledReason}",`;
 	config += `\n${"\t".repeat(indent - 1)}},`;
 
 	return config;
@@ -103,7 +103,7 @@ const calculateVE = (editorConfig, indent) => {
 
 	let config = `{
 ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.variableSystem.enabled},`;
-	if (editorConfig.settings.addons.variableSystem.disabledReason) config += `\n${ "\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.variableSystem.disabledReason}",`;
+	if (editorConfig.settings.addons.variableSystem.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.variableSystem.disabledReason}",`;
 	config += `\n${"\t".repeat(indent - 1)}},`;
 
 	return config;
@@ -116,10 +116,12 @@ const calculateAddonsComponents = (editorConfig, indent) => {
 
 	let config = `{
 ${"\t".repeat(indent)}enabled: ${components.enabled},`;
-	if (components.disabledReason) config += `\n${ "\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.components.disabledReason}",`;
-	if (components.behaviour) config += `\n${ "\t".repeat(indent)}behaviour: "${components.behaviour}",`;
-	config += `\n${"\t".repeat(indent - 1)}},`;
 
+	if (components.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.components.disabledReason}",`;
+	if (components.behavior) config += `\n${"\t".repeat(indent)}behavior: "${components.behavior}",`;
+	if (components.behaviorDescription) config += `\n${"\t".repeat(indent)}behaviorDescription: "${components.behaviorDescription}",`;
+
+	config += `\n${"\t".repeat(indent - 1)}},`;
 	return config;
 };
 

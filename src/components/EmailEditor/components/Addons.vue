@@ -12,7 +12,7 @@
 			<div v-for="(item, name, ind) in addonArr" :key="item.id">
 				<v-card
 					flat
-					class="rounded-0 d-flex pa-4"
+					class="rounded-0 pa-4"
 					:class="
 						ind === 0
 							? 'rounded-t'
@@ -30,7 +30,6 @@
 								{{ item.id }}
 							</v-card-title>
 						</v-col>
-
 						<v-col
 							v-if="item.state === 'disabled'"
 							class="align-content-right"
@@ -45,15 +44,15 @@
 							/>
 						</v-col>
 						<v-col
-							v-if="item.state === 'enabled' && item.behaviour"
+							v-if="item.state === 'enabled' && item.behavior"
 							class="align-content-right"
 						>
 							<v-select
-								v-model="selectedComponentBehaviour"
+								:value="currentComponentBehavior"
 								hide-details="true"
-								:items="componentBehaviours"
-								label="behaviour"
-								@change="updateAddonState({ id: item.id, key: 'behaviour', value: $event })"
+								:items="componentBehaviors"
+								label="behavior"
+								@input="updateAddonState({ id: item.id, key: 'behavior', value: $event }); updateEditorSettings()"
 							/>
 						</v-col>
 						<v-col class="align-self-center">
@@ -64,7 +63,7 @@
 									small
 									:ripple="false"
 									:color="item.state === 'enabled' ? 'primary' : ''"
-									@click="updateAddonState({ id: item.id, state: 'enabled' }); updateEditorSettings();"
+									@click="updateAddonState({ id: item.id, key: 'state', value: 'enabled' }); updateEditorSettings();"
 								>
 									<v-icon
 										size="25"
@@ -81,7 +80,7 @@
 									small
 									:ripple="false"
 									:color="item.state === 'disabled' ? 'primary' : ''"
-									@click="updateAddonState({ id: item.id, state: 'disabled' }); updateEditorSettings();"
+									@click="updateAddonState({ id: item.id, key: 'state', value: 'disabled' }); updateEditorSettings();"
 								>
 									<v-icon
 										size="25"
@@ -98,7 +97,7 @@
 									small
 									:ripple="false"
 									:color="item.state === 'hidden' ? 'primary' : ''"
-									@click="updateAddonState({ id: item.id, state: 'hidden' }); updateEditorSettings();"
+									@click="updateAddonState({ id: item.id, key: 'state', value: 'hidden' }); updateEditorSettings();"
 								>
 									<v-icon
 										size="25"
@@ -108,6 +107,18 @@
 								</v-btn>
 							</v-card>
 						</v-col>
+					</v-row>
+					<v-row>
+						<v-text-field
+							v-if="'behaviorDescription' in item && (item.state === 'enabled')"
+							dense
+							hide-details
+							outlined
+							class="ma-4"
+							:value="behaviorDescription"
+							label="behaviorDescription"
+							@input="setComponentBehaviorDescription(item.id, $event)"
+						/>
 					</v-row>
 				</v-card>
 				<v-divider v-show="ind !== addonArrLength - 1" />
@@ -126,8 +137,8 @@ export default {
 	},
 	data() {
 		return {
-			selectedComponentBehaviour: this.$store.state.editorConfig.settings.addons.components.behaviour,
-			componentBehaviours: ["nested", "unique", "both"],
+			currentComponentBehavior: this.$store.state.editorConfig.settings.addons.components.behavior,
+			componentBehaviors: ["nested", "unique", "both"],
 		};
 	},
 	computed: {
@@ -137,6 +148,9 @@ export default {
 		},
 		addonArrLength() {
 			return Object.keys(this.addonArr).length;
+		},
+		behaviorDescription() {
+			return this.$store.state.editorConfig.settings.addons.components.behaviorDescription;
 		},
 	},
 	methods: {
@@ -152,6 +166,10 @@ export default {
 		},
 		setDisabledReason(name, value) {
 			this.updateAddonDisabledState({ name, value });
+			this.updateEditorSettings();
+		},
+		setComponentBehaviorDescription(id, $event) {
+			this.updateAddonState({ id, key: "behaviorDescription", value: $event });
 			this.updateEditorSettings();
 		},
 	},
