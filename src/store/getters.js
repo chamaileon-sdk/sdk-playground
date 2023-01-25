@@ -51,7 +51,7 @@ export default {
 		config.settings.addons = addons;
 
 		// User processing
-		if (!config.settings.user.enabled) config.user = false;
+		if (!config.settings.user.enabled) config.settings.user = false;
 
 		const document = JSON.parse(JSON.stringify(state.document));
 
