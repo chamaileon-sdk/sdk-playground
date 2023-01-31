@@ -171,7 +171,6 @@ export default {
 						await dispatch("updateDocument", obj.document);
 					},
 					onAutoSave: (obj) => {
-						console.log(obj.document);
 						commit("updateDocument", obj.document);
 					},
 					onChange: () => {
