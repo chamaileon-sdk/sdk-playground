@@ -4,7 +4,7 @@ const getDefaultState = () => {
 		settings: {
 			buttons: {
 				header: [],
-			}
+			},
 		},
 	};
 };

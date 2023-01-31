@@ -121,9 +121,10 @@ ${"\t".repeat(indent + 1)}label: "${c.label}",
 ${"\t".repeat(indent + 1)}canDeleteBlock: ${c.canDeleteBlock},
 ${"\t".repeat(indent + 1)}canRenameBlock: ${c.canRenameBlock},
 ${"\t".repeat(indent + 1)}canSaveBlock: ${c.canSaveBlock},
-${"\t".repeat(indent)}},`;
+${"\t".repeat(indent + 1)}useBlockTitleAsMarker: ${c.useBlockTitleAsMarker},
+${"\t".repeat(indent)}},\n`;
 	});
-	literal += `\n${"\t".repeat(indent - 1)}],`;
+	literal += `${"\t".repeat(indent - 1)}],`;
 	return literal;
 };
 

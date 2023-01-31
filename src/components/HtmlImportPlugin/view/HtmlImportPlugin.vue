@@ -28,12 +28,11 @@
 			<div id="header" class="section">
 				<Header />
 			</div>
-
 		</SectionObserver>
-		<Footer 
-			:previous="'Variable Editor'" 
+		<Footer
+			:previous="'Variable Editor'"
 			:prev-to="'/variableeditor'"
-			:next="'Email HTML Generator'" 
+			:next="'Email HTML Generator'"
 			:next-to="'/htmlgenerator'"
 		/>
 	</div>

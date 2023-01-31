@@ -159,6 +159,37 @@
 													}}
 												</v-icon>
 											</v-btn>
+											<v-tooltip bottom>
+												<template #activator="{ on: onVTooltip }">
+													<v-btn
+														icon
+														small
+														color="primary"
+														:value="b.useBlockTitleAsMarker"
+														:ripple="false"
+														@click="
+															updateBlockLibs({
+																index: ind,
+																useBlockTitleAsMarker: !b.useBlockTitleAsMarker,
+															});
+															updateEditorSettings();
+														"
+														v-on="{ ...onVTooltip }"
+													>
+														<v-icon
+															size="25"
+														>
+															{{
+																b.useBlockTitleAsMarker
+																	? "mdi-format-title"
+																	: "mdi-contain-start"
+															}}
+														</v-icon>
+													</v-btn>
+												</template>
+												<span v-if="b.useBlockTitleAsMarker">Using block title as marker</span>
+												<span v-else>Using block marker</span>
+											</v-tooltip>
 										</v-card>
 									</v-col>
 
