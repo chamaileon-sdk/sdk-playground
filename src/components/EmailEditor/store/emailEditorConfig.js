@@ -166,7 +166,7 @@ const getDefaultState = () => {
 			elementDefaults: {
 				attrs: {
 					text: {
-						text: "<p>Double click to edit text!</p>",
+						text: "Double click to edit text!",
 					},
 					button: {
 						text: "<p>Click here to edit me</p>",
