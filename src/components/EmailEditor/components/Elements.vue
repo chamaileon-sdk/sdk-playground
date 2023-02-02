@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2>Elements</h2>
+		<h2>Elements </h2>
 		<p>
 			You can turn on and off basic draggable elements. You can even disable all
 			the elements, which is useful if you want your users to be only be able to
@@ -220,6 +220,10 @@ export default {
 					icon: "mdi-format-header-1",
 				},
 				{
+					type: "list",
+					icon: "mdi-format-list-bulleted",
+				},
+				{
 					type: "paragraph",
 					icon: "mdi-format-paragraph",
 				},
@@ -323,19 +327,19 @@ export default {
 			updateEditorSettings: "updateEditorSettings",
 		}),
 		disableTextElements(type) {
-			if (this.elementsArr.content.text && (type === "title" || type === "paragraph")) {
+			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
 				return true;
-			} else if ((this.elementsArr.content.title || this.elementsArr.content.paragraph) && type === "text") {
+			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
 				return true;
 			} else {
 				return false;
 			}
 		},
 		getDisabledTooltipText(type) {
-			if (this.elementsArr.content.text && (type === "title" || type === "paragraph")) {
+			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
 				return "To enable this element, disable the text element";
-			} else if ((this.elementsArr.content.title || this.elementsArr.content.paragraph) && type === "text") {
-				return "To enable this element, disable the title and paragraph elements";
+			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
+				return "To enable this element, disable the title, list and paragraph elements";
 			}
 		},
 	},
