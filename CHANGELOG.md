@@ -1,13 +1,17 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [1.4.0] 2023-01-31
+## [1.4.1] - 2023-02-01
+### Changed
+- Update @chamaileon-sdk/plugins version that fixes sdk init message send
+
+## [1.4.0] - 2023-01-31
 
 ### Added
 - German (de) language option
 - `useBlockTitleAsMarker` config option to block libraries
 
-## [1.3.0] 2022-08-16
+## [1.3.0] - 2022-08-16
 
 ### Added
 - Added html import plugin tab, its settings, and data flow
@@ -15,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - html import plugin configuration
 
-## [1.2.0] 2022-08-05
+## [1.2.0] - 2022-08-05
 
 ### Added
 - updateHooks example code for every plugin
@@ -30,18 +34,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - vuetify color palette update in the sdk config
 - French lang option for language selector
 
-## [1.1.0] 2022-08-05
+## [1.1.0] - 2022-08-05
 
 ### Added
 - Folder handling in gallery foldertree
 - New gallery hooks
 
-## [1.0.2] 2022-07-06
+## [1.0.2] - 2022-07-06
 
 ### Changed
 - New chamaileon-sdk version that fixes inline plugin dimensions
 
-## [1.0.1] 2022-06-21
+## [1.0.1] - 2022-06-21
 
 ### Changed
 - plugins version
