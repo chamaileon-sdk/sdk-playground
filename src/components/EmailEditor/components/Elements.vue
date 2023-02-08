@@ -337,7 +337,7 @@ export default {
 		},
 		getDisabledTooltipText(type) {
 			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
-				return "To enable this element, disable the text element";
+				return "To enable this element, disable the Text element";
 			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
 				return "To enable this element, disable the title, list and paragraph elements";
 			}
