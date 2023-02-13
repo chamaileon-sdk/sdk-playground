@@ -220,6 +220,10 @@ export default {
 					icon: "mdi-format-header-1",
 				},
 				{
+					type: "list",
+					icon: "mdi-format-list-bulleted",
+				},
+				{
 					type: "paragraph",
 					icon: "mdi-format-paragraph",
 				},
@@ -323,19 +327,19 @@ export default {
 			updateEditorSettings: "updateEditorSettings",
 		}),
 		disableTextElements(type) {
-			if (this.elementsArr.content.text && (type === "title" || type === "paragraph")) {
+			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
 				return true;
-			} else if ((this.elementsArr.content.title || this.elementsArr.content.paragraph) && type === "text") {
+			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
 				return true;
 			} else {
 				return false;
 			}
 		},
 		getDisabledTooltipText(type) {
-			if (this.elementsArr.content.text && (type === "title" || type === "paragraph")) {
-				return "To enable this element, disable the text element";
-			} else if ((this.elementsArr.content.title || this.elementsArr.content.paragraph) && type === "text") {
-				return "To enable this element, disable the title and paragraph elements";
+			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
+				return "To enable this element, disable the Text element";
+			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
+				return "To enable this element, disable the Title, List and Paragraph elements";
 			}
 		},
 	},
