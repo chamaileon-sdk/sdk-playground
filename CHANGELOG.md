@@ -1,6 +1,10 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.5.0] - 2023-02-23
+### Added
+- acc (Adobe Campaign Classic) and Mailchimp templating language
+
 ## [1.4.1] - 2023-02-01
 ### Changed
 - Update @chamaileon-sdk/plugins version that fixes sdk init message send
