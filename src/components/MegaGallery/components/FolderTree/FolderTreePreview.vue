@@ -16,7 +16,6 @@
 			<template
 				slot="label"
 				slot-scope="{ item }"
-				class=""
 			>
 				<v-text-field
 					v-if="activeFolders.includes(item._id)"

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import vueGtm from "@gtm-support/vue2-gtm";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
@@ -8,29 +9,49 @@ import VueHighlightJS from "vue-highlight.js";
 import VueMeta from "vue-meta";
 
 import "vue-highlight.js/lib/allLanguages";
-
 import "highlight.js/styles/monokai-sublime.css";
 
 import InlineSvg from "vue-inline-svg";
 import VueObserveVisibility from "vue-observe-visibility";
 
-Vue.use(VueHighlightJS);
+export default function addScript(src) {
+	return new Promise((resolve, reject) => {
+		const createScript = document.createElement("script");
+		createScript.src = src;
+		createScript.type = "text/javascript";
+		createScript.onload = resolve;
+		createScript.onerror = reject;
+		document.head.appendChild(createScript);
+	});
+}
 
-Vue.use(VueScrollActive);
-Vue.use(VueMeta);
+(async () => {
+	Vue.use(VueHighlightJS);
 
-// eslint-disable-next-line vue/match-component-file-name
-Vue.component("InlineSvg", InlineSvg);
+	Vue.use(VueScrollActive);
+	Vue.use(VueMeta);
 
-Vue.use(VueObserveVisibility);
+	// eslint-disable-next-line vue/match-component-file-name
+	Vue.component("InlineSvg", InlineSvg);
 
-Vue.config.productionTip = false;
+	Vue.use(VueObserveVisibility);
 
-Vue.prototype.$chamaileon = {};
+	Vue.use(vueGtm, {
+		id: "GTM-THZSD53",
+		vueRouter: router,
+		enabled: process.env.NODE_ENV !== "development",
+	});
 
-new Vue({
-	router,
-	store,
-	vuetify,
-	render: h => h(App),
-}).$mount("#app");
+	Vue.config.productionTip = false;
+
+	Vue.prototype.$chamaileon = {};
+
+	await addScript("https://cdn.chamaileon.io/assets/createLogo.js");
+
+	new Vue({
+		router,
+		store,
+		vuetify,
+		render: h => h(App),
+	}).$mount("#app");
+})();

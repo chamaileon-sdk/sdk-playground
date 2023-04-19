@@ -92,15 +92,21 @@
 </template>
 
 <script>
-const chamaileonLogo = require("chamaileon-logo");
 
 export default {
 	directives: {
 		chamaileonLogoNoText: {
-			inserted(el) {
-				const logo = chamaileonLogo();
-				logo.style.height = "100%";
-				el.appendChild(logo);
+			async inserted(el) {
+				let tryCount = 0;
+				if (!window.createLogo && tryCount < 5) {
+					tryCount++;
+					await new Promise(resolve => setTimeout(resolve, 1000));
+				}
+				if (window.createLogo) {
+					const logo = window.createLogo();
+					logo.style.height = "100%";
+					el.appendChild(logo);
+				}
 			},
 		},
 	},

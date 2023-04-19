@@ -2,31 +2,31 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // Dashboard
-import Dashboard from "../components/Dashboard/view/Dashboard";
+const Dashboard = () => import("../components/Dashboard/view/Dashboard");
 
 // Email editor
-import EmailEditor from "../components/EmailEditor/view/EmailEditor.vue";
+const EmailEditor = () => import("../components/EmailEditor/view/EmailEditor.vue");
 
 // Gallery
-import MegaGallery from "../components/MegaGallery/view/MegaGallery";
+const MegaGallery = () => import("../components/MegaGallery/view/MegaGallery");
 
 // Thumbnail
-import Thumbnail from "../components/Thumbnail/view/Thumbnail";
+const Thumbnail = () => import("../components/Thumbnail/view/Thumbnail");
 
 // Preview
-import Preview from "../components/Preview/view/Preview";
+const Preview = () => import("../components/Preview/view/Preview");
 
 // Variable Editor
-import VariableEditor from "../components/VariableEditor/view/VariableEditor";
+const VariableEditor = () => import("../components/VariableEditor/view/VariableEditor");
 
 // Html Import
-import HtmlImportPlugin from "../components/HtmlImportPlugin/view/HtmlImportPlugin";
+const HtmlImportPlugin = () => import("../components/HtmlImportPlugin/view/HtmlImportPlugin");
 
 // Html Generator
-import HtmlGenerator from "../components/HtmlGenerator/view/HtmlGenerator";
+const HtmlGenerator = () => import("../components/HtmlGenerator/view/HtmlGenerator");
 
 // Html Import
-import HtmlImport from "../components/HtmlImport/view/HtmlImport";
+const HtmlImport = () => import("../components/HtmlImport/view/HtmlImport");
 
 Vue.use(VueRouter);
 

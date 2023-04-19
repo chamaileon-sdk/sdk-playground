@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
-import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
 

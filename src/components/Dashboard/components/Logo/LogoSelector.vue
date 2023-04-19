@@ -87,13 +87,18 @@
 </template>
 
 <script>
-const chamaileonLogo = require("chamaileon-logo");
-
 export default {
 	directives: {
 		chamaileonLogo: {
-			inserted(el) {
-				el.appendChild(chamaileonLogo({ withText: true }));
+			async inserted(el) {
+				let tryCount = 0;
+				if (!window.createLogo && tryCount < 5) {
+					tryCount++;
+					await new Promise(resolve => setTimeout(resolve, 1000));
+				}
+				if (window.createLogo) {
+					el.appendChild(window.createLogo({ withText: true }));
+				}
 			},
 		},
 	},

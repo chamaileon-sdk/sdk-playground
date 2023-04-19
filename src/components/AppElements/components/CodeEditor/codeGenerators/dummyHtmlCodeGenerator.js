@@ -1,4 +1,4 @@
-const bulletproofLineLength = require("bulletprooflinelength");
+import bulletproofLineLength from "bulletprooflinelength";
 
 export default function (doc, size, lineLength = 799) {
 	const el = document.createElement("html");
@@ -73,5 +73,6 @@ export default function (doc, size, lineLength = 799) {
 		}
 	}
 
+	// return out;
 	return bulletproofLineLength(out, lineLength);
 }

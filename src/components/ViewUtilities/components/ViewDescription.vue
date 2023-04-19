@@ -129,7 +129,7 @@ export default {
 		};
 	},
 	created() {
-		this.img = require(`@/assets/${this.image}`);
+		this.img = `./assets/${this.image}`;
 	},
 
 	methods: {

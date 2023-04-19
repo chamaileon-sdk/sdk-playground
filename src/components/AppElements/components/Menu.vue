@@ -33,7 +33,7 @@
 						<v-list-item-title>{{ m.title }}</v-list-item-title>
 					</v-list-item>
 
-					<template v-if="isActive(m.to)">
+					<template v-if="isActive(m.to) && m.children && m.children.length > 0">
 						<v-list-item
 							v-for="c in m.children.filter(item => item.disabled !== true)"
 							:key="c.to"
@@ -63,14 +63,20 @@
 </template>
 
 <script>
-const chamaileonLogo = require("chamaileon-logo");
 import { mapGetters } from "vuex";
 
 export default {
 	directives: {
 		chamaileonLogo: {
-			inserted(el) {
-				el.appendChild(chamaileonLogo({ withText: true }));
+			async inserted(el) {
+				let tryCount = 0;
+				if (!window.createLogo && tryCount < 5) {
+					tryCount++;
+					await new Promise(resolve => setTimeout(resolve, 1000));
+				}
+				if (window.createLogo) {
+					el.appendChild(window.createLogo({ withText: true }));
+				}
 			},
 		},
 	},

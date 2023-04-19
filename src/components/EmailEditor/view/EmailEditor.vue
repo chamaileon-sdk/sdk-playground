@@ -83,7 +83,9 @@ import { mapGetters, mapState, mapActions } from "vuex";
 export default {
 	components: {
 		SectionObserver,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Header,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		Elements,
 		BlockLibraries,
