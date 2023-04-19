@@ -1,6 +1,6 @@
 {
 	"name": "sdk-playground",
-	"version": "1.4.0",
+	"version": "1.5.0-components.2",
 	"private": true,
 	"scripts": {
 		"build": "vue-cli-service build",
@@ -11,7 +11,7 @@
 		"test": "npm run lint"
 	},
 	"dependencies": {
-		"@chamaileon-sdk/plugins": "1.1.0",
+		"@chamaileon-sdk/plugins": "1.1.1",
 		"bulletprooflinelength": "^0.3.1",
 		"chamaileon-logo": "^1.0.3",
 		"core-js": "^3.6.5",
@@ -30,7 +30,7 @@
 		"zangodb": "^1.0.8"
 	},
 	"devDependencies": {
-		"@chamaileon-sdk/eslint-config": "^2.1.9",
+		"@chamaileon-sdk/eslint-config": "^3.0.0",
 		"@vue/cli-plugin-babel": "~4.5.0",
 		"@vue/cli-plugin-eslint": "~4.5.0",
 		"@vue/cli-plugin-router": "~4.5.0",

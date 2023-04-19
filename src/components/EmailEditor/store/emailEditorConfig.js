@@ -303,6 +303,7 @@ export default {
 				canDeleteBlock: false,
 				canRenameBlock: false,
 				canSaveBlock: true,
+				useBlockTitleAsMarker: true,
 			});
 
 			state.blKey++;
