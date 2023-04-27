@@ -92,7 +92,7 @@ export default {
 		chamaileonLogo: {
 			async inserted(el) {
 				let tryCount = 0;
-				if (!window.createLogo && tryCount < 5) {
+				while (!window.createLogo && tryCount < 5) {
 					tryCount++;
 					await new Promise(resolve => setTimeout(resolve, 1000));
 				}
