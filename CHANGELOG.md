@@ -2,10 +2,27 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-
 ### Added
 - behaviorDescription to components Addons
 - New title and paragraph elements to email editor
+- gtm plugin instead of direct gtm load
+- components and it's settings
+
+### Changed
+- zangoDB moved to load from script tag because it has no es build import
+- node 18
+- vite instead of webpack
+- v2 api instead of v1
+- v3 json instead of v2
+- dynamic route import so that it gets separated into chunks on build
+
+
+### Security
+- dependency version updates
+
+### Removed
+- package-lock.json
+- webpack and vue cli deps
 
 ## [1.5.0] - 2023-02-23
 ### Added
