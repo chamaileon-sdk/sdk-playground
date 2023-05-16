@@ -137,7 +137,7 @@ export default {
 	},
 	data() {
 		return {
-			currentComponentBehavior: this.$store.state.editorConfig.settings.addons.components.behavior,
+			currentComponentBehavior: this.$store.state.editorConfig.settings.addons.componentSystem.behavior,
 			componentBehaviors: ["nested", "unique", "both"],
 		};
 	},
@@ -150,7 +150,7 @@ export default {
 			return Object.keys(this.addonArr).length;
 		},
 		behaviorDescription() {
-			return this.$store.state.editorConfig.settings.addons.components.behaviorDescription;
+			return this.$store.state.editorConfig.settings.addons.componentSystem.behaviorDescription;
 		},
 	},
 	methods: {

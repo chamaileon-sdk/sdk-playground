@@ -271,9 +271,9 @@ export default {
 							resolve({ value: buttonId });
 						});
 					},
-					onExpressionEditClicked: ({ expression }) => {
+					onExpressionEditClicked: ({ expression, elementType }) => {
 						return new Promise((resolve) => {
-							resolve({ expression });
+							resolve({ expression: `${elementType} ${expression}` });
 						});
 					},
 				},
