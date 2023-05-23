@@ -329,6 +329,8 @@ export default {
 		disableTextElements(type) {
 			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
 				return true;
+			} else if (type === "text" && this.$store.state.editorConfig.settings.addons.componentSystem.state !== "hidden") {
+				return true;
 			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
 				return true;
 			} else {
@@ -336,11 +338,18 @@ export default {
 			}
 		},
 		getDisabledTooltipText(type) {
+			const returnArray = [];
 			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
-				return "To enable this element, disable the Text element";
-			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
-				return "To enable this element, disable the Title, List and Paragraph elements";
+				returnArray.push("disable the 'text' element");
 			}
+			if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
+				returnArray.push("disable the 'title', 'list' and 'paragraph' elements");
+			}
+			if (type === "text" && this.$store.state.editorConfig.settings.addons.componentSystem.state !== "hidden") {
+				returnArray.push("disable the 'componentSystem' addon");
+			}
+
+			return `To enable this element ${returnArray.join(" and ")}`;
 		},
 	},
 };

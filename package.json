@@ -8,7 +8,7 @@
 		"lint-fix": "npm run lint -- --fix",
 		"prepare": "husky install",
 		"preview": "npm run build && vite preview",
-		"serve": "vite --force",
+		"serve": "vite dev --force",
 		"test": "npm run lint"
 	},
 	"dependencies": {

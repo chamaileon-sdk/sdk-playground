@@ -412,6 +412,12 @@ export default {
 					obj[addon][payload.key] = payload.value;
 				}
 			}
+			if (payload.id === "Component System"
+				&& payload.key === "state"
+				&& (payload.value === "enabled" || payload.value === "disabled")
+				&& state.settings.elements.content?.text) {
+				Vue.set(state.settings.elements.content, "text", false);
+			}
 			return state;
 		},
 
