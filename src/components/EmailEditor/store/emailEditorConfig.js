@@ -150,6 +150,9 @@ const getDefaultState = () => {
 					disabledReason: "This addon is disabled",
 				},
 			},
+			title: {
+				canEdit: true,
+			},
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 			autoSaveInterval: 15000,
@@ -413,6 +416,15 @@ export default {
 				state.settings,
 				"panels",
 				{ ...state.settings.panels, ...panel },
+			);
+		},
+
+		// Title
+		updateTitle(state, payload) {
+			Vue.set(
+				state.settings,
+				"title",
+				{ ...state.settings.title, ...payload },
 			);
 		},
 

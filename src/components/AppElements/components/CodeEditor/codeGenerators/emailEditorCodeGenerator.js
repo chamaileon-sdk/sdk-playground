@@ -218,6 +218,12 @@ ${"\t".repeat(indent)}details: ${editorConfig.settings.panels.details},
 ${"\t".repeat(indent - 1)}},`;
 };
 
+const calculateTitle = (editorConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}canEdit: ${editorConfig.settings.title.canEdit},
+${"\t".repeat(indent - 1)}},`;
+};
+
 const calculateVariables = (editorConfig, indent) => {
 	return `{${Object.keys(editorConfig.settings.variables).map((key) => {
 		return `\n${"\t".repeat(indent)}${key}: {
@@ -272,6 +278,7 @@ ${"\t".repeat(indent)}toolboxes: ${calculateToolboxes(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}dropzones: ${calculateDropZones(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}variables: ${calculateVariables(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}panels: ${calculatePanels(editorConfig, indent + 1)}
+${"\t".repeat(indent)}title: ${calculateTitle(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}staticAssetsBaseUrl: "${editorConfig.settings.staticAssetsBaseUrl}",
 ${"\t".repeat(indent)}videoElementBaseUrl: "${editorConfig.settings.videoElementBaseUrl}",
 ${"\t".repeat(indent)}autoSaveInterval: ${editorConfig.settings.autoSaveInterval},

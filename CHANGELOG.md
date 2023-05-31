@@ -1,6 +1,10 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.6.0] - 2023-06-01
+### Added
+- `canEdit` title option to settings
+
 ## [1.5.0] - 2023-02-23
 ### Added
 - acc (Adobe Campaign Classic) and Mailchimp templating language

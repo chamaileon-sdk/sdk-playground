@@ -370,6 +370,45 @@
 				</v-card>
 			</v-card>
 		</OptionWrapper>
+
+		<h3>Title</h3>
+		<p>
+			You can toggle the editing of the document title as well
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
+					<v-row>
+						<v-col
+							v-for="(value, name) in title"
+							:key="name"
+							cols="6"
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								:input-value="title[name]"
+								class="ma-0 pa-0"
+								color="primary"
+								hide-details
+								:true-value="true"
+								@change="updateTitleOption($event, name)"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
 	</div>
 </template>
 
@@ -409,7 +448,6 @@ export default {
 				this.updateEditorSettings();
 			},
 		},
-
 		autosave: {
 			get() {
 				return this.$store.state.editorConfig.settings.autoSaveInterval;
@@ -419,7 +457,6 @@ export default {
 				this.updateEditorSettings();
 			},
 		},
-
 		staticAssets: {
 			get() {
 				return this.$store.state.editorConfig.settings.staticAssetsBaseUrl;
@@ -453,6 +490,9 @@ export default {
 				this.updateEditorSettings();
 			},
 		},
+		title() {
+			return this.$store.state.editorConfig.settings.title;
+		},
 	},
 	methods: {
 		processName(name) {
@@ -480,6 +520,10 @@ export default {
 			this.updatePanels({ [name]: !!value });
 			this.updateEditorSettings();
 		},
+		updateTitleOption(value, name) {
+			this.updateTitle({ [name]: !!value });
+			this.updateEditorSettings();
+		},
 		...mapMutations([
 			"updateUser",
 			"updateAutoSave",
@@ -490,6 +534,7 @@ export default {
 			"updateVideoElementBaseUrl",
 			"updateVariablePermissions",
 			"updatePanels",
+			"updateTitle",
 		]),
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
