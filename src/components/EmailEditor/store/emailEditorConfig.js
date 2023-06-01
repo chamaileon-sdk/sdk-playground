@@ -79,6 +79,8 @@ const getDefaultState = () => {
 					loop: true,
 					conditional: true,
 					dynamicImage: true,
+					blockLevelConditional: true,
+					blockLevelLoop: true,
 				},
 			},
 			variables: {
