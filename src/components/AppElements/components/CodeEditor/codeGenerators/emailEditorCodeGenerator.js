@@ -72,6 +72,8 @@ ${"\t".repeat(indent)}code:  ${editorConfig.settings.elements.advanced.code},
 ${"\t".repeat(indent)}loop: ${editorConfig.settings.elements.advanced.loop},
 ${"\t".repeat(indent)}conditional: ${editorConfig.settings.elements.advanced.conditional},
 ${"\t".repeat(indent)}dynamicImage: ${editorConfig.settings.elements.advanced.dynamicImage},
+${"\t".repeat(indent)}blockLevelConditional: ${editorConfig.settings.elements.advanced.blockLevelConditional},
+${"\t".repeat(indent)}blockLevelLoop: ${editorConfig.settings.elements.advanced.blockLevelLoop},
 ${"\t".repeat(indent - 1)}},`;
 };
 
