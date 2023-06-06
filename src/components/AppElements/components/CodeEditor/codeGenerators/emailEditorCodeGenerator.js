@@ -111,16 +111,16 @@ ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.variableSystem.ena
 };
 
 const calculateAddonsComponents = (editorConfig, indent) => {
-	const { components } = editorConfig.settings.addons;
+	const { componentSystem } = editorConfig.settings.addons;
 
-	if (!components) return "false,";
+	if (!componentSystem) return "false,";
 
 	let config = `{
-${"\t".repeat(indent)}enabled: ${components.enabled},`;
+${"\t".repeat(indent)}enabled: ${componentSystem.enabled},`;
 
-	if (components.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.components.disabledReason}",`;
-	if (components.behavior) config += `\n${"\t".repeat(indent)}behavior: "${components.behavior}",`;
-	if (components.behaviorDescription) config += `\n${"\t".repeat(indent)}behaviorDescription: "${components.behaviorDescription}",`;
+	if (componentSystem.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${componentSystem.disabledReason}",`;
+	if (componentSystem.behavior) config += `\n${"\t".repeat(indent)}behavior: "${componentSystem.behavior}",`;
+	if (componentSystem.behaviorDescription) config += `\n${"\t".repeat(indent)}behaviorDescription: "${componentSystem.behaviorDescription}",`;
 
 	config += `\n${"\t".repeat(indent - 1)}},`;
 	return config;
@@ -140,9 +140,10 @@ ${"\t".repeat(indent + 1)}label: "${c.label}",
 ${"\t".repeat(indent + 1)}canDeleteBlock: ${c.canDeleteBlock},
 ${"\t".repeat(indent + 1)}canRenameBlock: ${c.canRenameBlock},
 ${"\t".repeat(indent + 1)}canSaveBlock: ${c.canSaveBlock},
-${"\t".repeat(indent)}},`;
+${"\t".repeat(indent + 1)}useBlockTitleAsMarker: ${c.useBlockTitleAsMarker},
+${"\t".repeat(indent)}},\n`;
 	});
-	literal += `\n${"\t".repeat(indent - 1)}],`;
+	literal += `${"\t".repeat(indent - 1)}],`;
 	return literal;
 };
 
@@ -252,12 +253,14 @@ ${"\t".repeat(indent - 1)}}`;
 const calculateComponents = (editorConfig, indent) => {
 	return `{${Object.keys(editorConfig.settings.components).map((key) => {
 		return `\n${"\t".repeat(indent)}${key}: {
-${"\t".repeat(indent + 1)}add: ${editorConfig.settings.components[key].add},
-${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.components[key].delete},
-${"\t".repeat(indent + 1)}save: ${editorConfig.settings.components[key].save},
-${"\t".repeat(indent + 1)}edit: ${editorConfig.settings.components[key].edit},
-${"\t".repeat(indent + 1)}reset: ${editorConfig.settings.components[key].reset},
-${"\t".repeat(indent + 1)}detach: ${editorConfig.settings.components[key].detach},
+${"\t".repeat(indent + 1)}canAdd: ${editorConfig.settings.components[key].canAdd},
+${"\t".repeat(indent + 1)}canDelete: ${editorConfig.settings.components[key].canDelete},
+${"\t".repeat(indent + 1)}canSave: ${editorConfig.settings.components[key].canSave},
+${"\t".repeat(indent + 1)}canEdit: ${editorConfig.settings.components[key].canEdit},
+${"\t".repeat(indent + 1)}canReset: ${editorConfig.settings.components[key].canReset},
+${"\t".repeat(indent + 1)}canDetach: ${editorConfig.settings.components[key].canDetach},
+${"\t".repeat(indent + 1)}canDetachAll: ${editorConfig.settings.components[key].canDetachAll},
+${"\t".repeat(indent + 1)}canRestore: ${editorConfig.settings.components[key].canRestore},
 ${"\t".repeat(indent)}}`;
 	})}
 ${"\t".repeat(indent - 1)}}`;
@@ -298,7 +301,7 @@ ${"\t".repeat(indent)}hideDefaultFonts: ${editorConfig.settings.hideDefaultFonts
 ${"\t".repeat(indent)}addons: {
 ${"\t".repeat(indent + 1)}blockLock: ${calculateBL(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}variableSystem: ${calculateVE(editorConfig, indent + 2)}
-${"\t".repeat(indent + 1)}components: ${calculateAddonsComponents(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}componentSystem: ${calculateAddonsComponents(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}actionMenu: ${calculateActionMenu(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}toolboxes: ${calculateToolboxes(editorConfig, indent + 1)}

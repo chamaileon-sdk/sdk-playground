@@ -53,9 +53,11 @@ import Description from "../../ViewUtilities/components/ViewDescription.vue";
 export default {
 	components: {
 		SectionObserver,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		Logo,
 		Colors,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Font,
 		Developer,
 		SplashScreen,

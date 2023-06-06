@@ -40,6 +40,7 @@ import NotAvailable from "./components/AppElements/components/NotAvailable.vue";
 
 export default {
 	components: {
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Menu,
 		CodeEditor,
 		NotAvailable,

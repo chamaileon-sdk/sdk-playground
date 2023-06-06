@@ -56,6 +56,7 @@ export default {
 		AddButton,
 		List6,
 		OptionWrapper,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Header,
 	},
 	data() {

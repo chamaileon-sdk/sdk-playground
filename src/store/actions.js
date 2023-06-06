@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
-import zango from "zangodb";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
 
@@ -272,9 +271,9 @@ export default {
 							resolve({ value: buttonId });
 						});
 					},
-					onExpressionEditClicked: ({ expression }) => {
+					onExpressionEditClicked: ({ expression, elementType }) => {
 						return new Promise((resolve) => {
-							resolve({ expression });
+							resolve({ expression: `${elementType} ${expression}` });
 						});
 					},
 				},

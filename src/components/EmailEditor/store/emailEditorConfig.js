@@ -123,44 +123,54 @@ const getDefaultState = () => {
 			},
 			components: {
 				image: {
-					add: true,
-					delete: true,
-					save: true,
-					edit: true,
-					reset: true,
-					detach: true,
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canRestore: true,
 				},
 				text: {
-					add: true,
-					delete: true,
-					save: true,
-					edit: true,
-					reset: true,
-					detach: true,
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canRestore: true,
 				},
 				video: {
-					add: true,
-					delete: true,
-					save: true,
-					edit: true,
-					reset: true,
-					detach: true,
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canRestore: true,
 				},
 				button: {
-					add: true,
-					delete: true,
-					save: true,
-					edit: true,
-					reset: true,
-					detach: true,
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canRestore: true,
 				},
 				divider: {
-					add: true,
-					delete: true,
-					save: true,
-					edit: true,
-					reset: true,
-					detach: true,
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canRestore: true,
 				},
 			},
 			elementDefaults: {
@@ -178,8 +188,8 @@ const getDefaultState = () => {
 			},
 			blockLibraries: [],
 			addons: {
-				components: {
-					id: "Components System",
+				componentSystem: {
+					id: "Component System",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 					behaviorDescription: "description of the current behavior",
@@ -303,6 +313,7 @@ export default {
 				canDeleteBlock: false,
 				canRenameBlock: false,
 				canSaveBlock: true,
+				useBlockTitleAsMarker: true,
 			});
 
 			state.blKey++;
@@ -400,6 +411,12 @@ export default {
 				if (obj[addon].id === payload.id) {
 					obj[addon][payload.key] = payload.value;
 				}
+			}
+			if (payload.id === "Component System"
+				&& payload.key === "state"
+				&& (payload.value === "enabled" || payload.value === "disabled")
+				&& state.settings.elements.content?.text) {
+				Vue.set(state.settings.elements.content, "text", false);
 			}
 			return state;
 		},

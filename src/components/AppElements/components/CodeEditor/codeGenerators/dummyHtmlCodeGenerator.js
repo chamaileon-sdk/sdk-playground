@@ -1,4 +1,4 @@
-const bulletproofLineLength = require("bulletprooflinelength");
+import bulletproofLineLength from "bulletprooflinelength";
 
 export default function (doc, size, lineLength = 799) {
 	const el = document.createElement("html");
@@ -50,7 +50,10 @@ export default function (doc, size, lineLength = 799) {
 		directiveNode.removeChild(directiveNode.querySelector("table"));
 
 		out += "\n\n<!-- Templating language -->\n\n";
-		out += directiveNode.outerHTML.replace("\n\n", "\n");
+		out += directiveNode.outerHTML
+			.replace("\n\n", "\n")
+			.replaceAll("&lt;", "<") // ACC templating language
+			.replaceAll("&gt;", ">"); // ACC templating language
 
 		out += "\n\n<!-- Encode URL & Minimal buttons & Hexadecimal colors -->\n\n";
 
@@ -70,5 +73,6 @@ export default function (doc, size, lineLength = 799) {
 		}
 	}
 
+	// return out;
 	return bulletproofLineLength(out, lineLength);
 }

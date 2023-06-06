@@ -15,7 +15,7 @@ export default {
 	data() {
 		return {
 			apiBackends: [
-				"http://localhost:12101/api/v1/tokens/generate",
+				"http://localhost:12101/api/v2/tokens/generate",
 				"https://sdk-demo-api.chamaileon.io/getAuthToken",
 			],
 		};

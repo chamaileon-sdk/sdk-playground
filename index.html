@@ -4,34 +4,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-	<link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+	<link rel="icon" href="favicon.ico" />
 	<title>Chamaileon SDK Playground</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		rel="stylesheet"
-		href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
-	/>
-	<link
-		rel="stylesheet"
-		href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
-	/>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap"
-		rel="stylesheet"
-	/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap"/>
 	<link rel="canonical" href="https://sdk-playground.chamaileon.io/">
 	<meta name="title" content="Email SDK Playground: Email Builder, Preview, Thumbnail, Import">
 	<meta name="description" content="Demo playground for the integrated HTML email template builder SDK. White-label email editor plugin, branded email preview, customized email HTML code.">
 	<meta name="language" content="English">
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});
-		var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
-		j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})
-		(window,document,'script','dataLayer','GTM-THZSD53');
-	</script>
-	<!-- End Google Tag Manager -->
 	<!-- schema rich snippets -->
 	<meta property="og:locale" content="en_US"/>
 	<meta property="og:type" content="website"/>
@@ -53,19 +35,8 @@
 	<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Chamaileon.io Email Creation Platform","operatingSystem":"Web Browser","applicationCategory":"BusinessApplication","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.2","ratingCount":"23"},"offers":{"@type":"Standard Plan","price":"125","priceCurrency":"USD"}},{"@type":"Organization","@id":"https://chamaileon.io/#organization","name":"Chamaileon.io","url":"https://chamaileon.io/","sameAs":["https://www.facebook.com/chamaileon.io/","https://www.linkedin.com/company/chamaileon/","https://www.youtube.com/channel/UCBt26ipcddeo1j95u71_-ww","https://hu.pinterest.com/chamaileonemaileditor/","https://twitter.com/chamaileon_io"],"logo":{"@type":"ImageObject","@id":"https://chamaileon.io/#logo","inLanguage":"en-US","url":"https://chamaileon.io/assets/chamaileon-logo-symbol.png","width":400,"height":105,"caption":"Chamaileon.io"},"image":{"@id":"https://chamaileon.io/#logo"}}]}</script>
 </head>
 <body>
-	<noscript>
-		<strong
-			>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
-			properly without JavaScript enabled. Please enable it to
-			continue.</strong
-		>
-	</noscript>
 	<div id="app"></div>
-	<!-- built files will be auto injected -->
-	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THZSD53"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe>
-	</noscript>
-<!-- End Google Tag Manager (noscript) -->
+	<script src="src/main.js" type="module"></script>
+	<script src="https://unpkg.com/zangodb@latest/dist/zangodb.min.js"></script>
 </body>
 </html>
