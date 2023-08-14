@@ -1,7 +1,7 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [2.0.0] - 2023-08-14
 ### Added
 - behaviorDescription to components Addons
 - New title and paragraph elements to email editor
