@@ -291,6 +291,16 @@ export default {
 					type: "dynamicImage",
 					icon: "mdi-folder-multiple-image",
 				},
+				{
+					alt: "block-lvl cond",
+					type: "blockLevelConditional",
+					icon: "mdi-call-split",
+				},
+				{
+					alt: "block-lvl loop",
+					type: "blockLevelLoop",
+					icon: "mdi-refresh",
+				},
 			],
 		};
 	},

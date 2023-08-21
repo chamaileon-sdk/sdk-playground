@@ -82,6 +82,8 @@ const getDefaultState = () => {
 					loop: true,
 					conditional: true,
 					dynamicImage: true,
+					blockLevelConditional: true,
+					blockLevelLoop: true,
 				},
 			},
 			variables: {
@@ -207,6 +209,9 @@ const getDefaultState = () => {
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
+			},
+			title: {
+				canEdit: true,
 			},
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
@@ -475,6 +480,15 @@ export default {
 				state.settings,
 				"panels",
 				{ ...state.settings.panels, ...panel },
+			);
+		},
+
+		// Title
+		updateTitle(state, payload) {
+			Vue.set(
+				state.settings,
+				"title",
+				{ ...state.settings.title, ...payload },
 			);
 		},
 

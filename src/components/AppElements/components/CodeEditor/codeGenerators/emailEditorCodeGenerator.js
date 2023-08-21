@@ -75,6 +75,8 @@ ${"\t".repeat(indent)}code:  ${editorConfig.settings.elements.advanced.code},
 ${"\t".repeat(indent)}loop: ${editorConfig.settings.elements.advanced.loop},
 ${"\t".repeat(indent)}conditional: ${editorConfig.settings.elements.advanced.conditional},
 ${"\t".repeat(indent)}dynamicImage: ${editorConfig.settings.elements.advanced.dynamicImage},
+${"\t".repeat(indent)}blockLevelConditional: ${editorConfig.settings.elements.advanced.blockLevelConditional},
+${"\t".repeat(indent)}blockLevelLoop: ${editorConfig.settings.elements.advanced.blockLevelLoop},
 ${"\t".repeat(indent - 1)}},`;
 };
 
@@ -237,6 +239,12 @@ ${"\t".repeat(indent)}details: ${editorConfig.settings.panels.details},
 ${"\t".repeat(indent - 1)}},`;
 };
 
+const calculateTitle = (editorConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}canEdit: ${editorConfig.settings.title.canEdit},
+${"\t".repeat(indent - 1)}},`;
+};
+
 const calculateVariables = (editorConfig, indent) => {
 	return `{${Object.keys(editorConfig.settings.variables).map((key) => {
 		return `\n${"\t".repeat(indent)}${key}: {
@@ -309,6 +317,7 @@ ${"\t".repeat(indent)}dropzones: ${calculateDropZones(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}variables: ${calculateVariables(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}components: ${calculateComponents(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}panels: ${calculatePanels(editorConfig, indent + 1)}
+${"\t".repeat(indent)}title: ${calculateTitle(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}staticAssetsBaseUrl: "${editorConfig.settings.staticAssetsBaseUrl}",
 ${"\t".repeat(indent)}videoElementBaseUrl: "${editorConfig.settings.videoElementBaseUrl}",
 ${"\t".repeat(indent)}autoSaveInterval: ${editorConfig.settings.autoSaveInterval},
