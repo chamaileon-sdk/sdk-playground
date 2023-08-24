@@ -154,6 +154,30 @@ export default {
 						"16322284940689326",
 					],
 				},
+				{
+					name: "canDeleteImages",
+					icon: "mdi-file-image-remove",
+					notAllowedIds: [],
+
+				},
+				{
+					name: "canEditImages",
+					icon: "mdi-file-image-minus",
+					notAllowedIds: [],
+
+				},
+				{
+					name: "canCropImages",
+					icon: "mdi-image-edit",
+					notAllowedIds: [],
+
+				},
+				{
+					name: "canRenameImages",
+					icon: "mdi-file-image-remove",
+					notAllowedIds: [],
+
+				},
 			],
 		};
 	},
@@ -208,6 +232,10 @@ export default {
 				canCreateSubfolder: true,
 				canDelete: true,
 				canRename: true,
+				canDeleteImages: true,
+				canEditImages: true,
+				canCropImages: true,
+				canRenameImages: true,
 			};
 			const node = searchTree(obj, item._id);
 			if (!node.children) node.children = [];
