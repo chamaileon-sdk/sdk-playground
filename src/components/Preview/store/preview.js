@@ -9,6 +9,7 @@ const getDefaultState = () => {
 				header: [],
 			},
 			defaultView: "mobile",
+			proxyImages: true,
 		},
 	};
 };
@@ -94,6 +95,9 @@ export default {
 		},
 		setDefaultView(state, payload) {
 			state.settings.defaultView = payload;
+		},
+		setProxyImagesOnPreview(state, payload) {
+			state.settings.proxyImages = payload;
 		},
 
 	},

@@ -4,6 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [2.2.0] - 2023-08-31
 ### Added
 - SL lang file
+- proxyImages setting to preview and thumbnail
 
 ## [2.1.0] - 2023-08-23
 ### Added
