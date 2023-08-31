@@ -14,6 +14,22 @@ ${"\t".repeat(indent + 1)}canRename: ${item.canRename},`;
 		string += `
 ${"\t".repeat(indent + 1)}canDelete: ${item.canDelete},`;
 	}
+	if (Object.prototype.hasOwnProperty.call(item, "canDeleteImages")) {
+		string += `
+${"\t".repeat(indent + 1)}canDeleteImages: ${item.canDeleteImages},`;
+	}
+	if (Object.prototype.hasOwnProperty.call(item, "canEditImages")) {
+		string += `
+${"\t".repeat(indent + 1)}canEditImages: ${item.canEditImages},`;
+	}
+	if (Object.prototype.hasOwnProperty.call(item, "canCropImages")) {
+		string += `
+${"\t".repeat(indent + 1)}canCropImages: ${item.canCropImages},`;
+	}
+	if (Object.prototype.hasOwnProperty.call(item, "canRenameImages")) {
+		string += `
+${"\t".repeat(indent + 1)}canRenameImages: ${item.canRenameImages},`;
+	}
 	string += `
 `;
 	if (item && item.children) {
