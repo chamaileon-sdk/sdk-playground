@@ -47,6 +47,7 @@ ${"\t".repeat(indent)}buttons: {
 ${"\t".repeat(indent + 1)}header: ${calculatePreviewHeader(previewConfig, 2 + indent)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}defaultView: "${previewConfig.settings.defaultView}",
+${"\t".repeat(indent)}proxyImages: "${previewConfig.settings.proxyImages}",
 ${"\t".repeat(indent - 1)}}`;
 };
 
