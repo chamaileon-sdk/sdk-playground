@@ -132,6 +132,7 @@ const getDefaultState = () => {
 					canReset: true,
 					canDetach: true,
 					canDetachAll: true,
+					canReplaceAll: true,
 					canRestore: true,
 				},
 				text: {
@@ -142,6 +143,7 @@ const getDefaultState = () => {
 					canReset: true,
 					canDetach: true,
 					canDetachAll: true,
+					canReplaceAll: true,
 					canRestore: true,
 				},
 				video: {
@@ -152,6 +154,7 @@ const getDefaultState = () => {
 					canReset: true,
 					canDetach: true,
 					canDetachAll: true,
+					canReplaceAll: true,
 					canRestore: true,
 				},
 				button: {
@@ -162,6 +165,7 @@ const getDefaultState = () => {
 					canReset: true,
 					canDetach: true,
 					canDetachAll: true,
+					canReplaceAll: true,
 					canRestore: true,
 				},
 				divider: {
@@ -172,6 +176,7 @@ const getDefaultState = () => {
 					canReset: true,
 					canDetach: true,
 					canDetachAll: true,
+					canReplaceAll: true,
 					canRestore: true,
 				},
 			},

@@ -268,6 +268,7 @@ ${"\t".repeat(indent + 1)}canEdit: ${editorConfig.settings.components[key].canEd
 ${"\t".repeat(indent + 1)}canReset: ${editorConfig.settings.components[key].canReset},
 ${"\t".repeat(indent + 1)}canDetach: ${editorConfig.settings.components[key].canDetach},
 ${"\t".repeat(indent + 1)}canDetachAll: ${editorConfig.settings.components[key].canDetachAll},
+${"\t".repeat(indent + 1)}canReplaceAll: ${editorConfig.settings.components[key].canReplaceAll},
 ${"\t".repeat(indent + 1)}canRestore: ${editorConfig.settings.components[key].canRestore},
 ${"\t".repeat(indent)}}`;
 	})}
