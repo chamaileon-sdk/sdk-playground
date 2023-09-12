@@ -2,6 +2,7 @@ const getDefaultState = () => {
 	return {
 		settings: {
 			scroll: false,
+			proxyImages: true,
 		},
 		dimensions: {
 			width: 300,
@@ -25,6 +26,9 @@ export default {
 			}
 			if (Object.prototype.hasOwnProperty.call(payload, "scroll")) {
 				settings.scroll = payload.scroll;
+			}
+			if (Object.prototype.hasOwnProperty.call(payload, "proxyImages")) {
+				settings.proxyImages = payload.proxyImages;
 			}
 			if (Object.prototype.hasOwnProperty.call(payload, "scale")) {
 				dimensions.scale = parseFloat(payload.scale);

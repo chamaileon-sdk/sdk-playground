@@ -1,6 +1,12 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.8.0] - 2023-09-11
+### Added
+- SL lang file
+- proxyImages setting to preview and thumbnail
+- canEditImages, canDeleteImages, canRenameImages, canCropImages options on gallery folders
+
 ## [1.7.0] - 2023-06-02
 ### Added
 - Block level loop and conditional to advanced elements
