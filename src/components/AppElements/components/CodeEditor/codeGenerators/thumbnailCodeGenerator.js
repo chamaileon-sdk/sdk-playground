@@ -1,6 +1,7 @@
 const settingsGenerator = (thumbnailConfig, indent = 2) => {
 	return `{
-${"\t".repeat(indent)}scroll: ${thumbnailConfig.scroll}
+${"\t".repeat(indent)}scroll: ${thumbnailConfig.scroll},
+${"\t".repeat(indent)}proxyImages: ${thumbnailConfig.proxyImages},
 ${"\t".repeat(indent - 1)}}`;
 };
 

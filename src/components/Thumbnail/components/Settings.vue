@@ -44,11 +44,21 @@
 						outlined
 					/>
 				</v-col>
-				<v-col :cols="Math.max(columns, 2)" class="pa-0 ma-0 mt-4 mt-xl-0">
+				<v-col :cols="columns" class="pa-0 ma-0 mt-4 mt-xl-0">
 					<v-switch
 						v-model.lazy="scroll"
 						class="ma-0 pa-0 ml-2"
 						label="Scroll"
+						hide-details="true"
+						color="primary"
+						inset
+					/>
+				</v-col>
+				<v-col :cols="columns" class="pa-0 ma-0 mt-4 mt-xl-0">
+					<v-switch
+						v-model.lazy="proxyImages"
+						class="ma-0 pa-0 ml-2"
+						label="Proxy Images?"
 						hide-details="true"
 						color="primary"
 						inset
@@ -144,6 +154,14 @@ export default {
 			},
 			set(val) {
 				this.updateProperties({ scale: val });
+			},
+		},
+		proxyImages: {
+			get() {
+				return this.configObj.proxyImages;
+			},
+			set(val) {
+				this.updateProperties({ proxyImages: val });
 			},
 		},
 	},
