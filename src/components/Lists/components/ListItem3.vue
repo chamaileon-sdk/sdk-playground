@@ -4,7 +4,7 @@
 		elevation="0"
 		tile
 	>
-		<v-list-item-icon class="align-self-center ma-0 mx-3">
+		<v-list-item-icon v-if="!hideDrag" class="align-self-center ma-0 mx-3">
 			<v-icon class="dtrigger">
 				mdi-menu
 			</v-icon>
@@ -20,6 +20,7 @@
 						dense
 						:value="id"
 						hide-details="true"
+						:disabled="disableId"
 						label="ID"
 						outlined
 						@input="
@@ -32,6 +33,7 @@
 
 				<!-- If split: delete button will be rendered as 2nd element -->
 				<v-col
+					v-if="!hideDelete"
 					v-show="split || breakpoint.lgAndDown"
 					class="pa-2 ma-0"
 					:cols="split || breakpoint.lgAndDown ? 6 : 3"
@@ -47,6 +49,27 @@
 				</v-col>
 
 				<v-col
+					v-if="showTitle"
+					class="pa-2"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
+					align-self="center"
+				>
+					<v-text-field
+						dense
+						:value="title"
+						hide-details="true"
+						outlined
+						label="Title"
+						@input="
+							(e) => {
+								$emit('titleChange', e);
+							}
+						"
+					/>
+				</v-col>
+
+				<v-col
+					v-if="!hideLabel"
 					class="pa-2"
 					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
@@ -66,6 +89,7 @@
 				</v-col>
 
 				<v-col
+					v-if="!hideIcon"
 					class="pa-2"
 					:cols="split || breakpoint.lgAndDown ? 6 : 3"
 					align-self="center"
@@ -86,6 +110,7 @@
 
 				<!-- If not split: delete button will be rendered as 4th element -->
 				<v-col
+					v-if="!hideDelete"
 					v-show="!split && !breakpoint.lgAndDown"
 					class="pa-2"
 					:cols="split || breakpoint.lgAndDown ? 6 : 3"
@@ -98,6 +123,32 @@
 							}
 						"
 					/>
+				</v-col>
+
+				<v-col
+					v-if="showVisible"
+					class="pa-2"
+					:cols="split || breakpoint.lgAndDown ? 6 : 3"
+					align-self="center"
+				>
+					<v-btn
+						icon
+						small
+						:color="visible ? 'primary' : ''"
+						:value="visible"
+						:ripple="false"
+						@click="
+							() => {
+								$emit('visibilityChange');
+							}
+						"
+					>
+						<v-icon
+							size="25"
+						>
+							mdi-eye
+						</v-icon>
+					</v-btn>
 				</v-col>
 			</v-row>
 		</v-list-item-content>
@@ -139,11 +190,47 @@ export default {
 		},
 		label: {
 			type: String,
-			required: true,
+			default: "",
 		},
 		icon: {
 			type: String,
-			required: true,
+			default: "",
+		},
+		title: {
+			type: String,
+			default: "",
+		},
+		visible: {
+			type: Boolean,
+			default: false,
+		},
+		showVisible: {
+			type: Boolean,
+			default: false,
+		},
+		showTitle: {
+			type: Boolean,
+			default: false,
+		},
+		hideDelete: {
+			type: Boolean,
+			default: false,
+		},
+		hideLabel: {
+			type: Boolean,
+			default: false,
+		},
+		hideDrag: {
+			type: Boolean,
+			default: false,
+		},
+		hideIcon: {
+			type: Boolean,
+			default: false,
+		},
+		disableId: {
+			type: Boolean,
+			default: false,
 		},
 	},
 
