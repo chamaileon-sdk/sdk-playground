@@ -85,13 +85,13 @@ const getDefaultState = () => {
 						visible: true,
 					},
 					dynamicImageAlt: {
-						id: "dynamic-image-src",
+						id: "dynamic-image-alt",
 						label: "",
 						icon: "code-braces",
 						visible: true,
 					},
 					dynamicImageSrc: {
-						id: "dynamic-image-alt",
+						id: "dynamic-image-src",
 						label: "",
 						icon: "code-braces",
 						visible: true,
