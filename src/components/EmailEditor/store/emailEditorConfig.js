@@ -59,6 +59,82 @@ const getDefaultState = () => {
 					},
 				],
 				textInsert: [],
+				inlineTextInsert: {
+					videoAlt: {
+						id: "video-alt",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					imageAlt: {
+						id: "image-alt",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					imageLink: {
+						id: "image-link",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					imageLinkTitle: {
+						id: "image-link-title",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageAlt: {
+						id: "dynamic-image-alt",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageSrc: {
+						id: "dynamic-image-src",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageLink: {
+						id: "dynamic-image-link",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageLinkTitle: {
+						id: "dynamic-image-link-title",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					buttonLink: {
+						id: "button-link",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					buttonLinkTitle: {
+						id: "button-link-title",
+						label: "",
+						icon: "code-braces",
+						visible: true,
+					},
+				},
+				cKEditorTextInsert: {
+					textLink: {
+						id: "text-link",
+						title: "",
+						label: "{}",
+						visible: true,
+					},
+					textVariableLink: {
+						id: "text-variable-link",
+						title: "",
+						label: "{}",
+						visible: true,
+					},
+				},
 			},
 			elements: {
 				content: {
@@ -350,6 +426,14 @@ export default {
 					return c;
 				},
 			);
+		},
+
+		updateInlineTextInsertButton(state, payload) {
+			Vue.set(state.settings.buttons.inlineTextInsert[payload.key], payload.target, payload.content);
+		},
+
+		updateCKEditorTextInsertButton(state, payload) {
+			Vue.set(state.settings.buttons.cKEditorTextInsert[payload.key], payload.target, payload.content);
 		},
 
 		// Addons

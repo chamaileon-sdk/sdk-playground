@@ -8,21 +8,34 @@
 					depressed
 					style="background-color: rgba(1, 1, 1, 0) !important"
 				/>
-				<v-btn
+				<div
 					v-for="(item, ind) in btnArr"
 					:key="ind"
-					text
-					:icon="item.icon.length !== 0"
 				>
-					<img
-						v-if="item.icon"
-						style="max-width: 30px"
-						:src="item.icon"
-					>
-					<div v-else>
-						{{ item.label }}
-					</div>
-				</v-btn>
+					<v-tooltip :disabled="!showHover" bottom>
+						<template #activator="{ on, attrs }">
+							<v-btn
+								text
+								v-bind="attrs"
+								:icon="typeof item.icon === 'string' && item.icon.length !== 0"
+								v-on="on"
+							>
+								<img
+									v-if="item.icon && typeof item.icon === 'string' && item.icon.includes('http')"
+									style="max-width: 30px"
+									:src="item.icon"
+								>
+								<v-icon v-else-if="item.icon">
+									mdi-{{ item.icon }}
+								</v-icon>
+								<div v-else>
+									{{ item.label }}
+								</div>
+							</v-btn>
+						</template>
+						<span>{{ item.title && item.title.length > 0 ? item.title : "Add a merge tag" }}</span>
+					</v-tooltip>
+				</div>
 			</div>
 		</v-card>
 		<v-card
@@ -46,9 +59,14 @@
 
 <script>
 export default {
-	computed: {
-		btnArr() {
-			return this.$store.state.editorConfig.settings.buttons.textInsert;
+	props: {
+		btnArr: {
+			type: Array,
+			required: true,
+		},
+		showHover: {
+			type: Boolean,
+			default: false,
 		},
 	},
 };
