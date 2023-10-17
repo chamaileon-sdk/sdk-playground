@@ -168,9 +168,11 @@ export default {
 						Vue.prototype.$chamaileon.emailEditor.hide();
 					},
 					onSave: async (obj) => {
+						console.log(obj);
 						await dispatch("updateDocument", obj.document);
 					},
 					onAutoSave: (obj) => {
+						console.log(obj);
 						commit("updateDocument", obj.document);
 					},
 					onChange: () => {
