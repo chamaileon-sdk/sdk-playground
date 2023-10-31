@@ -12,6 +12,52 @@
 			<HeaderPreview />
 		</OptionsWrapper>
 
+		<div>
+			<h3>Inline Header Buttons</h3>
+			<p>
+				Hardcoded inline buttons are always visible in the header.
+			</p>
+
+			<OptionsWrapper>
+				<div
+					class="mt-8 list3 rounded"
+					style="max-height: 218px; overflow-y: auto"
+				>
+					<div v-for="(item, ind) in inlineHeaderBtnArr" :key="ind">
+						<ListItem3
+							:id="ind"
+							:title="item.title"
+							:visible="item.visible"
+							:disable-id="true"
+							:hide-delete="true"
+							:hide-drag="true"
+							:show-visible="true"
+							:show-title="true"
+							:hide-label="true"
+							:hide-icon="true"
+							@titleChange="
+								updateInlineHeaderButton({
+									key: ind,
+									target: 'title',
+									content: $event,
+								});
+								updateEditorSettings();
+							"
+							@visibilityChange="
+								updateInlineHeaderButton({
+									key: ind,
+									target: 'visible',
+									content: !item.visible,
+								});
+								updateEditorSettings();
+							"
+						/>
+						<v-divider v-show="ind !== inlineHeaderBtnArr.length - 1" />
+					</div>
+				</div>
+			</OptionsWrapper>
+		</div>
+
 		<h3>Your Buttons and Dropdowns</h3>
 		<p>
 			You can add and customize your buttons and dropdowns below. The icon is
@@ -48,6 +94,7 @@ import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import HeaderPreview from "./Header/HeaderPreview.vue";
 import OptionsWrapper from "../../ViewUtilities/components/OptionWrapper.vue";
 import List6 from "../../Lists/components/List6.vue";
+import ListItem3 from "../../Lists/components/ListItem3.vue";
 import { mapMutations, mapActions } from "vuex";
 
 export default {
@@ -56,6 +103,7 @@ export default {
 		HeaderPreview,
 		OptionsWrapper,
 		List6,
+		ListItem3,
 	},
 	data() {
 		return {
@@ -65,10 +113,21 @@ export default {
 			},
 		};
 	},
+	computed: {
+		inlineHeaderBtnArr: {
+			get() {
+				return this.$store.state.editorConfig.settings.buttons.inlineHeader;
+			},
+			set(val) {
+				this.updateInlineHeaderButton(val);
+			},
+		},
+	},
 	methods: {
 		...mapMutations({
 			addBtn: "addEditorBtn",
 			addDD: "addEditorDropdown",
+			updateInlineHeaderButton: "updateInlineHeaderButton",
 		}),
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",

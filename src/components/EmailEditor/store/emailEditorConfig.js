@@ -59,6 +59,24 @@ const getDefaultState = () => {
 					},
 				],
 				textInsert: [],
+				inlineHeader: {
+					undo: {
+						title: "",
+						visible: true,
+					},
+					redo: {
+						title: "",
+						visible: true,
+					},
+					save: {
+						title: "",
+						visible: true,
+					},
+					zoom: {
+						title: "",
+						visible: true,
+					},
+				},
 				inlineTextInsert: {
 					videoAlt: {
 						id: "video-alt",
@@ -430,6 +448,10 @@ export default {
 
 		updateInlineTextInsertButton(state, payload) {
 			Vue.set(state.settings.buttons.inlineTextInsert[payload.key], payload.target, payload.content);
+		},
+
+		updateInlineHeaderButton(state, payload) {
+			Vue.set(state.settings.buttons.inlineHeader[payload.key], payload.target, payload.content);
 		},
 
 		updateCKEditorTextInsertButton(state, payload) {
