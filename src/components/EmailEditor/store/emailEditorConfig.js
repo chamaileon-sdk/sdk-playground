@@ -104,13 +104,13 @@ const getDefaultState = () => {
 					},
 					dynamicImageAlt: {
 						id: "dynamic-image-alt",
-						label: "",
+						title: "",
 						icon: "code-braces",
 						visible: true,
 					},
 					dynamicImageSrc: {
 						id: "dynamic-image-src",
-						label: "",
+						title: "",
 						icon: "code-braces",
 						visible: true,
 					},
@@ -128,8 +128,8 @@ const getDefaultState = () => {
 					},
 					buttonLink: {
 						id: "button-link",
-						label: "",
-						title: "code-braces",
+						title: "",
+						icon: "code-braces",
 						visible: true,
 					},
 					buttonLinkTitle: {
@@ -330,9 +330,7 @@ export default {
 				payload.obj.index,
 				1,
 				{
-					...state.settings.buttons.header[payload.parentIndex].items[
-						payload.obj.index
-					],
+					...state.settings.buttons.header[payload.parentIndex].items[payload.obj.index],
 					...newObj,
 				},
 			);
