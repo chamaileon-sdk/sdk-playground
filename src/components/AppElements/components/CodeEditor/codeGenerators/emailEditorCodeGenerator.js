@@ -161,11 +161,93 @@ const calculateTextInsert = (editorConfig, indent) => {
 		literal += `${"\t".repeat(indent)}{\n`;
 		literal += `${"\t".repeat(indent + 1)}id: "${c.id}",\n`;
 		literal += `${"\t".repeat(indent + 1)}label: "${c.label}",\n`;
-		literal += `${"\t".repeat(indent + 1)}ticon: "${c.icon}",\n`;
+		literal += `${"\t".repeat(indent + 1)}icon: "${c.icon}",\n`;
 		literal += `${"\t".repeat(indent)}},`;
 	});
 
 	literal += `\n${"\t".repeat(indent - 1)}],`;
+
+	return literal;
+};
+
+const calculateInlineTextInsert = (editorConfig, indent) => {
+	let literal = "";
+	const arr = editorConfig.settings.buttons.inlineTextInsert;
+
+	const keys = {
+		"video-alt": "videoAlt",
+		"image-alt": "imageAlt",
+		"image-link": "imageLink",
+		"image-link-title": "imageLinkTitle",
+		"dynamic-image-src": "dynamicImageAlt",
+		"dynamic-image-alt": "dynamicImageSrc",
+		"dynamic-image-link": "dynamicImageLink",
+		"dynamic-image-link-title": "dynamicImageLinkTitle",
+		"button-link": "buttonLink",
+		"button-link-title": "buttonLinkTitle",
+	};
+
+	if (editorConfig.settings.buttons.textInsert.length === 0) return "{},";
+
+	literal += "{\n";
+
+	Object.keys(arr).forEach((c) => {
+		literal += `${"\t".repeat(indent)}${keys[arr[c].id]}: {\n`;
+		literal += `${"\t".repeat(indent + 1)}id: "${arr[c].id}",\n`;
+		literal += `${"\t".repeat(indent + 1)}title: "${arr[c].title}",\n`;
+		literal += `${"\t".repeat(indent + 1)}icon: "${arr[c].icon}",\n`;
+		literal += `${"\t".repeat(indent + 1)}visible: "${arr[c].visible}",\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
+	});
+
+	literal += `${"\t".repeat(indent - 1)}},`;
+
+	return literal;
+};
+
+const calculateCKTextInsert = (editorConfig, indent) => {
+	let literal = "";
+	const arr = editorConfig.settings.buttons.cKEditorTextInsert;
+
+	const keys = {
+		"text-link": "textLink",
+		"text-variable-link": "textVariableLink",
+	};
+
+	if (editorConfig.settings.buttons.textInsert.length === 0) return "{},";
+
+	literal += "{\n";
+
+	Object.keys(arr).forEach((c) => {
+		literal += `${"\t".repeat(indent)}${keys[arr[c].id]}: {\n`;
+		literal += `${"\t".repeat(indent + 1)}id: "${arr[c].id}",\n`;
+		literal += `${"\t".repeat(indent + 1)}title: "${arr[c].title}",\n`;
+		literal += `${"\t".repeat(indent + 1)}label: "${arr[c].label}",\n`;
+		literal += `${"\t".repeat(indent + 1)}visible: "${arr[c].visible}",\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
+	});
+
+	literal += `${"\t".repeat(indent - 1)}},`;
+
+	return literal;
+};
+
+const calculateInlineHeader = (editorConfig, indent) => {
+	let literal = "";
+	const arr = editorConfig.settings.buttons.inlineHeader;
+
+	if (editorConfig.settings.buttons.inlineHeader.length === 0) return "{},";
+
+	literal += "{\n";
+
+	Object.keys(arr).forEach((c) => {
+		literal += `${"\t".repeat(indent)}${c}: {\n`;
+		literal += `${"\t".repeat(indent + 1)}title: "${arr[c].title}",\n`;
+		literal += `${"\t".repeat(indent + 1)}visible: "${arr[c].visible}",\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
+	});
+
+	literal += `${"\t".repeat(indent - 1)}},`;
 
 	return literal;
 };
@@ -300,6 +382,9 @@ ${"\t".repeat(indent)}},\n`;
 	string += `${"\t".repeat(indent)}buttons: {
 ${"\t".repeat(indent + 1)}header: ${calculateHeader(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}textInsert: ${calculateTextInsert(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}inlineHeader: ${calculateInlineHeader(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}inlineTextInsert: ${calculateInlineTextInsert(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}cKEditorTextInsert: ${calculateCKTextInsert(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}elements: ${calculateElements(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}elementDefaults: ${calculateElementDefaults(editorConfig, indent + 1)}

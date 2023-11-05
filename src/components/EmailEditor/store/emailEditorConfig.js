@@ -59,6 +59,100 @@ const getDefaultState = () => {
 					},
 				],
 				textInsert: [],
+				inlineHeader: {
+					undo: {
+						title: "",
+						visible: true,
+					},
+					redo: {
+						title: "",
+						visible: true,
+					},
+					save: {
+						title: "",
+						visible: true,
+					},
+					zoom: {
+						title: "",
+						visible: true,
+					},
+				},
+				inlineTextInsert: {
+					videoAlt: {
+						id: "video-alt",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					imageAlt: {
+						id: "image-alt",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					imageLink: {
+						id: "image-link",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					imageLinkTitle: {
+						id: "image-link-title",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageAlt: {
+						id: "dynamic-image-alt",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageSrc: {
+						id: "dynamic-image-src",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageLink: {
+						id: "dynamic-image-link",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					dynamicImageLinkTitle: {
+						id: "dynamic-image-link-title",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					buttonLink: {
+						id: "button-link",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+					buttonLinkTitle: {
+						id: "button-link-title",
+						title: "",
+						icon: "code-braces",
+						visible: true,
+					},
+				},
+				cKEditorTextInsert: {
+					textLink: {
+						id: "text-link",
+						title: "",
+						label: "{}",
+						visible: true,
+					},
+					textVariableLink: {
+						id: "text-variable-link",
+						title: "",
+						label: "{}",
+						visible: true,
+					},
+				},
 			},
 			elements: {
 				content: {
@@ -299,9 +393,7 @@ export default {
 				payload.obj.index,
 				1,
 				{
-					...state.settings.buttons.header[payload.parentIndex].items[
-						payload.obj.index
-					],
+					...state.settings.buttons.header[payload.parentIndex].items[payload.obj.index],
 					...newObj,
 				},
 			);
@@ -412,6 +504,18 @@ export default {
 					return c;
 				},
 			);
+		},
+
+		updateInlineTextInsertButton(state, payload) {
+			Vue.set(state.settings.buttons.inlineTextInsert[payload.key], payload.target, payload.content);
+		},
+
+		updateInlineHeaderButton(state, payload) {
+			Vue.set(state.settings.buttons.inlineHeader[payload.key], payload.target, payload.content);
+		},
+
+		updateCKEditorTextInsertButton(state, payload) {
+			Vue.set(state.settings.buttons.cKEditorTextInsert[payload.key], payload.target, payload.content);
 		},
 
 		// Addons
