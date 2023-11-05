@@ -25,13 +25,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - v3 json instead of v2
 - dynamic route import so that it gets separated into chunks on build
 
-
 ### Security
 - dependency version updates
 
 ### Removed
 - package-lock.json
 - webpack and vue cli deps
+
+## [1.9.1] - 2023-10-17
+### Changed
+- plugin interface ver
+
+## [1.9.0] - 2023-09-27
+### Added
+- inline merge tag config options for editor
+- CKEditor merge tag config options for editor
+
+## [1.8.0] - 2023-09-11
+### Added
+- SL lang file
+- proxyImages setting to preview and thumbnail
+- canEditImages, canDeleteImages, canRenameImages, canCropImages options on gallery folders
 
 ## [1.7.0] - 2023-06-02
 ### Added

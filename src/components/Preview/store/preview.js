@@ -99,7 +99,6 @@ export default {
 		setProxyImagesOnPreview(state, payload) {
 			state.settings.proxyImages = payload;
 		},
-
 	},
 	actions: {
 		async updatePreviewSettings({ getters, rootState }) {

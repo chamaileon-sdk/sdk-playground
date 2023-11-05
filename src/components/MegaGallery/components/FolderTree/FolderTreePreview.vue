@@ -158,28 +158,24 @@ export default {
 					name: "canDeleteImages",
 					icon: "mdi-file-image-remove",
 					notAllowedIds: [],
-
 				},
 				{
 					name: "canEditImages",
 					icon: "mdi-file-image-minus",
 					notAllowedIds: [],
-
 				},
 				{
 					name: "canCropImages",
 					icon: "mdi-image-edit",
 					notAllowedIds: [],
-
 				},
 				{
 					name: "canRenameImages",
 					icon: "mdi-file-image-remove",
 					notAllowedIds: [],
-
 				},
 			],
-		};
+		}
 	},
 	computed: {
 		...mapState({
