@@ -232,6 +232,26 @@ const calculateCKTextInsert = (editorConfig, indent) => {
 	return literal;
 };
 
+const calculateInlineHeader = (editorConfig, indent) => {
+	let literal = "";
+	const arr = editorConfig.settings.buttons.inlineHeader;
+
+	if (editorConfig.settings.buttons.inlineHeader.length === 0) return "{},";
+
+	literal += "{\n";
+
+	Object.keys(arr).forEach((c) => {
+		literal += `${"\t".repeat(indent)}${c}: {\n`;
+		literal += `${"\t".repeat(indent + 1)}title: "${arr[c].title}",\n`;
+		literal += `${"\t".repeat(indent + 1)}visible: "${arr[c].visible}",\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
+	});
+
+	literal += `${"\t".repeat(indent - 1)}},`;
+
+	return literal;
+};
+
 const calculateFontFiles = (editorConfig, indent) => {
 	if (Object.keys(editorConfig.settings.fontFiles).length === 0) return "{},";
 
@@ -362,6 +382,7 @@ ${"\t".repeat(indent)}},\n`;
 	string += `${"\t".repeat(indent)}buttons: {
 ${"\t".repeat(indent + 1)}header: ${calculateHeader(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}textInsert: ${calculateTextInsert(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}inlineHeader: ${calculateInlineHeader(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}inlineTextInsert: ${calculateInlineTextInsert(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}cKEditorTextInsert: ${calculateCKTextInsert(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},

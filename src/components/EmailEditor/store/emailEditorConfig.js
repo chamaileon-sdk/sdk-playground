@@ -59,6 +59,24 @@ const getDefaultState = () => {
 					},
 				],
 				textInsert: [],
+				inlineHeader: {
+					undo: {
+						title: "",
+						visible: true,
+					},
+					redo: {
+						title: "",
+						visible: true,
+					},
+					save: {
+						title: "",
+						visible: true,
+					},
+					zoom: {
+						title: "",
+						visible: true,
+					},
+				},
 				inlineTextInsert: {
 					videoAlt: {
 						id: "video-alt",
@@ -86,13 +104,13 @@ const getDefaultState = () => {
 					},
 					dynamicImageAlt: {
 						id: "dynamic-image-alt",
-						label: "",
+						title: "",
 						icon: "code-braces",
 						visible: true,
 					},
 					dynamicImageSrc: {
 						id: "dynamic-image-src",
-						label: "",
+						title: "",
 						icon: "code-braces",
 						visible: true,
 					},
@@ -110,8 +128,8 @@ const getDefaultState = () => {
 					},
 					buttonLink: {
 						id: "button-link",
-						label: "",
-						title: "code-braces",
+						title: "",
+						icon: "code-braces",
 						visible: true,
 					},
 					buttonLinkTitle: {
@@ -375,9 +393,7 @@ export default {
 				payload.obj.index,
 				1,
 				{
-					...state.settings.buttons.header[payload.parentIndex].items[
-						payload.obj.index
-					],
+					...state.settings.buttons.header[payload.parentIndex].items[payload.obj.index],
 					...newObj,
 				},
 			);
@@ -492,6 +508,10 @@ export default {
 
 		updateInlineTextInsertButton(state, payload) {
 			Vue.set(state.settings.buttons.inlineTextInsert[payload.key], payload.target, payload.content);
+		},
+
+		updateInlineHeaderButton(state, payload) {
+			Vue.set(state.settings.buttons.inlineHeader[payload.key], payload.target, payload.content);
 		},
 
 		updateCKEditorTextInsertButton(state, payload) {
