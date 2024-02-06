@@ -1,6 +1,10 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.3.0] - 2024-02-06
+### Changed
+- merge back ver. 1.11.0
+
 ## [2.2.0] - 2023-08-31
 ### Added
 - SL lang file
@@ -31,6 +35,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 - package-lock.json
 - webpack and vue cli deps
+
+## [1.11.0] - 2024-02-05
+### Added
+- es lang
+- it lang
+
+### Changed
+- plugins version
 
 ## [1.10.0] - 2023-10-31
 ### Added

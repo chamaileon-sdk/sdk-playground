@@ -148,10 +148,10 @@ export default {
 		commit("changeLogoFunction", window.createLogo);
 
 		dispatch("initEmailEditor");
-		dispatch("initVariableEditor");
-		dispatch("initEmailPreview");
-		dispatch("initHtmlImport");
-		dispatch("initGallery");
+		// dispatch("initVariableEditor");
+		// dispatch("initEmailPreview");
+		// dispatch("initHtmlImport");
+		// dispatch("initGallery");
 	},
 	async initEmailEditor({ commit, dispatch, getters, state }) {
 		if (state.emailEditorInited === true || state.emailEditorInited === "pending") return;
@@ -277,6 +277,9 @@ export default {
 						return new Promise((resolve) => {
 							resolve({ expression: `${elementType} ${expression}` });
 						});
+					},
+					error: (payload) => {
+						console.log(payload);
 					},
 				},
 			});
