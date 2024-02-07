@@ -3,7 +3,7 @@
 		<v-select
 			v-model="locale"
 			hide-details="true"
-			:items="['de','en', 'fr', 'hu', 'ru', 'sl', 'zh-tw']"
+			:items="['de','en', 'es', 'fr', 'hu', 'it', 'ru', 'sl', 'zh-tw']"
 			outlined
 			label="Language"
 		/>
