@@ -1,6 +1,11 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.12.0] - 2024-10-03
+- pt-br lang
+- `uploadOptions` gallery setting
+- `panels` gallery setting
+
 ## [1.11.0] - 2024-02-05
 ### Added
 - es lang
