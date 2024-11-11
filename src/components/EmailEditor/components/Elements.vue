@@ -17,42 +17,35 @@
 					cols="4"
 					xl="2"
 				>
-					<v-tooltip bottom :disabled="!disableTextElements(element.type)">
-						<template #activator="{ on, attrs }">
-							<div v-on="on">
-								<v-btn
-									depressed
-									class="pa-0 d-flex"
-									height="100%"
-									width="100%"
-									:attrs="attrs"
-									:color="elementsArr.content[element.type] ? 'primary' : 'white'"
-									:disabled="disableTextElements(element.type)"
-									@click="toggleElement({ type: 'content', element: element.type }); updateEditorSettings();"
+					<div>
+						<v-btn
+							depressed
+							class="pa-0 d-flex"
+							height="100%"
+							width="100%"
+							:color="elementsArr.content[element.type] ? 'primary' : 'white'"
+							@click="toggleElement({ type: 'content', element: element.type }); updateEditorSettings();"
+						>
+							<v-responsive :aspect-ratio="1">
+								<div
+									class="d-flex flex-column justify-space-around"
+									style="height: 100%"
 								>
-									<v-responsive :aspect-ratio="1">
-										<div
-											class="d-flex flex-column justify-space-around"
-											style="height: 100%"
-										>
-											<div>
-												<v-icon x-large>
-													{{ element.icon }}
-												</v-icon>
-												<div v-if="element.alt">
-													{{ element.alt }}
-												</div>
-												<div v-else class="element-break-word">
-													{{ element.type }}
-												</div>
-											</div>
+									<div>
+										<v-icon x-large>
+											{{ element.icon }}
+										</v-icon>
+										<div v-if="element.alt">
+											{{ element.alt }}
 										</div>
-									</v-responsive>
-								</v-btn>
-							</div>
-						</template>
-						<span>{{ getDisabledTooltipText(element.type) }}</span>
-					</v-tooltip>
+										<div v-else class="element-break-word">
+											{{ element.type }}
+										</div>
+									</div>
+								</div>
+							</v-responsive>
+						</v-btn>
+					</div>
 				</v-col>
 			</v-row>
 		</OptionWrapper>
@@ -163,6 +156,35 @@
 					>
 						<v-text-field
 							v-model="textElementDefaultText"
+							hide-details="true"
+							dense
+							outlined
+							label="text"
+						/>
+					</v-col>
+				</v-row>
+			</v-card>
+			<v-divider />
+			<v-card
+				flat
+				class="rounded-0 d-flex pa-4 rounded-t"
+			>
+				<v-row>
+					<v-col class="align-self-center">
+						<v-card-title
+							class="ma-0 pa-0 text-subtitle-1"
+							style="margin-bottom: -3px !important"
+						>
+							Typed text element default text
+						</v-card-title>
+					</v-col>
+
+					<v-col
+						class="align-content-right"
+						cols="6"
+					>
+						<v-text-field
+							v-model="textElementDefaultTypedText"
 							hide-details="true"
 							dense
 							outlined
@@ -317,6 +339,15 @@ export default {
 				this.updateEditorSettings();
 			},
 		},
+		textElementDefaultTypedText: {
+			get() {
+				return this.$store.state.editorConfig.settings.elementDefaults.attrs.typedText.text;
+			},
+			set(val) {
+				this.updateTypedTextElementDefaultText(val);
+				this.updateEditorSettings();
+			},
+		},
 		buttonElementDefaultText: {
 			get() {
 				return this.$store.state.editorConfig.settings.elementDefaults.attrs.button.text;
@@ -332,35 +363,11 @@ export default {
 			"toggleElement",
 			"updateTextElementDefaultText",
 			"updateButtonElementDefaultText",
+			"updateTypedTextElementDefaultText",
 		]),
 		...mapActions({
 			updateEditorSettings: "updateEditorSettings",
 		}),
-		disableTextElements(type) {
-			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
-				return true;
-			} else if (type === "text" && this.$store.state.editorConfig.settings.addons.componentSystem.state !== "hidden") {
-				return true;
-			} else if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-		getDisabledTooltipText(type) {
-			const returnArray = [];
-			if (["title", "paragraph", "list"].includes(type) && this.elementsArr.content.text) {
-				returnArray.push("disable the 'text' element");
-			}
-			if (type === "text" && (this.elementsArr.content.title || this.elementsArr.content.paragraph || this.elementsArr.content.list)) {
-				returnArray.push("disable the 'title', 'list' and 'paragraph' elements");
-			}
-			if (type === "text" && this.$store.state.editorConfig.settings.addons.componentSystem.state !== "hidden") {
-				returnArray.push("disable the 'componentSystem' addon");
-			}
-
-			return `To enable this element ${returnArray.join(" and ")}`;
-		},
 	},
 };
 </script>
