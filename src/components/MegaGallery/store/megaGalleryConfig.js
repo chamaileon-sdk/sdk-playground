@@ -23,6 +23,13 @@ const getDefaultState = () => {
 			selectedFolderId: "root",
 			maxImagePerPage: 12,
 			maxFileSize: 6,
+			panels: {
+				stockPhotos: true,
+			},
+			uploadOptions: {
+				url: true,
+				file: true,
+			},
 		},
 	};
 };
@@ -75,6 +82,20 @@ export default {
 		},
 		setFolderTree(state, payload) {
 			state.settings.folderTree = payload;
+		},
+		updateGalleryPanel(state, payload) {
+			Vue.set(
+				state.settings,
+				"panels",
+				{ ...state.settings.panels, ...payload },
+			);
+		},
+		updateGalleryUploadOption(state, payload) {
+			Vue.set(
+				state.settings,
+				"uploadOptions",
+				{ ...state.settings.uploadOptions, ...payload },
+			);
 		},
 	},
 	actions: {

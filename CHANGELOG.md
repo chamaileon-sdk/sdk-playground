@@ -1,6 +1,11 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.4.0] - 2024-10-31
+### Changed
+- merge back ver 1.12.0
+- change components update behavior
+
 ## [2.3.0] - 2024-02-06
 ### Changed
 - merge back ver. 1.11.0
@@ -35,6 +40,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 - package-lock.json
 - webpack and vue cli deps
+
+## [1.12.0] - 2024-10-03
+- pt-br lang
+- `uploadOptions` gallery setting
+- `panels` gallery setting
 
 ## [1.11.0] - 2024-02-05
 ### Added

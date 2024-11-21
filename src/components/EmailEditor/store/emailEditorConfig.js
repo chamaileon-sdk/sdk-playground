@@ -229,7 +229,7 @@ const getDefaultState = () => {
 					canReplaceAll: true,
 					canRestore: true,
 				},
-				text: {
+				typedText: {
 					canAdd: true,
 					canDelete: true,
 					canSave: true,
@@ -278,6 +278,9 @@ const getDefaultState = () => {
 				attrs: {
 					text: {
 						text: "<p>Double click to edit text!</p>",
+					},
+					typedText: {
+						text: "Double click to edit typed text!",
 					},
 					button: {
 						text: "<p>Click here to edit me</p>",
@@ -620,6 +623,11 @@ export default {
 		// text element default text
 		updateTextElementDefaultText(state, payload) {
 			Vue.set(state.settings.elementDefaults.attrs.text, "text", payload);
+		},
+
+		// typed text element default text
+		updateTypedTextElementDefaultText(state, payload) {
+			Vue.set(state.settings.elementDefaults.attrs.typedText, "text", payload);
 		},
 
 		// button element default text

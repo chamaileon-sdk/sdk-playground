@@ -175,7 +175,7 @@ export default {
 					notAllowedIds: [],
 				},
 			],
-		}
+		};
 	},
 	computed: {
 		...mapState({

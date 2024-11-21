@@ -1,3 +1,16 @@
+const calculatePanels = (galleryConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}stockPhotos: ${galleryConfig.settings.panels.stockPhotos},
+${"\t".repeat(indent - 1)}}`;
+};
+
+const calculateUploadOptions = (galleryConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}url: ${galleryConfig.settings.uploadOptions.url},
+${"\t".repeat(indent)}file: ${galleryConfig.settings.uploadOptions.file},
+${"\t".repeat(indent - 1)}}`;
+};
+
 const generateFolderTreeItem = (item, indent) => {
 	let string = `{
 ${"\t".repeat(indent + 1)}_id: "${item._id}",
@@ -51,6 +64,8 @@ ${"\t".repeat(indent)}folderTree: ${generateFolderTreeItem(galleryConfig.setting
 ${"\t".repeat(indent)}selectedFolderId: "${galleryConfig.settings.selectedFolderId}",
 ${"\t".repeat(indent)}maxImagePerPage: ${galleryConfig.settings.maxImagePerPage},
 ${"\t".repeat(indent)}maxFileSize: ${galleryConfig.settings.maxFileSize},
+${"\t".repeat(indent)}panels: ${calculatePanels(galleryConfig, indent + 1)},
+${"\t".repeat(indent)}uploadOptions: ${calculateUploadOptions(galleryConfig, indent + 1)},
 ${"\t".repeat(indent - 1)}}`;
 };
 
