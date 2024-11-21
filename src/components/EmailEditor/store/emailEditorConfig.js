@@ -26,6 +26,7 @@ const getDefaultState = () => {
 				body: true,
 				fullWidth: true,
 				text: true,
+				typedText: true,
 				button: true,
 				box: true,
 				multiColumn: true,

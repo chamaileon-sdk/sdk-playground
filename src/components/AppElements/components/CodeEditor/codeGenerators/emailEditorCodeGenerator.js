@@ -292,6 +292,7 @@ const calculateToolboxes = (editorConfig, indent) => {
 ${"\t".repeat(indent)}body: ${editorConfig.settings.toolboxes.body},
 ${"\t".repeat(indent)}fullWidth: ${editorConfig.settings.toolboxes.fullWidth},
 ${"\t".repeat(indent)}text: ${editorConfig.settings.toolboxes.text},
+${"\t".repeat(indent)}typedText: ${editorConfig.settings.toolboxes.typedText},
 ${"\t".repeat(indent)}button: ${editorConfig.settings.toolboxes.button},
 ${"\t".repeat(indent)}box: ${editorConfig.settings.toolboxes.box},
 ${"\t".repeat(indent)}multiColumn: ${editorConfig.settings.toolboxes.multiColumn},
