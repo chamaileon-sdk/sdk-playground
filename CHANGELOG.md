@@ -1,6 +1,11 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.5.0] - 2024-11-21
+### Changed
+- text-split-split
+
+
 ## [2.4.0] - 2024-10-31
 ### Changed
 - merge back ver 1.12.0
