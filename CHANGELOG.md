@@ -1,6 +1,51 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.5.0] - 2024-11-21
+### Changed
+- text-split-split
+
+
+## [2.4.0] - 2024-10-31
+### Changed
+- merge back ver 1.12.0
+- change components update behavior
+
+## [2.3.0] - 2024-02-06
+### Changed
+- merge back ver. 1.11.0
+
+## [2.2.0] - 2023-08-31
+### Added
+- SL lang file
+- proxyImages setting to preview and thumbnail
+
+## [2.1.0] - 2023-08-23
+### Added
+- canEditImages, canDeleteImages, canRenameImages, canCropImages options on gallery folders
+
+## [2.0.0] - 2023-08-14
+### Added
+- behaviorDescription to components Addons
+- New title and paragraph elements to email editor
+- gtm plugin instead of direct gtm load
+- components and it's settings
+
+### Changed
+- zangoDB moved to load from script tag because it has no es build import
+- node 18
+- vite instead of webpack
+- v2 api instead of v1
+- v3 json instead of v2
+- dynamic route import so that it gets separated into chunks on build
+
+### Security
+- dependency version updates
+
+### Removed
+- package-lock.json
+- webpack and vue cli deps
+
 ## [1.12.0] - 2024-10-03
 - pt-br lang
 - `uploadOptions` gallery setting

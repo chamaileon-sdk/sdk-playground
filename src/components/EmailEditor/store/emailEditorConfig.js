@@ -26,6 +26,7 @@ const getDefaultState = () => {
 				body: true,
 				fullWidth: true,
 				text: true,
+				typedText: true,
 				button: true,
 				box: true,
 				multiColumn: true,
@@ -156,7 +157,10 @@ const getDefaultState = () => {
 			},
 			elements: {
 				content: {
-					text: true,
+					title: true,
+					paragraph: true,
+					list: true,
+					text: false,
 					image: true,
 					button: true,
 					divider: true,
@@ -214,10 +218,70 @@ const getDefaultState = () => {
 					canRemoveAll: true,
 				},
 			},
+			components: {
+				image: {
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canReplaceAll: true,
+					canRestore: true,
+				},
+				typedText: {
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canReplaceAll: true,
+					canRestore: true,
+				},
+				video: {
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canReplaceAll: true,
+					canRestore: true,
+				},
+				button: {
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canReplaceAll: true,
+					canRestore: true,
+				},
+				divider: {
+					canAdd: true,
+					canDelete: true,
+					canSave: true,
+					canEdit: true,
+					canReset: true,
+					canDetach: true,
+					canDetachAll: true,
+					canReplaceAll: true,
+					canRestore: true,
+				},
+			},
 			elementDefaults: {
 				attrs: {
 					text: {
 						text: "<p>Double click to edit text!</p>",
+					},
+					typedText: {
+						text: "Double click to edit typed text!",
 					},
 					button: {
 						text: "<p>Click here to edit me</p>",
@@ -229,19 +293,22 @@ const getDefaultState = () => {
 			},
 			blockLibraries: [],
 			addons: {
+				componentSystem: {
+					id: "Component System",
+					state: "disabled",
+					disabledReason: "This addon is disabled",
+					behaviorDescription: "description of the current behavior",
+					behavior: "nested",
+				},
 				blockLock: {
 					icon: "table-lock",
 					id: "Block Lock",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
 				variableSystem: {
 					icon: "iframe-variable-outline",
 					id: "Variable System",
-					description:
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sint exercitationem blanditiis vel facere consequuntur nisi mollitia magnam amet quibusdam tempore ullam quasi.",
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
@@ -344,7 +411,6 @@ export default {
 		toggleElement(state, payload) {
 			state.settings.elements[payload.type][payload.element] = !state.settings.elements[payload.type][payload.element];
 		},
-
 		// BlockLibs
 		addBlockLibs(state) {
 			state.settings.blockLibraries.push({
@@ -461,9 +527,14 @@ export default {
 			const obj = state.settings.addons;
 			for (const addon in obj) {
 				if (obj[addon].id === payload.id) {
-					// eslint-disable-next-line no-return-assign
-					return (obj[addon].state = payload.state);
+					obj[addon][payload.key] = payload.value;
 				}
+			}
+			if (payload.id === "Component System"
+				&& payload.key === "state"
+				&& (payload.value === "enabled" || payload.value === "disabled")
+				&& state.settings.elements.content?.text) {
+				Vue.set(state.settings.elements.content, "text", false);
 			}
 			return state;
 		},
@@ -544,9 +615,20 @@ export default {
 			Vue.set(state.settings.variables[payload.variableTypeName], payload.name, payload.value);
 		},
 
+		// Components
+		updateComponentPermissions(state, payload) {
+			const { componentTypeName, name, value } = payload;
+			Vue.set(state.settings.components[componentTypeName], name, value);
+		},
+
 		// text element default text
 		updateTextElementDefaultText(state, payload) {
 			Vue.set(state.settings.elementDefaults.attrs.text, "text", payload);
+		},
+
+		// typed text element default text
+		updateTypedTextElementDefaultText(state, payload) {
+			Vue.set(state.settings.elementDefaults.attrs.typedText, "text", payload);
 		},
 
 		// button element default text

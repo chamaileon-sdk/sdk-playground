@@ -157,28 +157,12 @@
 
 <script>
 /* eslint-disable vue/match-component-file-name */
-import Vue from "vue";
-import {
-	VRow,
-	VCol,
-	VCard,
-	VListItemIcon,
-	VListItemContent,
-	VTextField,
-	VIcon,
-} from "vuetify/lib";
 import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 
-Vue.component("VCol", VCol);
-Vue.component("VRow", VRow);
-Vue.component("VCard", VCard);
-Vue.component("VListItemIcon", VListItemIcon);
-Vue.component("VListItemContent", VListItemContent);
-Vue.component("VTextField", VTextField);
-Vue.component("VIcon", VIcon);
-Vue.component("DeleteButton", DeleteButton);
-
 export default {
+	components: {
+		DeleteButton,
+	},
 	props: {
 		split: {
 			type: Boolean,

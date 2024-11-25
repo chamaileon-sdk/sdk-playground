@@ -1,7 +1,7 @@
 export default function () {
 	return `const htmlString = document.querySelector('textarea').value;
 
-	const genRequest = await fetch('https://sdk-api.chamaileon.io/api/v1/emails/import', {
+	const genRequest = await fetch('https://sdk-api.chamaileon.io/api/v2/emails/import', {
 	method: 'POST',
 	headers: {
 		'Authorization': \`\${yourApiKey}\`,

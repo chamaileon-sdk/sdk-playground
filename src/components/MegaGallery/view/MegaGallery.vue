@@ -57,6 +57,7 @@ export default {
 	components: {
 		SectionObserver,
 		FolderTree,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		Description,
 		Settings,

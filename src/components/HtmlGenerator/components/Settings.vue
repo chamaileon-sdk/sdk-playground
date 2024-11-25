@@ -27,7 +27,6 @@
 							>
 								{{ item.displayText }}
 							</v-card-title>
-							<!--<p class="ma-0">{{ item.description }}</p>-->
 						</v-col>
 
 						<v-col

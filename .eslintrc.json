@@ -1,0 +1,9 @@
+{
+	"extends": [
+		"@chamaileon-sdk/eslint-config/lib/defaults",
+		"@chamaileon-sdk/eslint-config/lib/vue"
+	],
+	"globals": {
+		"zango": "readonly"
+	}
+}

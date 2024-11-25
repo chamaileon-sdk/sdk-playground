@@ -39,6 +39,7 @@ export default {
 	components: {
 		Settings,
 		SectionObserver,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		Description,
 

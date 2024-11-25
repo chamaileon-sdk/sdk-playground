@@ -48,9 +48,11 @@ import { mapState } from "vuex";
 
 export default {
 	components: {
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Header,
 		SectionObserver,
 		Description,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		PreviewButton,
 	},

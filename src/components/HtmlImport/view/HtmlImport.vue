@@ -29,6 +29,7 @@ export default {
 	components: {
 		SectionObserver,
 		Description,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 	},
 	mounted() {

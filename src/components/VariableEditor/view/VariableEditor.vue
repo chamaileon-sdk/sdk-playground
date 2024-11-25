@@ -72,7 +72,9 @@ import { mapState, mapActions } from "vuex";
 
 export default {
 	components: {
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Header,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		NavFooter,
 		CustomFonts,

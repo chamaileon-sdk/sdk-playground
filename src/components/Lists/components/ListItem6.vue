@@ -143,30 +143,14 @@
 
 <script>
 /* eslint-disable vue/match-component-file-name */
-import Vue from "vue";
-import {
-	VRow,
-	VCol,
-	VCard,
-	VListItemIcon,
-	VListItemContent,
-	VTextField,
-	VIcon,
-} from "vuetify/lib";
 import DeleteButton from "../../ViewUtilities/components/DeleteButton.vue";
 import ColorPicker from "../../ViewUtilities/components/ColorPicker.vue";
 
-Vue.component("VCol", VCol);
-Vue.component("VRow", VRow);
-Vue.component("VCard", VCard);
-Vue.component("VListItemIcon", VListItemIcon);
-Vue.component("VListItemContent", VListItemContent);
-Vue.component("VTextField", VTextField);
-Vue.component("VIcon", VIcon);
-Vue.component("DeleteButton", DeleteButton);
-Vue.component("ColorPicker", ColorPicker);
-
 export default {
+	components: {
+		DeleteButton,
+		ColorPicker,
+	},
 	props: {
 		split: {
 			type: Boolean,

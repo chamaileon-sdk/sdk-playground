@@ -73,8 +73,8 @@ import Elements from "../components/Elements";
 import BlockLibraries from "../components/BlockLibraries";
 import CustomFonts from "../../sharedComponents/CustomFonts";
 import TextInsert from "../components/TextInsert";
-import Addons from "../components/Addons";
-import Settings from "../components/Settings";
+import Addons from "../components/Addons.vue";
+import Settings from "../components/Settings.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
@@ -83,7 +83,9 @@ import { mapGetters, mapState, mapActions } from "vuex";
 export default {
 	components: {
 		SectionObserver,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Header,
+		// eslint-disable-next-line vue/no-reserved-component-names
 		Footer,
 		Elements,
 		BlockLibraries,
