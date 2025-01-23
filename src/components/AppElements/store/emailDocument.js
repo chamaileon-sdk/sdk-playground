@@ -352,7 +352,7 @@ const getDefaultState = () => {
 												title: "",
 												link: "",
 												altText: "",
-												src: "https://placehold.co/167x36/ffffff/5C9AEB?text=Logo",
+												src: "https://placehold.co/167x36/ffffff/5C9AEB.png?text=Logo",
 											},
 											style: {
 												fullWidthOnMobile: false,
@@ -768,7 +768,7 @@ const getDefaultState = () => {
 																		title: "",
 																		link: "",
 																		altText: "",
-																		src: "https://placehold.co/300x453/ededed/5C9AEB",
+																		src: "https://placehold.co/300x453/ededed/5C9AEB.png",
 																	},
 																	style: {
 																		fullWidthOnMobile: false,
@@ -1007,7 +1007,7 @@ const getDefaultState = () => {
 								title: "",
 								link: "",
 								altText: "",
-								src: "https://placehold.co/600x338/ededed/1762C5",
+								src: "https://placehold.co/600x338/ededed/1762C5.png",
 							},
 							style: {
 								fullWidthOnMobile: true,
@@ -1777,7 +1777,7 @@ const getDefaultState = () => {
 								title: "",
 								link: "",
 								altText: "",
-								src: "https://placehold.co/600x338/a1a1a1/1762C5",
+								src: "https://placehold.co/600x338/a1a1a1/1762C5.png",
 							},
 							style: {
 								fullWidthOnMobile: true,
@@ -2167,7 +2167,7 @@ const getDefaultState = () => {
 												title: "",
 												link: "",
 												altText: "",
-												src: "https://placehold.co/300x453/ededed/5C9AEB",
+												src: "https://placehold.co/300x453/ededed/5C9AEB.png",
 											},
 											style: {
 												fullWidthOnMobile: false,
@@ -2317,7 +2317,7 @@ const getDefaultState = () => {
 																title: "",
 																link: "",
 																altText: "",
-																src: "https://placehold.co/150/ededed/1762C5",
+																src: "https://placehold.co/150/ededed/1762C5.png",
 															},
 															style: {
 																fullWidthOnMobile: false,
@@ -2617,7 +2617,7 @@ const getDefaultState = () => {
 																title: "",
 																link: "",
 																altText: "",
-																src: "https://placehold.co/150/a1a1a1/5C9AEB",
+																src: "https://placehold.co/150/a1a1a1/5C9AEB.png",
 															},
 															style: {
 																fullWidthOnMobile: false,
@@ -2726,7 +2726,7 @@ const getDefaultState = () => {
 																title: "",
 																link: "",
 																altText: "",
-																src: "https://placehold.co/150/ededed/1762C5",
+																src: "https://placehold.co/150/ededed/1762C5.png",
 															},
 															style: {
 																fullWidthOnMobile: false,
@@ -3026,7 +3026,7 @@ const getDefaultState = () => {
 																title: "",
 																link: "",
 																altText: "",
-																src: "https://placehold.co/150/a1a1a1/5C9AEB",
+																src: "https://placehold.co/150/a1a1a1/5C9AEB.png",
 															},
 															style: {
 																fullWidthOnMobile: false,
@@ -3326,7 +3326,7 @@ const getDefaultState = () => {
 																				title: "",
 																				link: "",
 																				altText: "",
-																				src: "https://placehold.co/270/a1a1a1/5C9AEB",
+																				src: "https://placehold.co/270/a1a1a1/5C9AEB.png",
 																			},
 																			style: {
 																				fullWidthOnMobile: true,
@@ -3599,7 +3599,7 @@ const getDefaultState = () => {
 																				title: "",
 																				link: "",
 																				altText: "",
-																				src: "https://placehold.co/270/a1a1a1/5C9AEB",
+																				src: "https://placehold.co/270/a1a1a1/5C9AEB.png",
 																			},
 																			style: {
 																				fullWidthOnMobile: true,
