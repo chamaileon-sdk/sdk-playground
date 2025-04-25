@@ -77,6 +77,10 @@ const getDefaultState = () => {
 						title: "",
 						visible: true,
 					},
+					aiAssistant: {
+						title: "",
+						visible: true,
+					},
 				},
 				inlineTextInsert: {
 					videoAlt: {
@@ -312,8 +316,17 @@ const getDefaultState = () => {
 					state: "disabled",
 					disabledReason: "This addon is disabled",
 				},
+				aiAssistant: {
+					icon: "auto-fix",
+					id: "AI Assistant",
+					state: "disabled",
+					disabledReason: "This addon is disabled",
+				},
 			},
 			title: {
+				canEdit: true,
+			},
+			subjectLineAndPreviewText: {
 				canEdit: true,
 			},
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
@@ -602,6 +615,15 @@ export default {
 				state.settings,
 				"title",
 				{ ...state.settings.title, ...payload },
+			);
+		},
+
+		// Subject line and preview text
+		updateSubjectLineAndPreviewText(state, payload) {
+			Vue.set(
+				state.settings,
+				"subjectLineAndPreviewText",
+				{ ...state.settings.subjectLineAndPreviewText, ...payload },
 			);
 		},
 

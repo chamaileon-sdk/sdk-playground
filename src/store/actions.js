@@ -3,6 +3,7 @@ import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
+import aiGeneratedDocument from "../components/AppElements/store/aiGeneratedDocument.js";
 
 let images = [];
 try {
@@ -182,6 +183,17 @@ export default {
 					onEditTitle: ({ title }) => {
 						return new Promise((resolve) => {
 							resolve(title);
+						});
+					},
+					onEditSubjectLineAndPreviewText: ({ subjectLine, previewText }) => {
+						return new Promise((resolve) => {
+							resolve({ subjectLine, previewText });
+						});
+					},
+					// eslint-disable-next-line no-unused-vars
+					onAiAssistant: ({ context, action, tone, customContext,	target }) => {
+						return new Promise((resolve) => {
+							resolve({ result: aiGeneratedDocument });
 						});
 					},
 					onEditImage: async ({

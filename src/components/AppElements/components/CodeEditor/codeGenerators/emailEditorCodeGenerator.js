@@ -112,6 +112,16 @@ ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.variableSystem.ena
 	return config;
 };
 
+const calculateAiAssistant = (editorConfig, indent) => {
+	if (!editorConfig.settings.addons.aiAssistant) return "false,";
+	let config = `{
+${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.aiAssistant.enabled},`;
+	if (editorConfig.settings.addons.aiAssistant.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.aiAssistant.disabledReason}",`;
+	config += `\n${"\t".repeat(indent - 1)}},`;
+
+	return config;
+};
+
 const calculateAddonsComponents = (editorConfig, indent) => {
 	const { componentSystem } = editorConfig.settings.addons;
 
@@ -328,6 +338,12 @@ ${"\t".repeat(indent)}canEdit: ${editorConfig.settings.title.canEdit},
 ${"\t".repeat(indent - 1)}},`;
 };
 
+const subjectLineAndPreviewText = (editorConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}canEdit: ${editorConfig.settings.subjectLineAndPreviewText.canEdit},
+${"\t".repeat(indent - 1)}},`;
+};
+
 const calculateVariables = (editorConfig, indent) => {
 	return `{${Object.keys(editorConfig.settings.variables).map((key) => {
 		return `\n${"\t".repeat(indent)}${key}: {
@@ -396,6 +412,7 @@ ${"\t".repeat(indent)}hideDefaultFonts: ${editorConfig.settings.hideDefaultFonts
 ${"\t".repeat(indent)}addons: {
 ${"\t".repeat(indent + 1)}blockLock: ${calculateBL(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}variableSystem: ${calculateVE(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}aiAssistant: ${calculateAiAssistant(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}componentSystem: ${calculateAddonsComponents(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}actionMenu: ${calculateActionMenu(editorConfig, indent + 1)}
@@ -405,6 +422,7 @@ ${"\t".repeat(indent)}variables: ${calculateVariables(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}components: ${calculateComponents(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}panels: ${calculatePanels(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}title: ${calculateTitle(editorConfig, indent + 1)}
+${"\t".repeat(indent)}subjectLineAndPreviewText: ${subjectLineAndPreviewText(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}staticAssetsBaseUrl: "${editorConfig.settings.staticAssetsBaseUrl}",
 ${"\t".repeat(indent)}videoElementBaseUrl: "${editorConfig.settings.videoElementBaseUrl}",
 ${"\t".repeat(indent)}autoSaveInterval: ${editorConfig.settings.autoSaveInterval},

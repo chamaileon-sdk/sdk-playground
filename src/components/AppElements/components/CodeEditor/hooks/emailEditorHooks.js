@@ -34,6 +34,19 @@ const emailEditorHooks = {
 		});
 	},
 
+	onEditSubjectLineAndPreviewText: ({ subjectLine, previewText }) => {
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+
+
+	onAiAssistant: ({ context, action, tone, customContext,	target }) => {
+		return new Promise(resolve => {
+			resolve({ result });
+		});
+	},
+
 	onEditImage: async ({ originalImage, lockDimensions }) => {
 		await galleryInstance.methods.updateData({ currentImgSrc: originalImage, dimensions: lockDimensions });
 		await galleryInstance.show();

@@ -1,6 +1,10 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.5.2] - 2025-01-10
+### Added
+- Ai Assistant options
+
 ## [2.5.1] - 2025-01-10
 ### Changed
 - replace images in default json
