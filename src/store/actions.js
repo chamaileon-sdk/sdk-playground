@@ -185,9 +185,10 @@ export default {
 							resolve(title);
 						});
 					},
+					// eslint-disable-next-line no-unused-vars
 					onEditSubjectLineAndPreviewText: ({ subjectLine, previewText }) => {
 						return new Promise((resolve) => {
-							resolve({ subjectLine, previewText });
+							resolve();
 						});
 					},
 					// eslint-disable-next-line no-unused-vars
