@@ -1,6 +1,6 @@
 {
 	"name": "sdk-playground",
-	"version": "2.5.1",
+	"version": "2.6.0",
 	"scripts": {
 		"build": "vite build",
 		"dev": "npm run serve",
