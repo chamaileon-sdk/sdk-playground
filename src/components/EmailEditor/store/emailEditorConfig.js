@@ -327,7 +327,7 @@ const getDefaultState = () => {
 				canEdit: true,
 			},
 			subjectLineAndPreviewText: {
-				canEdit: true,
+				canEdit: false,
 			},
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
