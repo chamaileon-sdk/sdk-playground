@@ -77,10 +77,6 @@ const getDefaultState = () => {
 						title: "",
 						visible: true,
 					},
-					aiAssistant: {
-						title: "",
-						visible: true,
-					},
 				},
 				inlineTextInsert: {
 					videoAlt: {
