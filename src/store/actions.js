@@ -4,6 +4,7 @@ import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
 import aiGeneratedDocument from "../components/AppElements/store/aiGeneratedDocument.js";
+import aiGeneratedSubjectPreview from "../components/AppElements/store/aiGeneratedSubjectPreview.js";
 
 let images = [];
 try {
@@ -194,7 +195,17 @@ export default {
 					// eslint-disable-next-line no-unused-vars
 					onAiAssistant: ({ context, action, tone, customContext,	target }) => {
 						return new Promise((resolve) => {
-							resolve({ result: aiGeneratedDocument });
+							const sections = target.match(/<section\b[^>]*>/g);
+							if (target.includes('id="subject"') && target.includes('id="previewText"')) {
+								resolve({ result: aiGeneratedSubjectPreview });
+							} else if (sections.length === 1) {
+								const sectionTag = sections[0];
+								const idMatch = sectionTag.match(/id="([^"]*)"/);
+								const typeMatch = sectionTag.match(/type="([^"]*)"/);
+								resolve({ result: `<section type="${typeMatch[1]}" id="${idMatch[1]}">Example AI generated text</section>` });
+							} else {
+								resolve({ result: aiGeneratedDocument });
+							}
 						});
 					},
 					onEditImage: async ({
