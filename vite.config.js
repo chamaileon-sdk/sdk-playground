@@ -5,7 +5,8 @@ import vue2 from "@vitejs/plugin-vue2";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
-	appType: "mpa", // needed for correct routing after reload
+	base: "./",
+	appType: "spa", // needed for correct routing after reload
 	server: {
 		port: 8080,
 		strictPort: true,
