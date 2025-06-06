@@ -21,6 +21,12 @@ const getDefaultState = () => {
 					duplicate: true,
 					delete: true,
 				},
+				element: {
+					drag: true,
+					duplicate: true,
+					delete: true,
+					edit: true,
+				},
 			},
 			toolboxes: {
 				body: true,
@@ -327,7 +333,7 @@ const getDefaultState = () => {
 			},
 			externalElements: [
 				{
-					id: "contentDialog",
+					id: "contentDialogExample",
 					defaultJson: {
 						type: "image",
 						style: {},
@@ -335,26 +341,19 @@ const getDefaultState = () => {
 					},
 					toolbox: {
 						type: "contentDialog",
-						buttonConfig: [{
-							id: "preview",
-							icon: "eye",
-							label: "Preview",
+						buttonConfig: [ {
+							id: "change",
+							icon: "camera-switch",
+							label: "Change",
 							color: "#D0021B",
 							style: "outlined",
-						},
-						{
-							id: "preview2",
-							icon: "eye",
-							label: "Pre",
-							color: "#D0021B",
-							style: "outlined",
-						}],
+						} ],
 					},
-					icon: "cog",
-					title: "contentDialog",
+					icon: "image",
+					title: "contentDialogExample",
 				},
 				{
-					id: "iframe",
+					id: "iframeExample",
 					defaultJson: {
 						type: "image",
 						style: {},
@@ -364,67 +363,10 @@ const getDefaultState = () => {
 						type: "iframe",
 						url: `${document.location.origin}/assets/external-plugin-toolbox-example.html`,
 					},
-					icon: "cog", // mdi- autocomplete on our side, like every other icon
-					title: "iframe",
+					icon: "image",
+					title: "iframeExample",
 				},
-				{
-					id: "iframe2",
-					defaultJson: {
-						type: "code",
-						style: {},
-						attrs: {},
-						placeholder: {
-							eid: "1kt-fkeMAK",
-							type: "text",
-							attrs: {
-								text: "<p style=\"text-align: center;\">Site</p>\n",
-							},
-							style: {
-								backgroundColor: "",
-								backgroundRepeat: "no-repeat",
-								backgroundPosition: "center center",
-								backgroundImage: "",
-								backgroundSize: "auto",
-								paddingLeft: "10px",
-								paddingBottom: "5px",
-								paddingRight: "10px",
-								paddingTop: "5px",
-								paragraphLineHeight: "20px",
-								paragraphLetterSpacing: "normal",
-								paragraphColor: "#FFFFFF",
-								paragraphFontSize: "14px",
-								paragraphFontFamily: "Helvetica Neue, Helvetica, Arial, Verdana, sans-serif",
-								linkTextDecoration: "underline",
-								linkColor: "#00c0e7",
-								h3LineHeight: "27px",
-								h3Color: "#000000",
-								h3FontSize: "22px",
-								h3FontFamily: "Georgia, Times, Times New Roman, serif",
-								h3LetterSpacing: "normal",
-								h2LineHeight: "34px",
-								h2Color: "#000000",
-								h2FontSize: "26px",
-								h2FontFamily: "Georgia, Times, Times New Roman, serif",
-								h2LetterSpacing: "normal",
-								h1LineHeight: "40px",
-								h1Color: "#000000",
-								h1FontSize: "33px",
-								h1FontFamily: "Georgia, Times, Times New Roman, serif",
-								h1LetterSpacing: "normal",
-								h6: {},
-								h5: {},
-								h4: {},
-							},
-							customData: null,
-						},
-					},
-					toolbox: {
-						type: "iframe",
-						url: `${document.location.origin}/assets/external-plugin-toolbox-example.html`,
-					},
-					icon: "cog", // mdi- autocomplete on our side, like every other icon
-					title: "code",
-				},
+
 			],
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
@@ -688,6 +630,15 @@ export default {
 			);
 		},
 
+		// Block Action Menu
+		updateElementActionMenu(state, blockActionMenu) {
+			Vue.set(
+				state.settings.actionMenu,
+				"element",
+				{ ...state.settings.actionMenu.element, ...blockActionMenu },
+			);
+		},
+
 		// Block Dropzone
 		updateDropZones(state, dropZone) {
 			Vue.set(
@@ -753,6 +704,91 @@ export default {
 		// button element default text
 		updateButtonElementDefaultText(state, payload) {
 			Vue.set(state.settings.elementDefaults.attrs.button, "text", payload);
+		},
+
+		addExternalElement(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				[...state.settings.externalElements, payload],
+			);
+		},
+
+		updateEditorExternalElement(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				state.settings.externalElements.map((elem, idx) => {
+					if (idx !== payload.index) return elem;
+					delete payload.index;
+					return { ...elem, ...payload };
+				}),
+			);
+		},
+		overrideEditorExternalElementToolbox(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				state.settings.externalElements.map((elem, idx) => {
+					if (idx !== payload.index) return elem;
+					if (payload.toolboxType === "contentDialog") {
+						return { ...elem, toolbox: { type: "contentDialog", buttonConfig: [] } };
+					} else {
+						return { ...elem, toolbox: { type: "iframe", url: "" } };
+					}
+				}),
+			);
+		},
+		deleteEditorExternalElement(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				state.settings.externalElements.filter((elem, idx) => {
+					if (idx !== payload.index) return true;
+					return false;
+				}),
+			);
+		},
+
+		addEditorExternalElementButton(state, elemIndex) {
+			Vue.set(
+				state.settings.externalElements[elemIndex].toolbox,
+				"buttonConfig",
+				[
+					...state.settings.externalElements[elemIndex].toolbox.buttonConfig,
+					{
+						id: "",
+						icon: "",
+						label: "",
+						color: "",
+						style: "",
+					},
+				],
+			);
+		},
+
+		updateEditorExternalElementButton(state, payload) {
+			Vue.set(
+				state.settings.externalElements[payload.elemIndex].toolbox,
+				"buttonConfig",
+				state.settings.externalElements[payload.elemIndex].toolbox.buttonConfig.map((elem, idx) => {
+					if (idx !== payload.index) return elem;
+					delete payload.index;
+					delete payload.elemIndex;
+					return { ...elem, ...payload };
+				}),
+			);
+		},
+
+		deleteEditorExternalElementButton(state, payload) {
+			Vue.set(
+				state.settings.externalElements[payload.elemIndex].toolbox,
+				"buttonConfig",
+				state.settings.externalElements[payload.elemIndex].toolbox.buttonConfig.filter((elem, idx) => {
+					if (idx !== payload.index) return true;
+					return false;
+				}),
+			);
 		},
 	},
 	actions: {

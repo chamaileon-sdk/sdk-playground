@@ -294,7 +294,84 @@ ${"\t".repeat(indent + 1)}save: ${editorConfig.settings.actionMenu.block.save},
 ${"\t".repeat(indent + 1)}duplicate: ${editorConfig.settings.actionMenu.block.duplicate},
 ${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.actionMenu.block.delete},
 ${"\t".repeat(indent)}},
+${"\t".repeat(indent)}element: {
+${"\t".repeat(indent + 1)}drag: ${editorConfig.settings.actionMenu.element.drag},
+${"\t".repeat(indent + 1)}edit: ${editorConfig.settings.actionMenu.element.edit},
+${"\t".repeat(indent + 1)}duplicate: ${editorConfig.settings.actionMenu.element.duplicate},
+${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.actionMenu.element.delete},
+${"\t".repeat(indent)}},
 ${"\t".repeat(indent - 1)}},`;
+};
+
+const calculateExternalElementButtons = (buttonConfig, indent) => {
+	let literal = "";
+	const arr = buttonConfig;
+
+	if (arr.length === 0) return "[],";
+
+	literal += "[\n";
+	arr.forEach((item) => {
+		literal += `${"\t".repeat(indent)}{\n`;
+		literal += `${"\t".repeat(indent + 1)}id: "${item.id}",\n`;
+		literal += `${"\t".repeat(indent + 1)}icon: "${item.icon}",\n`;
+		literal += `${"\t".repeat(indent + 1)}label: "${item.label}",\n`;
+		literal += `${"\t".repeat(indent + 1)}color: "${item.color}",\n`;
+		literal += `${"\t".repeat(indent + 1)}style: "${item.style}",\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
+	});
+	literal += `${"\t".repeat(indent - 1)}],`;
+
+	return literal;
+};
+
+const calculateExternalElements = (editorConfig, indent) => {
+	if (editorConfig.settings.externalElements.length === 0) return "[],";
+
+	const innerElements = editorConfig.settings.externalElements.map((externalElement) => {
+		let defaultJsonStyle = "style: {},";
+		let defaultJsonAttrs = "attrs: {},";
+
+		if (Object.keys(externalElement.defaultJson.style).length > 0) {
+			defaultJsonStyle = `${"\t".repeat(indent + 2)}style: {
+${"\t".repeat(indent + 3)}${Object.keys(externalElement.defaultJson.style).forEach(key => `${key}: ${externalElement.defaultJson[key]},`)}
+${"\t".repeat(indent + 2)}},`;
+		}
+
+		if (Object.keys(externalElement.defaultJson.attrs).length > 0) {
+			defaultJsonAttrs = `${"\t".repeat(indent + 2)}style: {
+${"\t".repeat(indent + 3)}${Object.keys(externalElement.defaultJson.attrs).forEach(key => `${key}: ${externalElement.defaultJson[key]},`)}
+${"\t".repeat(indent + 2)}},`;
+		}
+
+		let toolbox = "";
+
+		if (externalElement.toolbox?.type === "iframe") {
+			toolbox += `${"\t".repeat(indent + 2)}type: "${externalElement.toolbox.type}",
+${"\t".repeat(indent + 2)}url: "${externalElement.toolbox.url}",`;
+		}
+
+		if (externalElement.toolbox?.type === "contentDialog") {
+			toolbox += `${"\t".repeat(indent + 2)}type: "${externalElement.toolbox.type}",
+${"\t".repeat(indent + 2)}buttonConfig: ${calculateExternalElementButtons(externalElement.toolbox.buttonConfig, indent + 3)}`;
+		}
+
+		return `
+${"\t".repeat(indent)}{
+${"\t".repeat(indent + 1)}id: "${externalElement.id}",
+${"\t".repeat(indent + 1)}title: "${externalElement.title}",
+${"\t".repeat(indent + 1)}icon: "${externalElement.icon}",
+${"\t".repeat(indent + 1)}defaultJson: {
+${"\t".repeat(indent + 2)}type: "${externalElement.defaultJson.type}",
+${"\t".repeat(indent + 2)}${defaultJsonStyle}
+${"\t".repeat(indent + 2)}${defaultJsonAttrs}
+${"\t".repeat(indent + 1)}},
+${"\t".repeat(indent + 1)}toolbox: {
+${toolbox}
+${"\t".repeat(indent + 1)}},
+${"\t".repeat(indent)}}`;
+	});
+
+	return `[${innerElements}\n${"\t".repeat(indent - 1)}],`;
 };
 
 const calculateToolboxes = (editorConfig, indent) => {
@@ -418,6 +495,7 @@ ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}actionMenu: ${calculateActionMenu(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}toolboxes: ${calculateToolboxes(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}dropzones: ${calculateDropZones(editorConfig, indent + 1)}
+${"\t".repeat(indent)}externalElements: ${calculateExternalElements(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}variables: ${calculateVariables(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}components: ${calculateComponents(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}panels: ${calculatePanels(editorConfig, indent + 1)}

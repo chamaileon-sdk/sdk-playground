@@ -232,7 +232,46 @@
 								color="primary"
 								hide-details
 								:true-value="true"
-								@change="updateActionMenu($event, name)"
+								@change="updateBActionMenu($event, name)"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+
+		<h3>Element Action Menu</h3>
+		<p>
+			You can control what your users capable to do with elements. Drag, edit, duplicate or delete. All this functionality can be turned off.
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
+					<v-row>
+						<v-col
+							v-for="(value, name) in elementActions"
+							:key="name"
+							cols="6"
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								:input-value="elementActions[name]"
+								class="ma-0 pa-0"
+								color="primary"
+								hide-details
+								:true-value="true"
+								@change="updateEActionMenu($event, name)"
 							/>
 						</v-col>
 					</v-row>
@@ -558,6 +597,9 @@ export default {
 		blockActions() {
 			return this.$store.state.editorConfig.settings.actionMenu.block;
 		},
+		elementActions() {
+			return this.$store.state.editorConfig.settings.actionMenu.element;
+		},
 		dropZones() {
 			return this.$store.state.editorConfig.settings.dropzones;
 		},
@@ -596,8 +638,12 @@ export default {
 			this.updateDropZones({ [name]: !!value });
 			this.updateEditorSettings();
 		},
-		updateActionMenu(value, name) {
+		updateBActionMenu(value, name) {
 			this.updateBlockActionMenu({ [name]: !!value });
+			this.updateEditorSettings();
+		},
+		updateEActionMenu(value, name) {
+			this.updateElementActionMenu({ [name]: !!value });
 			this.updateEditorSettings();
 		},
 		updateToolbox(value, name) {
@@ -629,6 +675,7 @@ export default {
 			"updateAutoSave",
 			"updateStaticAssets",
 			"updateBlockActionMenu",
+			"updateElementActionMenu",
 			"updateDropZones",
 			"updateToolboxes",
 			"updateVideoElementBaseUrl",
