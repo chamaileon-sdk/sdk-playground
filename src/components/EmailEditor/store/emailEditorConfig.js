@@ -21,6 +21,12 @@ const getDefaultState = () => {
 					duplicate: true,
 					delete: true,
 				},
+				element: {
+					drag: true,
+					duplicate: true,
+					delete: true,
+					edit: true,
+				},
 			},
 			toolboxes: {
 				body: true,
@@ -325,6 +331,43 @@ const getDefaultState = () => {
 			subjectLineAndPreviewText: {
 				canEdit: false,
 			},
+			externalElements: [
+				{
+					id: "contentDialogExample",
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "contentDialog",
+						buttonConfig: [ {
+							id: "change",
+							icon: "camera-switch",
+							label: "Change",
+							color: "#D0021B",
+							style: "outlined",
+						} ],
+					},
+					icon: "image",
+					title: "contentDialogExample",
+				},
+				{
+					id: "iframeExample",
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "iframe",
+						url: `${document.location.origin}/assets/external-plugin-toolbox-example.html`,
+					},
+					icon: "image",
+					title: "iframeExample",
+				},
+
+			],
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
 			autoSaveInterval: 15000,
@@ -587,6 +630,15 @@ export default {
 			);
 		},
 
+		// Block Action Menu
+		updateElementActionMenu(state, blockActionMenu) {
+			Vue.set(
+				state.settings.actionMenu,
+				"element",
+				{ ...state.settings.actionMenu.element, ...blockActionMenu },
+			);
+		},
+
 		// Block Dropzone
 		updateDropZones(state, dropZone) {
 			Vue.set(
@@ -652,6 +704,91 @@ export default {
 		// button element default text
 		updateButtonElementDefaultText(state, payload) {
 			Vue.set(state.settings.elementDefaults.attrs.button, "text", payload);
+		},
+
+		addExternalElement(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				[...state.settings.externalElements, payload],
+			);
+		},
+
+		updateEditorExternalElement(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				state.settings.externalElements.map((elem, idx) => {
+					if (idx !== payload.index) return elem;
+					delete payload.index;
+					return { ...elem, ...payload };
+				}),
+			);
+		},
+		overrideEditorExternalElementToolbox(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				state.settings.externalElements.map((elem, idx) => {
+					if (idx !== payload.index) return elem;
+					if (payload.toolboxType === "contentDialog") {
+						return { ...elem, toolbox: { type: "contentDialog", buttonConfig: [] } };
+					} else {
+						return { ...elem, toolbox: { type: "iframe", url: "" } };
+					}
+				}),
+			);
+		},
+		deleteEditorExternalElement(state, payload) {
+			Vue.set(
+				state.settings,
+				"externalElements",
+				state.settings.externalElements.filter((elem, idx) => {
+					if (idx !== payload.index) return true;
+					return false;
+				}),
+			);
+		},
+
+		addEditorExternalElementButton(state, elemIndex) {
+			Vue.set(
+				state.settings.externalElements[elemIndex].toolbox,
+				"buttonConfig",
+				[
+					...state.settings.externalElements[elemIndex].toolbox.buttonConfig,
+					{
+						id: "",
+						icon: "",
+						label: "",
+						color: "",
+						style: "",
+					},
+				],
+			);
+		},
+
+		updateEditorExternalElementButton(state, payload) {
+			Vue.set(
+				state.settings.externalElements[payload.elemIndex].toolbox,
+				"buttonConfig",
+				state.settings.externalElements[payload.elemIndex].toolbox.buttonConfig.map((elem, idx) => {
+					if (idx !== payload.index) return elem;
+					delete payload.index;
+					delete payload.elemIndex;
+					return { ...elem, ...payload };
+				}),
+			);
+		},
+
+		deleteEditorExternalElementButton(state, payload) {
+			Vue.set(
+				state.settings.externalElements[payload.elemIndex].toolbox,
+				"buttonConfig",
+				state.settings.externalElements[payload.elemIndex].toolbox.buttonConfig.filter((elem, idx) => {
+					if (idx !== payload.index) return true;
+					return false;
+				}),
+			);
 		},
 	},
 	actions: {

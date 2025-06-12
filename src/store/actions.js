@@ -173,10 +173,11 @@ export default {
 						await dispatch("updateDocument", obj.document);
 					},
 					onAutoSave: (obj) => {
-						console.log(obj);
+						console.log("save", obj);
 						commit("updateDocument", obj.document);
 					},
-					onChange: () => {
+					onChange: (obj) => {
+						console.log("change", obj);
 						return new Promise((resolve) => {
 							resolve();
 						});
@@ -207,6 +208,29 @@ export default {
 								resolve({ result: aiGeneratedDocument });
 							}
 						});
+					},
+					onExternalElementDropIn: async (data) => {
+						console.log(data);
+
+						Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: "", dimensions: null });
+						Vue.prototype.$chamaileon.gallery.show();
+
+						const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+						Vue.prototype.$chamaileon.gallery.hide();
+
+						data.elementJson.attrs.src = src;
+
+						return data.elementJson;
+					},
+					onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
+						console.log(externalElementId, buttonId, elementJson, defaultJson);
+
+						switch (buttonId) {
+							case "preview":
+								return { style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs };
+							case "preview2":
+								return { style: { ...(elementJson.style.align === "center" ? { align: "right" } : { align: "center" }) }, attrs: elementJson.attrs };
+						}
 					},
 					onEditImage: async ({
 						originalImage,

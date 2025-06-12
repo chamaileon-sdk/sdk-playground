@@ -1,6 +1,12 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.7.0] - 2025-06-06
+### Added
+- actionMenu.element editor config
+- externalElements editor config
+- externalElements examples
+
 ## [2.6.1] - 2025-05-27
 ### Changed
 - dependency updates

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<title>External Plugin Toolbox Example</title>
+</head>
+
+<body>
+	<button onclick="change()" type="button">Set align  to left - center</button>
+
+	<pre id="data"></pre>
+
+	<script src="./pluginInterface.js" type="module"></script>
+	<script>
+		let interfaceHooks = {};
+		let interfaceData = { style: {}, attrs: {}};
+
+		const change = async () => {
+			const {style, attrs} = await interfaceHooks?.updateElement({ style: {...(interfaceData.style.align === "center"? {align: "left"}: {align: "center"})}})
+			interfaceData.style = style;
+			interfaceData.attrs = attrs;
+
+			document.getElementById("data").innerHTML = JSON.stringify(interfaceData, null, "\t");
+		}
+
+		const initInterface = async () => {
+			const {
+				data = {},
+				settings = {},
+				hooks,
+				terminate,
+			} = await window.pluginInterface.providePlugin({ hooks: ["updateElement"], methods: [], validator: () => {}})
+
+			interfaceHooks = hooks;
+			interfaceData.style = data?.elementJson?.style || {};
+			interfaceData.attrs = data?.elementJson?.attrs || {};
+
+			console.log(data.externalElementId, data.defaultJson);
+
+			document.getElementById("data").innerHTML = JSON.stringify(interfaceData, null, "\t");
+		}
+
+		document.addEventListener("DOMContentLoaded", (event) => {
+			initInterface();
+		});
+
+	</script>
+</body>
+</html>

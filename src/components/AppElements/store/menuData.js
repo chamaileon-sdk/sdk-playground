@@ -101,6 +101,12 @@ export default {
 						codePropToMatch: "elements",
 					},
 					{
+						title: "External Elements",
+						icon: "card-multiple",
+						to: "#external-elements",
+						codePropToMatch: "externalElements",
+					},
+					{
 						title: "Block Libraries",
 						icon: "database-edit-outline",
 						to: "#block-libraries",
