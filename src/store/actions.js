@@ -227,10 +227,8 @@ export default {
 							console.log(externalElementId, buttonId, elementJson, defaultJson);
 	
 							switch (buttonId) {
-								case "preview":
+								case "change":
 									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs });
-								case "preview2":
-									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "right" } : { align: "center" }) }, attrs: elementJson.attrs });
 							}
 						});
 					},
