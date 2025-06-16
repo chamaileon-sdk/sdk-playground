@@ -223,14 +223,16 @@ export default {
 						return data.elementJson;
 					},
 					onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
-						console.log(externalElementId, buttonId, elementJson, defaultJson);
-
-						switch (buttonId) {
-							case "preview":
-								return { style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs };
-							case "preview2":
-								return { style: { ...(elementJson.style.align === "center" ? { align: "right" } : { align: "center" }) }, attrs: elementJson.attrs };
-						}
+						return new Promise((resolve) => {
+							console.log(externalElementId, buttonId, elementJson, defaultJson);
+	
+							switch (buttonId) {
+								case "preview":
+									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs });
+								case "preview2":
+									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "right" } : { align: "center" }) }, attrs: elementJson.attrs });
+							}
+						});
 					},
 					onEditImage: async ({
 						originalImage,
