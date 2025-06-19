@@ -332,14 +332,26 @@ const calculateExternalElements = (editorConfig, indent) => {
 		let defaultJsonAttrs = "attrs: {},";
 
 		if (Object.keys(externalElement.defaultJson.style).length > 0) {
-			defaultJsonStyle = `${"\t".repeat(indent + 2)}style: {
-${"\t".repeat(indent + 3)}${Object.keys(externalElement.defaultJson.style).forEach(key => `${key}: ${externalElement.defaultJson[key]},`)}
+			defaultJsonStyle = `style: {
+${Object.keys(externalElement.defaultJson.style).map((key) => {
+		if (typeof externalElement.defaultJson.style[key] === "string") {
+			return `${"\t".repeat(indent + 3)}${key}: "${externalElement.defaultJson.style[key]}",`;
+		}
+
+		return `${"\t".repeat(indent + 3)}${key}: ${externalElement.defaultJson.style[key]},`;
+	}).join("\n")}
 ${"\t".repeat(indent + 2)}},`;
 		}
 
 		if (Object.keys(externalElement.defaultJson.attrs).length > 0) {
-			defaultJsonAttrs = `${"\t".repeat(indent + 2)}style: {
-${"\t".repeat(indent + 3)}${Object.keys(externalElement.defaultJson.attrs).forEach(key => `${key}: ${externalElement.defaultJson[key]},`)}
+			defaultJsonAttrs = `attrs: {
+${Object.keys(externalElement.defaultJson.attrs).map((key) => {
+		if (typeof externalElement.defaultJson.attrs[key] === "string") {
+			return `${"\t".repeat(indent + 3)}${key}: "${externalElement.defaultJson.attrs[key]}",`;
+		}
+
+		return `${"\t".repeat(indent + 3)}${key}: ${externalElement.defaultJson.attrs[key]},`;
+	}).join("\n")}
 ${"\t".repeat(indent + 2)}},`;
 		}
 

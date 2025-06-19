@@ -739,12 +739,12 @@ export default {
 				}),
 			);
 		},
-		deleteEditorExternalElement(state, payload) {
+		deleteEditorExternalElement(state, index) {
 			Vue.set(
 				state.settings,
 				"externalElements",
 				state.settings.externalElements.filter((elem, idx) => {
-					if (idx !== payload.index) return true;
+					if (idx !== index) return true;
 					return false;
 				}),
 			);
