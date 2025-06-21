@@ -225,7 +225,7 @@ export default {
 					onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
 						return new Promise((resolve) => {
 							console.log(externalElementId, buttonId, elementJson, defaultJson);
-	
+
 							switch (buttonId) {
 								case "change":
 									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs });
