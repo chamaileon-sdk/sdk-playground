@@ -47,6 +47,18 @@ const emailEditorHooks = {
 		});
 	},
 
+	onExternalElementDropIn: ({ externalElementId, elementJson, defaultJson }) => {
+		return new Promise(resolve => {
+			resolve(elementJson);
+		});
+	},
+
+	onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
+		return new Promise(resolve => {
+			resolve(elementJson);
+		});
+	},
+
 	onEditImage: async ({ originalImage, lockDimensions }) => {
 		await galleryInstance.methods.updateData({ currentImgSrc: originalImage, dimensions: lockDimensions });
 		await galleryInstance.show();
