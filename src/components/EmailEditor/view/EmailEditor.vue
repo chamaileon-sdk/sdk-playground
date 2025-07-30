@@ -40,6 +40,10 @@
 				<Elements />
 			</div>
 
+			<div id="external-elements" class="section">
+				<ExternalElements />
+			</div>
+
 			<div id="block-libraries" class="section">
 				<BlockLibraries />
 			</div>
@@ -75,6 +79,7 @@ import CustomFonts from "../../sharedComponents/CustomFonts";
 import TextInsert from "../components/TextInsert";
 import Addons from "../components/Addons.vue";
 import Settings from "../components/Settings.vue";
+import ExternalElements from "../components/ExternalElements.vue";
 import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
 
@@ -95,6 +100,7 @@ export default {
 		Settings,
 		Description,
 		PreviewButton,
+		ExternalElements,
 	},
 	data() {
 		return {

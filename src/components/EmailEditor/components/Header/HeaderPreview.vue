@@ -15,6 +15,10 @@
 
 			<div class="ml-auto d-flex flex-nowrap justify-self-end">
 				<v-btn class="mx-2" icon>
+					<v-icon>mdi-auto-fix</v-icon>
+				</v-btn>
+
+				<v-btn class="mx-2" icon>
 					<v-icon>mdi-undo</v-icon>
 				</v-btn>
 

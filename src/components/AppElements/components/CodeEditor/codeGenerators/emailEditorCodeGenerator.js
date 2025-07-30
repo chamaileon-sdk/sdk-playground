@@ -112,6 +112,16 @@ ${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.variableSystem.ena
 	return config;
 };
 
+const calculateAiAssistant = (editorConfig, indent) => {
+	if (!editorConfig.settings.addons.aiAssistant) return "false,";
+	let config = `{
+${"\t".repeat(indent)}enabled: ${editorConfig.settings.addons.aiAssistant.enabled},`;
+	if (editorConfig.settings.addons.aiAssistant.disabledReason) config += `\n${"\t".repeat(indent)}disabledReason: "${editorConfig.settings.addons.aiAssistant.disabledReason}",`;
+	config += `\n${"\t".repeat(indent - 1)}},`;
+
+	return config;
+};
+
 const calculateAddonsComponents = (editorConfig, indent) => {
 	const { componentSystem } = editorConfig.settings.addons;
 
@@ -284,7 +294,96 @@ ${"\t".repeat(indent + 1)}save: ${editorConfig.settings.actionMenu.block.save},
 ${"\t".repeat(indent + 1)}duplicate: ${editorConfig.settings.actionMenu.block.duplicate},
 ${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.actionMenu.block.delete},
 ${"\t".repeat(indent)}},
+${"\t".repeat(indent)}element: {
+${"\t".repeat(indent + 1)}drag: ${editorConfig.settings.actionMenu.element.drag},
+${"\t".repeat(indent + 1)}edit: ${editorConfig.settings.actionMenu.element.edit},
+${"\t".repeat(indent + 1)}duplicate: ${editorConfig.settings.actionMenu.element.duplicate},
+${"\t".repeat(indent + 1)}delete: ${editorConfig.settings.actionMenu.element.delete},
+${"\t".repeat(indent)}},
 ${"\t".repeat(indent - 1)}},`;
+};
+
+const calculateExternalElementButtons = (buttonConfig, indent) => {
+	let literal = "";
+	const arr = buttonConfig;
+
+	if (arr.length === 0) return "[],";
+
+	literal += "[\n";
+	arr.forEach((item) => {
+		literal += `${"\t".repeat(indent)}{\n`;
+		literal += `${"\t".repeat(indent + 1)}id: "${item.id}",\n`;
+		literal += `${"\t".repeat(indent + 1)}icon: "${item.icon}",\n`;
+		literal += `${"\t".repeat(indent + 1)}label: "${item.label}",\n`;
+		literal += `${"\t".repeat(indent + 1)}color: "${item.color}",\n`;
+		literal += `${"\t".repeat(indent + 1)}style: "${item.style}",\n`;
+		literal += `${"\t".repeat(indent)}},\n`;
+	});
+	literal += `${"\t".repeat(indent - 1)}],`;
+
+	return literal;
+};
+
+const calculateExternalElements = (editorConfig, indent) => {
+	if (editorConfig.settings.externalElements.length === 0) return "[],";
+
+	const innerElements = editorConfig.settings.externalElements.map((externalElement) => {
+		let defaultJsonStyle = "style: {},";
+		let defaultJsonAttrs = "attrs: {},";
+
+		if (Object.keys(externalElement.defaultJson.style).length > 0) {
+			defaultJsonStyle = `style: {
+${Object.keys(externalElement.defaultJson.style).map((key) => {
+		if (typeof externalElement.defaultJson.style[key] === "string") {
+			return `${"\t".repeat(indent + 3)}${key}: "${externalElement.defaultJson.style[key]}",`;
+		}
+
+		return `${"\t".repeat(indent + 3)}${key}: ${externalElement.defaultJson.style[key]},`;
+	}).join("\n")}
+${"\t".repeat(indent + 2)}},`;
+		}
+
+		if (Object.keys(externalElement.defaultJson.attrs).length > 0) {
+			defaultJsonAttrs = `attrs: {
+${Object.keys(externalElement.defaultJson.attrs).map((key) => {
+		if (typeof externalElement.defaultJson.attrs[key] === "string") {
+			return `${"\t".repeat(indent + 3)}${key}: "${externalElement.defaultJson.attrs[key]}",`;
+		}
+
+		return `${"\t".repeat(indent + 3)}${key}: ${externalElement.defaultJson.attrs[key]},`;
+	}).join("\n")}
+${"\t".repeat(indent + 2)}},`;
+		}
+
+		let toolbox = "";
+
+		if (externalElement.toolbox?.type === "iframe") {
+			toolbox += `${"\t".repeat(indent + 2)}type: "${externalElement.toolbox.type}",
+${"\t".repeat(indent + 2)}url: "${externalElement.toolbox.url}",`;
+		}
+
+		if (externalElement.toolbox?.type === "contentDialog") {
+			toolbox += `${"\t".repeat(indent + 2)}type: "${externalElement.toolbox.type}",
+${"\t".repeat(indent + 2)}buttonConfig: ${calculateExternalElementButtons(externalElement.toolbox.buttonConfig, indent + 3)}`;
+		}
+
+		return `
+${"\t".repeat(indent)}{
+${"\t".repeat(indent + 1)}id: "${externalElement.id}",
+${"\t".repeat(indent + 1)}title: "${externalElement.title}",
+${"\t".repeat(indent + 1)}icon: "${externalElement.icon}",
+${"\t".repeat(indent + 1)}defaultJson: {
+${"\t".repeat(indent + 2)}type: "${externalElement.defaultJson.type}",
+${"\t".repeat(indent + 2)}${defaultJsonStyle}
+${"\t".repeat(indent + 2)}${defaultJsonAttrs}
+${"\t".repeat(indent + 1)}},
+${"\t".repeat(indent + 1)}toolbox: {
+${toolbox}
+${"\t".repeat(indent + 1)}},
+${"\t".repeat(indent)}}`;
+	});
+
+	return `[${innerElements}\n${"\t".repeat(indent - 1)}],`;
 };
 
 const calculateToolboxes = (editorConfig, indent) => {
@@ -325,6 +424,12 @@ ${"\t".repeat(indent - 1)}},`;
 const calculateTitle = (editorConfig, indent) => {
 	return `{
 ${"\t".repeat(indent)}canEdit: ${editorConfig.settings.title.canEdit},
+${"\t".repeat(indent - 1)}},`;
+};
+
+const subjectLineAndPreviewText = (editorConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}canEdit: ${editorConfig.settings.subjectLineAndPreviewText.canEdit},
 ${"\t".repeat(indent - 1)}},`;
 };
 
@@ -396,15 +501,18 @@ ${"\t".repeat(indent)}hideDefaultFonts: ${editorConfig.settings.hideDefaultFonts
 ${"\t".repeat(indent)}addons: {
 ${"\t".repeat(indent + 1)}blockLock: ${calculateBL(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}variableSystem: ${calculateVE(editorConfig, indent + 2)}
+${"\t".repeat(indent + 1)}aiAssistant: ${calculateAiAssistant(editorConfig, indent + 2)}
 ${"\t".repeat(indent + 1)}componentSystem: ${calculateAddonsComponents(editorConfig, indent + 2)}
 ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}actionMenu: ${calculateActionMenu(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}toolboxes: ${calculateToolboxes(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}dropzones: ${calculateDropZones(editorConfig, indent + 1)}
+${"\t".repeat(indent)}externalElements: ${calculateExternalElements(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}variables: ${calculateVariables(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}components: ${calculateComponents(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}panels: ${calculatePanels(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}title: ${calculateTitle(editorConfig, indent + 1)}
+${"\t".repeat(indent)}subjectLineAndPreviewText: ${subjectLineAndPreviewText(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}staticAssetsBaseUrl: "${editorConfig.settings.staticAssetsBaseUrl}",
 ${"\t".repeat(indent)}videoElementBaseUrl: "${editorConfig.settings.videoElementBaseUrl}",
 ${"\t".repeat(indent)}autoSaveInterval: ${editorConfig.settings.autoSaveInterval},

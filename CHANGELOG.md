@@ -1,6 +1,21 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.7.0] - 2025-06-06
+### Added
+- actionMenu.element editor config
+- externalElements editor config
+- externalElements examples
+
+## [2.6.1] - 2025-05-27
+### Changed
+- dependency updates
+- node 22
+
+## [2.6.0] - 2025-05-07
+### Added
+- Ai Assistant options
+
 ## [2.5.1] - 2025-01-10
 ### Changed
 - replace images in default json

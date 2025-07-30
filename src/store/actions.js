@@ -3,6 +3,8 @@ import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
 import { favoriteImages } from "./favoriteImages";
 import searchTree from "../utils/searchTree.js";
+import aiGeneratedDocument from "../components/AppElements/store/aiGeneratedDocument.js";
+import aiGeneratedSubjectPreview from "../components/AppElements/store/aiGeneratedSubjectPreview.js";
 
 let images = [];
 try {
@@ -171,10 +173,11 @@ export default {
 						await dispatch("updateDocument", obj.document);
 					},
 					onAutoSave: (obj) => {
-						console.log(obj);
+						console.log("save", obj);
 						commit("updateDocument", obj.document);
 					},
-					onChange: () => {
+					onChange: (obj) => {
+						console.log("change", obj);
 						return new Promise((resolve) => {
 							resolve();
 						});
@@ -182,6 +185,51 @@ export default {
 					onEditTitle: ({ title }) => {
 						return new Promise((resolve) => {
 							resolve(title);
+						});
+					},
+					// eslint-disable-next-line no-unused-vars
+					onEditSubjectLineAndPreviewText: ({ subjectLine, previewText }) => {
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
+					// eslint-disable-next-line no-unused-vars
+					onAiAssistant: ({ context, action, tone, customContext,	target }) => {
+						return new Promise((resolve) => {
+							const sections = target.match(/<section\b[^>]*>/g);
+							if (target.includes('id="subject"') && target.includes('id="previewText"')) {
+								resolve({ result: aiGeneratedSubjectPreview });
+							} else if (sections.length === 1) {
+								const sectionTag = sections[0];
+								const idMatch = sectionTag.match(/id="([^"]*)"/);
+								const typeMatch = sectionTag.match(/type="([^"]*)"/);
+								resolve({ result: `<section type="${typeMatch[1]}" id="${idMatch[1]}">Example AI generated text</section>` });
+							} else {
+								resolve({ result: aiGeneratedDocument });
+							}
+						});
+					},
+					onExternalElementDropIn: async (data) => {
+						console.log(data);
+
+						Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: "", dimensions: null });
+						Vue.prototype.$chamaileon.gallery.show();
+
+						const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+						Vue.prototype.$chamaileon.gallery.hide();
+
+						data.elementJson.attrs.src = src;
+
+						return data.elementJson;
+					},
+					onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
+						return new Promise((resolve) => {
+							console.log(externalElementId, buttonId, elementJson, defaultJson);
+
+							switch (buttonId) {
+								case "change":
+									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs });
+							}
 						});
 					},
 					onEditImage: async ({
