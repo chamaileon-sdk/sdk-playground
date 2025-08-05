@@ -159,6 +159,12 @@ const getDefaultState = () => {
 						label: "{}",
 						visible: true,
 					},
+					typedTextLink: {
+						id: "typed-text-link",
+						title: "",
+						label: "{}",
+						visible: true,
+					},
 				},
 			},
 			elements: {
