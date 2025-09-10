@@ -15,7 +15,16 @@
 	<script src="./pluginInterface.js" type="module"></script>
 	<script>
 		let interfaceHooks = {};
-		let interfaceData = { style: {}, attrs: {}};
+		let interfaceData = { style: {}, attrs: {}, variables: [], blockLock: false};
+
+		const updateData = (data) => {
+			interfaceData.style = data?.elementJson?.style || {};
+			interfaceData.attrs = data?.elementJson?.attrs || {};
+			interfaceData.variables = data?.variables || [];
+			interfaceData.blockLock = data?.blockLock || false;
+
+			document.getElementById("data").innerHTML = JSON.stringify(interfaceData, null, "\t");
+		}
 
 		const change = async () => {
 			const {style, attrs} = await interfaceHooks?.updateElement({ style: {...(interfaceData.style.align === "center"? {align: "left"}: {align: "center"})}})
@@ -31,13 +40,14 @@
 				settings = {},
 				hooks,
 				terminate,
-			} = await window.pluginInterface.providePlugin({ hooks: ["updateElement"], methods: [], validator: () => {}})
+			} = await window.pluginInterface.providePlugin({ hooks: ["updateElement"], methods: {updateData}, validator: () => {}})
 
 			interfaceHooks = hooks;
 			interfaceData.style = data?.elementJson?.style || {};
 			interfaceData.attrs = data?.elementJson?.attrs || {};
+			interfaceData.variables = data?.variables || [];
+			interfaceData.blockLock = data?.blockLock || false;
 
-			console.log(data.externalElementId, data.defaultJson);
 
 			document.getElementById("data").innerHTML = JSON.stringify(interfaceData, null, "\t");
 		}
