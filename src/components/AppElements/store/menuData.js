@@ -215,6 +215,19 @@ export default {
 				],
 			},
 			{
+				title: "Landing page HTML Generator",
+				icon: "form-select",
+				to: "landingpagehtmlgenerator",
+				children: [
+					{
+						title: "Settings",
+						icon: "cog-outline",
+						to: "#settings",
+						codePropToMatch: "document",
+					},
+				],
+			},
+			{
 				title: "Email HTML Import",
 				icon: "code-tags",
 				to: "htmlimport",
