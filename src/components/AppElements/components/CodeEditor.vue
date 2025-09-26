@@ -13,15 +13,19 @@
 			dark
 		>
 			<v-tabs-slider color="yellow" />
-			<v-tab> Settings </v-tab>
+			<v-tab :tab-value="0">
+				Settings
+			</v-tab>
 			<v-tab
 				v-show="
 					route !== '/htmlgenerator' &&
+						route !== '/landingpagehtmlgenerator' &&
 						route !== '/htmlimportplugin' &&
 						route !== '/htmlimport' &&
 						route !== '/sdk' &&
 						route !== '/gallery'
 				"
+				:tab-value="1"
 			>
 				Document
 			</v-tab>
@@ -33,6 +37,7 @@
 					|| route === '/emailthumbnail'
 					|| route === '/htmlimportplugin'
 				"
+				:tab-value="2"
 			>
 				Hooks
 			</v-tab>
@@ -44,25 +49,26 @@
 					|| route === '/emailthumbnail'
 					|| route === '/htmlimportplugin'
 				"
+				:tab-value="3"
 			>
 				Methods
 			</v-tab>
-			<v-tab v-show="route === '/emaileditor'">
+			<v-tab v-show="route === '/emaileditor'" :tab-value="4">
 				Block Libraries
 			</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">
+			<v-tab v-show="route === '/htmlgenerator'" :tab-value="5">
 				Examples
 			</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">
+			<v-tab v-show="route === '/htmlgenerator' || route === '/landingpagehtmlgenerator'" :tab-value="6">
 				Input JSON
 			</v-tab>
-			<v-tab v-show="route === '/htmlgenerator'">
+			<v-tab v-show="route === '/htmlgenerator' || route === '/landingpagehtmlgenerator'" :tab-value="7">
 				Output HTML
 			</v-tab>
-			<v-tab v-show="route === '/htmlimport'">
+			<v-tab v-show="route === '/htmlimport'" :tab-value="8">
 				Input HTML
 			</v-tab>
-			<v-tab v-show="route === '/htmlimport'">
+			<v-tab v-show="route === '/htmlimport'" :tab-value="9">
 				Output JSON
 			</v-tab>
 		</v-tabs>
@@ -183,7 +189,7 @@
 			<HighlightCode
 				class="pa-0"
 				lang="html"
-				:code="getDummyHtmlDocument"
+				:code="route === '/htmlgenerator' ? getDummyHtmlDocument : getLandingPageDummyHtmlDocument"
 			/>
 		</v-card>
 
@@ -223,6 +229,7 @@ import blockLibrariesCodeGenerator from "./CodeEditor/codeGenerators/blockLibrar
 import documentCodeGenerator from "./CodeEditor/codeGenerators/documentCodeGenerator";
 import htmlImportPluginCodeGenerator from "./CodeEditor/codeGenerators/htmlImportPluginCodeGenerator";
 import htmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/htmlGeneratorCodeGenerator";
+import landingPageHtmlGeneratorCodeGenerator from "./CodeEditor/codeGenerators/landingPageHtmlGeneratorCodeGenerator";
 import htmlImportCodeGenerator from "./CodeEditor/codeGenerators/htmlImportCodeGenerator";
 import dummyHtmlCodeGenerator from "./CodeEditor/codeGenerators/dummyHtmlCodeGenerator";
 
@@ -259,6 +266,9 @@ export default {
 			"getDummyHtmlDocument",
 			"getDummyJSON",
 			"getSize",
+			"getLandingPageHtmlGeneratorConfigObject",
+			"getLandingPageDummyJSON",
+			"getLandingPageDummyHtmlDocument",
 		]),
 		route() {
 			return this.$route.path;
@@ -343,18 +353,28 @@ export default {
 		},
 		// Html generator
 		htmlGeneratorCode() {
-			return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
+			if (this.$route.path === "/htmlgenerator") {
+				return htmlGeneratorCodeGenerator(this.getHtmlGeneratorConfigObject);
+			}
+			return landingPageHtmlGeneratorCodeGenerator(this.getLandingPageHtmlGeneratorConfigObject);
 		},
 		htmlGeneratorDummyJSON() {
-			return JSON.stringify(this.getDummyJSON, null, " ");
+			if (this.$route.path === "/htmlgenerator") {
+				return JSON.stringify(this.getDummyJSON, null, " ");
+			}
+			return JSON.stringify(this.getLandingPageDummyJSON, null, " ");
 		},
 		htmlCode() {
-			return dummyHtmlCodeGenerator(
-				this.getDummyHtmlDocument,
-				this.getSize,
-				this.getHtmlGeneratorConfigObject.lineLength,
-			);
+			if (this.$route.path === "/htmlgenerator") {
+				return dummyHtmlCodeGenerator(
+					this.getDummyHtmlDocument,
+					this.getSize,
+					this.getHtmlGeneratorConfigObject.lineLength,
+				);
+			}
+			return "";
 		},
+
 		// Html import
 		htmlImportCode() {
 			return htmlImportCodeGenerator();
@@ -369,7 +389,7 @@ export default {
 				return this.thumbnailCode;
 			} else if (this.$route.path === "/variableeditor") {
 				return this.variableEditorCode;
-			} else if (this.$route.path === "/htmlgenerator") {
+			} else if (this.$route.path === "/htmlgenerator" || this.$route.path === "/landingpagehtmlgenerator") {
 				return this.htmlGeneratorCode;
 			} else if (this.$route.path === "/htmlimportplugin") {
 				return this.htmlImportPluginCode;
@@ -492,7 +512,7 @@ export default {
 					break;
 				case 7:
 				case 8:
-					str = this.getDummyHtmlDocument;
+					str = this.$route.path === "/htmlgenerator" ? this.getDummyHtmlDocument : this.getLandingPageDummyHtmlDocument;
 					break;
 				default:
 					str = "";

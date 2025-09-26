@@ -25,6 +25,9 @@ const HtmlImportPlugin = () => import("../components/HtmlImportPlugin/view/HtmlI
 // Html Generator
 const HtmlGenerator = () => import("../components/HtmlGenerator/view/HtmlGenerator");
 
+// Landing Page Generator
+const LandingPageHtmlGenerator = () => import("../components/LandingPageHtmlGenerator/view/LandingPageHtmlGenerator");
+
 // Html Import
 const HtmlImport = () => import("../components/HtmlImport/view/HtmlImport");
 
@@ -66,6 +69,10 @@ const routes = [
 	{
 		path: "/htmlgenerator",
 		component: HtmlGenerator,
+	},
+	{
+		path: "/landingpagehtmlgenerator",
+		component: LandingPageHtmlGenerator,
 	},
 	{
 		path: "/htmlimport",

@@ -680,6 +680,7 @@ export default {
 		localStorage.clear(); // Remove everything from the localStorage as well
 		commit("setLocalStorageLoaded", true);
 		dispatch("fetchDummyHtml");
+		dispatch("fetchLandingPageDummyHtml");
 		dispatch("initSDK");
 	},
 };
