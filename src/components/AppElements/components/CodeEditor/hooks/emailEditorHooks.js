@@ -53,7 +53,7 @@ const emailEditorHooks = {
 		});
 	},
 
-	onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
+	onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson, blockLock, variables }) => {
 		return new Promise(resolve => {
 			resolve(elementJson);
 		});
