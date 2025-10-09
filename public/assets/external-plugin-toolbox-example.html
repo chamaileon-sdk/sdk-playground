@@ -21,7 +21,10 @@
 			interfaceData.style = data?.elementJson?.style || {};
 			interfaceData.attrs = data?.elementJson?.attrs || {};
 			interfaceData.variables = data?.variables || [];
+			interfaceData.components = data?.components || [];
 			interfaceData.blockLock = data?.blockLock || false;
+			interfaceData.parentWidth = data?.parentWidth || null;
+
 
 			document.getElementById("data").innerHTML = JSON.stringify(interfaceData, null, "\t");
 		}
@@ -46,7 +49,9 @@
 			interfaceData.style = data?.elementJson?.style || {};
 			interfaceData.attrs = data?.elementJson?.attrs || {};
 			interfaceData.variables = data?.variables || [];
+			interfaceData.components = data?.components || [];
 			interfaceData.blockLock = data?.blockLock || false;
+			interfaceData.parentWidth = data?.parentWidth || null;
 
 
 			document.getElementById("data").innerHTML = JSON.stringify(interfaceData, null, "\t");
