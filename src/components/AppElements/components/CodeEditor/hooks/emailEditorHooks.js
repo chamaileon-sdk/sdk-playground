@@ -47,13 +47,13 @@ const emailEditorHooks = {
 		});
 	},
 
-	onExternalElementDropIn: ({ externalElementId, elementJson, defaultJson }) => {
+	onExternalElementDropIn: ({ externalElementId, elementJson, defaultJson, blockLock, variables, components, parentWidth }) => {
 		return new Promise(resolve => {
 			resolve(elementJson);
 		});
 	},
 
-	onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson, blockLock, variables }) => {
+	onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson, blockLock, variables, components, parentWidth }) => {
 		return new Promise(resolve => {
 			resolve(elementJson);
 		});
