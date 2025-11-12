@@ -1,6 +1,7 @@
 <template>
 	<v-btn
 		depressed
+		v-bind="$attrs"
 		color="red white--text"
 		width="100%"
 		min-width="0"

@@ -212,10 +212,12 @@ export default {
 					onExternalElementDropIn: async (data) => {
 						console.log(data);
 
-						Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: "", dimensions: null });
-						Vue.prototype.$chamaileon.gallery.show();
-
-						const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+						let src;
+						if (data.externalElementId !== "icons" && data.externalElementId !== "socialMediaEmbed") {
+							Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: "", dimensions: null });
+							Vue.prototype.$chamaileon.gallery.show();
+							src = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
+						}
 						Vue.prototype.$chamaileon.gallery.hide();
 
 						data.elementJson.attrs.src = src;

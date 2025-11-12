@@ -340,6 +340,7 @@ const getDefaultState = () => {
 			externalElements: [
 				{
 					id: "contentDialogExample",
+					readonly: false,
 					defaultJson: {
 						type: "image",
 						style: {},
@@ -360,6 +361,7 @@ const getDefaultState = () => {
 				},
 				{
 					id: "iframeExample",
+					readonly: false,
 					defaultJson: {
 						type: "image",
 						style: {},
@@ -372,7 +374,48 @@ const getDefaultState = () => {
 					icon: "image",
 					title: "iframeExample",
 				},
-
+				{
+					id: "icons",
+					readonly: true,
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "contentDialog",
+						buttonConfig: [ {
+							id: "insert",
+							icon: "plus",
+							label: "Insert Icon Image",
+							color: "#2D3291",
+							style: "outlined",
+						} ],
+					},
+					icon: "image",
+					title: "Icons",
+				},
+				{
+					id: "socialMediaEmbed",
+					readonly: true,
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "contentDialog",
+						buttonConfig: [ {
+							id: "insert",
+							icon: "plus",
+							label: "Insert Social Image",
+							color: "#2D3291",
+							style: "outlined",
+						} ],
+					},
+					icon: "image",
+					title: "Social Media Embed",
+				},
 			],
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",

@@ -34,6 +34,7 @@
 							:id="eE.id"
 							:title="eE.title"
 							:icon="eE.icon"
+							:readonly="eE.readonly"
 							:visible="true"
 							:disable-id="false"
 							:hide-delete="false"
@@ -59,6 +60,7 @@
 						<v-textarea
 							class="pa-0 px-4"
 							background-color="white"
+							:disabled="eE.readonly"
 							color="primary"
 							outlined
 							style="width:100%"
@@ -81,6 +83,7 @@
 									:value="eE.toolbox.type"
 									hide-details="true"
 									dense
+									:disabled="eE.readonly"
 									:items="['contentDialog', 'iframe']"
 									outlined
 									label="Toolbox type"
@@ -99,6 +102,7 @@
 							>
 								<v-text-field
 									dense
+									:disabled="eE.readonly"
 									:value="eE.toolbox?.url || ''"
 									hide-details="true"
 									label="Toolbox url"
@@ -119,7 +123,11 @@
 							<div style="width:100%;background-color:rgba(0,0,0,.1); border-radius:5px;" class="pa-2">
 								<p>Button Config</p>
 								<v-row align="center" class="ma-0 justify-begin">
-									<AddButton class="ml-auto ml-xl-0" @click="addNewExternalElementButton(ind)">
+									<AddButton
+										:disabled="eE.readonly"
+										class="ml-auto ml-xl-0"
+										@click="addNewExternalElementButton(ind)"
+									>
 										New Button
 									</AddButton>
 								</v-row>
@@ -136,6 +144,7 @@
 												:label="item.label"
 												:item-style="item.style"
 												:color="item.color"
+												:readonly="eE.readonly"
 												:split="true"
 												@idChange="
 													updateExternalElementButton({
