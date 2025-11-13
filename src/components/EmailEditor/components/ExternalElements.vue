@@ -4,7 +4,8 @@
 		<p>
 			You can set up custom elements that shows up as a normal element on the left panel. You can drag & drop it, modify it on drop and also use custom toolboxes with it.
 		</p>
-
+		<ExternalElementIconModal />
+		<ExternalElementSocialEmbedModal />
 		<OptionWrapper>
 			<v-row
 				align="center"
@@ -204,6 +205,8 @@ import AddButton from "../../ViewUtilities/components/AddButton.vue";
 import ListItem3 from "../../Lists/components/ListItem3.vue";
 import ListItem6 from "../../Lists/components/ListItem6.vue";
 import Draggable from "vuedraggable";
+import ExternalElementIconModal from "./ExternalElementIconModal.vue";
+import ExternalElementSocialEmbedModal from "./ExternalElementSocialEmbedModal.vue";
 
 export default {
 	components: {
@@ -212,6 +215,8 @@ export default {
 		ListItem3,
 		ListItem6,
 		Draggable,
+		ExternalElementIconModal,
+		ExternalElementSocialEmbedModal,
 	},
 	data() {
 		return {};

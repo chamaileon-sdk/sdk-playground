@@ -1,6 +1,10 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.9.0] - 2025-11-13
+### Added
+- Icons and Social Media Embed external elements
+
 ## [2.8.0] - 2025-09-10
 ### Added
 - landing page generator

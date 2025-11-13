@@ -1,5 +1,7 @@
 <template>
 	<div>
+		{{ getShowExternalElementIconModal }}
+
 		<PreviewButton
 			button-text="Open editor"
 			:preview-button-visible="previewButtonVisible"
@@ -109,7 +111,7 @@ export default {
 	},
 	computed: {
 		...mapState(["document", "emailEditorInited"]),
-		...mapGetters([ "getEditorConfigObject" ]),
+		...mapGetters(["getEditorConfigObject", "getShowExternalElementIconModal", "getShowExternalElementSocialMediaEmbedModal"]),
 		isInited() {
 			return this.emailEditorInited;
 		},
@@ -117,6 +119,8 @@ export default {
 	methods: {
 		...mapActions({
 			openGallery: "openGallery",
+			setShowExternalElementIconModal: "setShowExternalElementIconModal",
+			setShowExternalElementSocialMediaEmbedModal: "setShowExternalElementSocialMediaEmbedModal",
 		}),
 		async openEditor() {
 			await this.$store.dispatch("initEmailEditor");
@@ -131,6 +135,12 @@ export default {
 		},
 		showPreviewButton(isVisible) {
 			this.previewButtonVisible = isVisible;
+		},
+		closeExternalElementIconModal() {
+			this.setShowExternalElementIconModal(false);
+		},
+		closeExternalElementSocialMediaEmbedModal() {
+			this.setShowExternalElementSocialMediaEmbedModal(false);
 		},
 	},
 };
