@@ -11,6 +11,7 @@
 				<v-text-field
 					dense
 					outlined
+					:disabled="readonly"
 					:value="value"
 					:label="label"
 					:placeholder="value"
@@ -55,6 +56,11 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		readonly: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 	},
 	data() {
 		return {
@@ -65,10 +71,12 @@ export default {
 
 	methods: {
 		emitTarVal(e) {
+			if (this.readonly) return;
 			this.$emit("colorChange", e.target.value);
 		},
 
 		emitHex(e) {
+			if (this.readonly) return;
 			this.$emit("colorChange", e.hex);
 		},
 	},

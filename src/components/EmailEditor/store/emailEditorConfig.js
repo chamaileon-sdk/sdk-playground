@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-import BlockLibData from "./editorBlockLibraryContainer";
 import Vue from "vue";
-
+import { defaultAttrs, defaultStyle } from "../../../utils/imageDefaults";
+import BlockLibData from "./editorBlockLibraryContainer";
 const getDefaultState = () => {
 	return {
 		key: 0,
@@ -339,7 +339,50 @@ const getDefaultState = () => {
 			},
 			externalElements: [
 				{
+					id: "iconImageElement",
+					readonly: true,
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "contentDialog",
+						buttonConfig: [ {
+							id: "insertIconImage",
+							icon: "plus",
+							label: "Change Icon Image",
+							color: "#2D3291",
+							style: "outlined",
+						} ],
+					},
+					icon: "image",
+					title: "Icons",
+				},
+				{
+					id: "socialMediaPostImageElement",
+					readonly: true,
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "contentDialog",
+						buttonConfig: [ {
+							id: "insertSocialImage",
+							icon: "plus",
+							label: "Change Social Image",
+							color: "#2D3291",
+							style: "outlined",
+						} ],
+					},
+					icon: "image",
+					title: "Social Media Embed",
+				},
+				{
 					id: "contentDialogExample",
+					readonly: false,
 					defaultJson: {
 						type: "image",
 						style: {},
@@ -360,6 +403,7 @@ const getDefaultState = () => {
 				},
 				{
 					id: "iframeExample",
+					readonly: false,
 					defaultJson: {
 						type: "image",
 						style: {},
@@ -372,7 +416,6 @@ const getDefaultState = () => {
 					icon: "image",
 					title: "iframeExample",
 				},
-
 			],
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
 			videoElementBaseUrl: "https://video-demo.chamaileon.io/",
@@ -381,11 +424,49 @@ const getDefaultState = () => {
 	};
 };
 
+const constructExternalElementsBackendBaseUrl = window.origin.includes("localhost")
+	? "localhost:10004"
+	: window.origin.includes("staging")
+		? "https://external-elements.staging.chamaileon.io"
+		: "https://external-elements.chamaileon.io";
+
 export default {
 	modules: {
 		BlockLibData,
 	},
-	state: getDefaultState(),
+	state: {
+		...getDefaultState(),
+		showExternalElementIconModal: false,
+		showExternalElementSocialMediaEmbedModal: false,
+		promiseResolver: null,
+		promiseRejecter: null,
+		parentWidth: 600,
+		externalElementJson: {},
+		externalElementIconData: {
+			iconType: "",
+			iconName: "",
+			iconSize: "",
+			iconStyle: "",
+			iconColorName: "",
+			displayIconColor: "",
+			selectedIcon: "",
+			isIconUpdate: false,
+		},
+		externalElementSocialImageData: {
+			sourceUrl: "",
+			platform: "",
+			postId: "",
+			theme: "light",
+			page: "",
+			imageWidth: 32,
+		},
+		openPeepsIconsArray: {
+			monochromatic: [],
+			multicolor: [],
+		},
+		humaansIconsArray: [],
+		externalElementsBackendBaseUrl: constructExternalElementsBackendBaseUrl,
+	},
 	mutations: {
 		resetEditorState(state) {
 			Object.assign(state, getDefaultState());
@@ -785,7 +866,6 @@ export default {
 				}),
 			);
 		},
-
 		deleteEditorExternalElementButton(state, payload) {
 			Vue.set(
 				state.settings.externalElements[payload.elemIndex].toolbox,
@@ -796,6 +876,41 @@ export default {
 				}),
 			);
 		},
+		updateOpenPeepsIconsArray(state, payload) {
+			if (payload.set === "monochromatic") state.openPeepsIconsArray.monochromatic = payload.value;
+			if (payload.set === "multicolor") state.openPeepsIconsArray.multicolor = payload.value;
+		},
+		updateHumaansIconsArray(state, payload) {
+			state.humaansIconsArray = payload;
+		},
+		updateExternalElementIconData(state, payload) {
+			Object.entries(payload).forEach(([key, value]) => {
+				state.externalElementIconData[key] = value;
+			});
+		},
+		updateExternalElementSocialImageData(state, payload) {
+			Object.entries(payload).forEach(([key, value]) => {
+				state.externalElementSocialImageData[key] = value;
+			});
+		},
+		setShowExternalElementIconModal(state, payload) {
+			state.showExternalElementIconModal = payload;
+		},
+		setShowExternalElementSocialMediaEmbedModal(state, payload) {
+			state.showExternalElementSocialMediaEmbedModal = payload;
+		},
+		setPromiseResolver(state, payload) {
+			state.promiseResolver = payload;
+		},
+		setPromiseRejecter(state, payload) {
+			state.promiseRejecter = payload;
+		},
+		setExternalElementJson(state, payload) {
+			state.externalElementJson = payload;
+		},
+		setParentWidth(state, payload) {
+			state.parentWidth = payload;
+		},
 	},
 	actions: {
 		async updateEditorSettings({ getters, rootState }) {
@@ -805,6 +920,91 @@ export default {
 			}
 			if (rootState.emailEditorInited === true) {
 				Vue.prototype.$chamaileon.emailEditor.methods.updateSettings(settings);
+			}
+		},
+		setShowExternalElementIconModal({ commit }, value) {
+			commit("setShowExternalElementIconModal", value);
+		},
+		setShowExternalElementSocialMediaEmbedModal({ commit }, value) {
+			commit("setShowExternalElementSocialMediaEmbedModal", value);
+		},
+		setParentWidth({ commit }, value) {
+			commit("setParentWidth", value);
+		},
+		resolvePromiseResolver({ commit }, value) {
+			commit("setPromiseResolver", value);
+		},
+		setPromiseRejecter({ commit }, value) {
+			commit("setPromiseRejecter", value);
+		},
+		fetchIconImage({ state }, payload) {
+			try {
+				const { iconGroup, iconName, iconSize, iconStyle, iconColor } = payload;
+				if (state.promiseResolver) {
+					state.promiseResolver({ style: { ...defaultStyle,
+						width: `${iconSize}px`,
+						maxHeight: `${Number(iconSize) * 2}px`,
+						maxWidth: `${Number(iconSize) * 2}px` },
+					attrs: {
+						...defaultAttrs,
+						src: `${state.externalElementsBackendBaseUrl}/${iconGroup}/${iconStyle}/${iconName}/${iconSize}/${iconColor}.png`,
+					} });
+				}
+			} catch (error) {
+				if (state.promiseRejecter) {
+					state.promiseRejecter(error);
+				}
+			}
+		},
+		fetchSocialEmbedImage({ state }, payload) {
+			const { sourceUrl, platform, postId, imageWidth, theme = "light", page = "" } = payload;
+			try {
+				if (state.promiseResolver) {
+					state.promiseResolver({
+						style: {
+							...defaultStyle,
+							width: `${imageWidth}px`,
+							maxHeight: `${Number(imageWidth) * 2}px`,
+							maxWidth: `${Number(imageWidth) * 2}px`,
+						},
+						attrs: {
+							...defaultAttrs,
+							src: `${state.externalElementsBackendBaseUrl}/social-media-embed/${platform}/${postId}/${imageWidth}/${theme}${page ? `/${page}` : ""}.png`,
+							link: sourceUrl,
+						},
+					});
+				}
+			} catch (error) {
+				if (this.promiseRejecter) {
+					this.promiseRejecter(error);
+				}
+			}
+		},
+		async fetchOpenPeepsIcons({ commit, state }) {
+			try {
+				if (state.openPeepsIconsArray.monochromatic.length > 0 && state.openPeepsIconsArray.multicolor.length > 0) return;
+
+				const { monochromaticOpenPeepsSvgs, multicolorOpenPeepsSvgs } = await fetch(`${state.externalElementsBackendBaseUrl}/openPeepsIcons/svgs`).then(res => res.json());
+				if (monochromaticOpenPeepsSvgs && Array.isArray(monochromaticOpenPeepsSvgs)) {
+					commit("updateOpenPeepsIconsArray", { set: "monochromatic", value: monochromaticOpenPeepsSvgs });
+				}
+				if (multicolorOpenPeepsSvgs && Array.isArray(multicolorOpenPeepsSvgs)) {
+					commit("updateOpenPeepsIconsArray", { set: "multicolor", value: multicolorOpenPeepsSvgs });
+				}
+			} catch (error) {
+				console.error("Error fetchin open peeps icons: ", error);
+			}
+		},
+		async fetchHumaansIcons({ commit, state }) {
+			try {
+				if (state.humaansIconsArray.length > 0) return;
+
+				const humaansSvgs = await fetch(`${state.externalElementsBackendBaseUrl}/humaaans/svgs`).then(res => res.json());
+				if (humaansSvgs && Array.isArray(humaansSvgs)) {
+					commit("updateHumaansIconsArray", humaansSvgs);
+				}
+			} catch (error) {
+				console.error("Error fetchin humaans icons: ", error);
 			}
 		},
 	},
@@ -826,6 +1026,15 @@ export default {
 			}
 
 			return id;
+		},
+		getShowExternalElementIconModal: (state) => {
+			return state.showExternalElementIconModal;
+		},
+		getShowExternalElementSocialMediaEmbedModal: (state) => {
+			return state.showExternalElementSocialMediaEmbedModal;
+		},
+		getExternalElementJson: (state) => {
+			return state.externalElementJson;
 		},
 	},
 };

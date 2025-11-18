@@ -1,10 +1,10 @@
 /* eslint-disable no-shadow */
-import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
-import { favoriteImages } from "./favoriteImages";
-import searchTree from "../utils/searchTree.js";
+import Vue from "vue";
 import aiGeneratedDocument from "../components/AppElements/store/aiGeneratedDocument.js";
 import aiGeneratedSubjectPreview from "../components/AppElements/store/aiGeneratedSubjectPreview.js";
+import searchTree from "../utils/searchTree.js";
+import { favoriteImages } from "./favoriteImages";
 
 let images = [];
 try {
@@ -211,24 +211,77 @@ export default {
 					},
 					onExternalElementDropIn: async (data) => {
 						console.log(data);
+						commit("setExternalElementJson", {});
+						commit("updateExternalElementIconData", {
+							iconType: "",
+							iconName: "",
+							iconStyle: "",
+							iconSize: "",
+							iconColorName: "",
+							displayIconColor: "",
+							selectedIcon: "",
+							isIconUpdate: false,
+						});
+						if (data.externalElementId === "iconImageElement" || data.externalElementId === "socialMediaPostImageElement") {
+							if (data.externalElementId === "iconImageElement") commit("setShowExternalElementIconModal", true);
+							if (data.externalElementId === "socialMediaPostImageElement") commit("setShowExternalElementSocialMediaEmbedModal", true);
+							return new Promise((resolve, reject) => {
+								commit("setExternalElementJson", data);
+								commit("setPromiseResolver", resolve);
+								commit("setPromiseRejecter", reject);
+							});
+						}
 
 						Vue.prototype.$chamaileon.gallery.methods.updateData({ currentImgSrc: "", dimensions: null });
 						Vue.prototype.$chamaileon.gallery.show();
 
 						const { src } = await Vue.prototype.$chamaileon.gallery.methods.pickImage();
 						Vue.prototype.$chamaileon.gallery.hide();
-
 						data.elementJson.attrs.src = src;
 
 						return data.elementJson;
 					},
-					onExternalElementButtonClicked: ({ externalElementId, buttonId, elementJson, defaultJson }) => {
-						return new Promise((resolve) => {
-							console.log(externalElementId, buttonId, elementJson, defaultJson);
-
-							switch (buttonId) {
+					onExternalElementButtonClicked: (data) => {
+						return new Promise((resolve, reject) => {
+							switch (data.buttonId) {
 								case "change":
-									resolve({ style: { ...(elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: elementJson.attrs });
+									resolve({ style: { ...(data?.elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: data.elementJson.attrs });
+									break;
+								case "insertSocialImage":
+									commit("setShowExternalElementSocialMediaEmbedModal", true);
+									commit("setPromiseResolver", resolve);
+									commit("setExternalElementJson", data.elementJson);
+									commit("setPromiseRejecter", reject);
+									break;
+								case "insertIconImage":
+									if (data?.elementJson?.attrs?.src) {
+										try {
+											const sourceUrl = new URL(data?.elementJson?.attrs?.src || "");
+											const { pathname } = sourceUrl;
+											const cleanedPath = pathname.replace(/\.png$/i, "").replace(/@+/g, "");
+
+											const [iconType, iconStyle, iconName, iconSize, iconColorVariableName] = cleanedPath.split("/").filter(Boolean);
+											const iconColorName = decodeURIComponent(iconColorVariableName);
+											const displayIconColor = data?.variables.find(v => v.name === iconColorName)?.value || "";
+											commit("updateExternalElementIconData", {
+												iconType,
+												iconName,
+												iconStyle,
+												iconSize,
+												iconColorName,
+												displayIconColor,
+												selectedIcon: iconName,
+												isIconUpdate: true,
+											});
+										} catch (error) {
+											console.error("Error parsing URL:", error);
+										}
+									}
+									commit("setExternalElementJson", data);
+									commit("setShowExternalElementIconModal", true);
+									commit("setPromiseResolver", resolve);
+									commit("setPromiseRejecter", reject);
+									break;
 							}
 						});
 					},
