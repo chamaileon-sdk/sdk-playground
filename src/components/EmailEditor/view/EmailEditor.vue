@@ -1,7 +1,5 @@
 <template>
 	<div>
-		{{ getShowExternalElementIconModal }}
-
 		<PreviewButton
 			button-text="Open editor"
 			:preview-button-visible="previewButtonVisible"
@@ -72,20 +70,20 @@
 </template>
 
 <script>
-import Footer from "../../ViewUtilities/components/Footer.vue";
-import SectionObserver from "../../AppElements/components/SectionObserver.vue";
-import Header from "../components/Header";
-import Elements from "../components/Elements";
-import BlockLibraries from "../components/BlockLibraries";
-import CustomFonts from "../../sharedComponents/CustomFonts";
-import TextInsert from "../components/TextInsert";
-import Addons from "../components/Addons.vue";
-import Settings from "../components/Settings.vue";
-import ExternalElements from "../components/ExternalElements.vue";
-import Description from "../../ViewUtilities/components/ViewDescription.vue";
 import PreviewButton from "../../AppElements/components/PreviewButton.vue";
+import SectionObserver from "../../AppElements/components/SectionObserver.vue";
+import CustomFonts from "../../sharedComponents/CustomFonts";
+import Footer from "../../ViewUtilities/components/Footer.vue";
+import Description from "../../ViewUtilities/components/ViewDescription.vue";
+import Addons from "../components/Addons.vue";
+import BlockLibraries from "../components/BlockLibraries";
+import Elements from "../components/Elements";
+import ExternalElements from "../components/ExternalElements.vue";
+import Header from "../components/Header";
+import Settings from "../components/Settings.vue";
+import TextInsert from "../components/TextInsert";
 
-import { mapGetters, mapState, mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
 	components: {
@@ -111,7 +109,6 @@ export default {
 	},
 	computed: {
 		...mapState(["document", "emailEditorInited"]),
-		...mapGetters(["getEditorConfigObject", "getShowExternalElementIconModal", "getShowExternalElementSocialMediaEmbedModal"]),
 		isInited() {
 			return this.emailEditorInited;
 		},

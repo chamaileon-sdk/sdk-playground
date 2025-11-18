@@ -37,7 +37,6 @@
 import CodeEditor from "./components/AppElements/components/CodeEditor.vue";
 import Menu from "./components/AppElements/components/Menu.vue";
 import NotAvailable from "./components/AppElements/components/NotAvailable.vue";
-import { mapGetters } from "vuex";
 
 export default {
 	components: {
@@ -48,11 +47,10 @@ export default {
 	},
 	data() {
 		return {
-			localStorageVersion: "v9",
+			localStorageVersion: "v10",
 		};
 	},
 	computed: {
-		...mapGetters(["getShowExternalElementIconModal", "getShowExternalElementSocialMediaEmbedModal"]),
 		isAvailable() {
 			return this.$vuetify.breakpoint.width > 960;
 		},
@@ -103,23 +101,23 @@ export default {
 		}.bind(this);
 
 		this.$store.commit("setLocalStorageLoaded", "pending");
-		// for (const elem of [
-		// 	`sdkConfig_${this.localStorageVersion}`,
-		// 	`emailEditorConfig_${this.localStorageVersion}`,
-		// 	`previewConfig_${this.localStorageVersion}`,
-		// 	`galleryConfig_${this.localStorageVersion}`,
-		// 	`variableEditorConfig_${this.localStorageVersion}`,
-		// 	`thumbnailConfig_${this.localStorageVersion}`,
-		// 	`generatorConfig_${this.localStorageVersion}`,
-		// 	`emailDocument_${this.localStorageVersion}`,
-		// ]) {
-		// 	if (localStorage.getItem(elem)) {
-		// 		this.$store.commit(
-		// 			`${elem.replace(`_${this.localStorageVersion}`, "")}Load`,
-		// 			JSON.parse(localStorage.getItem(elem)),
-		// 		);
-		// 	}
-		// }
+		for (const elem of [
+			`sdkConfig_${this.localStorageVersion}`,
+			`emailEditorConfig_${this.localStorageVersion}`,
+			`previewConfig_${this.localStorageVersion}`,
+			`galleryConfig_${this.localStorageVersion}`,
+			`variableEditorConfig_${this.localStorageVersion}`,
+			`thumbnailConfig_${this.localStorageVersion}`,
+			`generatorConfig_${this.localStorageVersion}`,
+			`emailDocument_${this.localStorageVersion}`,
+		]) {
+			if (localStorage.getItem(elem)) {
+				this.$store.commit(
+					`${elem.replace(`_${this.localStorageVersion}`, "")}Load`,
+					JSON.parse(localStorage.getItem(elem)),
+				);
+			}
+		}
 		this.$store.commit("setLocalStorageLoaded", true);
 		this.$store.dispatch("fetchDummyHtml");
 		this.$store.dispatch("fetchLandingPageDummyHtml");

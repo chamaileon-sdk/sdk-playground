@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-import BlockLibData from "./editorBlockLibraryContainer";
 import Vue from "vue";
-import { defaultStyle, defaultAttrs } from "../../../utils/imageDefaults";
+import { defaultAttrs, defaultStyle } from "../../../utils/imageDefaults";
+import BlockLibData from "./editorBlockLibraryContainer";
 const getDefaultState = () => {
 	return {
 		key: 0,
@@ -339,42 +339,6 @@ const getDefaultState = () => {
 			},
 			externalElements: [
 				{
-					id: "contentDialogExample",
-					readonly: false,
-					defaultJson: {
-						type: "image",
-						style: {},
-						attrs: {},
-					},
-					toolbox: {
-						type: "contentDialog",
-						buttonConfig: [ {
-							id: "change",
-							icon: "camera-switch",
-							label: "Change",
-							color: "#D0021B",
-							style: "outlined",
-						} ],
-					},
-					icon: "image",
-					title: "contentDialogExample",
-				},
-				{
-					id: "iframeExample",
-					readonly: false,
-					defaultJson: {
-						type: "image",
-						style: {},
-						attrs: {},
-					},
-					toolbox: {
-						type: "iframe",
-						url: `${document.location.origin}/assets/external-plugin-toolbox-example.html`,
-					},
-					icon: "image",
-					title: "iframeExample",
-				},
-				{
 					id: "iconImageElement",
 					readonly: true,
 					defaultJson: {
@@ -415,6 +379,42 @@ const getDefaultState = () => {
 					},
 					icon: "image",
 					title: "Social Media Embed",
+				},
+				{
+					id: "contentDialogExample",
+					readonly: false,
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "contentDialog",
+						buttonConfig: [ {
+							id: "change",
+							icon: "camera-switch",
+							label: "Change",
+							color: "#D0021B",
+							style: "outlined",
+						} ],
+					},
+					icon: "image",
+					title: "contentDialogExample",
+				},
+				{
+					id: "iframeExample",
+					readonly: false,
+					defaultJson: {
+						type: "image",
+						style: {},
+						attrs: {},
+					},
+					toolbox: {
+						type: "iframe",
+						url: `${document.location.origin}/assets/external-plugin-toolbox-example.html`,
+					},
+					icon: "image",
+					title: "iframeExample",
 				},
 			],
 			staticAssetsBaseUrl: "https://cdn.chamaileon.io/assets/",
@@ -459,7 +459,7 @@ export default {
 			multicolor: [],
 		},
 		humaansIconsArray: [],
-		externalElementsBackendBaseUrl: "https://external-elements.staging.chamaileon.io",
+		externalElementsBackendBaseUrl: "https://external-elements.chamaileon.io",
 	},
 	mutations: {
 		resetEditorState(state) {

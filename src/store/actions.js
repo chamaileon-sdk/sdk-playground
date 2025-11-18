@@ -1,10 +1,10 @@
 /* eslint-disable no-shadow */
-import Vue from "vue";
 import createChamaileonSdk from "@chamaileon-sdk/plugins";
-import { favoriteImages } from "./favoriteImages";
-import searchTree from "../utils/searchTree.js";
+import Vue from "vue";
 import aiGeneratedDocument from "../components/AppElements/store/aiGeneratedDocument.js";
 import aiGeneratedSubjectPreview from "../components/AppElements/store/aiGeneratedSubjectPreview.js";
+import searchTree from "../utils/searchTree.js";
+import { favoriteImages } from "./favoriteImages";
 
 let images = [];
 try {
@@ -248,7 +248,6 @@ export default {
 									resolve({ style: { ...(data?.elementJson.style.align === "center" ? { align: "left" } : { align: "center" }) }, attrs: data.elementJson.attrs });
 									break;
 								case "insertSocialImage":
-									// resolve({ ...elementJson, attrs: { ...elementJson.attrs, src: "https://unsplash.com/photos/a-person-swimming-in-the-ocean-with-a-camera-NhWxAIs61MM" } });
 									commit("setShowExternalElementSocialMediaEmbedModal", true);
 									commit("setPromiseResolver", resolve);
 									commit("setExternalElementJson", data.elementJson);

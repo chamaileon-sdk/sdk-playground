@@ -1,6 +1,5 @@
 <template>
 	<v-btn
-		v-bind="$attrs"
 		depressed
 		color="success"
 		@click="
