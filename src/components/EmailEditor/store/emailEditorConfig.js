@@ -424,12 +424,6 @@ const getDefaultState = () => {
 	};
 };
 
-const constructExternalElementsBackendBaseUrl = window.origin.includes("localhost")
-	? "localhost:10004"
-	: window.origin.includes("staging")
-		? "https://external-elements-staging.chamaileon.io"
-		: "https://external-elements.chamaileon.io";
-
 export default {
 	modules: {
 		BlockLibData,
@@ -465,7 +459,6 @@ export default {
 			multicolor: [],
 		},
 		humaansIconsArray: [],
-		externalElementsBackendBaseUrl: constructExternalElementsBackendBaseUrl,
 	},
 	mutations: {
 		resetEditorState(state) {
@@ -937,7 +930,7 @@ export default {
 		setPromiseRejecter({ commit }, value) {
 			commit("setPromiseRejecter", value);
 		},
-		fetchIconImage({ state }, payload) {
+		fetchIconImage({ state, getters }, payload) {
 			try {
 				const { iconGroup, iconName, iconSize, iconStyle, iconColor } = payload;
 				if (state.promiseResolver) {
@@ -947,7 +940,7 @@ export default {
 						maxWidth: `${Number(iconSize) * 2}px` },
 					attrs: {
 						...defaultAttrs,
-						src: `${state.externalElementsBackendBaseUrl}/${iconGroup}/${iconStyle}/${iconName}/${iconSize}/${iconColor}.png`,
+						src: `${getters.getExternalElementBackendBaseUrl}/${iconGroup}/${iconStyle}/${iconName}/${iconSize}/${iconColor}.png`,
 					} });
 				}
 			} catch (error) {
@@ -956,7 +949,7 @@ export default {
 				}
 			}
 		},
-		fetchSocialEmbedImage({ state }, payload) {
+		fetchSocialEmbedImage({ state, getters }, payload) {
 			const { sourceUrl, platform, postId, imageWidth, theme = "light", page = "" } = payload;
 			try {
 				if (state.promiseResolver) {
@@ -969,7 +962,7 @@ export default {
 						},
 						attrs: {
 							...defaultAttrs,
-							src: `${state.externalElementsBackendBaseUrl}/social-media-embed/${platform}/${postId}/${imageWidth}/${theme}${page ? `/${page}` : ""}.png`,
+							src: `${getters.getExternalElementBackendBaseUrl}/social-media-embed/${platform}/${postId}/${imageWidth}/${theme}${page ? `/${page}` : ""}.png`,
 							link: sourceUrl,
 						},
 					});
@@ -980,11 +973,11 @@ export default {
 				}
 			}
 		},
-		async fetchOpenPeepsIcons({ commit, state }) {
+		async fetchOpenPeepsIcons({ commit, state, getters }) {
 			try {
 				if (state.openPeepsIconsArray.monochromatic.length > 0 && state.openPeepsIconsArray.multicolor.length > 0) return;
 
-				const { monochromaticOpenPeepsSvgs, multicolorOpenPeepsSvgs } = await fetch(`${state.externalElementsBackendBaseUrl}/openPeepsIcons/svgs`).then(res => res.json());
+				const { monochromaticOpenPeepsSvgs, multicolorOpenPeepsSvgs } = await fetch(`${getters.getExternalElementBackendBaseUrl}/openPeepsIcons/svgs`).then(res => res.json());
 				if (monochromaticOpenPeepsSvgs && Array.isArray(monochromaticOpenPeepsSvgs)) {
 					commit("updateOpenPeepsIconsArray", { set: "monochromatic", value: monochromaticOpenPeepsSvgs });
 				}
@@ -995,11 +988,11 @@ export default {
 				console.error("Error fetchin open peeps icons: ", error);
 			}
 		},
-		async fetchHumaansIcons({ commit, state }) {
+		async fetchHumaansIcons({ commit, state, getters }) {
 			try {
 				if (state.humaansIconsArray.length > 0) return;
 
-				const humaansSvgs = await fetch(`${state.externalElementsBackendBaseUrl}/humaaans/svgs`).then(res => res.json());
+				const humaansSvgs = await fetch(`${getters.getExternalElementBackendBaseUrl}/humaaans/svgs`).then(res => res.json());
 				if (humaansSvgs && Array.isArray(humaansSvgs)) {
 					commit("updateHumaansIconsArray", humaansSvgs);
 				}
@@ -1035,6 +1028,13 @@ export default {
 		},
 		getExternalElementJson: (state) => {
 			return state.externalElementJson;
+		},
+		getExternalElementBackendBaseUrl: () => {
+			return window.origin.includes("localhost")
+				? "http://localhost:10004"
+				: window.origin.includes("staging")
+					? "https://external-elements-staging.chamaileon.io"
+					: "https://external-elements.chamaileon.io";
 		},
 	},
 };
