@@ -18,7 +18,7 @@
 		"bulletprooflinelength": "^0.3.1",
 		"chamaileon-logo": "^1.0.3",
 		"highlight.js": "^10.7.3",
-		"vue": "^2.7.16",
+		"vue": "^3.0.0",
 		"vue-color": "^2.8.1",
 		"vue-highlight.js": "^4.0.1-beta",
 		"vue-inline-svg": "^2.1.4",
