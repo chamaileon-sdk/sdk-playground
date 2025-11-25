@@ -61,6 +61,7 @@
 				</v-col>
 			</v-row>
 			<v-row
+				v-if="iconType !== 'humaaans'"
 				no-gutters
 				class="mb-2"
 			>
