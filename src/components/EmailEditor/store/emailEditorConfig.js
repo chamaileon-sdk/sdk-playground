@@ -426,7 +426,9 @@ const getDefaultState = () => {
 
 const constructExternalElementsBackendBaseUrl = window.origin.includes("localhost")
 	? "localhost:10004"
-	: "https://external-elements-staging.chamaileon.io";
+	: window.origin.includes("staging")
+		? "https://external-elements-staging.chamaileon.io"
+		: "https://external-elements.chamaileon.io";
 
 export default {
 	modules: {
