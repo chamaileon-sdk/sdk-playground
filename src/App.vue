@@ -121,6 +121,9 @@ export default {
 		this.$store.commit("setLocalStorageLoaded", true);
 		this.$store.dispatch("fetchDummyHtml");
 		this.$store.dispatch("fetchLandingPageDummyHtml");
+
+		this.$store.commit("setShowExternalElementIconModal", false);
+		this.$store.commit("setShowExternalElementSocialMediaEmbedModal", false);
 	},
 };
 </script>
