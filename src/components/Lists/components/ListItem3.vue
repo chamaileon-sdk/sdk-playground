@@ -20,7 +20,7 @@
 						dense
 						:value="id"
 						hide-details="true"
-						:disabled="disableId"
+						:disabled="readonly || disableId"
 						label="ID"
 						outlined
 						@input="
@@ -40,6 +40,7 @@
 					align-self="center"
 				>
 					<DeleteButton
+						:disabled="readonly"
 						@click="
 							() => {
 								$emit('deleteClicked');
@@ -56,6 +57,7 @@
 				>
 					<v-text-field
 						dense
+						:disabled="readonly"
 						:value="title"
 						hide-details="true"
 						outlined
@@ -76,6 +78,7 @@
 				>
 					<v-text-field
 						dense
+						:disabled="readonly"
 						:value="label"
 						hide-details="true"
 						outlined
@@ -96,6 +99,7 @@
 				>
 					<v-text-field
 						dense
+						:disabled="readonly"
 						:value="icon"
 						hide-details="true"
 						label="Icon"
@@ -117,6 +121,7 @@
 					align-self="center"
 				>
 					<DeleteButton
+						:disabled="readonly"
 						@click="
 							() => {
 								$emit('deleteClicked');
@@ -132,6 +137,7 @@
 					align-self="center"
 				>
 					<v-btn
+						:disabled="readonly"
 						icon
 						small
 						:color="visible ? 'primary' : ''"
@@ -215,6 +221,11 @@ export default {
 		disableId: {
 			type: Boolean,
 			default: false,
+		},
+		readonly: {
+			type: Boolean,
+			default: false,
+			required: false,
 		},
 	},
 

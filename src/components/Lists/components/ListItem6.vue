@@ -18,6 +18,7 @@
 				>
 					<v-text-field
 						dense
+						:disabled="readonly"
 						:value="id"
 						hide-details="true"
 						label="ID"
@@ -38,6 +39,7 @@
 					align-self="center"
 				>
 					<DeleteButton
+						:disabled="readonly"
 						@click="
 							() => {
 								$emit('deleteClicked');
@@ -53,6 +55,7 @@
 				>
 					<v-select
 						dense
+						:disabled="readonly"
 						hide-details="true"
 						class="ma-0 pa-0"
 						label="Style"
@@ -74,6 +77,7 @@
 				>
 					<v-text-field
 						dense
+						:disabled="readonly"
 						:value="icon"
 						hide-details="true"
 						label="Icon"
@@ -93,6 +97,7 @@
 				>
 					<ColorPicker
 						:key="`${id}_color_picker`"
+						:readonly="readonly"
 						class="pa-0"
 						:value="color"
 						:label="'Color'"
@@ -109,6 +114,7 @@
 				>
 					<v-text-field
 						dense
+						:disabled="readonly"
 						:value="label"
 						hide-details="true"
 						outlined
@@ -129,6 +135,7 @@
 					align-self="center"
 				>
 					<DeleteButton
+						:disabled="readonly"
 						@click="
 							() => {
 								$emit('deleteClicked');
@@ -175,6 +182,11 @@ export default {
 		color: {
 			type: String,
 			required: true,
+		},
+		readonly: {
+			type: Boolean,
+			default: false,
+			required: false,
 		},
 	},
 
