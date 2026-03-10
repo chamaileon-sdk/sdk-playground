@@ -344,6 +344,14 @@ export default {
 							resolve();
 						});
 					},
+					onBlockLibraryCreate: () => {
+						commit("addBlockLibs");
+						const currentBlockLibs = getters.getBlockLibs;
+						commit("createBlockLibData", currentBlockLibs[currentBlockLibs.length - 1].id);
+						return new Promise((resolve) => {
+							resolve({ blockLibraries: currentBlockLibs });
+						});
+					},
 					onBlockDelete: ({ libId, block: { _id } }) => {
 						commit("deleteBlock", {
 							libId,
