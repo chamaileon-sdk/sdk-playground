@@ -131,6 +131,22 @@ const emailEditorHooks = {
 		});
 	},
 
+	onBlockLibraryCreate: () => {
+		let array = currentBlockLibs;
+
+		array.push({
+			id: "new-block-lib",
+			label: "New Block lib",
+			canDeleteBlock: false,
+			canRenameBlock: false,
+			canSaveBlock: false,
+		})
+
+		return new Promise((resolve) => {
+			resolve({ blockLibraries: array });
+		});
+	},
+
 	onHeaderButtonClicked: ({ buttonId }) => {
 		return new Promise(resolve => {
 			resolve();
