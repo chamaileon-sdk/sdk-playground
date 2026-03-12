@@ -1,6 +1,10 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.10.0] - 2026-03-10
+### Added
+- onBlockLibraryCreate hook for editor
+
 ## [2.9.1] - 2025-11-25
 ### Fixed
 - Icons and Social Media Embed modal persistence through page reloads
