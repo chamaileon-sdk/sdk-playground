@@ -5,6 +5,46 @@
 			It's possible to provide block libraries to your users, which is a great
 			way to reuse sections of an email that are already designed.
 		</p>
+
+		<h3>Block Library Actions</h3>
+		<p>
+			You can toggle the available actions of the block save panel
+		</p>
+		<OptionWrapper>
+			<v-card elevation="0" class="d-flex px-2">
+				<v-card
+					min-height="72px"
+					flat
+					class="rounded-0 rounded-t d-flex pa-4"
+					width="100%"
+				>
+					<v-row>
+						<v-col
+							v-for="(value, name) in blockLibraryActions"
+							:key="name"
+							cols="6"
+							class="d-flex justify-space-between align-center"
+						>
+							<v-card-title
+								class="ma-0 pa-0 text-subtitle-1"
+								style="margin-bottom: -3px !important"
+							>
+								{{ name }}
+							</v-card-title>
+							<v-switch
+								:input-value="blockLibraryActions[name]"
+								class="ma-0 pa-0"
+								color="primary"
+								hide-details
+								:true-value="true"
+								@change="updateBlockLibraryAction($event, name)"
+							/>
+						</v-col>
+					</v-row>
+				</v-card>
+			</v-card>
+		</OptionWrapper>
+
 		<h3>Your Libraries</h3>
 		<p>
 			You can set up different block libraries, set up the access level of the
@@ -243,11 +283,15 @@ export default {
 				this.updateEditorSettings();
 			},
 		},
+		blockLibraryActions() {
+			return this.$store.state.editorConfig.settings.blockLibraryActions;
+		},
 	},
 	methods: {
 		...mapMutations([
 			"updateBlockLibsOrder",
 			"updateBlockLibs",
+			"updateBlockLibraryActions",
 			"addBlockLibs",
 			"removeBlockLibs",
 		]),
@@ -279,6 +323,12 @@ export default {
 			this.updateBlockLibs({ index, id });
 			this.updateEditorSettings();
 		},
+
+		updateBlockLibraryAction(value, name) {
+			this.updateBlockLibraryActions({ [name]: !!value });
+			this.updateEditorSettings();
+		},
+
 		noEmpty(e) {
 			return e.length !== 0;
 		},

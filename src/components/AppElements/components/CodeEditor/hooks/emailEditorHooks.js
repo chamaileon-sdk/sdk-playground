@@ -131,6 +131,32 @@ const emailEditorHooks = {
 		});
 	},
 
+	onBlockLibraryCreate: () => {
+		blockLibraryData.set(libId, []);
+
+		return new Promise(resolve => {
+			resolve({ blockLibraries: blockLibraryData.entries() });
+		});
+	},
+
+	onBlockLibraryEdit: ({ blockLibrary }) => {
+		const updatedBlock = { ...blockLibrary, label: "newLabel" };
+		blockLibraryData.set(blockLibrary.id, updatedBlock);
+
+		return new Promise(resolve => {
+			resolve({ blockLibrary: updatedBlock });
+		});
+	},
+
+	onBlockLibraryDelete: ({ blockLibrary }) => {
+		blockLibraryData.delete(blockLibrary.id, []);
+
+
+		return new Promise(resolve => {
+			resolve();
+		});
+	},
+
 	onHeaderButtonClicked: ({ buttonId }) => {
 		return new Promise(resolve => {
 			resolve();

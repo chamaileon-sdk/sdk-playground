@@ -28,6 +28,11 @@ const getDefaultState = () => {
 					edit: true,
 				},
 			},
+			blockLibraryActions: {
+				create: true,
+				edit: true,
+				delete: true,
+			},
 			toolboxes: {
 				body: true,
 				fullWidth: true,
@@ -734,6 +739,15 @@ export default {
 				state.settings,
 				"panels",
 				{ ...state.settings.panels, ...panel },
+			);
+		},
+
+		// Block Library Actions
+		updateBlockLibraryActions(state, blockLibraryAction) {
+			Vue.set(
+				state.settings,
+				"blockLibraryActions",
+				{ ...state.settings.blockLibraryActions, ...blockLibraryAction },
 			);
 		},
 
