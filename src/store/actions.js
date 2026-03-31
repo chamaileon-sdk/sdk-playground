@@ -352,6 +352,31 @@ export default {
 							resolve({ blockLibraries: currentBlockLibs });
 						});
 					},
+					onBlockLibraryEdit: ({ blockLibrary }) => {
+						const currentBlockLibs = getters.getBlockLibs;
+						const blockLibIndex = currentBlockLibs.findIndex(i => i.id === blockLibrary.id);
+						if (blockLibIndex === -1) return new Error();
+
+						const newBlockLibrary = { ...blockLibrary, label: `${blockLibrary.label} - ${new Date().toDateString()}` };
+						commit("updateBlockLibs", { index: blockLibIndex, label: newBlockLibrary.label });
+
+						return new Promise((resolve) => {
+							resolve({ blockLibrary: newBlockLibrary });
+						});
+					},
+					onBlockLibraryDelete: ({ blockLibrary }) => {
+						const currentBlockLibs = getters.getBlockLibs;
+
+						const blockLibIndex = currentBlockLibs.findIndex(i => i.id === blockLibrary.id);
+						if (blockLibIndex === -1) return new Error();
+						commit("removeBlockLibs", blockLibIndex);
+
+						commit("deleteBlockLibData", blockLibrary.id);
+
+						return new Promise((resolve) => {
+							resolve();
+						});
+					},
 					onBlockDelete: ({ libId, block: { _id } }) => {
 						commit("deleteBlock", {
 							libId,

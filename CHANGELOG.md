@@ -1,6 +1,11 @@
 # Changelog
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.11.0] - 2026-03-26
+### Added
+- blockLibraryActions for editor
+- blockLibraryEdit, blockLibraryDelete hook for editor
+
 ## [2.10.1] - 2026-03-16
 ### Changed
 - dependency updates

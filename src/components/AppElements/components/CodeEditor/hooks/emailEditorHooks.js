@@ -132,18 +132,28 @@ const emailEditorHooks = {
 	},
 
 	onBlockLibraryCreate: () => {
-		let array = currentBlockLibs;
+		blockLibraryData.set(libId, []);
 
-		array.push({
-			id: "new-block-lib",
-			label: "New Block lib",
-			canDeleteBlock: false,
-			canRenameBlock: false,
-			canSaveBlock: false,
-		})
+		return new Promise(resolve => {
+			resolve({ blockLibraries: blockLibraryData.entries() });
+		});
+	},
 
-		return new Promise((resolve) => {
-			resolve({ blockLibraries: array });
+	onBlockLibraryEdit: ({ blockLibrary }) => {
+		const updatedBlock = { ...blockLibrary, label: "newLabel" };
+		blockLibraryData.set(blockLibrary.id, updatedBlock);
+
+		return new Promise(resolve => {
+			resolve({ blockLibrary: updatedBlock });
+		});
+	},
+
+	onBlockLibraryDelete: ({ blockLibrary }) => {
+		blockLibraryData.delete(blockLibrary.id, []);
+
+
+		return new Promise(resolve => {
+			resolve();
 		});
 	},
 
