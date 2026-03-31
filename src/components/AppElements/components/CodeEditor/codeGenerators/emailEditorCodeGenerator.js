@@ -90,6 +90,14 @@ ${"\t".repeat(indent)}advanced: ${calculateAdvanced(editorConfig, indent + 1)}
 ${"\t".repeat(indent - 1)}},`;
 };
 
+const calculateBlockLibActions = (editorConfig, indent) => {
+	return `{
+${"\t".repeat(indent)}create: ${editorConfig.settings.blockLibraryActions.create},
+${"\t".repeat(indent)}edit: ${editorConfig.settings.blockLibraryActions.edit},
+${"\t".repeat(indent)}delete: ${editorConfig.settings.blockLibraryActions.delete},
+${"\t".repeat(indent - 1)}},`;
+};
+
 const calculateBL = (editorConfig, indent) => {
 	if (!editorConfig.settings.addons.blockLock) return "false,";
 
@@ -495,6 +503,7 @@ ${"\t".repeat(indent)}},
 ${"\t".repeat(indent)}elements: ${calculateElements(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}elementDefaults: ${calculateElementDefaults(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}blockLibraries: ${calculateBlockLibs(editorConfig, indent + 1)}
+${"\t".repeat(indent)}blockLibraryActions: ${calculateBlockLibActions(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}fontFiles: ${calculateFontFiles(editorConfig, indent)}
 ${"\t".repeat(indent)}fontStacks: ${calculateFontStacks(editorConfig, indent + 1)}
 ${"\t".repeat(indent)}hideDefaultFonts: ${editorConfig.settings.hideDefaultFonts},

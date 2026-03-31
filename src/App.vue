@@ -47,7 +47,7 @@ export default {
 	},
 	data() {
 		return {
-			localStorageVersion: "v10",
+			localStorageVersion: "v11",
 		};
 	},
 	computed: {
