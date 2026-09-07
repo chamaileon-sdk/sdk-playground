@@ -234,6 +234,13 @@ const getDefaultState = () => {
 					canReplaceAll: true,
 					canRemoveAll: true,
 				},
+				size: {
+					canAdd: true,
+					canEdit: true,
+					canDelete: true,
+					canReplaceAll: true,
+					canRemoveAll: true,
+				},
 			},
 			components: {
 				image: {
